@@ -51,6 +51,9 @@ cursor-click = pointer
 
 bottom = true
 
+; launch on every monitor -> launch.sh
+monitor = ${env:MONITOR:}
+
 [settings]
 screenchange-reload = true
 
