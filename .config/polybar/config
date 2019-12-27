@@ -22,24 +22,22 @@ include-file = ~/.config/polybar/modules.ini
 [bar/main]
 width = 100%
 height = 24
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
+bottom = true
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 1
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-size = 3
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = Font Awesome 5 Free:pixelsize=10;0
+
+# module settings
+module-margin-left = 1
+module-margin-right = 1
 
 modules-left = i3 
 modules-right = memory cpu battery temperature date
@@ -49,8 +47,6 @@ tray-position = right
 tray-padding = 2
 
 cursor-click = pointer
-
-bottom = true
 
 ; launch on every monitor -> launch.sh
 monitor = ${env:MONITOR:}
