@@ -31,7 +31,7 @@ line-size = 3
 line-color = #f00
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 1
@@ -44,6 +44,7 @@ font-3 = Font Awesome 5 Free:pixelsize=10;0
 modules-left = i3 
 modules-right = memory cpu battery temperature date
 
+# tray sttings
 tray-position = right
 tray-padding = 2
 
