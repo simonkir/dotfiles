@@ -3,10 +3,9 @@
 # Launch polybar
 if type "xrandr"; then # multiple monitors
 
-    # launch polybar on every connected monitor
-    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-        MONITOR=$m polybar -r main &
-    done
+    # launch polybar on both monitors
+    MONITOR=HDMI1 polybar -r main &
+    MONITOR=eDP1  polybar -r main &
 
 else # only one monitor
     polybar -r main &
