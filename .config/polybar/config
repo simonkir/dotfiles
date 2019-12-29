@@ -19,7 +19,7 @@
 include-file = ~/.config/polybar/colors.ini
 include-file = ~/.config/polybar/modules.ini
 
-[bar/main]
+[bar/main-no-tray]
 width = 100%
 height = 24
 bottom = true
@@ -42,14 +42,17 @@ module-margin-right = 1
 modules-left = i3 
 modules-right = memory cpu battery temperature date
 
-# tray sttings
-tray-position = right
-tray-padding = 2
-
 cursor-click = pointer
 
 ; launch on every monitor -> launch.sh
 monitor = ${env:MONITOR:}
+
+[bar/main-incl-tray]
+inherit = bar/main-no-tray
+
+# tray sttings
+tray-position = right
+tray-padding = 2
 
 [settings]
 screenchange-reload = true
