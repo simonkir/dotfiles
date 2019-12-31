@@ -18,7 +18,6 @@ Use the `stop.sh` script.
 ## Multi-Monitor Capabilities
 The `launch.sh` script by default looks at whether more than one monitor is connected.
 
-* If one monitor is connected, launch polybar on that one monitor.
-* If more that one monitors are connected, launch polybar on two of them.
+The tray will be shown HDMI1 or on the monitor specified in `launch.sh`.
 
-At the moment, there is no support for more than two monitors. The bar will be launched on `HDMI1` and `eDP1`.
+See [this comment](https://github.com/polybar/polybar/issues/763#issuecomment-450940924) on further explanation on this topic.
