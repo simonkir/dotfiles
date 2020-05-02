@@ -1,26 +1,28 @@
 # -----
 # colors
-# theme: default manjaro theme
+# theme: papercolor theme
+# statusbar: vim-airline light theme
 # -----
 
-set default-bg "#222D31"
+set default-bg "#E7E8EB"
 
-set statusbar-bg "#222D31"
+set statusbar-bg "#005fff"
+set statusbar-fg "#ffffff"
 
-set inputbar-fg "#1ABB9B"
-set inputbar-bg "#222D31"
+set notification-bg "#00df87"
+set notification-error-bg "#cf0000"
+set notification-warning-bg "#ff5f00"
 
-set notification-bg "#55aa33"
-set notification-error-bg "#bd2c40"
-set notification-warning-bg "#ffc51a"
+set inputbar-bg "#afffff"
+set inputbar-fg "#005fff"
 
-set completion-fg "#1ABB9B"
-set completion-bg "#222D31"
+set completion-bg "#afffff"
+set completion-fg "#005fff"
 
-set completion-highlight-fg "#222D31"
-set completion-highlight-bg "#1ABB9B"
+set completion-highlight-fg "#afffff"
+set completion-highlight-bg "#005fff"
 
-set highlight-color "#1ABB9B"
+set highlight-color "#afff87"
 
 # -----
 # general settings
