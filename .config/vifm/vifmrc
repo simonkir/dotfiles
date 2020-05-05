@@ -167,7 +167,7 @@ filextype *.djvu
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
        \ {Play using ffplay}
-       \ ffplay nodisp -autoexit %c,
+       \ ffplay -nodisp -autoexit %c,
        \ {Play using MPlayer}
        \ mplayer %f,
 fileviewer *.mp3 mp3info
@@ -207,8 +207,8 @@ fileviewer *.[1-8] man ./%c | col -b
 
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ {View in sxiv}
-        \ sxiv %f,
+        \ {View in viewnior}
+        \ viewnior %f,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
@@ -257,13 +257,11 @@ fileviewer *.torrent dumptorrent -v %c
 
 " FuseZipMount
 filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
-       \ {Mount with fuse-zip}
-       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
        \ {View contents}
-       \ zip -sf %c | less,
+       \ 7z l | less,
        \ {Extract here}
        \ tar -xf %c,
-fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
+fileviewer *.zip,*.jar,*.war,*.ear,*.oxt 7z l
 
 " ArchiveMount
 filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
