@@ -410,6 +410,7 @@ endif
 " Mappings for faster renaming
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
+nnoremap cC cW<c-u>
 nnoremap A cw
 
 " Open console in current directory
