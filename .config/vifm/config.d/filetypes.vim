@@ -183,6 +183,7 @@ fileviewer *.7z 7z l %c
 
 " Office files
 filextype *.odt,*.odg,*.ods,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
+filextype *.xopp xournalpp %f &
 fileviewer *.doc catdoc %c
 fileviewer *.docx docx2txt.pl %f -
 
