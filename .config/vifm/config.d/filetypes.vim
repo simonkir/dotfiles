@@ -93,10 +93,16 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ shotwell,
 fileviewer *.bmp,*.gif,*.xpm
          \ identify %f
+
+" image previews
 fileviewer *.jpg,*.jpeg,*.png
            \ vifmimg draw %px %py %pw %ph %c
            \ %pc
            \ vifmimg clear
+
+filextype *.kra krita %f &
+filextype *.xcf gimp %f &
+filextype *.blend blender %f &
 
 " OpenRaster
 filextype *.ora
