@@ -14,4 +14,5 @@ command! df df -h %m 2> /dev/null
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
+command! tedit :touch %a | edit %a " short version -> :te
 command! reload :write | restart
