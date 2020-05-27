@@ -48,6 +48,9 @@ The <b>only</b> important number on a file is `01-plugins.vim` because you want 
 <br>
 Also, you <b>do not</b> want the prefix `01` at <b>any</b> file except for the `01-plugins.vim` file!
 
+## Updating config from within neovim
+`<localleade>cu` reads in the config files another time.
+
 ## Autocompletion
 I use the default vim autocompletion, which can be accessed with `<C-N>`.
 <br>
