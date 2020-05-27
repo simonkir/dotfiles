@@ -8,6 +8,7 @@ Plug 'vim-airline/vim-airline'        " status bar
 Plug 'vim-airline/vim-airline-themes' " status bar themes
 
 Plug 'mhinz/vim-startify'             " fancy start screen
+Plug 'vifm/vifm.vim'                  " vifm file manager
 
 Plug 'jiangmiao/auto-pairs'           " auto-close parentheses
 Plug 'tpope/vim-surround'             " edit parentheses

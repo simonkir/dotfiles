@@ -1,0 +1,19 @@
+" vim: filetype=vim :
+" Sample configuration file for vifm (last updated: 2 June, 2019)
+" You can edit this file by hand.
+" The " character at the beginning of a line comments out the line.
+" Blank lines are ignored.
+" The basic format for each item is shown with an example.
+
+" ------------------------------------------------------------------------------
+
+" import these files in the specified order
+
+source '~/.config/vifm/config.d/general.vim'
+source '~/.config/vifm/config.d/panes.vim'
+source '~/.config/vifm/config.d/commands.vim'
+source '~/.config/vifm/config.d/mappings.vim'
+source '~/.config/vifm/config.d/marks.vim'
+source '~/.config/vifm/config.d/filetypes.vim'
+
+" ------------------------------------------------------------------------------
