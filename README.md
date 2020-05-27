@@ -4,6 +4,11 @@ This is a repository for all of my dotfiles.
 
 # Documentation
 
+## `update.sh`
+- found in `~/documentation/update.sh`
+- updates permissions for some scripts
+- compiles some configs (e. g. i3 config)
+
 ## Configuration specific
 Configuration specific documentation can be found in `documentation/`
 
