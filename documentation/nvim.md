@@ -2,6 +2,8 @@
 ## Dependencies
 * [vim-plug](https://github.com/junegunn/vim-plug)
 * [Powerline Fonts](https://github.com/powerline/fonts)
+* [arduino](https://www.archlinux.org/packages/community/x86_64/arduino/=)
+* [screen](https://www.archlinux.org/packages/extra/x86_64/screen/)
 
 ## Install neovim-config
 * Clone this repo into `~/.local/share/`
@@ -65,3 +67,13 @@ I set `foldmethod=syntax`, which automatically folds everything inside curly bra
 `zM`: close all folds
 
 `zR`: open all folds
+
+## Arduino IDE
+[vim-arduino](https://github.com/stevearc/vim-arduino) is used for arduino syntax highlighting and compilation
+
+`<localleader>av`: verify the current sketch
+`<localleader>au`: upload the current sketch
+`<localleader>as`: open serial monitor using screen
+
+### Serial Monitor
+The serial monitor starts a `screen` process. Because it is not stopped when you `:q` the serial monitor buffer, you have to manually `killall screen` or `<localleader>ak` the `screen` process. Otherwise, you will not be able to upload any more sketches due to the device being markes as busy.
