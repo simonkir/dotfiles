@@ -1,6 +1,6 @@
 [options]
 clickable_url = true
-font = Monospace 10
+font = Inconsolata 10.5
 mouse_autohide = true
 scroll_on_output = true
 
