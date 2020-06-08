@@ -1,16 +1,9 @@
 # dotfiles
-
 This is a repository for all of my dotfiles.
 
-# Documentation
-
-## `update.sh`
-- found in `~/documentation/update.sh`
-- updates permissions for some scripts
-- compiles some configs (e. g. i3 config)
-
+# Usage
 ## Configuration specific
-Configuration specific documentation can be found in `documentation/`
+Documentation on specific applications can be found in `documentation/`
 
 ## How this repository works
 See
@@ -19,3 +12,9 @@ See
 * [Arch Wiki](https://wiki.archlinux.org/index.php/Dotfiles)
 
 for some documentation.
+
+# Tips & Tricks
+## `update.sh`
+- found in `~/documentation/update.sh`
+- updates permissions for some scripts
+- compiles some configs (e. g. i3 config)
