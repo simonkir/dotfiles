@@ -57,22 +57,40 @@ scrollback_lines = 10000
 highlight = #2f2f2f
 
 # Colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
+foreground = #4D4D4C
+background = #E7E8EB
+
+# black
+color0 = #EDEDED
+color8 = #969694
+
+# red
+color1 = #D7005F
+color9 = #D7005F
+
+# green
+color2 = #718C00
+color10 = #718C00
+
+# yellow / orange
+color3 = #D75F00
+color11 = #D75F00
+
+# blue
+color4 = #4271AE
+color12 = #4271AE
+
+# magenta
+color5 = #8959A8
+color13 = #8959A8
+
+# cyan
+color6 = #3E999F
+color14 = #3E999F
+
+# white
+color7 = #2D2D2C
+color15 = #2D2D2C
 
 [hints]
 #font = Monospace 12
