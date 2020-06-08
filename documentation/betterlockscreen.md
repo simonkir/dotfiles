@@ -1,7 +1,7 @@
 # Betterlockscreen
 
 # Dependencies
-* [`betterlockscreen`](https://aur.archlinux.org/packages/betterlockscreen)
+* [`betterlockscreen (AUR)`](https://aur.archlinux.org/packages/betterlockscreen)
 
 # Usage
 ## Setting Lockscreen Picture
