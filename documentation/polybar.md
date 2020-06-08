@@ -1,8 +1,8 @@
 # polybar
 
 # Dependencies
-* [polybar](https://aur.archlinux.org/packages/polybar)
-* xrandr (for multi-monitor capabilities)
+* [`polybar (AUR)`](https://aur.archlinux.org/packages/polybar)
+* [`xorg-xrandr (extra)`](https://www.archlinux.org/packages/extra/x86_64/xorg-xrandr/) (for multi-monitor capabilities)
 
 # Usage
 The config directory is `~/.config/polybar/`
