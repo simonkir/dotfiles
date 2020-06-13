@@ -64,8 +64,8 @@ filetype *.html,*.htm links, lynx
 
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ {View in viewnior}
-        \ viewnior %f,
+        \ {View in sxiv}
+        \ sxiv %f,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
