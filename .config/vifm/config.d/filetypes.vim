@@ -65,11 +65,11 @@ filetype *.html,*.htm links, lynx
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
-        \ sxiv %f,
+        \ sxiv %f &,
         \ {View in gpicview}
-        \ gpicview %c,
+        \ gpicview %c &,
         \ {View in shotwell}
-        \ shotwell,
+        \ shotwell &,
 fileviewer *.bmp,*.gif,*.xpm
          \ identify %f
 
