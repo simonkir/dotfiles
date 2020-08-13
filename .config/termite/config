@@ -1,6 +1,7 @@
 [options]
 clickable_url = true
-font = Inconsolata 10.5
+allow_bold = true
+font = Monospace 11
 mouse_autohide = true
 scroll_on_output = true
 
@@ -12,44 +13,45 @@ scrollback_lines = 10000
 browser = firefox
 
 [colors]
-# If unset, will reverse foreground and background
-highlight = #2f2f2f
+# ArcoLinux Default Theme
+background = rgba(40, 42, 54, 0.8)
 
-# Colors from color0 to color254 can be set
-foreground = #4D4D4C
-background = #E7E8EB
+# special
+foreground      = #f8f8f2
+foreground_bold = #f8f8f2
+cursor          = #f8f8f2
 
 # black
-color0 = #EDEDED
-color8 = #969694
+color0  = #000000
+color8  = #79A9FF
 
 # red
-color1 = #D7005F
-color9 = #D7005F
+color1  = #ff5555
+color9  = #ff6e67
 
 # green
-color2 = #718C00
-color10 = #718C00
+color2  = #50fa7b
+color10 = #5af78e
 
-# yellow / orange
-color3 = #D75F00
-color11 = #D75F00
+# yellow
+color3  = #f1fa8c
+color11 = #f4f99d
 
 # blue
-color4 = #4271AE
-color12 = #4271AE
+color4  = #6790EB
+color12 = #79A9FF
 
 # magenta
-color5 = #8959A8
-color13 = #8959A8
+color5  = #ff79c6
+color13 = #ff92d0
 
 # cyan
-color6 = #3E999F
-color14 = #3E999F
+color6  = #8be9fd
+color14 = #9aedfe
 
 # white
-color7 = #2D2D2C
-color15 = #2D2D2C
+color7  = #bfbfbf
+color15 = #e6e6e6
 
 [hints]
 # empty for now
