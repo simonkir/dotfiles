@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+sleep 1
+
 # all monitors
 outputs=$(xrandr --query | grep " connected" | cut -d" " -f1)
 
