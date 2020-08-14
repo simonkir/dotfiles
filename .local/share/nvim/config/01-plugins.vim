@@ -2,8 +2,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " insert all plugins below this line
 
-Plug 'noahfrederick/vim-hemisu'       " hemisu theme
-
 Plug 'vim-airline/vim-airline'        " status bar
 Plug 'vim-airline/vim-airline-themes' " status bar themes
 
