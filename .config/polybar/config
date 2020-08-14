@@ -45,7 +45,7 @@ module-margin-left = 1
 module-margin-right = 1
 
 modules-left = i3 ewmh
-modules-center = kernel
+modules-center = kernel pacman-updates
 modules-right = memory cpu battery temperature date
 
 separator = |
