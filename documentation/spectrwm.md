@@ -22,3 +22,8 @@ The default bar is replaced with `polybar`. See `documentation/polybar.md` for m
 The config file automatically loads a script which takes care of the screen layouting and settings, located in `~/.screenlayout/default.sh`. All screen layout specific commands go into this file. If you don't have more than one screen, just don't create the mentioned file or leave it empty.
 
 **Suggestion:** Use [`arandr (community)`](https://www.archlinux.org/packages/community/any/arandr/) to generate such a script.
+
+## Bug: Flickering Windows in Fullscreen Layout
+The issue happens when switching from another layout to the fullscreen layout (layout that all windows are maximum size).
+
+**Workaround:** `focus_mode = follow` should be replaced with one of the other focus modes.
