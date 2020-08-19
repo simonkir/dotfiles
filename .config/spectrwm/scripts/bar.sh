@@ -3,7 +3,7 @@
 
 ## RAM
 mem() {
-  mem=`free | awk '/Mem/ {printf "%dM/%dM\n", $3 / 1024.0, $2 / 1024.0 }'`
+  mem=`free | awk '/Mem/ {printf "%0.1fG/%0.1fG\n", $3 / 1024.0 / 1024.0, $2 / 1024.0 / 1024.0 }'`
   echo -e "$mem"
 }
 
