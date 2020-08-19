@@ -32,11 +32,11 @@ systime() {
 
 ## PACMAN UPDATES
 pacup() {
-    pacup=`pacman -Qu | wc -l`
+    pacup=`checkupdatescheckupdates | wc -l`
     echo -e "$pacup"
 }
 
-SLEEP_SEC=3
+SLEEP_SEC=10
 #loops forever outputting a line every SLEEP_SEC secs
 
 # It seems that we are limited to how many characters can be displayed via
