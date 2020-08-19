@@ -15,7 +15,7 @@ cpu() {
   read cpu a b c idle rest < /proc/stat
   total=$((a+b+c+idle))
   cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  echo -e "CPU: $cpu%"
+  echo -e "$cpu%"
 }
 
 ## BATTERY
@@ -44,6 +44,6 @@ SLEEP_SEC=10
 # So I would love to add more functions to this script but it makes the 
 # echo output too long to display correctly.
 while :; do
-    echo "+@fg=4; +@fn=0; UPDATES: $(pacup) +@fg=0; | +@fg=1; +@fn=0; $(cpu) +@fg=0; | +@fg=5; +@fn=0; RAM: $(mem) +@fg=0; |+@fg=3; +@fn=0; BAT: $(battery) % +@fg=0; | +@fg=2; $(systime) +@fg=0;"
+    echo "+@fg=1; +@fn=1; +@fn=0; UPDATES: $(pacup) +@fg=0; | +@fg=5; +@fn=1;+@fn=0;  $(cpu) +@fg=0; | +@fg=2; +@fn=1; +@fn=0; $(mem) +@fg=0; | +@fg=4; +@fn=1; +@fn=0; $(battery) % +@fg=0; | +@fg=3; +@fn=1; +@fn=0; $(systime)"
 	sleep $SLEEP_SEC
 done
