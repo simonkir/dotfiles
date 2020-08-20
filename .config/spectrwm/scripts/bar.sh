@@ -32,7 +32,7 @@ systime() {
 
 ## PACMAN UPDATES
 pacup() {
-    pacup=`checkupdatescheckupdates | wc -l`
+    pacup=`checkupdates | wc -l`
     echo -e "$pacup"
 }
 
