@@ -1,6 +1,6 @@
 " ron theme
-set background=light
-colorscheme hemisu
+set background=dark
+colorscheme default
 
 " enable relative linenumbers
 set number relativenumber

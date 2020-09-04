@@ -6,7 +6,7 @@
   * [zsh syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
   * [zsh autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   * [powerlevel10k](https://github.com/romkatv/powerlevel10k)
-* [Powerline](https://powerline.readthedocs.io/en/latest/installation/linux.html)
+* [`neofetch (community)`](https://www.archlinux.org/packages/community/any/neofetch/)
 
 # Installation
 * oh my zsh directory is `~/.oh-my-zsh`

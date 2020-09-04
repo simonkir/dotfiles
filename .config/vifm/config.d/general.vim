@@ -83,6 +83,8 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 set number
 set relativenumber
 
+colo palenight
+
 " What should be saved automatically between vifm sessions.  Drop "savedirs"
 " value if you don't want vifm to remember last visited directories for you.
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
