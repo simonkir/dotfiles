@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/sxhkd -c ~/.config/spectrwm/sxhkd/sxhkdrc &
+/usr/bin/sxhkd -c ~/.config/sxhkd/sxhkdrc

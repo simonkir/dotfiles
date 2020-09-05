@@ -1,0 +1,108 @@
+#################################################################
+# KEYBOARD BINDINGS FOR ANY WM
+#################################################################
+
+# terminal
+super + Return
+    termite
+
+# Xkill
+super + Escape
+    xkill
+
+# application launcher
+super +  d
+	kupfer
+
+# lockscreen
+super + 9
+    betterlockscreen -l
+
+# logout dialog
+super + 0
+    arcolinux-logout
+
+#################################################################
+# APPLICATIONS
+#################################################################
+
+#reload sxhkd:
+super + alt + s
+	pkill -USR1 -x sxhkd
+
+# file browser
+super + alt + b
+    termite -e ~/.config/vifm/scripts/vifmrun
+
+# web browser
+super + alt + w
+     firefox
+
+#################################################################
+# SCREENSHOTS
+#################################################################
+
+#Scrot
+Print
+    scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
+
+#screeenshooter
+ctrl + Print
+     xfce4-screenshooter
+
+#################################################################
+# POLYBAR        
+#################################################################
+
+#Hide polybar
+super + y
+    polybar-msg cmd toggle
+
+#################################################################
+# MULTIMEDIA KEYS
+#################################################################
+
+#Raises volume
+XF86AudioRaiseVolume
+    amixer set Master 10%+
+
+#Lowers volume
+XF86AudioLowerVolume
+    amixer set Master 10%-
+
+#Mute
+XF86AudioMute
+    amixer -D pulse set Master 1+ toggle
+
+#Playerctl works for Pragha, Spotify and others
+#Delete the line for playerctl if you want to use mpc
+#and replace it with the corresponding code
+#mpc works for e.g.ncmpcpp
+#mpc toggle
+#mpc next
+#mpc prev
+#mpc stop
+
+#PLAY
+XF86AudioPlay
+    playerctl play-pause
+
+#Next
+XF86AudioNext
+    playerctl next
+
+#previous
+XF86AudioPrev
+    playerctl previous
+
+#Stop
+XF86AudioStop
+    playerctl stop
+
+#Brightness up
+XF86MonBrightnessUp
+    xbacklight -inc 10
+
+#Brightness down
+XF86MonBrightnessDown
+    xbacklight -dec 10
