@@ -25,7 +25,7 @@ xsetroot -cursor_name left_ptr &
 #keybindings are in ~/.config/sxhkd/sxhkdrc
 sxhkd &
 
-~/.config/herbstluftwm/scripts/picom-toggle.sh &
+~/.config/herbstluftwm/scripts/picom-launch.sh &
 
 nitrogen --restore &
 run volumeicon &

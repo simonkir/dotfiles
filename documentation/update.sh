@@ -5,6 +5,7 @@ chmod +x ~/.config/polybar/scripts/tempcores.sh
 chmod +x ~/.config/vifm/scripts/vifmimg
 chmod +x ~/.config/vifm/scripts/vifmrun
 chmod +x ~/.config/spectrwm/scripts/bar.sh
+chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 
 # hlwm config permissions
 chmod +x ~/.config/herbstluftwm/autostart
