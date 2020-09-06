@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
+
+#herbstluftwm start
+hc() {
+    herbstclient "$@"
+}
+
+#launching polybar
+~/.config/polybar/launch.sh
+
+#Autostart applications
+pkill -u $USER '^picom$'
+picom --config $HOME/.config/herbstluftwm/picom.conf &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+xsetroot -solid '#000000'
+xsetroot -cursor_name left_ptr &
+
+#keybindings are in ~/.config/sxhkd/sxhkdrc
+sxhkd &
+
+~/.config/herbstluftwm/scripts/picom-toggle.sh
+
+nitrogen --restore &
+run volumeicon &
+nm-applet &
+xfce4-power-manager &
+numlockx on &
+setxkbmap -option caps:escape &

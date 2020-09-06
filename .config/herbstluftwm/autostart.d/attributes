@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
+
+#herbstluftwm start
+hc() {
+    herbstclient "$@"
+}
+
+#reset prior to setting the theme
+hc attr theme.reset 1
+
+# Attribute
+hc attr theme.active.color '#6790EB'
+hc attr theme.active.inner_color '#141414'
+hc attr theme.active.outer_color '#6790EB'
+hc attr theme.background_color '#141414'
+hc attr theme.border_width 3
+hc attr theme.floating.border_width 4
+hc attr theme.floating.outer_width 1
+hc attr theme.floating.outer_color black
+hc attr theme.inner_color black
+hc attr theme.inner_width 1
+hc attr theme.normal.color '#141414'
+hc attr theme.urgent.color orange
+
+# Set
+hc set always_show_frame 0
+hc set focus_follows_mouse 1
+hc set frame_border_active_color '#6790EB'
+hc set frame_border_normal_color '#141414'
+hc set frame_bg_normal_color '#141414'
+hc set frame_bg_active_color '#000000'
+hc set frame_border_width 0
+hc set frame_bg_transparent 1
+hc set frame_transparent_width 0
+hc set frame_gap 0
+hc set frame_padding 0
+hc set mouse_recenter_gap 0
+hc set smart_frame_surroundings 1
+hc set smart_window_surroundings 0
+hc set tree_style '╾│ ├└╼─┐'
+hc set window_gap 0
