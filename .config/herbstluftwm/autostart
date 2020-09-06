@@ -14,7 +14,6 @@ hc() {
 
 hc emit_hook reload
 
-~/.config/herbstluftwm/autostart.d/workspaces
 ~/.config/herbstluftwm/autostart.d/keybinds
 ~/.config/herbstluftwm/autostart.d/attributes
 ~/.config/herbstluftwm/autostart.d/rules
