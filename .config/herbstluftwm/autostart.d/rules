@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
+
+#herbstluftwm start
+hc() {
+    herbstclient "$@"
+}
+
+# RULES
+hc unrule -F
+hc rule focus=on # normally focus new clients
+
+# give focus to most common terminals
+#hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+#hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' manage=off
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule class=Oblogout fullscreen=on
+hc rule class=Insync pseudotile=on
+hc rule class=VirtualBox fullscreen=on
+hc rule class=Arcolinux-tweak-tool.py pseudotile=on
+hc rule class=Arcolinux-welcome-app.py pseudotile=on
+# No solution yet to dropdown xfce4-terminal
+# hc rule windowrole=xfce4-terminal-dropdown manage=off
+
+# assign applications to workspaces or tags - using names for tags
+hc rule class~'Opera'                   tag='1'
+hc rule class~'firefox'                 tag='1'
+    
+hc rule class~'URxvt'                   tag='2'
+hc rule class~'Termite'                 tag='2'
+    
+hc rule class~'krita'                   tag='3'
+hc rule class~'Kicad'                   tag='3'
+hc rule class~'calibre'                 tag='3'
+hc rule class~'libreoffice-startcenter' tag='3'
+hc rule class~'Soffice'                 tag='3'
+hc rule class~'lyx'                     tag='3'
+hc rule class~'Xournalpp'               tag='3'
+hc rule class~'Zathura'                 tag='3'
+hc rule class~'okular'                  tag='3'
+hc rule class~'kdenlive'                tag='3'
+hc rule class~'WED'                     tag='3'
+    
+hc rule class~'Steam'                   tag='4'
+hc rule class~'minecraft-launcher'      tag='4'
+hc rule class~'Minecraft*'              tag='4'
+hc rule class~'X-Plane'                 tag='4'
+hc rule class~'gui-Main'                tag='4'
+    
+hc rule class~'vlc'                     tag='5'
+    
+hc rule class~'discord'                 tag='7'

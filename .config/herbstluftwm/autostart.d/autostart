@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
+
+#herbstluftwm start
+hc() {
+    herbstclient "$@"
+}
+
+#launching polybar & tray icons
+~/.config/polybar/launch.sh &
+volumeicon &
+nm-applet &
+
+#Autostart applications
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+xfce4-power-manager &
+~/.config/herbstluftwm/scripts/picom-launch.sh &
+nitrogen --restore &
+
+#keybindings are in ~/.config/sxhkd/sxhkdrc
+sxhkd &
+
+# misc applications
+numlockx on &
+setxkbmap -option caps:escape &
