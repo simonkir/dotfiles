@@ -8,6 +8,8 @@ alias rm='rm -I'
 alias vifm='~/.config/vifm/scripts/vifmrun'
 alias git-dtf='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+fish_vi_key_bindings
+
 neofetch
 
 # vim:ft=bash
