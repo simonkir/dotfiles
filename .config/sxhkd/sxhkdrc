@@ -36,7 +36,11 @@ super + alt + b
 
 # web browser
 super + alt + w
-     firefox
+    firefox
+
+# discord
+super + alt + d
+    discord
 
 #################################################################
 # SCREENSHOTS
