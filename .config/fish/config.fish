@@ -8,6 +8,11 @@ alias rm='rm -I'
 alias vifm='~/.config/vifm/scripts/vifmrun'
 alias git-dtf='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
+
 fish_vi_key_bindings
 
 # cursor style settings
