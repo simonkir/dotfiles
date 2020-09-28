@@ -1,7 +1,10 @@
-" open vertical splits to the right
-set splitright
+" --------------------------------
+"   SPLITS
+" --------------------------------
 
+" open vertical splits to the right
 " open horizontal splits below
+set splitright
 set splitbelow
 
 " split naviagtion (single keybind instead of keychord)
@@ -18,3 +21,10 @@ nnoremap <localleader>sh <C-w>t<C-w>K
 
 " no pipe | symbols that separate splits
 set fillchars+=vert:\ 
+
+" --------------------------------
+"   TABS
+" --------------------------------
+nnoremap <C-t>   :tabnew<CR>
+nnoremap <C-S-h> :tabprevious<CR>
+nnoremap <C-S-l> :tabnext<CR>
