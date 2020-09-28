@@ -28,3 +28,4 @@ set fillchars+=vert:\
 nnoremap <C-t>   :tabnew<CR>
 nnoremap <C-S-h> :tabprevious<CR>
 nnoremap <C-S-l> :tabnext<CR>
+nnoremap <C-c>   :tabclose<CR>
