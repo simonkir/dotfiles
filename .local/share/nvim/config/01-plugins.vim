@@ -15,8 +15,6 @@ Plug 'junegunn/vim-easy-align'        " easy alignment
 Plug 'neomake/neomake'                " error highlighting / linting
 
 Plug 'lervag/vimtex'		          " latex support
-Plug 'iamcco/markdown-preview.vim'    " markdown preview
-Plug 'stevearc/vim-arduino'           " arduino compatibility
 
 " insert all plugins above this line
 
