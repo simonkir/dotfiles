@@ -1,8 +1,14 @@
 " airline
 
 let g:airline_theme = "wombat"
-
 let g:airline_powerline_fonts = 1
+
+" tabline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 2     " only show with at least 2 tabs
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
