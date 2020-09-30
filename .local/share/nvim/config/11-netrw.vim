@@ -10,7 +10,6 @@ filetype plugin on
 autocmd BufWrite * :set bt=
 
 " file exploration menu settings
-let g:netrw_banner = 0        " remove directions at top of file listing
+let g:netrw_banner = 0        " remove banner at top of file listing
 let g:netrw_liststyle=3       " tree style listing
-let g:netrw_browse_split = 3  " open in new tab
-let g:netrw_winsize=25        " width of window
+let g:netrw_browse_split = 0  " open in same buffer
