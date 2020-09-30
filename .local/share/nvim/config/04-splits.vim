@@ -29,4 +29,4 @@ nnoremap <C-t> :tabnew<CR>
 nnoremap <S-h> :tabprevious<CR>
 nnoremap <S-l> :tabnext<CR>
 nnoremap <C-c> :tabclose<CR>
-autocmd TabNewEntered * :Explore
+autocmd TabNewEntered * :Vexplore

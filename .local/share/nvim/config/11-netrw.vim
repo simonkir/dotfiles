@@ -10,6 +10,8 @@ filetype plugin on
 autocmd BufWrite * :set bt=
 
 " file exploration menu settings
-let g:netrw_banner = 0        " remove banner at top of file listing
-let g:netrw_liststyle=3       " tree style listing
-let g:netrw_browse_split = 0  " open in same buffer
+let g:netrw_banner = 0       " remove banner at top of file listing
+let g:netrw_liststyle = 3    " tree style listing
+let g:netrw_browse_split = 4 " open file in last used buffer
+let g:netrw_altv = 1         " open vsplit to the right instead of left
+let g:netrw_winsize = 15
