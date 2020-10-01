@@ -1,4 +1,3 @@
-syntax enable
 " enable plugins for netrw
 filetype plugin on
 
