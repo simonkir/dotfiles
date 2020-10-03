@@ -98,12 +98,11 @@ hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
 
 # cycle monitor
-hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-Tab   cycle_monitor
+hc keybind $Mod-Shift-Tab   cycle_monitor -1
 
 # alt + tab / mod + tab
-hc keybind $Mod-Tab         cycle 1
 hc keybind Mod1-Tab         cycle 1
-hc keybind $Mod-Shift-Tab   cycle -1
 hc keybind Mod1-Shift-Tab   cycle -1
 
 hc keybind $Mod-i jumpto urgent
