@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-function run {
-  if ! pgrep $1 ;
-  then
-    $@&
-  fi
-}
-
 #herbstluftwm start
 hc() {
     herbstclient "$@"
@@ -17,14 +10,16 @@ hc() {
 volumeicon &
 nm-applet &
 
-#Autostart applications
+# general applications
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 xfce4-power-manager &
+
+# compositor & wallpaper
 ~/.config/herbstluftwm/scripts/picom-launch.sh &
 nitrogen --restore &
 
-#keybindings are in ~/.config/sxhkd/sxhkdrc
+#keybinds are in ~/.config/sxhkd/sxhkdrc
 sxhkd &
 
 # misc applications
