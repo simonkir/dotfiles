@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 # add execute permission to scripts
 chmod +x ~/.i3/create_config
 chmod +x ~/.config/polybar/launch.sh
