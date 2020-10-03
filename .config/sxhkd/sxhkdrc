@@ -27,8 +27,16 @@ super + 0
 #################################################################
 
 #reload sxhkd:
-super + alt + s
+super + alt + r
 	pkill -USR1 -x sxhkd
+
+# task manager
+super + alt + h
+    termite -e htop
+
+# text editor
+super + alt + e
+    termite -e nvim
 
 # file browser
 super + alt + b
@@ -38,9 +46,21 @@ super + alt + b
 super + alt + w
     firefox
 
+# office application
+super + alt + o
+    libreoffice
+
 # discord
 super + alt + d
     discord
+
+# minecraft
+super + alt + m
+    minecraft-launcher
+
+# steam
+super + alt + s
+    steam
 
 #################################################################
 # SCREENSHOTS
