@@ -25,3 +25,7 @@ sxhkd &
 # misc applications
 numlockx on &
 setxkbmap -option caps:escape &
+
+# open ws 1 on second monitor at startup
+hc cycle_monitor
+hc use_index 0
