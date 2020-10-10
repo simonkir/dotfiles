@@ -44,6 +44,14 @@ let g:easy_align_delimiters['"'] = {
 \ 'ignore_unmatched': 0,
 \ }
 
+" aligns comments that begin with '%' (latex comments)
+" comments are aligned behind the widest line of code
+let g:easy_align_delimiters['%'] = {
+\ 'pattern': '%',
+\ 'ignore_groups': ['String'],
+\ 'ignore_unmatched': 0,
+\ }
+
 " aligns the cpp-output operator
 " e.g. if you have a really long std::cout command
 " split over several lines
