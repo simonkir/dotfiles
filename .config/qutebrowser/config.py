@@ -61,8 +61,11 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #       CUSTOMIZED CONFIG
 #-------------------------------------------------------------------------------------
 
+# ----- keybinds
+
 # watch video in vlc player
-config.bind('M', 'hint links spawn vlc {hint-url}')
+config.bind('z', 'hint links spawn vlc {hint-url}')
+config.bind('Z', 'spawn vlc {url}')
 
 # toggle tab and status bars
 config.bind('xb', 'config-cycle statusbar.show never always')
