@@ -44,7 +44,7 @@ super + alt + b
 
 # web browser
 super + alt + w
-    firefox
+    qutebrowser
 
 # office application
 super + alt + o

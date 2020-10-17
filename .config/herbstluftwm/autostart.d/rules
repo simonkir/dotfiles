@@ -26,6 +26,8 @@ hc rule class=Arcolinux-welcome-app.py                               pseudotile=
 # assign applications to workspaces or tags - using names for tags
 hc rule class~'Opera'                   tag='1'
 hc rule class~'firefox'                 tag='1'
+hc rule class~'qutebrowser'             tag='1'
+hc rule class~'vlc'                     tag='1'
     
 hc rule class~'URxvt'                   tag='2'
 hc rule class~'Termite'                 tag='2'
@@ -47,7 +49,5 @@ hc rule class~'minecraft-launcher'      tag='4'
 hc rule class~'Minecraft*'              tag='4'
 hc rule class~'X-Plane'                 tag='4'
 hc rule class~'gui-Main'                tag='4'
-    
-hc rule class~'vlc'                     tag='5'
     
 hc rule class~'discord'                 tag='7'
