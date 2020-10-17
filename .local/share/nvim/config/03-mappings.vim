@@ -2,11 +2,19 @@
 "   FASTER EDITING
 " --------------------------------
 
-inoremap <C-l> <C-o>a  " advance one character
-inoremap <C-k> <C-o>zz " center view on current line
+" skip one character in insert mode
+inoremap <C-l> <C-o>a
+
+" center view on current line
+inoremap <C-k> <C-o>zz
+
+" line scrolling
+inoremap <C-e> <C-o><C-e>
+inoremap <C-y> <C-o><C-y>
 
 " --------------------------------
 "   MISC
 " --------------------------------
 
-nnoremap <localleader>cu :source $MYVIMRC  " update config
+" update config
+nnoremap <localleader>cu :source $MYVIMRC<CR>
