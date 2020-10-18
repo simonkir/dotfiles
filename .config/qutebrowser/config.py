@@ -70,3 +70,17 @@ config.bind('Z', 'spawn vlc {url}')
 # toggle tab and status bars
 config.bind('xb', 'config-cycle statusbar.show never always')
 config.bind('xt', 'config-cycle tabs.show never always')
+
+# ----- theme settings
+
+import dracula.draw
+
+# Load existing settings made via :set
+config.load_autoconfig()
+
+dracula.draw.blood(c, {
+    'spacing': {
+        'vertical': 6,
+        'horizontal': 8
+    }
+})
