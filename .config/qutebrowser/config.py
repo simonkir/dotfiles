@@ -66,6 +66,8 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # watch video in vlc player
 config.bind('z', 'hint links spawn vlc {hint-url}')
 config.bind('Z', 'spawn vlc {url}')
+config.bind('t', 'set-cmd-text -s :open -t')
+config.bind('O', 'set-cmd-text -s :open -p')
 
 # toggle tab and status bars
 config.bind('xb', 'config-cycle statusbar.show never always')
