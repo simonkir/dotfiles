@@ -46,6 +46,10 @@ super + alt + b
 super + alt + w
     qutebrowser
 
+# secondary web browser
+super + alt + shift + w
+    firefox
+
 # office application
 super + alt + o
     libreoffice
