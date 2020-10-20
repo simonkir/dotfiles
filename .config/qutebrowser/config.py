@@ -66,8 +66,11 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # watch video in vlc player
 config.bind('z', 'hint links spawn vlc {hint-url}')
 config.bind('Z', 'spawn vlc {url}')
-config.bind('t', 'set-cmd-text -s :open -t')
-config.bind('O', 'set-cmd-text -s :open -p')
+
+config.bind('t', 'set-cmd-text -s :open -t') # open link in new tab
+config.bind('O', 'set-cmd-text -s :open -p') # open link in private mode
+config.bind('F', 'hint inputs')              # hints inputs only (replaces hint and open in new tab, alt binding: ;f)
+config.bind('I', 'hint inputs --first')      # insert mode in first field, same as gi
 
 # toggle tab and status bars
 config.bind('xb', 'config-cycle statusbar.show never always')
