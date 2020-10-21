@@ -61,6 +61,8 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #       CUSTOMIZED CONFIG
 #-------------------------------------------------------------------------------------
 
+c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
+
 # ----- keybinds
 
 # watch video in vlc player
