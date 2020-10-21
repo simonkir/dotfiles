@@ -13,6 +13,17 @@ config file: `~/.config/qutebrowser/config.py`
 ### watching youtube without ads
 * use binding `Z` (current url) or `z` (hint) to watch videos in an external video player
 
-## toggle bars
+## improved keybinds
 * `xb`: toggles main bar
 * `xt`: toggles tab bar
+* `F`: hints input fields only
+* `I`: insert in first input field
+
+### other useful keybinds
+* `;f`: open hint in foreground tab
+* `;b`: open hint in background tab
+* `;y`: yank hinted url to clipboard
+* `;r`: rapid hinting (open several hints in background tabs)
+
+## custom startpage
+the custom startpage needs to be `~/.config/qutebrowser/startpage/index.html` (linking also possible)
