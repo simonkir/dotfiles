@@ -67,6 +67,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 config.bind('z', 'hint links spawn vlc {hint-url}')
 config.bind('Z', 'spawn vlc {url}')
 
+config.bind('<Ctrl-t>', 'open -t ~/.config/qutebrowser/startpage/index.html')
 config.bind('t', 'set-cmd-text -s :open -t') # open link in new tab
 config.bind('O', 'set-cmd-text -s :open -p') # open link in private mode
 config.bind('F', 'hint inputs')              # hints inputs only (replaces hint and open in new tab, alt binding: ;f)
