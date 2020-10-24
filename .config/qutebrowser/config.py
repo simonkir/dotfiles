@@ -90,6 +90,7 @@ dracula.draw.blood(c, {
 
 # ----- miscellaneous
 
+c.confirm_quit = ['downloads', 'multiple-tabs']
 c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
 
 # search engines
