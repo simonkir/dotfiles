@@ -61,8 +61,6 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #       CUSTOMIZED CONFIG
 #-------------------------------------------------------------------------------------
 
-c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
-
 # ----- keybinds
 
 # watch video in vlc player
@@ -88,3 +86,10 @@ dracula.draw.blood(c, {
         'horizontal': 6
     }
 })
+
+# ----- miscellaneous
+
+c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
+
+# search engines
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}', 'wiki': 'https://en.wikipedia.org/wiki/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'tra': 'https://deepl.com/translator#en/de/{}', 'am': 'https://www.amazon.de/s?k={}'}
