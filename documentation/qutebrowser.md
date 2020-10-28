@@ -22,6 +22,7 @@ config file: `~/.config/qutebrowser/config.py`
 ### other useful keybinds
 * `;f`: open hint in foreground tab
 * `;b`: open hint in background tab
+* `;p`: open hint in private tab
 * `;y`: yank hinted url to clipboard
 * `;r`: rapid hinting (open several hints in background tabs)
 
