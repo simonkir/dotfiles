@@ -45,7 +45,7 @@ nnoremap cC cW<c-u>
 nnoremap A cw
 
 " Open console in current directory
-nnoremap ,t :!termite &<cr>
+nnoremap ,t :!termite %i &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 nnoremap ,c :write | edit $MYVIFMRC | restart<cr>

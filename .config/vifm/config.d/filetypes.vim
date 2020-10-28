@@ -67,11 +67,11 @@ filetype *.html,*.htm links, lynx
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
-        \ sxiv %f &,
+        \ sxiv %f %i &,
         \ {View in gpicview}
-        \ gpicview %c &,
+        \ gpicview %c %i &,
         \ {View in shotwell}
-        \ shotwell &,
+        \ shotwell %i &,
 fileviewer *.bmp,*.gif,*.xpm
          \ identify %f
 
@@ -82,13 +82,13 @@ fileviewer *.jpg,*.jpeg,*.png
            \ vifmimg clear
 
 " graphic programs
-filextype *.kra krita %f &
-filextype *.xcf gimp %f &
-filextype *.blend blender %f &
+filextype *.kra krita %f %i &
+filextype *.xcf gimp %f %i &
+filextype *.blend blender %f %i &
 
 " Office files
-filextype *.odt,*.odg,*.ods,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
-filextype *.xopp xournalpp %f &
+filextype *.odt,*.odg,*.ods,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f %i &
+filextype *.xopp xournalpp %f %i &
 fileviewer *.doc catdoc %c
 fileviewer *.docx docx2txt.pl %f -
 
@@ -133,7 +133,7 @@ filextype *.ora
 " Mindmap
 filextype *.vym
         \ {Open with VYM}
-        \ vym %f &,
+        \ vym %f %i &,
 
 " MD5
 filetype *.md5
@@ -161,7 +161,7 @@ filetype *.asc
        \ !!gpg --verify %c,
 
 " Torrent
-filetype *.torrent ktorrent %f &
+filetype *.torrent ktorrent %f %i &
 fileviewer *.torrent dumptorrent -v %c
 
 " ArchiveMount
@@ -204,12 +204,12 @@ fileviewer *.7z 7z l %c
 filetype *.tudu tudu -f %c
 
 " Qt projects
-filextype *.pro qtcreator %f &
+filextype *.pro qtcreator %f %i &
 
 " Directories
 filextype */
         \ {View in thunar}
-        \ Thunar %f &,
+        \ Thunar %f %i &,
 
 " Syntax highlighting in preview
 "
