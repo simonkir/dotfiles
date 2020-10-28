@@ -8,9 +8,22 @@ inoremap <C-l> <C-o>a
 " center view on current line
 inoremap <C-k> <C-o>zz
 
-" line scrolling
-inoremap <C-e> <C-o><C-e>
-inoremap <C-y> <C-o><C-y>
+" --------------------------------
+"   AUTOCOMPLETION
+" --------------------------------
+
+" either insert <Tab> or open autocompletion
+function! CleverTab()
+   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+      return "\<Tab>"
+   else
+      return "\<C-P>"
+   endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+
+" scroll back in autocompletion
+inoremap <S-Tab> <C-N>
 
 " --------------------------------
 "   MISC
