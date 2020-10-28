@@ -44,6 +44,10 @@ super + alt + b
 
 # web browser
 super + alt + w
+    qutebrowser
+
+# secondary web browser
+super + alt + shift + w
     firefox
 
 # office application

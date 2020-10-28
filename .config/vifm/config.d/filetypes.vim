@@ -56,6 +56,8 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 filextype *.html,*.htm
         \ {Open with dwb}
         \ dwb %f %i &,
+        \ {Open with qutebrowser}
+        \ qutebrowser %f &,
         \ {Open with firefox}
         \ firefox %f &,
         \ {Open with uzbl}
