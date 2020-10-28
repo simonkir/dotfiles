@@ -2,8 +2,6 @@
 ## Dependencies
 * [vim-plug](https://github.com/junegunn/vim-plug)
 * [Powerline Fonts](https://github.com/powerline/fonts)
-* [arduino](https://www.archlinux.org/packages/community/x86_64/arduino/=)
-* [screen](https://www.archlinux.org/packages/extra/x86_64/screen/)
 
 ## Install neovim-config
 * Link/copy `init.vim` into `~/.config/nvim/`
@@ -27,14 +25,9 @@ Also, you *do not* want the prefix `01` at *any* file except for the `01-plugins
 `<localleader>cu` reads in the config files another time.
 
 ## Autocompletion
-* `<C-N>`: default vim autocompletion (next item)
-* `<C-P>`: default vim autocompletion (previous item)
-* `<C-X><C-N>`: limits to file only
+* `<TAB>`: default vim autocompletion (previous item)
+* `<S-TAB>`: default vim autocompletion (next item)
 * `<C-X><C-F>`: only filenames
-
-## Fuzzy File Finder
-* `:find <file you're looking for>`
-* `:find *<part of file name>` (fuzzy file find)
 
 ## Using Folds
 * `zo`/`zO`: open a fold
@@ -42,13 +35,3 @@ Also, you *do not* want the prefix `01` at *any* file except for the `01-plugins
 * `za`/`zA`: toggle a fold
 * `zM`: close all folds
 * `zR`: open all folds
-
-*Note:* Uppercase letters do a recursive operation.
-
-## Arduino IDE
-[vim-arduino](https://github.com/stevearc/vim-arduino) is used for arduino syntax highlighting and compilation
-
-* `<localleader>av`: verify the current sketch
-* `<localleader>au`: upload the current sketch
-* `<localleader>as`: open serial monitor using screen
-* `<localleader>ak`: kills serial connection (needed before another upload)
