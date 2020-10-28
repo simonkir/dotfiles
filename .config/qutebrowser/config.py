@@ -67,11 +67,16 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 config.bind('z', 'hint links spawn vlc {hint-url}')
 config.bind('Z', 'spawn vlc {url}')
 
-config.bind('<Ctrl-t>', 'open -t ~/.config/qutebrowser/startpage/index.html')
+# opening / closing tabs and windows
+config.bind('<Ctrl-t>', 'open -t ~/.config/qutebrowser/startpage/index.html') # open startpage in new tab
 config.bind('t', 'set-cmd-text -s :open -t') # open link in new tab
 config.bind('O', 'set-cmd-text -s :open -p') # open link in private mode
-config.bind('F', 'hint inputs')              # hints inputs only (replaces hint and open in new tab, alt binding: ;f)
-config.bind('I', 'hint inputs --first')      # insert mode in first field, same as gi
+config.bind('D', 'close')
+
+# hinting actions
+config.bind('F', 'hint inputs')                        # hints inputs only (replaces hint and open in new tab, alt binding: ;f)
+config.bind('I', 'hint inputs --first')                # insert mode in first field, same as gi
+config.bind(';p', 'hint links run open -p {hint-url}') # open hint in private tab
 
 # toggle tab and status bars
 config.bind('xb', 'config-cycle statusbar.show never always')
