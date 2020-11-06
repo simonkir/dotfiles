@@ -25,7 +25,9 @@ set fillchars+=vert:\
 " --------------------------------
 "   TABS
 " --------------------------------
-nnoremap <C-t> :tabnew<CR>
+nnoremap <C-t> :tabnew<CR>:e 
 nnoremap <S-h> :tabprevious<CR>
 nnoremap <S-l> :tabnext<CR>
 nnoremap <C-c> :q<CR>
+nnoremap <localleader>tl :tabmove +1<CR>
+nnoremap <localleader>th :tabmove -1<CR>
