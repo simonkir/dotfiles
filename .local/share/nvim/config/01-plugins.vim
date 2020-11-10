@@ -15,6 +15,7 @@ Plug 'junegunn/vim-easy-align'        " easy alignment
 Plug 'neomake/neomake'                " error highlighting / linting
 
 Plug 'lervag/vimtex'		          " latex support
+Plug 'shime/vim-livedown'             " markdown preview
 
 " insert all plugins above this line
 
