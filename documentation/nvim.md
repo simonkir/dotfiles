@@ -5,13 +5,12 @@
 * [`npm (community)`](https://www.archlinux.org/packages/community/any/npm/)
 
 ## Install neovim-config
-* Link/copy `init.vim` into `~/.config/nvim/`
 * `:PlugClean`, `:UpdateRemotePlugins`, `:PlugInstall`
 
 # Usage
-* `config/01-plugins.vim`: all vim-plug and plugin-enabling commands
-* `config/0n-xyzabc.vim`: nvim-specific configuration
-* `config/nn-xyzabc.vim`: plugin-specifig / other configuration
+* `config.d/01-plugins.vim`: all vim-plug and plugin-enabling commands
+* `config.d/0n-xyzabc.vim`: nvim-specific configuration
+* `config.d/nn-xyzabc.vim`: plugin-specifig / other configuration
 
 ## `nn`-prefix
 * specifies load order on nvim startup
