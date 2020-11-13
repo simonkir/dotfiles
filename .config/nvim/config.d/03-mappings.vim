@@ -63,6 +63,8 @@ nnoremap <localleader>th :tabmove -1<CR>
 "   PLUGIN-SPECIFIC
 " --------------------------------
 
+nnoremap <localleader>wg :Goyo<CR>
+nnoremap <localleader>wl :Limelight!!<CR>
 nnoremap <localleader>mm :LivedownToggle<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)

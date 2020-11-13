@@ -17,6 +17,9 @@ Plug 'neomake/neomake'                " error highlighting / linting
 Plug 'lervag/vimtex'		          " latex support
 Plug 'shime/vim-livedown'             " markdown preview
 
+Plug 'junegunn/goyo.vim'              " hide distractions
+Plug 'junegunn/limelight.vim'         " focus on one paragraph
+
 " insert all plugins above this line
 
 call plug#end()
