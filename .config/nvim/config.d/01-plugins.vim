@@ -14,7 +14,8 @@ Plug 'junegunn/vim-easy-align'        " easy alignment
 
 Plug 'neomake/neomake'                " error highlighting / linting
 
-Plug 'lervag/vimtex'		          " latex support
+Plug 'lervag/vimtex'                  " latex support
+Plug 'plasticboy/vim-markdown'
 Plug 'shime/vim-livedown'             " markdown preview
 
 Plug 'junegunn/goyo.vim'              " hide distractions
