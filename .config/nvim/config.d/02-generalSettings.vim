@@ -39,7 +39,7 @@ set fillchars+=vert:\
 " ----------------------------------------------------------------
 
 set mouse=a           " enable mouse support
-set foldmethod=syntax " create default folds, e.g. from '{' to '}'
+set foldmethod=indent " create default folds, e.g. from '{' to '}'
 set scrolloff=5       " see more lines while scrolling below / above the cursor
 set path+=**          " search in every subdirectory
 set autochdir         " change vim working dir when editing other files
