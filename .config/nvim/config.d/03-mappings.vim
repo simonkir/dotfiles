@@ -50,6 +50,7 @@ nnoremap <localleader>sh <C-w>t<C-w>K
 " ----------------------------------------------------------------
 "   TABS
 " ----------------------------------------------------------------
+
 nnoremap <C-t> :tabnew<CR>:e 
 nnoremap <S-h> :tabprevious<CR>
 nnoremap <S-l> :tabnext<CR>
@@ -81,3 +82,4 @@ nmap ga <Plug>(EasyAlign)
 
 " update config
 nnoremap <localleader>cu :source $MYVIMRC<CR>
+nnoremap <Space> za
