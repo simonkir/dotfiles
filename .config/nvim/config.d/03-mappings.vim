@@ -11,6 +11,23 @@ inoremap <C-k> <C-o>zz
 
 
 " ----------------------------------------------------------------
+"   WRITING
+" ----------------------------------------------------------------
+
+augroup textlike
+    autocmd!
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> . .<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> … …<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> , ,<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> ! !<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> ? ?<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> : :<C-g>u
+    autocmd FileType markdown,tex,latex,text inoremap <buffer> – –<C-g>u
+augroup END
+
+
+
+" ----------------------------------------------------------------
 "   AUTOCOMPLETION
 " ----------------------------------------------------------------
 
