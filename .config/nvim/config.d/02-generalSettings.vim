@@ -15,7 +15,8 @@ set smarttab
 " ----------------------------------------------------------------
 
 set background=dark       " ron theme
-colorscheme default
+set termguicolors         " enable 24-bit colors
+colo onedark
 set number relativenumber " enable relative linenumbers
 set linebreak             " better line wrapping, doesn't break words
 syntax enable             " syntax highlighting

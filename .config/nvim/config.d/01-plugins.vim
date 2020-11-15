@@ -4,6 +4,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'        " status bar
 Plug 'vim-airline/vim-airline-themes' " status bar themes
+Plug 'joshdick/onedark.vim'
 
 Plug 'mhinz/vim-startify'             " fancy start screen
 Plug 'vifm/vifm.vim'                  " vifm file manager
