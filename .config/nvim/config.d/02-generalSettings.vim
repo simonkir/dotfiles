@@ -7,6 +7,7 @@ set shiftwidth=4  " the size of an indent
 set softtabstop=0 " insert spaces instead of tab characters
 set expandtab     " uses spaces instead of tabs in insert mode
 set smarttab
+set linebreak     " better line wrapping, doesn't break words
 
 
 
@@ -18,7 +19,7 @@ set background=dark       " ron theme
 set termguicolors         " enable 24-bit colors
 colo onedark
 set number relativenumber " enable relative linenumbers
-set linebreak             " better line wrapping, doesn't break words
+set cursorline
 syntax enable             " syntax highlighting
 
 
