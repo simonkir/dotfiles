@@ -26,8 +26,8 @@ let g:limelight_paragraph_span = 1
 "   MARKDOWNN
 " ----------------------------------------------------------------
 
-
 let g:livedown_browser = "qutebrowser"      " default browser for preview
+let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_math = 1                 " enable latex
 let g:vim_markdown_toc_autofit = 1          " auto-shrink toc
 
