@@ -31,6 +31,7 @@ hc rule class~'vlc'                     tag='1'
     
 hc rule class~'URxvt'                   tag='2'
 hc rule class~'Termite'                 tag='2'
+hc rule class~'Emacs'                   tag='2'
     
 hc rule class~'krita'                   tag='3'
 hc rule class~'Kicad'                   tag='3'
