@@ -31,7 +31,7 @@ for iTemp in ${!temperaturesValues[*]}
 do
     if (( "$sum" < "${temperaturesValues[$iTemp]}" )); then
         ## This line will color the icon too
-        tmpEcho="%{F#ffe585}${temperaturesIcons[$iTemp]}%{F-}"
+        tmpEcho="%{F#61afef}${temperaturesIcons[$iTemp]}%{F-}"
         ## This line will NOT color the icon
         #tmpEcho="${temperaturesIcons[$iTemp]}"
         finalEcho=" $finalEcho $tmpEcho"
