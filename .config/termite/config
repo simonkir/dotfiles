@@ -1,7 +1,7 @@
 [options]
 clickable_url = true
 allow_bold = true
-font = Inconsolata 12
+font = Inconsolata 11
 mouse_autohide = true
 scroll_on_output = true
 
