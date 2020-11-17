@@ -14,6 +14,8 @@ inoremap <C-k> <C-o>zz
 "   WRITING
 " ----------------------------------------------------------------
 
+" these aliasses create an undo point after each
+" .…,!?:– (end of sentence or clauses)
 augroup textlike
     autocmd!
     autocmd FileType markdown,tex,latex,text inoremap <buffer> . .<C-g>u

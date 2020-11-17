@@ -3,7 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " insert all plugins below this line
 
 Plug 'vim-airline/vim-airline'        " status bar
-Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'           " color scheme
 
 Plug 'mhinz/vim-startify'             " fancy start screen
 
