@@ -27,6 +27,11 @@ augroup textlike
     autocmd FileType markdown,tex,latex,text inoremap <buffer> – –<C-g>u
 augroup END
 
+augroup markdown
+    autocmd!
+    autocmd FileType markdown nnoremap <buffer> <CR> A<CR>
+augroup END
+
 
 
 " ----------------------------------------------------------------
