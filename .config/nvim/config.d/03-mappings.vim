@@ -8,7 +8,11 @@ inoremap <C-l> <C-o>a
 " center view on current line
 inoremap <C-k> <C-o>zz
 
-
+" move line up / down
+inoremap <M-k> <Esc>:m-2<CR>gi
+inoremap <M-j> <Esc>:m+1<CR>gi
+nnoremap <M-k> :m-2<CR>
+nnoremap <M-j> :m+1<CR>
 
 " ----------------------------------------------------------------
 "   WRITING
