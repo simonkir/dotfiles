@@ -18,7 +18,7 @@ nnoremap <M-j> :m+1<CR>
 "   WRITING
 " ----------------------------------------------------------------
 
-" these aliasses create an undo point after each
+" these aliases create an undo point after each
 " .…,!?:– (end of sentence or clauses)
 augroup textlike
     autocmd!
@@ -35,6 +35,11 @@ augroup markdown
     autocmd!
     autocmd FileType markdown nnoremap <buffer> <CR> A<CR>
 augroup END
+
+" aliases for spell checking
+nnoremap <localleader>se :setlocal spell<CR>:setlocal spelllang=en_us<CR>
+nnoremap <localleader>sd :setlocal spell<CR>:setlocal spelllang=de_de<CR>
+nnoremap <localleader>ss :setlocal nospell<CR>
 
 
 
@@ -61,7 +66,7 @@ inoremap <S-Tab> <C-N>
 "   SPLITS
 " ----------------------------------------------------------------
 
-" split naviagtion (single keybind instead of keychord)
+" split navigation (single keybind instead of keychord)
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -70,7 +75,7 @@ nnoremap <C-l> <C-w>l
 " horizontal split to vertical split
 nnoremap <localleader>sv <C-w>t<C-w>H
 
-" vertival split to horizontral split
+" vertical split to horizontal split
 nnoremap <localleader>sh <C-w>t<C-w>K
 
 
