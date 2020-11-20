@@ -5,7 +5,7 @@ hc() {
     herbstclient "$@"
 }
 
-#launching polybar & tray icons
+# launching polybar & tray icons
 ~/.config/polybar/launch.sh &
 volumeicon &
 nm-applet &
@@ -19,12 +19,8 @@ xfce4-power-manager &
 ~/.config/herbstluftwm/scripts/picom-launch.sh &
 nitrogen --restore &
 
-#keybinds are in ~/.config/sxhkd/sxhkdrc
+# keybinds are in ~/.config/sxhkd/sxhkdrc
 sxhkd &
-
-# misc applications
-numlockx on &
-setxkbmap -option caps:escape &
 
 # open ws 1 on second monitor at startup
 hc cycle_monitor

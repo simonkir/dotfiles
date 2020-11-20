@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+#herbstluftwm start
+hc() {
+    herbstclient "$@"
+}
+
+# misc applications
+numlockx on &
+setxkbmap -option caps:escape &

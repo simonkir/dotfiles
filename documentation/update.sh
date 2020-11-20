@@ -12,7 +12,8 @@ chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 chmod +x ~/.config/herbstluftwm/autostart
 chmod +x ~/.config/herbstluftwm/autostart.d/keybinds
 chmod +x ~/.config/herbstluftwm/autostart.d/rules
-chmod +x ~/.config/herbstluftwm/autostart.d/autostart
+chmod +x ~/.config/herbstluftwm/autostart.d/autostart-once
+chmod +x ~/.config/herbstluftwm/autostart.d/autostart-always
 chmod +x ~/.config/herbstluftwm/autostart.d/attributes
 chmod +x ~/.config/herbstluftwm/autostart.d/monitor-settings
 
