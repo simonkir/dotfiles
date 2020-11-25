@@ -33,7 +33,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'visual)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -57,3 +57,7 @@
 (setq evil-split-window-below t)
 
 (setq markdown-enable-math t)
+
+(evil-define-key 'normal dired-mode-map
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-find-file)
