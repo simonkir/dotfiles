@@ -83,6 +83,13 @@
     (setq powerline-default-separator (quote arrow))
     (spaceline-spacemacs-theme))
 #+end_src
+*** hide minor modes
+#+begin_src emacs-lisp
+  (use-package diminish
+    :ensure t
+    :init
+    (diminish 'which-key-mode 'eldoc-mode))
+#+end_src
 ** startup screen
 #+begin_src emacs-lisp
   (use-package dashboard
