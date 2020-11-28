@@ -62,6 +62,15 @@
     :ensure t
     :bind ("M-y" . popup-kill-ring))
 #+end_src
+** snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (use-package yasnippet-snippets
+      :ensure t)
+    (yas-reload-all))
+#+end_src
 * appearance
 ** general settings
 #+begin_src emacs-lisp
