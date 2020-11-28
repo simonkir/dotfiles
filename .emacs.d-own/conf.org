@@ -1,0 +1,165 @@
+* editing
+** evil mode
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'evil)
+    (package-refresh-contents)
+    (package-install 'evil))
+
+  (require 'evil)
+  (evil-mode 1)
+#+end_src
+
+** which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+END_SRC
+
+** config operations
+*** edit
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+  (global-set-key (kbd "C-c e") 'config-visit)
+#+end_src
+*** reload
+#+begin_src emacs-lisp
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+  (global-set-key (kbd "C-c r") 'config-reload)
+#+end_src
+** parenthesis
+*** auto-close
+#+begin_src emacs-lisp
+  (electric-pair-mode t)
+#+end_src
+*** color parenthesis
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+** autocompletion
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+#+end_src
+* appearance
+** general settings
+#+begin_src emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(line-number-mode 1)
+(column-number-mode 1)
+
+(setq inhibit-startup-message t)
+(setq scroll-conservatively 100)
+(defalias 'yes-or-no 'y-o-n-p)
+(setq make-backup-file nil)
+;;(setq ring-bell-function 'ignore)
+#+end_src
+
+** theme
+#+begin_src emacs-lisp
+(use-package atom-one-dark-theme
+  :ensure t)
+(when window-system (global-hl-line-mode t))
+#+end_src
+
+** modeline
+#+begin_src emacs-lisp
+  (use-package spaceline
+    :ensure t
+    :config
+    (require 'spaceline-config)
+    (setq powerline-default-separator (quote arrow))
+    (spaceline-spacemacs-theme))
+#+end_src
+** startup screen
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-items '((recents . 10))))
+#+end_src
+* buffers
+** kill current buffer
+#+begin_src emacs-lisp
+(defun kill-current-buffer ()
+  (interactive)
+  (kill-buffer (current-buffer)))
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
+#+end_src
+* navigation
+** enable ibuffer
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-x b") 'ibuffer) 
+#+end_src
+** ido
+*** enable ido mode
+#+begin_src emacs-lisp
+(setq ido-enable-flex-matching nil)
+(setq ido-create-new-buffer 'always)
+(setq ido-everywhere t)
+(ido-mode 1)
+#+end_src
+
+*** switch buffers
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+#+end_src
+*** ido-vertical
+#+begin_src emacs-lisp
+(use-package ido-vertical-mode
+  :ensure t
+  :init
+  (ido-vertical-mode 1))
+;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+#+end_src
+
+*** smex
+=M-x= completion
+#+begin_src emacs-lisp
+(use-package smex
+  :ensure t
+  :init (smex-initialize)
+  :bind
+  ("M-x" . smex))
+#+end_src
+** avy
+#+begin_src emacs-lisp
+(use-package avy
+  :ensure t
+  :bind
+  ("M-s" . avy-goto-char))
+#+end_src
+
+** window splitting
+#+begin_src emacs-lisp
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+#+end_src
+* org
+#+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+end_src
