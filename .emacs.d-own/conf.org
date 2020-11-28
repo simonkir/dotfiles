@@ -83,6 +83,12 @@
   (global-display-line-numbers-mode 1)
 #+end_src
 
+** pretty symbols
+#+begin_src emacs-lisp
+  (use-package pretty-mode
+    :ensure t)
+  (global-pretty-mode t)
+#+end_src
 ** theme
 #+begin_src emacs-lisp
   (use-package atom-one-dark-theme
