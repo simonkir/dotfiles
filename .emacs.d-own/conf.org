@@ -56,6 +56,12 @@
     (add-hook 'after-init-hook 'global-company-mode))
 #+end_src
 
+** easier kill ring
+#+begin_src emacs-lisp
+  (use-package popup-kill-ring
+    :ensure t
+    :bind ("M-y" . popup-kill-ring))
+#+end_src
 * appearance
 ** general settings
 #+begin_src emacs-lisp
@@ -192,6 +198,12 @@
 #+end_src
 
 * org
+** org-indent
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-indent-mode)
+#+end_src
+
+** don't spread across two windows
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
 #+end_src
