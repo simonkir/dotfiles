@@ -89,7 +89,8 @@
     :ensure t
     :config
     (dashboard-setup-startup-hook)
-    (setq dashboard-items '((recents . 10))))
+    (setq dashboard-items '((recents . 10)))
+    (setq dashboard-center-content t))
 #+end_src
 * buffers
 ** kill current buffer
@@ -158,6 +159,12 @@
     (balance-windows)
     (other-window 1))
   (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+#+end_src
+* dired
+#+begin_src emacs-lisp
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
 #+end_src
 * org
 #+begin_src emacs-lisp
