@@ -176,21 +176,11 @@ use =M-x customize-themes= to change theme settings
   (when window-system (global-hl-line-mode t))
 #+end_src
 ** modeline
+use doom-modeline
 #+begin_src emacs-lisp
-  (use-package spaceline
-    :ensure t
-    :config
-    (require 'spaceline-config)
-    (setq powerline-default-separator (quote arrow))
-    (spaceline-spacemacs-theme))
-#+end_src
-*** hide minor modes
-#+begin_src emacs-lisp
-  (use-package diminish
+  (use-package doom-modeline
     :ensure t)
-  (diminish 'which-key-mode)
-  (diminish 'eldoc-mode)
-  (diminish 'org-indent-mode)
+  (doom-modeline-mode 't)
 #+end_src
 ** startup screen
 #+begin_src emacs-lisp
