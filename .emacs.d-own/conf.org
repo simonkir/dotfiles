@@ -86,8 +86,7 @@ functions that move the cursor when the window is split
   (use-package evil-org
     :ensure t
     :config
-    (add-hook 'org-mode-hook 'evil-org-mode)
-    (add-hook 'evil-org-mode-hook 'evil-org-key-theme))
+    (add-hook 'org-mode-hook 'evil-org-mode))
 #+end_src
 * editing
 ** parenthesis
@@ -220,6 +219,19 @@ package, contains more symbols, e. g. for python
 e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
+#+end_src
+* latex
+** general settings
+#+begin_src emacs-lisp
+  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+#+end_src
+** auctex
+#+begin_src emacs-lisp
+  (use-package auctex
+    :defer t
+    :ensure t)
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
 #+end_src
 * dired
 some mappings for a more vim-like behaviour
