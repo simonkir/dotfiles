@@ -106,6 +106,12 @@ functions that move the cursor when the window is split
     :init
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+end_src
+*** surround.vim
+#+begin_src emacs-lisp
+  (use-package evil-surround
+    :ensure t
+    :config (global-evil-surround-mode 1))
+#+end_src
 ** easier kill ring
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
