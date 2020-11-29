@@ -210,6 +210,18 @@ package, contains more symbols, e. g. for python
     :ensure t)
   (global-pretty-mode t)
 #+end_src
+* magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t)
+#+end_src
+* dired
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+#+end_src
 * org
 ** org-indent
 #+begin_src emacs-lisp
@@ -232,11 +244,4 @@ e. g. when opening a src block with =C-c '=
     :ensure t)
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
-#+end_src
-* dired
-some mappings for a more vim-like behaviour
-#+begin_src emacs-lisp
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'dired-up-directory
-    (kbd "l") 'dired-find-file)
 #+end_src
