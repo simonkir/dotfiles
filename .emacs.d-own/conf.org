@@ -81,6 +81,11 @@ functions that move the cursor when the window is split
   (require 'evil)
   (evil-mode 1)
 #+end_src
+** evil-magit
+#+begin_src emacs-lisp
+  (use-package evil-magit
+    :ensure t)
+#+end_src
 ** evil-org
 #+begin_src emacs-lisp
   (use-package evil-org
@@ -151,6 +156,13 @@ some mappings around ido
     (kill-buffer (current-buffer)))
   (global-set-key (kbd "C-x k") 'kill-current-buffer)
 #+end_src
+** dired
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+#+end_src
 * appearance
 ** general settings
 settings regarding the application and the frame
@@ -214,13 +226,6 @@ package, contains more symbols, e. g. for python
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t)
-#+end_src
-* dired
-some mappings for a more vim-like behaviour
-#+begin_src emacs-lisp
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'dired-up-directory
-    (kbd "l") 'dired-find-file)
 #+end_src
 * org
 ** org-indent
