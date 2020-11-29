@@ -126,6 +126,11 @@ functions that move the cursor when the window is split
     :init
     (add-hook 'after-init-hook 'global-company-mode))
 #+end_src
+*** tab-and-go
+emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through menu, and just continuing typing to end completion
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook 'company-tng-mode)
+#+end_src
 ** snippets
 #+begin_src emacs-lisp
   (use-package yasnippet
