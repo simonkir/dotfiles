@@ -14,15 +14,6 @@
   (global-set-key (kbd "C-c r") 'config-reload)
 #+end_src
 * general behaviour
-** evil mode
-#+begin_src emacs-lisp
-  (unless (package-installed-p 'evil)
-    (package-refresh-contents)
-    (package-install 'evil))
-
-  (require 'evil)
-  (evil-mode 1)
-#+end_src
 ** which key
 #+begin_src emacs-lisp
   (use-package which-key
@@ -79,6 +70,24 @@ functions that move the cursor when the window is split
   (defalias 'yes-or-no 'y-or-n-p)
   (setq make-backup-file nil)
   ;;(setq ring-bell-function 'ignore)
+#+end_src
+* evil mode
+** general settings
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'evil)
+    (package-refresh-contents)
+    (package-install 'evil))
+
+  (require 'evil)
+  (evil-mode 1)
+#+end_src
+** evil-org
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode)
+    (add-hook 'evil-org-mode-hook 'evil-org-key-theme))
 #+end_src
 * editing
 ** parenthesis
