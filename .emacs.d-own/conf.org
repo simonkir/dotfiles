@@ -165,9 +165,14 @@ for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it 
   (global-display-line-numbers-mode 1)
 #+end_src
 ** theme
+use =M-x customize-themes= to change theme settings
+*** doom themes
+- [ ] enable bold/italics support
 #+begin_src emacs-lisp
-  (use-package atom-one-dark-theme
-    :ensure t)
+  (use-package doom-themes
+    :ensure t
+    :config (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+
   (when window-system (global-hl-line-mode t))
 #+end_src
 ** modeline
