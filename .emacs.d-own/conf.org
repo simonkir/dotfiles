@@ -3,14 +3,14 @@
 #+begin_src emacs-lisp
   (defun config-visit ()
     (interactive)
-    (find-file "~/.emacs.d/conf.org"))
+    (find-file "~/.emacs.d-own/conf.org"))
   (global-set-key (kbd "C-c e") 'config-visit)
 #+end_src
 ** reload
 #+begin_src emacs-lisp
   (defun config-reload ()
     (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+    (org-babel-load-file (expand-file-name "~/.emacs.d-own/conf.org")))
   (global-set-key (kbd "C-c r") 'config-reload)
 #+end_src
 * general behaviour
