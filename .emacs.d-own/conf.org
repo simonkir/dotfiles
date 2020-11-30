@@ -55,6 +55,7 @@ wrapper around ido that improves =M-x=
     ("M-x" . smex))
 #+end_src
 ** window splitting
+*** functions
 functions that move the cursor when the window is split
 #+begin_src emacs-lisp
   (defun split-and-follow-horizontally ()
@@ -62,14 +63,22 @@ functions that move the cursor when the window is split
     (split-window-below)
     (balance-windows)
     (other-window 1))
-  (evil-define-key 'normal 'global (kbd "C-x 2") 'split-and-follow-horizontally)
 
   (defun split-and-follow-vertically ()
     (interactive)
     (split-window-right)
     (balance-windows)
     (other-window 1))
+#+end_src
+*** keybinds
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC w c") 'evil-window-delete)
+
+  (evil-define-key 'normal 'global (kbd "C-x 2") 'split-and-follow-horizontally)
+  (evil-define-key 'normal 'global (kbd "SPC w s") 'split-and-follow-horizontally)
+
   (evil-define-key 'normal 'global (kbd "C-x 3") 'split-and-follow-vertically)
+  (evil-define-key 'normal 'global (kbd "SPC w v") 'split-and-follow-vertically)
 #+end_src
 ** misc
 #+begin_src emacs-lisp
@@ -151,14 +160,15 @@ navigate to any char in a buffer using =M-s=
     ("M-s" . avy-goto-char))
 #+end_src
 ** switching buffers
-some mappings around ido
-*** ibuffer
+some mappings around ido and buffer switching
 #+begin_src emacs-lisp
+  ;; entire buffer
   (evil-define-key 'normal 'global (kbd "C-x b") 'ibuffer)
-#+end_src
-*** ido
-#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC b B") 'ibuffer)
+
+  ;; popup menu
   (evil-define-key 'normal 'global (kbd "C-x C-b") 'ido-switch-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC b b") 'ido-switch-buffer)
 #+end_src
 ** kill current buffer
 #+begin_src emacs-lisp
@@ -166,6 +176,7 @@ some mappings around ido
     (interactive)
     (kill-buffer (current-buffer)))
   (evil-define-key 'normal 'global (kbd "C-x k") 'kill-current-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC b k") 'kill-current-buffer)
 #+end_src
 ** dired
 some mappings for a more vim-like behaviour
@@ -234,11 +245,20 @@ package, contains more symbols, e. g. for python
   (global-pretty-mode t)
 #+end_src
 * magit
+** installation
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t)
 #+end_src
+** mappings
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC g") 'magit)
+#+end_src
 * org
+** keybinds
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC o x") 'org-export-dispatch)
+#+end_src
 ** org-indent
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'org-indent-mode)
