@@ -1,17 +1,24 @@
-* config operations
-** edit
+* evil mode
+** general settings
 #+begin_src emacs-lisp
-  (defun config-visit ()
-    (interactive)
-    (find-file "~/.emacs.d-own/conf.org"))
-  (global-set-key (kbd "C-c e") 'config-visit)
+  (unless (package-installed-p 'evil)
+    (package-refresh-contents)
+    (package-install 'evil))
+
+  (require 'evil)
+  (evil-mode 1)
 #+end_src
-** reload
+** evil-magit
 #+begin_src emacs-lisp
-  (defun config-reload ()
-    (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d-own/conf.org")))
-  (global-set-key (kbd "C-c r") 'config-reload)
+  (use-package evil-magit
+    :ensure t)
+#+end_src
+** evil-org
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode))
 #+end_src
 * general behaviour
 ** which key
@@ -55,14 +62,14 @@ functions that move the cursor when the window is split
     (split-window-below)
     (balance-windows)
     (other-window 1))
-  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+  (evil-define-key 'normal 'global (kbd "C-x 2") 'split-and-follow-horizontally)
 
   (defun split-and-follow-vertically ()
     (interactive)
     (split-window-right)
     (balance-windows)
     (other-window 1))
-  (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+  (evil-define-key 'normal 'global (kbd "C-x 3") 'split-and-follow-vertically)
 #+end_src
 ** misc
 #+begin_src emacs-lisp
@@ -70,28 +77,6 @@ functions that move the cursor when the window is split
   (defalias 'yes-or-no 'y-or-n-p)
   (setq make-backup-file nil)
   ;;(setq ring-bell-function 'ignore)
-#+end_src
-* evil mode
-** general settings
-#+begin_src emacs-lisp
-  (unless (package-installed-p 'evil)
-    (package-refresh-contents)
-    (package-install 'evil))
-
-  (require 'evil)
-  (evil-mode 1)
-#+end_src
-** evil-magit
-#+begin_src emacs-lisp
-  (use-package evil-magit
-    :ensure t)
-#+end_src
-** evil-org
-#+begin_src emacs-lisp
-  (use-package evil-org
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook 'evil-org-mode))
 #+end_src
 * editing
 ** parenthesis
@@ -141,6 +126,21 @@ emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through 
     (yas-reload-all))
     (yas-global-mode)
 #+end_src
+* config operations
+** edit
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d-own/conf.org"))
+  (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
+#+end_src
+** reload
+#+begin_src emacs-lisp
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d-own/conf.org")))
+  (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
+#+end_src
 * navigation
 ** avy
 navigate to any char in a buffer using =M-s=
@@ -154,18 +154,18 @@ navigate to any char in a buffer using =M-s=
 some mappings around ido
 *** ibuffer
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-x b") 'ibuffer)
+  (evil-define-key 'normal 'global (kbd "C-x b") 'ibuffer)
 #+end_src
 *** ido
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+  (evil-define-key 'normal 'global (kbd "C-x C-b") 'ido-switch-buffer)
 #+end_src
 ** kill current buffer
 #+begin_src emacs-lisp
   (defun kill-current-buffer ()
     (interactive)
     (kill-buffer (current-buffer)))
-  (global-set-key (kbd "C-x k") 'kill-current-buffer)
+  (evil-define-key 'normal 'global (kbd "C-x k") 'kill-current-buffer)
 #+end_src
 ** dired
 some mappings for a more vim-like behaviour
