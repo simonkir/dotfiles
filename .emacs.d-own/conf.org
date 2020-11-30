@@ -135,15 +135,35 @@ emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through 
     (yas-reload-all))
     (yas-global-mode)
 #+end_src
-* config operations
-** edit
+* general keybinds
+** interacting with files
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
+  (evil-define-key 'normal 'global (kbd "SPC f F") 'find-file-read-only)
+
+  (evil-define-key 'normal 'global (kbd "SPC s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f S") 'save-some-buffers)
+#+end_src
+** dired
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC d") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "SPC D") 'dired)
+
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+#+end_src
+** config operations
+*** edit
 #+begin_src emacs-lisp
   (defun config-visit ()
     (interactive)
     (find-file "~/.emacs.d-own/conf.org"))
   (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
 #+end_src
-** reload
+*** reload
 #+begin_src emacs-lisp
   (defun config-reload ()
     (interactive)
@@ -177,13 +197,6 @@ some mappings around ido and buffer switching
     (kill-buffer (current-buffer)))
   (evil-define-key 'normal 'global (kbd "C-x k") 'kill-current-buffer)
   (evil-define-key 'normal 'global (kbd "SPC b k") 'kill-current-buffer)
-#+end_src
-** dired
-some mappings for a more vim-like behaviour
-#+begin_src emacs-lisp
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'dired-up-directory
-    (kbd "l") 'dired-find-file)
 #+end_src
 * appearance
 ** general settings
@@ -258,6 +271,7 @@ package, contains more symbols, e. g. for python
 ** keybinds
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC o x") 'org-export-dispatch)
+  (evil-define-key 'normal 'global (kbd "SPC o l") 'org-latex-preview)
 #+end_src
 ** org-indent
 #+begin_src emacs-lisp
@@ -272,6 +286,14 @@ e. g. when opening a src block with =C-c '=
 ** general settings
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+#+end_src
+** keybinds
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC l p") 'preview-at-point)
+  (evil-define-key 'normal 'global (kbd "SPC l P") 'preview-clearout-at-point)
+
+  (evil-define-key 'normal 'global (kbd "SPC l C-p") 'preview-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC l C-S-p") 'preview-clearout-buffer)
 #+end_src
 ** auctex
 #+begin_src emacs-lisp
