@@ -1,0 +1,335 @@
+* evil mode
+** general settings
+*** setup
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'evil)
+    (package-refresh-contents)
+    (package-install 'evil))
+
+  (require 'evil)
+  (evil-mode 1)
+#+end_src
+*** initial states
+#+begin_src emacs-lisp
+  (evil-set-initial-state 'ibuffer-mode 'normal)
+#+end_src
+** evil-magit
+#+begin_src emacs-lisp
+  (use-package evil-magit
+    :ensure t)
+#+end_src
+** evil-org
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode))
+#+end_src
+* general behaviour
+** which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+end_src
+** ido
+replace default emacs menues with more interactive ones, e. g. when opening files
+*** enable ido
+#+begin_src emacs-lisp
+  (setq ido-enable-flex-matching nil)
+  (setq ido-create-new-buffer 'always)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+#+end_src
+*** ido-vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :ensure t
+    :init
+    (ido-vertical-mode 1))
+  ;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+#+end_src
+*** smex
+wrapper around ido that improves =M-x=
+#+begin_src emacs-lisp
+  (use-package smex
+    :ensure t
+    :init (smex-initialize)
+    :bind
+    ("M-x" . smex))
+#+end_src
+** window splitting
+*** functions
+functions that move the cursor when the window is split
+#+begin_src emacs-lisp
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+#+end_src
+*** keybinds
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC w c") 'evil-window-delete)
+
+  (evil-define-key 'normal 'global (kbd "C-x 2") 'split-and-follow-horizontally)
+  (evil-define-key 'normal 'global (kbd "SPC w s") 'split-and-follow-horizontally)
+
+  (evil-define-key 'normal 'global (kbd "C-x 3") 'split-and-follow-vertically)
+  (evil-define-key 'normal 'global (kbd "SPC w v") 'split-and-follow-vertically)
+#+end_src
+** misc
+#+begin_src emacs-lisp
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq scroll-conservatively 100)
+  (defalias 'yes-or-no 'y-or-n-p)
+  (setq make-backup-file nil)
+  ;;(setq ring-bell-function 'ignore)
+#+end_src
+* editing
+** parenthesis
+*** auto-close
+#+begin_src emacs-lisp
+  (electric-pair-mode t)
+#+end_src
+*** color parenthesis
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+*** surround.vim
+#+begin_src emacs-lisp
+  (use-package evil-surround
+    :ensure t
+    :config (global-evil-surround-mode 1))
+#+end_src
+** easier kill ring
+=M-y= shows a completion from all previously cut stuff
+#+begin_src emacs-lisp
+  (use-package popup-kill-ring
+    :ensure t
+    :bind ("M-y" . popup-kill-ring))
+#+end_src
+** autocompletion
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+#+end_src
+*** tab-and-go
+emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through menu, and just continuing typing to end completion
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook 'company-tng-mode)
+#+end_src
+** snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (use-package yasnippet-snippets
+      :ensure t)
+    (yas-reload-all))
+    (yas-global-mode)
+#+end_src
+* general keybinds
+** quitting
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC q") 'save-buffers-kill-terminal)
+  (evil-define-key 'normal 'global (kbd "SPC Q") 'save-buffers-kill-emacs)
+#+end_src
+** interacting with files
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
+  (evil-define-key 'normal 'global (kbd "SPC f F") 'find-file-read-only)
+
+  (evil-define-key 'normal 'global (kbd "SPC s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f S") 'save-some-buffers)
+#+end_src
+** dired
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC d") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "SPC D") 'dired)
+
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+#+end_src
+** config operations
+*** edit
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+  (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
+#+end_src
+*** reload
+#+begin_src emacs-lisp
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+  (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
+#+end_src
+* navigation
+** avy
+navigate to any char in a buffer using =M-s=
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure t
+    :bind
+    ("M-s" . avy-goto-char))
+#+end_src
+** switching buffers
+some mappings around ido and buffer switching
+#+begin_src emacs-lisp
+  ;; entire buffer
+  (evil-define-key 'normal 'global (kbd "C-x b") 'ibuffer)
+  (evil-define-key 'normal 'global (kbd "SPC b B") 'ibuffer)
+
+  ;; popup menu
+  (evil-define-key 'normal 'global (kbd "C-x C-b") 'ido-switch-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC b b") 'ido-switch-buffer)
+#+end_src
+** kill current buffer
+#+begin_src emacs-lisp
+  (defun kill-current-buffer ()
+    (interactive)
+    (kill-buffer (current-buffer)))
+  (evil-define-key 'normal 'global (kbd "C-x k") 'kill-current-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC b k") 'kill-current-buffer)
+#+end_src
+* appearance
+** general settings
+settings regarding the application and the frame
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+** line numbers
+use visual instead of absolute or relative line numbers
+visual line numbers are determined with lines visible on the screen instead of buffer lines.
+for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it is shown as the amount of lines that are folded (this subheading would then be 12 lines).
+#+begin_src emacs-lisp
+  ;; display line / column numbers in modeline
+  (line-number-mode 1)
+  (column-number-mode 1)
+
+  ;; display visual line numbers left of each buffer
+  (setq display-line-numbers-type 'visual)
+  (global-display-line-numbers-mode 1)
+#+end_src
+** theme
+use =M-x customize-themes= to change theme settings
+*** doom themes
+- [ ] enable bold/italics support
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :ensure t
+    :config (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+
+  (when window-system (global-hl-line-mode t))
+#+end_src
+** modeline
+use doom-modeline
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :ensure t)
+  (doom-modeline-mode 't)
+#+end_src
+** startup screen
+#+begin_src emacs-lisp
+  ;;(setq inhibit-startup-message t)
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-items '((recents . 10)))
+    (setq dashboard-center-content t))
+#+end_src
+** pretty symbols
+pretty symbols for eye candy when editing code
+*** TODO prettify-symbols-mode
+*** pretty-mode
+package, contains more symbols, e. g. for python
+#+begin_src emacs-lisp
+  (use-package pretty-mode
+    :ensure t)
+  (global-pretty-mode t)
+#+end_src
+* magit
+** installation
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t)
+#+end_src
+** mappings
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC g") 'magit)
+#+end_src
+* org
+** general settings
+#+begin_src emacs-lisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
+#+end_src
+*** don't spread across two windows
+e. g. when opening a src block with =C-c '=
+#+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+end_src
+** keybinds
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC o x") 'org-export-dispatch)
+  (evil-define-key 'normal 'global (kbd "SPC o l") 'org-latex-preview)
+#+end_src
+** org-indent
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-indent-mode)
+#+end_src
+* latex
+** general settings
+#+begin_src emacs-lisp
+  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+  (setq-default preview-scale-function 1.4)
+#+end_src
+** keybinds
+*** compilation / preview
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-master)
+
+  (evil-define-key 'normal 'global (kbd "SPC l p") 'preview-at-point)
+  (evil-define-key 'normal 'global (kbd "SPC l P") 'preview-clearout-at-point)
+
+  (evil-define-key 'normal 'global (kbd "SPC l C-p") 'preview-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC l C-S-p") 'preview-clearout-buffer)
+#+end_src
+*** command insertion
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC l s") 'LaTeX-section)          ;; insert section
+  (evil-define-key 'normal 'global (kbd "SPC l e") 'LaTeX-environment)      ;; insert environment
+  (evil-define-key 'normal 'global (kbd "SPC l f") 'LaTeX-fill-environment) ;; auto-indent
+#+end_src
+** auctex
+#+begin_src emacs-lisp
+  (use-package auctex
+    :defer t
+    :ensure t)
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+#+end_src
+*** math mode
+#+begin_src emacs-lisp
+  (setq LaTeX-math-abbrev-prefix "'")
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+#+end_src

@@ -1,9 +1,15 @@
 # Dependencies
-* [Doom Emacs](https://github.com/hlissner/doom-emacs#install)
+* GNU [`emacs`](https://www.archlinux.org/packages/extra/x86_64/emacs/)
 
 # Installation
-* `~/.config/doom/`: config home
-* `~/.emacs.d/`: doom emacs home
+* `~/.emacs.d/`: emacs home config
 
 # Usage
-* `doom`: fish alias for doom managing cli
+## org-config file
+* config is stored as an org document
+  * all of the `emacs-lisp` src blocks are loaded on startup
+* `~/.emacs.d/conf.org`
+
+## daemon
+* emacs is automatically started as daemon
+* connect with `emacsclient -a "" -cq`
