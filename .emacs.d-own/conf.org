@@ -1,5 +1,6 @@
 * evil mode
 ** general settings
+*** setup
 #+begin_src emacs-lisp
   (unless (package-installed-p 'evil)
     (package-refresh-contents)
@@ -7,6 +8,10 @@
 
   (require 'evil)
   (evil-mode 1)
+#+end_src
+*** initial states
+#+begin_src emacs-lisp
+  (evil-set-initial-state 'ibuffer-mode 'normal)
 #+end_src
 ** evil-magit
 #+begin_src emacs-lisp
