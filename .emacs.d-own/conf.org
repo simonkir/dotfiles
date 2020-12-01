@@ -269,6 +269,15 @@ package, contains more symbols, e. g. for python
   (evil-define-key 'normal 'global (kbd "SPC g") 'magit)
 #+end_src
 * org
+** general settings
+#+begin_src emacs-lisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
+#+end_src
+*** don't spread across two windows
+e. g. when opening a src block with =C-c '=
+#+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+end_src
 ** keybinds
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC o x") 'org-export-dispatch)
@@ -278,16 +287,11 @@ package, contains more symbols, e. g. for python
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'org-indent-mode)
 #+end_src
-** don't spread across two windows
-e. g. when opening a src block with =C-c '=
-#+begin_src emacs-lisp
-  (setq org-src-window-setup 'current-window)
-#+end_src
 * latex
 ** general settings
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
-  ;;(setq-default 'preview-scale-function 2)
+  (setq-default preview-scale-function 1.4)
 #+end_src
 ** keybinds
 *** compilation / preview
