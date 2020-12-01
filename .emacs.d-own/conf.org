@@ -290,12 +290,21 @@ e. g. when opening a src block with =C-c '=
   ;;(setq-default 'preview-scale-function 2)
 #+end_src
 ** keybinds
+*** compilation / preview
 #+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-master)
+
   (evil-define-key 'normal 'global (kbd "SPC l p") 'preview-at-point)
   (evil-define-key 'normal 'global (kbd "SPC l P") 'preview-clearout-at-point)
 
   (evil-define-key 'normal 'global (kbd "SPC l C-p") 'preview-buffer)
   (evil-define-key 'normal 'global (kbd "SPC l C-S-p") 'preview-clearout-buffer)
+#+end_src
+*** command insertion
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC l s") 'LaTeX-section)          ;; insert section
+  (evil-define-key 'normal 'global (kbd "SPC l e") 'LaTeX-environment)      ;; insert environment
+  (evil-define-key 'normal 'global (kbd "SPC l f") 'LaTeX-fill-environment) ;; auto-indent
 #+end_src
 ** auctex
 #+begin_src emacs-lisp
@@ -304,4 +313,9 @@ e. g. when opening a src block with =C-c '=
     :ensure t)
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
+#+end_src
+*** math mode
+#+begin_src emacs-lisp
+  (setq LaTeX-math-abbrev-prefix "'")
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 #+end_src
