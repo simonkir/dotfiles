@@ -142,6 +142,11 @@ emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through 
     (yas-global-mode)
 #+end_src
 * general keybinds
+** quitting
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC q") 'save-buffers-kill-terminal)
+  (evil-define-key 'normal 'global (kbd "SPC Q") 'save-buffers-kill-emacs)
+#+end_src
 ** interacting with files
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
