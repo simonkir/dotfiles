@@ -36,7 +36,7 @@ super + alt + h
 
 # text editor
 super + alt + e
-    emacs
+    emacsclient -cq
 
 # file browser
 super + alt + b

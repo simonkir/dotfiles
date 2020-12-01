@@ -82,6 +82,7 @@ functions that move the cursor when the window is split
 #+end_src
 ** misc
 #+begin_src emacs-lisp
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq scroll-conservatively 100)
   (defalias 'yes-or-no 'y-or-n-p)
   (setq make-backup-file nil)
@@ -286,6 +287,7 @@ e. g. when opening a src block with =C-c '=
 ** general settings
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+  ;;(setq-default 'preview-scale-function 2)
 #+end_src
 ** keybinds
 #+begin_src emacs-lisp
