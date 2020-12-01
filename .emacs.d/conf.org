@@ -171,14 +171,14 @@ some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
   (defun config-visit ()
     (interactive)
-    (find-file "~/.emacs.d-own/conf.org"))
+    (find-file "~/.emacs.d/conf.org"))
   (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
 #+end_src
 *** reload
 #+begin_src emacs-lisp
   (defun config-reload ()
     (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d-own/conf.org")))
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
   (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
 #+end_src
 * navigation
