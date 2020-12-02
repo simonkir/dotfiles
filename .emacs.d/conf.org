@@ -26,6 +26,54 @@
     :config
     (add-hook 'org-mode-hook 'evil-org-mode))
 #+end_src
+* general keybinds
+** quitting
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC ESC") 'keyboard-escape-quit)
+  (evil-define-key 'normal 'global (kbd "SPC q") 'save-buffers-kill-terminal)
+  (evil-define-key 'normal 'global (kbd "SPC Q") 'save-buffers-kill-emacs)
+#+end_src
+** interacting with files
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
+  (evil-define-key 'normal 'global (kbd "SPC f F") 'find-file-read-only)
+
+  (evil-define-key 'normal 'global (kbd "SPC s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "SPC f S") 'save-some-buffers)
+#+end_src
+** dired
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC d") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "SPC D") 'dired)
+
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+#+end_src
+** config operations
+*** edit
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+  (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
+#+end_src
+*** reload
+#+begin_src emacs-lisp
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+  (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
+#+end_src
+** which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+end_src
 * general behaviour
 ** ido
 replace default emacs menues with more interactive ones, e. g. when opening files
@@ -134,54 +182,6 @@ emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through 
       :ensure t)
     (yas-reload-all))
     (yas-global-mode)
-#+end_src
-* general keybinds
-** quitting
-#+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC ESC") 'keyboard-escape-quit)
-  (evil-define-key 'normal 'global (kbd "SPC q") 'save-buffers-kill-terminal)
-  (evil-define-key 'normal 'global (kbd "SPC Q") 'save-buffers-kill-emacs)
-#+end_src
-** interacting with files
-#+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
-  (evil-define-key 'normal 'global (kbd "SPC f F") 'find-file-read-only)
-
-  (evil-define-key 'normal 'global (kbd "SPC s") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "SPC f s") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "SPC f S") 'save-some-buffers)
-#+end_src
-** dired
-some mappings for a more vim-like behaviour
-#+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC d") 'dired-jump)
-  (evil-define-key 'normal 'global (kbd "SPC D") 'dired)
-
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'dired-up-directory
-    (kbd "l") 'dired-find-file)
-#+end_src
-** config operations
-*** edit
-#+begin_src emacs-lisp
-  (defun config-visit ()
-    (interactive)
-    (find-file "~/.emacs.d/conf.org"))
-  (evil-define-key 'normal 'global (kbd "C-c e") 'config-visit)
-#+end_src
-*** reload
-#+begin_src emacs-lisp
-  (defun config-reload ()
-    (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
-  (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
-#+end_src
-** which key
-#+begin_src emacs-lisp
-  (use-package which-key
-    :ensure t
-    :init
-    (which-key-mode))
 #+end_src
 * navigation
 ** avy
@@ -336,6 +336,17 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (setq LaTeX-math-abbrev-prefix "'")
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+#+end_src
+* writing
+** visual-fill-column-mode
+visual fill column mode
+#+begin_src emacs-lisp
+  (use-package visual-fill-column
+    :ensure t)
+
+  (setq visual-fill-column-center-text t)
+  (evil-define-key 'normal 'global (kbd "SPC t v") 'visual-fill-column-mode)
+  (evil-define-key 'normal 'global (kbd "SPC t w") 'set-fill-column)
 #+end_src
 * docview
 ** vim-like keybinds
