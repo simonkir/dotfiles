@@ -2,16 +2,17 @@
 ** general settings
 *** setup
 #+begin_src emacs-lisp
-  (unless (package-installed-p 'evil)
-    (package-refresh-contents)
-    (package-install 'evil))
-
-  (require 'evil)
-  (evil-mode 1)
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-respect-visual-line-mode t)
+    :config
+    (evil-mode 1))
 #+end_src
 *** initial states
 #+begin_src emacs-lisp
-  (evil-set-initial-state 'ibuffer-mode 'normal)
+  (setq evil-emacs-state-modes nil)
+  (setq evil-motion-state-modes nil)
 #+end_src
 ** evil-magit
 #+begin_src emacs-lisp
@@ -26,13 +27,6 @@
     (add-hook 'org-mode-hook 'evil-org-mode))
 #+end_src
 * general behaviour
-** which key
-#+begin_src emacs-lisp
-  (use-package which-key
-    :ensure t
-    :init
-    (which-key-mode))
-#+end_src
 ** ido
 replace default emacs menues with more interactive ones, e. g. when opening files
 *** enable ido
@@ -144,6 +138,7 @@ emulates vim =TAB= press to open completion, =Tab= and =S-TAB= to cycle through 
 * general keybinds
 ** quitting
 #+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC ESC") 'keyboard-escape-quit)
   (evil-define-key 'normal 'global (kbd "SPC q") 'save-buffers-kill-terminal)
   (evil-define-key 'normal 'global (kbd "SPC Q") 'save-buffers-kill-emacs)
 #+end_src
@@ -180,6 +175,13 @@ some mappings for a more vim-like behaviour
     (interactive)
     (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
   (evil-define-key 'normal 'global (kbd "C-c r") 'config-reload)
+#+end_src
+** which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
 #+end_src
 * navigation
 ** avy
@@ -229,6 +231,8 @@ for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it 
   ;; display visual line numbers left of each buffer
   (setq display-line-numbers-type 'visual)
   (global-display-line-numbers-mode 1)
+  
+  (global-visual-line-mode)
 #+end_src
 ** theme
 use =M-x customize-themes= to change theme settings
