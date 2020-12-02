@@ -337,3 +337,28 @@ e. g. when opening a src block with =C-c '=
   (setq LaTeX-math-abbrev-prefix "'")
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 #+end_src
+* docview
+** vim-like keybinds
+#+begin_src emacs-lisp
+  (setq doc-view-continuous t)
+  (evil-define-key 'normal doc-view-mode-map
+    (kbd "j") 'doc-view-next-line-or-next-page
+    (kbd "J") 'doc-view-next-page
+    (kbd "k") 'doc-view-previous-line-or-previous-page
+    (kbd "K") 'doc-view-previous-page
+    (kbd "gg") 'doc-view-first-page)
+#+end_src
+
+*** function for goto-page
+#+begin_src emacs-lisp
+  (defun sk:doc-view-goto-page (count)
+    "Goto page COUNT
+  if COUNT isn't supplied, go to the last page"
+      (interactive "P")
+      (if count
+          (doc-view-goto-page count)
+        (doc-view-last-page)))
+
+  (evil-define-key 'normal doc-view-mode-map
+    (kbd "G") 'sk:doc-view-goto-page)
+#+end_src
