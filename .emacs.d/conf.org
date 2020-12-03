@@ -342,9 +342,10 @@ e. g. when opening a src block with =C-c '=
 visual fill column mode
 #+begin_src emacs-lisp
   (use-package visual-fill-column
-    :ensure t)
+    :ensure t
+    :init
+    (setq visual-fill-column-center-text t))
 
-  (setq visual-fill-column-center-text t)
   (evil-define-key 'normal 'global (kbd "SPC t v") 'visual-fill-column-mode)
   (evil-define-key 'normal 'global (kbd "SPC t w") 'set-fill-column)
 #+end_src
