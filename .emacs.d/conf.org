@@ -296,6 +296,15 @@ e. g. when opening a src block with =C-c '=
   (setq org-src-window-setup 'current-window)
 #+end_src
 *** keybinds
+**** toggling
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC o -") 'org-table-insert-hline)
+  (evil-define-key 'normal 'global (kbd "SPC o h") 'org-toggle-heading)
+  (evil-define-key 'normal 'global (kbd "SPC o i") 'org-toggle-item)
+  (evil-define-key 'normal 'global (kbd "SPC o t") 'org-todo)
+  (evil-define-key 'normal 'global (kbd "SPC o RET") 'org-toggle-checkbox)
+#+end_src
+**** latex preview / export
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC o x") 'org-export-dispatch)
   (evil-define-key 'normal 'global (kbd "SPC o l") 'org-latex-preview)
