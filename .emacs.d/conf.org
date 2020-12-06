@@ -103,6 +103,20 @@ for more focused writing
   (evil-define-key 'normal 'global (kbd "SPC t v") 'visual-fill-column-mode)
   (evil-define-key 'normal 'global (kbd "SPC t w") 'set-fill-column)
 #+end_src
+*** spell checking
+#+begin_src emacs-lisp
+  (setq flyspell-issue-message-flag nil)
+
+  (defun sk:flyspell-mode ()
+    (interactive)
+    (if (bound-and-true-p flyspell-mode)
+        (flyspell-mode 0)
+      (flyspell-mode 1)
+      (flyspell-buffer)))
+
+  (evil-define-key 'normal 'global (kbd "SPC t s") 'sk:flyspell-mode)
+  (evil-define-key 'normal 'global (kbd "SPC t S") 'ispell-change-dictionary)
+#+end_src
 * navigation
 ** navigating within a window
 *** avy
@@ -165,6 +179,7 @@ functions that move the cursor when the window is split
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC f f") 'find-file)
   (evil-define-key 'normal 'global (kbd "SPC f F") 'find-file-read-only)
+  (evil-define-key 'normal 'global (kbd "SPC f r") 'recentf-open-files)
 
   (evil-define-key 'normal 'global (kbd "SPC s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "SPC f s") 'save-buffer)
@@ -187,6 +202,7 @@ some mappings for a more vim-like behaviour
     (interactive)
     (find-file "~/.emacs.d/conf.org"))
   (evil-define-key 'normal 'global (kbd "SPC c v") 'config-visit)
+  (evil-define-key 'normal 'global (kbd "SPC c e") 'config-visit)
 #+end_src
 **** reload
 #+begin_src emacs-lisp
