@@ -40,6 +40,11 @@ evil config / plugins need to be loaded before everything else because of variab
     :ensure t
     :bind ("M-y" . popup-kill-ring))
 #+end_src
+*** text scale
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC +") 'text-scale-adjust)
+  (evil-define-key 'normal 'global (kbd "SPC -") 'text-scale-adjust)
+#+end_src
 ** coding
 *** parenthesis
 **** auto-close
@@ -101,7 +106,7 @@ for more focused writing
     (setq visual-fill-column-center-text t))
 
   (evil-define-key 'normal 'global (kbd "SPC t v") 'visual-fill-column-mode)
-  (evil-define-key 'normal 'global (kbd "SPC t w") 'set-fill-column)
+  (evil-define-key 'normal 'global (kbd "SPC t V") 'set-fill-column)
 #+end_src
 *** spell checking
 #+begin_src emacs-lisp
@@ -127,6 +132,46 @@ navigate to any char in a buffer using =M-s=
     :bind
     ("M-s" . avy-goto-char))
 #+end_src
+** navigating windows
+*** functions
+functions that move the cursor when the window is split
+#+begin_src emacs-lisp
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+#+end_src
+*** keybinds
+**** manage windows
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC w =") 'balance-windows)
+  (evil-define-key 'normal 'global (kbd "SPC w o") 'delete-other-windows)
+  (evil-define-key 'normal 'global (kbd "SPC w 1") 'delete-other-windows)
+#+end_src
+**** switch windows
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC w h") 'evil-window-left)
+  (evil-define-key 'normal 'global (kbd "SPC w j") 'evil-window-down)
+  (evil-define-key 'normal 'global (kbd "SPC w k") 'evil-window-up)
+  (evil-define-key 'normal 'global (kbd "SPC w l") 'evil-window-right)
+  
+  (evil-define-key 'normal 'global (kbd "SPC w w") 'evil-window-next)
+  (evil-define-key 'normal 'global (kbd "SPC SPC") 'evil-window-next)
+  (evil-define-key 'normal 'global (kbd "SPC w c") 'evil-window-delete)
+  (evil-define-key 'normal 'global (kbd "SPC w C") 'kill-buffer-and-window)
+#+end_src
+**** split windows
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC w s") 'split-and-follow-horizontally)
+  (evil-define-key 'normal 'global (kbd "SPC w v") 'split-and-follow-vertically)
+#+end_src
 ** navigating buffers
 *** general keybinds
 some mappings around ido and buffer switching
@@ -148,32 +193,6 @@ some mappings around ido and buffer switching
   (evil-define-key 'normal 'global (kbd "SPC b k") 'kill-current-buffer)
   (evil-define-key 'normal 'global (kbd "SPC b K") 'kill-buffer-and-window)
 #+end_src
-** navigating windows
-*** functions
-functions that move the cursor when the window is split
-#+begin_src emacs-lisp
-  (defun split-and-follow-horizontally ()
-    (interactive)
-    (split-window-below)
-    (balance-windows)
-    (other-window 1))
-
-  (defun split-and-follow-vertically ()
-    (interactive)
-    (split-window-right)
-    (balance-windows)
-    (other-window 1))
-#+end_src
-*** keybinds
-#+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC w c") 'evil-window-delete)
-
-  (evil-define-key 'normal 'global (kbd "C-x 2") 'split-and-follow-horizontally)
-  (evil-define-key 'normal 'global (kbd "SPC w s") 'split-and-follow-horizontally)
-
-  (evil-define-key 'normal 'global (kbd "C-x 3") 'split-and-follow-vertically)
-  (evil-define-key 'normal 'global (kbd "SPC w v") 'split-and-follow-vertically)
-#+end_src
 ** navigating files
 *** general keybinds
 #+begin_src emacs-lisp
@@ -188,12 +207,18 @@ functions that move the cursor when the window is split
 *** dired
 some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC d") 'dired-jump)
-  (evil-define-key 'normal 'global (kbd "SPC D") 'dired)
+  (evil-define-key 'normal 'global (kbd "SPC f d") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "SPC f D") 'dired)
 
   (evil-define-key 'normal dired-mode-map
     (kbd "h") 'dired-up-directory
     (kbd "l") 'dired-find-file)
+#+end_src
+*** help mode
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "SPC h f") 'describe-function)
+  (evil-define-key 'normal 'global (kbd "SPC h v") 'describe-variable)
+  (evil-define-key 'normal 'global (kbd "SPC h k") 'describe-key)
 #+end_src
 *** config operations
 **** edit
@@ -288,7 +313,7 @@ e. g. when opening a src block with =C-c '=
 *** keybinds
 **** compilation / preview
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-master)
+  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-run-all)
 
   (evil-define-key 'normal 'global (kbd "SPC l p") 'preview-at-point)
   (evil-define-key 'normal 'global (kbd "SPC l P") 'preview-clearout-at-point)
