@@ -319,10 +319,30 @@ e. g. when opening a src block with =C-c '=
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
   (setq-default preview-scale-function 1.4)
 #+end_src
+*** auctex
+**** installation
+#+begin_src emacs-lisp
+  (use-package auctex
+    :defer t
+    :ensure t
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t))
+#+end_src
+**** default pdf viewer
+#+begin_src emacs-lisp
+  (setq TeX-view-program-selection '((output-pdf "Zathura")))
+#+end_src
+**** math mode
+#+begin_src emacs-lisp
+  (setq LaTeX-math-abbrev-prefix "'")
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+#+end_src
 *** keybinds
 **** compilation / preview
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-run-all)
+  (evil-define-key 'normal 'global (kbd "SPC l l") 'TeX-command-master)
+  (evil-define-key 'normal 'global (kbd "SPC l a") 'TeX-command-run-all)
 
   (evil-define-key 'normal 'global (kbd "SPC l p") 'preview-at-point)
   (evil-define-key 'normal 'global (kbd "SPC l P") 'preview-clearout-at-point)
@@ -335,20 +355,6 @@ e. g. when opening a src block with =C-c '=
   (evil-define-key 'normal 'global (kbd "SPC l s") 'LaTeX-section)          ;; insert section
   (evil-define-key 'normal 'global (kbd "SPC l e") 'LaTeX-environment)      ;; insert environment
   (evil-define-key 'normal 'global (kbd "SPC l f") 'LaTeX-fill-environment) ;; auto-indent
-#+end_src
-*** auctex
-#+begin_src emacs-lisp
-  (use-package auctex
-    :defer t
-    :ensure t
-    :config
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t))
-#+end_src
-**** math mode
-#+begin_src emacs-lisp
-  (setq LaTeX-math-abbrev-prefix "'")
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 #+end_src
 ** docview
 *** vim-like keybinds
@@ -384,6 +390,7 @@ e. g. when opening a src block with =C-c '=
 *** mappings
 #+begin_src emacs-lisp
   (evil-define-key 'normal 'global (kbd "SPC g") 'magit)
+  (add-hook 'git-commit-mode-hook 'evil-insert-state)
 #+end_src
 * appearance
 ** general settings
