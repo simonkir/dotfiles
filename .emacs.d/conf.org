@@ -21,8 +21,8 @@ evil config / plugins need to be loaded before everything else because of variab
 #+end_src
 *** initial states
 #+begin_src emacs-lisp
-  (setq evil-emacs-state-modes nil)
-  (setq evil-motion-state-modes nil)
+  (setq evil-emacs-state-modes nil
+        evil-motion-state-modes nil)
 #+end_src
 ** evil-org
 #+begin_src emacs-lisp
@@ -323,9 +323,9 @@ some mappings for a more vim-like behaviour
 replace default emacs menues with more interactive ones, e. g. when opening files
 *** enable ido
 #+begin_src emacs-lisp
-  (setq ido-enable-flex-matching nil)
-  (setq ido-create-new-buffer 'always)
-  (setq ido-everywhere t)
+  (setq ido-enable-flex-matching nil
+        ido-create-new-buffer 'always
+        ido-everywhere t)
   (ido-mode 1)
 #+end_src
 *** ido-vertical
@@ -426,8 +426,8 @@ e. g. when opening a src block with =C-c '=
     :defer t
     :ensure t
     :config
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t))
+    (setq TeX-auto-save t
+          TeX-parse-self t))
 #+end_src
 **** default pdf viewer
 #+begin_src emacs-lisp
@@ -552,8 +552,8 @@ use doom-modeline
     (doom-modeline-mode 't))
 
   ;; needs to be set explicitly when running in server mode
-  (setq doom-modeline-icon t)
-  (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-icon t
+        doom-modeline-buffer-encoding nil)
 #+end_src
 ** startup screen
 #+begin_src emacs-lisp
@@ -563,6 +563,9 @@ use doom-modeline
     :ensure t
     :config
     (dashboard-setup-startup-hook)
-    (setq dashboard-items '((recents . 10)))
-    (setq dashboard-center-content t))
+    (setq dashboard-items '((recents . 15))
+          dashboard-startup-banner 'logo
+          dashboard-set-heading-icons t
+          dashboard-set-file-icons t
+          dashboard-center-content t))
 #+end_src
