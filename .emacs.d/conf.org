@@ -2,6 +2,11 @@
 my emacs config, this file is loaded in =init.el=, which adds more general features like =use-package=
 ** HIERACHY
 the further up a heading / subheading, the more important it is. each config snippet thould be on the most important heading it adresses (e. g. color parenthesis is at /editing → parenthesis/ instead of /appearance/).
+* keybind settings
+#+begin_src emacs-lisp
+  (use-package general
+    :ensure t)
+#+end_src
 * evil mode
 evil config / plugins need to be loaded before everything else because of variable definitions
 ** general settings
@@ -35,24 +40,32 @@ evil config / plugins need to be loaded before everything else because of variab
 ** general editing
 *** insert mode navigation
 #+begin_src emacs-lisp
-  (evil-define-key 'insert 'global
-    (kbd "C-k") 'evil-previous-line
-    (kbd "C-j") 'evil-next-line
-    (kbd "C-h") 'evil-backward-char
-    (kbd "C-l") 'evil-forward-char)
+  (general-define-key
+   :states 'insert
+   "C-k" 'evil-previous-line
+   "C-j" 'evil-next-line
+   "C-h" 'evil-backward-char
+   "C-l" 'evil-forward-char)
 #+end_src
 *** easier kill ring
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
   (use-package popup-kill-ring
-    :ensure t
-    :bind ("M-y" . popup-kill-ring))
+    :ensure t)
+
+  (general-define-key
+   :states 'insert
+   "M-y" 'popup-kill-ring)
 #+end_src
 *** text scale
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC +") 'text-scale-adjust
-    (kbd "SPC -") 'text-scale-adjust)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC"
+   "0" 'text-scale-mode
+   "+" 'text-scale-adjust
+   "-" 'text-scale-adjust)
 #+end_src
 ** coding
 *** parenthesis
@@ -114,9 +127,12 @@ for more focused writing
     :init
     (setq visual-fill-column-center-text t))
 
-  (evil-define-key 'normal 'global
-    (kbd "SPC t v") 'visual-fill-column-mode
-    (kbd "SPC t V") 'set-fill-column)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC t"
+   "v" 'visual-fill-column-mode
+   "V" 'set-fill-column)
 #+end_src
 *** spell checking
 #+begin_src emacs-lisp
@@ -129,9 +145,12 @@ for more focused writing
       (flyspell-mode 1)
       (flyspell-buffer)))
 
-  (evil-define-key 'normal 'global
-    (kbd "SPC t s") 'sk:flyspell-mode
-    (kbd "SPC t S") 'ispell-change-dictionary)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC t"
+   "s" 'sk:flyspell-mode
+   "S" 'ispell-change-dictionary)
 #+end_src
 * navigation
 ** navigating within a window
@@ -139,9 +158,11 @@ for more focused writing
 navigate to any char in a buffer using =M-s=
 #+begin_src emacs-lisp
   (use-package avy
-    :ensure t
-    :bind
-    ("M-s" . avy-goto-char))
+    :ensure t)
+
+  (general-define-key
+   :states '(normal visual)
+   "M-s" 'avy-goto-char)
 #+end_src
 ** navigating windows
 *** functions
@@ -162,44 +183,45 @@ functions that move the cursor when the window is split
 *** keybinds
 **** manage windows
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC w =") 'balance-windows
-    (kbd "SPC w o") 'delete-other-windows
-    (kbd "SPC w 1") 'delete-other-windows)
+  (general-define-key
+   :states 'normal
+   :keymap 'override
+   :prefix "SPC w"
+   "=" 'balance-windows
+   "o" 'delete-other-windows
+   "1" 'delete-other-windows
+   "s" 'split-and-follow-horizontally
+   "v" 'split-and-follow-vertically)
 #+end_src
 **** switch windows
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC w h") 'evil-window-left
-    (kbd "SPC w j") 'evil-window-down
-    (kbd "SPC w k") 'evil-window-up
-    (kbd "SPC w l") 'evil-window-right)
-
-  (evil-define-key 'normal 'global
-    (kbd "SPC w w") 'evil-window-next
-    (kbd "SPC SPC") 'evil-window-next
-    (kbd "SPC w c") 'evil-window-delete
-    (kbd "SPC w C") 'kill-buffer-and-window)
-#+end_src
-**** split windows
-#+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC w s") 'split-and-follow-horizontally
-    (kbd "SPC w v") 'split-and-follow-vertically)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC w"
+   "h" 'evil-window-left
+   "j" 'evil-window-down
+   "k" 'evil-window-up
+   "l" 'evil-window-right
+   "w" 'evil-window-next
+   "c" 'evil-window-delete
+   "C" 'kill-buffer-and-window)
+   
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   "SPC SPC" 'evil-window-next)
 #+end_src
 ** navigating buffers
 *** general keybinds
 some mappings around ido and buffer switching
 #+begin_src emacs-lisp
-  ;; entire buffer
-  (evil-define-key 'normal 'global
-    (kbd "C-x C-b") 'ibuffer
-    (kbd "SPC b B") 'ibuffer)
-
-  ;; popup menu
-  (evil-define-key 'normal 'global
-    (kbd "C-x b") 'ido-switch-buffer
-    (kbd "SPC b b") 'ido-switch-buffer)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC b"
+   "b" 'ido-switch-buffer
+   "B" 'ibuffer)
 #+end_src
 *** kill current buffer
 #+begin_src emacs-lisp
@@ -207,65 +229,87 @@ some mappings around ido and buffer switching
     (interactive)
     (kill-buffer (current-buffer)))
 
-  (evil-define-key 'normal 'global
-    (kbd "C-x k") 'kill-current-buffer
-    (kbd "SPC b k") 'kill-current-buffer
-    (kbd "SPC b K") 'kill-buffer-and-window)
+  (general-define-key
+   :states 'normal
+   :keymap 'overrdie
+   :prefix "SPC b"
+   "k" 'kill-current-buffer
+   "K" 'kill-buffer-and-window)
 #+end_src
 ** navigating files
 *** general keybinds
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global 
-    (kbd "SPC f f") 'find-file
-    (kbd "SPC f F") 'find-file-read-only
-    (kbd "SPC f r") 'recentf-open-files
-    (kbd "SPC s") 'save-buffer
-    (kbd "SPC f s") 'save-buffer
-    (kbd "SPC f S") 'save-some-buffers)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC f"
+   "f" 'find-file
+   "F" 'find-file-read-only
+   "r" 'recentf-open-files
+   "s" 'save-buffer
+   "S" 'save-some-buffers)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   "SPC s" 'save-buffer)
 #+end_src
 *** dired
 some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC f d") 'dired-jump
-    (kbd "SPC f D") 'dired)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC f"
+   "d" 'dired-jump
+   "D" 'dired)
 
-  (evil-define-key 'normal dired-mode-map
-    (kbd "h") 'dired-up-directory
-    (kbd "l") 'dired-find-file)
+  (general-define-key
+   :states 'normal
+   :keymaps 'dired-mode-map
+   "h" 'dired-up-directory
+   "l" 'dired-find-file)
 #+end_src
 *** help mode
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global
-    (kbd "SPC h f") 'describe-function
-    (kbd "SPC h v") 'describe-variable
-    (kbd "SPC h k") 'describe-key)
+  (general-define-key
+   :states 'normal
+   :keymap 'override
+   :prefix "SPC h"
+   "f" 'describe-function
+   "v" 'describe-variable
+   "k" 'describe-key)
 #+end_src
 *** config operations
-**** edit
+**** functions
 #+begin_src emacs-lisp
   (defun config-visit ()
     (interactive)
     (find-file "~/.emacs.d/conf.org"))
     
-  (evil-define-key 'normal 'global
-    (kbd "SPC c v") 'config-visit
-    (kbd "SPC c e") 'config-visit)
-#+end_src
-**** reload
-#+begin_src emacs-lisp
   (defun config-reload ()
     (interactive)
     (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
-    
-  (evil-define-key 'normal 'global (kbd "SPC c r") 'config-reload)
+#+end_src
+**** keybinds
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC c"
+   "r" 'config-reload
+   "v" 'config-visit
+   "e" 'config-visit)
 #+end_src
 ** quitting
 #+begin_src emacs-lisp
-  (evil-define-key 'normal 'global 
-    (kbd "SPC ESC") 'keyboard-escape-quit
-    (kbd "SPC q") 'save-buffers-kill-terminal
-    (kbd "SPC Q") 'save-buffers-kill-emacs)
+  (general-define-key
+   :states 'normal
+   :keymap 'override
+   :prefix "SPC"
+   "ESC" 'keyboard-escape-quit
+   "q" 'save-buffers-kill-terminal
+   "Q" 'save-buffers-kill-emacs)
 #+end_src
 * general behaviour
 ** which key
@@ -297,9 +341,11 @@ wrapper around ido that improves =M-x=
 #+begin_src emacs-lisp
   (use-package smex
     :ensure t
-    :config (smex-initialize)
-    :bind
-    ("M-x" . smex))
+    :config (smex-initialize))
+    
+  (general-define-key
+   :keymaps 'override
+   "M-x" 'smex)
 #+end_src
 ** misc
 #+begin_src emacs-lisp
@@ -323,22 +369,28 @@ e. g. when opening a src block with =C-c '=
 *** keybinds
 **** toggling
 #+begin_src emacs-lisp
-  (evil-define-key 'normal org-mode-map
-    (kbd "SPC o -") 'org-table-insert-hline
-    (kbd "SPC o h") 'org-toggle-heading
-    (kbd "SPC o i") 'org-toggle-item
-    (kbd "SPC o t") 'org-todo
-    (kbd "SPC o b") 'org-cycle-list-bullet
-    (kbd "SPC o c") 'org-babel-execute-src-block
-    (kbd "SPC o RET") 'org-toggle-checkbox)
+  (general-define-key
+   :states 'normal
+   :keymap 'org-mode-map
+   :prefix "SPC o"
+   "-" 'org-table-insert-hline
+   "h" 'org-toggle-heading
+   "i" 'org-toggle-item
+   "t" 'org-todo
+   "b" 'org-cycle-list-bullet
+   "c" 'org-babel-execute-src-block
+   "RET" 'org-toggle-checkbox
+   "x" 'org-export-dispatch)
 #+end_src
-**** preview / export
+**** preview
 #+begin_src emacs-lisp
-  (evil-define-key 'normal org-mode-map
-    (kbd "SPC o x") 'org-export-dispatch
-    (kbd "SPC p p") 'org-latex-preview
-    (kbd "SPC p I") 'org-toggle-inline-images
-    (kbd "SPC p i") 'org-display-inline-images)
+  (general-define-key
+   :states 'normal
+   :keymap 'org-mode-map
+   :prefix "SPC p"
+   "p" 'org-latex-preview
+   "I" 'org-toggle-inline-images
+   "i" 'org-display-inline-images)
 #+end_src
 *** org babel / source code
 **** general settings
@@ -389,35 +441,38 @@ e. g. when opening a src block with =C-c '=
 *** keybinds
 **** compilation / preview
 #+begin_src emacs-lisp
-  (evil-define-key 'normal LaTeX-mode-map
-    (kbd "SPC l l") 'TeX-command-master
-    (kbd "SPC l a") 'TeX-command-run-all
-    (kbd "SPC p p") 'preview-at-point
-    (kbd "SPC p P") 'preview-clearout-at-point
-    (kbd "SPC p b") 'preview-buffer
-    (kbd "SPC p B") 'preview-clearout-buffer)
+  (general-define-key
+   :states 'normal
+   :keymap 'LaTeX-mode-map
+   :prefix "SPC l"
+   "l" 'TeX-command-master
+   "a" 'TeX-command-run-all)
+
+  (general-define-key
+   :states 'normal
+   :keymap 'LaTeX-mode-map
+   :prefix "SPC p"
+   "p" 'preview-at-point
+   "P" 'preview-clearout-at-point
+   "b" 'preview-buffer
+   "B" 'preview-clearout-buffer)
 #+end_src
 **** command insertion
 #+begin_src emacs-lisp
-  (evil-define-key 'normal LaTeX-mode-map
-    (kbd "SPC l s") 'LaTeX-section          ;; insert section
-    (kbd "SPC l e") 'LaTeX-environment      ;; insert environment
-    (kbd "SPC l f") 'LaTeX-fill-environment) ;; auto-indent
+  (general-define-key
+   :states 'normal
+   :keymaps 'LaTeX-mode-map
+   :prefix "SPC l"
+   "s" 'LaTeX-section           ;; insert section
+   "e" 'LaTeX-environment       ;; insert environment
+   "f" 'LaTeX-fill-environment) ;; auto-indent
 #+end_src
 ** docview
 *** vim-like keybinds
+**** functions / settings
 #+begin_src emacs-lisp
   (setq doc-view-continuous t)
-  (evil-define-key 'normal doc-view-mode-map
-    (kbd "j") 'doc-view-next-line-or-next-page
-    (kbd "J") 'doc-view-next-page
-    (kbd "k") 'doc-view-previous-line-or-previous-page
-    (kbd "K") 'doc-view-previous-page
-    (kbd "gg") 'doc-view-first-page)
-#+end_src
-
-**** function for goto-page
-#+begin_src emacs-lisp
+  
   (defun sk:doc-view-goto-page (count)
     "Goto page COUNT
   if COUNT isn't supplied, go to the last page"
@@ -425,9 +480,19 @@ e. g. when opening a src block with =C-c '=
       (if count
           (doc-view-goto-page count)
         (doc-view-last-page)))
+#+end_src
 
-  (evil-define-key 'normal doc-view-mode-map
-    (kbd "G") 'sk:doc-view-goto-page)
+**** function for goto-page
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'doc-view-mode-map
+   "j" 'doc-view-next-line-or-next-page
+   "J" 'doc-view-next-page
+   "k" 'doc-view-previous-line-or-previous-page
+   "K" 'doc-view-previous-page
+   "gg" 'doc-view-first-page
+   "G" 'sk:doc-view-goto-page)
 #+end_src
 ** magit
 *** installation
@@ -437,8 +502,12 @@ e. g. when opening a src block with =C-c '=
 #+end_src
 *** mappings
 #+begin_src emacs-lisp
-(evil-define-key 'normal 'global (kbd "SPC g") 'magit-file-dispatch)
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC"
+   "g" 'magit-file-dispatch)
 #+end_src
 * appearance
 ** general settings
