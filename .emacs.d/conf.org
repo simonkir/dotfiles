@@ -33,6 +33,14 @@ evil config / plugins need to be loaded before everything else because of variab
 #+end_src
 * editing
 ** general editing
+*** insert mode navigation
+#+begin_src emacs-lisp
+  (evil-define-key 'insert 'global
+    (kbd "C-k") 'evil-previous-line
+    (kbd "C-j") 'evil-next-line
+    (kbd "C-h") 'evil-backward-char
+    (kbd "C-l") 'evil-forward-char)
+#+end_src
 *** easier kill ring
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
@@ -338,7 +346,7 @@ e. g. when opening a src block with =C-c '=
   (setq org-confirm-babel-evaluate nil)
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 #+end_src
-**** langagues
+**** languages
 #+begin_src emacs-lisp
   (use-package jupyter
     :ensure t)
@@ -429,7 +437,7 @@ e. g. when opening a src block with =C-c '=
 #+end_src
 *** mappings
 #+begin_src emacs-lisp
-(evil-define-key 'normal 'global (kbd "SPC g") 'magit)
+(evil-define-key 'normal 'global (kbd "SPC g") 'magit-file-dispatch)
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
 #+end_src
 * appearance
