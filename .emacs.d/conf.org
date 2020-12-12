@@ -329,19 +329,25 @@ e. g. when opening a src block with =C-c '=
   (evil-define-key 'normal org-mode-map
     (kbd "SPC o x") 'org-export-dispatch
     (kbd "SPC p p") 'org-latex-preview
-    (kbd "SPC p i") 'org-toggle-inline-images)
+    (kbd "SPC p I") 'org-toggle-inline-images
+    (kbd "SPC p i") 'org-display-inline-images)
 #+end_src
 *** org babel / source code
 **** general settings
 #+begin_src emacs-lisp
   (setq org-confirm-babel-evaluate nil)
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 #+end_src
 **** langagues
 #+begin_src emacs-lisp
+  (use-package jupyter
+    :ensure t)
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    (append org-babel-load-languages
-           '((python . t))))
+           '((python . t)
+             (jupyter . t))))
 #+end_src
 *** org-indent
 #+begin_src emacs-lisp
