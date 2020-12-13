@@ -185,7 +185,7 @@ functions that move the cursor when the window is split
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'override
+   :keymaps 'override
    :prefix "SPC w"
    "=" 'balance-windows
    "o" 'delete-other-windows
@@ -231,7 +231,7 @@ some mappings around ido and buffer switching
 
   (general-define-key
    :states 'normal
-   :keymap 'overrdie
+   :keymaps 'overrdie
    :prefix "SPC b"
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
@@ -274,7 +274,7 @@ some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'override
+   :keymaps 'override
    :prefix "SPC h"
    "f" 'describe-function
    "v" 'describe-variable
@@ -305,7 +305,7 @@ some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'override
+   :keymaps 'override
    :prefix "SPC"
    "ESC" 'keyboard-escape-quit
    "q" 'save-buffers-kill-terminal
@@ -371,7 +371,7 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'org-mode-map
+   :keymaps 'org-mode-map
    :prefix "SPC o"
    "-" 'org-table-insert-hline
    "h" 'org-toggle-heading
@@ -386,7 +386,7 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'org-mode-map
+   :keymaps 'org-mode-map
    :prefix "SPC p"
    "p" 'org-latex-preview
    "I" 'org-toggle-inline-images
@@ -443,14 +443,14 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymap 'LaTeX-mode-map
+   :keymaps 'LaTeX-mode-map
    :prefix "SPC l"
    "l" 'TeX-command-master
    "a" 'TeX-command-run-all)
 
   (general-define-key
    :states 'normal
-   :keymap 'LaTeX-mode-map
+   :keymaps 'LaTeX-mode-map
    :prefix "SPC p"
    "p" 'preview-at-point
    "P" 'preview-clearout-at-point
