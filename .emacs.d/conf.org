@@ -38,15 +38,6 @@ evil config / plugins need to be loaded before everything else because of variab
 #+end_src
 * editing
 ** general editing
-*** insert mode navigation
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'insert
-   "C-k" 'evil-previous-line
-   "C-j" 'evil-next-line
-   "C-h" 'evil-backward-char
-   "C-l" 'evil-forward-char)
-#+end_src
 *** easier kill ring
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
@@ -154,6 +145,19 @@ for more focused writing
 #+end_src
 * navigation
 ** navigating within a window
+*** scrolling
+#+begin_src emacs-lisp
+  (setq scroll-margin 5)
+#+end_src
+*** insert mode
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'insert
+   "C-k" 'evil-previous-line
+   "C-j" 'evil-next-line
+   "C-h" 'evil-backward-char
+   "C-l" 'evil-forward-char)
+#+end_src
 *** avy
 navigate to any char in a buffer using =M-s=
 #+begin_src emacs-lisp
