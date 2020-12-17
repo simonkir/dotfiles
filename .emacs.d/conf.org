@@ -373,28 +373,52 @@ wrapper around ido that improves =M-x=
 exception: evil mode stuff
 ** org
 *** general settings
-#+begin_src emacs-lisp
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
-#+end_src
 **** don't spread across two windows
 e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
 #+end_src
+*** latex preview
+#+begin_src emacs-lisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (setq org-latex-packages-alist '())
+  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
+#+end_src
 *** keybinds
-**** toggling
+**** ='org-ctrl-c-ctrl-c=
+- evaluate src-block
+- numbered list reodering
+- table realignment
+- toggling checkboxes
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   "RET" 'org-ctrl-c-ctrl-c)
+#+end_src
+**** ='org-ctrl-c-minus=
+- table insert hline
+- toggle item
+- cylce list bullet
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
    :prefix "SPC o"
-   "-" 'org-table-insert-hline
+   "o" 'org-ctrl-c-minus
+   "-" 'org-ctrl-c-minus
+   "i" 'org-ctrl-c-minus
+   "b" 'org-ctrl-c-minus)
+#+end_src
+**** others
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   :prefix "SPC o"
+   "TAB" 'org-table-toggle-column-width
    "h" 'org-toggle-heading
-   "i" 'org-toggle-item
    "t" 'org-todo
-   "b" 'org-cycle-list-bullet
-   "c" 'org-babel-execute-src-block
-   "RET" 'org-toggle-checkbox
    "x" 'org-export-dispatch)
 #+end_src
 **** preview
