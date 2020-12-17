@@ -456,7 +456,7 @@ e. g. when opening a src block with =C-c '=
 *** general settings
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
-  (setq-default preview-scale-function 1.4)
+  (setq-default preview-scale-function 1.5)
 #+end_src
 *** auctex
 **** installation
@@ -468,34 +468,21 @@ e. g. when opening a src block with =C-c '=
     (setq TeX-auto-save t
           TeX-parse-self t))
 #+end_src
-**** default pdf viewer
+**** general settings
 #+begin_src emacs-lisp
   (setq TeX-view-program-selection '((output-pdf "Zathura")))
+  (setq preview-auto-cache-preamble t)
 #+end_src
 **** math mode
 #+begin_src emacs-lisp
   (setq LaTeX-math-abbrev-prefix "'")
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+  (setq texmathp-tex-commands '())
+  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on
+                                              "IEEEeqnarray*" env-on)))
 #+end_src
 *** keybinds
-**** compilation / preview
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix "SPC l"
-   "l" 'TeX-command-master
-   "a" 'TeX-command-run-all)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix "SPC p"
-   "p" 'preview-at-point
-   "P" 'preview-clearout-at-point
-   "b" 'preview-buffer
-   "B" 'preview-clearout-buffer)
-#+end_src
 **** command insertion
 #+begin_src emacs-lisp
   (general-define-key
@@ -505,6 +492,26 @@ e. g. when opening a src block with =C-c '=
    "s" 'LaTeX-section           ;; insert section
    "e" 'LaTeX-environment       ;; insert environment
    "f" 'LaTeX-fill-environment) ;; auto-indent
+#+end_src
+**** compilation
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'LaTeX-mode-map
+   :prefix "SPC l"
+   "l" 'TeX-command-master
+   "L" 'TeX-command-run-all)
+#+end_src
+**** previewing
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'LaTeX-mode-map
+   :prefix "SPC p"
+   "p" 'preview-at-point
+   "P" 'preview-clearout-at-point
+   "b" 'preview-buffer
+   "B" 'preview-clearout-buffer)
 #+end_src
 ** docview
 *** vim-like keybinds
