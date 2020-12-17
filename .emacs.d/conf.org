@@ -66,6 +66,7 @@ evil config / plugins need to be loaded before everything else because of variab
 #+end_src
 **** color parenthesis
 #+begin_src emacs-lisp
+  (show-paren-mode)
   (use-package rainbow-delimiters
     :ensure t
     :config
@@ -142,6 +143,11 @@ for more focused writing
    :prefix "SPC t"
    "s" 'sk:flyspell-mode
    "S" 'ispell-change-dictionary)
+#+end_src
+*** german quotation marks
+#+begin_src emacs-lisp
+  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
+  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
 #+end_src
 * navigation
 ** navigating within a window
@@ -346,10 +352,15 @@ wrapper around ido that improves =M-x=
   (use-package smex
     :ensure t
     :config (smex-initialize))
-    
+
   (general-define-key
    :keymaps 'override
    "M-x" 'smex)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   "SPC x" 'smex)
 #+end_src
 ** misc
 #+begin_src emacs-lisp
