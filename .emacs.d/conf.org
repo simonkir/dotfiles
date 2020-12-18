@@ -198,6 +198,7 @@ functions that move the cursor when the window is split
    :keymaps 'override
    :prefix "SPC w"
    "=" 'balance-windows
+   "q" 'quit-window
    "o" 'delete-other-windows
    "1" 'delete-other-windows
    "s" 'split-and-follow-horizontally
@@ -378,14 +379,8 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
 #+end_src
-*** latex preview
-#+begin_src emacs-lisp
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-  (setq org-latex-packages-alist '())
-  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-#+end_src
-*** keybinds
-**** ='org-ctrl-c-ctrl-c=
+**** keybinds
+***** ='org-ctrl-c-ctrl-c=
 - evaluate src-block
 - numbered list reodering
 - table realignment
@@ -396,7 +391,7 @@ e. g. when opening a src block with =C-c '=
    :keymaps 'org-mode-map
    "RET" 'org-ctrl-c-ctrl-c)
 #+end_src
-**** ='org-ctrl-c-minus=
+***** ='org-ctrl-c-minus=
 - table insert hline
 - toggle item
 - cylce list bullet
@@ -410,24 +405,34 @@ e. g. when opening a src block with =C-c '=
    "i" 'org-ctrl-c-minus
    "b" 'org-ctrl-c-minus)
 #+end_src
-**** others
+***** others
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
    :prefix "SPC o"
    "TAB" 'org-table-toggle-column-width
+   "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
    "h" 'org-toggle-heading
+   "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
    "t" 'org-todo
-   "x" 'org-export-dispatch)
+   "X" 'org-export-dispatch
+   "x" '(lambda () (interactive) (org-export-dispatch '(4))))
 #+end_src
-**** preview
+*** latex preview
 #+begin_src emacs-lisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (setq org-latex-packages-alist '())
+  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
+
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
    :prefix "SPC p"
    "p" 'org-latex-preview
+   "P" '(lambda () (interactive) (org-latex-preview '(4)))
+   "b" '(lambda () (interactive) (org-latex-preview '(16)))
+   "B" '(lambda () (interactive) (org-latex-preview '(64)))
    "I" 'org-toggle-inline-images
    "i" 'org-display-inline-images)
 #+end_src
@@ -436,6 +441,17 @@ e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
   (setq org-confirm-babel-evaluate nil)
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+#+end_src
+**** viewing code blocks
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   "SPC o e" 'org-edit-src-exit)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   "SPC o e" 'org-edit-special)
 #+end_src
 **** languages
 #+begin_src emacs-lisp
