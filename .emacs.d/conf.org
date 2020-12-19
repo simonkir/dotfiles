@@ -156,6 +156,80 @@ for more focused writing
   (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
   (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
 #+end_src
+* ido
+replace default emacs menues with more interactive ones, e. g. when opening files
+** general settings
+*** ido everywhere
+#+begin_src emacs-lisp
+  (setq ido-enable-flex-matching nil
+        ido-create-new-buffer 'always
+        ido-everywhere t)
+  (ido-mode 1)
+#+end_src
+*** ido-vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :ensure t
+    :config
+    (ido-vertical-mode 1))
+#+end_src
+*** keybinds
+#+begin_src emacs-lisp
+  (defun sk:ido-custom-keys ()
+    (general-define-key
+     :keymaps 'ido-completion-map
+     "C-d" 'ido-kill-buffer-at-head
+     "C-n" 'ido-next-match
+     "C-j" 'ido-next-match
+     "C-k" 'ido-prev-match
+     "C-p" 'ido-prev-match))
+
+  (add-hook 'ido-setup-hook 'sk:ido-custom-keys)
+#+end_src
+*** smex
+wrapper around ido that improves =M-x=
+#+begin_src emacs-lisp
+  (use-package smex
+    :ensure t
+    :config (smex-initialize))
+
+  (general-define-key
+   :keymaps 'override
+   "M-x" 'smex)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   "SPC x" 'smex)
+#+end_src
+** ignoring buffers
+#+begin_src emacs-lisp
+  (setq sk:ido-unignored-buffers '("*dashboard*"))
+
+  (defun sk:ido-ignore-buffers-fun (name)
+    "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
+    (and (string-match "^\*" name)
+        (not (member name sk:ido-unignored-buffers))))
+
+  (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
+#+end_src
+** recent files
+#+begin_src emacs-lisp
+  (defun recentf-ido-find-file ()
+    "Find a recent file using Ido."
+    (interactive)
+    (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+      (when file
+        (find-file file))))
+#+end_src
+** bookmarks
+#+begin_src emacs-lisp
+  (defun ido-bookmark-jump (bname)
+    "Switch to bookmark interactively using `ido'."
+    (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+    (bookmark-jump bname))
+  (add-hook 'after-init-hook 'bookmark-save)
+#+end_src
 * navigation
 ** navigating within a window
 *** scrolling
@@ -186,7 +260,15 @@ navigate to any char in a buffer using =M-s=
 
   (general-define-key
    :states '(normal visual)
-   "M-s" 'avy-goto-char)
+   :keymaps 'override
+   :prefix "SPC a"
+   "a" 'avy-goto-word-or-subword-1
+   "c" 'avy-goto-char-timer
+   "w" 'avy-goto-word-or-subword-1
+   "W" 'avy-goto-word
+   "l" 'avy-goto-line
+   "j" 'avy-goto-line-below
+   "k" 'avy-goto-line-above)
 #+end_src
 ** navigating windows
 *** functions
@@ -212,7 +294,6 @@ functions that move the cursor when the window is split
    :keymaps 'override
    :prefix "SPC w"
    "=" 'balance-windows
-   "q" 'quit-window
    "o" 'delete-other-windows
    "1" 'delete-other-windows
    "s" 'split-and-follow-horizontally
@@ -238,7 +319,7 @@ functions that move the cursor when the window is split
    "SPC SPC" 'evil-window-next)
 #+end_src
 ** navigating buffers
-*** general keybinds
+*** buffer navigation
 some mappings around ido and buffer switching
 #+begin_src emacs-lisp
   (general-define-key
@@ -248,7 +329,7 @@ some mappings around ido and buffer switching
    "b" 'ido-switch-buffer
    "B" 'ibuffer)
 #+end_src
-*** kill current buffer
+*** killing buffers
 #+begin_src emacs-lisp
   (defun kill-current-buffer ()
     (interactive)
@@ -256,13 +337,14 @@ some mappings around ido and buffer switching
 
   (general-define-key
    :states 'normal
-   :keymaps 'overrdie
+   :keymaps 'override
    :prefix "SPC b"
+   "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
 #+end_src
 ** navigating files
-*** general keybinds
+*** visiting / saving
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -270,7 +352,7 @@ some mappings around ido and buffer switching
    :prefix "SPC f"
    "f" 'find-file
    "F" 'find-file-read-only
-   "r" 'recentf-open-files
+   "r" 'recentf-ido-find-file
    "s" 'save-buffer
    "S" 'save-some-buffers)
 
@@ -278,6 +360,27 @@ some mappings around ido and buffer switching
    :states 'normal
    :keymaps 'override
    "SPC s" 'save-buffer)
+#+end_src
+**** config operations
+***** functions
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+    
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+#+end_src
+***** keybinds
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC c"
+   "r" 'config-reload
+   "v" 'config-visit
+   "e" 'config-visit)
 #+end_src
 *** dired
 **** general settings
@@ -306,6 +409,26 @@ some mappings for a more vim-like behaviour
    "h" 'dired-up-directory
    "l" 'dired-find-file)
 #+end_src
+*** bookmarks
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC f"
+   "b" 'ido-bookmark-jump
+   "B" 'bookmark-set)
+#+end_src
+** misc
+*** quitting
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC"
+   "ESC" 'keyboard-escape-quit
+   "q" 'save-buffers-kill-terminal
+   "Q" 'save-buffers-kill-emacs)
+#+end_src
 *** help mode
 #+begin_src emacs-lisp
   (general-define-key
@@ -316,38 +439,7 @@ some mappings for a more vim-like behaviour
    "v" 'describe-variable
    "k" 'describe-key)
 #+end_src
-*** config operations
-**** functions
-#+begin_src emacs-lisp
-  (defun config-visit ()
-    (interactive)
-    (find-file "~/.emacs.d/conf.org"))
-    
-  (defun config-reload ()
-    (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
-#+end_src
-**** keybinds
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC c"
-   "r" 'config-reload
-   "v" 'config-visit
-   "e" 'config-visit)
-#+end_src
-** quitting
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC"
-   "ESC" 'keyboard-escape-quit
-   "q" 'save-buffers-kill-terminal
-   "Q" 'save-buffers-kill-emacs)
-#+end_src
-* general behaviour
+* misc settings
 ** which key
 #+begin_src emacs-lisp
   (use-package which-key
@@ -355,40 +447,7 @@ some mappings for a more vim-like behaviour
     :config
     (which-key-mode))
 #+end_src
-** ido
-replace default emacs menues with more interactive ones, e. g. when opening files
-*** enable ido
-#+begin_src emacs-lisp
-  (setq ido-enable-flex-matching nil
-        ido-create-new-buffer 'always
-        ido-everywhere t)
-  (ido-mode 1)
-#+end_src
-*** ido-vertical
-#+begin_src emacs-lisp
-  (use-package ido-vertical-mode
-    :ensure t
-    :config
-    (ido-vertical-mode 1))
-  ;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
-#+end_src
-*** smex
-wrapper around ido that improves =M-x=
-#+begin_src emacs-lisp
-  (use-package smex
-    :ensure t
-    :config (smex-initialize))
-
-  (general-define-key
-   :keymaps 'override
-   "M-x" 'smex)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   "SPC x" 'smex)
-#+end_src
-** misc
+** misc of misc
 #+begin_src emacs-lisp
   (setq scroll-conservatively 100)
   (defalias 'yes-or-no 'y-or-n-p)
