@@ -38,15 +38,34 @@ evil config / plugins need to be loaded before everything else because of variab
 #+end_src
 * editing
 ** general editing
-*** easier kill ring
-=M-y= shows a completion from all previously cut stuff
+*** autocompletion
 #+begin_src emacs-lisp
-  (use-package popup-kill-ring
-    :ensure t)
-
+  (use-package company
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
+    
   (general-define-key
-   :states 'insert
-   "M-y" 'popup-kill-ring)
+   :keymaps 'company-active-map
+   "C-w" 'evil-delete-backward-word)
+   
+  (setq company-idle-delay 0.3)
+  (setq company-minimum-prefix-length 2)
+#+end_src
+**** tab-and-go
+emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through menu, and just continuing typing to end completion
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook 'company-tng-mode)
+#+end_src
+*** snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (use-package yasnippet-snippets
+      :ensure t)
+    (yas-reload-all))
+    (yas-global-mode)
 #+end_src
 *** text scale
 #+begin_src emacs-lisp
@@ -78,34 +97,15 @@ evil config / plugins need to be loaded before everything else because of variab
     :ensure t
     :config (global-evil-surround-mode 1))
 #+end_src
-*** autocompletion
+*** easier kill ring
+=M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
-  (use-package company
-    :ensure t
-    :config
-    (add-hook 'after-init-hook 'global-company-mode))
-    
+  (use-package popup-kill-ring
+    :ensure t)
+
   (general-define-key
-   :keymaps 'company-active-map
-   "C-w" 'evil-delete-backward-word)
-   
-  (setq company-idle-delay 0.3)
-  (setq company-minimum-prefix-length 2)
-#+end_src
-**** tab-and-go
-emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through menu, and just continuing typing to end completion
-#+begin_src emacs-lisp
-  (add-hook 'after-init-hook 'company-tng-mode)
-#+end_src
-*** snippets
-#+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t
-    :config
-    (use-package yasnippet-snippets
-      :ensure t)
-    (yas-reload-all))
-    (yas-global-mode)
+   :states 'insert
+   "M-y" 'popup-kill-ring)
 #+end_src
 *** pretty symbols
 pretty symbols for eye candy when editing code
