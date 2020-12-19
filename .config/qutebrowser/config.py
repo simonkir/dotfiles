@@ -66,8 +66,14 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # watch video in vlc player
 config.bind('z', 'hint links spawn vlc {hint-url}')
 config.bind('Z', 'spawn vlc {url}')
-config.bind(';z', 'hint links spawn vlc --preferred-resolution 480 {hint-url}') # vlc-bug: some yt videos can
-config.bind(';Z', 'spawn vlc --preferred-resolution 480 {url}')                 # only be viewed in 480p
+config.bind(',z5', 'hint links spawn vlc --preferred-resolution 720 {hint-url}')
+config.bind(',Z5', 'spawn vlc --preferred-resolution 720 {url}')
+config.bind(',z4', 'hint links spawn vlc --preferred-resolution 480 {hint-url}') # vlc-bug: some yt videos can
+config.bind(',Z4', 'spawn vlc --preferred-resolution 480 {url}')                 # only be viewed in 480p
+config.bind(',z3', 'hint links spawn vlc --preferred-resolution 360 {hint-url}')
+config.bind(',Z3', 'spawn vlc --preferred-resolution 360 {url}')
+config.bind(',z2', 'hint links spawn vlc --preferred-resolution 240 {hint-url}')
+config.bind(',Z2', 'spawn vlc --preferred-resolution 240 {url}')
 
 # opening / closing tabs and windows
 config.bind('<Ctrl-t>', 'open -t ~/.config/qutebrowser/startpage/index.html') # open startpage in new tab
