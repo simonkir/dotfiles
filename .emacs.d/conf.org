@@ -2,9 +2,44 @@
 my emacs config, this file is loaded in =init.el=, which adds more general features like =use-package=
 ** HIERACHY
 the further up a heading / subheading, the more important it is. each config snippet thould be on the most important heading it adresses (e. g. color parenthesis is at /editing → parenthesis/ instead of /appearance/).
-* keybind settings
+* init lines
+** performance improvements
+a lot of useful tips can be found in the doom emacs faq
+*** =lexibal-binding: t=
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+*** disable garbage collection
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold most-positive-fixnum)
+  (setq gc-cons-percentage 0.6)
+  (add-hook 'emacs-startup-hook '(lambda () (setq gc-cons-threshold 16777216) (setq gc-cons-percentage 0.1)))
+#+end_src
+*** unset =fnah=
+#+begin_src emacs-lisp
+  (defvar sk:file-name-handler-alist file-name-handler-alist)
+  (setq file-name-handler-alist nil)
+  (add-hook 'emacs-startup-hook '(lambda () (setq file-name-handler-alist sk:file-name-handler-alist)))
+#+end_src
+** package-management
+*** use-package
+#+begin_src emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+  (add-to-list 'package-archives
+              '("melpa" . "https://melpa.org/packages/"))
+  (package-initialize)
+
+  (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+  (setq use-package-always-defer t)
+#+end_src
+*** general-el
 #+begin_src emacs-lisp
   (use-package general
+    :demand t
     :ensure t)
 #+end_src
 * evil mode
@@ -13,6 +48,7 @@ evil config / plugins need to be loaded before everything else because of variab
 *** setup
 #+begin_src emacs-lisp
   (use-package evil
+    :demand t
     :ensure t
     :init
     (setq evil-respect-visual-line-mode t)
@@ -27,6 +63,7 @@ evil config / plugins need to be loaded before everything else because of variab
 ** evil-org
 #+begin_src emacs-lisp
   (use-package evil-org
+    :defer 2
     :ensure t
     :config
     (add-hook 'org-mode-hook 'evil-org-mode))
@@ -34,6 +71,7 @@ evil config / plugins need to be loaded before everything else because of variab
 ** evil-magit
 #+begin_src emacs-lisp
   (use-package evil-magit
+    :defer 4
     :ensure t)
 #+end_src
 * editing
@@ -41,14 +79,15 @@ evil config / plugins need to be loaded before everything else because of variab
 *** autocompletion
 #+begin_src emacs-lisp
   (use-package company
+    :demand t
     :ensure t
     :config
     (add-hook 'after-init-hook 'global-company-mode))
-    
+
   (general-define-key
    :keymaps 'company-active-map
    "C-w" 'evil-delete-backward-word)
-   
+
   (setq company-idle-delay 0.3)
   (setq company-minimum-prefix-length 2)
 #+end_src
@@ -87,6 +126,7 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 #+begin_src emacs-lisp
   (show-paren-mode)
   (use-package rainbow-delimiters
+    :defer 1
     :ensure t
     :config
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -94,6 +134,7 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 **** surround.vim
 #+begin_src emacs-lisp
   (use-package evil-surround
+    :defer 3
     :ensure t
     :config (global-evil-surround-mode 1))
 #+end_src
@@ -113,6 +154,7 @@ pretty symbols for eye candy when editing code
 package, contains more symbols, e. g. for python
 #+begin_src emacs-lisp
   (use-package pretty-mode
+    :defer 3
     :ensure t
     :config
     (global-pretty-mode t))
@@ -123,7 +165,7 @@ for more focused writing
 #+begin_src emacs-lisp
   (use-package visual-fill-column
     :ensure t
-    :init
+    :config
     (setq visual-fill-column-center-text t))
 
   (general-define-key
@@ -169,6 +211,7 @@ replace default emacs menues with more interactive ones, e. g. when opening file
 *** ido-vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
+    :demand t
     :ensure t
     :config
     (ido-vertical-mode 1))
@@ -190,6 +233,7 @@ replace default emacs menues with more interactive ones, e. g. when opening file
 wrapper around ido that improves =M-x=
 #+begin_src emacs-lisp
   (use-package smex
+    :demand t
     :ensure t
     :config (smex-initialize))
 
@@ -443,6 +487,7 @@ some mappings for a more vim-like behaviour
 ** which key
 #+begin_src emacs-lisp
   (use-package which-key
+    :defer 4
     :ensure t
     :config
     (which-key-mode))
@@ -563,7 +608,6 @@ e. g. when opening a src block with =C-c '=
 **** installation
 #+begin_src emacs-lisp
   (use-package auctex
-    :defer t
     :ensure t
     :config
     (setq TeX-auto-save t
@@ -685,6 +729,7 @@ use =M-x customize-themes= to change theme settings
 - [ ] enable bold/italics support
 #+begin_src emacs-lisp
   (use-package doom-themes
+    :demand t
     :ensure t
     :config (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
@@ -694,6 +739,7 @@ use =M-x customize-themes= to change theme settings
 use doom-modeline
 #+begin_src emacs-lisp
   (use-package doom-modeline
+    :demand t
     :ensure t
     :config
     (doom-modeline-mode 't))
@@ -707,6 +753,7 @@ use doom-modeline
   ;;(setq inhibit-startup-message t)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
   (use-package dashboard
+    :demand t
     :ensure t
     :config
     (dashboard-setup-startup-hook)
