@@ -280,7 +280,16 @@ some mappings around ido and buffer switching
    "SPC s" 'save-buffer)
 #+end_src
 *** dired
-some mappings for a more vim-like behaviour
+**** general settings
+#+begin_src emacs-lisp
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
+**** dwim mode
+when two windows are next to each other, move / copy files between them
+#+begin_src emacs-lisp
+  (setq dired-dwim-target t)
+#+end_src
+**** keybinds
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -288,7 +297,9 @@ some mappings for a more vim-like behaviour
    :prefix "SPC f"
    "d" 'dired-jump
    "D" 'dired)
-
+#+end_src
+some mappings for a more vim-like behaviour
+#+begin_src emacs-lisp
   (general-define-key
    :states 'normal
    :keymaps 'dired-mode-map
