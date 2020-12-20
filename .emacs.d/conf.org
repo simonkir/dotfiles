@@ -63,7 +63,7 @@ evil config / plugins need to be loaded before everything else because of variab
 ** evil-org
 #+begin_src emacs-lisp
   (use-package evil-org
-    :defer 2
+    :defer 1
     :ensure t
     :config
     (add-hook 'org-mode-hook 'evil-org-mode))
@@ -126,7 +126,7 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 #+begin_src emacs-lisp
   (show-paren-mode)
   (use-package rainbow-delimiters
-    :defer 1
+    :demand t
     :ensure t
     :config
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -134,7 +134,7 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 **** surround.vim
 #+begin_src emacs-lisp
   (use-package evil-surround
-    :defer 3
+    :defer 1
     :ensure t
     :config (global-evil-surround-mode 1))
 #+end_src
@@ -154,10 +154,10 @@ pretty symbols for eye candy when editing code
 package, contains more symbols, e. g. for python
 #+begin_src emacs-lisp
   (use-package pretty-mode
-    :defer 3
+    :defer 1
     :ensure t
     :config
-    (global-pretty-mode t))
+    (add-hook 'python-mode-hook 'turn-on-pretty-mode))
 #+end_src
 ** writing
 *** visual-fill-column-mode
@@ -726,14 +726,13 @@ for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it 
 ** theme
 use =M-x customize-themes= to change theme settings
 *** doom themes
-- [ ] enable bold/italics support
 #+begin_src emacs-lisp
   (use-package doom-themes
     :demand t
     :ensure t
     :config (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
-  (when window-system (global-hl-line-mode t))
+  (global-hl-line-mode)
 #+end_src
 ** modeline
 use doom-modeline
