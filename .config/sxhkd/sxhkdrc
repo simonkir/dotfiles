@@ -12,7 +12,7 @@ super + Escape
 
 # application launcher
 super +  d
-	kupfer
+    rofi -show drun
 
 # lockscreen
 super + 9
