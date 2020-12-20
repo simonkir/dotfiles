@@ -14,7 +14,7 @@ nm-applet &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 xfce4-power-manager &
-emacs --daemon &
+~/.emacs.d/launch-daemon.sh &
 
 # compositor & wallpaper
 ~/.config/herbstluftwm/scripts/picom-launch.sh &

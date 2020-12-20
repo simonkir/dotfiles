@@ -34,9 +34,13 @@ super + alt + r
 super + alt + h
     termite -e htop
 
-# text editor
+# text editor (emacsclient)
 super + alt + e
-    emacsclient -a "" -cq
+    emacsclient -cq
+
+# standalone emacs
+super + alt + shift + e
+    emacs
 
 # file browser
 super + alt + b
