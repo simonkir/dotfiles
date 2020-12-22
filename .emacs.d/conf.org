@@ -121,6 +121,7 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 **** auto-close
 #+begin_src emacs-lisp
   (electric-pair-mode t)
+  (add-to-list 'electric-pair-pairs '(36 . 36)) ;; $$
 #+end_src
 **** color parenthesis
 #+begin_src emacs-lisp
@@ -449,7 +450,7 @@ some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
-   :keymaps 'dired-mode-map
+   :keymaps '(dired-mode-map dired-hide-details-mode-map)
    "h" 'dired-up-directory
    "l" 'dired-find-file)
 #+end_src
