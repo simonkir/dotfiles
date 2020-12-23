@@ -77,6 +77,7 @@ evil config / plugins need to be loaded before everything else because of variab
 * editing
 ** general editing
 *** autocompletion
+**** setup
 #+begin_src emacs-lisp
   (use-package company
     :demand t
@@ -87,14 +88,24 @@ evil config / plugins need to be loaded before everything else because of variab
   (general-define-key
    :keymaps 'company-active-map
    "C-w" 'evil-delete-backward-word)
-
+#+end_src
+**** general settings
+#+begin_src emacs-lisp
   (setq company-idle-delay 0.3)
   (setq company-minimum-prefix-length 2)
 #+end_src
-**** tab-and-go
+***** tab-and-go
 emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through menu, and just continuing typing to end completion
 #+begin_src emacs-lisp
   (add-hook 'after-init-hook 'company-tng-mode)
+#+end_src
+**** backends
+#+begin_src emacs-lisp
+  (use-package company-math
+    :after company
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-math-symbols-unicode))
 #+end_src
 *** snippets
 #+begin_src emacs-lisp
@@ -121,7 +132,8 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
 **** auto-close
 #+begin_src emacs-lisp
   (electric-pair-mode t)
-  (add-to-list 'electric-pair-pairs '(36 . 36)) ;; $$
+  (add-hook 'org-mode-hook '(lambda () (setq-local electric-pair-pairs (append '((electric-pair-pairs) (36 . 36)))))) ;; $$
+  (add-hook 'LaTeX-mode-hook '(lambda () (setq-local electric-pair-pairs (append '((electric-pair-pairs) (36 . 36)))))) ;; $$
 #+end_src
 **** color parenthesis
 #+begin_src emacs-lisp
@@ -502,6 +514,11 @@ some mappings for a more vim-like behaviour
 #+end_src
 * mode- / package-specific configuration
 exception: evil mode stuff
+** julia
+#+begin_src emacs-lisp
+  (use-package julia-mode
+    :ensure t)
+#+end_src
 ** org
 *** general settings
 **** don't spread across two windows
@@ -554,7 +571,6 @@ e. g. when opening a src block with =C-c '=
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (setq org-latex-packages-alist '())
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-  (add-hook 'org-mode-hook 'org-toggle-pretty-entities)
 
   (general-define-key
    :states 'normal
@@ -592,8 +608,7 @@ e. g. when opening a src block with =C-c '=
   (org-babel-do-load-languages
    'org-babel-load-languages
    (append org-babel-load-languages
-           '((python . t)
-             (jupyter . t))))
+           '((jupyter . t))))
 #+end_src
 *** org-indent
 #+begin_src emacs-lisp
