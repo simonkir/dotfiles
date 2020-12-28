@@ -127,13 +127,23 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
    "+" 'text-scale-adjust
    "-" 'text-scale-adjust)
 #+end_src
-** coding
 *** parenthesis
 **** auto-close
 #+begin_src emacs-lisp
   (electric-pair-mode t)
-  (add-hook 'org-mode-hook '(lambda () (setq-local electric-pair-pairs (append '((electric-pair-pairs) (36 . 36)))))) ;; $$
-  (add-hook 'LaTeX-mode-hook '(lambda () (setq-local electric-pair-pairs (append '((electric-pair-pairs) (36 . 36)))))) ;; $$
+#+end_src
+***** special characters
+#+begin_src emacs-lisp
+  (defun sk:electric-add-latex-parenthesis ()
+    (interactive)
+    (make-local-variable 'electric-pair-pairs)
+    (add-to-list 'electric-pair-pairs '(36 . 36))) ;; $$
+
+  (add-hook 'org-mode-hook 'sk:electric-add-latex-parenthesis)
+  (add-hook 'LaTeX-mode-hook 'sk:electric-add-latex-parenthesis)
+  
+  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
+  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
 #+end_src
 **** color parenthesis
 #+begin_src emacs-lisp
@@ -151,6 +161,20 @@ emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through 
     :ensure t
     :config (global-evil-surround-mode 1))
 #+end_src
+*** alignment
+#+begin_src emacs-lisp
+  (use-package evil-lion
+    :ensure t
+    :defer 2)
+
+  (general-define-key
+   :states '(normal visual)
+   :keymap 'override
+   :prefix "g"
+   "l" 'evil-lion-left
+   "L" 'evil-lion-right)
+#+end_src
+** coding
 *** easier kill ring
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
@@ -205,11 +229,6 @@ for more focused writing
    :prefix "SPC t"
    "s" 'sk:flyspell-mode
    "S" 'ispell-change-dictionary)
-#+end_src
-*** german quotation marks
-#+begin_src emacs-lisp
-  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
-  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
 #+end_src
 * ido
 replace default emacs menues with more interactive ones, e. g. when opening files
@@ -460,11 +479,12 @@ when two windows are next to each other, move / copy files between them
 #+end_src
 some mappings for a more vim-like behaviour
 #+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps '(dired-mode-map dired-hide-details-mode-map)
-   "h" 'dired-up-directory
-   "l" 'dired-find-file)
+  (with-eval-after-load 'dired
+    (general-define-key
+    :states 'normal
+    :keymaps 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
 #+end_src
 *** bookmarks
 #+begin_src emacs-lisp
