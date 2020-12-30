@@ -1,4 +1,4 @@
-* INTRODUCTION
+* README
 my emacs config, this file is loaded in =init.el=, which adds more general features like =use-package=
 ** HIERACHY
 the further up a heading / subheading, the more important it is. each config snippet thould be on the most important heading it adresses (e. g. color parenthesis is at /editing → parenthesis/ instead of /appearance/).
@@ -21,7 +21,7 @@ a lot of useful tips can be found in the doom emacs faq
   (setq file-name-handler-alist nil)
   (add-hook 'emacs-startup-hook '(lambda () (setq file-name-handler-alist sk:file-name-handler-alist)))
 #+end_src
-** package-management
+** package management
 *** use-package
 #+begin_src emacs-lisp
   (require 'package)
@@ -42,10 +42,9 @@ a lot of useful tips can be found in the doom emacs faq
     :demand t
     :ensure t)
 #+end_src
-* evil mode
-evil config / plugins need to be loaded before everything else because of variable definitions
-** general settings
-*** setup
+* global config
+** evil mode
+evil config need to be loaded before everything else because of variable definitions
 #+begin_src emacs-lisp
   (use-package evil
     :demand t
@@ -54,272 +53,23 @@ evil config / plugins need to be loaded before everything else because of variab
     (setq evil-respect-visual-line-mode t)
     :config
     (evil-mode 1))
-#+end_src
-*** initial states
-#+begin_src emacs-lisp
+    
   (setq evil-emacs-state-modes nil
         evil-motion-state-modes nil)
 #+end_src
-** evil-org
+** navigation
+*** within a window
+**** scrolling
 #+begin_src emacs-lisp
-  (use-package evil-org
-    :defer 1
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook 'evil-org-mode))
-#+end_src
-** evil-magit
-#+begin_src emacs-lisp
-  (use-package evil-magit
-    :defer 4
-    :ensure t)
-#+end_src
-* editing
-** general editing
-*** autocompletion
-**** setup
-#+begin_src emacs-lisp
-  (use-package company
-    :demand t
-    :ensure t
-    :config
-    (add-hook 'after-init-hook 'global-company-mode))
-
-  (general-define-key
-   :keymaps 'company-active-map
-   "C-w" 'evil-delete-backward-word)
-#+end_src
-**** general settings
-#+begin_src emacs-lisp
-  (setq company-idle-delay 0.3)
-  (setq company-minimum-prefix-length 2)
-#+end_src
-***** tab-and-go
-emulates vim =TAB= press to open completion, =TAB= and =S-TAB= to cycle through menu, and just continuing typing to end completion
-#+begin_src emacs-lisp
-  (add-hook 'after-init-hook 'company-tng-mode)
-#+end_src
-**** backends
-#+begin_src emacs-lisp
-  (use-package company-math
-    :after company
-    :ensure t
-    :config
-    (add-to-list 'company-backends 'company-math-symbols-unicode))
-#+end_src
-*** snippets
-#+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t
-    :config
-    (use-package yasnippet-snippets
-      :ensure t)
-    (yas-reload-all))
-    (yas-global-mode)
-#+end_src
-*** text scale
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC"
-   "0" 'text-scale-mode
-   "+" 'text-scale-adjust
-   "-" 'text-scale-adjust)
-#+end_src
-*** parenthesis
-**** auto-close
-#+begin_src emacs-lisp
-  (electric-pair-mode t)
-#+end_src
-***** special characters
-#+begin_src emacs-lisp
-  (defun sk:electric-add-latex-parenthesis ()
-    (interactive)
-    (make-local-variable 'electric-pair-pairs)
-    (add-to-list 'electric-pair-pairs '(36 . 36))) ;; $$
-
-  (add-hook 'org-mode-hook 'sk:electric-add-latex-parenthesis)
-  (add-hook 'LaTeX-mode-hook 'sk:electric-add-latex-parenthesis)
+  (setq scroll-conservatively 100)
+  (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
   
-  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
-  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
-#+end_src
-**** color parenthesis
-#+begin_src emacs-lisp
-  (show-paren-mode)
-  (use-package rainbow-delimiters
-    :demand t
-    :ensure t
-    :config
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-#+end_src
-**** surround.vim
-#+begin_src emacs-lisp
-  (use-package evil-surround
-    :defer 1
-    :ensure t
-    :config (global-evil-surround-mode 1))
-#+end_src
-*** alignment
-#+begin_src emacs-lisp
-  (use-package evil-lion
-    :ensure t
-    :defer 2)
-
-  (general-define-key
-   :states '(normal visual)
-   :keymap 'override
-   :prefix "g"
-   "l" 'evil-lion-left
-   "L" 'evil-lion-right)
-#+end_src
-** coding
-*** easier kill ring
-=M-y= shows a completion from all previously cut stuff
-#+begin_src emacs-lisp
-  (use-package popup-kill-ring
-    :ensure t)
-
-  (general-define-key
-   :states 'insert
-   "M-y" 'popup-kill-ring)
-#+end_src
-*** pretty symbols
-pretty symbols for eye candy when editing code
-**** pretty-mode
-package, contains more symbols, e. g. for python
-#+begin_src emacs-lisp
-  (use-package pretty-mode
-    :defer 1
-    :ensure t
-    :config
-    (add-hook 'python-mode-hook 'turn-on-pretty-mode))
-#+end_src
-** writing
-*** visual-fill-column-mode
-for more focused writing
-#+begin_src emacs-lisp
-  (use-package visual-fill-column
-    :ensure t
-    :config
-    (setq visual-fill-column-center-text t))
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC t"
-   "v" 'visual-fill-column-mode
-   "V" 'set-fill-column)
-#+end_src
-*** spell checking
-#+begin_src emacs-lisp
-  (setq flyspell-issue-message-flag nil)
-
-  (defun sk:flyspell-mode ()
-    (interactive)
-    (if (bound-and-true-p flyspell-mode)
-        (flyspell-mode 0)
-      (flyspell-mode 1)
-      (flyspell-buffer)))
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC t"
-   "s" 'sk:flyspell-mode
-   "S" 'ispell-change-dictionary)
-#+end_src
-* ido
-replace default emacs menues with more interactive ones, e. g. when opening files
-** general settings
-*** ido everywhere
-#+begin_src emacs-lisp
-  (setq ido-enable-flex-matching nil
-        ido-create-new-buffer 'always
-        ido-everywhere t)
-  (ido-mode 1)
-#+end_src
-*** ido-vertical
-#+begin_src emacs-lisp
-  (use-package ido-vertical-mode
-    :demand t
-    :ensure t
-    :config
-    (ido-vertical-mode 1))
-#+end_src
-*** keybinds
-#+begin_src emacs-lisp
-  (defun sk:ido-custom-keys ()
-    (general-define-key
-     :keymaps 'ido-completion-map
-     "C-d" 'ido-kill-buffer-at-head
-     "C-n" 'ido-next-match
-     "C-j" 'ido-next-match
-     "C-k" 'ido-prev-match
-     "C-p" 'ido-prev-match))
-
-  (add-hook 'ido-setup-hook 'sk:ido-custom-keys)
-#+end_src
-*** smex
-wrapper around ido that improves =M-x=
-#+begin_src emacs-lisp
-  (use-package smex
-    :demand t
-    :ensure t
-    :config (smex-initialize))
-
-  (general-define-key
-   :keymaps 'override
-   "M-x" 'smex)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   "SPC x" 'smex)
-#+end_src
-** ignoring buffers
-#+begin_src emacs-lisp
-  (setq sk:ido-unignored-buffers '("*dashboard*"))
-
-  (defun sk:ido-ignore-buffers-fun (name)
-    "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
-    (and (string-match "^\*" name)
-        (not (member name sk:ido-unignored-buffers))))
-
-  (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
-#+end_src
-** recent files
-#+begin_src emacs-lisp
-  (defun recentf-ido-find-file ()
-    "Find a recent file using Ido."
-    (interactive)
-    (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
-      (when file
-        (find-file file))))
-#+end_src
-** bookmarks
-#+begin_src emacs-lisp
-  (defun ido-bookmark-jump (bname)
-    "Switch to bookmark interactively using `ido'."
-    (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
-    (bookmark-jump bname))
-  (add-hook 'after-init-hook 'bookmark-save)
-#+end_src
-* navigation
-** navigating within a window
-*** scrolling
-#+begin_src emacs-lisp
-  (setq scroll-margin 5)
-#+end_src
-*** follow mode
-#+begin_src emacs-lisp
   (general-define-key
    :states 'normal
    :keymaps 'override
    "SPC t f" 'follow-mode)
 #+end_src
-*** insert mode
+**** insert mode
 #+begin_src emacs-lisp
   (general-define-key
    :states 'insert
@@ -328,7 +78,7 @@ wrapper around ido that improves =M-x=
    "C-h" 'backward-char
    "C-l" 'forward-char)
 #+end_src
-*** avy
+**** avy
 navigate to any char in a buffer using =M-s=
 #+begin_src emacs-lisp
   (use-package avy
@@ -346,9 +96,7 @@ navigate to any char in a buffer using =M-s=
    "j" 'avy-goto-line-below
    "k" 'avy-goto-line-above)
 #+end_src
-** navigating windows
-*** functions
-functions that move the cursor when the window is split
+*** windows
 #+begin_src emacs-lisp
   (defun split-and-follow-horizontally ()
     (interactive)
@@ -361,10 +109,7 @@ functions that move the cursor when the window is split
     (split-window-right)
     (balance-windows)
     (other-window 1))
-#+end_src
-*** keybinds
-**** manage windows
-#+begin_src emacs-lisp
+
   (general-define-key
    :states 'normal
    :keymaps 'override
@@ -373,14 +118,8 @@ functions that move the cursor when the window is split
    "o" 'delete-other-windows
    "1" 'delete-other-windows
    "s" 'split-and-follow-horizontally
-   "v" 'split-and-follow-vertically)
-#+end_src
-**** switch windows
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC w"
+   "v" 'split-and-follow-vertically
+
    "h" 'evil-window-left
    "j" 'evil-window-down
    "k" 'evil-window-up
@@ -388,24 +127,14 @@ functions that move the cursor when the window is split
    "w" 'evil-window-next
    "c" 'evil-window-delete
    "C" 'kill-buffer-and-window)
-   
+
   (general-define-key
    :states 'normal
    :keymaps 'override
    "SPC SPC" 'evil-window-next)
 #+end_src
-** navigating buffers
-*** buffer navigation
+*** buffers
 some mappings around ido and buffer switching
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC b"
-   "b" 'ido-switch-buffer
-   "B" 'ibuffer)
-#+end_src
-*** killing buffers
 #+begin_src emacs-lisp
   (defun kill-current-buffer ()
     (interactive)
@@ -415,12 +144,14 @@ some mappings around ido and buffer switching
    :states 'normal
    :keymaps 'override
    :prefix "SPC b"
+   "b" 'ido-switch-buffer
+   "B" 'ibuffer
    "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
 #+end_src
-** navigating files
-*** visiting / saving
+*** files
+**** visiting / saving
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -430,55 +161,23 @@ some mappings around ido and buffer switching
    "F" 'find-file-read-only
    "r" 'recentf-ido-find-file
    "s" 'save-buffer
-   "S" 'save-some-buffers)
+   "S" 'save-some-buffers
+   "b" 'ido-bookmark-jump
+   "B" 'bookmark-set
+   "d" 'dired-jump
+   "D" 'dired)
 
   (general-define-key
    :states 'normal
    :keymaps 'override
    "SPC s" 'save-buffer)
 #+end_src
-**** config operations
-***** functions
-#+begin_src emacs-lisp
-  (defun config-visit ()
-    (interactive)
-    (find-file "~/.emacs.d/conf.org"))
-    
-  (defun config-reload ()
-    (interactive)
-    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
-#+end_src
-***** keybinds
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC c"
-   "r" 'config-reload
-   "v" 'config-visit
-   "e" 'config-visit)
-#+end_src
-*** dired
-**** general settings
+**** dired
 #+begin_src emacs-lisp
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-#+end_src
-**** dwim mode
-when two windows are next to each other, move / copy files between them
-#+begin_src emacs-lisp
-  (setq dired-dwim-target t)
-#+end_src
-**** keybinds
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC f"
-   "d" 'dired-jump
-   "D" 'dired)
-#+end_src
-some mappings for a more vim-like behaviour
-#+begin_src emacs-lisp
+  (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
+  
+  ;;some mappings for a more vim-like behaviour
   (with-eval-after-load 'dired
     (general-define-key
     :states 'normal
@@ -486,17 +185,8 @@ some mappings for a more vim-like behaviour
     "h" 'dired-up-directory
     "l" 'dired-find-file))
 #+end_src
-*** bookmarks
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC f"
-   "b" 'ido-bookmark-jump
-   "B" 'bookmark-set)
-#+end_src
-** misc
-*** quitting
+*** misc
+**** quitting
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -506,7 +196,7 @@ some mappings for a more vim-like behaviour
    "q" 'save-buffers-kill-terminal
    "Q" 'save-buffers-kill-emacs)
 #+end_src
-*** help mode
+**** help mode
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -516,8 +206,180 @@ some mappings for a more vim-like behaviour
    "v" 'describe-variable
    "k" 'describe-key)
 #+end_src
-* misc settings
-** which key
+**** config operations
+#+begin_src emacs-lisp
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/conf.org"))
+    
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
+    
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC c"
+   "r" 'config-reload
+   "v" 'config-visit
+   "e" 'config-visit)
+#+end_src
+** usage
+*** editing
+**** parenthesis
+***** electric
+#+begin_src emacs-lisp
+  (electric-pair-mode t)
+  
+  (defun sk:electric-add-latex-parenthesis ()
+    (interactive)
+    (make-local-variable 'electric-pair-pairs)
+    (add-to-list 'electric-pair-pairs '(36 . 36))) ;; $$
+
+  (add-hook 'org-mode-hook 'sk:electric-add-latex-parenthesis)
+  (add-hook 'LaTeX-mode-hook 'sk:electric-add-latex-parenthesis)
+  
+  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
+  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
+#+end_src
+***** surround.vim
+#+begin_src emacs-lisp
+  (use-package evil-surround
+    :defer 1
+    :ensure t
+    :config (global-evil-surround-mode 1))
+#+end_src
+***** color parenthesis
+#+begin_src emacs-lisp
+  (show-paren-mode)
+  (use-package rainbow-delimiters
+    :demand t
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+**** alignment
+#+begin_src emacs-lisp
+  (use-package evil-lion
+    :ensure t
+    :defer 2)
+
+  (general-define-key
+   :states '(normal visual)
+   :keymap 'override
+   :prefix "g"
+   "l" 'evil-lion-left
+   "L" 'evil-lion-right)
+#+end_src
+*** inserting
+**** autocompletion
+***** company
+#+begin_src emacs-lisp
+  (use-package company
+    :demand t
+    :ensure t
+    :config
+    (setq company-idle-delay 0.3)
+    (setq company-minimum-prefix-length 2)
+    (add-hook 'after-init-hook 'company-tng-mode)
+    (add-hook 'after-init-hook 'global-company-mode))
+
+  (general-define-key
+   :keymaps 'company-active-map
+   "C-w" 'evil-delete-backward-word)
+#+end_src
+***** backends
+#+begin_src emacs-lisp
+  (use-package company-math
+    :after company
+    :ensure t
+    :config
+    (add-to-list 'company-backends 'company-math-symbols-unicode))
+#+end_src
+**** snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :demand t
+    :ensure t
+    :config
+    (yas-global-mode))
+
+  (use-package yasnippet-snippets
+    :after yasnippet
+    :ensure t
+    :config
+    (yas-reload-all))
+#+end_src
+**** easier kill ring
+=M-y= shows a completion from all previously cut stuff
+#+begin_src emacs-lisp
+  (use-package popup-kill-ring
+    :ensure t)
+
+  (general-define-key
+   :states 'insert
+   "M-y" 'popup-kill-ring)
+#+end_src
+*** visual aids
+**** spell checking
+#+begin_src emacs-lisp
+  (setq flyspell-issue-message-flag nil)
+
+  (defun sk:flyspell-mode ()
+    (interactive)
+    (if (bound-and-true-p flyspell-mode)
+        (flyspell-mode 0)
+      (flyspell-mode 1)
+      (flyspell-buffer)))
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC t"
+   "s" 'sk:flyspell-mode
+   "S" 'ispell-change-dictionary)
+#+end_src
+**** visual-fill-column-mode
+for more focused writing
+#+begin_src emacs-lisp
+  (use-package visual-fill-column
+    :ensure t
+    :config
+    (setq visual-fill-column-center-text t))
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC t"
+   "v" 'visual-fill-column-mode
+   "V" 'set-fill-column)
+#+end_src
+**** text scale
+#+begin_src emacs-lisp
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   :prefix "SPC"
+   "0" 'text-scale-mode
+   "+" 'text-scale-adjust
+   "-" 'text-scale-adjust)
+#+end_src
+**** pretty symbols
+pretty symbols for eye candy when editing code
+#+begin_src emacs-lisp
+  (use-package pretty-mode
+    :defer 1
+    :ensure t
+    :config
+    (add-hook 'python-mode-hook 'turn-on-pretty-mode))
+#+end_src
+** interaction
+*** general settings
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no 'y-or-n-p)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+*** which key
 #+begin_src emacs-lisp
   (use-package which-key
     :defer 4
@@ -525,14 +387,82 @@ some mappings for a more vim-like behaviour
     :config
     (which-key-mode))
 #+end_src
-** misc of misc
+*** ido
+replace default emacs menues with more interactive ones, e. g. when opening files
+**** general settings
+***** setup
 #+begin_src emacs-lisp
-  (setq scroll-conservatively 100)
-  (defalias 'yes-or-no 'y-or-n-p)
-  ;;(setq make-backup-file nil)
-  ;;(setq ring-bell-function 'ignore)
+  (setq ido-enable-flex-matching nil
+        ido-create-new-buffer 'always
+        ido-everywhere t)
+  (ido-mode 1)
+  
+  (defun sk:ido-custom-keys ()
+    (general-define-key
+     :keymaps 'ido-completion-map
+     "C-d" 'ido-kill-buffer-at-head
+     "C-n" 'ido-next-match
+     "C-j" 'ido-next-match
+     "C-k" 'ido-prev-match
+     "C-p" 'ido-prev-match))
+
+  (add-hook 'ido-setup-hook 'sk:ido-custom-keys)
 #+end_src
-* mode- / package-specific configuration
+***** ido-vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :demand t
+    :ensure t
+    :config
+    (ido-vertical-mode 1))
+#+end_src
+***** smex
+wrapper around ido that improves =M-x=
+#+begin_src emacs-lisp
+  (use-package smex
+    :demand t
+    :ensure t
+    :config (smex-initialize))
+
+  (general-define-key
+   :keymaps 'override
+   "M-x" 'smex)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'override
+   "SPC x" 'smex)
+#+end_src
+**** more features
+***** ignoring buffers
+#+begin_src emacs-lisp
+  (setq sk:ido-unignored-buffers '("*dashboard*"))
+
+  (defun sk:ido-ignore-buffers-fun (name)
+    "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
+    (and (string-match "^\*" name)
+        (not (member name sk:ido-unignored-buffers))))
+
+  (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
+#+end_src
+***** recent files
+#+begin_src emacs-lisp
+  (defun recentf-ido-find-file ()
+    "Find a recent file using Ido."
+    (interactive)
+    (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+      (when file
+        (find-file file))))
+#+end_src
+***** bookmarks
+#+begin_src emacs-lisp
+  (defun ido-bookmark-jump (bname)
+    "Switch to bookmark interactively using `ido'."
+    (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+    (bookmark-jump bname))
+  (add-hook 'after-init-hook 'bookmark-save)
+#+end_src
+* local config
 exception: evil mode stuff
 ** julia
 #+begin_src emacs-lisp
@@ -541,76 +471,21 @@ exception: evil mode stuff
 #+end_src
 ** org
 *** general settings
-**** don't spread across two windows
-e. g. when opening a src block with =C-c '=
 #+begin_src emacs-lisp
-  (setq org-src-window-setup 'current-window)
-#+end_src
-**** keybinds
-***** ='org-ctrl-c-ctrl-c=
-- evaluate src-block
-- numbered list reodering
-- table realignment
-- toggling checkboxes
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   "RET" 'org-ctrl-c-ctrl-c)
-#+end_src
-***** ='org-ctrl-c-minus=
-- table insert hline
-- toggle item
-- cylce list bullet
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   :prefix "SPC o"
-   "o" 'org-ctrl-c-minus
-   "-" 'org-ctrl-c-minus
-   "i" 'org-ctrl-c-minus
-   "b" 'org-ctrl-c-minus)
-#+end_src
-***** others
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   :prefix "SPC o"
-   "TAB" 'org-table-toggle-column-width
-   "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
-   "h" 'org-toggle-heading
-   "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
-   "t" 'org-todo
-   "X" 'org-export-dispatch
-   "x" '(lambda () (interactive) (org-export-dispatch '(4))))
-#+end_src
-*** latex preview
-#+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
+  
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (setq org-latex-packages-alist '())
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   :prefix "SPC p"
-   "p" 'org-latex-preview
-   "P" '(lambda () (interactive) (org-latex-preview '(4)))
-   "b" '(lambda () (interactive) (org-latex-preview '(16)))
-   "B" '(lambda () (interactive) (org-latex-preview '(64)))
-   "I" 'org-toggle-inline-images
-   "i" 'org-display-inline-images)
 #+end_src
-*** org babel / source code
-**** general settings
+*** org-babel
+**** setup
 #+begin_src emacs-lisp
   (setq org-confirm-babel-evaluate nil)
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
-#+end_src
-**** viewing code blocks
-#+begin_src emacs-lisp
+  
   (general-define-key
    :states 'normal
    "SPC o e" 'org-edit-src-exit)
@@ -630,32 +505,71 @@ e. g. when opening a src block with =C-c '=
    (append org-babel-load-languages
            '((jupyter . t))))
 #+end_src
-*** org-indent
+*** keybinds
+- =C-c C-c=
+  - evaluate src-block
+  - numbered list reordering
+  - table realignment
+  - toggle checkboxes
+- =C-c minus=
+  - table insert hline
+  - toggle item
+  - cycle list bullet
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'org-indent-mode)
+  (use-package evil-org
+    :defer 1
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode))
+    
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   "RET" 'org-ctrl-c-ctrl-c)
+   
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   :prefix "SPC o"
+   "o" 'org-ctrl-c-minus
+   "-" 'org-ctrl-c-minus
+   "i" 'org-ctrl-c-minus
+   "b" 'org-ctrl-c-minus
+
+   "TAB" 'org-table-toggle-column-width
+   "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
+   "h" 'org-toggle-heading
+   "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
+   "t" 'org-todo
+   "X" 'org-export-dispatch
+   "x" '(lambda () (interactive) (org-export-dispatch '(4))))
+   
+  (general-define-key
+   :states 'normal
+   :keymaps 'org-mode-map
+   :prefix "SPC p"
+   "p" 'org-latex-preview
+   "P" '(lambda () (interactive) (org-latex-preview '(4)))
+   "b" '(lambda () (interactive) (org-latex-preview '(16)))
+   "B" '(lambda () (interactive) (org-latex-preview '(64)))
+   "I" 'org-toggle-inline-images
+   "i" 'org-display-inline-images)
 #+end_src
-** latex
+** auctex
 *** general settings
-#+begin_src emacs-lisp
-  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
-  (setq-default preview-scale-function 1.5)
-#+end_src
-*** auctex
-**** installation
 #+begin_src emacs-lisp
   (use-package auctex
     :ensure t
     :config
     (setq TeX-auto-save t
           TeX-parse-self t))
-#+end_src
-**** general settings
-#+begin_src emacs-lisp
+          
   (setq TeX-view-program-selection '((output-pdf "Zathura")))
   (setq preview-auto-cache-preamble t)
-#+end_src
-**** math mode
-#+begin_src emacs-lisp
+  
+  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+  (setq-default preview-scale-function 1.5)
+  
   (setq LaTeX-math-abbrev-prefix "'")
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
@@ -664,7 +578,6 @@ e. g. when opening a src block with =C-c '=
                                               "IEEEeqnarray*" env-on)))
 #+end_src
 *** keybinds
-**** command insertion
 #+begin_src emacs-lisp
   (general-define-key
    :states 'normal
@@ -672,19 +585,10 @@ e. g. when opening a src block with =C-c '=
    :prefix "SPC l"
    "s" 'LaTeX-section           ;; insert section
    "e" 'LaTeX-environment       ;; insert environment
-   "f" 'LaTeX-fill-environment) ;; auto-indent
-#+end_src
-**** compilation
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix "SPC l"
+   "f" 'LaTeX-fill-environment  ;; auto-indent
    "l" 'TeX-command-master
    "L" 'TeX-command-run-all)
-#+end_src
-**** previewing
-#+begin_src emacs-lisp
+   
   (general-define-key
    :states 'normal
    :keymaps 'LaTeX-mode-map
@@ -695,8 +599,6 @@ e. g. when opening a src block with =C-c '=
    "B" 'preview-clearout-buffer)
 #+end_src
 ** docview
-*** vim-like keybinds
-**** functions / settings
 #+begin_src emacs-lisp
   (setq doc-view-continuous t)
   
@@ -707,10 +609,7 @@ e. g. when opening a src block with =C-c '=
       (if count
           (doc-view-goto-page count)
         (doc-view-last-page)))
-#+end_src
-
-**** function for goto-page
-#+begin_src emacs-lisp
+        
   (general-define-key
    :states 'normal
    :keymaps 'doc-view-mode-map
@@ -722,14 +621,16 @@ e. g. when opening a src block with =C-c '=
    "G" 'sk:doc-view-goto-page)
 #+end_src
 ** magit
-*** installation
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t)
-#+end_src
-*** mappings
-#+begin_src emacs-lisp
+    
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
+    
+  (use-package evil-magit
+    :defer 4
+    :ensure t)
+  
   (general-define-key
    :states 'normal
    :keymaps 'override
@@ -738,17 +639,14 @@ e. g. when opening a src block with =C-c '=
 #+end_src
 * appearance
 ** general settings
-settings regarding the application and the frame
-#+begin_src emacs-lisp
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-#+end_src
-** line numbers
 use visual instead of absolute or relative line numbers
 visual line numbers are determined with lines visible on the screen instead of buffer lines.
 for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it is shown as the amount of lines that are folded (this subheading would then be 12 lines).
 #+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  
   ;; display line / column numbers in modeline
   (line-number-mode 1)
   (column-number-mode 1)
@@ -756,12 +654,10 @@ for example, in ='visual= a fold is shown as 1 line, whereas in ='relative=, it 
   ;; display visual line numbers left of each buffer
   (setq display-line-numbers-type 'visual)
   (global-display-line-numbers-mode 1)
-  
   (global-visual-line-mode)
 #+end_src
 ** theme
 use =M-x customize-themes= to change theme settings
-*** doom themes
 #+begin_src emacs-lisp
   (use-package doom-themes
     :demand t
@@ -798,3 +694,5 @@ use doom-modeline
           dashboard-set-file-icons t
           dashboard-center-content t))
 #+end_src
+
+
