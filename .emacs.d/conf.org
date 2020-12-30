@@ -64,7 +64,7 @@ evil config need to be loaded before everything else because of variable definit
 #+begin_src emacs-lisp
   (use-package evil-collection
     :after evil
-    :demand
+    :demand t
     :ensure t
     :config
     (evil-collection-init))
