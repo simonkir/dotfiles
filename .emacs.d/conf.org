@@ -45,17 +45,29 @@ a lot of useful tips can be found in the doom emacs faq
 * global config
 ** evil mode
 evil config need to be loaded before everything else because of variable definitions
+*** setup
 #+begin_src emacs-lisp
   (use-package evil
     :demand t
     :ensure t
     :init
-    (setq evil-respect-visual-line-mode t)
+    (setq evil-respect-visual-line-mode t
+          evil-want-integration t
+          evil-want-keybinding nil)
     :config
     (evil-mode 1))
-    
+
   (setq evil-emacs-state-modes nil
         evil-motion-state-modes nil)
+#+end_src
+*** evil-collection
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :demand
+    :ensure t
+    :config
+    (evil-collection-init))
 #+end_src
 ** navigation
 *** within a window
@@ -160,6 +172,7 @@ some mappings around ido and buffer switching
    "f" 'find-file
    "F" 'find-file-read-only
    "r" 'recentf-ido-find-file
+   "R" 'revert-buffer
    "s" 'save-buffer
    "S" 'save-some-buffers
    "b" 'ido-bookmark-jump
@@ -182,6 +195,7 @@ some mappings around ido and buffer switching
     (general-define-key
     :states 'normal
     :keymaps 'dired-mode-map
+    "v" 'dired-view-file
     "h" 'dired-up-directory
     "l" 'dired-find-file))
 #+end_src
@@ -521,12 +535,12 @@ exception: evil mode stuff
     :ensure t
     :config
     (add-hook 'org-mode-hook 'evil-org-mode))
-    
+
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
    "RET" 'org-ctrl-c-ctrl-c)
-   
+
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
@@ -536,6 +550,8 @@ exception: evil mode stuff
    "i" 'org-ctrl-c-minus
    "b" 'org-ctrl-c-minus
 
+   "E" 'org-babel-execute-buffer
+
    "TAB" 'org-table-toggle-column-width
    "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
    "h" 'org-toggle-heading
@@ -543,7 +559,7 @@ exception: evil mode stuff
    "t" 'org-todo
    "X" 'org-export-dispatch
    "x" '(lambda () (interactive) (org-export-dispatch '(4))))
-   
+
   (general-define-key
    :states 'normal
    :keymaps 'org-mode-map
@@ -613,11 +629,6 @@ exception: evil mode stuff
   (general-define-key
    :states 'normal
    :keymaps 'doc-view-mode-map
-   "j" 'doc-view-next-line-or-next-page
-   "J" 'doc-view-next-page
-   "k" 'doc-view-previous-line-or-previous-page
-   "K" 'doc-view-previous-page
-   "gg" 'doc-view-first-page
    "G" 'sk:doc-view-goto-page)
 #+end_src
 ** magit
@@ -627,10 +638,6 @@ exception: evil mode stuff
     
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
     
-  (use-package evil-magit
-    :defer 4
-    :ensure t)
-  
   (general-define-key
    :states 'normal
    :keymaps 'override
@@ -688,11 +695,9 @@ use doom-modeline
     :ensure t
     :config
     (dashboard-setup-startup-hook)
-    (setq dashboard-items '((recents . 15))
+    (setq dashboard-items '((bookmarks . 10) (recents . 10))
           dashboard-startup-banner 'logo
           dashboard-set-heading-icons t
           dashboard-set-file-icons t
           dashboard-center-content t))
 #+end_src
-
-
