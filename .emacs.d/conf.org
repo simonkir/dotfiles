@@ -80,19 +80,8 @@ evil config need to be loaded before everything else because of variable definit
   (setq scroll-conservatively 100)
   (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
   
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
+  (general-def 'normal override
    "SPC t f" 'follow-mode)
-#+end_src
-**** insert mode
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'insert
-   "C-k" 'evil-previous-line
-   "C-j" 'evil-next-line
-   "C-h" 'backward-char
-   "C-l" 'forward-char)
 #+end_src
 **** avy
 #+begin_src emacs-lisp
@@ -121,10 +110,7 @@ evil config need to be loaded before everything else because of variable definit
     (balance-windows)
     (other-window 1))
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC w"
+  (general-def 'normal override :prefix "SPC w"
    "=" 'balance-windows
    "o" 'delete-other-windows
    "1" 'delete-other-windows
@@ -139,9 +125,7 @@ evil config need to be loaded before everything else because of variable definit
    "c" 'evil-window-delete
    "C" 'kill-buffer-and-window)
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
+  (general-def 'normal override
    "SPC SPC" 'evil-window-next)
 #+end_src
 *** buffers
@@ -151,10 +135,7 @@ some mappings around ido and buffer switching
     (interactive)
     (kill-buffer (current-buffer)))
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC b"
+  (general-def 'normal override :prefix "SPC b"
    "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
@@ -165,10 +146,7 @@ some mappings around ido and buffer switching
 *** files
 **** visiting / saving
 #+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC f"
+  (general-def 'normal override :prefix "SPC f"
    "f" 'find-file
    "F" 'find-file-read-only
    "R" 'revert-buffer
@@ -176,9 +154,7 @@ some mappings around ido and buffer switching
    "S" 'save-some-buffers
    "B" 'bookmark-set)
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
+  (general-def 'normal override
    "SPC s" 'save-buffer)
 #+end_src
 **** dired
@@ -202,20 +178,14 @@ some mappings around ido and buffer switching
 *** misc
 **** quitting
 #+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC"
+  (general-def 'normal override :prefix "SPC"
    "ESC" 'keyboard-escape-quit
    "q" 'save-buffers-kill-terminal
    "Q" 'save-buffers-kill-emacs)
 #+end_src
 **** help mode
 #+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC h"
+  (general-def 'normal override :prefix "SPC h"
    "f" 'describe-function
    "v" 'describe-variable
    "k" 'describe-key)
@@ -230,10 +200,7 @@ some mappings around ido and buffer switching
     (interactive)
     (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
     
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC c"
+  (general-def 'normal override :prefix "SPC c"
    "r" 'config-reload
    "v" 'config-visit
    "e" 'config-visit)
@@ -367,10 +334,7 @@ for more focused writing
 #+end_src
 **** text scale
 #+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC"
+  (general-def 'normal override :prefix "SPC"
    "0" 'text-scale-mode
    "+" 'text-scale-adjust
    "-" 'text-scale-adjust)
