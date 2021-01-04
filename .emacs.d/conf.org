@@ -5,7 +5,7 @@ the further up a heading / subheading, the more important it is. each config sni
 * init lines
 ** performance improvements
 a lot of useful tips can be found in the doom emacs faq
-*** =lexibal-binding: t=
+*** =lexical-binding: t=
 #+begin_src emacs-lisp
   ;;; -*- lexical-binding: t; -*-
 #+end_src
@@ -31,10 +31,8 @@ a lot of useful tips can be found in the doom emacs faq
   (package-initialize)
 
   (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-  (setq use-package-always-defer t)
+    (package-refresh-contents)
+    (package-install 'use-package))
 #+end_src
 *** general-el
 #+begin_src emacs-lisp
@@ -54,11 +52,17 @@ evil config need to be loaded before everything else because of variable definit
     (setq evil-respect-visual-line-mode t
           evil-want-integration t
           evil-want-keybinding nil)
-    :config
-    (evil-mode 1))
 
-  (setq evil-emacs-state-modes nil
-        evil-motion-state-modes nil)
+    :config
+    (setq evil-emacs-state-modes nil
+          evil-motion-state-modes nil)
+    (evil-mode 1)
+
+    :general ('insert
+              "C-k" 'evil-previous-line
+              "C-j" 'evil-next-line
+              "C-h" 'backward-char
+              "C-l" 'forward-char))
 #+end_src
 *** evil-collection
 #+begin_src emacs-lisp
@@ -91,22 +95,17 @@ evil config need to be loaded before everything else because of variable definit
    "C-l" 'forward-char)
 #+end_src
 **** avy
-navigate to any char in a buffer using =M-s=
 #+begin_src emacs-lisp
   (use-package avy
-    :ensure t)
-
-  (general-define-key
-   :states '(normal visual)
-   :keymaps 'override
-   :prefix "SPC a"
-   "a" 'avy-goto-word-or-subword-1
-   "c" 'avy-goto-char-timer
-   "w" 'avy-goto-word-or-subword-1
-   "W" 'avy-goto-word
-   "l" 'avy-goto-line
-   "j" 'avy-goto-line-below
-   "k" 'avy-goto-line-above)
+    :ensure t
+    :general ('(normal visual) override :prefix "SPC a"
+              "a" 'avy-goto-word-or-subword-1
+              "c" 'avy-goto-char-timer
+              "w" 'avy-goto-word-or-subword-1
+              "W" 'avy-goto-word
+              "l" 'avy-goto-line
+              "j" 'avy-goto-line-below
+              "k" 'avy-goto-line-above))
 #+end_src
 *** windows
 #+begin_src emacs-lisp
@@ -156,11 +155,12 @@ some mappings around ido and buffer switching
    :states 'normal
    :keymaps 'override
    :prefix "SPC b"
-   "b" 'ido-switch-buffer
-   "B" 'ibuffer
    "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
+   
+  (use-package ibuffer
+    :general ('normal override "SPC b B" 'ibuffer))
 #+end_src
 *** files
 **** visiting / saving
@@ -171,14 +171,10 @@ some mappings around ido and buffer switching
    :prefix "SPC f"
    "f" 'find-file
    "F" 'find-file-read-only
-   "r" 'recentf-ido-find-file
    "R" 'revert-buffer
    "s" 'save-buffer
    "S" 'save-some-buffers
-   "b" 'ido-bookmark-jump
-   "B" 'bookmark-set
-   "d" 'dired-jump
-   "D" 'dired)
+   "B" 'bookmark-set)
 
   (general-define-key
    :states 'normal
@@ -187,17 +183,21 @@ some mappings around ido and buffer switching
 #+end_src
 **** dired
 #+begin_src emacs-lisp
-  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-  (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
-  
-  ;;some mappings for a more vim-like behaviour
-  (with-eval-after-load 'dired
-    (general-define-key
-    :states 'normal
-    :keymaps 'dired-mode-map
-    "v" 'dired-view-file
-    "h" 'dired-up-directory
-    "l" 'dired-find-file))
+  (use-package dired
+    :hook
+    (dired-mode . dired-hide-details-mode)
+
+    :config
+    (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
+
+    :general ('normal override :prefix "SPC f"
+                      "d" 'dired-jump
+                      "D" 'dired)
+
+             ('normal dired-mode-map
+                      "v" 'dired-view-file
+                      "h" 'dired-up-directory
+                      "l" 'dired-find-file))
 #+end_src
 *** misc
 **** quitting
@@ -243,69 +243,71 @@ some mappings around ido and buffer switching
 **** parenthesis
 ***** electric
 #+begin_src emacs-lisp
-  (electric-pair-mode t)
-  
-  (defun sk:electric-add-latex-parenthesis ()
-    (interactive)
-    (make-local-variable 'electric-pair-pairs)
-    (add-to-list 'electric-pair-pairs '(36 . 36))) ;; $$
+  (use-package electric
+    :demand t
+    :hook
+    ((org-mode . sk:electric-add-latex-parenthesis)
+     (LaTeX-mode . sk:electric-add-latex-parenthesis))
 
-  (add-hook 'org-mode-hook 'sk:electric-add-latex-parenthesis)
-  (add-hook 'LaTeX-mode-hook 'sk:electric-add-latex-parenthesis)
-  
-  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
-  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
+    :config
+    (electric-pair-mode t)
+
+    (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
+    (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
+
+    (defun sk:electric-add-latex-parenthesis ()
+      (interactive)
+      (make-local-variable 'electric-pair-pairs)
+      (add-to-list 'electric-pair-pairs '(36 . 36)))) ;; $$
 #+end_src
 ***** surround.vim
 #+begin_src emacs-lisp
   (use-package evil-surround
+    :after evil
     :defer 1
     :ensure t
-    :config (global-evil-surround-mode 1))
+    :config
+    (global-evil-surround-mode 1))
 #+end_src
 ***** color parenthesis
 #+begin_src emacs-lisp
   (show-paren-mode)
   (use-package rainbow-delimiters
-    :demand t
     :ensure t
-    :config
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+    :hook
+    (prog-mode . rainbow-delimiters-mode))
 #+end_src
 **** alignment
 #+begin_src emacs-lisp
   (use-package evil-lion
+    :after evil
     :ensure t
-    :defer 2)
-
-  (general-define-key
-   :states '(normal visual)
-   :keymap 'override
-   :prefix "g"
-   "l" 'evil-lion-left
-   "L" 'evil-lion-right)
+    :general ('(normal visual) override :prefix "g"
+              "l" 'evil-lion-left
+              "L" 'evil-lion-right))
 #+end_src
 *** inserting
 **** autocompletion
 ***** company
 #+begin_src emacs-lisp
   (use-package company
-    :demand t
     :ensure t
+    :general (company-active-map
+              "C-w" 'evil-delete-backward-word)
+
     :config
     (setq company-idle-delay 0.3)
     (setq company-minimum-prefix-length 2)
-    (add-hook 'after-init-hook 'company-tng-mode)
-    (add-hook 'after-init-hook 'global-company-mode))
 
-  (general-define-key
-   :keymaps 'company-active-map
-   "C-w" 'evil-delete-backward-word)
+    :hook
+    ((after-init . company-tng-mode)
+     (after-init . global-company-mode)))
 #+end_src
 ***** backends
 #+begin_src emacs-lisp
   (use-package company-math
     :after company
+    :demand t
     :ensure t
     :config
     (add-to-list 'company-backends 'company-math-symbols-unicode))
@@ -320,6 +322,7 @@ some mappings around ido and buffer switching
 
   (use-package yasnippet-snippets
     :after yasnippet
+    :demand t
     :ensure t
     :config
     (yas-reload-all))
@@ -328,30 +331,27 @@ some mappings around ido and buffer switching
 =M-y= shows a completion from all previously cut stuff
 #+begin_src emacs-lisp
   (use-package popup-kill-ring
-    :ensure t)
-
-  (general-define-key
-   :states 'insert
-   "M-y" 'popup-kill-ring)
+    :ensure t
+    :general ('insert
+    "M-y" 'popup-kill-ring))
 #+end_src
 *** visual aids
 **** spell checking
 #+begin_src emacs-lisp
-  (setq flyspell-issue-message-flag nil)
+  (use-package flyspell
+    :config
+    (setq flyspell-issue-message-flag nil)
 
-  (defun sk:flyspell-mode ()
-    (interactive)
-    (if (bound-and-true-p flyspell-mode)
-        (flyspell-mode 0)
-      (flyspell-mode 1)
-      (flyspell-buffer)))
+    (defun sk:flyspell-mode ()
+      (interactive)
+      (if (bound-and-true-p flyspell-mode)
+          (flyspell-mode 0)
+        (flyspell-mode 1)
+        (flyspell-buffer)))
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC t"
-   "s" 'sk:flyspell-mode
-   "S" 'ispell-change-dictionary)
+    :general ('normal override :prefix "SPC t"
+                      "s" 'sk:flyspell-mode
+                      "S" 'ispell-change-dictionary))
 #+end_src
 **** visual-fill-column-mode
 for more focused writing
@@ -359,14 +359,11 @@ for more focused writing
   (use-package visual-fill-column
     :ensure t
     :config
-    (setq visual-fill-column-center-text t))
+    (setq visual-fill-column-center-text t)
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC t"
-   "v" 'visual-fill-column-mode
-   "V" 'set-fill-column)
+    :general ('normal override :prefix "SPC t"
+                      "v" 'visual-fill-column-mode
+                      "V" 'set-fill-column))
 #+end_src
 **** text scale
 #+begin_src emacs-lisp
@@ -382,10 +379,10 @@ for more focused writing
 pretty symbols for eye candy when editing code
 #+begin_src emacs-lisp
   (use-package pretty-mode
-    :defer 1
+    :after python
     :ensure t
-    :config
-    (add-hook 'python-mode-hook 'turn-on-pretty-mode))
+    :hook
+    (python-mode . turn-on-pretty-mode))
 #+end_src
 **** mixed-pitch-mode
 #+begin_src emacs-lisp
@@ -396,13 +393,13 @@ pretty symbols for eye candy when editing code
   (use-package mixed-pitch
     :ensure t
     :config
-    (setq mixed-pitch-variable-pitch-cursor nil)
-    :hook ((org-mode TeX-mode) . mixed-pitch-mode)) ;; keep filled cursor
+    (setq mixed-pitch-variable-pitch-cursor nil) ;; keep filled cursor
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   "SPC t m" 'mixed-pitch-mode)
+    :hook
+    ((org-mode TeX-mode) . mixed-pitch-mode)
+
+    :general ('normal override
+                      "SPC t m" 'mixed-pitch-mode))
 #+end_src
 ** interaction
 *** general settings
@@ -420,276 +417,240 @@ pretty symbols for eye candy when editing code
 #+end_src
 *** ido
 replace default emacs menues with more interactive ones, e. g. when opening files
-**** general settings
-***** setup
+**** setup
 #+begin_src emacs-lisp
-  (setq ido-enable-flex-matching nil
-        ido-create-new-buffer 'always
-        ido-everywhere t)
-  (ido-mode 1)
-  
-  (defun sk:ido-custom-keys ()
-    (general-define-key
-     :keymaps 'ido-completion-map
-     "C-d" 'ido-kill-buffer-at-head
-     "C-n" 'ido-next-match
-     "C-j" 'ido-next-match
-     "C-k" 'ido-prev-match
-     "C-p" 'ido-prev-match))
+  (use-package ido
+    :demand t
+    :config
+    (defun sk:ido-custom-keys ()
+      (general-def ido-completion-map
+           "C-d" 'ido-kill-buffer-at-head
+           "C-n" 'ido-next-match
+           "C-j" 'ido-next-match
+           "C-k" 'ido-prev-match
+           "C-p" 'ido-prev-match))
 
-  (add-hook 'ido-setup-hook 'sk:ido-custom-keys)
+    (setq sk:ido-unignored-buffers '("*dashboard*"))
+    (defun sk:ido-ignore-buffers-fun (name)
+      "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
+      (and (string-match "^\*" name)
+          (not (member name sk:ido-unignored-buffers))))
+    (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
+
+    (defun recentf-ido-find-file ()
+      "Find a recent file using Ido."
+      (interactive)
+      (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+        (when file
+          (find-file file))))
+
+    (defun ido-bookmark-jump (bname)
+      "Switch to bookmark interactively using `ido'."
+      (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+      (bookmark-jump bname))
+    (add-hook 'after-init-hook 'bookmark-save)
+
+    (setq ido-enable-flex-matching nil
+          ido-create-new-buffer 'always
+          ido-everywhere t)
+    (ido-mode 1)
+
+    :hook
+    (ido-setup . sk:ido-custom-keys)
+
+    :general ('normal override
+                      "SPC b b" 'ido-switch-buffer
+                      "SPC f r" 'recentf-ido-find-file
+                      "SPC f b" 'ido-bookmark-jump))
 #+end_src
-***** ido-vertical
+**** ido-vertical
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
+    :after ido
     :demand t
     :ensure t
     :config
     (ido-vertical-mode 1))
 #+end_src
-***** smex
+**** smex
 wrapper around ido that improves =M-x=
 #+begin_src emacs-lisp
   (use-package smex
+    :after ido
     :demand t
     :ensure t
-    :config (smex-initialize))
+    :config
+    (smex-initialize)
 
-  (general-define-key
-   :keymaps 'override
-   "M-x" 'smex)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   "SPC x" 'smex)
-#+end_src
-**** more features
-***** ignoring buffers
-#+begin_src emacs-lisp
-  (setq sk:ido-unignored-buffers '("*dashboard*"))
-
-  (defun sk:ido-ignore-buffers-fun (name)
-    "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
-    (and (string-match "^\*" name)
-        (not (member name sk:ido-unignored-buffers))))
-
-  (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
-#+end_src
-***** recent files
-#+begin_src emacs-lisp
-  (defun recentf-ido-find-file ()
-    "Find a recent file using Ido."
-    (interactive)
-    (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
-      (when file
-        (find-file file))))
-#+end_src
-***** bookmarks
-#+begin_src emacs-lisp
-  (defun ido-bookmark-jump (bname)
-    "Switch to bookmark interactively using `ido'."
-    (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
-    (bookmark-jump bname))
-  (add-hook 'after-init-hook 'bookmark-save)
+    :general
+    ("M-x" 'smex)
+    ('normal override "SPC x" 'smex))
 #+end_src
 * local config
 exception: evil mode stuff
 ** julia
 #+begin_src emacs-lisp
   (use-package julia-mode
+    :defer t
+    :ensure t)
+#+end_src
+** jupyter
+#+begin_src emacs-lisp
+  (use-package jupyter
+    :defer t
     :ensure t)
 #+end_src
 ** org
 *** general settings
 #+begin_src emacs-lisp
-  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
+  (use-package org
+    :defer t
+    :config
+    (setq org-src-window-setup 'current-window) ;; don't spread across two windows
 
-  ;; section numbering & indentation
-  (setq org-hide-leading-stars t)
-  (setq org-num-max-level 4)
-  (add-hook 'org-mode-hook 'org-num-mode)
-  (add-hook 'org-mode-hook 'org-indent-mode)
+    ;; section numbering & indentation
+    (setq org-hide-leading-stars t)
+    (setq org-num-max-level 4)
+    (add-hook 'org-mode-hook 'org-num-mode)
+    (add-hook 'org-mode-hook 'org-indent-mode)
 
-  ;; beautify fonts & font effects
-  (setq org-hide-emphasis-markers t
-        org-fontify-whole-heading-line t
-        org-fontify-done-headline t
-        org-fontify-quote-and-verse-blocks t)
+    ;; beautify fonts & font effects
+    (setq org-hide-emphasis-markers t
+          org-fontify-whole-heading-line t
+          org-fontify-done-headline t
+          org-fontify-quote-and-verse-blocks t)
 
-  ;; replace the some default bullets / list item styles
-  ;;(font-lock-add-keywords 'org-mode
-  ;;                        '(("^ *\\([*]\\)+ " (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "◖"))))   ;; "***" → "•••"
-  ;;                          ("^ *\\([-]\\) "  (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "–"))))   ;; "-"   → "–"
-  ;;                          ("^ *\\([+]\\) "  (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "→")))))) ;; "+"   → "→"
+    (setq org-list-demote-modify-bullet
+          '(("+" . "-") ("-" . "+")
+            ("1." . "-") ("1)" . "-")))
+
+    ;;(setq org-src-tab-acts-natively t)
+    (setq org-confirm-babel-evaluate nil)
+    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+
+    ;; latex preview options
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+    (setq org-latex-packages-alist '())
+    (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     (append org-babel-load-languages
+             '((jupyter . t))))
+
+    :general ('normal
+              "SPC o e" 'org-edit-src-exit)
+
+             ('normal org-mode-map
+                      "RET" 'org-ctrl-c-ctrl-c)
+
+             ('normal org-mode-map :prefix "SPC o"
+                      "e" 'org-edit-special
+                      "o" 'org-ctrl-c-minus
+                      "-" 'org-ctrl-c-minus
+                      "i" 'org-ctrl-c-minus
+                      "b" 'org-ctrl-c-minus
+                      "E" 'org-babel-execute-buffer
+                      "n" 'org-num-mode
+                      "TAB" 'org-table-toggle-column-width
+                      "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
+                      "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
+                      "h" 'org-toggle-heading
+                      "t" 'org-todo
+                      "X" 'org-export-dispatch
+                      "x" '(lambda () (interactive) (org-export-dispatch '(4))))
+
+             ('normal org-mode-map :prefix "SPC p"
+                      "p" 'org-latex-preview
+                      "P" '(lambda () (interactive) (org-latex-preview '(4)))
+                      "b" '(lambda () (interactive) (org-latex-preview '(16)))
+                      "B" '(lambda () (interactive) (org-latex-preview '(64)))
+                      "I" 'org-toggle-inline-images
+                      "i" 'org-display-inline-images))
+#+end_src
+*** superstar
+#+begin_src emacs-lisp
   (use-package org-superstar
     :after org
-    :demand t
     :ensure t
     :config
     (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧")
           org-superstar-item-bullet-alist '((42 . 8226) (43 . "→") (45 . 8211)))
-    (add-hook 'org-mode-hook 'org-superstar-mode))
 
-  ;; automatically change bullet on indent / dedent
-  (setq org-list-demote-modify-bullet
-        '(("+" . "-") ("-" . "+")
-          ("1." . "-") ("1)" . "-")))
-#+end_src
-*** org-babel
-**** setup
-#+begin_src emacs-lisp
-  (setq org-src-tab-acts-natively t
-        org-confirm-babel-evaluate nil)
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
-
-  ;; latex preview options
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-  (setq org-latex-packages-alist '())
-  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-
-  (general-define-key
-   :states 'normal
-   "SPC o e" 'org-edit-src-exit)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   "SPC o e" 'org-edit-special)
-#+end_src
-**** languages
-#+begin_src emacs-lisp
-  (use-package jupyter
-    :ensure t)
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   (append org-babel-load-languages
-           '((jupyter . t))))
+    :hook
+    (org-mode . org-superstar-mode))
 #+end_src
 *** keybinds
-- =C-c C-c=
-  - evaluate src-block
-  - numbered list reordering
-  - table realignment
-  - toggle checkboxes
-- =C-c minus=
-  - table insert hline
-  - toggle item
-  - cycle list bullet
 #+begin_src emacs-lisp
   (use-package evil-org
-    :defer 1
+    :after org
     :ensure t
-    :config
-    (add-hook 'org-mode-hook 'evil-org-mode))
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   "RET" 'org-ctrl-c-ctrl-c)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   :prefix "SPC o"
-   "o" 'org-ctrl-c-minus
-   "-" 'org-ctrl-c-minus
-   "i" 'org-ctrl-c-minus
-   "b" 'org-ctrl-c-minus
-   "E" 'org-babel-execute-buffer
-   "n" 'org-num-mode
-   "TAB" 'org-table-toggle-column-width
-   "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
-   "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
-   "h" 'org-toggle-heading
-   "t" 'org-todo
-   "X" 'org-export-dispatch
-   "x" '(lambda () (interactive) (org-export-dispatch '(4))))
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'org-mode-map
-   :prefix "SPC p"
-   "p" 'org-latex-preview
-   "P" '(lambda () (interactive) (org-latex-preview '(4)))
-   "b" '(lambda () (interactive) (org-latex-preview '(16)))
-   "B" '(lambda () (interactive) (org-latex-preview '(64)))
-   "I" 'org-toggle-inline-images
-   "i" 'org-display-inline-images)
+    :hook
+    (org-mode . evil-org-mode))
 #+end_src
 ** auctex
-*** general settings
 #+begin_src emacs-lisp
   (use-package auctex
+    :defer t
     :ensure t
     :config
     (setq TeX-auto-save t
-          TeX-parse-self t))
-          
-  (setq TeX-view-program-selection '((output-pdf "Zathura")))
-  (setq preview-auto-cache-preamble t)
-  
-  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
-  (setq-default preview-scale-function 1.5)
-  
-  (setq LaTeX-math-abbrev-prefix "'")
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+          TeX-parse-self t)
 
+    (setq TeX-view-program-selection '((output-pdf "Zathura")))
+    (setq preview-auto-cache-preamble t)
+
+    (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+    (setq-default preview-scale-function 1.5)
+
+    (setq LaTeX-math-abbrev-prefix "'")
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+    :general ('normal TeX-mode-map :prefix "SPC l"
+                      "s" 'LaTeX-section           ;; insert section
+                      "e" 'LaTeX-environment       ;; insert environment
+                      "f" 'LaTeX-fill-environment  ;; auto-indent
+                      "l" 'TeX-command-master
+                      "L" 'TeX-command-run-all)
+
+             ('normal TeX-mode-map :prefix "SPC p"
+                      "p" 'preview-at-point
+                      "P" 'preview-clearout-at-point
+                      "b" 'preview-buffer
+                      "B" 'preview-clearout-buffer))
+
+  ;; not in use-package because of org-mode latex blocks
   (setq texmathp-tex-commands '())
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on
                                               "IEEEeqnarray*" env-on)))
 #+end_src
-*** keybinds
-#+begin_src emacs-lisp
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix "SPC l"
-   "s" 'LaTeX-section           ;; insert section
-   "e" 'LaTeX-environment       ;; insert environment
-   "f" 'LaTeX-fill-environment  ;; auto-indent
-   "l" 'TeX-command-master
-   "L" 'TeX-command-run-all)
-   
-  (general-define-key
-   :states 'normal
-   :keymaps 'LaTeX-mode-map
-   :prefix "SPC p"
-   "p" 'preview-at-point
-   "P" 'preview-clearout-at-point
-   "b" 'preview-buffer
-   "B" 'preview-clearout-buffer)
-#+end_src
 ** docview
 #+begin_src emacs-lisp
-  (setq doc-view-continuous t)
-  
-  (defun sk:doc-view-goto-page (count)
-    "Goto page COUNT
-  if COUNT isn't supplied, go to the last page"
-      (interactive "P")
-      (if count
-          (doc-view-goto-page count)
-        (doc-view-last-page)))
-        
-  (general-define-key
-   :states 'normal
-   :keymaps 'doc-view-mode-map
-   "G" 'sk:doc-view-goto-page)
+  (use-package doc-view
+    :defer t
+    :config
+    (setq doc-view-continuous t)
+
+    (defun sk:doc-view-goto-page (count)
+      "Goto page COUNT
+    if COUNT isn't supplied, go to the last page"
+        (interactive "P")
+        (if count
+            (doc-view-goto-page count)
+          (doc-view-last-page)))
+
+    :general ('normal doc-view-mode-map
+                      "G" 'sk:doc-view-goto-page))
 #+end_src
 ** magit
 #+begin_src emacs-lisp
   (use-package magit
-    :ensure t)
-    
-  (add-hook 'git-commit-mode-hook 'evil-insert-state)
-    
-  (general-define-key
-   :states 'normal
-   :keymaps 'override
-   :prefix "SPC"
-   "g" 'magit-file-dispatch)
+    :ensure t
+    :hook
+    (git-commit-mode . evil-insert-state)
+
+    :general ('normal override
+                      "SPC g" 'magit-file-dispatch))
 #+end_src
 * appearance
 ** general settings
@@ -716,9 +677,10 @@ use =M-x customize-themes= to change theme settings
   (use-package doom-themes
     :demand t
     :ensure t
-    :config (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+    :config
+    (global-hl-line-mode)
+    (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
-  (global-hl-line-mode)
 #+end_src
 ** modeline
 use doom-modeline
@@ -727,11 +689,11 @@ use doom-modeline
     :demand t
     :ensure t
     :config
-    (doom-modeline-mode 't))
+    (doom-modeline-mode 't)
 
-  ;; needs to be set explicitly when running in server mode
-  (setq doom-modeline-icon t
-        doom-modeline-buffer-encoding nil)
+    ;; needs to be set explicitly when running in server mode
+    (setq doom-modeline-icon t
+          doom-modeline-buffer-encoding nil))
 #+end_src
 ** startup screen
 #+begin_src emacs-lisp
