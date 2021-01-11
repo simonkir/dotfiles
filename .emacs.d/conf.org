@@ -564,21 +564,23 @@ exception: evil mode stuff
 #+end_src
 ** auctex
 #+begin_src emacs-lisp
-  (use-package auctex
+  (use-package tex
+    :ensure auctex
     :defer t
-    :ensure t
     :config
     (setq TeX-auto-save t
-          TeX-parse-self t)
+          TeX-parse-self t
 
-    (setq TeX-view-program-selection '((output-pdf "Zathura")))
-    (setq preview-auto-cache-preamble t)
-
-    (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
+          TeX-view-program-selection '((output-pdf "Zathura"))
+          preview-auto-cache-preamble t
+          
+          LaTeX-math-abbrev-prefix "#")
+    
     (setq-default preview-scale-function 1.5)
 
-    (setq LaTeX-math-abbrev-prefix "'")
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    :hook
+    (LaTeX-mode . LaTeX-math-mode)
+    (LaTeX-mode . prettify-symbols-mode)
 
     :general ('normal TeX-mode-map :prefix "SPC l"
                       "s" 'LaTeX-section           ;; insert section
