@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: plot 
+# key: plot
+# --
+plot(title="$1", framestyle=${2::zerolines}, size=${3:(1280, 720)}
+     xlabel="$4", ylabel="$5", minorgrid=${6:true}, minorticks=${7:2})$0

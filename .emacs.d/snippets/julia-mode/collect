@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: collect
+# key: collect
+# --
+collect(${1:0}:${2:0.02}:${3:0})$0

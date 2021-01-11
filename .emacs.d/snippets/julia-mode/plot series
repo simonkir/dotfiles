@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: plot series
+# key: plot!
+# --
+plot!(${1:t_vec, y_vec}, color=${3:C0}, label="\\\$$4\\\$", w=${5:1.5})$0
