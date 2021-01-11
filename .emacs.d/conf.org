@@ -130,7 +130,7 @@ replace default emacs menues with more interactive ones, e. g. when opening file
     :hook
     (ido-setup . sk:ido-custom-keys)
 
-    :general ('normal override
+    :general ('normal 'override
                       "SPC b b" 'ido-switch-buffer
                       "SPC f b" 'ido-bookmark-jump))
 #+end_src
@@ -155,7 +155,7 @@ wrapper around ido that improves =M-x=
 
     :general
     ("M-x" 'smex)
-    ('normal override "SPC x" 'smex))
+    ('normal 'override "SPC x" 'smex))
 #+end_src
 ** navigation
 *** within a window
@@ -164,14 +164,14 @@ wrapper around ido that improves =M-x=
   (setq scroll-conservatively 100)
   (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
   
-  (general-def 'normal override
+  (general-def 'normal 'override
    "SPC t f" 'follow-mode)
 #+end_src
 **** avy
 #+begin_src emacs-lisp
   (use-package avy
     :ensure t
-    :general ('(normal visual) override :prefix "SPC a"
+    :general ('(normal visual) 'override :prefix "SPC a"
               "a" 'avy-goto-word-or-subword-1
               "c" 'avy-goto-char-timer
               "w" 'avy-goto-word-or-subword-1
@@ -194,7 +194,7 @@ wrapper around ido that improves =M-x=
     (balance-windows)
     (other-window 1))
 
-  (general-def 'normal override :prefix "SPC w"
+  (general-def 'normal 'override :prefix "SPC w"
    "=" 'balance-windows
    "o" 'delete-other-windows
    "1" 'delete-other-windows
@@ -209,7 +209,7 @@ wrapper around ido that improves =M-x=
    "c" 'evil-window-delete
    "C" 'kill-buffer-and-window)
 
-  (general-def 'normal override
+  (general-def 'normal 'override
    "SPC ," 'evil-window-next)
 #+end_src
 *** buffers
@@ -219,18 +219,18 @@ some mappings around ido and buffer switching
     (interactive)
     (kill-buffer (current-buffer)))
 
-  (general-def 'normal override :prefix "SPC b"
+  (general-def 'normal 'override :prefix "SPC b"
    "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
    
   (use-package ibuffer
-    :general ('normal override "SPC b B" 'ibuffer))
+    :general ('normal 'override "SPC b B" 'ibuffer))
 #+end_src
 *** files
 **** visiting / saving
 #+begin_src emacs-lisp
-  (general-def 'normal override :prefix "SPC f"
+  (general-def 'normal 'override :prefix "SPC f"
    "f" 'find-file
    "F" 'find-file-read-only
    "R" 'revert-buffer
@@ -238,7 +238,7 @@ some mappings around ido and buffer switching
    "S" 'save-some-buffers
    "B" 'bookmark-set)
 
-  (general-def 'normal override
+  (general-def 'normal 'override
    "SPC s" 'save-buffer)
 #+end_src
 **** recentf
@@ -249,7 +249,7 @@ some mappings around ido and buffer switching
     (recentf-mode t)
     (setq recentf-max-saved-items 100)
     
-    :general ('normal override
+    :general ('normal 'override
                       "SPC f r" 'recentf-ido-find-file))
 #+end_src
 **** dired
@@ -261,7 +261,7 @@ some mappings around ido and buffer switching
     :config
     (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
 
-    :general ('normal override :prefix "SPC f"
+    :general ('normal 'override :prefix "SPC f"
                       "d" 'dired-jump
                       "D" 'dired)
 
@@ -273,14 +273,14 @@ some mappings around ido and buffer switching
 *** misc
 **** quitting
 #+begin_src emacs-lisp
-  (general-def 'normal override :prefix "SPC"
+  (general-def 'normal 'override :prefix "SPC"
    "ESC" 'keyboard-escape-quit
    "q" 'save-buffers-kill-terminal
    "Q" 'save-buffers-kill-emacs)
 #+end_src
 **** help mode
 #+begin_src emacs-lisp
-  (general-def 'normal override :prefix "SPC h"
+  (general-def 'normal 'override :prefix "SPC h"
    "f" 'describe-function
    "v" 'describe-variable
    "k" 'describe-key)
@@ -295,7 +295,7 @@ some mappings around ido and buffer switching
     (interactive)
     (org-babel-load-file (expand-file-name "~/.emacs.d/conf.org")))
     
-  (general-def 'normal override :prefix "SPC c"
+  (general-def 'normal 'override :prefix "SPC c"
    "r" 'config-reload
    "v" 'config-visit
    "e" 'config-visit)
@@ -344,7 +344,7 @@ some mappings around ido and buffer switching
   (use-package evil-lion
     :after evil
     :ensure t
-    :general ('(normal visual) override :prefix "g"
+    :general ('(normal visual) 'override :prefix "g"
               "l" 'evil-lion-left
               "L" 'evil-lion-right))
 #+end_src
@@ -411,7 +411,7 @@ some mappings around ido and buffer switching
         (flyspell-mode 1)
         (flyspell-buffer)))
 
-    :general ('normal override :prefix "SPC t"
+    :general ('normal 'override :prefix "SPC t"
                       "s" 'sk:flyspell-mode
                       "S" 'ispell-change-dictionary))
 #+end_src
@@ -423,13 +423,13 @@ for more focused writing
     :config
     (setq visual-fill-column-center-text t)
 
-    :general ('normal override :prefix "SPC t"
+    :general ('normal 'override :prefix "SPC t"
                       "v" 'visual-fill-column-mode
                       "V" 'set-fill-column))
 #+end_src
 **** text scale
 #+begin_src emacs-lisp
-  (general-def 'normal override :prefix "SPC"
+  (general-def 'normal 'override :prefix "SPC"
    "0" 'text-scale-mode
    "+" 'text-scale-adjust
    "-" 'text-scale-adjust)
@@ -457,7 +457,7 @@ pretty symbols for eye candy when editing code
     :hook
     ((org-mode TeX-mode) . mixed-pitch-mode)
 
-    :general ('normal override
+    :general ('normal 'override
                       "SPC t m" 'mixed-pitch-mode))
 #+end_src
 * local config
@@ -515,7 +515,7 @@ exception: evil mode stuff
     :general ('normal
               "SPC e" 'org-edit-src-exit)
               
-             ('normal
+             ('normal org-mode-map
               "SPC e" 'org-edit-special)
 
              ('normal org-mode-map
@@ -627,7 +627,7 @@ exception: evil mode stuff
     :hook
     (git-commit-mode . evil-insert-state)
 
-    :general ('normal override
+    :general ('normal 'override
                       "SPC g" 'magit-file-dispatch))
 #+end_src
 * appearance
