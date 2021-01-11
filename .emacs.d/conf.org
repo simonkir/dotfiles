@@ -210,7 +210,7 @@ wrapper around ido that improves =M-x=
    "C" 'kill-buffer-and-window)
 
   (general-def 'normal override
-   "SPC SPC" 'evil-window-next)
+   "SPC ," 'evil-window-next)
 #+end_src
 *** buffers
 some mappings around ido and buffer switching
@@ -513,13 +513,15 @@ exception: evil mode stuff
              '((jupyter . t))))
 
     :general ('normal
-              "SPC o e" 'org-edit-src-exit)
+              "SPC e" 'org-edit-src-exit)
+              
+             ('normal
+              "SPC e" 'org-edit-special)
 
              ('normal org-mode-map
                       "RET" 'org-ctrl-c-ctrl-c)
 
-             ('normal org-mode-map :prefix "SPC o"
-                      "e" 'org-edit-special
+             ('normal org-mode-map :prefix "SPC SPC"
                       "o" 'org-ctrl-c-minus
                       "-" 'org-ctrl-c-minus
                       "i" 'org-ctrl-c-minus
@@ -582,12 +584,12 @@ exception: evil mode stuff
     (LaTeX-mode . LaTeX-math-mode)
     (LaTeX-mode . prettify-symbols-mode)
 
-    :general ('normal TeX-mode-map :prefix "SPC l"
-                      "s" 'LaTeX-section           ;; insert section
-                      "e" 'LaTeX-environment       ;; insert environment
-                      "f" 'LaTeX-fill-environment  ;; auto-indent
-                      "l" 'TeX-command-master
-                      "L" 'TeX-command-run-all)
+    :general ('normal TeX-mode-map :prefix "SPC SPC"
+                      "s"   'LaTeX-section           ;; insert section
+                      "e"   'LaTeX-environment       ;; insert environment
+                      "TAB" 'LaTeX-fill-environment  ;; auto-indent
+                      "l"   'TeX-command-master
+                      "L"   'TeX-command-run-all)
 
              ('normal TeX-mode-map :prefix "SPC p"
                       "p" 'preview-at-point
