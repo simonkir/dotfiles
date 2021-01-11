@@ -73,6 +73,90 @@ evil config need to be loaded before everything else because of variable definit
     :config
     (evil-collection-init))
 #+end_src
+** interaction
+*** general settings
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no 'y-or-n-p)
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+*** which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :defer 4
+    :ensure t
+    :config
+    (which-key-mode))
+#+end_src
+*** ido
+replace default emacs menues with more interactive ones, e. g. when opening files
+**** setup
+#+begin_src emacs-lisp
+  (use-package ido
+    :demand t
+    :config
+    (defun sk:ido-custom-keys ()
+      (general-def ido-completion-map
+           "C-d" 'ido-kill-buffer-at-head
+           "C-n" 'ido-next-match
+           "C-j" 'ido-next-match
+           "C-k" 'ido-prev-match
+           "C-p" 'ido-prev-match))
+
+    (setq sk:ido-unignored-buffers '("*dashboard*"))
+    (defun sk:ido-ignore-buffers-fun (name)
+      "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
+      (and (string-match "^\*" name)
+          (not (member name sk:ido-unignored-buffers))))
+    (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
+
+    (defun recentf-ido-find-file ()
+      "Find a recent file using Ido."
+      (interactive)
+      (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+        (when file
+          (find-file file))))
+
+    (defun ido-bookmark-jump (bname)
+      "Switch to bookmark interactively using `ido'."
+      (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+      (bookmark-jump bname))
+    (add-hook 'after-init-hook 'bookmark-save)
+
+    (setq ido-enable-flex-matching nil
+          ido-create-new-buffer 'always
+          ido-everywhere t)
+    (ido-mode 1)
+
+    :hook
+    (ido-setup . sk:ido-custom-keys)
+
+    :general ('normal override
+                      "SPC b b" 'ido-switch-buffer
+                      "SPC f b" 'ido-bookmark-jump))
+#+end_src
+**** ido-vertical
+#+begin_src emacs-lisp
+  (use-package ido-vertical-mode
+    :after ido
+    :demand t
+    :ensure t
+    :config
+    (ido-vertical-mode 1))
+#+end_src
+**** smex
+wrapper around ido that improves =M-x=
+#+begin_src emacs-lisp
+  (use-package smex
+    :after ido
+    :demand t
+    :ensure t
+    :config
+    (smex-initialize)
+
+    :general
+    ("M-x" 'smex)
+    ('normal override "SPC x" 'smex))
+#+end_src
 ** navigation
 *** within a window
 **** scrolling
@@ -156,6 +240,17 @@ some mappings around ido and buffer switching
 
   (general-def 'normal override
    "SPC s" 'save-buffer)
+#+end_src
+**** recentf
+#+begin_src emacs-lisp
+  (use-package recentf
+    :defer 5
+    :config
+    (recentf-mode t)
+    (setq recentf-max-saved-items 100)
+    
+    :general ('normal override
+                      "SPC f r" 'recentf-ido-find-file))
 #+end_src
 **** dired
 #+begin_src emacs-lisp
@@ -364,91 +459,6 @@ pretty symbols for eye candy when editing code
 
     :general ('normal override
                       "SPC t m" 'mixed-pitch-mode))
-#+end_src
-** interaction
-*** general settings
-#+begin_src emacs-lisp
-  (defalias 'yes-or-no 'y-or-n-p)
-  (defalias 'yes-or-no-p 'y-or-n-p)
-#+end_src
-*** which key
-#+begin_src emacs-lisp
-  (use-package which-key
-    :defer 4
-    :ensure t
-    :config
-    (which-key-mode))
-#+end_src
-*** ido
-replace default emacs menues with more interactive ones, e. g. when opening files
-**** setup
-#+begin_src emacs-lisp
-  (use-package ido
-    :demand t
-    :config
-    (defun sk:ido-custom-keys ()
-      (general-def ido-completion-map
-           "C-d" 'ido-kill-buffer-at-head
-           "C-n" 'ido-next-match
-           "C-j" 'ido-next-match
-           "C-k" 'ido-prev-match
-           "C-p" 'ido-prev-match))
-
-    (setq sk:ido-unignored-buffers '("*dashboard*"))
-    (defun sk:ido-ignore-buffers-fun (name)
-      "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
-      (and (string-match "^\*" name)
-          (not (member name sk:ido-unignored-buffers))))
-    (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
-
-    (defun recentf-ido-find-file ()
-      "Find a recent file using Ido."
-      (interactive)
-      (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
-        (when file
-          (find-file file))))
-
-    (defun ido-bookmark-jump (bname)
-      "Switch to bookmark interactively using `ido'."
-      (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
-      (bookmark-jump bname))
-    (add-hook 'after-init-hook 'bookmark-save)
-
-    (setq ido-enable-flex-matching nil
-          ido-create-new-buffer 'always
-          ido-everywhere t)
-    (ido-mode 1)
-
-    :hook
-    (ido-setup . sk:ido-custom-keys)
-
-    :general ('normal override
-                      "SPC b b" 'ido-switch-buffer
-                      "SPC f r" 'recentf-ido-find-file
-                      "SPC f b" 'ido-bookmark-jump))
-#+end_src
-**** ido-vertical
-#+begin_src emacs-lisp
-  (use-package ido-vertical-mode
-    :after ido
-    :demand t
-    :ensure t
-    :config
-    (ido-vertical-mode 1))
-#+end_src
-**** smex
-wrapper around ido that improves =M-x=
-#+begin_src emacs-lisp
-  (use-package smex
-    :after ido
-    :demand t
-    :ensure t
-    :config
-    (smex-initialize)
-
-    :general
-    ("M-x" 'smex)
-    ('normal override "SPC x" 'smex))
 #+end_src
 * local config
 exception: evil mode stuff
