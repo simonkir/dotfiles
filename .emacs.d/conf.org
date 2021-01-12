@@ -569,16 +569,21 @@ exception: evil mode stuff
   (use-package tex
     :ensure auctex
     :defer t
-    :config
-    (setq TeX-auto-save t
-          TeX-parse-self t
 
-          TeX-view-program-selection '((output-pdf "Zathura"))
-          preview-auto-cache-preamble t
-          
-          LaTeX-math-abbrev-prefix "#")
-    
-    (setq-default preview-scale-function 1.5)
+    :custom
+    (TeX-auto-save t)
+    (TeX-parse-self t)
+
+    (LaTeX-math-abbrev-prefix "#")
+
+    (TeX-view-program-selection '((output-pdf "PDF Tools")))
+    (TeX-source-correlate-mode t)
+
+    (preview-scale-function 1.5)
+    (preview-auto-cache-preamble t)
+
+    :config
+    (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
     :hook
     (LaTeX-mode . LaTeX-math-mode)
@@ -601,6 +606,38 @@ exception: evil mode stuff
   (setq texmathp-tex-commands '())
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on
                                               "IEEEeqnarray*" env-on)))
+#+end_src
+** pdf-tools
+#+begin_src emacs-lisp
+  (use-package pdf-tools
+    :requires evil-collection
+    :ensure t
+    :mode ("\\.pdf\\'" . pdf-view-mode)
+
+    :custom
+    (pdf-view-resize-factor 1.1)
+    (pdf-view-display-size 'fit-page)
+    (pdf-annot-activate-created-annotations t)
+
+    :config
+    (pdf-tools-install)
+
+    (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"
+      "w" 'pdf-annot-add-squiggly-markup-annotation
+      "h" 'pdf-annot-add-highlight-markup-annotation
+      "s" 'pdf-annot-add-strikethrough-markup-annotation
+      "u" 'pdf-annot-add-underline-markup-annotation
+      "H" 'pdf-annot-add-markup-annotation)
+
+    (general-def 'normal pdf-view-mode-map "SPC" nil)
+    (general-def 'normal pdf-view-mode-map :prefix "SPC SPC"
+      "t" 'pdf-annot-add-text-annotation
+      "d" 'pdf-annot-delete)
+
+    :hook
+    (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
+    (text-mode     . evil-insert-state))
+
 #+end_src
 ** docview
 #+begin_src emacs-lisp
