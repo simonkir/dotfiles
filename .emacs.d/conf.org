@@ -131,8 +131,7 @@ replace default emacs menues with more interactive ones, e. g. when opening file
     (ido-mode 1)
 
     (general-def 'normal 'override
-      "SPC b b" 'ido-switch-buffer
-      "SPC f b" 'ido-bookmark-jump))
+      "SPC b b" 'ido-switch-buffer))
 #+end_src
 **** ido-vertical
 #+begin_src emacs-lisp
@@ -235,22 +234,37 @@ some mappings around ido and buffer switching
    "F" 'find-file-read-only
    "R" 'revert-buffer
    "s" 'save-buffer
-   "S" 'save-some-buffers
-   "B" 'bookmark-set)
+   "S" 'save-some-buffers)
 
   (general-def 'normal 'override
    "SPC s" 'save-buffer)
 #+end_src
+**** bookmarks
+#+begin_src emacs-lisp
+  (use-package bookmark
+    :demand t
+
+    :config
+    (general-def 'normal 'override
+      "SPC f b" 'ido-bookmark-jump)
+
+    (general-def 'normal 'override :prefix "SPC f B"
+      "B" 'edit-bookmarks
+      "d" 'bookmark-delete
+      "r" 'bookmark-rename
+      "s" 'bookmark-set))
+#+end_src
 **** recentf
 #+begin_src emacs-lisp
   (use-package recentf
-    :defer 5
+    :demand t
 
     :custom
     (recentf-max-saved-items 100)
 
     :config
     (recentf-mode t)
+    (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
     (general-def 'normal 'override "SPC f r" 'recentf-ido-find-file))
 #+end_src
 **** dired
@@ -558,7 +572,7 @@ exception: evil mode stuff
     :ensure t
     :custom
     (org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
-    (org-superstar-item-bullet-alist '(("*" . "•") ("+" . "→") ("-" . "–")))
+    (org-superstar-item-bullet-alist '((42 . "•") (43 . "→") (45 . "–")))
 
     :hook
     (org-mode . org-superstar-mode))
