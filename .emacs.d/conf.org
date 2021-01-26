@@ -600,6 +600,7 @@ exception: evil mode stuff
     :custom
     (TeX-auto-save  t)
     (TeX-parse-self t)
+    (TeX-error-overview-open-after-TeX-run t)
 
     (LaTeX-math-abbrev-prefix "#")
 
@@ -611,7 +612,7 @@ exception: evil mode stuff
 
     :config
     (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
-    
+
     (general-def 'normal TeX-mode-map :prefix "SPC SPC"
       "s"   'LaTeX-section            ;; insert section
       "e"   'LaTeX-environment        ;; insert environment
@@ -620,10 +621,10 @@ exception: evil mode stuff
       "L"   'TeX-command-run-all)
 
     (general-def 'normal TeX-mode-map :prefix "SPC p"
-        "p" 'preview-at-point
-        "P" 'preview-clearout-at-point
-        "b" 'preview-buffer
-        "B" 'preview-clearout-buffer)
+      "p" 'preview-at-point
+      "P" 'preview-clearout-at-point
+      "b" 'preview-buffer
+      "B" 'preview-clearout-buffer)
 
     :hook
     (LaTeX-mode . LaTeX-math-mode)
