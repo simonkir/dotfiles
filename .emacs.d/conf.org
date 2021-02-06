@@ -236,6 +236,9 @@ some mappings around ido and buffer switching
    "s" 'save-buffer
    "S" 'save-some-buffers)
 
+  (general-def 'normal
+    "g r" 'revert-buffer)
+
   (general-def 'normal 'override
    "SPC s" 'save-buffer)
 #+end_src
@@ -252,6 +255,7 @@ some mappings around ido and buffer switching
       "B" 'edit-bookmarks
       "d" 'bookmark-delete
       "r" 'bookmark-rename
+      "R" 'bookmark-relocate
       "s" 'bookmark-set))
 #+end_src
 **** recentf
@@ -271,7 +275,7 @@ some mappings around ido and buffer switching
 #+begin_src emacs-lisp
   (use-package dired
     :custom
-    (dired-dwin-target t) ;; when two windows are next to each other, move / copy files between them
+    (dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
 
     :config
     (add-hook 'dired-mode-hook 'dired-hide-details-mode)
@@ -446,7 +450,7 @@ for more focused writing
 **** text scale
 #+begin_src emacs-lisp
   (general-def 'normal 'override :prefix "SPC"
-   "0" 'text-scale-mode
+   "0" 'text-scale-adjust
    "+" 'text-scale-adjust
    "-" 'text-scale-adjust)
 #+end_src
@@ -646,6 +650,9 @@ exception: evil mode stuff
     :config
     (pdf-tools-install)
 
+    (general-def 'normal pdf-view-mode-map
+      "=" 'pdf-view-fit-page-to-window)
+
     (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"
       "w" 'pdf-annot-add-squiggly-markup-annotation
       "h" 'pdf-annot-add-highlight-markup-annotation
@@ -661,7 +668,6 @@ exception: evil mode stuff
     :hook
     (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
     (text-mode     . evil-insert-state))
-
 #+end_src
 ** docview
 #+begin_src emacs-lisp
