@@ -521,7 +521,10 @@ exception: evil mode stuff
     (org-confirm-babel-evaluate nil)
 
     ;; latex preview options
-    (org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+    (org-preview-latex-scale-increment 0.2)
+    (org-preview-latex-scale 1.5)
+    (org-preview-latex-default-scale org-preview-latex-scale)
+    (org-format-latex-options (plist-put org-format-latex-options :scale org-preview-latex-default-scale))
     (org-latex-packages-alist '())
 
     :config
@@ -534,6 +537,30 @@ exception: evil mode stuff
      'org-babel-load-languages
      (append org-babel-load-languages
              '((jupyter . t))))
+
+    (defun org-preview-latex-scale--aftermath ()
+      (plist-put org-format-latex-options :scale org-preview-latex-scale)
+      (message "%s" (concat "latex preview scale set to " (number-to-string org-preview-latex-scale))))
+
+    (defun org-preview-latex-scale-increase ()
+      (interactive)
+      (setq org-preview-latex-scale (+ org-preview-latex-scale org-preview-latex-scale-increment))
+      (org-preview-latex-scale--aftermath))
+
+    (defun org-preview-latex-scale-decrease ()
+      (interactive)
+      (setq org-preview-latex-scale (- org-preview-latex-scale org-preview-latex-scale-increment))
+      (org-preview-latex-scale--aftermath))
+
+    (defun org-preview-latex-scale-set (new-scale)
+      (interactive "nnew preview scale: ")
+      (setq org-preview-latex-scale new-scale)
+      (org-preview-latex-scale--aftermath))
+
+    (defun org-preview-latex-scale-reset ()
+      (interactive)
+      (setq org-preview-latex-scale org-preview-latex-default-scale)
+      (org-preview-latex-scale--aftermath))
 
     (general-def 'normal org-mode-map
       "RET" 'org-ctrl-c-ctrl-c)
@@ -562,6 +589,10 @@ exception: evil mode stuff
       "P" '(lambda () (interactive) (org-latex-preview '(4)))
       "b" '(lambda () (interactive) (org-latex-preview '(16)))
       "B" '(lambda () (interactive) (org-latex-preview '(64)))
+      "+" 'org-preview-latex-scale-increase
+      "-" 'org-preview-latex-scale-decrease
+      "0" 'org-preview-latex-scale-reset
+      "s" 'org-preview-latex-scale-set
 
       "I" 'org-toggle-inline-images
       "i" 'org-display-inline-images)
