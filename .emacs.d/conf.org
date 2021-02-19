@@ -525,12 +525,12 @@ exception: evil mode stuff
     (org-preview-latex-scale 1.5)
     (org-preview-latex-default-scale org-preview-latex-scale)
     (org-format-latex-options (plist-put org-format-latex-options :scale org-preview-latex-default-scale))
-    (org-latex-packages-alist '())
 
     :config
     (add-hook    'org-mode-hook                'org-num-mode)
     (add-hook    'org-mode-hook                'org-indent-mode)
     (add-hook    'org-babel-after-execute-hook 'org-display-inline-images)
+
     (add-to-list 'org-latex-packages-alist     '("" "IEEEtrantools" t))
 
     (org-babel-do-load-languages
@@ -563,7 +563,8 @@ exception: evil mode stuff
       (org-preview-latex-scale--aftermath))
 
     (general-def 'normal org-mode-map
-      "RET" 'org-ctrl-c-ctrl-c)
+      "RET" 'org-ctrl-c-ctrl-c
+      "SPC e" 'org-edit-special)
 
     (general-def 'normal org-mode-map :prefix "SPC SPC"
       "o" 'org-ctrl-c-minus
@@ -578,9 +579,6 @@ exception: evil mode stuff
       "n" 'org-num-mode
       "h" 'org-toggle-heading
       "t" 'org-todo
-
-      "X" 'org-export-dispatch
-      "x" '(lambda () (interactive) (org-export-dispatch '(4)))
 
       "E" 'org-babel-execute-buffer)
 
@@ -597,8 +595,32 @@ exception: evil mode stuff
       "I" 'org-toggle-inline-images
       "i" 'org-display-inline-images)
 
-    :general ('normal              "SPC e" 'org-edit-src-exit)
-             ('normal org-mode-map "SPC e" 'org-edit-special))
+    (general-def 'normal
+      "SPC e" 'org-edit-src-exit))
+#+end_src
+
+#+RESULTS:
+*** export settings
+#+begin_src emacs-lisp
+  (use-package ox
+    :defer t
+    :requires org
+
+    :general
+    ('normal org-mode-map :prefix "SPC SPC"
+      "X" 'org-export-dispatch
+      "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+
+  (use-package ox-latex
+    :defer t
+    :after ox
+
+    :config
+    (add-to-list 'org-latex-classes '("report-nopart" "\\documentclass[11pt]{report}"
+                                      ("\\chapter{%s}" . "\\chapter*{%s}")
+                                      ("\\section{%s}" . "\\section*{%s}")
+                                      ("\\subsection{%s}" . "\\subsection*{%s}")
+                                      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
 #+end_src
 *** superstar
 #+begin_src emacs-lisp
