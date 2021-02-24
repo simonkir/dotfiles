@@ -67,7 +67,6 @@ evil config need to be loaded before everything else because of variable definit
 #+begin_src emacs-lisp
   (use-package evil-collection
     :after evil
-    :demand t
     :ensure t
     :config
     (evil-collection-init))
@@ -137,7 +136,6 @@ replace default emacs menues with more interactive ones, e. g. when opening file
 #+begin_src emacs-lisp
   (use-package ido-vertical-mode
     :after ido
-    :demand t
     :ensure t
     :config
     (ido-vertical-mode 1))
@@ -147,7 +145,6 @@ wrapper around ido that improves =M-x=
 #+begin_src emacs-lisp
   (use-package smex
     :after ido
-    :demand t
     :ensure t
     :config
     (smex-initialize)
@@ -222,7 +219,7 @@ some mappings around ido and buffer switching
    "q" 'quit-window
    "k" 'kill-current-buffer
    "K" 'kill-buffer-and-window)
-   
+
   (use-package ibuffer
     :general ('normal 'override "SPC b B" 'ibuffer))
 #+end_src
@@ -372,7 +369,6 @@ some mappings around ido and buffer switching
 #+begin_src emacs-lisp
   (use-package company
     :ensure t
-
     :custom
     (company-idle-delay 0.3)
     (company-minimum-prefix-length 2)
@@ -388,7 +384,6 @@ some mappings around ido and buffer switching
 #+begin_src emacs-lisp
   (use-package company-math
     :after company
-    :demand t
     :ensure t
     :config
     (add-to-list 'company-backends 'company-math-symbols-unicode))
@@ -403,7 +398,6 @@ some mappings around ido and buffer switching
 
   (use-package yasnippet-snippets
     :after yasnippet
-    :demand t
     :ensure t
     :config
     (yas-reload-all))
@@ -413,8 +407,7 @@ some mappings around ido and buffer switching
 #+begin_src emacs-lisp
   (use-package popup-kill-ring
     :ensure t
-    :general ('insert
-              "M-y" 'popup-kill-ring))
+    :general ('insert "M-y" 'popup-kill-ring))
 #+end_src
 *** visual aids
 **** spell checking
@@ -477,8 +470,7 @@ pretty symbols for eye candy when editing code
     :hook
     ((org-mode TeX-mode) . mixed-pitch-mode)
 
-    :general ('normal 'override
-                      "SPC t m" 'mixed-pitch-mode))
+    :general ('normal 'override "SPC t m" 'mixed-pitch-mode))
 #+end_src
 * local config
 exception: evil mode stuff
@@ -603,16 +595,13 @@ exception: evil mode stuff
 *** export settings
 #+begin_src emacs-lisp
   (use-package ox
-    :defer t
     :requires org
 
-    :general
-    ('normal org-mode-map :prefix "SPC SPC"
-      "X" 'org-export-dispatch
-      "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+    :general ('normal org-mode-map :prefix "SPC SPC"
+                      "X" 'org-export-dispatch
+                      "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
 
   (use-package ox-latex
-    :defer t
     :after ox
 
     :config
@@ -645,8 +634,8 @@ exception: evil mode stuff
 ** auctex
 #+begin_src emacs-lisp
   (use-package tex
-    :ensure auctex
     :defer t
+    :ensure auctex
 
     :init
     ;; in init bc. org-mode needs it, too
@@ -669,6 +658,8 @@ exception: evil mode stuff
 
     :config
     (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
 
     (general-def 'normal TeX-mode-map :prefix "SPC SPC"
       "s"   'LaTeX-section            ;; insert section
@@ -681,17 +672,11 @@ exception: evil mode stuff
       "p" 'preview-at-point
       "P" 'preview-clearout-at-point
       "b" 'preview-buffer
-      "B" 'preview-clearout-buffer)
-
-    :hook
-    (LaTeX-mode . LaTeX-math-mode)
-    (LaTeX-mode . prettify-symbols-mode))
-
+      "B" 'preview-clearout-buffer))
 #+end_src
 ** pdf-tools
 #+begin_src emacs-lisp
   (use-package pdf-tools
-    :requires evil-collection
     :ensure t
     :mode ("\\.pdf\\'" . pdf-view-mode)
 
@@ -702,6 +687,9 @@ exception: evil mode stuff
 
     :config
     (pdf-tools-install)
+
+    (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
+    (add-hook 'text-mode-hook 'evil-insert-state)
 
     (general-def 'normal pdf-view-mode-map
       "=" 'pdf-view-fit-page-to-window)
@@ -716,11 +704,7 @@ exception: evil mode stuff
     (general-def 'normal pdf-view-mode-map "SPC" nil)
     (general-def 'normal pdf-view-mode-map :prefix "SPC SPC"
       "t" 'pdf-annot-add-text-annotation
-      "d" 'pdf-annot-delete)
-
-    :hook
-    (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
-    (text-mode     . evil-insert-state))
+      "d" 'pdf-annot-delete))
 #+end_src
 ** docview
 #+begin_src emacs-lisp
@@ -731,7 +715,6 @@ exception: evil mode stuff
     (doc-view-continuous t)
 
     :config
-
     (defun sk:doc-view-goto-page (count)
       "Goto page COUNT
     if COUNT isn't supplied, go to the last page"
