@@ -108,8 +108,16 @@ c.confirm_quit = ['downloads', 'multiple-tabs'] # display a confirmation window 
 c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
 
 # search engines
-c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}', 'wiki': 'https://en.wikipedia.org/wiki/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'tra': 'https://deepl.com/translator#en/de/{}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
+                       'wiki': 'https://en.wikipedia.org/wiki/{}',
+                       'yt': 'https://www.youtube.com/results?search_query={}',
+                       'tra': 'https://deepl.com/translator#en/de/{}'}
 
 # custom content blocking lists
 # run :adblock-update after changing this list
-c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt", "https://easylist.to/easylist/easyprivacy.txt", "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt"]
+c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt",
+                                    "https://easylist.to/easylist/easyprivacy.txt",
+                                    "https://easylist.to/easylist/fanboy-social.txt",
+                                    "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+                                    "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt"]
