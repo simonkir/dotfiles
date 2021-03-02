@@ -478,7 +478,8 @@ exception: evil mode stuff
 #+begin_src emacs-lisp
   (use-package julia-mode
     :defer t
-    :ensure t)
+    :ensure t
+    :general ('normal 'override "SPC r j" 'run-julia))
 #+end_src
 ** jupyter
 #+begin_src emacs-lisp
@@ -733,6 +734,12 @@ exception: evil mode stuff
     (add-hook 'git-commit-mode-hook 'evil-insert-state)
 
     :general ('normal 'override "SPC g" 'magit-file-dispatch))
+#+end_src
+** calc-mode
+#+begin_src emacs-lisp
+  (use-package calc
+    :defer t
+    :general ('normal 'override "SPC r c" 'calc))
 #+end_src
 * appearance
 ** general settings
