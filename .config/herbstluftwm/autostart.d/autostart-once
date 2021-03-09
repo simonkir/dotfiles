@@ -17,7 +17,7 @@ xfce4-power-manager &
 ~/.emacs.d/launch-daemon.sh &
 
 # compositor & wallpaper
-~/.config/herbstluftwm/scripts/picom-launch.sh &
+picom -b
 nitrogen --restore &
 
 # keybinds are in ~/.config/sxhkd/sxhkdrc
