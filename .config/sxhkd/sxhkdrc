@@ -70,6 +70,13 @@ super + alt + m
 super + alt + s
     steam
 
+# pulseaudio settings
+super + alt + p
+    pavucontrol
+
+super + alt + shift + p
+    paprefs
+
 #################################################################
 # SCREENSHOTS
 #################################################################
