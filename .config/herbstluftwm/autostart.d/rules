@@ -20,6 +20,8 @@ hc rule class=Insync                                                 pseudotile=
 hc rule class=VirtualBox                                             fullscreen=on
 hc rule class=Arcolinux-tweak-tool.py                                pseudotile=on
 hc rule class=Arcolinux-welcome-app.py                               pseudotile=on
+hc rule class=Pavucontrol                                            floating=on
+hc rule class=Paprefs                                                floating=on
 # No solution yet to dropdown xfce4-terminal
 # hc rule windowrole=xfce4-terminal-dropdown manage=off
 

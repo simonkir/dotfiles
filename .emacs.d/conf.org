@@ -415,6 +415,7 @@ some mappings around ido and buffer switching
   (use-package flyspell
     :custom
     (flyspell-issue-message-flag nil)
+    (ispell-dictionary "de_DE")
 
     :config
     (defun sk:flyspell-mode ()
@@ -573,7 +574,7 @@ exception: evil mode stuff
       "h" 'org-toggle-heading
       "t" 'org-todo
 
-      "E" 'org-babel-execute-buffer)
+      "e" 'org-babel-execute-buffer)
 
     (general-def 'normal org-mode-map :prefix "SPC p"
       "p" 'org-latex-preview
@@ -591,8 +592,6 @@ exception: evil mode stuff
     (general-def 'normal
       "SPC e" 'org-edit-src-exit))
 #+end_src
-
-#+RESULTS:
 *** export settings
 #+begin_src emacs-lisp
   (use-package ox
