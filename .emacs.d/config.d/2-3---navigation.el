@@ -117,21 +117,34 @@
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
   (general-def 'normal 'override "SPC f r" 'recentf-ido-find-file))
 
+
+
 (use-package dired
+  :defer t
+
   :custom
   (dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
 
   :config
-  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-
   (general-def 'normal dired-mode-map
     "v" 'dired-view-file
     "h" 'dired-up-directory
     "l" 'dired-find-file)
 
   :general ('normal 'override :prefix "SPC f"
-                    "d" 'dired-jump
                     "D" 'dired))
+
+
+
+(use-package dired-x
+  :defer t
+  
+  :hook
+  (dired-mode . dired-hide-details-mode)
+  (dired-mode . dired-omit-mode)
+
+  :general ('normal 'override :prefix "SPC f"
+                    "d" 'dired-jump))
 
 
 
@@ -151,15 +164,15 @@
 
 ; config operations ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sk:config-visit ()
-  (interactive)
-  (find-file "~/.emacs.d/conf.org"))
+;; (defun sk:config-visit ()
+;;   (interactive)
+;;   (find-file "~/.emacs.d/conf.org"))
 
 (defun sk:config-reload ()
   (interactive)
   (load-directory "~/.emacs.d/config.d"))
 
 (general-def 'normal 'override :prefix "SPC c"
- "r" 'sk:config-reload
- "v" 'sk:config-visit
- "e" 'sk:config-visit)
+ ;; "v" 'sk:config-visit
+ ;; "e" 'sk:config-visit
+ "r" 'sk:config-reload)

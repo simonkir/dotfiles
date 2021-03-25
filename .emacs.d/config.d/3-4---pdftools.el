@@ -18,6 +18,10 @@
   (add-hook 'text-mode-hook 'evil-insert-state)
 
   (general-def 'normal pdf-view-mode-map
+    "J" 'pdf-view-next-page
+    "K" 'pdf-view-previous-page)
+  
+  (general-def 'normal pdf-view-mode-map
     "=" 'pdf-view-fit-page-to-window)
 
   (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"

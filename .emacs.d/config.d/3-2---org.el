@@ -123,7 +123,7 @@
 ; export settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ox
-  :requires org
+  :after org
 
   :general ('normal org-mode-map :prefix "SPC SPC"
                     "X" 'org-export-dispatch

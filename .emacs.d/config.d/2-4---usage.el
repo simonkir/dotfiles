@@ -82,11 +82,24 @@
   (yas-global-mode))
 
 
+
 (use-package yasnippet-snippets
   :after yasnippet
   :ensure t
   :config
   (yas-reload-all))
+
+
+
+(use-package autoinsert
+  :demand t
+  :custom
+  (auto-insert t)
+  (auto-insert-directory "~/.emacs.d/templates/")
+
+  :config
+  (define-auto-insert 'org-mode "org-mode.org")
+  (auto-insert-mode t))
 
 
 
