@@ -11,6 +11,7 @@
   (org-src-window-setup 'current-window) ;; don't spread across two windows
 
   ;; section numbering & indentation
+  (org-startup-folded     t)
   (org-hide-leading-stars t)
   (org-num-max-level      4)
 
@@ -27,10 +28,7 @@
   ;;(setq org-src-tab-acts-natively t)
   (org-confirm-babel-evaluate nil)
 
-  ;; latex preview options
-  (org-preview-latex-scale-increment 0.2)
-  (org-preview-latex-scale 1.5)
-  (org-preview-latex-default-scale org-preview-latex-scale)
+
 
   :config
   (add-hook    'org-mode-hook                'org-num-mode)
@@ -48,7 +46,12 @@
 
 
 
+  (setq org-preview-latex-scale-increment 0.2)
+  (setq org-preview-latex-scale 1.5)
+  (setq org-preview-latex-default-scale org-preview-latex-scale)
   (plist-put org-format-latex-options :scale org-preview-latex-default-scale)
+
+
 
   (defun org-preview-latex-scale--aftermath ()
     (plist-put org-format-latex-options :scale org-preview-latex-scale)
