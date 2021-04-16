@@ -78,19 +78,20 @@ dracula.draw.blood(c, {
 #                                     MISC                                    #
 ###############################################################################
 
+c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
+c.content.autoplay = False
+c.tabs.mode_on_change = "restore"
+
 # quitting ####################################################################
 c.confirm_quit = ['downloads', 'multiple-tabs'] # display a confirmation window if downloads are running
 
-c.url.start_pages = "~/.config/qutebrowser/startpage/index.html"
-c.content.autoplay = False
-
-# search engines
+# search engines ##############################################################
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
                        'wiki': 'https://en.wikipedia.org/wiki/{}',
                        'yt': 'https://www.youtube.com/results?search_query={}',
                        'tra': 'https://deepl.com/translator#en/de/{}'}
 
-# custom content blocking lists
+# adblock filter lists ########################################################
 # run :adblock-update after changing this list
 c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt",
                                     "https://easylist.to/easylist/easyprivacy.txt",
