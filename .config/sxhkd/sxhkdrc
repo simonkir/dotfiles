@@ -58,6 +58,10 @@ super + alt + shift + w
 super + alt + o
     libreoffice
 
+# KiCAD
+super + alt + k
+    kicad
+
 # discord
 super + alt + d
     discord
