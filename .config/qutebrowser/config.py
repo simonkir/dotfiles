@@ -87,9 +87,11 @@ c.confirm_quit = ['downloads', 'multiple-tabs'] # display a confirmation window 
 
 # search engines ##############################################################
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
-                       'wiki': 'https://en.wikipedia.org/wiki/{}',
-                       'yt': 'https://www.youtube.com/results?search_query={}',
-                       'tra': 'https://deepl.com/translator#en/de/{}'}
+                       'wiki':    'https://en.wikipedia.org/wiki/{}',
+                       'yt':      'https://www.youtube.com/results?search_query={}',
+                       'tra':     'https://deepl.com/translator#en/de/{}',
+                       'r':       'https://reddit.com/r/{}',
+                       'sat':     'https://satisfactory.fandom.com/wiki/Special:Search?search={}'}
 
 # adblock filter lists ########################################################
 # run :adblock-update after changing this list
