@@ -6,6 +6,9 @@
 
 (setq scroll-conservatively 100)
 (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
+(setq mouse-wheel-scroll-amount '(5 ((shift) . 20)))
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't)
 
 (general-def 'normal 'override
  "SPC t f" 'follow-mode)
@@ -78,6 +81,7 @@
 (general-def 'normal 'override :prefix "SPC f"
  "f" 'find-file
  "F" 'find-file-read-only
+ "p" 'find-file-at-point
  "R" 'revert-buffer
  "s" 'save-buffer
  "S" 'save-some-buffers)
@@ -100,8 +104,8 @@
   (general-def 'normal 'override :prefix "SPC f B"
     "B" 'edit-bookmarks
     "d" 'bookmark-delete
-    "r" 'bookmark-rename
-    "R" 'bookmark-relocate
+    "r" 'bookmark-relocate
+    "R" 'bookmark-rename
     "s" 'bookmark-set))
 
 
