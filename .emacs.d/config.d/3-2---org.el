@@ -100,6 +100,9 @@
     "h" 'org-toggle-heading
     "t" 'org-todo
 
+    "f" 'org-table-eval-formula
+    "F" '(lambda () (interactive) (org-table-eval-formula '(4)))
+
     "e" 'org-babel-execute-buffer)
 
 
