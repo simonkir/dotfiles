@@ -54,6 +54,10 @@ super + alt + w
 super + alt + shift + w
     firefox
 
+# tertiary web browser
+super + alt + ctrl + w
+    chromium
+
 # office application
 super + alt + o
     libreoffice
