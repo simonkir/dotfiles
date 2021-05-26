@@ -66,8 +66,12 @@ super + alt + o
 super + alt + k
     kicad
 
-# discord
+# discord (browser)
 super + alt + d
+    qutebrowser -s statusbar.show never -s tabs.show never https://discord.com/channels/@me
+
+# discord (app)
+super + alt + shift + d
     discord
 
 # minecraft
