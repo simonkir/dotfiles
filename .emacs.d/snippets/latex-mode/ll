@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: LL
+# key: ll
+# --
+\mathbb{L}_{$1}$0

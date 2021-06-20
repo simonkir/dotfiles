@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: betrag left and right
+# key: blr
+# --
+\left| $0 \right|
