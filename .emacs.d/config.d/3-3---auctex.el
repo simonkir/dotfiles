@@ -30,7 +30,41 @@
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
 
+  (defun sk:activate-tex-alignment-keybinds ()
+    (interactive)
+    (general-def 'insert TeX-mode-map
+      "C-<" '(lambda () (interactive) (insert "& \\leq &"))
+      "C->" '(lambda () (interactive) (insert "& \\geq &"))
+      "=" '(lambda () (interactive) (insert "& = &"))
+      "<" '(lambda () (interactive) (insert "& < &"))
+      ">" '(lambda () (interactive) (insert "& > &")))
+      (message "Enabled TeX Alignment Keybinds")
+      (setq sk:tex-alignment-keybinds-active t))
+
+  (defun sk:deactivate-tex-alignment-keybinds ()
+    (interactive)
+    (general-def 'insert TeX-mode-map
+      "C-<" '(lambda () (interactive) (insert "\\leq"))
+      "C->" '(lambda () (interactive) (insert "\\geq"))
+      "=" '(lambda () (interactive) (insert "="))
+      "<" '(lambda () (interactive) (insert "<"))
+      ">" '(lambda () (interactive) (insert ">")))
+      (message "Disabled TeX Alignment Keybinds")
+      (setq sk:tex-alignment-keybinds-active nil))
+
+  (defun sk:toggle-tex-alignment-keybinds ()
+    (interactive)
+    (if sk:tex-alignment-keybinds-active
+	(sk:deactivate-tex-alignment-keybinds)
+      (sk:activate-tex-alignment-keybinds)))
+
+  (sk:activate-tex-alignment-keybinds)
+
+  (general-def 'insert TeX-mode-map
+    "<C-return>" '(lambda () (interactive) (insert " \\\\\n  ")))
+
   (general-def 'normal TeX-mode-map :prefix "SPC SPC"
+    "c"   'sk:toggle-tex-alignment-keybinds
     "s"   'LaTeX-section            ;; insert section
     "e"   'LaTeX-environment        ;; insert environment
     "TAB" 'LaTeX-fill-environment   ;; auto-indent
