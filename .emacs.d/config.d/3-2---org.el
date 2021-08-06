@@ -98,6 +98,7 @@
 
     "n" 'org-num-mode
     "h" 'org-toggle-heading
+    "l" 'org-toggle-item
     "t" 'org-todo
 
     "f" 'org-table-eval-formula
