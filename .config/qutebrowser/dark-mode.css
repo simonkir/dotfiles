@@ -1,0 +1,65 @@
+/*
+ *
+ * DARK MODE STYLESHEET
+ *
+ * contains most common html structures
+ * for some colors to be combined with them.
+ *
+*/
+
+/* default bg */
+html,
+body, body *,
+table
+{
+	background-color: #282C34 !important;
+}
+
+/* default fg */
+body *
+{
+	color: #ABB2BF !important;
+}
+
+/* default current line / selection */
+textarea,
+input,
+select,
+button,
+[role="button"],
+a.button,
+a.submit,
+a.BigButton,
+a.TabLink,
+.install[onclick]
+{
+	background: #44475A !important;
+}
+
+/* cyan */
+a, a *,
+a.highlight *,
+a.active, a.active *,
+.selected, .selected *,
+[href="#"]
+/*a:visited, a:visited *,*/
+{
+	color: #61AFEF !important;
+}
+
+/* purple */
+a:hover, a:hover *,
+a:visited:hover, a:visited:hover *,
+span[onclick]:hover, div[onclick]:hover,
+[role="link"]:hover, [role="link"]:hover *,
+[role="button"]:hover *,
+[role="menuitem"]:hover, [role="menuitem"]:hover *,
+.link:hover, .link:hover *,
+h1, h2, h3, h4, h5, h6,
+[id*="headline"], [class*="headline"],
+[id*="header"], [class*="header"], [class*="header"],
+/*strong,*/
+td
+{
+	color: #C678DD !important;
+}
