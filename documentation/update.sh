@@ -11,6 +11,10 @@ chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 chmod +x ~/.screenlayout/default.sh
 chmod +x ~/.emacs.d/launch-daemon.sh 
 
+# qtile config permissions
+chmod +x ~/.config/qtile/scripts/autostart-always.sh
+chmod +x ~/.config/qtile/scripts/autostart-once.sh
+
 # hlwm config permissions
 chmod +x ~/.config/herbstluftwm/autostart
 chmod +x ~/.config/herbstluftwm/autostart.d/keybinds

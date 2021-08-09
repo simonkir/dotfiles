@@ -178,18 +178,10 @@ for i in groups:
 def assign_app_group(client):
     d = {}
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-    d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium",  "qutebrowser"]
+    d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium", "qutebrowser"]
     d[group_names[1]] = ["URxvt", "Termite", "Emacs"]
     d[group_names[2]] = ["krita", "Kicad", "FreeCAD"]
-    d[group_names[3]] = ["Gimp", "gimp" ]
-    d[group_names[4]] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
-    d[group_names[5]] = ["Vlc","vlc", "Mpv", "mpv" ]
-    d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-              "virtualbox manager", "virtualbox machine", "vmplayer", ]
-    d[group_names[7]] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-              "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-    d[group_names[8]] = ["Evolution", "Geary", "Mail", "Thunderbird",
-              "evolution", "geary", "mail", "thunderbird" ]
+    d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer", "virtualbox manager", "virtualbox machine", "vmplayer", ]
 
     wm_class = client.window.get_wm_class()[0]
 
@@ -199,7 +191,8 @@ def assign_app_group(client):
             client.togroup(group)
             client.group.cmd_toscreen(toggle=False)
 
-    
+
+   
 ###############################################################################
 #                                   LAYOUTS                                   #
 ###############################################################################
@@ -212,7 +205,6 @@ def init_layout_theme():
             }
 
 layout_theme = init_layout_theme()
-
 
 layouts = [
     layout.MonadTall(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
@@ -483,12 +475,14 @@ main = None
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
+    subprocess.call([home + '/.config/qtile/scripts/autostart-once.sh'])
 
 @hook.subscribe.startup
 def start_always():
     # Set the cursor to something sane in X
-    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+    #subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/scripts/autostart-always.sh'])
 
 
 
