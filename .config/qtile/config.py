@@ -8,15 +8,18 @@ from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
 #import arcobattery
 
-#mod4 or mod = super key
+
+
+###############################################################################
+#                                   KEYBINDS                                  #
+###############################################################################
+
+# keybinds ####################################################################
 mod = "mod4"
 mod1 = "alt"
 home = os.path.expanduser('~')
 
-
 keys = [
-
-# Most of our keybindings are in sxhkd file - except these
 
 # SUPER + FUNCTION KEYS
 
@@ -120,9 +123,22 @@ keys = [
 
     ]
 
+# mouse configuration #########################################################
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size())
+]
+
+
+
+###############################################################################
+#                                    GROUPS                                   #
+###############################################################################
+
 groups = []
 
-# FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
 #group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
@@ -132,6 +148,7 @@ group_labels = group_names
 
 group_layouts = ["max", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
+# workspace initialization ####################################################
 for i in range(len(group_names)):
     groups.append(
         Group(
@@ -140,23 +157,52 @@ for i in range(len(group_names)):
             label=group_labels[i],
         ))
 
+# workspace keybinds ##########################################################
 for i in groups:
     keys.extend([
 
-#CHANGE WORKSPACES
+        #CHANGE WORKSPACES
         Key([mod], i.name, lazy.group[i.name].toscreen()),
         #Key([mod], "Tab", lazy.screen.next_group()),
         #Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
         Key(["mod1"], "Tab",          lazy.group.next_window()),
         Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
 
-# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
+        # MOVE WINDOW TO SELECTED WORKSPACE 1-10
         Key([mod, "shift"],   i.name, lazy.window.togroup(i.name)),
         Key([mod, "control"], i.name, lazy.window.togroup(i.name), lazy.group[i.name].toscreen()),
     ])
 
+# assign applications to workspaces ###########################################
+@hook.subscribe.client_new
+def assign_app_group(client):
+    d = {}
+    ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
+    d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium",  "qutebrowser"]
+    d[group_names[1]] = ["URxvt", "Termite", "Emacs"]
+    d[group_names[2]] = ["krita", "Kicad", "FreeCAD"]
+    d[group_names[3]] = ["Gimp", "gimp" ]
+    d[group_names[4]] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
+    d[group_names[5]] = ["Vlc","vlc", "Mpv", "mpv" ]
+    d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
+              "virtualbox manager", "virtualbox machine", "vmplayer", ]
+    d[group_names[7]] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
+              "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
+    d[group_names[8]] = ["Evolution", "Geary", "Mail", "Thunderbird",
+              "evolution", "geary", "mail", "thunderbird" ]
+
+    wm_class = client.window.get_wm_class()[0]
+
+    for i in range(len(d)):
+        if wm_class in list(d.values())[i]:
+            group = list(d.keys())[i]
+            client.togroup(group)
+            client.group.cmd_toscreen(toggle=False)
+
+    
+###############################################################################
+#                                   LAYOUTS                                   #
+###############################################################################
 
 def init_layout_theme():
     return {"margin":5,
@@ -174,6 +220,12 @@ layouts = [
     layout.RatioTile(**layout_theme),
     layout.Max(**layout_theme)
 ]
+
+
+
+###############################################################################
+#                                     BAR                                     #
+###############################################################################
 
 # COLORS FOR THE BAR
 
@@ -411,62 +463,22 @@ def init_screens():
 screens = init_screens()
 
 
-# MOUSE CONFIGURATION
-mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size())
-]
-
 dgroups_key_binder = None
 dgroups_app_rules = []
 
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-# BEGIN
 
-#########################################################
-################ assgin apps to groups ##################
-#########################################################
-# @hook.subscribe.client_new
-# def assign_app_group(client):
-#     d = {}
-#     #####################################################################################
-#     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-#     #####################################################################################
-#     d[group_names[0]] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
-#               "navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
-#     d[group_names[1]] = [ "Atom", "Subl", "Geany", "Brackets", "Code-oss", "Code", "TelegramDesktop", "Discord",
-#                "atom", "subl", "geany", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
-#     d[group_names[2]] = ["Inkscape", "Nomacs", "Ristretto", "Nitrogen", "Feh",
-#               "inkscape", "nomacs", "ristretto", "nitrogen", "feh", ]
-#     d[group_names[3]] = ["Gimp", "gimp" ]
-#     d[group_names[4]] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
-#     d[group_names[5]] = ["Vlc","vlc", "Mpv", "mpv" ]
-#     d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-#               "virtualbox manager", "virtualbox machine", "vmplayer", ]
-#     d[group_names[7]] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-#               "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-#     d[group_names[8]] = ["Evolution", "Geary", "Mail", "Thunderbird",
-#               "evolution", "geary", "mail", "thunderbird" ]
-#     d[group_names[9]] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
-#               "spotify", "pragha", "clementine", "deadbeef", "audacious" ]
-#     ######################################################################################
-#
-# wm_class = client.window.get_wm_class()[0]
-#
-#     for i in range(len(d)):
-#         if wm_class in list(d.values())[i]:
-#             group = list(d.keys())[i]
-#             client.togroup(group)
-#             client.group.cmd_toscreen(toggle=False)
 
-# END
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
+
 
 
 
 main = None
+
+
+
+###############################################################################
+#                                  AUTOSTART                                  #
+###############################################################################
 
 @hook.subscribe.startup_once
 def start_once():
@@ -478,6 +490,20 @@ def start_always():
     # Set the cursor to something sane in X
     subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
 
+
+
+###############################################################################
+#                                     MISC                                    #
+###############################################################################
+
+# settings ####################################################################
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "focus" # or smart
+
+# floating ####################################################################
 @hook.subscribe.client_new
 def set_floating(window):
     if (window.window.get_wm_transient_for()
@@ -485,11 +511,6 @@ def set_floating(window):
         window.floating = True
 
 floating_types = ["notification", "toolbar", "splash", "dialog"]
-
-
-follow_mouse_focus = True
-bring_front_click = False
-cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'Arcolinux-welcome-app.py'},
     {'wmclass': 'Arcolinux-tweak-tool.py'},
@@ -516,8 +537,5 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'ssh-askpass'},
 
 ],  fullscreen_border_width = 0, border_width = 0)
-auto_fullscreen = True
-
-focus_on_window_activation = "focus" # or smart
 
 wmname = "LG3D"
