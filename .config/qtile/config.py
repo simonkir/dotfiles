@@ -90,7 +90,6 @@ keys = [
         lazy.layout.increase_nmaster(),
         ),
 
-
 # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
@@ -99,8 +98,8 @@ keys = [
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
 
+    Key([mod, "shift"], "h", lazy.layout.swap_left()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
@@ -179,9 +178,8 @@ def assign_app_group(client):
     d = {}
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
     d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium", "qutebrowser"]
-    d[group_names[1]] = ["URxvt", "Termite", "Emacs"]
-    d[group_names[2]] = ["krita", "Kicad", "FreeCAD"]
-    d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer", "virtualbox manager", "virtualbox machine", "vmplayer", ]
+    d[group_names[1]] = ["urxvt", "termite", "emacs"]
+    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura"]
 
     wm_class = client.window.get_wm_class()[0]
 
@@ -452,6 +450,7 @@ widgets_screen2 = init_widgets_screen2()
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26, opacity=0.8)),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26, opacity=0.8))]
+    # return [Screen(),Screen()]
 screens = init_screens()
 
 
@@ -491,11 +490,11 @@ def start_always():
 ###############################################################################
 
 # settings ####################################################################
-follow_mouse_focus = True
-bring_front_click = False
-cursor_warp = False
-auto_fullscreen = True
-focus_on_window_activation = "focus" # or smart
+auto_fullscreen            = True
+bring_front_click          = False
+cursor_warp                = True
+follow_mouse_focus         = True
+focus_on_window_activation = "smart"
 
 # floating ####################################################################
 @hook.subscribe.client_new
@@ -531,5 +530,3 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'ssh-askpass'},
 
 ],  fullscreen_border_width = 0, border_width = 0)
-
-wmname = "LG3D"
