@@ -17,8 +17,8 @@ sxhkd -c ~/.config/sxhkd/sxhkdrc &
 
 # starting utility applications at boot time
 # run variety &
-run volumeicon &
-run nm-applet &
+#run volumeicon &
+#run nm-applet &
 # blueberry-tray &
 
 picom --config $HOME/.config/qtile/scripts/picom.conf &
