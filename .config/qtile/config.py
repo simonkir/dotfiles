@@ -160,7 +160,7 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 #group_labels = ["Web", "Edit/chat", "Image", "Gimp", "Meld", "Video", "Vb", "Files", "Mail", "Music",]
 group_labels = group_names
 
-group_layouts = ["max", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+group_layouts = ["max", "monadtall", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
 
 # workspace initialization ####################################################
 for i in range(len(group_names)):
@@ -207,8 +207,8 @@ def assign_app_group(client):
 ###############################################################################
 
 def init_layout_theme():
-    return {"margin":5,
-            "border_width":2,
+    return {"margin": 0,
+            "border_width": 1,
             "border_focus": "#5e81ac",
             "border_normal": "#4c566a"
             }
@@ -216,8 +216,8 @@ def init_layout_theme():
 layout_theme = init_layout_theme()
 
 layouts = [
-    layout.MonadTall(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
-    layout.MonadWide(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
+    layout.MonadTall(**layout_theme),
+    layout.MonadWide(**layout_theme),
     layout.RatioTile(**layout_theme),
     layout.Max(**layout_theme)
 ]
