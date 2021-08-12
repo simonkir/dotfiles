@@ -11,29 +11,44 @@ from libqtile.widget import Spacer
 
 
 ###############################################################################
+#                                     VARS                                    #
+###############################################################################
+
+mod = "mod4"
+mod1 = "alt"
+my_term = "termite"
+home = os.path.expanduser('~')
+
+
+
+###############################################################################
 #                                   KEYBINDS                                  #
 ###############################################################################
 
 # keybinds ####################################################################
-mod = "mod4"
-mod1 = "alt"
-home = os.path.expanduser('~')
 
 keys = [
 
-# SUPER + FUNCTION KEYS
-
+    # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
 
 
-# QTILE LAYOUT KEYS
+    # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
-# CHANGE FOCUS
+    # CHANGE SCREENS
+    Key([mod], "Tab", lazy.next_screen()),
+    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
+
+    # CYCLE WINDOWS
+    Key(["mod1"], "Tab",          lazy.group.next_window()),
+    Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
+
+    # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Left", lazy.layout.left()),
@@ -44,7 +59,7 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
 
 
-# RESIZE UP, DOWN, LEFT, RIGHT
+    # RESIZE UP, DOWN, LEFT, RIGHT
     Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
@@ -90,10 +105,10 @@ keys = [
         lazy.layout.increase_nmaster(),
         ),
 
-# FLIP LAYOUT FOR MONADTALL/MONADWIDE
+    # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
-# MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
+    # MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
@@ -104,17 +119,17 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
 
-# TOGGLE FLOATING LAYOUT
+    # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),
     Key([mod], "s", lazy.window.toggle_floating()),
 
-### # FLIP LAYOUT FOR BSP
+###     # FLIP LAYOUT FOR BSP
 ###     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
 ###     Key([mod, "mod1"], "j", lazy.layout.flip_down()),
 ###     Key([mod, "mod1"], "l", lazy.layout.flip_right()),
 ###     Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 ### 
-### # MOVE WINDOWS UP OR DOWN BSP LAYOUT
+###     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
 ###     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 ###     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
 ###     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
@@ -162,10 +177,6 @@ for i in groups:
 
         #CHANGE WORKSPACES
         Key([mod], i.name, lazy.group[i.name].toscreen()),
-        #Key([mod], "Tab", lazy.screen.next_group()),
-        #Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
-        Key(["mod1"], "Tab",          lazy.group.next_window()),
-        Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
 
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10
         Key([mod, "shift"],   i.name, lazy.window.togroup(i.name)),
@@ -179,7 +190,7 @@ def assign_app_group(client):
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
     d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium", "qutebrowser"]
     d[group_names[1]] = ["urxvt", "termite", "emacs"]
-    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura"]
+    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura", "Blender"]
 
     wm_class = client.window.get_wm_class()[0]
 
