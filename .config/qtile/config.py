@@ -244,7 +244,7 @@ def init_colors():
 
 colors = init_colors()
 
-# widgets #####################################################################
+# default settings ############################################################
 def init_widgets_defaults():
     return dict(font="Noto Sans",
                 fontsize = 12,
@@ -255,6 +255,11 @@ def init_widgets_defaults():
 
 widget_defaults = init_widgets_defaults()
 
+icon_margin = 5
+sep_linewidth = 1
+sep_padding = 10
+
+# widget list #################################################################
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
@@ -272,21 +277,20 @@ def init_widgets_list():
             inactive = colors[8],
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # layout section ######################################################
         widget.CurrentLayoutIcon(
             scale = 0.7,
-            font = "Noto Sans",
         ),
         widget.CurrentLayout(
             font = "Noto Sans Bold",
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # window name section #################################################
@@ -301,12 +305,16 @@ def init_widgets_list():
         ),
 
         # updates #############################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[5],
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[5],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/updates.png",
+            margin = icon_margin,
         ),
         widget.CheckUpdates(
             display_format = "{updates}",
@@ -314,52 +322,21 @@ def init_widgets_list():
             update_interval = 1800,
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
-        ),
-
-        # memory ##############################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[4],
-        ),
-        widget.Memory(
-            format = "{MemUsed:.1f}G",
-            measure_mem = "G",
-            update_interval = 1,
-        ),
-        widget.Sep(
-            linewidth = 1,
-            padding = 10,
-        ),
-
-        # cpu #################################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[5],
-        ),
-        widget.CPU(
-            format = "{load_percent}%",
-            update_interval = 2,
-        ),
-        widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # battery #############################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[4],
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[4],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/battery.png",
+            margin = icon_margin,
         ),
         widget.Battery(
             #hide_threshold = 0.9, # doesnt hide icon
@@ -367,46 +344,97 @@ def init_widgets_list():
             notify_below = 0.25,
             charge_char = "∧",
             discharge_char = "∨",
+            full_string = "full",
             update_interval = 10,
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
+        # cpu #################################################################
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[5],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/cpu.png",
+            margin = icon_margin,
+        ),
+        widget.CPU(
+            format = "{load_percent}%",
+            update_interval = 2,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # temperature #########################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[5],
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[5],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/temperature.png",
+            margin = icon_margin,
         ),
         widget.ThermalSensor(
             threshold = 70,
-            padding = 0,
             foreground = colors[8],
             foreground_alert = colors[1],
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
+        # memory ##############################################################
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[4],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/memory.png",
+            margin = icon_margin,
+        ),
+        widget.Memory(
+            format = "{MemUsed:.1f}G",
+            measure_mem = "G",
+            update_interval = 1,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # clock ###############################################################
-        widget.TextBox(
-            font = "FontAwesome",
-            fontsize = 16,
-            text = "  ",
-            padding = 0,
-            foreground = colors[4],
+        # widget.TextBox(
+        #     font = "FontAwesome",
+        #     fontsize = 16,
+        #     text = "  ",
+        #     padding = 0,
+        #     foreground = colors[4],
+        # ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/clock.png",
+            margin = icon_margin,
         ),
         widget.Clock(
             format="%H:%M",
         ),
         widget.Sep(
-            linewidth = 1,
-            padding = 10,
+            linewidth = sep_linewidth,
+            padding = sep_padding,
         ),
 
         # systray #############################################################
