@@ -2,6 +2,8 @@
 
 
 
+;; note: requires running ‚all-the-icons-install-fonts‘
+;; for the icons to appear correctly
 (use-package doom-modeline
   :demand t
   :ensure t
