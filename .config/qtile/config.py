@@ -16,8 +16,23 @@ from libqtile.widget import Spacer
 
 mod = "mod4"
 mod1 = "alt"
-my_term = "termite"
 home = os.path.expanduser('~')
+
+# colors ######################################################################
+def init_colors():
+    return [["#282c34", "#282c34"], # color 0, black
+            ["#ed254e", "#ed254e"], # color 1, red
+            ["#71f79f", "#71f79f"], # color 2, green
+            ["#f9dc5c", "#f9dc5c"], # color 3, yellow
+            ["#66abff", "#66abff"], # color 4, blue
+            ["#c74ded", "#c74ded"], # color 5, magenta
+            ["#00c1e4", "#00c1e4"], # color 6, teal
+            ["#dcdfe4", "#dcdfe4"], # color 7, silver
+            ["#c3c7d1", "#c3c7d1"], # foreground
+            ["#141925", "#141925"]] # background
+
+
+colors = init_colors()
 
 
 
@@ -57,7 +72,6 @@ keys = [
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-
 
     # RESIZE UP, DOWN, LEFT, RIGHT
     Key([mod, "control"], "l",
@@ -151,18 +165,13 @@ mouse = [
 #                                    GROUPS                                   #
 ###############################################################################
 
+# workspace initialization ####################################################
 groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
-
-#group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
-#group_labels = ["", "", "", "", "", "", "", "", "", "",]
-#group_labels = ["Web", "Edit/chat", "Image", "Gimp", "Meld", "Video", "Vb", "Files", "Mail", "Music",]
 group_labels = group_names
-
 group_layouts = ["max", "monadtall", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
 
-# workspace initialization ####################################################
 for i in range(len(group_names)):
     groups.append(
         Group(
@@ -178,7 +187,7 @@ for i in groups:
         #CHANGE WORKSPACES
         Key([mod], i.name, lazy.group[i.name].toscreen()),
 
-        # MOVE WINDOW TO SELECTED WORKSPACE 1-10
+        # MOVE WINDOW TO SELECTED WORKSPACE 1-8
         Key([mod, "shift"],   i.name, lazy.window.togroup(i.name)),
         Key([mod, "control"], i.name, lazy.window.togroup(i.name), lazy.group[i.name].toscreen()),
     ])
@@ -207,9 +216,9 @@ def assign_app_group(client):
 ###############################################################################
 
 def init_layout_theme():
-    return {"margin": 0,
-            "border_width": 1,
-            "border_focus": "#5e81ac",
+    return {"margin":        0,
+            "border_width":  1,
+            "border_focus":  "#5e81ac",
             "border_normal": "#4c566a"
             }
 
@@ -227,22 +236,6 @@ layouts = [
 ###############################################################################
 #                                     BAR                                     #
 ###############################################################################
-
-# colors ######################################################################
-def init_colors():
-    return [["#282c34", "#282c34"], # color 0, black
-            ["#ed254e", "#ed254e"], # color 1, red
-            ["#71f79f", "#71f79f"], # color 2, green
-            ["#f9dc5c", "#f9dc5c"], # color 3, yellow
-            ["#66abff", "#66abff"], # color 4, blue
-            ["#c74ded", "#c74ded"], # color 5, magenta
-            ["#00c1e4", "#00c1e4"], # color 6, teal
-            ["#dcdfe4", "#dcdfe4"], # color 7, silver
-            ["#c3c7d1", "#c3c7d1"], # foreground
-            ["#141925", "#141925"]] # background
-
-
-colors = init_colors()
 
 # default settings ############################################################
 def init_widgets_defaults():
@@ -431,7 +424,7 @@ def init_widgets_list():
             margin = icon_margin,
         ),
         widget.Clock(
-            format="%H:%M",
+            format = "%H:%M",
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -440,7 +433,7 @@ def init_widgets_list():
 
         # systray #############################################################
         widget.Systray(
-            icon_size=20,
+            icon_size = 20,
         ),
     ]
     return widgets_list
@@ -449,6 +442,7 @@ widgets_list = init_widgets_list()
 
 def init_widgets(has_tray=False):
     widgets = init_widgets_list()
+
     if not has_tray:
         # delete tray
         # because the tray is *always* the last element, no complicated code
@@ -477,8 +471,8 @@ def init_widgets(has_tray=False):
         except ValueError:
             pass
         # no exception raised, thus deleting the widget
+        # note: this only works if the widget isn't the outermost one
         else:
-            print(update_index)
             del widgets[update_index-1:update_index+2]
 
     return widgets
