@@ -42,9 +42,13 @@ super + alt + e
 super + alt + shift + e
     emacs
 
-# file browser
+# # file browser
+# super + alt + b
+#     termite -e ~/.config/vifm/scripts/vifmrun
+
+# blender
 super + alt + b
-    termite -e ~/.config/vifm/scripts/vifmrun
+      blender
 
 # youtube client
 super + alt + y
