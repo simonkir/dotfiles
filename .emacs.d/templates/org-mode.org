@@ -6,4 +6,4 @@
 
 #+title: Lösungen 
 #+date: x 2021
-#+author: Simon K., 11a
+#+author: Simon K., Js1
