@@ -217,7 +217,7 @@ def assign_app_group(client):
 
 def init_layout_theme():
     return {"margin":        0,
-            "border_width":  1,
+            "border_width":  0,
             "border_focus":  "#5e81ac",
             "border_normal": "#4c566a"
             }
