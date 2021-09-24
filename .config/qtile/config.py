@@ -521,36 +521,36 @@ dgroups_app_rules = []
 main = None
 
 # floating ####################################################################
-@hook.subscribe.client_new
-def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
-        window.floating = True
-
-floating_types = ["notification", "toolbar", "splash", "dialog"]
-floating_layout = layout.Floating(float_rules=[
-    {'wmclass': 'Arcolinux-welcome-app.py'},
-    {'wmclass': 'Arcolinux-tweak-tool.py'},
-    {'wmclass': 'Arcolinux-calamares-tool.py'},
-    {'wmclass': 'confirm'},
-    {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
-    {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
-    {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
-    {'wmclass': 'confirmreset'},
-    {'wmclass': 'makebranch'},
-    {'wmclass': 'maketag'},
-    {'wmclass': 'Arandr'},
-    {'wmclass': 'feh'},
-    {'wmclass': 'Galculator'},
-    {'wmclass': 'arcolinux-logout'},
-    {'wmclass': 'xfce4-terminal'},
-    {'wname': 'branchdialog'},
-    {'wname': 'Open File'},
-    {'wname': 'pinentry'},
-    {'wmclass': 'ssh-askpass'},
-
-],  fullscreen_border_width = 0, border_width = 0)
+# @hook.subscribe.client_new
+# def set_floating(window):
+#     if (window.window.get_wm_transient_for()
+#             or window.window.get_wm_type() in floating_types):
+#         window.floating = True
+# 
+# floating_types = ["notification", "toolbar", "splash", "dialog"]
+# floating_layout = layout.Floating(float_rules=[
+#     {'wmclass': 'Arcolinux-welcome-app.py'},
+#     {'wmclass': 'Arcolinux-tweak-tool.py'},
+#     {'wmclass': 'Arcolinux-calamares-tool.py'},
+#     {'wmclass': 'confirm'},
+#     {'wmclass': 'dialog'},
+#     {'wmclass': 'download'},
+#     {'wmclass': 'error'},
+#     {'wmclass': 'file_progress'},
+#     {'wmclass': 'notification'},
+#     {'wmclass': 'splash'},
+#     {'wmclass': 'toolbar'},
+#     {'wmclass': 'confirmreset'},
+#     {'wmclass': 'makebranch'},
+#     {'wmclass': 'maketag'},
+#     {'wmclass': 'Arandr'},
+#     {'wmclass': 'feh'},
+#     {'wmclass': 'Galculator'},
+#     {'wmclass': 'arcolinux-logout'},
+#     {'wmclass': 'xfce4-terminal'},
+#     {'wname': 'branchdialog'},
+#     {'wname': 'Open File'},
+#     {'wname': 'pinentry'},
+#     {'wmclass': 'ssh-askpass'},
+# 
+# ],  fullscreen_border_width = 0, border_width = 0)
