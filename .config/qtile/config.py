@@ -197,9 +197,10 @@ for i in groups:
 def assign_app_group(client):
     d = {}
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-    d[group_names[0]] = ["Navigator", "Firefox", "Chromium", "navigator", "firefox", "chromium", "qutebrowser"]
+    d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox", "qutebrowser"]
     d[group_names[1]] = ["urxvt", "termite", "emacs"]
     d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura", "Blender"]
+    d[group_names[3]] = ["Chromium", "chromium"]
 
     wm_class = client.window.get_wm_class()[0]
 
@@ -230,6 +231,10 @@ layouts = [
     layout.RatioTile(**layout_theme),
     layout.Max(**layout_theme)
 ]
+
+# floating ####################################################################
+floating_types = ["notification", "toolbar", "splash", "dialog"]
+floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
 
 
 
@@ -519,38 +524,3 @@ focus_on_window_activation = "smart"
 dgroups_key_binder = None
 dgroups_app_rules = []
 main = None
-
-# floating ####################################################################
-# @hook.subscribe.client_new
-# def set_floating(window):
-#     if (window.window.get_wm_transient_for()
-#             or window.window.get_wm_type() in floating_types):
-#         window.floating = True
-# 
-# floating_types = ["notification", "toolbar", "splash", "dialog"]
-# floating_layout = layout.Floating(float_rules=[
-#     {'wmclass': 'Arcolinux-welcome-app.py'},
-#     {'wmclass': 'Arcolinux-tweak-tool.py'},
-#     {'wmclass': 'Arcolinux-calamares-tool.py'},
-#     {'wmclass': 'confirm'},
-#     {'wmclass': 'dialog'},
-#     {'wmclass': 'download'},
-#     {'wmclass': 'error'},
-#     {'wmclass': 'file_progress'},
-#     {'wmclass': 'notification'},
-#     {'wmclass': 'splash'},
-#     {'wmclass': 'toolbar'},
-#     {'wmclass': 'confirmreset'},
-#     {'wmclass': 'makebranch'},
-#     {'wmclass': 'maketag'},
-#     {'wmclass': 'Arandr'},
-#     {'wmclass': 'feh'},
-#     {'wmclass': 'Galculator'},
-#     {'wmclass': 'arcolinux-logout'},
-#     {'wmclass': 'xfce4-terminal'},
-#     {'wname': 'branchdialog'},
-#     {'wname': 'Open File'},
-#     {'wname': 'pinentry'},
-#     {'wmclass': 'ssh-askpass'},
-# 
-# ],  fullscreen_border_width = 0, border_width = 0)
