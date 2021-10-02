@@ -12,7 +12,7 @@ super + Escape
 
 # application launcher
 super +  d
-    rofi -show drun
+    rofi -show drun -theme ~/.config/rofi/themes/simonkir-dmenu.rasi
 
 # lockscreen
 super + 9
