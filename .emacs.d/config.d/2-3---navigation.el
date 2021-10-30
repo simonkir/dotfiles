@@ -86,9 +86,6 @@
  "s" 'save-buffer
  "S" 'save-some-buffers)
 
-(general-def 'normal
-  "g r" 'revert-buffer)
-
 (general-def 'normal 'override
  "SPC s" 'save-buffer)
 

@@ -24,6 +24,24 @@
 
 
 
+(use-package rainbow-delimiters
+  :ensure t
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
+
+
+
+; insertion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package evil-lion
+  :after evil
+  :ensure t
+  :general ('(normal visual) 'override :prefix "g"
+            "l" 'evil-lion-left
+            "L" 'evil-lion-right))
+
+
+
 (use-package evil-surround
   :after evil
   :defer 1
@@ -33,19 +51,9 @@
 
 
 
-(use-package rainbow-delimiters
+(use-package popup-kill-ring
   :ensure t
-  :hook
-  (prog-mode . rainbow-delimiters-mode))
-
-
-
-(use-package evil-lion
-  :after evil
-  :ensure t
-  :general ('(normal visual) 'override :prefix "g"
-            "l" 'evil-lion-left
-            "L" 'evil-lion-right))
+  :general ('insert "M-y" 'popup-kill-ring))
 
 
 
@@ -65,6 +73,7 @@
    (after-init . global-company-mode)))
 
 
+
 (use-package company-math
   :after company
   :ensure t
@@ -73,7 +82,7 @@
 
 
 
-; snippets ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; snippets & templates ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
   :demand t
@@ -103,13 +112,16 @@
 
 
 
-; misc  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; buffer handling  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package popup-kill-ring
-  :ensure t
-  :general ('insert "M-y" 'popup-kill-ring))
+(global-auto-revert-mode)
+
+(general-def 'normal
+  "g r" 'revert-buffer)
 
 
+
+; spell checking  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flyspell
   :custom
@@ -129,6 +141,7 @@
                     "S" 'ispell-change-dictionary))
 
 
+; visual aids  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column
   :ensure t
