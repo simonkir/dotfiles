@@ -48,6 +48,7 @@ config.bind(';p', 'hint links run open -p {hint-url}') # open hint in private ta
 config.bind('xb', 'config-cycle statusbar.show never always')
 config.bind('xt', 'config-cycle tabs.show never always')
 config.bind(',d', 'config-cycle content.user_stylesheets dark-mode.css \"\"')
+config.bind(',b', 'config-cycle colors.webpage.bg black white')
 
 # watch videos in vlc #########################################################
 config.bind('z', 'hint links spawn vlc {hint-url}')
