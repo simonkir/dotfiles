@@ -41,8 +41,7 @@
 
   (org-babel-do-load-languages
    'org-babel-load-languages
-   (append org-babel-load-languages
-           '((jupyter . t))))
+   '((jupyter . t)))
 
 
 
