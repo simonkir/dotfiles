@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: QQ
+# key: qq
+# --
+\mathbb{Q}_{$1}$0
