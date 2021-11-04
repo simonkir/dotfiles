@@ -80,7 +80,7 @@ super + alt + k
 
 # discord (browser)
 super + alt + d
-    qutebrowser -s tabs.show never https://discord.com/channels/@me
+    qutebrowser https://discord.com/channels/@me
 
 # discord (app)
 super + alt + shift + d
