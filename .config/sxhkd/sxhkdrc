@@ -42,6 +42,10 @@ super + alt + e
 super + alt + shift + e
     emacs
 
+# pdf viewer
+super + alt + z
+    zathura
+
 # # file browser
 # super + alt + b
 #     termite -e ~/.config/vifm/scripts/vifmrun
