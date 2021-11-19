@@ -118,8 +118,8 @@
     "0" 'org-preview-latex-scale-reset
     "s" 'org-preview-latex-scale-set
 
-    "I" 'org-toggle-inline-images
-    "i" 'org-display-inline-images)
+    "i" 'org-toggle-inline-images
+    "I" 'org-display-inline-images)
 
   (general-def 'normal
     "SPC e" 'org-edit-src-exit))
