@@ -345,6 +345,7 @@ def init_widgets_list():
             discharge_char = "∨",
             full_string = "full",
             update_interval = 10,
+            background = colors[9],
         ),
         widget.Sep(
             linewidth = sep_linewidth,
