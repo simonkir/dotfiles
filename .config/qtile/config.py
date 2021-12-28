@@ -486,6 +486,7 @@ widgets_screen1 = init_widgets(True)  # tray
 widgets_screen2 = init_widgets(False) # no tray
 
 def init_screens():
+    subprocess.call([home + '/.screenlayout/default.sh'])
     return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.65)),
             Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.65))]
 screens = init_screens()
@@ -498,14 +499,14 @@ screens = init_screens()
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
+    #home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart-once.sh'])
 
 @hook.subscribe.startup
 def start_always():
     # Set the cursor to something sane in X
     #subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
-    home = os.path.expanduser('~')
+    #home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart-always.sh'])
 
 

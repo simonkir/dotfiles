@@ -9,11 +9,8 @@ function run {
 
 
 
-~/.screenlayout/default.sh &
-
 #start sxhkd to replace Qtile native key-bindings
 sxhkd -c ~/.config/sxhkd/sxhkdrc &
-
 
 # starting utility applications at boot time
 # run variety &
