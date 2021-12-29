@@ -18,7 +18,7 @@ run volumeicon &
 run nm-applet &
 # blueberry-tray &
 
-picom --config $HOME/.config/qtile/scripts/picom.conf &
+picom &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run xfce4-power-manager &
