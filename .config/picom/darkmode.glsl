@@ -5,6 +5,7 @@
 // In other words, the invert flag will now only invert the 
 // lightness value. This helps preserve the look of pictures and
 // things while keeping the high contrast look.
+
 uniform float opacity;
 uniform bool invert_color;
 uniform sampler2D tex;

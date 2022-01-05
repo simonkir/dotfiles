@@ -1,10 +1,8 @@
-#################################################################
-# KEYBOARD BINDINGS FOR ANY WM
-#################################################################
+# -*- mode: conf -*-
 
-# terminal
-super + Return
-    termite
+#################################################################
+# WM-RELATED KEYBINDS
+#################################################################
 
 # Xkill
 super + Escape
@@ -34,6 +32,10 @@ super + alt + f
 super + alt + r
 	pkill -USR1 -x sxhkd
 
+# terminal
+super + Return
+    termite
+
 # task manager
 super + alt + h
     termite -e htop
@@ -49,10 +51,6 @@ super + alt + shift + e
 # pdf viewer
 super + alt + z
     zathura
-
-# # file browser
-# super + alt + b
-#     termite -e ~/.config/vifm/scripts/vifmrun
 
 # blender
 super + alt + b
