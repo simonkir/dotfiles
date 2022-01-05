@@ -9,7 +9,10 @@ chmod +x ~/.config/vifm/scripts/vifmrun
 chmod +x ~/.config/spectrwm/scripts/bar.sh
 chmod +x ~/.screenlayout/default.sh
 chmod +x ~/.emacs.d/launch-daemon.sh
+
+# picom
 chmod +x ~/.config/picom/picom.sh
+chmod +x ~/.config/picom/toggle-darkmode.sh
 
 # qtile config permissions
 chmod +x ~/.config/qtile/scripts/autostart-always.sh

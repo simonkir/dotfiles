@@ -22,6 +22,10 @@ super + 9
 super + 0
     arcolinux-logout
 
+# toggle dark mode
+super + alt + f
+    ~/.config/picom/toggle-darkmode.sh
+
 #################################################################
 # APPLICATIONS
 #################################################################
