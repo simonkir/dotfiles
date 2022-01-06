@@ -487,7 +487,10 @@ widgets_screen1 = init_widgets(True)  # tray
 widgets_screen2 = init_widgets(False) # no tray
 
 def init_screens():
-    subprocess.call([home + '/.screenlayout/default.sh'])
+    try:
+        subprocess.call([home + '/.screenlayout/default.sh'])
+    except FileNotFoundError:
+        pass
     return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.65)),
             Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.65))]
 screens = init_screens()
