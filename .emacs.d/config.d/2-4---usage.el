@@ -33,6 +33,10 @@
 
 ; insertion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq-default tab-width 4)
+
+
+
 (use-package evil-lion
   :after evil
   :ensure t

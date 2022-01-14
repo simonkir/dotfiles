@@ -17,4 +17,7 @@
 
 (use-package calc
   :defer t
-  :general ('normal 'override "SPC r c" 'calc))
+  :general ('normal 'override "SPC r C" 'calc))
+
+(general-def 'normal 'override
+  "SPC r c" 'quick-calc)

@@ -58,6 +58,9 @@
 (general-def 'normal 'override
  "SPC ," 'evil-window-next)
 
+(general-def '(normal insert) 'override
+  "C-SPC" 'evil-window-next)
+
 
 
 ; buffers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
