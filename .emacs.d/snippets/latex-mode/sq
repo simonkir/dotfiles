@@ -2,4 +2,4 @@
 # name: sqrt
 # key: sq
 # --
-\sqrt{${1:radicand}}$0
+\sqrt{$1}$0

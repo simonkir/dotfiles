@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: nsqrt
+# key: nsq
+# --
+\sqrt[$1]{$2}$0

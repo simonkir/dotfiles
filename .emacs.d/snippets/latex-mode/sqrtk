@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: sqrtk
-# key: sqk
-# --
-\sqrt[${1:k}]{${2:radicand}}$0

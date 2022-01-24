@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: vrule
-# key: |
+# key: vr
 # --
 \vrule$0
