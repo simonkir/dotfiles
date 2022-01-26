@@ -33,18 +33,21 @@
   :config
   (add-hook    'org-mode-hook                'org-num-mode)
   (add-hook    'org-mode-hook                'org-indent-mode)
+  (add-hook    'org-mode-hook                'org-display-inline-images)
   (add-hook    'org-babel-after-execute-hook 'org-display-inline-images)
 
   (add-to-list 'org-latex-packages-alist     '("" "IEEEtrantools" t))
 
 
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((jupyter . t)))
+  ;; disabled due to long loading time
+  ;;(org-babel-do-load-languages
+  ;; 'org-babel-load-languages
+  ;; '((jupyter . t)))
 
 
 
+  (setq org-image-actual-width nil)
   (setq org-preview-latex-scale-increment 0.2)
   (setq org-preview-latex-scale 1.5)
   (setq org-preview-latex-default-scale org-preview-latex-scale)
@@ -80,16 +83,23 @@
 
   ; editing source code blocks
   (general-def 'normal org-mode-map
+
+	;; – toggle checkboxes
+	;; – renumber ordered list
+	;; – realign table
+	;; – execute dynamic block
+	;; – remove highlights
+	;; – insert tags
     "RET" 'org-ctrl-c-ctrl-c
+
     "SPC e" 'org-edit-special)
 
 
   ; general mappings
   (general-def 'normal org-mode-map :prefix "SPC SPC"
-    "o" 'org-ctrl-c-minus
-    "-" 'org-ctrl-c-minus
-    "i" 'org-ctrl-c-minus
-    "b" 'org-ctrl-c-minus
+    "-" 'org-ctrl-c-minus ;; separator line in table
+    "i" 'org-ctrl-c-minus ;; toggle TODO item
+    "b" 'org-ctrl-c-minus ;; cycle list bullet style
 
     "TAB"       'org-table-toggle-column-width
     "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
@@ -157,7 +167,6 @@
 ; misc ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-superstar
-  :after org
   :ensure t
   :custom
   (org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
@@ -169,7 +178,6 @@
 
 
 (use-package evil-org
-  :after org
   :ensure t
   :hook
   (org-mode . evil-org-mode))
