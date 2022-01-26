@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: IEEEeqnarray
-# key: la_IEEEeq
+# name: equation (IEEEeqnarray)
+# key: eq
 # --
 #+begin_latex latex
-\begin{IEEEeqnarray*}{rCl+x*}
+\begin{IEEEeqnarray*}{$1rCl+x*}
   $0
 \end{IEEEeqnarray*}
 #+end_latex
