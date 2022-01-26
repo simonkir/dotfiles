@@ -96,14 +96,6 @@
 
 
 
-(use-package yasnippet-snippets
-  :after yasnippet
-  :ensure t
-  :config
-  (yas-reload-all))
-
-
-
 (use-package autoinsert
   :demand t
   :custom
@@ -163,14 +155,6 @@
  "0" 'text-scale-adjust
  "+" 'text-scale-adjust
  "-" 'text-scale-adjust)
-
-
-
-(use-package pretty-mode
-  :after python
-  :ensure t
-  :hook
-  (python-mode . turn-on-pretty-mode))
 
 
 
