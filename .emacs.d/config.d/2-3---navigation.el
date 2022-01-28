@@ -96,7 +96,6 @@
 
 (use-package bookmark
   :demand t
-
   :config
   (general-def 'normal 'override
     "SPC f b" 'ido-bookmark-jump)
@@ -112,43 +111,33 @@
 
 (use-package recentf
   :demand t
-
-  :custom
-  (recentf-max-saved-items 100)
-
   :config
-  (recentf-mode t)
+  (setq recentf-max-saved-items 100)
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
+  (recentf-mode t)
   (general-def 'normal 'override "SPC f r" 'recentf-ido-find-file))
 
 
 
 (use-package dired
   :defer t
-
-  :custom
-  (dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
-
+  :general ('normal 'override "SPC f D" 'dired)
   :config
+  (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
   (general-def 'normal dired-mode-map
     "v" 'dired-view-file
     "h" 'dired-up-directory
-    "l" 'dired-find-file)
+    "l" 'dired-find-file))
 
-  :general ('normal 'override :prefix "SPC f"
-                    "D" 'dired))
 
 
 
 (use-package dired-x
   :defer t
-  
+  :general ('normal 'override "SPC f d" 'dired-jump)
   :hook
   (dired-mode . dired-hide-details-mode)
-  (dired-mode . dired-omit-mode)
-
-  :general ('normal 'override :prefix "SPC f"
-                    "d" 'dired-jump))
+  (dired-mode . dired-omit-mode))
 
 
 

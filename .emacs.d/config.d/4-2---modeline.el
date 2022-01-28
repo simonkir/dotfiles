@@ -5,13 +5,10 @@
 ;; note: requires running ‚all-the-icons-install-fonts‘
 ;; for the icons to appear correctly
 (use-package doom-modeline
-  :demand t
   :ensure t
-
-  :custom
-  ;; needs to be set explicitly when running in server mode
-  (doom-modeline-icon t)
-  (doom-modeline-buffer-encoding nil)
-
+  :demand t
   :config
+  ;; needs to be set explicitly when running in server mode
+  (setq doom-modeline-icon t)
+  (setq doom-modeline-buffer-encoding nil)
   (doom-modeline-mode 't))

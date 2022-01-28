@@ -5,15 +5,12 @@
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
 
 (use-package dashboard
-  :demand t
   :ensure t
-
-  :custom
-  (dashboard-items             '((bookmarks . 10) (recents . 10)))
-  (dashboard-startup-banner    'logo)
-  (dashboard-set-heading-icons t)
-  (dashboard-set-file-icons    t)
-  (dashboard-center-content    t)
-
+  :demand t
   :config
+  (setq dashboard-items             '((bookmarks . 10) (recents . 10)))
+  (setq dashboard-startup-banner    'logo)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons    t)
+  (setq dashboard-center-content    t)
   (dashboard-setup-startup-hook))

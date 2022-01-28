@@ -4,14 +4,12 @@
 
 (use-package calc
   :defer t
-  :general
-  ('normal 'override
+  :general ('normal 'override
      "SPC r C" 'calc
      "SPC r c" 'quick-calc)
 
   :config
   (setq calc-multiplication-has-precedence nil)
-
   (add-hook 'calc-mode-hook 'calc-algebraic-mode)
 
   (general-def 'normal calc-mode-map "SPC" nil) ;; unbind SPC for the following to work

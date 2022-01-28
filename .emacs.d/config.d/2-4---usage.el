@@ -26,8 +26,7 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  :hook
-  (prog-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 
 
@@ -38,8 +37,8 @@
 
 
 (use-package evil-lion
-  :after evil
   :ensure t
+  :after evil
   :general ('(normal visual) 'override :prefix "g"
             "l" 'evil-lion-left
             "L" 'evil-lion-right))
@@ -47,11 +46,10 @@
 
 
 (use-package evil-surround
+  :ensure t
   :after evil
   :defer 1
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
+  :config (global-evil-surround-mode 1))
 
 
 
@@ -65,44 +63,39 @@
 
 (use-package company
   :ensure t
-  :custom
-  (company-idle-delay 0.3)
-  (company-minimum-prefix-length 2)
+  :hook
+  (after-init . company-tng-mode)
+  (after-init . global-company-mode)
 
   :config
-  (general-def company-active-map "C-w" 'evil-delete-backward-word)
+  (setq company-idle-delay 0.3)
+  (setq company-minimum-prefix-length 2)
+  (general-def company-active-map "C-w" 'evil-delete-backward-word))
 
-  :hook
-  ((after-init . company-tng-mode)
-   (after-init . global-company-mode)))
 
 
 
 (use-package company-math
-  :after company
   :ensure t
-  :config
-  (add-to-list 'company-backends 'company-math-symbols-unicode))
+  :after company
+  :config (add-to-list 'company-backends 'company-math-symbols-unicode))
 
 
 
 ; snippets & templates ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
-  :demand t
   :ensure t
-  :config
-  (yas-global-mode))
+  :demand t
+  :config (yas-global-mode))
 
 
 
 (use-package autoinsert
   :demand t
-  :custom
-  (auto-insert t)
-  (auto-insert-directory "~/.emacs.d/templates/")
-
   :config
+  (setq auto-insert t)
+  (setq auto-insert-directory "~/.emacs.d/templates/")
   (define-auto-insert 'org-mode "org-mode.org")
   (auto-insert-mode t))
 
@@ -120,33 +113,32 @@
 ; spell checking  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flyspell
-  :custom
-  (flyspell-issue-message-flag nil)
-  (ispell-dictionary "de_DE")
+  :defer t
+  :general ('normal 'override :prefix "SPC t"
+                    "s" 'sk:flyspell-mode
+                    "S" 'ispell-change-dictionary)
 
   :config
+  (setq flyspell-issue-message-flag nil)
+  (setq ispell-dictionary "de_DE")
   (defun sk:flyspell-mode ()
     (interactive)
     (if (bound-and-true-p flyspell-mode)
         (flyspell-mode 0)
       (flyspell-mode 1)
-      (flyspell-buffer)))
+      (flyspell-buffer))))
 
-  :general ('normal 'override :prefix "SPC t"
-                    "s" 'sk:flyspell-mode
-                    "S" 'ispell-change-dictionary))
 
 
 ; visual aids  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column
   :ensure t
-  :custom
-  (visual-fill-column-center-text t)
-
   :general ('normal 'override :prefix "SPC t"
                     "v" 'visual-fill-column-mode
-                    "V" 'set-fill-column))
+                    "V" 'set-fill-column)
+
+  :config (setq visual-fill-column-center-text t))
 
 
 
@@ -166,10 +158,6 @@
 
 (use-package mixed-pitch
   :ensure t
-  :custom
-  (mixed-pitch-variable-pitch-cursor nil) ;; keep filled cursor
-
-  :hook
-  ((org-mode TeX-mode) . mixed-pitch-mode)
-
-  :general ('normal 'override "SPC t m" 'mixed-pitch-mode))
+  :hook ((org-mode TeX-mode) . mixed-pitch-mode)
+  :general ('normal 'override "SPC t m" 'mixed-pitch-mode)
+  :config (setq mixed-pitch-variable-pitch-cursor nil)) ;; keep filled cursor

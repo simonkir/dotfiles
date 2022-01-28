@@ -4,7 +4,5 @@
 
 (use-package magit
   :ensure t
-  :config
-  (add-hook 'git-commit-mode-hook 'evil-insert-state)
-
-  :general ('normal 'override "SPC g" 'magit-file-dispatch))
+  :general ('normal 'override "SPC g" 'magit-file-dispatch)
+  :config (add-hook 'git-commit-mode-hook 'evil-insert-state))

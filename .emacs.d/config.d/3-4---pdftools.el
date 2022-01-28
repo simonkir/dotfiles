@@ -5,13 +5,11 @@
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
-
-  :custom
-  (pdf-view-resize-factor 1.1)
-  (pdf-view-display-size 'fit-page)
-  (pdf-annot-activate-created-annotations t)
-
   :config
+  (setq pdf-view-resize-factor 1.1)
+  (setq pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t)
+
   (pdf-tools-install)
 
   (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
@@ -40,11 +38,9 @@
 
 (use-package doc-view
   :defer t
-
-  :custom
-  (doc-view-continuous t)
-
   :config
+  (setq doc-view-continuous t)
+
   (defun sk:doc-view-goto-page (count)
     "Goto page COUNT
   if COUNT isn't supplied, go to the last page"

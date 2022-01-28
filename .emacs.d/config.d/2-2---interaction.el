@@ -17,13 +17,11 @@
 
 (use-package ido
   :demand t
-
-  :custom
-  (ido-enable-flex-matching nil)
-  (ido-create-new-buffer 'always)
-  (ido-everywhere t)
-
   :config
+  (setq ido-enable-flex-matching nil)
+  (setq ido-create-new-buffer 'always)
+  (setq ido-everywhere t)
+
   (defun sk:ido-custom-keys ()
     (general-def ido-completion-map
          "C-d" 'ido-kill-buffer-at-head

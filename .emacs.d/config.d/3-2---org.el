@@ -6,30 +6,6 @@
 
 (use-package org
   :defer t
-
-  :custom
-  (org-src-window-setup 'current-window) ;; don't spread across two windows
-
-  ;; section numbering & indentation
-  (org-startup-folded     t)
-  (org-hide-leading-stars t)
-  (org-num-max-level      4)
-
-  ;; beautify fonts & font effects
-  (org-hide-emphasis-markers          t)
-  (org-fontify-whole-heading-line     t)
-  (org-fontify-done-headline          t)
-  (org-fontify-quote-and-verse-blocks t)
-
-  (org-list-demote-modify-bullet
-        '(("+" . "-") ("-" . "+")
-          ("1." . "-") ("1)" . "-")))
-
-  ;;(setq org-src-tab-acts-natively t)
-  (org-confirm-babel-evaluate nil)
-
-
-
   :config
   (add-hook    'org-mode-hook                'org-num-mode)
   (add-hook    'org-mode-hook                'org-indent-mode)
@@ -39,20 +15,37 @@
 
   (add-to-list 'org-latex-packages-alist     '("" "IEEEtrantools" t))
 
+  ;; content
+  (setq org-startup-folded     t)
+  (setq org-hide-leading-stars t)
+  (setq org-num-max-level      4)
+  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
+  (setq org-image-actual-width nil)
+  (setq org-list-demote-modify-bullet
+        '(("+" . "-") ("-" . "+")
+          ("1." . "-") ("1)" . "-")))
+
+  ;;(setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil)
+
+  ;; beautify fonts & font effects
+  (setq org-hide-emphasis-markers          t)
+  (setq org-fontify-whole-heading-line     t)
+  (setq org-fontify-done-headline          t)
+  (setq org-fontify-quote-and-verse-blocks t)
+
+  ;; latex preview
+  (setq org-preview-latex-scale-increment 0.2)
+  (setq org-preview-latex-scale 1.5)
+  (setq org-preview-latex-default-scale org-preview-latex-scale)
+  (plist-put org-format-latex-options :scale org-preview-latex-default-scale)
+
 
 
   ;; disabled due to long loading time
   ;;(org-babel-do-load-languages
   ;; 'org-babel-load-languages
   ;; '((jupyter . t)))
-
-
-
-  (setq org-image-actual-width nil)
-  (setq org-preview-latex-scale-increment 0.2)
-  (setq org-preview-latex-scale 1.5)
-  (setq org-preview-latex-default-scale org-preview-latex-scale)
-  (plist-put org-format-latex-options :scale org-preview-latex-default-scale)
 
 
 
@@ -142,7 +135,6 @@
 
 (use-package ox
   :after org
-
   :general ('normal org-mode-map :prefix "SPC SPC"
                     "X" 'org-export-dispatch
                     "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
@@ -151,7 +143,6 @@
 
 (use-package ox-latex
   :after ox
-
   :config
   (add-to-list 'org-latex-classes '("report-nopart" "\\documentclass[11pt]{report}"
                                     ("\\chapter{%s}" . "\\chapter*{%s}")
@@ -170,16 +161,14 @@
 
 (use-package org-superstar
   :ensure t
-  :custom
-  (org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
-  (org-superstar-item-bullet-alist '((42 . "•") (43 . "→") (45 . "–")))
+  :hook (org-mode . org-superstar-mode)
+  :config
+  (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
+  (setq org-superstar-item-bullet-alist '((42 . "•") (43 . "→") (45 . "–"))))
 
-  :hook
-  (org-mode . org-superstar-mode))
 
 
 
 (use-package evil-org
   :ensure t
-  :hook
-  (org-mode . evil-org-mode))
+  :hook (org-mode . evil-org-mode))
