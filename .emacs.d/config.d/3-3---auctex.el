@@ -103,3 +103,10 @@
     "m" 'sk:activate-tex-alignment-keybinds-matrix
     "M" 'sk:deactivate-tex-alignment-keybinds-matrix
     "K" 'sk:deactivate-tex-alignment-keybinds-all)
+
+
+
+(use-package evil-tex
+  :ensure t
+  :defer t
+  :hook (LaTeX-mode . evil-tex-mode))
