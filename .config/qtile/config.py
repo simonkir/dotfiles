@@ -199,7 +199,8 @@ def assign_app_group(client):
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
     d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox", "qutebrowser"]
     d[group_names[1]] = ["urxvt", "termite", "emacs"]
-    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura", "Blender"]
+    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
+                         "Blender", "VirtualBox Machine", "VirtualBox Manager"]
     d[group_names[3]] = ["Chromium", "chromium"]
 
     wm_class = client.window.get_wm_class()[0]
@@ -522,9 +523,10 @@ def start_always():
 # settings ####################################################################
 auto_fullscreen            = True
 bring_front_click          = False
-cursor_warp                = True
+cursor_warp                = False
 follow_mouse_focus         = True
 focus_on_window_activation = "smart"
+reconfigure_screens        = True
 
 dgroups_key_binder = None
 dgroups_app_rules = []
