@@ -1,9 +1,9 @@
 #+latex_class: article
 #+latex_class_options: [a4paper]
-
 #+latex_header: \usepackage{a4wide,german}
+
 #+options: toc:nil
 
 #+title: Lösungen 
-#+date: x 2021
+#+date: x 2022
 #+author: Simon K., Js1
