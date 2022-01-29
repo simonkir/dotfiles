@@ -24,7 +24,7 @@
   (setq org-list-demote-modify-bullet
         '(("+" . "-") ("-" . "+")
           ("1." . "-") ("1)" . "-")))
-  (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+  (setq org-blank-before-new-entry '((heading . t) (plain-list-item . nil)))
 
   ;;(setq org-src-tab-acts-natively t)
   (setq org-confirm-babel-evaluate nil)
