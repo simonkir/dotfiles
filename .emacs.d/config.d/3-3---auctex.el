@@ -8,8 +8,8 @@
   :init
   ;; in init because org-mode needs it too
   (setq texmathp-tex-commands '())
-  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on
-                                              "IEEEeqnarray*" env-on)))
+  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on)))
+  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray\*" env-on)))
 
 
 
