@@ -5,6 +5,25 @@
 
 ; prettify symbols mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun sk:prettify-symbols-org-mode ()
+  (add-to-list 'prettify-symbols-alist '("[ ]" . "☐"))
+  (add-to-list 'prettify-symbols-alist '("[-]" . (?☐ (Bc . Bc) ?-)))
+  (add-to-list 'prettify-symbols-alist '("[X]" . "☑"))
+  (add-to-list 'prettify-symbols-alist '("#+title" . (?\s (Bc . Bc) ?𝙏)))
+  (add-to-list 'prettify-symbols-alist '("#+subtitle" . (?\s (Bc . Bc) ?𝙩)))
+  (add-to-list 'prettify-symbols-alist '("#+author" . (?\s (Bc . Bc) ?𝘼)))
+  (add-to-list 'prettify-symbols-alist '("#+date" . (?\s (Bc . Bc) ?𝘿)))
+  (add-to-list 'prettify-symbols-alist '("#+options" . (?\s (Bc . Bc) ?☸)))
+  (add-to-list 'prettify-symbols-alist '("#+latex_class" . (?\s (Bc . Bc) ?🄻)))
+  (add-to-list 'prettify-symbols-alist '("#+latex_class_options" . (?\s (Bc . Bc) ?🄻)))
+  (add-to-list 'prettify-symbols-alist '("#+latex_header" . (?\s (Bc . Bc) ?🅻)))
+  (add-to-list 'prettify-symbols-alist '("#+attr_org" . (?\s (Bc . Bc) ?⒪)))
+  (add-to-list 'prettify-symbols-alist '("#+attr_latex" . (?\s (Bc . Bc) ?🄛)))
+  (add-to-list 'prettify-symbols-alist '("#+begin_quote" . (?\s (bc . bc) ?“)))
+  (add-to-list 'prettify-symbols-alist '("#+end_quote" . (?\s (bc . bc) ?”)))
+  (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
+  (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝))))
+
 (defun sk:prettify-symbols-prog-mode ()
   ;;(add-to-list 'prettify-symbols-alist '("*" . "×")) ;; very similar to x
   ;;(add-to-list 'prettify-symbols-alist '("/" . "÷")) ;; very similar to +
@@ -48,6 +67,7 @@
 (general-def 'normal 'override
   "SPC t p" 'prettify-symbols-mode)
 
+(add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode())
 (add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode())
 (add-hook 'java-mode-hook 'sk:prettify-symbols-java-mode())
 (add-hook 'python-mode-hook 'sk:prettify-symbols-python-mode())
