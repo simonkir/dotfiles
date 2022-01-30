@@ -47,7 +47,7 @@
     "p" 'preview-at-point
     "P" 'preview-clearout-at-point
     "b" 'preview-buffer
-    "B" 'preview-clearout-buffer))
+    "B" 'preview-clearout-buffer)
 
 
 
@@ -98,7 +98,7 @@
     "E" 'sk:deactivate-tex-alignment-keybinds-equality
     "m" 'sk:activate-tex-alignment-keybinds-matrix
     "M" 'sk:deactivate-tex-alignment-keybinds-matrix
-    "K" 'sk:deactivate-tex-alignment-keybinds-all)
+    "K" 'sk:deactivate-tex-alignment-keybinds-all))
 
 
 
