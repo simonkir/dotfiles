@@ -11,6 +11,7 @@
   (add-hook    'org-mode-hook                'org-indent-mode)
   (add-hook    'org-mode-hook                'org-display-inline-images)
   (add-hook    'org-mode-hook                'org-toggle-pretty-entities)
+  (add-hook    'org-mode-hook                'flyspell-mode)
   (add-hook    'org-babel-after-execute-hook 'org-display-inline-images)
 
   (add-to-list 'org-latex-packages-alist     '("" "IEEEtrantools" t))
