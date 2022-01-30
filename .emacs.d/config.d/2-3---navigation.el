@@ -17,13 +17,10 @@
   :ensure t
   :general
   ('(normal visual) 'override :prefix "SPC a"
-   "a" 'avy-goto-word-or-subword-1
    "c" 'avy-goto-char-timer
+   "h" 'avy-org-goto-heading-timer
    "w" 'avy-goto-word-or-subword-1
-   "W" 'avy-goto-word
-   "l" 'avy-goto-line
-   "j" 'avy-goto-line-below
-   "k" 'avy-goto-line-above))
+   "W" 'avy-goto-word))
 
 
 
