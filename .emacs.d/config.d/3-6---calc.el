@@ -5,8 +5,8 @@
 (use-package calc
   :defer t
   :general ('normal 'override
-     "SPC r C" 'calc
-     "SPC r c" 'quick-calc)
+     "SPC r c" 'calc
+     "SPC r C" 'quick-calc)
 
   :config
   (setq calc-multiplication-has-precedence nil)
@@ -20,5 +20,5 @@
 	"S" 'calc-poly-roots
 	"d" 'calc-derivative
 	"t" 'calc-taylor
-	"i" 'calc-integral))
-	;;"I" '(lambda () (interactive) (setq current-prefix-arg 4) (calc-integral))))
+	"i" 'calc-integral
+	"I" 'calc-num-integral))
