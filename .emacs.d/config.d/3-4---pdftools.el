@@ -6,21 +6,20 @@
   :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
+  (pdf-tools-install)
+
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-view-display-size 'fit-page)
   (setq pdf-annot-activate-created-annotations t)
-
-  (pdf-tools-install)
 
   (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
   (add-hook 'text-mode-hook 'evil-insert-state)
 
   (general-def 'normal pdf-view-mode-map
-    "J" 'pdf-view-next-page
-    "K" 'pdf-view-previous-page)
-  
-  (general-def 'normal pdf-view-mode-map
-    "=" 'pdf-view-fit-page-to-window)
+	"SPC" nil
+    "J"   'pdf-view-next-page
+    "K"   'pdf-view-previous-page
+    "="   'pdf-view-fit-page-to-window)
 
   (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"
     "w" 'pdf-annot-add-squiggly-markup-annotation
@@ -29,7 +28,6 @@
     "u" 'pdf-annot-add-underline-markup-annotation
     "H" 'pdf-annot-add-markup-annotation)
 
-  (general-def 'normal pdf-view-mode-map "SPC" nil)
   (general-def 'normal pdf-view-mode-map :prefix "SPC SPC"
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete))

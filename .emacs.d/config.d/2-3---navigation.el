@@ -15,14 +15,15 @@
 
 (use-package avy
   :ensure t
-  :general ('(normal visual) 'override :prefix "SPC a"
-            "a" 'avy-goto-word-or-subword-1
-            "c" 'avy-goto-char-timer
-            "w" 'avy-goto-word-or-subword-1
-            "W" 'avy-goto-word
-            "l" 'avy-goto-line
-            "j" 'avy-goto-line-below
-            "k" 'avy-goto-line-above))
+  :general
+  ('(normal visual) 'override :prefix "SPC a"
+   "a" 'avy-goto-word-or-subword-1
+   "c" 'avy-goto-char-timer
+   "w" 'avy-goto-word-or-subword-1
+   "W" 'avy-goto-word
+   "l" 'avy-goto-line
+   "j" 'avy-goto-line-below
+   "k" 'avy-goto-line-above))
 
 
 

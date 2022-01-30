@@ -5,9 +5,8 @@
 (use-package tex
   :ensure auctex
   :defer t
-
   :init
-  ;; in init because org-mode needs it, too
+  ;; in init because org-mode needs it too
   (setq texmathp-tex-commands '())
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on
                                               "IEEEeqnarray*" env-on)))
@@ -17,15 +16,23 @@
   :config
   (setq TeX-auto-save  t)
   (setq TeX-parse-self t)
-  (setq TeX-error-overview-open-after-TeX-run t)
+  (setq TeX-error-overview-open-after-TeX-run nil)
+
+
+
+  ; output / viewing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+  (setq TeX-source-correlate-mode  t)
+  (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
+
+
+
+  ; math settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (setq LaTeX-math-abbrev-prefix "#")
   (setq TeX-insert-braces nil)
-
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-mode  t)
-  (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
   (setq preview-scale-function      1.5)
   (setq preview-auto-cache-preamble t)
@@ -33,6 +40,8 @@
 
 
 
+  ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
   (general-def 'insert TeX-mode-map
     "<C-return>" '(lambda () (interactive) (insert " \\\\\n  ")))
 
@@ -50,6 +59,8 @@
     "B" 'preview-clearout-buffer)
 
 
+
+  ; special keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:activate-tex-alignment-keybinds-equality ()
     (interactive)

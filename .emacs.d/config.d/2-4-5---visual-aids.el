@@ -16,9 +16,10 @@
 
 (use-package visual-fill-column
   :ensure t
-  :general ('normal 'override :prefix "SPC t"
-                    "v" 'visual-fill-column-mode
-                    "V" 'set-fill-column)
+  :general
+  ('normal 'override :prefix "SPC t"
+    "v" 'visual-fill-column-mode
+    "V" 'set-fill-column)
 
   :config (setq visual-fill-column-center-text t))
 
@@ -26,9 +27,9 @@
 
 ; text scale
 (general-def 'normal 'override :prefix "SPC"
- "0" 'text-scale-adjust
- "+" 'text-scale-adjust
- "-" 'text-scale-adjust)
+  "0" 'text-scale-adjust
+  "+" 'text-scale-adjust
+  "-" 'text-scale-adjust)
 
 
 

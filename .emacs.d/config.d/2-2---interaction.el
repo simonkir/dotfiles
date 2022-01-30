@@ -8,18 +8,16 @@
 
 
 (use-package which-key
-  :defer 4
+  :defer 2
   :ensure t
-  :config
-  (which-key-mode))
+  :config (which-key-mode))
 
 
 
 (use-package smex
   :after ido
   :ensure t
-  :config
-  (smex-initialize)
+  :config (smex-initialize)
 
   :general
   ("M-x" 'smex)

@@ -9,7 +9,9 @@
   :demand t
   :config
   (yas-global-mode)
-  ;; whitespace removing functions from Magnar Sveen ;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ; whitespace removing functions from Magnar Sveen ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
   (defun yas-s-trim-left (s)
     "Remove whitespace at the beginning of S."
     (if (string-match "\\`[ \t\n\r]+" s)

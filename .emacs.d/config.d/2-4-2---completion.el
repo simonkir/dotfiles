@@ -33,7 +33,7 @@
   :config
   (setq company-idle-delay 0.3)
   (setq company-minimum-prefix-length 2)
-  (general-def company-active-map "C-w" 'evil-delete-backward-word))
+  (general-def company-active-map "C-w" nil))
 
 (use-package company-math
   :ensure t
