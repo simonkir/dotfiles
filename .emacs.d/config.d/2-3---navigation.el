@@ -8,7 +8,7 @@
 (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
 (setq mouse-wheel-scroll-amount '(5 ((shift) . 20)))
 (setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-follow-mouse 't)
+(setq mouse-wheel-follow-mouse t)
 
 (general-def 'normal 'override
  "SPC t f" 'follow-mode)
@@ -75,6 +75,7 @@
  "K" 'kill-buffer-and-window)
 
 (use-package ibuffer
+  :defer t
   :general ('normal 'override "SPC b B" 'ibuffer))
 
 
@@ -94,52 +95,7 @@
 
 
 
-(use-package bookmark
-  :demand t
-  :config
-  (general-def 'normal 'override
-    "SPC f b" 'ido-bookmark-jump)
-
-  (general-def 'normal 'override :prefix "SPC f B"
-    "B" 'edit-bookmarks
-    "d" 'bookmark-delete
-    "r" 'bookmark-relocate
-    "R" 'bookmark-rename
-    "s" 'bookmark-set))
-
-
-
-(use-package recentf
-  :demand t
-  :config
-  (setq recentf-max-saved-items 100)
-  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
-  (recentf-mode t)
-  (general-def 'normal 'override "SPC f r" 'recentf-ido-find-file))
-
-
-
-(use-package dired
-  :defer t
-  :general ('normal 'override "SPC f D" 'dired)
-  :config
-  (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
-  (general-def 'normal dired-mode-map
-    "v" 'dired-view-file
-    "h" 'dired-up-directory
-    "l" 'dired-find-file))
-
-
-
-
-(use-package dired-x
-  :defer t
-  :general ('normal 'override "SPC f d" 'dired-jump)
-  :hook
-  (dired-mode . dired-hide-details-mode)
-  (dired-mode . dired-omit-mode))
-
-
+; misc ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; quitting
 (general-def 'normal 'override :prefix "SPC"
@@ -157,15 +113,9 @@
 
 ; config operations ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (defun sk:config-visit ()
-;;   (interactive)
-;;   (find-file "~/.emacs.d/conf.org"))
-
 (defun sk:config-reload ()
   (interactive)
   (load-directory "~/.emacs.d/config.d"))
 
 (general-def 'normal 'override :prefix "SPC c"
- ;; "v" 'sk:config-visit
- ;; "e" 'sk:config-visit
  "r" 'sk:config-reload)
