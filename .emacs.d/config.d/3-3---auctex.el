@@ -30,8 +30,8 @@
 
   ; math settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (setq LaTeX-math-abbrev-prefix "#")
+  ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode
+  ;;(setq LaTeX-math-abbrev-prefix "#")
   (setq TeX-insert-braces nil)
 
   (setq preview-scale-function      1.5)
@@ -110,6 +110,20 @@
     "m" 'sk:activate-tex-alignment-keybinds-matrix
     "M" 'sk:deactivate-tex-alignment-keybinds-matrix
     "K" 'sk:deactivate-tex-alignment-keybinds-all))
+
+
+
+(use-package cdlatex
+  :ensure t
+  :defer t
+  :hook (LaTeX-mode . cdlatex-mode)
+  :config
+  (setq cdlatex-math-symbol-prefix ?#)
+  (setq cdlatex-paired-parens "$([{|")
+  (general-def cdlatex-mode-map
+	"#" 'cdlatex-math-symbol))
+	;;"TAB" nil
+	;;"<tab>" nil))
 
 
 
