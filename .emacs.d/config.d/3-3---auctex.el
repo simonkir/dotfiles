@@ -116,11 +116,14 @@
 (use-package cdlatex
   :ensure t
   :defer t
-  :hook (LaTeX-mode . cdlatex-mode)
+  :hook
+  (LaTeX-mode . cdlatex-mode)
+  (org-mode . org-cdlatex-mode)
+
   :config
   (setq cdlatex-math-symbol-prefix ?#)
   (setq cdlatex-paired-parens "$([{|")
-  (general-def cdlatex-mode-map
+  (general-def (cdlatex-mode-map org-mode-map)
 	"#" 'cdlatex-math-symbol))
 	;;"TAB" nil
 	;;"<tab>" nil))
