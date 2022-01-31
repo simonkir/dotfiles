@@ -51,21 +51,7 @@
 
   (setq org-src-window-setup 'current-window) ;; don't spread across two windows
   (setq org-confirm-babel-evaluate nil)
-
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
-
-  (general-def 'normal org-mode-map
-	;; – toggle checkboxes
-	;; – renumber ordered list
-	;; – realign table
-	;; – execute dynamic block
-	;; – remove highlights
-	;; – insert tags
-    "RET" 'org-ctrl-c-ctrl-c
-    "SPC e" 'org-edit-special)
-
-  (general-def 'normal
-    "SPC e" 'org-edit-src-exit)
 
 
 
@@ -89,6 +75,22 @@
     "F" '(lambda () (interactive) (org-table-eval-formula '(4)))
 
     "e" 'org-babel-execute-buffer)
+
+  (general-def 'normal org-mode-map
+	;; – toggle checkboxes
+	;; – renumber ordered list
+	;; – realign table
+	;; – execute dynamic block
+	;; – remove highlights
+	;; – insert tags
+    "RET" 'org-ctrl-c-ctrl-c
+    "SPC e" 'org-edit-special)
+
+  (general-def 'insert 'org-mode-map
+	"C-#" '(lambda () (interactive) (insert "#")))
+
+  (general-def 'normal
+    "SPC e" 'org-edit-src-exit)
 
 
 
