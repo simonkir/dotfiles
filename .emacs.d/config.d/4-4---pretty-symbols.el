@@ -64,12 +64,22 @@
   (add-to-list 'prettify-symbols-alist '("or" . "⋁"))
   (add-to-list 'prettify-symbols-alist '("def" . "ƒ")))
 
-(general-def 'normal 'override
-  "SPC t p" 'prettify-symbols-mode)
-
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode())
 (add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode())
 (add-hook 'java-mode-hook 'sk:prettify-symbols-java-mode())
 (add-hook 'python-mode-hook 'sk:prettify-symbols-python-mode())
 
 (global-prettify-symbols-mode)
+
+
+
+; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sk:toggle-pretty-mode ()
+  (interactive)
+  (prettify-symbols-mode 'toggle)
+  (when (derived-mode-p 'org-mode)
+	  (org-toggle-pretty-entities)))
+
+(general-def 'normal 'override
+  "SPC t p" 'sk:toggle-pretty-mode)
