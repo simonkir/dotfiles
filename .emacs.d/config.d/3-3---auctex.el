@@ -123,6 +123,7 @@
   :config
   (setq cdlatex-math-symbol-prefix ?#)
   (setq cdlatex-paired-parens "$([{|")
+  (setq cdlatex-math-symbol-alist '((?F ("\\Phi"))))
   (general-def (cdlatex-mode-map org-mode-map)
 	"#" 'cdlatex-math-symbol))
 	;;"TAB" nil
