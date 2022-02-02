@@ -40,7 +40,6 @@
  "j" 'evil-window-down
  "k" 'evil-window-up
  "l" 'evil-window-right
- "w" 'evil-window-next
  "c" 'evil-window-delete
  "C" 'kill-buffer-and-window)
 
