@@ -38,7 +38,6 @@
   (setq org-image-actual-width             nil)
 
   (add-hook 'org-mode-hook 'org-toggle-pretty-entities)
-  (add-hook 'org-mode-hook 'org-display-inline-images)
 
 
 
