@@ -36,7 +36,6 @@
 
   (setq preview-scale-function      1.5)
   (setq preview-auto-cache-preamble t)
-  (add-hook 'LaTeX-mode-hook 'prettify-symbols-mode)
 
 
 

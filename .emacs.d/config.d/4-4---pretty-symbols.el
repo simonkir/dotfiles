@@ -24,6 +24,17 @@
   (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
   (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝))))
 
+(defun sk:prettify-symbols-LaTeX-mode ()
+  (add-to-list 'prettify-symbols-alist '("\\left(" . (?\s (Bc . Bc) ?⸨)))
+  (add-to-list 'prettify-symbols-alist '("\\right)" . (?\s (Bc . Bc) ?⸩)))
+  (add-to-list 'prettify-symbols-alist '("\\left[" . "⟦"))
+  (add-to-list 'prettify-symbols-alist '("\\right]" . "⟧"))
+  (add-to-list 'prettify-symbols-alist '("\\left\\{" . "⦃"))
+  (add-to-list 'prettify-symbols-alist '("\\right\\}" . "⦄"))
+  (add-to-list 'prettify-symbols-alist '("\\left|" . "‖"))
+  (add-to-list 'prettify-symbols-alist '("\\right|" . "‖"))
+  (add-to-list 'prettify-symbols-alist '("\\degree" . "°")))
+
 (defun sk:prettify-symbols-prog-mode ()
   ;;(add-to-list 'prettify-symbols-alist '("*" . "×")) ;; very similar to x
   ;;(add-to-list 'prettify-symbols-alist '("/" . "÷")) ;; very similar to +
@@ -65,6 +76,10 @@
   (add-to-list 'prettify-symbols-alist '("def" . "ƒ")))
 
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode())
+(add-hook 'org-mode-hook 'sk:prettify-symbols-LaTeX-mode())
+(add-hook 'latex-mode-hook 'sk:prettify-symbols-LaTeX-mode())
+(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode())
+
 (add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode())
 (add-hook 'java-mode-hook 'sk:prettify-symbols-java-mode())
 (add-hook 'python-mode-hook 'sk:prettify-symbols-python-mode())
