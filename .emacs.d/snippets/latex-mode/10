@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: 10^{}
+# key: 10
+# --
+\cdot 10^{$1}$0
