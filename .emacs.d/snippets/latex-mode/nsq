@@ -2,4 +2,4 @@
 # name: nsqrt
 # key: nsq
 # --
-\sqrt[$1]{$2}$0
+\sqrt[$1]{$0}

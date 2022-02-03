@@ -2,4 +2,4 @@
 # name: integral
 # key: int
 # --
-\int_{$1}^{$2}$0
+\int_{$0}^{}
