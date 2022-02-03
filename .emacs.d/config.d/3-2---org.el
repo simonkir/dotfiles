@@ -50,7 +50,16 @@
 
   (setq org-src-window-setup 'current-window) ;; don't spread across two windows
   (setq org-confirm-babel-evaluate nil)
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+
+  (defun sk:org-edit-special-current-window ()
+	(interactive)
+	(setq org-src-window-setup 'current-window)
+	(org-edit-special))
+
+  (defun sk:org-edit-special-new-window ()
+	(interactive)
+	(setq org-src-window-setup 'split-window-right)
+	(org-edit-special))
 
 
 
@@ -83,7 +92,8 @@
 	;; – remove highlights
 	;; – insert tags
     "RET" 'org-ctrl-c-ctrl-c
-    "SPC e" 'org-edit-special)
+    "SPC e" 'sk:org-edit-special-current-window
+    "SPC E" 'sk:org-edit-special-new-window)
 
   (general-def 'insert 'org-mode-map
 	"C-#" '(lambda () (interactive) (insert "#")))
