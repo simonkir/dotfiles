@@ -326,32 +326,32 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-        # battery #############################################################
+        # # battery #############################################################
         # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[4],
+        # #     font = "FontAwesome",
+        # #     fontsize = 16,
+        # #     text = "  ",
+        # #     padding = 0,
+        # #     foreground = colors[4],
+        # # ),
+        # widget.Image(
+        #     filename = "~/.config/qtile/icons/battery.png",
+        #     margin = icon_margin,
         # ),
-        widget.Image(
-            filename = "~/.config/qtile/icons/battery.png",
-            margin = icon_margin,
-        ),
-        widget.Battery(
-            #hide_threshold = 0.9, # doesnt hide icon
-            low_percentage = 0.2,
-            notify_below = 0.25,
-            charge_char = "∧",
-            discharge_char = "∨",
-            full_string = "full",
-            update_interval = 10,
-            background = colors[9],
-        ),
-        widget.Sep(
-            linewidth = sep_linewidth,
-            padding = sep_padding,
-        ),
+        # widget.Battery(
+        #     #hide_threshold = 0.9, # doesnt hide icon
+        #     low_percentage = 0.2,
+        #     notify_below = 0.25,
+        #     charge_char = "∧",
+        #     discharge_char = "∨",
+        #     full_string = "full",
+        #     update_interval = 10,
+        #     background = colors[9],
+        # ),
+        # widget.Sep(
+        #     linewidth = sep_linewidth,
+        #     padding = sep_padding,
+        # ),
 
         # cpu #################################################################
         # widget.TextBox(
