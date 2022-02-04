@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: sqrt
+# name: square root
 # key: sq
 # --
 \sqrt{$0}

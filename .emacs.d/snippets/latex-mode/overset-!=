@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: should be equal to
+# name: should be equal to (!=)
 # key: !=
 # --
 \overset{!}{=}

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: ZZ
+# name: ZZ (whole number set)
 # key: zz
 # --
 \mathbb{Z}$0

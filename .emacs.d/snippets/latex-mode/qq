@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: QQ
+# name: QQ (rational number set)
 # key: qq
 # --
 \mathbb{Q}$0

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: CC
+# name: CC (complex number set)
 # key: cc
 # --
 \mathbb{C}$0

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: NN
+# name: NN (natural number set)
 # key: nn
 # --
 \mathbb{N}$0

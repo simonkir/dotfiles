@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: colors
+# name: color constants
 # key: colors
 # --
 C0 = "#1f77b4"

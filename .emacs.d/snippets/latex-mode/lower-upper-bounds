@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: integral lower & upper bounds
+# name: integral: lower & upper bounds
 # key: \right]
 # --
 \right]_{$0}^{}
