@@ -14,7 +14,7 @@
 
   (general-def 'normal calc-mode-map "SPC" nil) ;; unbind SPC for the following to work
   (general-def 'normal calc-mode-map :prefix "SPC SPC"
-	"c" 'calc-evaluate
+	"e" 'calc-evaluate
 	"c" 'calc-convert-units
 	"s" 'calc-solve-for
 	"S" 'calc-poly-roots
