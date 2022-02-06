@@ -11,7 +11,7 @@
 (setq mouse-wheel-follow-mouse t)
 
 (general-def 'normal 'override
- "SPC t f" 'follow-mode)
+  "SPC t f" 'follow-mode)
 
 
 
@@ -30,21 +30,21 @@
   (other-window 1))
 
 (general-def 'normal 'override :prefix "SPC w"
- "=" 'balance-windows
- "o" 'delete-other-windows
- "1" 'delete-other-windows
- "s" 'split-and-follow-horizontally
- "v" 'split-and-follow-vertically
-
- "h" 'evil-window-left
- "j" 'evil-window-down
- "k" 'evil-window-up
- "l" 'evil-window-right
- "c" 'evil-window-delete
- "C" 'kill-buffer-and-window)
+  "=" 'balance-windows
+  "o" 'delete-other-windows
+  "1" 'delete-other-windows
+  "s" 'split-and-follow-horizontally
+  "v" 'split-and-follow-vertically
+ 
+  "h" 'evil-window-left
+  "j" 'evil-window-down
+  "k" 'evil-window-up
+  "l" 'evil-window-right
+  "c" 'evil-window-delete
+  "C" 'kill-buffer-and-window)
 
 (general-def 'normal 'override
- "SPC ," 'evil-window-next)
+  "SPC ," 'evil-window-next)
 
 (general-def '(normal insert) 'override
   "C-SPC" 'evil-window-next)
@@ -58,9 +58,10 @@
   (kill-buffer (current-buffer)))
 
 (general-def 'normal 'override :prefix "SPC b"
- "q" 'quit-window
- "k" 'kill-current-buffer
- "K" 'kill-buffer-and-window)
+  "b" 'ido-switch-buffer
+  "q" 'quit-window
+  "k" 'kill-current-buffer
+  "K" 'kill-buffer-and-window)
 
 (use-package ibuffer
   :defer t
@@ -71,15 +72,15 @@
 ; files ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-def 'normal 'override :prefix "SPC f"
- "f" 'find-file
- "F" 'find-file-read-only
- "p" 'find-file-at-point
- "R" 'revert-buffer
- "s" 'save-buffer
- "S" 'save-some-buffers)
+  "f" 'find-file
+  "F" 'find-file-read-only
+  "p" 'find-file-at-point
+  "R" 'revert-buffer
+  "s" 'save-buffer
+  "S" 'save-some-buffers)
 
 (general-def 'normal 'override
- "SPC s" 'save-buffer)
+  "SPC s" 'save-buffer)
 
 
 
@@ -87,15 +88,15 @@
 
 ; quitting
 (general-def 'normal 'override :prefix "SPC"
- "ESC" 'keyboard-escape-quit
- "q" 'save-buffers-kill-terminal
- "Q" 'save-buffers-kill-emacs)
+  "ESC" 'keyboard-escape-quit
+  "q" 'save-buffers-kill-terminal
+  "Q" 'save-buffers-kill-emacs)
 
 ; help
 (general-def 'normal 'override :prefix "SPC h"
- "f" 'describe-function
- "v" 'describe-variable
- "k" 'describe-key)
+  "f" 'describe-function
+  "v" 'describe-variable
+  "k" 'describe-key)
 
 
 
@@ -106,4 +107,4 @@
   (load-directory "~/.emacs.d/config.d"))
 
 (general-def 'normal 'override :prefix "SPC c"
- "r" 'sk:config-reload)
+  "r" 'sk:config-reload)

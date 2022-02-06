@@ -4,6 +4,7 @@
 
 (use-package bookmark
   :demand t ;; needed for dashboard
+  :hook (after-init . bookmark-save)
   :config
   (general-def 'normal 'override
     "SPC f b" 'ido-bookmark-jump)

@@ -5,24 +5,23 @@
 (use-package ido
   :demand t
   :config
-  (setq ido-enable-flex-matching nil)
+  (setq ido-enable-flex-matching t)
+  ;;(setq ido-use-virtual-buffers 'auto)
   (setq ido-create-new-buffer 'always)
   (setq ido-everywhere t)
 
   (defun sk:ido-custom-keys ()
     (general-def ido-completion-map
          "C-d" 'ido-kill-buffer-at-head
-         "C-n" 'ido-next-match
          "C-j" 'ido-next-match
-         "C-k" 'ido-prev-match
-         "C-p" 'ido-prev-match))
+         "C-k" 'ido-prev-match))
   (add-hook 'ido-setup-hook 'sk:ido-custom-keys)
 
 
 
   ; ignoring buffers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq sk:ido-unignored-buffers '("*dashboard*"))
+  (setq sk:ido-unignored-buffers '("*dashboard*" "*scratch*"))
   (defun sk:ido-ignore-buffers-fun (name)
     "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
     (and (string-match "^\*" name)
@@ -48,12 +47,8 @@
     "Switch to bookmark interactively using `ido'."
     (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
     (bookmark-jump bname))
-  (add-hook 'after-init-hook 'bookmark-save)
 
-  (ido-mode 1)
-
-  (general-def 'normal 'override
-    "SPC b b" 'ido-switch-buffer))
+  (ido-mode 1))
 
 
 
