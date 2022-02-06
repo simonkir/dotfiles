@@ -182,7 +182,7 @@
   :hook (org-mode . org-superstar-mode)
   :config
   (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
-  (setq org-superstar-item-bullet-alist '((42 . "•") (43 . "→") (45 . "–"))))
+  (setq org-superstar-item-bullet-alist '((42 . "•") (43 . (?\s (Bc . Bc) ?→)) (45 . "–"))))
 
 
 
