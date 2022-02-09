@@ -18,6 +18,8 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
+  (add-hook 'LaTeX-mode-hook 'dubcaps-mode)
+
 
 
   ; output / viewing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

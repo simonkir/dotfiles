@@ -25,6 +25,7 @@
           ("1." . "-") ("1)" . "-")))
 
   ;;(add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'dubcaps-mode)
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
 
 
