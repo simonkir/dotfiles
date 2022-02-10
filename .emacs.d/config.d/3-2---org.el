@@ -44,10 +44,10 @@
 
   ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
-  ;; disabled due to long loading times
-  ;;(org-babel-do-load-languages
-  ;; 'org-babel-load-languages
-  ;; '((jupyter . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((gnuplot . t)))
+   ;;'((jupyter . t)))
 
   (setq org-src-window-setup 'current-window) ;; don't spread across two windows
   (setq org-confirm-babel-evaluate nil)

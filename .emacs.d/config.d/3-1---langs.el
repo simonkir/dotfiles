@@ -9,6 +9,12 @@
 
 
 
+(use-package gnuplot
+  :ensure t
+  :defer t)
+
+
+
 (use-package jupyter
   :ensure t
   :defer t)
