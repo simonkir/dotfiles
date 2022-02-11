@@ -146,7 +146,7 @@
     "s" 'org-preview-latex-scale-set
 
     "i" 'org-toggle-inline-images
-    "I" 'org-display-inline-images))
+    "I" 'org-redisplay-inline-images))
 
 
 
