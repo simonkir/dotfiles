@@ -5,5 +5,5 @@
 #+begin_src gnuplot :file /tmp/gnuplot.png :var data=$1
   set xlabel "$2 [$3]"
   set ylabel "$4 [$5]"
-  plot data using 1:2 with l lw 2$0
+  plot data using 1:2 with l$0
 #+end_src
