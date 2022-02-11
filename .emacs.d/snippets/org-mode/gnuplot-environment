@@ -3,8 +3,6 @@
 # key: plot
 # --
 #+begin_src gnuplot :file /tmp/gnuplot.png :var data=$1
-  reset
-  set zeroaxis
   set xlabel "$2"
   set ylabel "$3"
   plot data using 1:2 with l lw 2 title "$4"$0
