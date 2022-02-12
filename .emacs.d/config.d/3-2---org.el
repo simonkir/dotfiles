@@ -51,8 +51,9 @@
 
   (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
 
-  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
   (setq org-confirm-babel-evaluate nil)
+  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
+  (setq org-src-preserve-indentation t)
 
   (defun sk:org-edit-special-current-window ()
 	(interactive)

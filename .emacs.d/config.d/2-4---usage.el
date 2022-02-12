@@ -5,10 +5,7 @@
 ; insertion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default tab-width 4)
-
-(use-package popup-kill-ring
-  :ensure t
-  :general ('insert "M-y" 'popup-kill-ring))
+(setq-default indent-tabs-mode nil)
 
 
 
