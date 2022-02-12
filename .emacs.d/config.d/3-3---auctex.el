@@ -47,9 +47,7 @@
   (general-def 'normal TeX-mode-map :prefix "SPC SPC"
     "s"   'LaTeX-section            ;; insert section
     "e"   'LaTeX-environment        ;; insert environment
-    "TAB" 'LaTeX-fill-environment   ;; auto-indent
-    "l"   'TeX-command-master
-    "L"   'TeX-command-run-all)
+    "TAB" 'LaTeX-fill-environment)  ;; auto-indent
 
   (general-def 'normal TeX-mode-map :prefix "SPC SPC l"
     "l" 'preview-at-point
