@@ -18,15 +18,15 @@ set key    textcolor rgb "#bbc2cf" # white
 
 set linetype 1  lw 2 lc rgb "#99bb66" # green
 set linetype 2  lw 2 lc rgb "#ecbe7b" # yellow
-set linetype 3  lw 2 lc rgb "#dd8844" # orange
+set linetype 3  lw 2 lc rgb "#51afef" # blue
 set linetype 4  lw 2 lc rgb "#ff6655" # red
-set linetype 5  lw 2 lc rgb "#44b9b1" # teal
-set linetype 6  lw 2 lc rgb "#c678dd" # magenta
-set linetype 7  lw 2 lc rgb "#a9a1e1" # violet
-set linetype 8  lw 2 lc rgb "#51afef" # blue
-set linetype 9  lw 2 lc rgb "#46d9ff" # cyan
-set linetype 10 lw 2 lc rgb "#5699af" # cyan dark
-set linetype 11 lw 2 lc rgb "#2257a0" # blue dark
+set linetype 5  lw 2 lc rgb "#c678dd" # magenta
+set linetype 6  lw 2 lc rgb "#a9a1e1" # violet
+set linetype 7  lw 2 lc rgb "#46d9ff" # cyan
+set linetype 8  lw 2 lc rgb "#5699af" # cyan dark
+set linetype 9  lw 2 lc rgb "#2257a0" # blue dark
+set linetype 10 lw 2 lc rgb "#44b9b1" # teal
+set linetype 11 lw 2 lc rgb "#dd8844" # orange
 set linetype cycle 11
 
 # note: atm, this has no use and is only
