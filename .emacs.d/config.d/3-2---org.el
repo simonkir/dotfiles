@@ -170,6 +170,7 @@
   (general-def 'normal org-mode-map :prefix "SPC SPC i"
     "i" 'org-toggle-inline-images-at-point
 	"b" 'org-toggle-inline-images
+	"B" 'org-remove-inline-images
     "r" 'org-redisplay-inline-images))
 
 
