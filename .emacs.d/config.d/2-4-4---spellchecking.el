@@ -15,8 +15,8 @@
       (flyspell-buffer)))
 
   (general-def 'normal 'override :prefix "SPC i"
-	"i" 'sk:toggle-flyspell-mode
-	"d" 'ispell-change-dictionary
-	"c" 'flyspell-check-previous-highlighted-word
-	"j" 'evil-next-flyspell-error
-	"k" 'evil-prev-flyspell-error))
+    "i" 'sk:toggle-flyspell-mode
+    "d" 'ispell-change-dictionary
+    "c" 'flyspell-check-previous-highlighted-word
+    "j" 'evil-next-flyspell-error
+    "k" 'evil-prev-flyspell-error))

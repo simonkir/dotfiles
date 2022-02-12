@@ -8,7 +8,7 @@
   :init
   (setq evil-respect-visual-line-mode t
         evil-want-integration t
-		evil-want-keybinding nil)
+        evil-want-keybinding nil)
 
   :config
   (evil-mode 1)

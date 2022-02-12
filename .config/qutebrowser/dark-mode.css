@@ -12,13 +12,13 @@ html,
 body, body *,
 table
 {
-	background-color: #282C34 !important;
+    background-color: #282C34 !important;
 }
 
 /* default fg */
 body *
 {
-	color: #ABB2BF !important;
+    color: #ABB2BF !important;
 }
 
 /* default current line / selection */
@@ -33,7 +33,7 @@ a.BigButton,
 a.TabLink,
 .install[onclick]
 {
-	background: #44475A !important;
+    background: #44475A !important;
 }
 
 /* cyan */
@@ -44,7 +44,7 @@ a.active, a.active *,
 [href="#"]
 /*a:visited, a:visited *,*/
 {
-	color: #61AFEF !important;
+    color: #61AFEF !important;
 }
 
 /* purple */
@@ -61,5 +61,5 @@ h1, h2, h3, h4, h5, h6,
 /*strong,*/
 td
 {
-	color: #C678DD !important;
+    color: #C678DD !important;
 }

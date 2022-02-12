@@ -94,7 +94,7 @@
   (interactive)
   (prettify-symbols-mode 'toggle)
   (when (derived-mode-p 'org-mode)
-	  (org-toggle-pretty-entities)))
+      (org-toggle-pretty-entities)))
 
 (general-def 'normal 'override
   "SPC t p" 'sk:toggle-pretty-mode)

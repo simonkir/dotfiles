@@ -14,11 +14,11 @@
 
   (general-def 'normal calc-mode-map "SPC" nil) ;; unbind SPC for the following to work
   (general-def 'normal calc-mode-map :prefix "SPC SPC"
-	"e" 'calc-evaluate
-	"c" 'calc-convert-units
-	"s" 'calc-solve-for
-	"S" 'calc-poly-roots
-	"d" 'calc-derivative
-	"t" 'calc-taylor
-	"i" 'calc-integral
-	"I" 'calc-num-integral))
+    "e" 'calc-evaluate
+    "c" 'calc-convert-units
+    "s" 'calc-solve-for
+    "S" 'calc-poly-roots
+    "d" 'calc-derivative
+    "t" 'calc-taylor
+    "i" 'calc-integral
+    "I" 'calc-num-integral))

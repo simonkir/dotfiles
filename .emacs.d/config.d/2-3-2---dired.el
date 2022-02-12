@@ -12,11 +12,11 @@
     "v" 'dired-view-file
     "h" 'dired-up-directory
     "l" 'dired-find-file
-	"SPC" nil)
+    "SPC" nil)
 
   (general-def 'normal dired-mode-map :prefix "SPC SPC"
-	"d" 'dired-hide-details-mode
-	"a" 'dired-omit-mode))
+    "d" 'dired-hide-details-mode
+    "a" 'dired-omit-mode))
 
 
 

@@ -16,7 +16,7 @@
   (add-hook 'text-mode-hook 'evil-insert-state)
 
   (general-def 'normal pdf-view-mode-map
-	"SPC" nil
+    "SPC" nil
     "J"   'pdf-view-next-page
     "K"   'pdf-view-previous-page
     "="   'pdf-view-fit-page-to-window)

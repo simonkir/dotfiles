@@ -56,14 +56,14 @@
   (setq org-src-preserve-indentation t)
 
   (defun sk:org-edit-special-current-window ()
-	(interactive)
-	(setq org-src-window-setup 'current-window)
-	(org-edit-special))
+    (interactive)
+    (setq org-src-window-setup 'current-window)
+    (org-edit-special))
 
   (defun sk:org-edit-special-new-window ()
-	(interactive)
-	(setq org-src-window-setup 'split-window-right)
-	(org-edit-special))
+    (interactive)
+    (setq org-src-window-setup 'split-window-right)
+    (org-edit-special))
 
 
 
@@ -87,18 +87,18 @@
     "e" 'org-babel-execute-buffer)
 
   (general-def 'normal org-mode-map
-	;; – toggle checkboxes
-	;; – renumber ordered list
-	;; – realign table
-	;; – execute dynamic block
-	;; – remove highlights
-	;; – insert tags
+    ;; – toggle checkboxes
+    ;; – renumber ordered list
+    ;; – realign table
+    ;; – execute dynamic block
+    ;; – remove highlights
+    ;; – insert tags
     "RET" 'org-ctrl-c-ctrl-c
     "SPC e" 'sk:org-edit-special-current-window
     "SPC E" 'sk:org-edit-special-new-window)
 
   (general-def 'insert 'org-mode-map
-	"C-#" '(lambda () (interactive) (insert "#")))
+    "C-#" '(lambda () (interactive) (insert "#")))
 
   (general-def 'normal
     "SPC e" 'org-edit-src-exit)
@@ -139,11 +139,11 @@
 
 
   (defun sk:org-latex-preview-at-point ()
-	(interactive)
-	(if (or (org-in-block-p '("latex"))
-			(org-in-regexp "\$.*\$"))
-		(org-latex-preview)
-	  (message "not inside latex environment")))
+    (interactive)
+    (if (or (org-in-block-p '("latex"))
+            (org-in-regexp "\$.*\$"))
+        (org-latex-preview)
+      (message "not inside latex environment")))
 
 
 
@@ -162,17 +162,17 @@
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:org-toggle-inline-images-in-region (beg end)
-	"toggle image previews between `beg' and `end'."
-	(let ((overlays-in-region (-intersection (overlays-in beg end) org-inline-image-overlays)))
+    "toggle image previews between `beg' and `end'."
+    (let ((overlays-in-region (-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
           (mapc (lambda (ov)
-			  (delete-overlay ov)
-			  (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
+              (delete-overlay ov)
+              (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
             overlays-in-region)
         (org-display-inline-images t nil beg end))))
 
   (defun sk:org-toggle-inline-images-after-babel-run ()
-	"activates image preview for babel results
+    "activates image preview for babel results
 
 the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
     (interactive)
@@ -184,19 +184,19 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
           (when (eq 2 (- ln-results ln-end-src))
             (forward-line)
             (sk:org-toggle-inline-images-at-point))))
-	  (goto-char initial-point-position)))
+      (goto-char initial-point-position)))
 
   (defun sk:org-toggle-inline-images-at-point ()
-	"toggles image previews in the current line"
-	(interactive)
+    "toggles image previews in the current line"
+    (interactive)
     (sk:org-toggle-inline-images-in-region (line-beginning-position) (line-end-position)))
 
 
 
   (general-def 'normal org-mode-map :prefix "SPC SPC i"
     "i" 'sk:org-toggle-inline-images-at-point
-	"b" 'org-toggle-inline-images
-	"B" 'org-remove-inline-images
+    "b" 'org-toggle-inline-images
+    "B" 'org-remove-inline-images
     "r" 'org-redisplay-inline-images))
 
 

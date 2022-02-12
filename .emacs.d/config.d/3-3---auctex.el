@@ -123,9 +123,9 @@
   (setq cdlatex-paired-parens "$([{|")
   (setq cdlatex-math-symbol-alist '((?F ("\\Phi"))))
   (general-def (cdlatex-mode-map org-mode-map)
-	"#" 'cdlatex-math-symbol))
-	;;"TAB" nil
-	;;"<tab>" nil))
+    "#" 'cdlatex-math-symbol))
+    ;;"TAB" nil
+    ;;"<tab>" nil))
 
 
 

@@ -33,15 +33,15 @@ set linetype cycle 11
 #       kept for future configuration
 #set palette maxcolors 11
 #set palette defined ( \
-#	0  '#ff6655', \
-#	1  '#dd8844', \
-#	2  '#99bb66', \
-#	3  '#44b9b1', \
-#	4  '#ecbe7b', \
-#	5  '#51afef', \
-#	6  '#2257a0', \
-#	7  '#c678dd', \
-#	8  '#a9a1e1', \
-#	9  '#46d9ff', \
-#	10 '#5699af'  \
+#   0  '#ff6655', \
+#   1  '#dd8844', \
+#   2  '#99bb66', \
+#   3  '#44b9b1', \
+#   4  '#ecbe7b', \
+#   5  '#51afef', \
+#   6  '#2257a0', \
+#   7  '#c678dd', \
+#   8  '#a9a1e1', \
+#   9  '#46d9ff', \
+#   10 '#5699af'  \
 #)

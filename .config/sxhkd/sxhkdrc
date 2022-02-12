@@ -30,7 +30,7 @@ super + alt + f
 
 #reload sxhkd:
 super + alt + r
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 # terminal
 super + Return
