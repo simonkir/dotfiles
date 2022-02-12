@@ -17,13 +17,13 @@
 
 ; windows ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun split-and-follow-horizontally ()
+(defun sk:split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
   (balance-windows)
   (other-window 1))
 
-(defun split-and-follow-vertically ()
+(defun sk:split-and-follow-vertically ()
   (interactive)
   (split-window-right)
   (balance-windows)
@@ -33,8 +33,8 @@
   "=" 'balance-windows
   "o" 'delete-other-windows
   "1" 'delete-other-windows
-  "s" 'split-and-follow-horizontally
-  "v" 'split-and-follow-vertically
+  "s" 'sk:split-and-follow-horizontally
+  "v" 'sk:split-and-follow-vertically
  
   "h" 'evil-window-left
   "j" 'evil-window-down
@@ -53,14 +53,14 @@
 
 ; buffers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun kill-current-buffer ()
+(defun sk:kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
 
 (general-def 'normal 'override :prefix "SPC b"
   "b" 'ido-switch-buffer
   "q" 'quit-window
-  "k" 'kill-current-buffer
+  "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
 
 (use-package ibuffer

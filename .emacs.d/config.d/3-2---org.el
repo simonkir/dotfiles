@@ -104,38 +104,38 @@
 
   ; latex preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq org-preview-latex-scale-increment 0.2)
-  (setq org-preview-latex-scale 1.5)
-  (setq org-preview-latex-default-scale org-preview-latex-scale)
-  (plist-put org-format-latex-options :scale org-preview-latex-default-scale)
+  (setq sk:org-preview-latex-scale-increment 0.2)
+  (setq sk:org-preview-latex-scale 1.5)
+  (setq sk:org-preview-latex-default-scale sk:org-preview-latex-scale)
+  (plist-put org-format-latex-options :scale sk:org-preview-latex-default-scale)
 
-  (defun org-preview-latex-scale--aftermath ()
-    (plist-put org-format-latex-options :scale org-preview-latex-scale)
-    (message "%s" (concat "latex preview scale set to " (number-to-string org-preview-latex-scale))))
+  (defun sk:org-preview-latex-scale--aftermath ()
+    (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
+    (message "%s" (concat "latex preview scale set to " (number-to-string sk:org-preview-latex-scale))))
 
-  (defun org-preview-latex-scale-increase ()
+  (defun sk:org-preview-latex-scale-increase ()
     (interactive)
-    (setq org-preview-latex-scale (+ org-preview-latex-scale org-preview-latex-scale-increment))
-    (org-preview-latex-scale--aftermath))
+    (setq sk:org-preview-latex-scale (+ sk:org-preview-latex-scale sk:org-preview-latex-scale-increment))
+    (sk:org-preview-latex-scale--aftermath))
 
-  (defun org-preview-latex-scale-decrease ()
+  (defun sk:org-preview-latex-scale-decrease ()
     (interactive)
-    (setq org-preview-latex-scale (- org-preview-latex-scale org-preview-latex-scale-increment))
-    (org-preview-latex-scale--aftermath))
+    (setq sk:org-preview-latex-scale (- sk:org-preview-latex-scale sk:org-preview-latex-scale-increment))
+    (sk:org-preview-latex-scale--aftermath))
 
-  (defun org-preview-latex-scale-set (new-scale)
+  (defun sk:org-preview-latex-scale-set (new-scale)
     (interactive "nnew preview scale: ")
-    (setq org-preview-latex-scale new-scale)
-    (org-preview-latex-scale--aftermath))
+    (setq sk:org-preview-latex-scale new-scale)
+    (sk:org-preview-latex-scale--aftermath))
 
-  (defun org-preview-latex-scale-reset ()
+  (defun sk:org-preview-latex-scale-reset ()
     (interactive)
-    (setq org-preview-latex-scale org-preview-latex-default-scale)
-    (org-preview-latex-scale--aftermath))
+    (setq sk:org-preview-latex-scale sk:org-preview-latex-default-scale)
+    (sk:org-preview-latex-scale--aftermath))
 
 
 
-  (defun org-latex-preview-at-point ()
+  (defun sk:org-latex-preview-at-point ()
 	(interactive)
 	(if (or (org-in-block-p '("latex"))
 			(org-in-regexp "\$.*\$"))
@@ -145,21 +145,21 @@
 
 
   (general-def 'normal org-mode-map :prefix "SPC SPC l"
-    "l" 'org-latex-preview-at-point
+    "l" 'sk:org-latex-preview-at-point
     "L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
     "b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
     "B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
-    "+" 'org-preview-latex-scale-increase
-    "-" 'org-preview-latex-scale-decrease
-    "0" 'org-preview-latex-scale-reset
-    "s" 'org-preview-latex-scale-set)
+    "+" 'sk:org-preview-latex-scale-increase
+    "-" 'sk:org-preview-latex-scale-decrease
+    "0" 'sk:org-preview-latex-scale-reset
+    "s" 'sk:org-preview-latex-scale-set)
 
 
 
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; modified from https://www.reddit.com/r/orgmode/comments/hx5keh/comment/fz669re/?utm_source=share&utm_medium=web2x&context=3
-  (defun org-toggle-inline-images-at-point ()
+  (defun sk:org-toggle-inline-images-at-point ()
 	(interactive)
   	(when-let* ((link-region (org-in-regexp org-link-bracket-re 1)))
   	  (let ((org-inline-image-overlays-old org-inline-image-overlays))
@@ -177,7 +177,7 @@
 
 
   (general-def 'normal org-mode-map :prefix "SPC SPC i"
-    "i" 'org-toggle-inline-images-at-point
+    "i" 'sk:org-toggle-inline-images-at-point
 	"b" 'org-toggle-inline-images
 	"B" 'org-remove-inline-images
     "r" 'org-redisplay-inline-images))

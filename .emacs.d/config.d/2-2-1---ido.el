@@ -32,7 +32,7 @@
 
   ; recentf ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (defun recentf-ido-find-file ()
+  (defun sk:recentf-ido-find-file ()
     "Find a recent file using Ido."
     (interactive)
     (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
@@ -43,7 +43,7 @@
 
   ; bookmarks ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (defun ido-bookmark-jump (bname)
+  (defun sk:ido-bookmark-jump (bname)
     "Switch to bookmark interactively using `ido'."
     (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
     (bookmark-jump bname))
