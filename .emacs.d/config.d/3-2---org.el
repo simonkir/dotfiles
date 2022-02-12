@@ -161,16 +161,14 @@
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:org-toggle-inline-images-in-region (beg end)
-	"toggle image previews between `beg' and `end'.
-
-note: lines containing multiple images may cause unexpected behaviour"
-	(if (-intersection (overlays-in beg end) org-inline-image-overlays)
-        (mapc (lambda (ov)
-            (when (member ov org-inline-image-overlays)
-              (delete-overlay ov)
-              (setq org-inline-image-overlays (delete ov org-inline-image-overlays))))
-          (overlays-in beg end))
-	  (org-display-inline-images t nil beg end)))
+	"toggle image previews between `beg' and `end'."
+	(let ((overlays-in-region (-intersection (overlays-in beg end) org-inline-image-overlays)))
+      (if overlays-in-region
+          (mapc (lambda (ov)
+			  (delete-overlay ov)
+			  (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
+            overlays-in-region)
+        (org-display-inline-images t nil beg end))))
 
   (defun sk:org-toggle-inline-images-after-babel-run ()
 	"activates image preview for babel results
@@ -188,9 +186,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 	  (goto-char initial-point-position)))
 
   (defun sk:org-toggle-inline-images-at-point ()
-	"toggles the image in the current line
-
-note: lines containing multiple images may cause unexpected behaviour"
+	"toggles image previews in the current line"
 	(interactive)
     (sk:org-toggle-inline-images-in-region (line-beginning-position) (line-end-position)))
 
