@@ -51,9 +51,9 @@
     "l"   'TeX-command-master
     "L"   'TeX-command-run-all)
 
-  (general-def 'normal TeX-mode-map :prefix "SPC p"
-    "p" 'preview-at-point
-    "P" 'preview-clearout-at-point
+  (general-def 'normal TeX-mode-map :prefix "SPC SPC l"
+    "l" 'preview-at-point
+    "L" 'preview-clearout-at-point
     "b" 'preview-buffer
     "B" 'preview-clearout-buffer)
 
