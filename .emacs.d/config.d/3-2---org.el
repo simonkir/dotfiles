@@ -158,21 +158,18 @@
 
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; modified from https://www.reddit.com/r/orgmode/comments/hx5keh/comment/fz669re/?utm_source=share&utm_medium=web2x&context=3
+  (defun sk:org-toggle-inline-images-in-region (beg end)
+	(if (-intersection (overlays-in beg end) org-inline-image-overlays)
+        (mapc (lambda (ov)
+            (when (member ov org-inline-image-overlays)
+              (delete-overlay ov)
+              (setq org-inline-image-overlays (delete ov org-inline-image-overlays))))
+          (overlays-in beg end))
+	  (org-display-inline-images t t beg end)))
+
   (defun sk:org-toggle-inline-images-at-point ()
 	(interactive)
-  	(when-let* ((link-region (org-in-regexp org-link-bracket-re 1)))
-  	  (let ((org-inline-image-overlays-old org-inline-image-overlays))
-  		(save-restriction
-  		  (narrow-to-region (car link-region) (cdr link-region))
-  		  (if (-intersection (overlays-at (point)) org-inline-image-overlays)
-  			  (mapc (lambda (ov)
-  				  (when (member ov org-inline-image-overlays)
-  					(delete-overlay ov)
-  					(setq org-inline-image-overlays (delete ov org-inline-image-overlays))))
-  				(overlays-at (point)))
-  			(org-display-inline-images)))
-  	(unless (equal org-inline-image-overlays org-inline-image-overlays-old) t)))) ;; if overlays did not change, the link is not inline image
+    (sk:org-toggle-inline-images-in-region (line-beginning-position) (line-end-position)))
 
 
 
