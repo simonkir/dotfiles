@@ -135,8 +135,17 @@
 
 
 
+  (defun org-latex-preview-at-point ()
+	(interactive)
+	(if (or (org-in-block-p '("latex"))
+			(org-in-regexp "\$.*\$"))
+		(org-latex-preview)
+	  (message "not inside latex environment")))
+
+
+
   (general-def 'normal org-mode-map :prefix "SPC SPC l"
-    "l" 'org-latex-preview
+    "l" 'org-latex-preview-at-point
     "L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
     "b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
     "B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
