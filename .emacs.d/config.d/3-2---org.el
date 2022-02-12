@@ -68,7 +68,6 @@
 
   (general-def 'normal org-mode-map :prefix "SPC SPC"
     "-" 'org-ctrl-c-minus ;; separator line in table
-    "i" 'org-ctrl-c-minus ;; toggle TODO item
     "b" 'org-ctrl-c-minus ;; cycle list bullet style
 
     "TAB"       'org-table-toggle-column-width
@@ -77,7 +76,6 @@
 
     "n" 'org-num-mode
     "h" 'org-toggle-heading
-    "l" 'org-toggle-item
     "t" 'org-todo
 
     "f" 'org-table-eval-formula
@@ -137,6 +135,18 @@
 
 
 
+  (general-def 'normal org-mode-map :prefix "SPC SPC l"
+    "l" 'org-latex-preview
+    "L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
+    "b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
+    "B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
+    "+" 'org-preview-latex-scale-increase
+    "-" 'org-preview-latex-scale-decrease
+    "0" 'org-preview-latex-scale-reset
+    "s" 'org-preview-latex-scale-set)
+
+
+
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; modified from https://www.reddit.com/r/orgmode/comments/hx5keh/comment/fz669re/?utm_source=share&utm_medium=web2x&context=3
@@ -157,20 +167,10 @@
 
 
 
-  ; preview bindings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (general-def 'normal org-mode-map :prefix "SPC p"
-    "p" 'org-latex-preview
-    "P" '(lambda () (interactive) (org-latex-preview '(4)))
-    "b" '(lambda () (interactive) (org-latex-preview '(16)))
-    "B" '(lambda () (interactive) (org-latex-preview '(64)))
-    "+" 'org-preview-latex-scale-increase
-    "-" 'org-preview-latex-scale-decrease
-    "0" 'org-preview-latex-scale-reset
-    "s" 'org-preview-latex-scale-set
-
+  (general-def 'normal org-mode-map :prefix "SPC SPC i"
     "i" 'org-toggle-inline-images-at-point
-    "I" 'org-redisplay-inline-images))
+	"b" 'org-toggle-inline-images
+    "r" 'org-redisplay-inline-images))
 
 
 
