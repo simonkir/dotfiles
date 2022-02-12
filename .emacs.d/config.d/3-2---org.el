@@ -49,6 +49,8 @@
    '((gnuplot . t)))
    ;;'((jupyter . t)))
 
+  (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
+
   (setq org-src-window-setup 'current-window) ;; don't spread across two windows
   (setq org-confirm-babel-evaluate nil)
 
@@ -159,13 +161,28 @@
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:org-toggle-inline-images-in-region (beg end)
+	"note: lines with multiple images might cause unexpected behaviour"
 	(if (-intersection (overlays-in beg end) org-inline-image-overlays)
         (mapc (lambda (ov)
             (when (member ov org-inline-image-overlays)
               (delete-overlay ov)
               (setq org-inline-image-overlays (delete ov org-inline-image-overlays))))
           (overlays-in beg end))
-	  (org-display-inline-images t t beg end)))
+	  (org-display-inline-images t nil beg end)))
+
+  (defun sk:org-toggle-inline-images-after-babel-run ()
+	(interactive)
+	(let ((initial-point-position (point)))
+	  (progn
+		(re-search-forward (rx "#+end_src"))
+		(let ((ln-end-src (line-number-at-pos)))
+		  (progn
+			(re-search-forward (rx "#+RESULTS:"))
+			(let ((ln-results (line-number-at-pos)))
+			  (when (eq 2 (- ln-results ln-end-src))
+				(forward-line)
+				(sk:org-toggle-inline-images-at-point))))
+		(goto-char initial-point-position)))))
 
   (defun sk:org-toggle-inline-images-at-point ()
 	(interactive)
