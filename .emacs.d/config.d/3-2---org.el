@@ -50,6 +50,7 @@
    ;;'((jupyter . t)))
 
   (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
+  ;;(add-hook 'org-babel-after-execute-hook 'sk:org-babel-kill-session-after-run)
 
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-window-setup 'current-window) ;; don't spread across two windows
@@ -64,6 +65,16 @@
     (interactive)
     (setq org-src-window-setup 'split-window-right)
     (org-edit-special))
+
+  ;; this function produces mixed results
+  ;; and is thus currently not in use
+  (defun sk:org-babel-kill-session-after-run ()
+    "kills the active org-babel session if `:session-kill yes' is specified in the code block arguments
+
+note: this function is only meant to be called from `org-babel-after-execute-hook'. otherwise, it may cause unexpected behaviour."
+    (let ((src-block-info (org-babel-get-src-block-info)))
+      (when (member '(:session-kill . "yes") (nth 2 src-block-info))
+        (kill-buffer (concat "*" (concat (nth 0 src-block-info) "*"))))))
 
 
 
