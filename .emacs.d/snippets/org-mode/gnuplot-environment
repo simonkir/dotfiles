@@ -3,7 +3,9 @@
 # key: plot
 # --
 #+begin_src gnuplot :file /tmp/gnuplot.png :var data=$1
-  set xlabel "$2 [$3]"
-  set ylabel "$4 [$5]"
-  plot data using 1:2 with l$0
+set xlabel "$2 [$3]"
+set xtics $4
+set ylabel "$5 [$6]"
+set ytics $7
+plot data using 1:2 with steps$8 title ""$0
 #+end_src
