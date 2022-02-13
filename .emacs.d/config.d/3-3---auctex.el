@@ -120,7 +120,7 @@
   :config
   (setq cdlatex-math-symbol-prefix ?#)
   (setq cdlatex-simplify-sub-super-scripts nil)
-  (setq cdlatex-paired-parens "$([{|")
+  (setq cdlatex-paired-parens "$([{")
   (setq cdlatex-math-symbol-alist '((?F ("\\Phi"))))
   (general-def (cdlatex-mode-map org-mode-map)
     "#" 'cdlatex-math-symbol))
