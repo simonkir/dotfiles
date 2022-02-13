@@ -76,6 +76,26 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
       (when (member '(:session-kill . "yes") (nth 2 src-block-info))
         (kill-buffer (concat "*" (concat (nth 0 src-block-info) "*"))))))
 
+  (defun sk:org-babel-kill-session-at-point ()
+    (interactive)
+    (kill-buffer (concat "*" (concat (nth 0 (org-babel-get-src-block-info)) "*"))))
+
+  (defun sk:org-babel-eval-with-new-session ()
+    (interactive)
+    (sk:org-babel-kill-session-at-point)
+    (org-ctrl-c-ctrl-c))
+
+
+
+  (general-def 'normal org-mode-map
+    "SPC SPC k"   'sk:org-babel-kill-session-at-point
+    "SPC SPC RET" 'sk:org-babel-eval-with-new-session
+    "SPC e"       'sk:org-edit-special-current-window
+    "SPC E"       'sk:org-edit-special-new-window)
+
+  (general-def 'normal
+    "SPC e" 'org-edit-src-exit)
+
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -104,15 +124,10 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
     ;; – execute dynamic block
     ;; – remove highlights
     ;; – insert tags
-    "RET" 'org-ctrl-c-ctrl-c
-    "SPC e" 'sk:org-edit-special-current-window
-    "SPC E" 'sk:org-edit-special-new-window)
+    "RET" 'org-ctrl-c-ctrl-c)
 
   (general-def 'insert 'org-mode-map
     "C-#" '(lambda () (interactive) (insert "#")))
-
-  (general-def 'normal
-    "SPC e" 'org-edit-src-exit)
 
 
 
