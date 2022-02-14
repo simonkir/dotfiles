@@ -21,12 +21,8 @@
 
   ; ignoring buffers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq sk:ido-unignored-buffers '("*dashboard*" "*scratch*"))
-  (defun sk:ido-ignore-buffers-fun (name)
-    "Ignore all *starred* buffers except the ones listed in sk:ido-unignored-buffers"
-    (and (string-match "^\*" name)
-        (not (member name sk:ido-unignored-buffers))))
-  (add-to-list 'ido-ignore-buffers 'sk:ido-ignore-buffers-fun)
+  (add-to-list 'ido-ignore-buffers "^\*")
+  (add-to-list 'ido-ignore-buffers "^magit")
 
 
 
