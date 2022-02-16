@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
 # name: plot tabular data (using gnuplot)
-# key: tplot
+# key: tpl
 # --
-
 #+name: $1
 | $2 | $3 |
 |----+----|
 | $0 |    |
 
+#+name: $1
 #+begin_src gnuplot :file /tmp/gnuplot-$1.png :var data=$1
 set xlabel "$2"
 set xtics $4

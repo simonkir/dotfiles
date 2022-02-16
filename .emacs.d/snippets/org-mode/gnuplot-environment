@@ -1,11 +1,12 @@
 # -*- mode: snippet -*-
 # name: plot (using gnuplot)
-# key: plot
+# key: pl
 # --
-#+begin_src gnuplot :file /tmp/gnuplot.png
-set xlabel "$1 [$2]"
-set xtics $3
-set ylabel "$4 [$5]"
-set ytics $6
-plot $7 title ""$0
+#+name: $1
+#+begin_src gnuplot :file /tmp/gnuplot-$1.png
+set xlabel "$2 [$3]"
+set xtics $4
+set ylabel "$5 [$6]"
+set ytics $7
+plot $8 title ""$0
 #+end_src
