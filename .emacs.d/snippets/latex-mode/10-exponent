@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: 10^{} (for values of quantities)
 # key: 10
+# condition: (not (and (derived-mode-p 'org-mode) (member (nth 0 (org-element-at-point)) '(table-row table))))
 # --
 \cdot 10^{$1}$0
