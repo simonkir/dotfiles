@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: plot tabular data (using gnuplot)
+# key: tplot
+# --
+
+#+name: $1
+| $2 | $3 |
+|----+----|
+| $0 |    |
+
+#+begin_src gnuplot :file /tmp/gnuplot-$1.png :var data=$1
+set xlabel "$2"
+set xtics $4
+set ylabel "$3"
+set ytics $5
+plot data u 1:2 with steps title ""
+#+end_src
