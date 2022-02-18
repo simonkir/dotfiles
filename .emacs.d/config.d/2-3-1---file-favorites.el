@@ -23,5 +23,6 @@
   :config
   (setq recentf-max-saved-items 100)
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
+  (add-to-list 'recentf-exclude (expand-file-name "/usr/share/emacs/*"))
   (recentf-mode t)
   (general-def 'normal 'override "SPC f r" 'sk:recentf-ido-find-file))
