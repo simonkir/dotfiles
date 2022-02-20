@@ -10,6 +10,7 @@
 
   :config
   (setq calc-multiplication-has-precedence nil)
+  (add-hook 'calc-mode-hook 'calc-degrees-mode)
   ;;(add-hook 'calc-mode-hook 'calc-algebraic-mode)
 
   (general-def 'normal calc-mode-map "SPC" nil) ;; unbind SPC for the following to work
