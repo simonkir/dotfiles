@@ -6,9 +6,7 @@
   :demand t ;; needed for dashboard
   :hook (after-init . bookmark-save)
   :config
-  (general-def 'normal 'override
-    "SPC f b" 'sk:ido-bookmark-jump)
-
+  (general-def 'normal 'override "SPC f b" 'bookmark-jump)
   (general-def 'normal 'override :prefix "SPC f B"
     "B" 'edit-bookmarks
     "d" 'bookmark-delete
@@ -25,4 +23,11 @@
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
   (add-to-list 'recentf-exclude (expand-file-name "/usr/share/emacs/*"))
   (recentf-mode t)
-  (general-def 'normal 'override "SPC f r" 'sk:recentf-ido-find-file))
+  (general-def 'normal 'override "SPC f r" 'sk:recentf-find-file)
+
+  (defun sk:recentf-find-file ()
+    "Find a recent file using completing-read."
+    (interactive)
+    (let ((file (completing-read "Choose recent file: " recentf-list nil t)))
+      (when file
+        (find-file file)))))

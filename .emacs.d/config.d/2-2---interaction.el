@@ -14,11 +14,11 @@
 
 
 
-(use-package smex
-  :after ido
-  :ensure t
-  :config (smex-initialize)
-
-  :general
-  ("M-x" 'smex)
-  ('normal 'override "SPC x" 'smex))
+;;(use-package smex
+;;  :after ido
+;;  :ensure t
+;;  :config (smex-initialize)
+;;
+;;  :general
+;;  ("M-x" 'smex)
+;;  ('normal 'override "SPC x" 'smex))

@@ -58,7 +58,7 @@
   (kill-buffer (current-buffer)))
 
 (general-def 'normal 'override :prefix "SPC b"
-  "b" 'ido-switch-buffer
+  "b" 'switch-to-buffer
   "q" 'quit-window
   "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
