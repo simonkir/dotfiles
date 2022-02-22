@@ -57,9 +57,16 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
+(general-def 'normal 'override
+  ;;"C-w" 'bury-buffer ;; useful when using tab-line-mode
+  "C-<tab>" 'next-buffer
+  "<C-iso-lefttab>" 'previous-buffer)
+
 (general-def 'normal 'override :prefix "SPC b"
+  "q" 'bury-buffer
+  "h" 'previous-buffer
+  "l" 'next-buffer
   "b" 'switch-to-buffer
-  "q" 'quit-window
   "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
 
