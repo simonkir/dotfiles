@@ -15,6 +15,8 @@
   (setq icomplete-compute-delay 0)
 
   (general-def icomplete-minibuffer-map
+    "C-<return>" 'icomplete-fido-ret
+    "C-d" 'icomplete-fido-kill
     "C-j" 'icomplete-forward-completions
     "C-k" 'icomplete-backward-completions)
 
