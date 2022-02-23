@@ -13,10 +13,11 @@
                   (= -3 (skip-syntax-backward "w")))
                 (let (case-fold-search)
                   (looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
+                (not (texmathp))
                 (capitalize-region (point) end))))))
 
 (define-minor-mode dubcaps-mode
-  "Toggle `dubcaps-mode'.  Converts words in DOuble CApitals to
+  "Toggle `dubcaps-mode'. Converts words in DOuble CApitals to
 Single Capitals as you type."
   :init-value nil
   :lighter (" DC")
