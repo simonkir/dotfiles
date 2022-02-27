@@ -35,6 +35,8 @@
   (add-to-list 'prettify-symbols-alist '("\\right|" . "‖"))
   (add-to-list 'prettify-symbols-alist '("\\left\\|" . (?‖ (Bl . Br) ?‖)))
   (add-to-list 'prettify-symbols-alist '("\\right\\|" . (?‖ (Bl . Br) ?‖)))
+  (add-to-list 'prettify-symbols-alist '("\\pm" . "±"))
+  (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°")))
 
 (defun sk:prettify-symbols-prog-mode ()
