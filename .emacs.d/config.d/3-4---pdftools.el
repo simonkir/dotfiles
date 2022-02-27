@@ -13,6 +13,7 @@
   (setq pdf-annot-activate-created-annotations t)
 
   (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
+  (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
   (add-hook 'text-mode-hook 'evil-insert-state)
 
   (general-def 'normal pdf-view-mode-map
@@ -29,6 +30,7 @@
     "H" 'pdf-annot-add-markup-annotation)
 
   (general-def 'normal pdf-view-mode-map :prefix "SPC SPC"
+    "m" 'pdf-view-midnight-minor-mode
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete))
 
