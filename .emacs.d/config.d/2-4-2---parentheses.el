@@ -2,8 +2,6 @@
 
 
 
-; parenthesis ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (use-package electric
   :demand t
   :config
@@ -22,20 +20,17 @@
 
 
 
-; autocompletion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package company
+(use-package evil-lion
   :ensure t
-  :hook
-  (after-init . company-tng-mode)
-  (after-init . global-company-mode)
+  :after evil
+  :general ('(normal visual) 'override :prefix "g"
+            "l" 'evil-lion-left
+            "L" 'evil-lion-right))
 
-  :config
-  (setq company-idle-delay 0.3)
-  (setq company-minimum-prefix-length 2)
-  (general-def company-active-map "C-w" nil))
 
-(use-package company-math
+
+(use-package evil-surround
   :ensure t
-  :after company
-  :config (add-to-list 'company-backends 'company-math-symbols-unicode))
+  :after evil
+  :defer 1
+  :config (global-evil-surround-mode 1))
