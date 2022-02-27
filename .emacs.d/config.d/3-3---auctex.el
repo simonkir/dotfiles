@@ -119,15 +119,27 @@
   (LaTeX-mode . cdlatex-mode)
   (org-mode . org-cdlatex-mode)
 
-  :config
+  :init
   (setq cdlatex-math-symbol-prefix ?#)
+
+  :config
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
-  (setq cdlatex-math-symbol-alist '((?F ("\\Phi"))))
-  (general-def (cdlatex-mode-map org-mode-map)
-    "#" 'cdlatex-math-symbol))
-    ;;"TAB" nil
-    ;;"<tab>" nil))
+  (setq cdlatex-math-symbol-alist
+        '((?F ("\\Phi"))
+          (?+ ("\\pm"))
+          (?: ("\\ldots"))))
+
+  (setq cdlatex-math-modify-alist
+        '((46 "\\dot"  nil t nil nil)
+          (58 "\\ddot" nil t nil nil)
+          (45 "\\bar"  nil t nil nil)
+          (62 "\\vec"  nil t nil nil)))
+
+ (general-def (cdlatex-mode-map org-mode-map)
+   "#" 'cdlatex-math-symbol))
+   ;;"TAB" nil
+   ;;"<tab>" nil))
 
 
 
