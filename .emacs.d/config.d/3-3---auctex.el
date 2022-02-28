@@ -42,11 +42,8 @@
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
-  (general-def 'insert TeX-mode-map
-    "<C-return>" '(lambda () (interactive) (insert " \\\\\n  ")))
-
   (general-def 'normal TeX-mode-map :prefix "SPC SPC"
+
     "s"   'LaTeX-section            ;; insert section
     "e"   'LaTeX-environment        ;; insert environment
     "TAB" 'LaTeX-fill-environment)  ;; auto-indent
@@ -60,6 +57,17 @@
 
 
   ; special keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (defun sk:latex-eqn-linebreak ()
+    (interactive)
+    (unless (eq ?\s (char-after (- (point) 1)))
+      (insert " "))
+    (insert "\\\\\n  "))
+  
+  (general-def 'insert TeX-mode-map
+    "<C-return>" 'sk:latex-eqn-linebreak)
+
+
 
   (defun sk:activate-tex-alignment-keybinds-equality ()
     (interactive)
