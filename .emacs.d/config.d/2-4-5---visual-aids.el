@@ -21,7 +21,7 @@
     "v" 'visual-fill-column-mode
     "V" 'set-fill-column)
 
-  :config (setq visual-fill-column-center-text t))
+  :config (setq-default visual-fill-column-center-text t))
 
 
 
