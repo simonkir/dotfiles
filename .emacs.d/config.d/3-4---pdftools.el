@@ -4,6 +4,7 @@
 
 (use-package pdf-tools
   :ensure t
+  :defer t
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
@@ -18,6 +19,10 @@
 
   (general-def 'normal pdf-view-mode-map
     "SPC" nil
+    "j"   '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
+    "k"   '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
+    "h"   '(lambda () (interactive) (image-backward-hscroll 10))
+    "l"   '(lambda () (interactive) (image-forward-hscroll 10))
     "J"   'pdf-view-next-page
     "K"   'pdf-view-previous-page
     "="   'pdf-view-fit-page-to-window)
@@ -43,7 +48,7 @@
 
   (defun sk:doc-view-goto-page (count)
     "Goto page COUNT
-  if COUNT isn't supplied, go to the last page"
+if COUNT isn't supplied, go to the last page"
       (interactive "P")
       (if count
           (doc-view-goto-page count)
