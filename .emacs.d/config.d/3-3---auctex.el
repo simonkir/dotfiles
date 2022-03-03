@@ -136,13 +136,14 @@
   (setq cdlatex-math-symbol-alist
         '((?F ("\\Phi"))
           (?+ ("\\pm"))
-          (?: ("\\ldots"))))
+          (?: ("\\ldots"))
+          (?c ("\\quad"))))
 
   (setq cdlatex-math-modify-alist
-        '((46 "\\dot"  nil t nil nil)
-          (58 "\\ddot" nil t nil nil)
-          (45 "\\bar"  nil t nil nil)
-          (62 "\\vec"  nil t nil nil)))
+        '((?. "\\dot"  nil t nil nil)
+          (?: "\\ddot" nil t nil nil)
+          (?- "\\bar"  nil t nil nil)
+          (?> "\\vec"  nil t nil nil)))
 
  (general-def (cdlatex-mode-map org-mode-map)
    "#" 'cdlatex-math-symbol))
