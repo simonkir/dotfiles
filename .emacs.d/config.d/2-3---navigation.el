@@ -104,14 +104,3 @@
   "f" 'describe-function
   "v" 'describe-variable
   "k" 'describe-key)
-
-
-
-; config operations ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sk:config-reload ()
-  (interactive)
-  (load-directory "~/.emacs.d/config.d"))
-
-(general-def 'normal 'override :prefix "SPC c"
-  "r" 'sk:config-reload)

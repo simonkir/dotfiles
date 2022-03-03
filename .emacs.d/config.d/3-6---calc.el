@@ -5,8 +5,7 @@
 (use-package calc
   :defer t
   :general ('normal 'override
-     "SPC r c" 'calc
-     "SPC r C" 'quick-calc)
+     "SPC c" 'calc-dispatch)
 
   :config
   (setq calc-multiplication-has-precedence nil)
