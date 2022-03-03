@@ -12,7 +12,12 @@
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t)
   (setq completion-ignore-case t)
+  (setq completion-auto-help 'lazy)
   (setq icomplete-compute-delay 0)
+
+  (set-face-attribute 'icomplete-first-match nil
+                      :weight     'normal
+                      :foreground "#98be65")
 
   (general-def icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
