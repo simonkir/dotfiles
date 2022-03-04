@@ -1,5 +1,5 @@
 #+latex_class: article
-#+latex_class_options: [a4paper]
+#+latex_class_options: [a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german}
 
 #+options: toc:nil
