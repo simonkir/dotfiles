@@ -124,8 +124,8 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
     ;; – execute dynamic block
     ;; – remove highlights
     ;; – insert tags
-    "g j" 'org-next-visible-heading
-    "g k" 'org-previous-visible-heading
+    "g J" 'org-next-visible-heading
+    "g K" 'org-previous-visible-heading
     "RET" 'org-ctrl-c-ctrl-c)
 
   (general-def 'insert 'org-mode-map
