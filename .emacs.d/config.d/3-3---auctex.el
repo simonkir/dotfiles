@@ -137,7 +137,7 @@
         '((?F ("\\Phi"))
           (?+ ("\\pm"))
           (?: ("\\ldots"))
-          (?c ("\\quad"))))
+          (?c ("\\quad" "" "\\cos"))))
 
   (setq cdlatex-math-modify-alist
         '((?. "\\dot"  nil t nil nil)
