@@ -9,6 +9,7 @@
 
 #+name: $1
 #+begin_src gnuplot :file /tmp/gnuplot-$1.png :var data=$1
+load "~/.gnuplot"
 set xlabel "$2"
 set xtics $4
 set ylabel "$3"
