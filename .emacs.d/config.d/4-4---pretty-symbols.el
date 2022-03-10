@@ -106,5 +106,5 @@
   (when (derived-mode-p 'org-mode)
       (org-toggle-pretty-entities)))
 
-(general-def 'normal 'override
+(general-def '(normal visual) 'override
   "SPC t p" 'sk:toggle-pretty-mode)

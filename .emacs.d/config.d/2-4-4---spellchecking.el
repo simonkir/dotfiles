@@ -14,7 +14,7 @@
       (flyspell-mode 1)
       (flyspell-buffer)))
 
-  (general-def 'normal 'override :prefix "SPC i"
+  (general-def '(normal visual) 'override :prefix "SPC i"
     "i" 'sk:toggle-flyspell-mode
     "d" 'ispell-change-dictionary
     "c" 'flyspell-check-previous-highlighted-word

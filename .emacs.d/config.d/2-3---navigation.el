@@ -29,7 +29,7 @@
   (balance-windows)
   (other-window 1))
 
-(general-def 'normal 'override :prefix "SPC w"
+(general-def '(normal visual) 'override :prefix "SPC w"
   "=" 'balance-windows
   "o" 'delete-other-windows
   "1" 'delete-other-windows
@@ -46,7 +46,7 @@
 (general-def 'normal 'override
   "SPC ," 'evil-window-next)
 
-(general-def '(normal insert) 'override
+(general-def '(normal visual insert) 'override
   "C-SPC" 'evil-window-next)
 
 
@@ -57,12 +57,12 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
-(general-def 'normal 'override
+(general-def '(normal visual insert) 'override
   ;;"C-w" 'bury-buffer ;; useful when using tab-line-mode
   "C-<tab>" 'next-buffer
   "<C-iso-lefttab>" 'previous-buffer)
 
-(general-def 'normal 'override :prefix "SPC b"
+(general-def '(normal visual) 'override :prefix "SPC b"
   "q" 'bury-buffer
   "h" 'previous-buffer
   "l" 'next-buffer
@@ -72,13 +72,13 @@
 
 (use-package ibuffer
   :defer t
-  :general ('normal 'override "SPC b B" 'ibuffer))
+  :general ('(normal visual) 'override "SPC b B" 'ibuffer))
 
 
 
 ; files ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(general-def 'normal 'override :prefix "SPC f"
+(general-def '(normal visual) 'override :prefix "SPC f"
   "f" 'find-file
   "F" 'find-file-read-only
   "p" 'find-file-at-point
@@ -86,7 +86,7 @@
   "s" 'save-buffer
   "S" 'save-some-buffers)
 
-(general-def 'normal 'override
+(general-def '(normal visual) 'override
   "SPC s" 'save-buffer)
 
 
@@ -94,13 +94,13 @@
 ; misc ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; quitting
-(general-def 'normal 'override :prefix "SPC"
+(general-def '(normal visual) 'override :prefix "SPC"
   "ESC" 'keyboard-escape-quit
   "q" 'save-buffers-kill-terminal
   "Q" 'save-buffers-kill-emacs)
 
 ; help
-(general-def 'normal 'override :prefix "SPC h"
+(general-def '(normal visual) 'override :prefix "SPC h"
   "f" 'describe-function
   "v" 'describe-variable
   "k" 'describe-key)

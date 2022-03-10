@@ -5,7 +5,7 @@
 (use-package julia-mode
   :ensure t
   :defer t
-  :general ('normal 'override "SPC r j" 'run-julia))
+  :general ('(normal visual) 'override "SPC r j" 'run-julia))
 
 
 

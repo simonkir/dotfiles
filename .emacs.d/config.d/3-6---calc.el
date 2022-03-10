@@ -10,8 +10,8 @@
   :config
   (setq calc-multiplication-has-precedence nil)
 
-  (general-def 'normal calc-mode-map "SPC" nil) ;; unbind SPC for the following to work
-  (general-def 'normal calc-mode-map :prefix "SPC SPC"
+  (general-def '(normal visual) calc-mode-map "SPC" nil) ;; unbind SPC for the following to work
+  (general-def '(normal visual) calc-mode-map :prefix "SPC SPC"
     "e" 'calc-evaluate
     "c" 'calc-convert-units
     "s" 'calc-solve-for

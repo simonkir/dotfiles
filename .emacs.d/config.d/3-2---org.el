@@ -87,20 +87,20 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
 
 
-  (general-def 'normal org-mode-map
+  (general-def '(normal visual) org-mode-map
     "SPC SPC k"   'sk:org-babel-kill-session-at-point
     "SPC SPC RET" 'sk:org-babel-eval-with-new-session
     "SPC e"       'sk:org-edit-special-current-window
     "SPC E"       'sk:org-edit-special-new-window)
 
-  (general-def 'normal
+  (general-def '(normal visual)
     "SPC e" 'org-edit-src-exit)
 
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (general-def 'normal org-mode-map :prefix "SPC SPC"
+  (general-def '(normal visual) org-mode-map :prefix "SPC SPC"
     "-" 'org-ctrl-c-minus ;; separator line in table
     "b" 'org-ctrl-c-minus ;; cycle list bullet style
 
@@ -117,7 +117,7 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
     "e" 'org-babel-execute-buffer)
 
-  (general-def 'normal org-mode-map
+  (general-def '(normal visual) org-mode-map
     ;; – toggle checkboxes
     ;; – renumber ordered list
     ;; – realign table
@@ -175,7 +175,7 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
 
 
-  (general-def 'normal org-mode-map :prefix "SPC SPC l"
+  (general-def '(normal visual) org-mode-map :prefix "SPC SPC l"
     "l" 'sk:org-latex-preview-at-point
     "L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
     "b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
@@ -221,7 +221,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-  (general-def 'normal org-mode-map :prefix "SPC SPC i"
+  (general-def '(normal visual) org-mode-map :prefix "SPC SPC i"
     "i" 'sk:org-toggle-inline-images-at-point
     "b" 'org-toggle-inline-images
     "B" 'org-remove-inline-images

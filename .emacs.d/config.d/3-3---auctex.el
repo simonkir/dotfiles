@@ -42,13 +42,12 @@
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (general-def 'normal TeX-mode-map :prefix "SPC SPC"
-
+  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC"
     "s"   'LaTeX-section            ;; insert section
     "e"   'LaTeX-environment        ;; insert environment
     "TAB" 'LaTeX-fill-environment)  ;; auto-indent
 
-  (general-def 'normal TeX-mode-map :prefix "SPC SPC l"
+  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC l"
     "l" 'preview-at-point
     "L" 'preview-clearout-at-point
     "b" 'preview-buffer
@@ -111,7 +110,7 @@
 
   (sk:activate-tex-alignment-keybinds-equality)
 
-  (general-def 'normal TeX-mode-map :prefix "SPC SPC k"
+  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC k"
     "e" 'sk:activate-tex-alignment-keybinds-equality
     "E" 'sk:deactivate-tex-alignment-keybinds-equality
     "m" 'sk:activate-tex-alignment-keybinds-matrix

@@ -26,7 +26,7 @@
 
 
 ; text scale
-(general-def 'normal 'override :prefix "SPC"
+(general-def '(normal visual) 'override :prefix "SPC"
   "0" 'text-scale-adjust
   "+" 'text-scale-adjust
   "-" 'text-scale-adjust)

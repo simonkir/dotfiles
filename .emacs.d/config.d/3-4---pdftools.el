@@ -17,7 +17,7 @@
   (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
   (add-hook 'text-mode-hook 'evil-insert-state)
 
-  (general-def 'normal pdf-view-mode-map
+  (general-def '(normal visual) pdf-view-mode-map
     "SPC" nil
     "j"   '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
     "k"   '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
@@ -34,7 +34,7 @@
     "u" 'pdf-annot-add-underline-markup-annotation
     "H" 'pdf-annot-add-markup-annotation)
 
-  (general-def 'normal pdf-view-mode-map :prefix "SPC SPC"
+  (general-def '(normal visual) pdf-view-mode-map :prefix "SPC SPC"
     "m" 'pdf-view-midnight-minor-mode
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete))
@@ -54,4 +54,4 @@ if COUNT isn't supplied, go to the last page"
           (doc-view-goto-page count)
         (doc-view-last-page)))
 
-  (general-def 'normal doc-view-mode-map "G" 'sk:doc-view-goto-page))
+  (general-def '(normal visual) doc-view-mode-map "G" 'sk:doc-view-goto-page))
