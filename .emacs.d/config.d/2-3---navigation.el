@@ -57,10 +57,26 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
+(defun sk:cycle-buffer (cycle-fun)
+  (funcall cycle-fun)
+  (while (or (string-match-p "^\*" (buffer-name))
+             (string-match-p "^magit" (buffer-name)))
+    (funcall cycle-fun)))
+
+(defun sk:next-buffer ()
+  (interactive)
+  (sk:cycle-buffer 'next-buffer))
+
+(defun sk:previous-buffer ()
+  (interactive)
+  (sk:cycle-buffer 'previous-buffer))
+
+
+
 (general-def '(normal visual insert) 'override
   ;;"C-w" 'bury-buffer ;; useful when using tab-line-mode
-  "C-<tab>" 'next-buffer
-  "<C-iso-lefttab>" 'previous-buffer)
+  "C-<tab>" 'sk:next-buffer
+  "<C-iso-lefttab>" 'sk:previous-buffer)
 
 (general-def '(normal visual) 'override :prefix "SPC b"
   "q" 'bury-buffer
@@ -69,6 +85,8 @@
   "b" 'switch-to-buffer
   "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
+
+
 
 (use-package ibuffer
   :defer t
