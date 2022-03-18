@@ -44,6 +44,7 @@
     "H" 'pdf-annot-add-markup-annotation)
 
   (general-def '(normal visual) pdf-view-mode-map :prefix "SPC SPC"
+    "c" (lambda () (interactive) (pdf-view-redisplay))
     "m" 'pdf-view-midnight-minor-mode
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete))
