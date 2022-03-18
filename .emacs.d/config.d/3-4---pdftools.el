@@ -10,12 +10,21 @@
   (pdf-tools-install)
 
   (setq pdf-view-resize-factor 1.1)
-  (setq pdf-view-display-size 'fit-page)
   (setq pdf-annot-activate-created-annotations t)
 
   (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
   (add-hook 'text-mode-hook 'evil-insert-state)
+
+
+
+  (defun sk:pdf-view-fit ()
+    (interactive)
+    (if (eq pdf-view-display-size 'fit-height)
+        (pdf-view-fit-width-to-window)
+      (pdf-view-fit-height-to-window)))
+
+
 
   (general-def '(normal visual) pdf-view-mode-map
     "SPC" nil
@@ -25,7 +34,7 @@
     "l"   '(lambda () (interactive) (image-forward-hscroll 10))
     "J"   'pdf-view-next-page
     "K"   'pdf-view-previous-page
-    "="   'pdf-view-fit-page-to-window)
+    "="   'sk:pdf-view-fit)
 
   (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"
     "w" 'pdf-annot-add-squiggly-markup-annotation
