@@ -59,7 +59,8 @@
 
 (defun sk:cycle-buffer (cycle-fun)
   (funcall cycle-fun)
-  (while (or (string-match-p "^\*" (buffer-name))
+  (while (or (and (string-match-p "^\*" (buffer-name))
+                  (not (string-match-p "^\*Org Src" (buffer-name))))
              (string-match-p "^magit" (buffer-name)))
     (funcall cycle-fun)))
 
