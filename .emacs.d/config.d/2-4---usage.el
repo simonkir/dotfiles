@@ -2,10 +2,13 @@
 
 
 
-; insertion  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; spacing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+
+(general-def '(normal insert) 'override
+  "M-SPC" 'delete-horizontal-space)
 
 
 
