@@ -7,6 +7,10 @@
   :config
   (setq tab-always-indent t)
 
+  (defun sk:hippie-unexpand ()
+    (interactive)
+    (hippie-expand 0))
+
   (defun sk:insert-tab-key ()
     (interactive)
     (if (string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
@@ -14,4 +18,5 @@
       (call-interactively 'indent-for-tab-command)))
 
   (general-def 'insert 'override
+    "<backtab>" 'sk:hippie-unexpand
     "TAB" 'sk:insert-tab-key))
