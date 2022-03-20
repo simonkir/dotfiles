@@ -128,7 +128,9 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
     "g K" 'org-previous-visible-heading
     "RET" 'org-ctrl-c-ctrl-c)
 
-  (general-def 'insert 'org-mode-map
+  (general-def 'insert org-mode-map
+    "<tab>" 'sk:insert-tab-key
+    "TAB" 'sk:insert-tab-key
     "C-#" '(lambda () (interactive) (insert "#")))
 
 
