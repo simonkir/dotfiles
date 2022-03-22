@@ -17,6 +17,8 @@
     (interactive)
     (cond ((and (derived-mode-p 'org-mode) (member (nth 0 (org-element-at-point)) '(table-row table)))
            (call-interactively 'org-table-next-field))
+          ((texmathp)
+           (call-interactively 'cdlatex-tab))
           ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
            (call-interactively 'hippie-expand))
           (t (call-interactively 'indent-for-tab-command))))
