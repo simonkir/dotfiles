@@ -7,7 +7,7 @@
   :config
   (setq tab-always-indent t)
   (setq hippie-expand-try-functions-list
-         '(ry-complete-file-name-partially
+         '(try-complete-file-name-partially
           try-complete-file-name
           try-expand-dabbrev
           try-expand-dabbrev-all-buffers
