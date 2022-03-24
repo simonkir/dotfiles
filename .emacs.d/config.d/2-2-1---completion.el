@@ -7,8 +7,7 @@
   :config
   (setq tab-always-indent t)
   (setq hippie-expand-try-functions-list
-        '(yas-hippie-try-expand
-          try-complete-file-name-partially
+         '(ry-complete-file-name-partially
           try-complete-file-name
           try-expand-dabbrev
           try-expand-dabbrev-all-buffers
@@ -26,11 +25,15 @@
     (interactive)
     (cond ((and (derived-mode-p 'org-mode) (member (nth 0 (org-element-at-point)) '(table-row table)))
            (call-interactively 'org-table-next-field))
+          ((when yas-minor-mode
+             (let ((yas-fallback-behavior 'return-nil))
+               (yas-expand))))
           ((texmathp)
            (call-interactively 'cdlatex-tab))
           ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
            (call-interactively 'hippie-expand))
-          (t (call-interactively 'indent-for-tab-command))))
+          (t
+           (call-interactively 'indent-for-tab-command))))
 
   (general-def 'insert 'override
     "<backtab>" 'sk:insert-backtab-key
