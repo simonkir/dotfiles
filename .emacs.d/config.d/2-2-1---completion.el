@@ -6,8 +6,15 @@
   :demand t
   :config
   (setq tab-always-indent t)
-
-  (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+  (setq hippie-expand-try-functions-list
+        '(yas-hippie-try-expand
+          try-complete-file-name-partially
+          try-complete-file-name
+          try-expand-dabbrev
+          try-expand-dabbrev-all-buffers
+          try-expand-dabbrev-from-kill
+          try-complete-lisp-symbol-partially
+          try-complete-lisp-symbol))
 
   (defun sk:hippie-unexpand ()
     (interactive)
