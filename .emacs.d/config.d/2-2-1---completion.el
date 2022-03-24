@@ -16,9 +16,11 @@
           try-complete-lisp-symbol-partially
           try-complete-lisp-symbol))
 
-  (defun sk:hippie-unexpand ()
+  (defun sk:insert-backtab-key ()
     (interactive)
-    (hippie-expand 0))
+    (cond ((and (derived-mode-p 'org-mode) (member (nth 0 (org-element-at-point)) '(table-row table)))
+           (call-interactively 'org-table-previous-field))
+          (t (hippie-expand 0))))
 
   (defun sk:insert-tab-key ()
     (interactive)
@@ -31,5 +33,5 @@
           (t (call-interactively 'indent-for-tab-command))))
 
   (general-def 'insert 'override
-    "<backtab>" 'sk:hippie-unexpand
+    "<backtab>" 'sk:insert-backtab-key
     "TAB" 'sk:insert-tab-key))
