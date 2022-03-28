@@ -2,13 +2,13 @@
 # name: plot tabular data (using gnuplot)
 # key: tpl
 # --
-#+name: $1
+#+name: `(format-time-string "%Y%m%d-%H%M")`
 | $2 | $3 |
 |----+----|
 | $0 |    |
 
-#+name: $1
-#+begin_src gnuplot :file /tmp/gnuplot-$1.png :var data=$1
+#+name: `(format-time-string "%Y%m%d-%H%M")`
+#+begin_src gnuplot :file /tmp/gnuplot-`(format-time-string "%Y%m%d-%H%M")`.png :var data=`(format-time-string "%Y%m%d-%H%M")`
 load "~/.gnuplot"
 set xlabel "$2"
 set xtics $4
