@@ -1,15 +1,15 @@
 # -*- mode: gnuplot-mode -*-
 
 reset
-set term png font "Noto Serif"
+set term pngcairo font "Noto Serif"
 set tics nomirror
 set format "%g"
 
 # one-dark color scheme #######################################################
-set term png background rgb "#282c34" # black
+set term pngcairo background rgb "#282c34" # black
 
-set grid          lc rgb "#3f444a" # grey
-set zeroaxis      lc rgb "#bbc2cf" # white
+set grid          lc rgb "#ffffff" # grey
+set zeroaxis      lc rgb "#ffffff" # white
 set border 3      lc rgb "#bbc2cf" # white
 set tics   textcolor rgb "#bbc2cf" # white
 set xlabel textcolor rgb "#bbc2cf" # white
