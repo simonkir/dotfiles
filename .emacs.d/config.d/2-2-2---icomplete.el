@@ -15,8 +15,8 @@
   (setq completion-auto-help 'lazy)
   (setq icomplete-compute-delay 0)
 
-  (set-face-attribute 'icomplete-first-match nil
-                      :weight     'normal
+  (set-face-attribute 'icomplete-selected-match nil
+                      :inherit    'default
                       :foreground "#98be65")
 
   (general-def icomplete-minibuffer-map
@@ -28,11 +28,5 @@
   (general-def '(normal visual) 'override
     "SPC x" 'execute-extended-command)
 
-  (fido-mode))
-
-
-
-(use-package icomplete-vertical
-  :ensure t
-  :after icomplete
-  :config (icomplete-vertical-mode))
+  (fido-mode)
+  (fido-vertical-mode))

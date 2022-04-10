@@ -6,7 +6,7 @@
 
 (setq scroll-conservatively 100)
 (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
-(setq mouse-wheel-scroll-amount '(5 ((shift) . 20)))
+(setq mouse-wheel-scroll-amount '(5 ((shift) . hscroll)))
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-wheel-follow-mouse t)
 
