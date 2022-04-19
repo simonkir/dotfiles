@@ -1,4 +1,6 @@
-# -*- mode: conf -*-
+# -*- mode: python -*-
+
+
 
 #################################################################
 # WM-RELATED KEYBINDS
@@ -23,6 +25,8 @@ super + 0
 # toggle dark mode
 super + alt + f
     ~/.config/picom/toggle-darkmode.sh
+
+
 
 #################################################################
 # APPLICATIONS
@@ -70,7 +74,7 @@ super + alt + shift + w
 
 # tertiary web browser
 super + alt + ctrl + w
-    chromium
+    google-chrome-stable
 
 # mp4 player
 super + alt + v
@@ -84,9 +88,9 @@ super + alt + o
 super + alt + k
     kicad
 
-# discord (browser)
-super + alt + d
-    qutebrowser https://discord.com/channels/@me
+# # discord (browser)
+# super + alt + d
+#     qutebrowser https://discord.com/channels/@me
 
 # discord (app)
 super + alt + shift + d
@@ -107,6 +111,8 @@ super + alt + p
 super + alt + shift + p
     paprefs
 
+
+
 #################################################################
 # SCREENSHOTS
 #################################################################
@@ -119,6 +125,8 @@ Print
 ctrl + Print
      xfce4-screenshooter
 
+
+
 #################################################################
 # POLYBAR        
 #################################################################
@@ -126,6 +134,8 @@ ctrl + Print
 #Hide polybar
 super + y
     polybar-msg cmd toggle
+
+
 
 #################################################################
 # MULTIMEDIA KEYS
