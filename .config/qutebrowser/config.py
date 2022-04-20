@@ -101,4 +101,9 @@ c.content.blocking.adblock.lists = ["https://easylist.to/easylist/easylist.txt",
                                     "https://easylist.to/easylist/fanboy-social.txt",
                                     "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
                                     "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
-                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt"]
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2020.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
+                                    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt"]
