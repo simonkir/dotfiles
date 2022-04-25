@@ -55,4 +55,5 @@
   (setq auto-insert t)
   (setq auto-insert-directory "~/.emacs.d/templates/")
   (define-auto-insert 'org-mode "org-mode.org")
+  (define-auto-insert 'glsl-mode "glsl-mode.frag")
   (auto-insert-mode t))
