@@ -1,4 +1,4 @@
-#define PI=3.14159265359
+#define PI 3.14159265359
 
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
