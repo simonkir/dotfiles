@@ -71,8 +71,6 @@
   (defun sk:activate-tex-alignment-keybinds-equality ()
     (interactive)
     (general-def 'insert TeX-mode-map
-      "C-<" '(lambda () (interactive) (insert "& \\leq &"))
-      "C->" '(lambda () (interactive) (insert "& \\geq &"))
       "=" '(lambda () (interactive) (insert "& = &"))
       "<" '(lambda () (interactive) (insert "& < &"))
       ">" '(lambda () (interactive) (insert "& > &")))
@@ -81,8 +79,6 @@
   (defun sk:deactivate-tex-alignment-keybinds-equality ()
     (interactive)
     (general-def 'insert TeX-mode-map
-      "C-<" '(lambda () (interactive) (insert "\\leq"))
-      "C->" '(lambda () (interactive) (insert "\\geq"))
       "=" '(lambda () (interactive) (insert "="))
       "<" '(lambda () (interactive) (insert "<"))
       ">" '(lambda () (interactive) (insert ">")))
@@ -107,6 +103,11 @@
     (sk:deactivate-tex-alignment-keybinds-equality)
     (sk:deactivate-tex-alignment-keybinds-matrix)
     (message "Disabled All TeX Alignment Keybinds"))
+
+  (general-def 'insert TeX-mode-map
+    "C-=" '(lambda () (interactive) (insert "="))
+    "C-<" '(lambda () (interactive) (insert "<"))
+    "C->" '(lambda () (interactive) (insert ">")))
 
   (sk:activate-tex-alignment-keybinds-equality)
 
