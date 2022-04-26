@@ -55,6 +55,12 @@
 
 
 
+; image mode config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'image-mode-hook '(lambda () (display-line-numbers-mode -1)))
+
+
+
 (use-package doc-view
   :defer t
   :config
