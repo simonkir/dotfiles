@@ -41,6 +41,8 @@
   (add-to-list 'prettify-symbols-alist '("\\right|" . "‖"))
   (add-to-list 'prettify-symbols-alist '("\\left\\|" . (?‖ (Br . Bl) ?‖)))
   (add-to-list 'prettify-symbols-alist '("\\right\\|" . (?‖ (Br . Bl) ?‖)))
+  (add-to-list 'prettify-symbols-alist '("\\longrightarrow" . "⟶"))
+  (add-to-list 'prettify-symbols-alist '("\\longleftarrow" . "⟵"))
   (add-to-list 'prettify-symbols-alist '("\\pm" . "±"))
   (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°")))
