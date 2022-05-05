@@ -2,4 +2,4 @@
 # name: sum
 # key: sum
 # --
-\sum_{$1}^{}
+\sum_{$0}^{}
