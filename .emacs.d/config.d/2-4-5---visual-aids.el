@@ -30,17 +30,3 @@
   "0" 'text-scale-adjust
   "+" 'text-scale-adjust
   "-" 'text-scale-adjust)
-
-
-
-; font settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(set-face-attribute 'default nil :family "Source Code Pro" :height 100)
-(set-face-attribute 'fixed-pitch nil :family "Source Code Pro")
-(set-face-attribute 'variable-pitch nil :family "Noto Serif")
-
-(use-package mixed-pitch
-  :ensure t
-  :hook ((org-mode TeX-mode) . mixed-pitch-mode)
-  :general ('normal 'override "SPC t m" 'mixed-pitch-mode)
-  :config (setq mixed-pitch-variable-pitch-cursor nil)) ;; keep filled cursor
