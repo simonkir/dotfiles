@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: text – bezug (chemie lk)
+# key: bzg
+# --
+\text{\quad Bezug: $0}
