@@ -18,7 +18,7 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
-  (add-hook 'LaTeX-mode-hook 'dubcaps-mode)
+  (add-hook 'LaTeX-mode-hook 'sk:autocorrect-mode)
 
 
 
