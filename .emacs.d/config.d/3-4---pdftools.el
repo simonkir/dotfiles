@@ -59,6 +59,9 @@
 
 (add-hook 'image-mode-hook '(lambda () (display-line-numbers-mode -1)))
 
+(general-def 'normal 'image-mode-map
+  "R" 'image-rotate)
+
 
 
 (use-package doc-view
