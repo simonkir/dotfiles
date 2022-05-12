@@ -57,14 +57,17 @@
 
   ; special keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (defun sk:latex-eqn-linebreak ()
+  (defun sk:latex-insert-linebreak ()
     (interactive)
-    (unless (eq ?\s (char-after (- (point) 1)))
-      (insert " "))
-    (insert "\\\\\n  "))
+    (if (texmathp)
+        (progn
+          (unless (eq ?\s (char-after (- (point) 1)))
+            (insert " "))
+          (insert "\\\\\n  "))
+      (insert "\n")))
   
   (general-def 'insert TeX-mode-map
-    "<C-return>" 'sk:latex-eqn-linebreak)
+    "RET" 'sk:latex-insert-linebreak)
 
 
 
