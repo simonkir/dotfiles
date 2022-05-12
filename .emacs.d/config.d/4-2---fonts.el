@@ -4,15 +4,15 @@
 
 ; font settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(set-face-attribute 'default nil :family "Noto Sans Mono" :height 100)
+(set-face-attribute 'default nil :family "Monospace" :height 100)
 (set-face-attribute 'variable-pitch nil :family "Noto Serif" :height 100)
 
 
 
 ; font switching ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq sk:fonts-fixed-pitch '("Noto Sans Mono" "Inconsolata" "Roboto Mono" "Source Code Pro"))
-(setq sk:fonts-variable-pitch '("Noto Serif" "C059" "Georgia" "Ubuntu" "Roboto"))
+(setq sk:fonts-fixed-pitch '("Monospace" "Roboto Mono" "Source Code Pro"))
+(setq sk:fonts-variable-pitch '("Noto Serif" "C059" "Georgia" "Ubuntu" "Noto Sans"))
 
 (defun sk:set-face-fixed ()
   (interactive)
