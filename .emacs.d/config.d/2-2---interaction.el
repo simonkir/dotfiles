@@ -5,6 +5,8 @@
 (defalias 'yes-or-no 'y-or-n-p)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq-default use-dialog-box nil)
+
 
 
 (use-package which-key
