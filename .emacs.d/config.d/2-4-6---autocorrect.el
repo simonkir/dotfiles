@@ -17,17 +17,14 @@
                 (capitalize-region (point) end))))))
 
 (defun sk:dspace-to-sspace ()
-  "Convert two  spaces to single space while typing."
+  "Convert two or more spaces to single space while typing."
   (interactive)
   (and (/= ?w (char-syntax (char-before)))
        (save-excursion
-         (let ((end (point)))
-           (and (if (called-interactively-p)
-                    (skip-syntax-backward "-")
-                  (= -2 (skip-syntax-backward "-")))
-                (looking-at (rx (= 2 " ")))
-                (not (texmathp))
-                (just-one-space))))))
+         (left-char)
+         (and (looking-at (rx (1+ " ")))
+              (not (texmathp))
+              (just-one-space)))))
 
 (define-minor-mode sk:autocorrect-mode nil
   :init-value nil
