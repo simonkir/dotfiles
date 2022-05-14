@@ -21,9 +21,12 @@
 (use-package recentf
   :demand t ;; needed for dashboard
   :config
-  (setq recentf-max-saved-items 100)
+  (setq recentf-max-saved-items 200)
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
   (add-to-list 'recentf-exclude (expand-file-name "/usr/share/emacs/*"))
+  (add-to-list 'recentf-exclude ".*/0---org.org")
+  (add-to-list 'recentf-exclude ".*/0---misc.org")
+  (add-to-list 'recentf-exclude ".*/0---glossar.org")
   (recentf-mode t)
   (general-def '(normal visual) 'override
     "SPC f r" 'sk:recentf-find-file)
