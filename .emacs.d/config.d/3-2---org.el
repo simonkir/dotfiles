@@ -8,9 +8,10 @@
 
   ; content ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq org-startup-folded     t)
-  (setq org-hide-leading-stars t)
-  (setq org-num-max-level      4)
+  (setq org-startup-folded      t)
+  (setq org-hide-leading-stars  t)
+  (setq org-num-max-level       4)
+  (setq org-return-follows-link t)
 
   (add-hook 'org-mode-hook 'org-num-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
@@ -52,9 +53,8 @@
   (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
   ;;(add-hook 'org-babel-after-execute-hook 'sk:org-babel-kill-session-after-run)
 
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-src-window-setup 'current-window) ;; don't spread across two windows
-  (setq org-src-preserve-indentation t)
+  (setq org-confirm-babel-evaluate       nil)
+  (setq org-edit-src-content-indentation 0)
 
   (defun sk:org-edit-special-current-window ()
     (interactive)
