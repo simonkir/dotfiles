@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: DS_ges (gesamte entropieänderung)
+# key: dsges
+# --
+\Delta S_{ges}$0

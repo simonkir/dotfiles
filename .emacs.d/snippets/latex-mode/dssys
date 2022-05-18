@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: DS_ges (entropieänderung des systems)
+# key: dssys
+# --
+\Delta S_{Sys}$0
