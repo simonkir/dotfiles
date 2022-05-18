@@ -27,6 +27,10 @@
   (add-to-list 'recentf-exclude ".*/0---org.org")
   (add-to-list 'recentf-exclude ".*/0---misc.org")
   (add-to-list 'recentf-exclude ".*/0---glossar.org")
+  (add-to-list 'recentf-exclude ".*/0---aufgaben.tex")
+  (add-to-list 'recentf-exclude ".*/0---aufgaben.pdf")
+  (add-to-list 'recentf-exclude ".*/0---mitschrieb.tex")
+  (add-to-list 'recentf-exclude ".*/0---mitschrieb.pdf")
   (recentf-mode t)
   (general-def '(normal visual) 'override
     "SPC f r" 'sk:recentf-find-file)
