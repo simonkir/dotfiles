@@ -20,7 +20,7 @@ super + 9
 
 # logout dialog
 super + 0
-    arcolinux-logout
+    archlinux-logout
 
 # toggle dark mode
 super + alt + f
