@@ -138,6 +138,8 @@
   (setq cdlatex-paired-parens "$([{")
   (setq cdlatex-math-symbol-alist
         '((?F ("\\Phi"))
+          (?w ("\\omega"))
+          (?X ("\\xi"))
           (?+ ("\\pm"))
           (?: ("\\ldots"))
           (?c ("\\quad" "" "\\cos"))))
