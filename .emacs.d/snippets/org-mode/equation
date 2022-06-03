@@ -3,7 +3,7 @@
 # key: eq
 # --
 #+begin_latex latex
-\begin{IEEEeqnarray*}{rCl+x*}
+\begin{IEEEeqnarray*}{rCl'l+x*}
   $0
 \end{IEEEeqnarray*}
 #+end_latex

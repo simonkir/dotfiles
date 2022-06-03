@@ -74,6 +74,7 @@
   (defun sk:activate-tex-alignment-keybinds-equality ()
     (interactive)
     (general-def 'insert TeX-mode-map
+      "|" '(lambda () (interactive) (insert "& |"))
       "=" '(lambda () (interactive) (insert "& = &"))
       "<" '(lambda () (interactive) (insert "& < &"))
       ">" '(lambda () (interactive) (insert "& > &")))
@@ -82,6 +83,7 @@
   (defun sk:deactivate-tex-alignment-keybinds-equality ()
     (interactive)
     (general-def 'insert TeX-mode-map
+      "|" '(lambda () (interactive) (insert "|"))
       "=" '(lambda () (interactive) (insert "="))
       "<" '(lambda () (interactive) (insert "<"))
       ">" '(lambda () (interactive) (insert ">")))
