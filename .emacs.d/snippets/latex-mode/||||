@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: left right ||||
-# key: ||
+# key: aabs
 # --
 \left\|$0\right\|
