@@ -93,14 +93,14 @@
     (interactive)
     (general-def 'insert TeX-mode-map
       "SPC" '(lambda () (interactive) (insert " & "))
-      "C-SPC" '(lambda () (interactive) (insert " ")))
+      "S-SPC" '(lambda () (interactive) (insert " ")))
     (message "Enabled TeX Alignment Keybinds for Matricies"))
 
   (defun sk:deactivate-tex-alignment-keybinds-matrix ()
     (interactive)
     (general-def 'insert TeX-mode-map
       "SPC" '(lambda () (interactive) (insert " "))
-      "C-SPC" '(lambda () (interactive) (insert " ")))
+      "S-SPC" '(lambda () (interactive) (insert " ")))
     (message "Disabled TeX Alignment Keybinds for Matricies"))
   
   (defun sk:deactivate-tex-alignment-keybinds-all ()
@@ -110,6 +110,7 @@
     (message "Disabled All TeX Alignment Keybinds"))
 
   (general-def 'insert TeX-mode-map
+    "C-|" '(lambda () (interactive) (insert "|"))
     "C-=" '(lambda () (interactive) (insert "="))
     "C-<" '(lambda () (interactive) (insert "<"))
     "C->" '(lambda () (interactive) (insert ">")))
