@@ -67,9 +67,8 @@
       (insert "\n")))
   
   (general-def 'insert TeX-mode-map
-    "RET" 'sk:latex-insert-linebreak)
-
-
+    "RET" 'sk:latex-insert-linebreak
+    "<C-return>" '(lambda () (interactive) (insert "\n")))
 
   (defun sk:activate-tex-alignment-keybinds-equality ()
     (interactive)
