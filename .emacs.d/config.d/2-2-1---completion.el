@@ -28,7 +28,7 @@
           ((when yas-minor-mode
              (let ((yas-fallback-behavior 'return-nil))
                (yas-expand))))
-          ((and (texmathp) (derived-mode-p 'TeX-mode))
+          ((and (texmathp) (not (derived-mode-p 'prog-mode)))
            (call-interactively 'cdlatex-tab))
           ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
            (call-interactively 'hippie-expand))
