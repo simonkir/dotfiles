@@ -55,11 +55,14 @@
 
 
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/sklatex"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 
 (use-package sklatex
   :defer t
-  :hook (LaTeX-mode . sklatex-mode))
+  :hook (LaTeX-mode . sklatex-mode)
+  :config
+  (general-def 'normal TeX-mode-map
+    "SPC SPC k" 'sklatex-dispatch))
 
 
 
