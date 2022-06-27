@@ -16,11 +16,12 @@
   (package-install 'use-package))
 
 (setq use-package-verbose t)
+(setq use-package-always-defer t)
+(setq use-package-always-ensure t)
 
 
 
 ;; general.el
 
 (use-package general
-  :demand t
-  :ensure t)
+  :demand t)

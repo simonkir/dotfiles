@@ -3,8 +3,6 @@
 
 
 (use-package pdf-tools
-  :ensure t
-  :defer t
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
@@ -65,7 +63,6 @@
 
 
 (use-package doc-view
-  :defer t
   :config
   (setq doc-view-continuous t)
 

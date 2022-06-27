@@ -3,7 +3,6 @@
 
 
 (use-package dired
-  :defer t
   :general ('normal 'override "SPC f D" 'dired)
   :config
   (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
@@ -22,7 +21,6 @@
 
 
 (use-package dired-x
-  :defer t
   :general ('normal 'override "SPC f d" 'dired-jump)
   :hook
   (dired-mode . dired-hide-details-mode)

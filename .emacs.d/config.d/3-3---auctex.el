@@ -4,7 +4,6 @@
 
 (use-package tex
   :ensure auctex
-  :defer t
   :init
   ;; in init because org-mode needs it too
   (setq texmathp-tex-commands '())
@@ -58,7 +57,6 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 
 (use-package sklatex
-  :defer t
   :hook (LaTeX-mode . sklatex-mode)
   :config
   (general-def 'normal TeX-mode-map
@@ -67,8 +65,6 @@
 
 
 (use-package cdlatex
-  :ensure t
-  :defer t
   :hook
   (LaTeX-mode . cdlatex-mode)
   (org-mode . org-cdlatex-mode)
@@ -101,6 +97,4 @@
 
 
 (use-package evil-tex
-  :ensure t
-  :defer t
   :hook (LaTeX-mode . evil-tex-mode))

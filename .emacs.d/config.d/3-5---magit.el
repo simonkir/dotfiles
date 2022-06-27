@@ -3,7 +3,6 @@
 
 
 (use-package magit
-  :ensure t
   :general
   ('(normal visual) 'override
     "SPC g" 'magit-file-dispatch

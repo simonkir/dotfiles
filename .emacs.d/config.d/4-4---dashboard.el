@@ -5,7 +5,6 @@
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
 
 (use-package dashboard
-  :ensure t
   :demand t
   :config
   (setq dashboard-items             '((bookmarks . 10) (recents . 10)))

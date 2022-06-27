@@ -3,7 +3,6 @@
 
 
 (use-package org
-  :defer t
   :config
 
   ; content ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -260,7 +259,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 ; misc ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-superstar
-  :ensure t
   :hook (org-mode . org-superstar-mode)
   :config
   (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
@@ -269,5 +267,4 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 (use-package evil-org
-  :ensure t
   :hook (org-mode . evil-org-mode))

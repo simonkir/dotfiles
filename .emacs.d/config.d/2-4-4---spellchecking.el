@@ -3,7 +3,6 @@
 
 
 (use-package flyspell
-  :defer t
   :config
   (setq flyspell-issue-message-flag nil)
   (setq ispell-dictionary "de_DE")

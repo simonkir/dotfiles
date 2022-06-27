@@ -3,21 +3,15 @@
 
 
 (use-package julia-mode
-  :ensure t
-  :defer t
   :general ('(normal visual) 'override "SPC r j" 'run-julia))
 
 
 
-(use-package gnuplot
-  :ensure t
-  :defer t)
+(use-package gnuplot)
 
 
 
 (use-package glsl-mode
-  :ensure t
-  :defer t
   :config
   (defun sk:glsl-compile-file-to-image ()
     (interactive)
@@ -33,6 +27,4 @@
 
 
 
-(use-package jupyter
-  :ensure t
-  :defer t)
+(use-package jupyter)

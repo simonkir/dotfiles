@@ -92,7 +92,6 @@
 
 
 (use-package ibuffer
-  :defer t
   :general ('(normal visual) 'override "SPC b B" 'ibuffer))
 
 

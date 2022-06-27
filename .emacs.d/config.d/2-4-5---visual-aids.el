@@ -7,7 +7,6 @@
 (show-paren-mode)
 
 (use-package rainbow-delimiters
-  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 
@@ -15,7 +14,6 @@
 ; writing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column
-  :ensure t
   :general
   ('normal 'override :prefix "SPC t"
     "v" 'visual-fill-column-mode
@@ -36,6 +34,5 @@
 ; indent guides ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-indent-guides
-  :defer t
   :hook (prog-mode . highlight-indent-guides-mode)
   :config (setq highlight-indent-guides-method 'bitmap))

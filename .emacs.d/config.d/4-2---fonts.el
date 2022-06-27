@@ -43,7 +43,6 @@
 ; mixed-pitch mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package mixed-pitch
-  :ensure t
   :hook ((org-mode TeX-mode) . mixed-pitch-mode)
   :general ('normal 'override "SPC d m" 'mixed-pitch-mode)
   :config

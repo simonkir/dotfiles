@@ -3,7 +3,6 @@
 
 
 (use-package avy
-  :ensure t
   :general
   ('(normal visual) 'override :prefix "SPC a"
    "c" 'avy-goto-char-timer

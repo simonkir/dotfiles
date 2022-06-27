@@ -5,7 +5,6 @@
 ;; note: requires running ‚all-the-icons-install-fonts‘
 ;; for the icons to appear correctly
 (use-package doom-modeline
-  :ensure t
   :demand t
   :config
   ;; needs to be set explicitly when running in server mode

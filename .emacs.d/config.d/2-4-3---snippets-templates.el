@@ -5,7 +5,6 @@
 ; snippets ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yasnippet
-  :ensure t
   :demand t
   :config
   (yas-global-mode)

@@ -3,7 +3,6 @@
 
 
 (use-package evil
-  :ensure t
   :demand t
   :init
   (setq evil-respect-visual-line-mode t
@@ -23,6 +22,5 @@
 
 
 (use-package evil-collection
-  :ensure t
   :after evil
   :config (evil-collection-init))

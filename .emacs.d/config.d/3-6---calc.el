@@ -3,7 +3,6 @@
 
 
 (use-package calc
-  :defer t
   :general ('normal 'override
      "SPC c" 'calc-dispatch)
 
