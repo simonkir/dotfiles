@@ -35,10 +35,10 @@
 (defun sklatex-activate-alignment-keybinds-equality (&optional inhibit-message)
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "|" '(lambda () (interactive) (insert "& |"))
-    "=" '(lambda () (interactive) (insert "& = &"))
-    "<" '(lambda () (interactive) (insert "& < &"))
-    ">" '(lambda () (interactive) (insert "& > &")))
+    "|" '(lambda () (interactive) (insert "&|"))
+    "=" '(lambda () (interactive) (insert "&=&"))
+    "<" '(lambda () (interactive) (insert "&<&"))
+    ">" '(lambda () (interactive) (insert "&>&")))
   (unless inhibit-message
     (message "Enabled TeX Alignment Keybinds for Equality Operators")))
 
