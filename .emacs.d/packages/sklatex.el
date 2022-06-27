@@ -1,23 +1,9 @@
 ;;; sklatex.el --- sklatex                           -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022  simonkir
-
 ;; Author: simonkir
-;; Version: 0.1
-;; Keywords: latex
-
-
-
-;;; Commentary:
-
-;; TODO
-
-
 
 ;;; Code:
-
-(require 'texmathp)
-(require 'general)
 
 
 
