@@ -57,6 +57,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 
 (use-package sklatex
+  :ensure nil
   :hook (LaTeX-mode . sklatex-mode)
   :config
   (general-def 'normal TeX-mode-map
