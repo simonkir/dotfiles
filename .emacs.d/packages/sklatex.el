@@ -16,15 +16,16 @@
 
 
 
+; linebreak ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defun sklatex-insert-linebreak ()
   (interactive)
   (if (texmathp)
       (progn
         (unless (eq ?\s (char-after (- (point) 1)))
           (insert " "))
-        (insert "\\\\")
-        (newline-and-indent))
-    (newline-and-indent)))
+        (insert "\\\\\n  "))
+    (insert "\n")))
 
 (general-def 'insert sklatex-mode-map
   "RET" 'sklatex-insert-linebreak
@@ -32,13 +33,46 @@
 
 
 
+; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sklatex--current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at-p "[[:blank:]]*$")))
+
+;; ; note: incompatible with prettify
+;; (defun sklatex--indent-to-alignment-operator ()
+;;   (let (prevbeg prevend curbeg curend)
+;;     (if (sklatex--current-line-empty-p)
+;;         (progn
+;;           (save-excursion
+;;             (setq curend (point))
+;;             (beginning-of-line)
+;;             (setq curbeg (point))
+;;             (previous-line)
+;;             (beginning-of-line)
+;;             (setq prevbeg (point))
+;;             (re-search-forward "&")
+;;             (setq prevend (- (point) 1)))
+;;           (dotimes (_ (- prevend prevbeg (- curend curbeg)))
+;;             (insert " "))))))
+
+
+
+; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sklatex--insert-aligned-char (char)
+  (if (sklatex--current-line-empty-p)
+      (insert "  "))
+  (insert (concat "&" char "&")))
+
 (defun sklatex-activate-alignment-keybinds-equality (&optional inhibit-message)
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "|" '(lambda () (interactive) (insert "&|"))
-    "=" '(lambda () (interactive) (insert "&=&"))
-    "<" '(lambda () (interactive) (insert "&<&"))
-    ">" '(lambda () (interactive) (insert "&>&")))
+    "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|"))
+    "=" '(lambda () (interactive) (sklatex--insert-aligned-char "="))
+    "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<"))
+    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">")))
   (unless inhibit-message
     (message "Enabled TeX Alignment Keybinds for Equality Operators")))
 
@@ -51,6 +85,10 @@
     ">" '(lambda () (interactive) (insert ">")))
   (unless inhibit-message
     (message "Disabled TeX Alignment Keybinds for Equality Operators")))
+
+
+
+; matricies ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-activate-alignment-keybinds-matrix (&optional inhibit-message)
   (interactive)
@@ -68,6 +106,10 @@
   (unless inhibit-message
     (message "Disabled TeX Alignment Keybinds for Matricies")))
 
+
+
+; all ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defun sklatex-deactivate-alignment-keybinds-all (&optional inhibit-message)
   (interactive)
   (sklatex-deactivate-alignment-keybinds-equality)
@@ -77,6 +119,8 @@
 
 
 
+; escape binds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (general-def 'insert sklatex-mode-map
   "C-|" '(lambda () (interactive) (insert "|"))
   "C-=" '(lambda () (interactive) (insert "="))
@@ -84,6 +128,8 @@
   "C->" '(lambda () (interactive) (insert ">")))
 
 
+
+; dispatch defun ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-dispatch (key)
   (interactive "k")
