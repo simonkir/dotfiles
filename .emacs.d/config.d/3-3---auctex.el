@@ -51,77 +51,15 @@
     "l" 'preview-at-point
     "L" 'preview-clearout-at-point
     "b" 'preview-buffer
-    "B" 'preview-clearout-buffer)
+    "B" 'preview-clearout-buffer))
 
 
 
-  ; special keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages/sklatex"))
 
-  (defun sk:latex-insert-linebreak ()
-    (interactive)
-    (if (texmathp)
-        (progn
-          (unless (eq ?\s (char-after (- (point) 1)))
-            (insert " "))
-          (insert "\\\\\n  "))
-      (insert "\n")))
-  
-  (general-def 'insert TeX-mode-map
-    "RET" 'sk:latex-insert-linebreak
-    "<C-return>" '(lambda () (interactive) (insert "\n")))
-
-  (defun sk:activate-tex-alignment-keybinds-equality ()
-    (interactive)
-    (general-def 'insert TeX-mode-map
-      "|" '(lambda () (interactive) (insert "& |"))
-      "=" '(lambda () (interactive) (insert "& = &"))
-      "<" '(lambda () (interactive) (insert "& < &"))
-      ">" '(lambda () (interactive) (insert "& > &")))
-    (message "Enabled TeX Alignment Keybinds for Equality Operators"))
-
-  (defun sk:deactivate-tex-alignment-keybinds-equality ()
-    (interactive)
-    (general-def 'insert TeX-mode-map
-      "|" '(lambda () (interactive) (insert "|"))
-      "=" '(lambda () (interactive) (insert "="))
-      "<" '(lambda () (interactive) (insert "<"))
-      ">" '(lambda () (interactive) (insert ">")))
-    (message "Disabled TeX Alignment Keybinds for Equality Operators"))
-
-  (defun sk:activate-tex-alignment-keybinds-matrix ()
-    (interactive)
-    (general-def 'insert TeX-mode-map
-      "SPC" '(lambda () (interactive) (insert " & "))
-      "S-SPC" '(lambda () (interactive) (insert " ")))
-    (message "Enabled TeX Alignment Keybinds for Matricies"))
-
-  (defun sk:deactivate-tex-alignment-keybinds-matrix ()
-    (interactive)
-    (general-def 'insert TeX-mode-map
-      "SPC" '(lambda () (interactive) (insert " "))
-      "S-SPC" '(lambda () (interactive) (insert " ")))
-    (message "Disabled TeX Alignment Keybinds for Matricies"))
-  
-  (defun sk:deactivate-tex-alignment-keybinds-all ()
-    (interactive)
-    (sk:deactivate-tex-alignment-keybinds-equality)
-    (sk:deactivate-tex-alignment-keybinds-matrix)
-    (message "Disabled All TeX Alignment Keybinds"))
-
-  (general-def 'insert TeX-mode-map
-    "C-|" '(lambda () (interactive) (insert "|"))
-    "C-=" '(lambda () (interactive) (insert "="))
-    "C-<" '(lambda () (interactive) (insert "<"))
-    "C->" '(lambda () (interactive) (insert ">")))
-
-  (sk:activate-tex-alignment-keybinds-equality)
-
-  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC k"
-    "e" 'sk:activate-tex-alignment-keybinds-equality
-    "E" 'sk:deactivate-tex-alignment-keybinds-equality
-    "m" 'sk:activate-tex-alignment-keybinds-matrix
-    "M" 'sk:deactivate-tex-alignment-keybinds-matrix
-    "K" 'sk:deactivate-tex-alignment-keybinds-all))
+(use-package sklatex
+  :defer t
+  :hook (LaTeX-mode . sklatex-mode))
 
 
 
