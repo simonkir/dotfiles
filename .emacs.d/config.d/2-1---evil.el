@@ -22,5 +22,6 @@
 
 
 (use-package evil-collection
+  :demand t
   :after evil
   :config (evil-collection-init))
