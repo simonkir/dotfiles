@@ -138,7 +138,7 @@
     ((string= key "m") (sklatex-activate-alignment-keybinds-matrix))
     ((string= key "M") (sklatex-deactivate-alignment-keybinds-matrix))
     ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
-    ((string= key "\n") (sklatex-activate-newline-keybinds))
+    ((string= key "n") (sklatex-activate-newline-keybinds))
     ((string= key "N") (sklatex-deactivate-newline-keybinds))
     (t (message "key %s unsupported" key))))
 
