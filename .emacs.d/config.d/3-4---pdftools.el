@@ -10,7 +10,7 @@
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
 
-  (add-hook 'pdf-view-mode-hook '(lambda () (display-line-numbers-mode -1)))
+  (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
   (add-hook 'text-mode-hook 'evil-insert-state)
 
@@ -55,7 +55,7 @@
 
 ; image mode config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'image-mode-hook '(lambda () (display-line-numbers-mode -1)))
+(add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
 (general-def 'normal 'image-mode-map
   "R" 'image-rotate)

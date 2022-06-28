@@ -10,7 +10,7 @@
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-wheel-follow-mouse t)
 
-(advice-add 'isearch-exit :after '(lambda () (when isearch-forward (setf (point) isearch-other-end))))
+(advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (setf (point) isearch-other-end))))
 
 (general-def 'normal 'override
   "SPC t f" 'follow-mode)
