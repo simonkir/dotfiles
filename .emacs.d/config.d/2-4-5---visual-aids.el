@@ -47,4 +47,4 @@
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (general-def 'normal vundo-mode-map
     "j" 'vundo-next
-    "k" 'vundo-previous)
+    "k" 'vundo-previous))
