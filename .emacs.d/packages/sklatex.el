@@ -12,7 +12,9 @@
   :lighter " skLaTeX"
   :keymap (make-sparse-keymap)
   (if sklatex-mode
-      (sklatex-activate-alignment-keybinds-equality)))
+      (progn
+        (sklatex-activate-newline-keybinds)
+        (sklatex-activate-alignment-keybinds-equality))))
 
 
 
@@ -27,9 +29,16 @@
         (insert "\\\\\n  "))
     (self-insert-command)))
 
-(general-def 'insert sklatex-mode-map
-  "RET" 'sklatex-insert-linebreak
-  "<C-return>" '(lambda () (interactive) (insert "\n")))
+(defun sklatex-activate-newline-keybinds ()
+  (interactive)
+  (general-def 'insert sklatex-mode-map
+    "RET" 'sklatex-insert-linebreak))
+
+(defun sklatex-deactivate-newline-keybinds ()
+  (interactive)
+  (general-def 'insert sklatex-mode-map
+    "RET" 'self-insert-command))
+
 
 
 
@@ -114,7 +123,8 @@
   "C-|" '(lambda () (interactive) (insert "|"))
   "C-=" '(lambda () (interactive) (insert "="))
   "C-<" '(lambda () (interactive) (insert "<"))
-  "C->" '(lambda () (interactive) (insert ">")))
+  "C->" '(lambda () (interactive) (insert ">"))
+  "<C-return>" '(lambda () (interactive) (insert "\n")))
 
 
 
@@ -128,6 +138,8 @@
     ((string= key "m") (sklatex-activate-alignment-keybinds-matrix))
     ((string= key "M") (sklatex-deactivate-alignment-keybinds-matrix))
     ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
+    ((string= key "\n") (sklatex-activate-newline-keybinds))
+    ((string= key "N") (sklatex-deactivate-newline-keybinds))
     (t (message "key %s unsupported" key))))
 
 
