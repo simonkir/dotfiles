@@ -6,4 +6,5 @@
   :demand t
   :config
   (global-hl-line-mode)
-  (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config)
+  (load-theme 'doom-one t)) ;; Corrects (and improves) org-mode's native fontification.

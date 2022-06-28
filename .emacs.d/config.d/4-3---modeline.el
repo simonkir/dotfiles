@@ -10,4 +10,4 @@
   ;; needs to be set explicitly when running in server mode
   (setq doom-modeline-icon t)
   (setq doom-modeline-buffer-encoding nil)
-  (doom-modeline-mode 't))
+  (doom-modeline-mode))
