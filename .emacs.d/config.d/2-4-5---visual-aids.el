@@ -36,3 +36,15 @@
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode)
   :config (setq highlight-indent-guides-method 'bitmap))
+
+
+
+; visual undo ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package vundo
+  :general ('normal override "U" 'vundo)
+  :config
+  (setq vundo-glyph-alist vundo-unicode-symbols)
+  (general-def 'normal vundo-mode-map
+    "j" 'vundo-next
+    "k" 'vundo-previous)
