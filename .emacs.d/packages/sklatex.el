@@ -25,7 +25,7 @@
         (unless (eq ?\s (char-after (- (point) 1)))
           (insert " "))
         (insert "\\\\\n  "))
-    (insert "\n")))
+    (self-insert-command)))
 
 (general-def 'insert sklatex-mode-map
   "RET" 'sklatex-insert-linebreak
@@ -79,10 +79,10 @@
 (defun sklatex-deactivate-alignment-keybinds-equality (&optional inhibit-message)
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "|" '(lambda () (interactive) (insert "|"))
-    "=" '(lambda () (interactive) (insert "="))
-    "<" '(lambda () (interactive) (insert "<"))
-    ">" '(lambda () (interactive) (insert ">")))
+    "|" 'self-insert-command
+    "=" 'self-insert-command
+    "<" 'self-insert-command
+    ">" 'self-insert-command)
   (unless inhibit-message
     (message "Disabled TeX Alignment Keybinds for Equality Operators")))
 
@@ -101,8 +101,7 @@
 (defun sklatex-deactivate-alignment-keybinds-matrix (&optional inhibit-message)
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "SPC" '(lambda () (interactive) (insert " "))
-    "S-SPC" '(lambda () (interactive) (insert " ")))
+    "SPC" 'self-insert-command)
   (unless inhibit-message
     (message "Disabled TeX Alignment Keybinds for Matricies")))
 
