@@ -12,7 +12,7 @@
   :lighter " skLaTeX"
   :keymap (make-sparse-keymap)
   (if sklatex-mode
-      (sklatex-activate-alignment-keybinds-equality t)))
+      (sklatex-activate-alignment-keybinds-equality)))
 
 
 
