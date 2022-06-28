@@ -66,55 +66,45 @@
       (insert "  "))
   (insert (concat "&" char "&")))
 
-(defun sklatex-activate-alignment-keybinds-equality (&optional inhibit-message)
+(defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)
   (general-def 'insert sklatex-mode-map
     "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|"))
     "=" '(lambda () (interactive) (sklatex--insert-aligned-char "="))
     "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<"))
-    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">")))
-  (unless inhibit-message
-    (message "Enabled TeX Alignment Keybinds for Equality Operators")))
+    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">"))))
 
-(defun sklatex-deactivate-alignment-keybinds-equality (&optional inhibit-message)
+(defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
   (general-def 'insert sklatex-mode-map
     "|" 'self-insert-command
     "=" 'self-insert-command
     "<" 'self-insert-command
-    ">" 'self-insert-command)
-  (unless inhibit-message
-    (message "Disabled TeX Alignment Keybinds for Equality Operators")))
+    ">" 'self-insert-command))
 
 
 
 ; matricies ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex-activate-alignment-keybinds-matrix (&optional inhibit-message)
+(defun sklatex-activate-alignment-keybinds-matrix ()
   (interactive)
   (general-def 'insert sklatex-mode-map
     "SPC" '(lambda () (interactive) (insert " & "))
-    "S-SPC" '(lambda () (interactive) (insert " ")))
-  (unless inhibit-message
-    (message "Enabled TeX Alignment Keybinds for Matricies")))
+    "S-SPC" '(lambda () (interactive) (insert " "))))
 
-(defun sklatex-deactivate-alignment-keybinds-matrix (&optional inhibit-message)
+(defun sklatex-deactivate-alignment-keybinds-matrix ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "SPC" 'self-insert-command)
-  (unless inhibit-message
-    (message "Disabled TeX Alignment Keybinds for Matricies")))
+    "SPC" 'self-insert-command))
 
 
 
 ; all ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex-deactivate-alignment-keybinds-all (&optional inhibit-message)
+(defun sklatex-deactivate-alignment-keybinds-all ()
   (interactive)
   (sklatex-deactivate-alignment-keybinds-equality)
-  (sklatex-deactivate-alignment-keybinds-matrix)
-  (unless inhibit-message
-    (message "Disabled All TeX Alignment Keybinds")))
+  (sklatex-deactivate-alignment-keybinds-matrix))
 
 
 
