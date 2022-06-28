@@ -27,7 +27,7 @@
         (unless (eq ?\s (char-after (- (point) 1)))
           (insert " "))
         (insert "\\\\\n  "))
-    (self-insert-command)))
+    (TeX-newline)))
 
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
@@ -132,15 +132,14 @@
 
 (defun sklatex-dispatch (key)
   (interactive "k")
-  (cond
-    ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
-    ((string= key "e") (sklatex-deactivate-alignment-keybinds-equality))
-    ((string= key "m") (sklatex-activate-alignment-keybinds-matrix))
-    ((string= key "M") (sklatex-deactivate-alignment-keybinds-matrix))
-    ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
-    ((string= key "n") (sklatex-activate-newline-keybinds))
-    ((string= key "N") (sklatex-deactivate-newline-keybinds))
-    (t (message "key %s unsupported" key))))
+  (cond ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
+        ((string= key "e") (sklatex-deactivate-alignment-keybinds-equality))
+        ((string= key "m") (sklatex-activate-alignment-keybinds-matrix))
+        ((string= key "M") (sklatex-deactivate-alignment-keybinds-matrix))
+        ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
+        ((string= key "n") (sklatex-activate-newline-keybinds))
+        ((string= key "N") (sklatex-deactivate-newline-keybinds))
+        (t (message "key %s unsupported" key))))
 
 
 

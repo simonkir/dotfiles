@@ -61,7 +61,8 @@
   :hook (LaTeX-mode . sklatex-mode)
   :config
   (general-def 'normal TeX-mode-map
-    "SPC SPC k" 'sklatex-dispatch))
+    "SPC SPC k" 'sklatex-dispatch
+    "SPC SPC K" 'sklatex-mode))
 
 
 
