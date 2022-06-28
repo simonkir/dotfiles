@@ -37,7 +37,7 @@
 (defun sklatex-deactivate-newline-keybinds ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "RET" 'self-insert-command))
+    "RET" nil))
 
 
 
@@ -86,10 +86,10 @@
 (defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "|" 'self-insert-command
-    "=" 'self-insert-command
-    "<" 'self-insert-command
-    ">" 'self-insert-command))
+    "|" nil
+    "=" nil
+    "<" nil
+    ">" nil))
 
 
 
@@ -104,7 +104,7 @@
 (defun sklatex-deactivate-alignment-keybinds-matrix ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "SPC" 'self-insert-command))
+    "SPC" nil))
 
 
 
