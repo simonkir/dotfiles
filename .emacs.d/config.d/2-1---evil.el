@@ -7,7 +7,8 @@
   :init
   (setq evil-respect-visual-line-mode t
         evil-want-integration t
-        evil-want-keybinding nil)
+        evil-want-keybinding nil
+        evil-undo-system 'undo-redo)
 
   :config
   (evil-mode 1)
