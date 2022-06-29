@@ -7,4 +7,8 @@
   :config
   (global-hl-line-mode)
   (doom-themes-org-config)
-  (load-theme 'doom-one t)) ;; Corrects (and improves) org-mode's native fontification.
+  (load-theme 'doom-one t)
+
+  (general-def 'normal 'override
+    "SPC d t" '(lambda () (interactive) (load-theme 'doom-one t))
+    "SPC d T" '(lambda () (interactive) (load-theme 'doom-one-light t))))
