@@ -5,6 +5,8 @@
 (use-package telephone-line
   :demand t
   :config
+  (set-face-attribute 'mode-line                      nil :background "#21242b" :foreground "#abb2bf")
+  (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#abb2bf")
   (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#abb2bf")
   (set-face-attribute 'telephone-line-accent-active   nil :background "#3e4452" :foreground "#abb2bf")
   (set-face-attribute 'telephone-line-error           nil :background "#3e4452" :foreground "#e06c75")

@@ -5,7 +5,6 @@
 (use-package doom-themes
   :demand t
   :config
-  (global-hl-line-mode)
   (doom-themes-org-config)
   (load-theme 'doom-one t)
 
