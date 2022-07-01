@@ -26,6 +26,7 @@
     "C-k" 'icomplete-backward-completions)
 
   (general-def '(normal visual) 'override
+    "SPC t i" 'fido-mode
     "SPC x" 'execute-extended-command)
 
   (fido-mode)
