@@ -198,7 +198,7 @@ def assign_app_group(client):
     d = {}
     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
     d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox", "qutebrowser"]
-    d[group_names[1]] = ["urxvt", "termite", "emacs"]
+    d[group_names[1]] = ["urxvt", "termite", "emacs", "alacritty"]
     d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
                          "Blender", "kicad",
                          "VirtualBox Machine", "VirtualBox Manager"]

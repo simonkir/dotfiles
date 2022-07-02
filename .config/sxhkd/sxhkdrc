@@ -38,11 +38,11 @@ super + alt + r
 
 # terminal
 super + Return
-    termite
+    alacritty
 
 # task manager
 super + alt + h
-    termite -e htop
+    alacritty -e htop
 
 # text editor (emacsclient)
 super + alt + e
