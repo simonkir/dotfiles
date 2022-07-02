@@ -170,7 +170,7 @@ groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 group_labels = group_names
-group_layouts = ["max", "monadtall", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
+group_layouts = ["max", "max", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
 
 for i in range(len(group_names)):
     groups.append(
