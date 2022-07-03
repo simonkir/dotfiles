@@ -18,16 +18,29 @@
 
 
 
+
+; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sklatex-in-latex-p ()
+  (cond
+   ((derived-mode-p 'latex-mode) (texmathp))
+   ((derived-mode-p 'org-mode) (eq (car (org-element-context)) 'latex-environment))
+   (t nil)))
+
+
+
 ; linebreak ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-insert-linebreak ()
   (interactive)
-  (if (texmathp)
+  (if (sklatex-in-latex-p)
       (progn
         (unless (eq ?\s (char-after (- (point) 1)))
           (insert " "))
         (insert "\\\\\n  "))
-    (TeX-newline)))
+    (cond ((derived-mode-p 'org-mode) (org-return))
+          ((derived-mode-p 'latex-mode) (TeX-newline))
+          (t (newline)))))
 
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
@@ -71,9 +84,12 @@
 ; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex--insert-aligned-char (char)
-  (if (sklatex--current-line-empty-p)
-      (insert "  "))
-  (insert (concat "&" char "&")))
+  (if (sklatex-in-latex-p)
+      (progn
+        (if (sklatex--current-line-empty-p)
+            (insert "  "))
+        (insert (concat "&" char "&")))
+    (insert char)))
 
 (defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)

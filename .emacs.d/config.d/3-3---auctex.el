@@ -58,7 +58,10 @@
 
 (use-package sklatex
   :ensure nil
-  :hook (LaTeX-mode . sklatex-mode)
+  :hook
+  (LaTeX-mode . sklatex-mode)
+  (org-mode . sklatex-mode)
+
   :config
   (general-def 'normal TeX-mode-map
     "SPC SPC k" 'sklatex-dispatch
