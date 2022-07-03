@@ -5,19 +5,19 @@
 (use-package telephone-line
   :demand t
   :config
-  (set-face-attribute 'mode-line                      nil :background "#21242b" :foreground "#abb2bf")
-  (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#abb2bf")
-  (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#abb2bf")
-  (set-face-attribute 'telephone-line-accent-active   nil :background "#3e4452" :foreground "#abb2bf")
-  (set-face-attribute 'telephone-line-error           nil :background "#3e4452" :foreground "#e06c75")
-  (set-face-attribute 'telephone-line-evil            nil :background "#282c34" :foreground "#abb2bf")
-  (set-face-attribute 'telephone-line-evil-emacs      nil :background "#e5C07b" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-insert     nil :background "#98c379" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-normal     nil :background "#61afef" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-operator   nil :background "#56b6c2" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-replace    nil :background "#e06c75" :foreground "#282c34")
+  (set-face-attribute 'mode-line                      nil :background "#202328" :foreground "#bbc2cf")
+  (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#bbc2cf")
+  (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#bbc2cf")
+  (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
+  (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
+  (set-face-attribute 'telephone-line-evil            nil :background "#282c34" :foreground "#bbc2cf")
+  (set-face-attribute 'telephone-line-evil-emacs      nil :background "#ecbe7b" :foreground "#282c34")
+  (set-face-attribute 'telephone-line-evil-insert     nil :background "#98be65" :foreground "#282c34")
+  (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
+  (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
+  (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
   (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-warning         nil :background "#e5C07b" :foreground "#e5c07b")
+  (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b")
 
 
 
