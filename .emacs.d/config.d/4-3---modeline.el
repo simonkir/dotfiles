@@ -22,13 +22,14 @@
 
 
   (telephone-line-defsegment sk:tl-vc-file-segment ()
-    (let ((state (vc-state (buffer-file-name))))
-      (cond
-       ((eq state 'up-to-date) "·")
-       ((eq state 'edited) "×")
-       ((eq state 'needs-update) "u")
-       ((eq state 'needs-merge) "c")
-       (t ""))))
+    (if (buffer-file-name)
+        (let ((state (vc-state (buffer-file-name))))
+          (cond
+           ((eq state 'up-to-date) "·")
+           ((eq state 'edited) "×")
+           ((eq state 'needs-update) "u")
+           ((eq state 'needs-merge) "c")
+           (t "")))))
 
   (telephone-line-defsegment sk:tl-buffer-modified-segment ()
     (if (and (buffer-modified-p) (not buffer-read-only) (buffer-file-name))
@@ -44,14 +45,26 @@
     mode-line-buffer-identification)
 
   (telephone-line-defsegment sk:tl-position-percentage-segment ()
-    (let ((percentage (/ (* 100 (line-number-at-pos)) (count-lines (point-min) (point-max)))))
+    (let* ((current-line (cond
+                          ((derived-mode-p 'pdf-view-mode) (pdf-view-current-page))
+                          (t (line-number-at-pos))))
+           (max-lines (cond
+                       ((derived-mode-p 'pdf-view-mode) (pdf-cache-number-of-pages))
+                       (t (count-lines (point-min) (point-max)))))
+           (percentage (/ (* 100 current-line) max-lines)))
       (concat (format "%s" percentage) "%%")))
 
   ;; TODO modeline doesn't update often enough to display changes in (current-column)
   (telephone-line-defsegment sk:tl-position-segment ()
-    (concat (format "%s" (line-number-at-pos))
-            ":"
-            (format "%s" (current-column))))
+    (cond
+     ((derived-mode-p 'pdf-view-mode)
+      (concat (format "%s" (pdf-view-current-page))
+              "/"
+              (format "%s" (pdf-cache-number-of-pages))))
+     (t
+      (concat (format "%s" (line-number-at-pos))
+              ":"
+              (format "%s" (current-column))))))
 
   (setq telephone-line-lhs
           '((evil   . (telephone-line-evil-tag-segment))
