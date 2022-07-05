@@ -34,7 +34,7 @@
 ; indent guides ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
+  :hook ((prog-mode org-mode LaTeX-mode) . highlight-indent-guides-mode)
   :config (setq highlight-indent-guides-method 'bitmap))
 
 
