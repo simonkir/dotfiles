@@ -102,4 +102,12 @@
 
 
 (use-package evil-tex
-  :hook (LaTeX-mode . evil-tex-mode))
+  :hook ((LaTeX-mode org-mode) . evil-tex-mode)
+  :config
+  (general-def evil-tex-delim-map
+    "(" 'evil-tex-delims---\\left\(
+    ")" 'evil-tex-delims---\\left\(
+    "[" 'evil-tex-delims---\\left\[
+    "]" 'evil-tex-delims---\\left\[
+    "|" 'evil-tex-delims---\\left\\vert
+    "<" 'evil-tex-delims---\\left\\langle\ ))
