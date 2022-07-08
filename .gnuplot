@@ -16,10 +16,10 @@ set xlabel textcolor rgb "#bbc2cf" # white
 set ylabel textcolor rgb "#bbc2cf" # white
 set key    textcolor rgb "#bbc2cf" # white
 
-set linetype 1  pt 3 ps 3 lw 2 lc rgb "#99bb66" # green
+set linetype 1  pt 3 ps 3 lw 2 lc rgb "#98be65" # green
 set linetype 2  pt 3 ps 3 lw 2 lc rgb "#ecbe7b" # yellow
 set linetype 3  pt 3 ps 3 lw 2 lc rgb "#51afef" # blue
-set linetype 4  pt 3 ps 3 lw 2 lc rgb "#ff6655" # red
+set linetype 4  pt 3 ps 3 lw 2 lc rgb "#ff6c6b" # red
 set linetype 5  pt 3 ps 3 lw 2 lc rgb "#c678dd" # magenta
 set linetype 6  pt 3 ps 3 lw 2 lc rgb "#a9a1e1" # violet
 set linetype 7  pt 3 ps 3 lw 2 lc rgb "#46d9ff" # cyan
