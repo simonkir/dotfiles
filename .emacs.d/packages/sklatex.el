@@ -139,8 +139,7 @@
   "C-|" '(lambda () (interactive) (insert "|"))
   "C-=" '(lambda () (interactive) (insert "="))
   "C-<" '(lambda () (interactive) (insert "<"))
-  "C->" '(lambda () (interactive) (insert ">"))
-  "<C-return>" '(lambda () (interactive) (insert "\n")))
+  "C->" '(lambda () (interactive) (insert ">")))
 
 
 
