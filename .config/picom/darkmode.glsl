@@ -23,10 +23,10 @@ void main() {
         // min / max values for lightness
         // softens the high contrast look
         float vmax = 0.8;
-	float vmin = 0.1;
+        float vmin = 0.1;
 
-	c.xyz = (vmin - vmax) * c.xyz + vmax;    // inversion: linear map of lightness
-	c.xyz = hue_shift(c.xyz, radians(180.)); // correct for hue shift due to the inversion
+        c.xyz = (vmin - vmax) * c.xyz + vmax;    // inversion: linear map of lightness
+        c.xyz = hue_shift(c.xyz, radians(180.)); // correct for hue shift due to the inversion
     }
 
     c *= opacity;
