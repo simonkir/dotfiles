@@ -83,21 +83,23 @@
 
 ; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex--insert-aligned-char (char)
+(defun sklatex--insert-aligned-char (char trailing-alignment)
   (if (sklatex-in-latex-p)
       (progn
         (if (sklatex--current-line-empty-p)
             (insert "  "))
-        (insert (concat "&" char "&")))
+        (insert (concat "&" char))
+        (if trailing-alignment
+            (insert "&")))
     (insert char)))
 
 (defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|"))
-    "=" '(lambda () (interactive) (sklatex--insert-aligned-char "="))
-    "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<"))
-    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">"))))
+    "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|" nil))
+    "=" '(lambda () (interactive) (sklatex--insert-aligned-char "=" t))
+    "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<" t))
+    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">" t))))
 
 (defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
