@@ -3,4 +3,4 @@
 # key: 10
 # condition: (not (and (derived-mode-p 'org-mode) (member (nth 0 (org-element-at-point)) '(table-row table))))
 # --
-\cdot 10^{$1}$0
+\cdot 10^{$0}
