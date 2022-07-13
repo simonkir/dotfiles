@@ -23,7 +23,7 @@
        (save-excursion
          (left-char)
          (and (looking-at (rx (1+ " ")))
-              (not (texmathp))
+              (eq (car (org-element-context)) 'paragraph)
               (just-one-space)))))
 
 (define-minor-mode sk:autocorrect-mode nil
