@@ -55,6 +55,13 @@
 
 ; buffers ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun sk:uniquify (base extra-string)
+  (concat base " (" (mapconcat #'identity extra-string "/") ")"))
+
+(setq uniquify-buffer-name-style 'sk:uniquify)
+
+
+
 (defun sk:kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
