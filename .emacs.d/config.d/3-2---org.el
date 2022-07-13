@@ -192,7 +192,7 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
   (defun sk:org-toggle-inline-images-in-region (beg end)
     "toggle image previews between `beg' and `end'."
-    (let ((overlays-in-region (-intersection (overlays-in beg end) org-inline-image-overlays)))
+    (let ((overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
           (mapc (lambda (ov)
               (delete-overlay ov)
