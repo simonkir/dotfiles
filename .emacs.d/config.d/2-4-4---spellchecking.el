@@ -6,6 +6,7 @@
   :config
   (setq flyspell-issue-message-flag nil)
   (setq ispell-dictionary "de_DE")
+
   (defun sk:toggle-flyspell-mode ()
     (interactive)
     (if (bound-and-true-p flyspell-mode)

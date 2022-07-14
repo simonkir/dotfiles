@@ -57,13 +57,13 @@
 
   (defun sk:org-edit-special-current-window ()
     (interactive)
-    (setq org-src-window-setup 'current-window)
-    (org-edit-special))
+    (let ((org-src-window-setup 'current-window))
+      (org-edit-special)))
 
   (defun sk:org-edit-special-new-window ()
     (interactive)
-    (setq org-src-window-setup 'split-window-right)
-    (org-edit-special))
+    (let ((org-src-window-setup 'split-window-right))
+      (org-edit-special)))
 
   ;; this function produces mixed results
   ;; and is thus currently not in use
@@ -235,8 +235,8 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 (use-package ox
   :after org
   :general ('normal org-mode-map :prefix "SPC SPC"
-                    "X" 'org-export-dispatch
-                    "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+    "X" 'org-export-dispatch
+    "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
 
 
 

@@ -3,8 +3,7 @@
 
 
 (use-package magit
-  :general
-  ('(normal visual) 'override
+  :general ('(normal visual) 'override
     "SPC g" 'magit-file-dispatch
     "SPC G" 'magit-dispatch)
 

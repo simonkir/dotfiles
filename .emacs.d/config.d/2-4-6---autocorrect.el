@@ -16,6 +16,8 @@
                 (not (texmathp))
                 (capitalize-region (point) end))))))
 
+
+
 (defun sk:dspace-to-sspace ()
   "Convert two or more spaces to single space while typing."
   (interactive)
@@ -25,6 +27,8 @@
          (and (looking-at (rx (1+ " ")))
               (eq (car (org-element-context)) 'paragraph)
               (just-one-space)))))
+
+
 
 (define-minor-mode sk:autocorrect-mode nil
   :init-value nil

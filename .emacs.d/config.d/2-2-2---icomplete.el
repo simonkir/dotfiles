@@ -21,13 +21,13 @@
 
   (general-def icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
-    "C-d" 'icomplete-fido-kill
-    "C-j" 'icomplete-forward-completions
-    "C-k" 'icomplete-backward-completions)
+    "C-d"        'icomplete-fido-kill
+    "C-j"        'icomplete-forward-completions
+    "C-k"        'icomplete-backward-completions)
 
   (general-def '(normal visual) 'override
     "SPC t i" 'fido-mode
-    "SPC x" 'execute-extended-command)
+    "SPC x"   'execute-extended-command)
 
   (fido-mode)
   (fido-vertical-mode))

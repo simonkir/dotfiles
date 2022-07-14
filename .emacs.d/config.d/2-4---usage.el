@@ -16,5 +16,5 @@
 
 (global-auto-revert-mode)
 
-(general-def '(normal visual)
+(general-def '(normal visual) 'override
   "g r" 'revert-buffer)

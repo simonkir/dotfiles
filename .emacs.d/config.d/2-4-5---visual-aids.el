@@ -14,8 +14,7 @@
 ; writing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column
-  :general
-  ('normal 'override :prefix "SPC t"
+  :general ('normal 'override :prefix "SPC t"
     "v" 'visual-fill-column-mode
     "V" 'set-fill-column)
 

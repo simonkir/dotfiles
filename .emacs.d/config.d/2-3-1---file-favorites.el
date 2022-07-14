@@ -4,8 +4,9 @@
 
 (use-package bookmark
   :demand t ;; needed for dashboard
-  :hook (after-init . bookmark-save)
   :config
+  (add-hook 'after-init-hook 'bookmark-save)
+
   (general-def '(normal visual) 'override
     "SPC f b" 'bookmark-jump)
 
@@ -31,13 +32,19 @@
   (add-to-list 'recentf-exclude ".*/0---aufgaben.pdf")
   (add-to-list 'recentf-exclude ".*/0---mitschrieb.tex")
   (add-to-list 'recentf-exclude ".*/0---mitschrieb.pdf")
-  (recentf-mode t)
-  (general-def '(normal visual) 'override
-    "SPC f r" 'sk:recentf-find-file)
+
+
 
   (defun sk:recentf-find-file ()
     "Find a recent file using completing-read."
     (interactive)
     (let ((file (completing-read "Choose recent file: " recentf-list nil t)))
       (when file
-        (find-file file)))))
+        (find-file file))))
+
+  (general-def '(normal visual) 'override
+    "SPC f r" 'sk:recentf-find-file)
+
+
+
+  (recentf-mode t))

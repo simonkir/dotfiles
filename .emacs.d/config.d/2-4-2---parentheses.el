@@ -23,8 +23,8 @@
 (use-package evil-lion
   :after evil
   :general ('(normal visual) 'override :prefix "g"
-            "l" 'evil-lion-left
-            "L" 'evil-lion-right))
+    "l" 'evil-lion-left
+    "L" 'evil-lion-right))
 
 
 

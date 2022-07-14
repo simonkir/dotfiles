@@ -3,9 +3,7 @@
 
 
 (use-package calc
-  :general ('normal 'override
-     "SPC c" 'calc-dispatch)
-
+  :general ('normal 'override "SPC c" 'calc-dispatch)
   :config
   (setq calc-multiplication-has-precedence nil)
 

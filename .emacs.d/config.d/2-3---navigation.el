@@ -85,7 +85,7 @@
 
 (general-def '(normal visual insert) 'override
   ;;"C-w" 'bury-buffer ;; useful when using tab-line-mode
-  "C-<tab>" 'sk:next-buffer
+  "C-<tab>"         'sk:next-buffer
   "<C-iso-lefttab>" 'sk:previous-buffer)
 
 (general-def '(normal visual) 'override :prefix "SPC b"
@@ -123,8 +123,8 @@
 ; quitting
 (general-def '(normal visual) 'override :prefix "SPC"
   "ESC" 'keyboard-escape-quit
-  "q" 'save-buffers-kill-terminal
-  "Q" 'save-buffers-kill-emacs)
+  "q"   'save-buffers-kill-terminal
+  "Q"   'save-buffers-kill-emacs)
 
 ; help
 (general-def '(normal visual) 'override :prefix "SPC h"

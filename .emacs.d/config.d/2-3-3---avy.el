@@ -3,8 +3,7 @@
 
 
 (use-package avy
-  :general
-  ('(normal visual) 'override :prefix "SPC a"
+  :general ('(normal visual) 'override :prefix "SPC a"
    "c" 'avy-goto-char-timer
    "h" 'avy-org-goto-heading-timer
    "w" 'avy-goto-word-or-subword-1
