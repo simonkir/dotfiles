@@ -12,7 +12,7 @@
 
   :config
   (evil-mode 1)
-  ;;(setq evil-want-minibuffer t) ;; yields to problems with ido
+  (setq evil-want-minibuffer t)
 
   (general-def 'insert
     "C-k" 'evil-previous-line

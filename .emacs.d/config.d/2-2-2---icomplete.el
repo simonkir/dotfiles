@@ -19,7 +19,7 @@
                       :inherit    'default
                       :foreground "#98be65")
 
-  (general-def icomplete-minibuffer-map
+  (general-def '(normal insert) icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
     "C-d"        'icomplete-fido-kill
     "C-j"        'icomplete-forward-completions
