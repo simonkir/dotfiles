@@ -18,7 +18,6 @@
 
 
 
-
 ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-in-latex-p ()
@@ -57,37 +56,15 @@
 
 ; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex--current-line-empty-p ()
-  (save-excursion
-    (beginning-of-line)
-    (looking-at-p "[[:blank:]]*$")))
-
-;; ; note: incompatible with prettify
-;; (defun sklatex--indent-to-alignment-operator ()
-;;   (let (prevbeg prevend curbeg curend)
-;;     (if (sklatex--current-line-empty-p)
-;;         (progn
-;;           (save-excursion
-;;             (setq curend (point))
-;;             (beginning-of-line)
-;;             (setq curbeg (point))
-;;             (previous-line)
-;;             (beginning-of-line)
-;;             (setq prevbeg (point))
-;;             (re-search-forward "&")
-;;             (setq prevend (- (point) 1)))
-;;           (dotimes (_ (- prevend prevbeg (- curend curbeg)))
-;;             (insert " "))))))
-
-
-
-; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defun sklatex--insert-aligned-char (char trailing-alignment)
   (if (sklatex-in-latex-p)
       (progn
-        (if (sklatex--current-line-empty-p)
-            (insert "  "))
+        (let (point-bol dummyvar)
+          (save-excursion
+            (beginning-of-line)
+            (setq point-bol (point)))
+          (dotimes (dummyvar (- 4 (- (point) point-bol)))
+            (insert " ")))
         (insert (concat "&" char))
         (if trailing-alignment
             (insert "&")))
