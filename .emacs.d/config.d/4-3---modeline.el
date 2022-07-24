@@ -44,6 +44,13 @@
   (telephone-line-defsegment sk:tl-file-segment ()
     mode-line-buffer-identification)
 
+  (telephone-line-defsegment sk:tl-visual-mode-segment ()
+    (if (eq evil-state 'visual)
+        (let ((beg (region-beginning))
+              (end (region-end)))
+          (format "%s/%s lines" (count-lines beg end) (count-lines beg end t)))
+      ""))
+
   (telephone-line-defsegment sk:tl-position-percentage-segment ()
     (let* ((current-line (cond
                           ((derived-mode-p 'pdf-view-mode) (pdf-view-current-page))
@@ -76,7 +83,8 @@
 
   (setq telephone-line-rhs
           '((nil    . (telephone-line-flycheck-segment
-                       telephone-line-misc-info-segment))
+                       telephone-line-misc-info-segment
+                       sk:tl-visual-mode-segment))
             (accent . (telephone-line-major-mode-segment))
             (evil   . (sk:tl-position-percentage-segment
                        sk:tl-position-segment))))
