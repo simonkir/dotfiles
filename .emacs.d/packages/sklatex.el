@@ -34,7 +34,7 @@
   (interactive)
   (if (sklatex-in-latex-p)
       (progn
-        (unless (eq ?\s (char-after (- (point) 1)))
+        (unless (eq ?\s (char-before (point)))
           (insert " "))
         (insert "\\\\\n  "))
     (cond ((derived-mode-p 'org-mode) (org-return))
@@ -99,7 +99,8 @@
 (defun sklatex-deactivate-alignment-keybinds-matrix ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "SPC" nil))
+    "SPC" nil
+    "S-SPC" nil))
 
 
 
