@@ -200,7 +200,7 @@ def assign_app_group(client):
     d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox", "qutebrowser"]
     d[group_names[1]] = ["urxvt", "termite", "emacs", "Alacritty"]
     d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
-                         "Blender", "kicad",
+                         "Blender", "kicad", "molsketch",
                          "VirtualBox Machine", "VirtualBox Manager"]
     d[group_names[3]] = ["Chromium", "chromium", "google-chrome"]
 

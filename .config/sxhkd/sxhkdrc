@@ -84,6 +84,10 @@ super + alt + v
 super + alt + o
     libreoffice
 
+# chemical drawings
+super + alt + m
+    molsketch
+
 # KiCAD
 super + alt + k
     kicad
@@ -95,10 +99,6 @@ super + alt + k
 # discord (app)
 super + alt + shift + d
     discord
-
-# minecraft
-super + alt + m
-    minecraft-launcher
 
 # steam
 super + alt + s
