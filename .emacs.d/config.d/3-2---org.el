@@ -190,7 +190,7 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (defun sk:org-toggle-inline-images-in-region (beg end)
+  (defun sk:org-toggle-inline-images (beg end)
     "toggle image previews between `beg' and `end'."
     (let ((overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
@@ -205,28 +205,31 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
 the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
     (interactive)
-    (let ((initial-point-position (point)))
-      (re-search-forward (rx "#+end_src"))
-      (let ((ln-end-src (line-number-at-pos)))
-        (re-search-forward (rx "#+RESULTS:"))
-        (let ((ln-results (line-number-at-pos)))
-          (when (eq 2 (- ln-results ln-end-src))
-            (forward-line)
-            (sk:org-toggle-inline-images-at-point))))
-      (goto-char initial-point-position)))
+    (save-excursion
+      (re-search-forward "\\[\\[")
+      (sk:org-toggle-inline-images-at-point)))
 
   (defun sk:org-toggle-inline-images-at-point ()
     "toggles image previews in the current line"
     (interactive)
-    (sk:org-toggle-inline-images-in-region (line-beginning-position) (line-end-position)))
+    (sk:org-toggle-inline-images (line-beginning-position) (line-end-position)))
+
+  (defun sk:org-toggle-inline-images-in-region ()
+    (interactive)
+    (sk:org-toggle-inline-images (region-beginning) (region-end)))
 
 
 
   (general-def '(normal visual) org-mode-map :prefix "SPC SPC i"
-    "i" 'sk:org-toggle-inline-images-at-point
     "b" 'org-toggle-inline-images
     "B" 'org-remove-inline-images
-    "r" 'org-redisplay-inline-images))
+    "r" 'org-redisplay-inline-images)
+
+  (general-def 'normal org-mode-map
+    "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
+
+  (general-def 'visual org-mode-map
+    "SPC SPC i i" 'sk:org-toggle-inline-images-in-region))
 
 
 
