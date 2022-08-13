@@ -41,7 +41,7 @@
 ; mixed-pitch mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package mixed-pitch
-  :hook ((org-mode TeX-mode) . mixed-pitch-mode)
+  :hook ((org-mode TeX-mode text-mode) . mixed-pitch-mode)
   :general ('normal 'override "SPC d m" 'mixed-pitch-mode)
   :config
   (setq mixed-pitch-variable-pitch-cursor nil)
