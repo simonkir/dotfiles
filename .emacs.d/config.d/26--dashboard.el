@@ -7,7 +7,7 @@
 (use-package dashboard
   :demand t
   :config
-  (setq dashboard-items             '((bookmarks . 10) (recents . 10)))
+  (setq dashboard-items             '((recents . 15)))
   (setq dashboard-startup-banner    'logo)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons    t)

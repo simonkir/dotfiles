@@ -2,6 +2,13 @@
 
 
 
+(show-paren-mode)
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+
+
 (use-package electric
   :demand t
   :config
