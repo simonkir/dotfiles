@@ -5,14 +5,11 @@
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
-  (pdf-tools-install)
-
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
 
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
-  (add-hook 'text-mode-hook 'evil-insert-state)
 
 
 
@@ -26,6 +23,7 @@
 
   (general-def '(normal visual) pdf-view-mode-map
     "SPC"     nil
+
     "<up>"    'pdf-view-previous-line-or-previous-page
     "<down>"  'pdf-view-next-line-or-next-page
     "<left>"  'image-backward-hscroll
@@ -36,6 +34,13 @@
     "l"       '(lambda () (interactive) (image-forward-hscroll 10))
     "J"       'pdf-view-next-page
     "K"       'pdf-view-previous-page
+    "<home>"  'image-bol
+    "<end>"   'image-eol
+    "<prior>" 'image-bob
+    "<next>"  'image-eob
+
+    "W"       'pdf-view-fit-width-to-window
+    "H"       'pdf-view-fit-height-to-window
     "="       'sk:pdf-view-fit)
 
   (general-def 'visual pdf-view-mode-map :prefix "SPC SPC"
@@ -48,12 +53,11 @@
   (general-def '(normal visual) pdf-view-mode-map :prefix "SPC SPC"
     "c" (lambda () (interactive) (pdf-view-redisplay))
     "m" 'pdf-view-midnight-minor-mode
+
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete))
 
 
-
-; image mode config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
