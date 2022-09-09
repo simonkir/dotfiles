@@ -84,6 +84,7 @@
         '((?F ("\\Phi"))
           (?w ("\\omega"))
           (?X ("\\xi"))
+          (?- ("\\leftrightarrow" "\\longleftrightarrow" "\\rightleftharpoons"))
           (?+ ("\\pm"))
           (?: ("\\ldots"))
           (?c ("\\quad" "" "\\cos"))))
