@@ -1,6 +1,6 @@
 #+latex_class: article
 #+latex_class_options: [a4paper,hidelinks]
-#+latex_header: \usepackage{a4wide,german}
+#+latex_header: \usepackage{a4wide,german,gensymb}
 
 #+options: toc:nil
 
