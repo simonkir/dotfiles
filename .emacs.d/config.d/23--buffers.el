@@ -16,6 +16,16 @@
 
 
 
+(defun sk:switch-to-buffer ()
+  (interactive)
+  (let ((buffers (mapcar 'buffer-name (buffer-list))))
+    (dolist (element buffers)
+      (if (or (string-match-p "^\*+" element)
+              (string-match-p "^\s-*" element)
+              (string-match-p "^magit" element))
+          (delete element buffers)))
+    (switch-to-buffer (completing-read "Switch to buffer: " buffers))))
+
 (defun sk:kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
@@ -46,7 +56,8 @@
   "q" 'bury-buffer
   "h" 'previous-buffer
   "l" 'next-buffer
-  "b" 'switch-to-buffer
+  "b" 'sk:switch-to-buffer
+  "B" 'switch-to-buffer
   "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
 
