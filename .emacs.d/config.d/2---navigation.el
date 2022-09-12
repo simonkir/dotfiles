@@ -24,6 +24,7 @@
 
 ; help
 (general-def '(normal visual) 'override :prefix "SPC h"
+  "p" 'describe-package
   "f" 'describe-function
   "v" 'describe-variable
   "k" 'describe-key)

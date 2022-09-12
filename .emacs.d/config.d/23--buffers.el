@@ -60,8 +60,3 @@
   "B" 'switch-to-buffer
   "k" 'sk:kill-current-buffer
   "K" 'kill-buffer-and-window)
-
-
-
-(use-package ibuffer
-  :general ('(normal visual) 'override "SPC b B" 'ibuffer))
