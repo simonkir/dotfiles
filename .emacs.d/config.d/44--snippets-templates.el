@@ -51,8 +51,7 @@
 (use-package autoinsert
   :demand t
   :config
-  (setq auto-insert t)
+  (setq auto-insert nil)
   (setq auto-insert-directory "~/.emacs.d/templates/")
   (define-auto-insert 'org-mode "org-mode.org")
-  (define-auto-insert 'glsl-mode "glsl-mode.frag")
-  (auto-insert-mode t))
+  (define-auto-insert 'glsl-mode "glsl-mode.frag"))
