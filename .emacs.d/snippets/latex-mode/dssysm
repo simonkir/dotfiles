@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: DS_gesm (molare entropieänderung des systems)
+# key: dssysm
+# --
+\Delta S_{Sysm}$0

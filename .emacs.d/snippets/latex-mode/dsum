@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: DS_Um (molare entropieänderung der umgebung)
+# key: dsum
+# --
+\Delta S_{Um}$0
