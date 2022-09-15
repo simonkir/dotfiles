@@ -110,5 +110,6 @@
     ")" 'evil-tex-delims---\\left\(
     "[" 'evil-tex-delims---\\left\[
     "]" 'evil-tex-delims---\\left\[
-    "|" 'evil-tex-delims---\\left\\vert
-    "<" 'evil-tex-delims---\\left\\langle\ ))
+    "{" 'evil-tex-delims---\\left\\{
+    "}" 'evil-tex-delims---\\left\\{
+    "|" 'evil-tex-delims---\\left\\vert))

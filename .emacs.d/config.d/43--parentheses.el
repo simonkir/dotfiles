@@ -4,6 +4,8 @@
 
 (show-paren-mode)
 
+
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -27,15 +29,21 @@
 
 
 
+(use-package evil-surround
+  :after evil
+  :demand t
+  :config
+  (setq-default evil-surround-pairs-alist (cl-pushnew '(?„ . ("„" . "“")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cl-pushnew '(?\“ . ("“" . "”")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cl-pushnew '(?‚ . ("‚" . "‘")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cl-pushnew '(?‘ . ("‘" . "’")) evil-surround-pairs-alist))
+
+  (global-evil-surround-mode 1))
+
+
+
 (use-package evil-lion
   :after evil
   :general ('(normal visual) 'override :prefix "g"
     "l" 'evil-lion-left
     "L" 'evil-lion-right))
-
-
-
-(use-package evil-surround
-  :after evil
-  :defer 1
-  :config (global-evil-surround-mode 1))

@@ -10,7 +10,7 @@
 
 
 (use-package which-key
-  :defer 2
+  :demand t
   :config (which-key-mode))
 
 
