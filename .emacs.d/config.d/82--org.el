@@ -259,12 +259,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-(use-package valign
-  :hook (org-mode . valign-mode)
-  :config (setq valign-fancy-bar t))
-
-
-
 (use-package org-superstar
   :hook (org-mode . org-superstar-mode)
   :config
