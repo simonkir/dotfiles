@@ -15,7 +15,7 @@
 ; visual undo ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vundo
-  :general ('normal override "U" 'vundo)
+  :general ('normal "U" 'vundo)
   :config
   (setq vundo-glyph-alist vundo-unicode-symbols)
   (general-def 'normal vundo-mode-map

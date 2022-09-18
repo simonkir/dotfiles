@@ -11,6 +11,9 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 (package-initialize)
 
+(general-def '(normal visual) package-menu-mode-map
+  "U" 'package-menu-mark-upgrades)
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
