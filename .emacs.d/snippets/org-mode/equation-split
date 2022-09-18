@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: equation split
 # key: eqs
+# condition: (eq (car (org-element-context)) 'latex-environment)
 # --
 \end{IEEEeqnarray*}
 #+end_latex

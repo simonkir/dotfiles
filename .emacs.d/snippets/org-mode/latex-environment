@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: latex
-# key: la_
+# key: la
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+begin_latex latex
 $0

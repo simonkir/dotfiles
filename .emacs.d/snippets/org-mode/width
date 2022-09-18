@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: :width
 # key: w
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 :width $0

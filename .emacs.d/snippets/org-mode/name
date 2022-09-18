@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: name
 # key: n
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+name: $0

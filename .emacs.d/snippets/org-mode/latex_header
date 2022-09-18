@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: #+latex_header
 # key: lh
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+latex_header: $0

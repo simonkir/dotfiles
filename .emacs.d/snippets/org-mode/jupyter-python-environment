@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # key: jpy_
 # name: jupyter-python
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+begin_src jupyter-python :session ${1:py}
   $0
