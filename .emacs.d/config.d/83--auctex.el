@@ -54,8 +54,6 @@
 
 
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
-
 (use-package sklatex
   :ensure nil
   :hook
@@ -63,7 +61,7 @@
   (org-mode . sklatex-mode)
 
   :config
-  (general-def 'normal TeX-mode-map
+  (general-def 'normal (org-mode-map TeX-mode-map)
     "SPC SPC k" 'sklatex-dispatch
     "SPC SPC K" 'sklatex-mode))
 

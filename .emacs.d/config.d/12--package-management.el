@@ -8,6 +8,7 @@
 (setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
