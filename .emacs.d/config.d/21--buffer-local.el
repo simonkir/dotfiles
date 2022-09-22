@@ -22,6 +22,5 @@
 
 
 
-
 (use-package follow
   :general ('normal 'override "SPC t f" 'follow-mode))
