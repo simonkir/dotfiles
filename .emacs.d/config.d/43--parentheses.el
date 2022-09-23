@@ -14,18 +14,11 @@
 (use-package electric
   :demand t
   :config
-  (electric-pair-mode t)
+  (electric-pair-mode)
 
-  (add-to-list 'electric-pair-pairs '(8218 . 8216)) ;; ‚‘
-  (add-to-list 'electric-pair-pairs '(8222 . 8220)) ;; „“
-
-  (defun sk:electric-add-latex-parenthesis ()
-    (interactive)
-    (make-local-variable 'electric-pair-pairs)
-    (add-to-list 'electric-pair-pairs '(36 . 36))) ;; $|$
-
-  (add-hook 'org-mode-hook 'sk:electric-add-latex-parenthesis)
-  (add-hook 'TeX-mode-hook 'sk:electric-add-latex-parenthesis))
+  (add-to-list 'electric-pair-pairs '(8218 . 8216))  ;; ‚‘
+  (add-to-list 'electric-pair-pairs '(8222 . 8220))) ;; „“
+  
 
 
 

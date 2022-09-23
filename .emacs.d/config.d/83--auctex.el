@@ -76,6 +76,9 @@
   (setq cdlatex-math-symbol-prefix ?#)
 
   :config
+  (general-def 'insert org-cdlatex-mode-map
+    "$" 'cdlatex-dollar)
+
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
   (setq cdlatex-math-symbol-alist
