@@ -9,7 +9,7 @@
 
   (setq org-startup-folded      t)
   (setq org-hide-leading-stars  t)
-  (setq org-num-max-level       4)
+  (setq org-num-max-level       3)
   (setq org-return-follows-link t)
 
   (add-hook 'org-mode-hook 'org-num-mode)
@@ -262,7 +262,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 (use-package org-superstar
   :hook (org-mode . org-superstar-mode)
   :config
-  (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "•" "☆" "✧"))
+  (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "☆" "✧" "•"))
   (setq org-superstar-item-bullet-alist '((42 . "•") (43 . (?\s (Bc . Bc) ?→)) (45 . "–"))))
 
 
