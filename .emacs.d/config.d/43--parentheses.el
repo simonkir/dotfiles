@@ -26,10 +26,10 @@
   :after evil
   :demand t
   :config
-  (setq-default evil-surround-pairs-alist (cl-pushnew '(?„ . ("„" . "“")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cl-pushnew '(?\“ . ("“" . "”")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cl-pushnew '(?‚ . ("‚" . "‘")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cl-pushnew '(?‘ . ("‘" . "’")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cons '(?„ . ("„" . "“")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cons '(?\“ . ("“" . "”")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cons '(?‚ . ("‚" . "‘")) evil-surround-pairs-alist))
+  (setq-default evil-surround-pairs-alist (cons '(?‘ . ("‘" . "’")) evil-surround-pairs-alist))
 
   (global-evil-surround-mode 1))
 
