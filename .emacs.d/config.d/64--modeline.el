@@ -5,19 +5,23 @@
 (use-package telephone-line
   :demand t
   :config
-  (set-face-attribute 'mode-line                      nil :background "#202328" :foreground "#bbc2cf")
-  (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#bbc2cf")
-  (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#bbc2cf")
-  (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
-  (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
-  (set-face-attribute 'telephone-line-evil            nil :background "#282c34" :foreground "#bbc2cf")
-  (set-face-attribute 'telephone-line-evil-emacs      nil :background "#ecbe7b" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-insert     nil :background "#98be65" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
-  (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b")
+  (defun sk:mode-line-update-colors ()
+    (interactive)
+    (set-face-attribute 'mode-line                      nil :background "#202328" :foreground "#bbc2cf")
+    (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#bbc2cf")
+    (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#bbc2cf")
+    (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
+    (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
+    (set-face-attribute 'telephone-line-evil            nil :background "#282c34" :foreground "#bbc2cf")
+    (set-face-attribute 'telephone-line-evil-emacs      nil :background "#ecbe7b" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-evil-insert     nil :background "#98be65" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
+    (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b"))
+
+  (sk:mode-line-update-colors)
 
 
 
