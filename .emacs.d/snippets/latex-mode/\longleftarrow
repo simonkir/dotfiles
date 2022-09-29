@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: \longleftarrow (convert &\longleftarrow& to \longleftarrow)
+# key: &\longleftarrow&
+# --
+\longleftarrow

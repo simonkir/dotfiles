@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: \rightleftharpoons (convert &\rightleftharpoons& to \rightleftharpoons)
+# key: &\rightleftharpoons&
+# --
+\rightleftharpoons
