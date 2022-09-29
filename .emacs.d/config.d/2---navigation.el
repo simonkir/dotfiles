@@ -22,9 +22,7 @@
   (save-some-buffers)
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
     (dolist (element buffers)
-      (if (not (or (string-match-p "^\*+" element)
-                   (string-match-p "^\s-*" element)
-                   (string-match-p "^magit" element)))
+      (if (not (string-match-p sk:hide-from-buffers-regexp element))
           (kill-buffer element))))
   (save-buffers-kill-terminal))
 

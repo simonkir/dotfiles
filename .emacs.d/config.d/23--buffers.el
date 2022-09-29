@@ -2,6 +2,10 @@
 
 
 
+(setq sk:hide-from-buffers-regexp "^\*+\\|^\s-*\\|^magit")
+
+
+
 (global-auto-revert-mode)
 
 (general-def '(normal visual) 'override
@@ -20,9 +24,7 @@
   (interactive)
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
     (dolist (element buffers)
-      (if (or (string-match-p "^\*+" element)
-              (string-match-p "^\s-*" element)
-              (string-match-p "^magit" element))
+      (if (string-match-p sk:hide-from-buffers-regexp element)
           (delete element buffers)))
     (switch-to-buffer (completing-read "Switch to buffer: " buffers))))
 
@@ -32,9 +34,8 @@
 
 (defun sk:cycle-buffer (cycle-fun)
   (funcall cycle-fun)
-  (while (or (and (string-match-p "^\*" (buffer-name))
-                  (not (string-match-p "^\*Org Src" (buffer-name))))
-             (string-match-p "^magit" (buffer-name)))
+  (while (and (string-match-p sk:hide-from-buffers-regexp (buffer-name))
+              (not (string-match-p "^\*Org Src" (buffer-name))))
     (funcall cycle-fun)))
 
 (defun sk:next-buffer ()
