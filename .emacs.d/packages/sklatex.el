@@ -45,12 +45,14 @@
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "RET" 'sklatex-insert-linebreak))
+    "RET" 'sklatex-insert-linebreak)
+  (message "sklatex: newline keybinds activated"))
 
 (defun sklatex-deactivate-newline-keybinds ()
   (interactive)
   (general-def 'insert sklatex-mode-map
-    "RET" nil))
+    "RET" nil)
+  (message "sklatex: newline keybinds deactivated"))
 
 
 
@@ -77,7 +79,8 @@
     "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|" nil))
     "=" '(lambda () (interactive) (sklatex--insert-aligned-char "=" t))
     "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<" t))
-    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">" t))))
+    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">" t)))
+  (message "sklatex: equality alignment keybinds activated"))
 
 (defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
@@ -85,7 +88,8 @@
     "|" nil
     "=" nil
     "<" nil
-    ">" nil))
+    ">" nil)
+  (message "sklatex: equality alignment keybinds deactivated"))
 
 
 
@@ -95,13 +99,15 @@
   (interactive)
   (general-def 'insert sklatex-mode-map
     "SPC" '(lambda () (interactive) (insert " & "))
-    "S-SPC" '(lambda () (interactive) (insert " "))))
+    "S-SPC" '(lambda () (interactive) (insert " ")))
+  (message "sklatex: matrix alignment keybinds activated"))
 
 (defun sklatex-deactivate-alignment-keybinds-matrix ()
   (interactive)
   (general-def 'insert sklatex-mode-map
     "SPC" nil
-    "S-SPC" nil))
+    "S-SPC" nil)
+  (message "sklatex: matrix alignment keybinds activated"))
 
 
 
@@ -110,7 +116,8 @@
 (defun sklatex-deactivate-alignment-keybinds-all ()
   (interactive)
   (sklatex-deactivate-alignment-keybinds-equality)
-  (sklatex-deactivate-alignment-keybinds-matrix))
+  (sklatex-deactivate-alignment-keybinds-matrix)
+  (message "sklatex: all alignment keybinds deactivated"))
 
 
 
@@ -168,14 +175,17 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 
 (defun sklatex-activate-subscript-conversion ()
   (interactive)
-  (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion))
+  (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)
+  (message "sklatex: automatic subscript activated"))
 
 (defun sklatex-deactivate-subscript-conversion ()
   (interactive)
-  (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion))
+  (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)
+  (message "sklatex: automatic subscript deactivated"))
 
 ;; TODOs
 ;; - make it work with greek stuff
+;; - solution for chemical equations
 
 
 
