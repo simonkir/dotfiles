@@ -14,7 +14,8 @@
   (if sklatex-mode
       (progn
         (sklatex-activate-newline-keybinds)
-        (sklatex-activate-alignment-keybinds-equality))))
+        (sklatex-activate-alignment-keybinds-equality)
+        (sklatex-activate-subscript-conversion))))
 
 
 
@@ -123,7 +124,62 @@
 
 
 
-; dispatch defun ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; subscript conversion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sklatex--input-to-subscript ()
+  "convert latex input to subscript"
+  (save-excursion
+    (left-char)
+    (insert "_{")
+    (right-char)
+    (insert "}"))
+  (right-char))
+
+(defun sklatex--input-delete-subscript ()
+  "remove subscript on latex input"
+  (save-excursion
+    (left-char 5)
+    (delete-char 2)
+    (right-char)
+    (delete-char 1)))
+
+(defun sklatex-delete-preceding-subscript ()
+  "user-invoked command to delete unwanted subscript that was inserted automatically
+
+not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
+  (interactive)
+  (when (sklatex-in-latex-p)
+    (left-char 4)
+    (delete-char 2)
+    (right-char)
+    (delete-char 1)))
+
+(defun sklatex-try-subscript-conversion ()
+  "determine which subscript conversion should be done and execute said conversion"
+  (interactive)
+  (when (sklatex-in-latex-p)
+    (let (conversion-method)
+      (save-excursion
+        (left-char 3)
+        (cond
+         ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method '(sklatex--input-delete-subscript)))
+         ((looking-at "\\s-[[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
+      (eval conversion-method))))
+
+(defun sklatex-activate-subscript-conversion ()
+  (interactive)
+  (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion))
+
+(defun sklatex-deactivate-subscript-conversion ()
+  (interactive)
+  (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion))
+
+;; TODOs
+;; - make it work with greek stuff
+
+
+
+; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-dispatch (key)
   (interactive "k")
@@ -134,7 +190,12 @@
         ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
         ((string= key "n") (sklatex-activate-newline-keybinds))
         ((string= key "N") (sklatex-deactivate-newline-keybinds))
-        (t (message "key %s unsupported" key))))
+        ((string= key "s") (sklatex-activate-subscript-conversion))
+        ((string= key "S") (sklatex-deactivate-subscript-conversion))
+        (t (message "%s: unsupported key" key))))
+
+(general-def 'insert sklatex-mode-map
+  "C-s" 'sklatex-delete-preceding-subscript)
 
 
 
