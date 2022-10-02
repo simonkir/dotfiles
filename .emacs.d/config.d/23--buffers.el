@@ -2,9 +2,6 @@
 
 
 
-(setq sk:hide-from-buffers-regexp "^\*+\\|^\s-*\\|^magit")
-
-
 
 (global-auto-revert-mode)
 
@@ -20,31 +17,51 @@
 
 
 
-(defun sk:switch-to-buffer ()
-  (interactive)
+(setq sk:ignored-buffers-regexp "^\\s-*\\*+\\|^magit")
+
+(defun sk:buffer-list ()
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
     (dolist (element buffers)
-      (if (string-match-p sk:hide-from-buffers-regexp element)
-          (delete element buffers)))
-    (switch-to-buffer (completing-read "Switch to buffer: " buffers))))
+      (when (string-match-p sk:ignored-buffers-regexp element)
+        (setq buffers (remove element buffers)))) ;; ensure element is deleted from buffers
+    buffers))
+
+(defun sk:switch-to-buffer ()
+  (interactive)
+  (switch-to-buffer (completing-read "Switch to buffer: " (sk:buffer-list))))
+
+(defun sk:cycle-buffers (step)
+  (let ((buffers (sk:buffer-list)))
+    (when buffers
+      ;; cycling logic
+      (let (nextpos)
+        (if (member (buffer-name) buffers)
+            (setq nextpos (+ (cl-position (buffer-name) buffers) step))
+          (setq nextpos 0))
+        (when (>= nextpos (length buffers))
+          (setq nextpos (- nextpos (length buffers))))
+        (when (< nextpos 0)
+          (setq nextpos (+ nextpos (length buffers))))
+        (switch-to-buffer (nth nextpos buffers) t))
+      ;; visualization in minibuffer
+      (let ((bmessage ""))
+        (dolist (element buffers)
+          (when (string= element (buffer-name))
+            (setq element (propertize element 'face '(:weight bold :foreground "#98be65"))))
+          (setq bmessage (concat bmessage element " / ")))
+        (message "%s" (substring bmessage 0 -3))))))
+
+(defun sk:next-buffer ()
+  (interactive)
+  (sk:cycle-buffers 1))
+
+(defun sk:previous-buffer ()
+  (interactive)
+  (sk:cycle-buffers -1))
 
 (defun sk:kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
-
-(defun sk:cycle-buffer (cycle-fun)
-  (funcall cycle-fun)
-  (while (and (string-match-p sk:hide-from-buffers-regexp (buffer-name))
-              (not (string-match-p "^\*Org Src" (buffer-name))))
-    (funcall cycle-fun)))
-
-(defun sk:next-buffer ()
-  (interactive)
-  (sk:cycle-buffer 'next-buffer))
-
-(defun sk:previous-buffer ()
-  (interactive)
-  (sk:cycle-buffer 'previous-buffer))
 
 
 

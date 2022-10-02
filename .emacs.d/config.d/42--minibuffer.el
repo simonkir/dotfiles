@@ -17,6 +17,7 @@
 
   (set-face-attribute 'icomplete-selected-match nil
                       :inherit    'default
+                      :weight     'bold
                       :foreground "#98be65")
 
   (general-def '(normal insert) icomplete-minibuffer-map
