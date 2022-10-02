@@ -170,7 +170,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
         (left-char 3)
         (cond
          ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method '(sklatex--input-delete-subscript)))
-         ((looking-at "\\s-[[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
+         ((looking-at "$\\|\\s-[[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
       (eval conversion-method))))
 
 (defun sklatex-activate-subscript-conversion ()
@@ -182,10 +182,6 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   (interactive)
   (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)
   (message "sklatex: automatic subscript deactivated"))
-
-;; TODOs
-;; - make it work with greek stuff
-;; - solution for chemical equations
 
 
 
