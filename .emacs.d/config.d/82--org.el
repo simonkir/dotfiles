@@ -7,13 +7,21 @@
 
   ; content ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq org-startup-folded      t)
-  (setq org-hide-leading-stars  t)
-  (setq org-num-max-level       3)
+  (setq org-num-max-level 3)
   (setq org-return-follows-link t)
+  (setq org-image-actual-width nil)
+
+  (setq org-startup-folded t)
+  (setq org-hide-leading-stars t)
+  (setq org-hide-emphasis-markers t)
+
+  (setq org-fontify-whole-heading-line t)
+  (setq org-fontify-done-headline t)
+  (setq org-fontify-quote-and-verse-blocks t)
 
   (add-hook 'org-mode-hook 'org-num-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'org-toggle-pretty-entities)
 
 
 
@@ -24,76 +32,8 @@
         '(("+" . "-") ("-" . "+")
           ("1." . "-") ("1)" . "-")))
 
-  ;;(add-hook 'org-mode-hook 'flyspell-mode)
   (add-hook 'org-mode-hook 'sk:autocorrect-mode)
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-
-
-
-  ; visual effects ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (setq org-hide-emphasis-markers          t)
-  (setq org-fontify-whole-heading-line     t)
-  (setq org-fontify-done-headline          t)
-  (setq org-fontify-quote-and-verse-blocks t)
-  (setq org-image-actual-width             nil)
-
-  (add-hook 'org-mode-hook 'org-toggle-pretty-entities)
-
-
-
-  ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((gnuplot . t)))
-   ;;'((jupyter . t)))
-
-  (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
-  ;;(add-hook 'org-babel-after-execute-hook 'sk:org-babel-kill-session-after-run)
-
-  (setq org-confirm-babel-evaluate       nil)
-  (setq org-edit-src-content-indentation 0)
-
-  (defun sk:org-edit-special-current-window ()
-    (interactive)
-    (let ((org-src-window-setup 'current-window))
-      (org-edit-special)))
-
-  (defun sk:org-edit-special-new-window ()
-    (interactive)
-    (let ((org-src-window-setup 'split-window-right))
-      (org-edit-special)))
-
-  ;; this function produces mixed results
-  ;; and is thus currently not in use
-  (defun sk:org-babel-kill-session-after-run ()
-    "kills the active org-babel session if `:session-kill yes' is specified in the code block arguments
-
-note: this function is only meant to be called from `org-babel-after-execute-hook'. otherwise, it may cause unexpected behaviour."
-    (let ((src-block-info (org-babel-get-src-block-info)))
-      (when (member '(:session-kill . "yes") (nth 2 src-block-info))
-        (kill-buffer (concat "*" (concat (nth 0 src-block-info) "*"))))))
-
-  (defun sk:org-babel-kill-session-at-point ()
-    (interactive)
-    (kill-buffer (concat "*" (concat (nth 0 (org-babel-get-src-block-info)) "*"))))
-
-  (defun sk:org-babel-eval-with-new-session ()
-    (interactive)
-    (sk:org-babel-kill-session-at-point)
-    (org-ctrl-c-ctrl-c))
-
-
-
-  (general-def '(normal visual) org-mode-map
-    "SPC SPC k"   'sk:org-babel-kill-session-at-point
-    "SPC SPC RET" 'sk:org-babel-eval-with-new-session
-    "SPC e"       'sk:org-edit-special-current-window
-    "SPC E"       'sk:org-edit-special-new-window)
-
-  (general-def '(normal visual)
-    "SPC e" 'org-edit-src-exit)
 
 
 
@@ -101,7 +41,8 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
   (general-def '(normal visual) org-mode-map :prefix "SPC SPC"
     "-" 'org-ctrl-c-minus ;; separator line in table
-    "b" 'org-ctrl-c-minus ;; cycle list bullet style
+    "b" 'org-cycle-list-bullet
+    "B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
 
     "TAB"       'org-table-toggle-column-width
     "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
@@ -109,24 +50,14 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
 
     "n" 'org-num-mode
     "h" 'org-toggle-heading
-    "t" 'org-todo
-
-    "f" 'org-table-eval-formula
-    "F" '(lambda () (interactive) (org-table-eval-formula '(4)))
-
-    "e" 'org-babel-execute-buffer)
+    "t" 'org-todo)
 
   (general-def '(normal visual) org-mode-map
-    ;; – toggle checkboxes
-    ;; – renumber ordered list
-    ;; – realign table
-    ;; – execute dynamic block
-    ;; – remove highlights
-    ;; – insert tags
+    "RET" 'org-ctrl-c-ctrl-c
     "g J" 'org-next-visible-heading
-    "g K" 'org-previous-visible-heading
-    "RET" 'org-ctrl-c-ctrl-c)
+    "g K" 'org-previous-visible-heading)
 
+  ;; override org default tab key behaviour
   (general-def 'insert org-mode-map
     "<tab>" 'sk:insert-tab-key
     "TAB" 'sk:insert-tab-key
@@ -164,8 +95,6 @@ note: this function is only meant to be called from `org-babel-after-execute-hoo
     (interactive)
     (setq sk:org-preview-latex-scale sk:org-preview-latex-default-scale)
     (sk:org-preview-latex-scale--aftermath))
-
-
 
   (defun sk:org-latex-preview-at-point ()
     (interactive)
@@ -225,11 +154,52 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     "B" 'org-remove-inline-images
     "r" 'org-redisplay-inline-images)
 
-  (general-def 'normal org-mode-map
-    "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
+  (general-def 'normal org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
+  (general-def 'visual org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-in-region)
 
-  (general-def 'visual org-mode-map
-    "SPC SPC i i" 'sk:org-toggle-inline-images-in-region))
+
+
+  ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((gnuplot . t)))
+   ;;'((jupyter . t)))
+
+  (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
+
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-edit-src-content-indentation 0)
+
+  (defun sk:org-edit-special-current-window ()
+    (interactive)
+    (let ((org-src-window-setup 'current-window))
+      (org-edit-special)))
+
+  (defun sk:org-edit-special-new-window ()
+    (interactive)
+    (let ((org-src-window-setup 'split-window-right))
+      (org-edit-special)))
+
+  (defun sk:org-babel-kill-session-at-point ()
+    (interactive)
+    (kill-buffer (concat "*" (concat (nth 0 (org-babel-get-src-block-info)) "*"))))
+
+  (defun sk:org-babel-eval-with-new-session ()
+    (interactive)
+    (sk:org-babel-kill-session-at-point)
+    (org-ctrl-c-ctrl-c))
+
+
+
+  (general-def '(normal visual) org-mode-map
+    "SPC SPC k"   'sk:org-babel-kill-session-at-point
+    "SPC SPC RET" 'sk:org-babel-eval-with-new-session
+    "SPC e"       'sk:org-edit-special-current-window
+    "SPC E"       'sk:org-edit-special-new-window)
+
+  (general-def '(normal visual)
+    "SPC e" 'org-edit-src-exit))
 
 
 
