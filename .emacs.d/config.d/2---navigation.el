@@ -28,13 +28,8 @@
 
 (general-def '(normal visual) 'override :prefix "SPC"
   "ESC" 'keyboard-escape-quit
-  "q"   'save-buffers-kill-terminal)
-
-(general-def '(normal visual) 'override :prefix "SPC Q"
-  "q" 'save-buffers-kill-terminal
-  "Q" 'sk:save-buffers-kill-buffers-kill-terminal
-  "k" 'save-buffers-kill-emacs
-  "K" 'kill-emacs)
+  "q"   'save-buffers-kill-terminal
+  "Q"   'sk:save-buffers-kill-buffers-kill-terminal)
 
 
 
