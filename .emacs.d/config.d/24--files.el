@@ -2,13 +2,13 @@
 
 
 
-(general-def '(normal visual) 'override :prefix "SPC f"
-  "f" 'find-file
-  "F" 'find-file-read-only
-  "p" 'find-file-at-point
-  "R" 'revert-buffer
-  "s" 'save-buffer
-  "S" 'save-some-buffers)
+(general-def '(normal visual) 'override
+  "SPC f f" 'find-file
+  "SPC f F" 'find-file-read-only
+  "SPC f p" 'find-file-at-point
+  "SPC f R" 'revert-buffer
+  "SPC f s" 'save-buffer
+  "SPC f S" 'save-some-buffers)
 
 (general-def '(normal visual) 'override
   "SPC s" 'save-buffer)

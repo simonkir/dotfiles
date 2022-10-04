@@ -14,9 +14,9 @@
     "l" 'dired-find-file
     "SPC" nil)
 
-  (general-def '(normal visual) dired-mode-map :prefix "SPC SPC"
-    "d" 'dired-hide-details-mode
-    "a" 'dired-omit-mode))
+  (general-def '(normal visual) dired-mode-map
+    "SPC SPC d" 'dired-hide-details-mode
+    "SPC SPC a" 'dired-omit-mode))
 
 
 

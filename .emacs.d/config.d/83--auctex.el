@@ -41,16 +41,16 @@
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC"
-    "s"   'LaTeX-section            ;; insert section
-    "e"   'LaTeX-environment        ;; insert environment
-    "TAB" 'LaTeX-fill-environment)  ;; auto-indent
+  (general-def '(normal visual) TeX-mode-map
+    "SPC SPC s"   'LaTeX-section            ;; insert section
+    "SPC SPC e"   'LaTeX-environment        ;; insert environment
+    "SPC SPC TAB" 'LaTeX-fill-environment)  ;; auto-indent
 
-  (general-def '(normal visual) TeX-mode-map :prefix "SPC SPC l"
-    "l" 'preview-at-point
-    "L" 'preview-clearout-at-point
-    "b" 'preview-buffer
-    "B" 'preview-clearout-buffer))
+  (general-def '(normal visual) TeX-mode-map
+    "SPC SPC l l" 'preview-at-point
+    "SPC SPC l L" 'preview-clearout-at-point
+    "SPC SPC l b" 'preview-buffer
+    "SPC SPC l B" 'preview-clearout-buffer))
 
 
 

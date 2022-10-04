@@ -39,18 +39,18 @@
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (general-def '(normal visual) org-mode-map :prefix "SPC SPC"
-    "-" 'org-ctrl-c-minus ;; separator line in table
-    "b" 'org-cycle-list-bullet
-    "B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
+  (general-def '(normal visual) org-mode-map
+    "SPC SPC -" 'org-ctrl-c-minus ;; separator line in table
+    "SPC SPC b" 'org-cycle-list-bullet
+    "SPC SPC B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
 
-    "TAB"       'org-table-toggle-column-width
-    "<backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
-    "c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
+    "SPC SPC TAB"       'org-table-toggle-column-width
+    "SPC SPC <backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
+    "SPC SPC c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
 
-    "n" 'org-num-mode
-    "h" 'org-toggle-heading
-    "t" 'org-todo)
+    "SPC SPC n" 'org-num-mode
+    "SPC SPC h" 'org-toggle-heading
+    "SPC SPC t" 'org-todo)
 
   (general-def '(normal visual) org-mode-map
     "RET" 'org-ctrl-c-ctrl-c
@@ -105,15 +105,15 @@
 
 
 
-  (general-def '(normal visual) org-mode-map :prefix "SPC SPC l"
-    "l" 'sk:org-latex-preview-at-point
-    "L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
-    "b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
-    "B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
-    "+" 'sk:org-preview-latex-scale-increase
-    "-" 'sk:org-preview-latex-scale-decrease
-    "0" 'sk:org-preview-latex-scale-reset
-    "s" 'sk:org-preview-latex-scale-set)
+  (general-def '(normal visual) org-mode-map
+    "SPC SPC l l" 'sk:org-latex-preview-at-point
+    "SPC SPC l L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
+    "SPC SPC l b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
+    "SPC SPC l B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
+    "SPC SPC l +" 'sk:org-preview-latex-scale-increase
+    "SPC SPC l -" 'sk:org-preview-latex-scale-decrease
+    "SPC SPC l 0" 'sk:org-preview-latex-scale-reset
+    "SPC SPC l s" 'sk:org-preview-latex-scale-set)
 
 
 
@@ -149,10 +149,10 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-  (general-def '(normal visual) org-mode-map :prefix "SPC SPC i"
-    "b" 'org-toggle-inline-images
-    "B" 'org-remove-inline-images
-    "r" 'org-redisplay-inline-images)
+  (general-def '(normal visual) org-mode-map
+    "SPC SPC i b" 'org-toggle-inline-images
+    "SPC SPC i B" 'org-remove-inline-images
+    "SPC SPC i r" 'org-redisplay-inline-images)
 
   (general-def 'normal org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
   (general-def 'visual org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-in-region)
@@ -207,9 +207,9 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 (use-package ox
   :after org
-  :general ('normal org-mode-map :prefix "SPC SPC"
-    "X" 'org-export-dispatch
-    "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+  :general ('normal org-mode-map
+    "SPC SPC X" 'org-export-dispatch
+    "SPC SPC x" '(lambda () (interactive) (org-export-dispatch '(4)))))
 
 
 

@@ -32,9 +32,9 @@
         (mixed-pitch-mode 'toggle)
         (mixed-pitch-mode 'toggle))))
 
-(general-def '(normal visual) 'override :prefix "SPC d"
-  "f" 'sk:set-face-fixed
-  "v" 'sk:set-face-variable)
+(general-def '(normal visual) 'override
+  "SPC d f" 'sk:set-face-fixed
+  "SPC d v" 'sk:set-face-variable)
 
 
 

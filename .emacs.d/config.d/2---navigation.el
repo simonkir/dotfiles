@@ -26,17 +26,17 @@
           (kill-buffer element))))
   (save-buffers-kill-terminal))
 
-(general-def '(normal visual) 'override :prefix "SPC"
-  "ESC" 'keyboard-escape-quit
-  "q"   'save-buffers-kill-terminal
-  "Q"   'sk:save-buffers-kill-buffers-kill-terminal)
+(general-def '(normal visual) 'override
+  "SPC ESC" 'keyboard-escape-quit
+  "SPC q"   'save-buffers-kill-terminal
+  "SPC Q"   'sk:save-buffers-kill-buffers-kill-terminal)
 
 
 
 ; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(general-def '(normal visual) 'override :prefix "SPC h"
-  "p" 'describe-package
-  "f" 'describe-function
-  "v" 'describe-variable
-  "k" 'describe-key)
+(general-def '(normal visual) 'override
+  "SPC h p" 'describe-package
+  "SPC h f" 'describe-function
+  "SPC h v" 'describe-variable
+  "SPC h k" 'describe-key)

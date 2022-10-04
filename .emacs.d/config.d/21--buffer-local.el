@@ -14,11 +14,11 @@
 
 
 (use-package avy
-  :general ('(normal visual) 'override :prefix "SPC a"
-   "c" 'avy-goto-char-timer
-   "h" 'avy-org-goto-heading-timer
-   "w" 'avy-goto-word-or-subword-1
-   "W" 'avy-goto-word))
+  :general ('(normal visual) 'override
+   "SPC a c" 'avy-goto-char-timer
+   "SPC a h" 'avy-org-goto-heading-timer
+   "SPC a w" 'avy-goto-word-or-subword-1
+   "SPC a W" 'avy-goto-word))
 
 
 

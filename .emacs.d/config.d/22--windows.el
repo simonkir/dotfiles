@@ -16,19 +16,19 @@
 
 
 
-(general-def '(normal visual) 'override :prefix "SPC w"
-  "=" 'balance-windows
-  "o" 'delete-other-windows
-  "1" 'delete-other-windows
-  "s" 'sk:split-and-follow-horizontally
-  "v" 'sk:split-and-follow-vertically
+(general-def '(normal visual) 'override
+  "SPC w =" 'balance-windows
+  "SPC w o" 'delete-other-windows
+  "SPC w 1" 'delete-other-windows
+  "SPC w s" 'sk:split-and-follow-horizontally
+  "SPC w v" 'sk:split-and-follow-vertically
  
-  "h" 'evil-window-left
-  "j" 'evil-window-down
-  "k" 'evil-window-up
-  "l" 'evil-window-right
-  "c" 'evil-window-delete
-  "C" 'kill-buffer-and-window)
+  "SPC w h" 'evil-window-left
+  "SPC w j" 'evil-window-down
+  "SPC w k" 'evil-window-up
+  "SPC w l" 'evil-window-right
+  "SPC w c" 'evil-window-delete
+  "SPC w C" 'kill-buffer-and-window)
 
 (general-def 'normal 'override
   "SPC ," 'evil-window-next)
@@ -38,11 +38,10 @@
 
 
 
-
 (use-package transpose-frame
-  :general ('(normal visual) 'override :prefix "SPC w"
-    "w" 'transpose-frame
-    "r" 'rotate-frame-clockwise
-    "R" 'rotate-frame-anticlockwise
-    "F" 'flip-frame
-    "f" 'flop-frame))
+  :general ('(normal visual) 'override
+    "SPC w w" 'transpose-frame
+    "SPC w r" 'rotate-frame-clockwise
+    "SPC w R" 'rotate-frame-anticlockwise
+    "SPC w F" 'flip-frame
+    "SPC w f" 'flop-frame))

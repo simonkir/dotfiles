@@ -70,11 +70,11 @@
   "C-<tab>"         'sk:next-buffer
   "<C-iso-lefttab>" 'sk:previous-buffer)
 
-(general-def '(normal visual) 'override :prefix "SPC b"
-  "q" 'bury-buffer
-  "h" 'previous-buffer
-  "l" 'next-buffer
-  "b" 'sk:switch-to-buffer
-  "B" 'switch-to-buffer
-  "k" 'sk:kill-current-buffer
-  "K" 'kill-buffer-and-window)
+(general-def '(normal visual) 'override
+  "SPC b q" 'bury-buffer
+  "SPC b h" 'previous-buffer
+  "SPC b l" 'next-buffer
+  "SPC b b" 'sk:switch-to-buffer
+  "SPC b B" 'switch-to-buffer
+  "SPC b k" 'sk:kill-current-buffer
+  "SPC b K" 'kill-buffer-and-window)
