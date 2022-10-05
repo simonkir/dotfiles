@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: CCC (complex number set)
+# key: ccc
+# --
+\mathbb{C}$0

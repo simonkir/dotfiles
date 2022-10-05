@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ZZZ (whole number set)
+# key: zzz
+# --
+\mathbb{Z}$0
