@@ -24,9 +24,22 @@
   (and (/= ?w (char-syntax (char-before)))
        (save-excursion
          (left-char)
-         (and (looking-at (rx (1+ " ")))
+         (and (looking-at " +")
               (eq (car (org-element-context)) 'paragraph)
               (just-one-space)))))
+
+
+
+(defun sk:org-remove-empty-bullet ()
+  "Remove empty org bullet after 'M-RET RET' in insert mode, or 'o RET' in normal mode"
+  (interactive)
+  (save-excursion
+    (previous-line)
+    (beginning-of-line)
+    (when (and (looking-at "\\s-*\\(-\\|+\\|\\*\\|[[:digit:]]+\\.?)?\\)\\s-*$")
+               (not (sklatex-in-latex-p)))
+      (kill-line)
+      (delete-horizontal-space))))
 
 
 
@@ -35,6 +48,8 @@
   :lighter (" AC")
   (if sk:autocorrect-mode
       (progn (add-hook 'post-self-insert-hook #'sk:dcaps-to-scaps nil 'local)
-             (add-hook 'post-self-insert-hook #'sk:dspace-to-sspace nil 'local))
+             (add-hook 'post-self-insert-hook #'sk:dspace-to-sspace nil 'local)
+             (add-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet nil 'local))
     (progn (remove-hook 'post-self-insert-hook #'sk:dcaps-to-scaps 'local)
-           (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local))))
+           (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local)
+           (remove-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet 'local))))
