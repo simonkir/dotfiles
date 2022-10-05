@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: \longrightarrow (convert &\longrightarrow& to \longrightarrow)
-# key: &\longrightarrow&
-# --
-\longrightarrow
