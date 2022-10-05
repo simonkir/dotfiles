@@ -7,6 +7,7 @@
 #+begin_src gnuplot :file /tmp/gnuplot-`(format-time-string "%Y%m%d-%H%M%S")`.png
 load "~/.gnuplot"
 set key position top right
+set samples 500
 set xlabel "$1 [$2]"
 set xrange [0:$3]
 set xtics $4
