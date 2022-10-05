@@ -30,9 +30,9 @@
   "Remove empty org bullet after 'M-RET RET' in insert mode, or 'o RET' in normal mode"
   (interactive)
   (save-excursion
-    (previous-line)
+    (forward-line -1)
     (beginning-of-line)
-    (when (and (looking-at "\\s-*\\(-\\|+\\|\\*\\|[[:digit:]]+\\.?)?\\)\\s-*$")
+    (when (and (looking-at "^\\( \\|\\t\\)*\\(-\\|\\+\\|\\*\\|[[:digit:]]+\\.?)?\\)\\s-*$")
                (not (sklatex-in-latex-p)))
       (kill-line)
       (delete-horizontal-space))))
