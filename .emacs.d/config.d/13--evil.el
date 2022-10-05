@@ -13,6 +13,7 @@
   :config
   (evil-mode 1)
   (setq evil-want-minibuffer t)
+  (setq evil-want-fine-undo t)
 
   (general-def 'insert
     "C-k" 'evil-previous-line
