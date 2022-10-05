@@ -2,4 +2,4 @@
 # name: nth root
 # key: nsq
 # --
-\sqrt[$1]{$0}
+\sqrt[$0]{}

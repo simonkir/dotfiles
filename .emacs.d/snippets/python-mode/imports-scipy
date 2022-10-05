@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: im_sci
-# key: im_sci
-# --
-%matplotlib inline
-import numpy as np
-$1import matplotlib.pyplot as plt
-import sympy as sp
-sp.init_printing()$0
