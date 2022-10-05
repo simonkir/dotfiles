@@ -5,28 +5,24 @@
 (defun sk:dcaps-to-scaps ()
   "Convert word in DOuble CApitals to Single Capitals while typing."
   (interactive)
-  (and (= ?w (char-syntax (char-before)))
-       (save-excursion
-         (let ((end (point)))
-           (and (if (called-interactively-p)
-                    (skip-syntax-backward "w")
-                  (= -3 (skip-syntax-backward "w")))
-                (let (case-fold-search)
-                  (looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
-                (not (texmathp))
-                (capitalize-region (point) end))))))
+  (save-excursion
+    (let ((end (point)))
+      (skip-syntax-backward "w")
+      (when (and (let ((case-fold-search nil))
+                   (looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
+                 (not (sklatex-in-latex-p)))
+        (capitalize-region (point) end)))))
 
 
 
 (defun sk:dspace-to-sspace ()
   "Convert two or more spaces to single space while typing."
   (interactive)
-  (and (/= ?w (char-syntax (char-before)))
-       (save-excursion
-         (left-char)
-         (and (looking-at " +")
-              (eq (car (org-element-context)) 'paragraph)
-              (just-one-space)))))
+  (save-excursion
+    (left-char)
+    (and (looking-at " +")
+         (eq (car (org-element-context)) 'paragraph)
+         (just-one-space))))
 
 
 
@@ -49,7 +45,9 @@
   (if sk:autocorrect-mode
       (progn (add-hook 'post-self-insert-hook #'sk:dcaps-to-scaps nil 'local)
              (add-hook 'post-self-insert-hook #'sk:dspace-to-sspace nil 'local)
-             (add-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet nil 'local))
+             (add-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet nil 'local)
+             (message "sk:autocorrect-mode activated"))
     (progn (remove-hook 'post-self-insert-hook #'sk:dcaps-to-scaps 'local)
            (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local)
-           (remove-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet 'local))))
+           (remove-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet 'local)
+           (message "sk:autocorrect-mode deactivated"))))
