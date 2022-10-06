@@ -170,7 +170,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
         (left-char 3)
         (cond
          ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method '(sklatex--input-delete-subscript)))
-         ((looking-at "$\\|[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
+         ((looking-at "$?[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
       (eval conversion-method))))
 
 (defun sklatex-activate-subscript-conversion ()
