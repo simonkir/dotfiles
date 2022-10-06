@@ -17,7 +17,7 @@
 
 
 
-(setq sk:ignored-buffers-regexp "^\\s-*\\*+\\|^magit")
+(setq sk:ignored-buffers-regexp "\\(^\\s-*\\*+\\)\\|\\(^magit\\)\\|\\(^\\s-*tq-temp-epdfinfo\\)")
 
 (defun sk:buffer-list ()
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
