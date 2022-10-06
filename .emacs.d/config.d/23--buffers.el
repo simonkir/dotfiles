@@ -44,12 +44,13 @@
           (setq nextpos (+ nextpos (length buffers))))
         (switch-to-buffer (nth nextpos buffers) t))
       ;; visualization in minibuffer
-      (let ((bmessage ""))
+      (let ((minibuffer-message-timeout 10)
+            (bmessage ""))
         (dolist (element buffers)
           (when (string= element (buffer-name))
             (setq element (propertize element 'face '(:weight bold :foreground "#98be65"))))
           (setq bmessage (concat bmessage element " / ")))
-        (message "%s" (substring bmessage 0 -3))))))
+        (minibuffer-message "%s" (substring bmessage 0 -3))))))
 
 (defun sk:next-buffer ()
   (interactive)
