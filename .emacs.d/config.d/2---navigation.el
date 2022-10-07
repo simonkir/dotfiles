@@ -15,24 +15,6 @@
 
 
 
-; quitting ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sk:save-buffers-kill-buffers-kill-terminal ()
-  (interactive)
-  (save-some-buffers)
-  (let ((buffers (mapcar 'buffer-name (buffer-list))))
-    (dolist (element buffers)
-      (if (not (string-match-p sk:ignored-buffers-regexp element))
-          (kill-buffer element))))
-  (save-buffers-kill-terminal))
-
-(general-def '(normal visual) 'override
-  "SPC ESC" 'keyboard-escape-quit
-  "SPC q"   'save-buffers-kill-terminal
-  "SPC Q"   'sk:save-buffers-kill-buffers-kill-terminal)
-
-
-
 ; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-def '(normal visual) 'override

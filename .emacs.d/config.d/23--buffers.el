@@ -2,7 +2,6 @@
 
 
 
-
 (global-auto-revert-mode)
 
 (general-def '(normal visual) 'override
