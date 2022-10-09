@@ -27,7 +27,7 @@
 
 (defun sk:switch-to-buffer ()
   (interactive)
-  (switch-to-buffer (completing-read "Switch to buffer: " (sk:buffer-list))))
+  (switch-to-buffer (completing-read "Switch to buffer: " (sk:buffer-list)) t))
 
 (defun sk:cycle-buffers (step)
   (let ((buffers (sk:buffer-list)))

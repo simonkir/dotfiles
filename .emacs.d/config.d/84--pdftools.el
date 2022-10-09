@@ -10,6 +10,7 @@
 
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
 
 
 
