@@ -11,7 +11,6 @@
 #+name: `(format-time-string "%Y%m%d-%H%M%S")`
 #+begin_src gnuplot :file /tmp/gnuplot-`(format-time-string "%Y%m%d-%H%M%S")`.png :var data=`(format-time-string "%Y%m%d-%H%M%S")`
 load "~/.gnuplot"
-set key position top right
 set xlabel "$2"
 set xtics $4
 set ylabel "$3"
