@@ -3,7 +3,6 @@
 reset
 set term pngcairo font "Noto Serif"
 set tics nomirror
-set key position top right
 set samples 500
 set format "%g"
 
