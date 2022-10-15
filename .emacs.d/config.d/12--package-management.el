@@ -26,7 +26,8 @@
 
 
 
-;; general.el
+;;(use-package general
+;;  :demand t)
 
-(use-package general
+(use-package bind-key
   :demand t)

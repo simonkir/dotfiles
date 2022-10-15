@@ -38,6 +38,6 @@
           (t
            (call-interactively 'indent-for-tab-command))))
 
-  (general-def 'insert 'override
-    "<backtab>" 'sk:insert-backtab-key
-    "TAB" 'sk:insert-tab-key))
+  (bind-keys
+    ("<tab>"     . sk:insert-tab-key)
+    ("<backtab>" . sk:insert-backtab-key)))

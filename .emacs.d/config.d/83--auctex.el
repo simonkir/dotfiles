@@ -41,16 +41,18 @@
 
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (general-def '(normal visual) TeX-mode-map
-    "SPC SPC s"   'LaTeX-section            ;; insert section
-    "SPC SPC e"   'LaTeX-environment        ;; insert environment
-    "SPC SPC TAB" 'LaTeX-fill-environment)  ;; auto-indent
 
-  (general-def '(normal visual) TeX-mode-map
-    "SPC SPC l l" 'preview-at-point
-    "SPC SPC l L" 'preview-clearout-at-point
-    "SPC SPC l b" 'preview-buffer
-    "SPC SPC l B" 'preview-clearout-buffer))
+  ;;(general-def '(normal visual) TeX-mode-map
+  ;;  "SPC SPC s"   'LaTeX-section            ;; insert section
+  ;;  "SPC SPC e"   'LaTeX-environment        ;; insert environment
+  ;;  "SPC SPC TAB" 'LaTeX-fill-environment)  ;; auto-indent
+  ;;
+  ;;(general-def '(normal visual) TeX-mode-map
+  ;;  "SPC SPC l l" 'preview-at-point
+  ;;  "SPC SPC l L" 'preview-clearout-at-point
+  ;;  "SPC SPC l b" 'preview-buffer
+  ;;  "SPC SPC l B" 'preview-clearout-buffer))
+  )
 
 
 
@@ -60,10 +62,11 @@
   (LaTeX-mode . sklatex-mode)
   (org-mode . sklatex-mode)
 
-  :config
-  (general-def 'normal (org-mode-map TeX-mode-map)
-    "SPC SPC k" 'sklatex-dispatch
-    "SPC SPC K" 'sklatex-mode))
+  ;;:config
+  ;;(general-def 'normal (org-mode-map TeX-mode-map)
+  ;;  "SPC SPC k" 'sklatex-dispatch
+  ;;  "SPC SPC K" 'sklatex-mode)
+  )
 
 
 
@@ -76,8 +79,8 @@
   (setq cdlatex-math-symbol-prefix ?#)
 
   :config
-  (general-def 'insert org-cdlatex-mode-map
-    "$" 'cdlatex-dollar)
+  (bind-keys :map org-cdlatex-mode-map
+    ("$" . cdlatex-dollar))
 
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
@@ -103,21 +106,23 @@
           (?- "\\bar"  nil t nil nil)
           (?> "\\vec"  nil t nil nil)))
 
- (general-def (cdlatex-mode-map org-mode-map)
-   "#" 'cdlatex-math-symbol))
-   ;;"TAB" nil
-   ;;"<tab>" nil))
+  (bind-keys :map cdlatex-mode-map
+    ("TAB" . nil)
+    ("<tab>" . nil))
+
+  (bind-keys :map org-mode-map
+    ("#" . cdlatex-math-symbol)))
 
 
 
-(use-package evil-tex
-  :hook ((LaTeX-mode org-mode) . evil-tex-mode)
-  :config
-  (general-def evil-tex-delim-map
-    "(" 'evil-tex-delims---\\left\(
-    ")" 'evil-tex-delims---\\left\(
-    "[" 'evil-tex-delims---\\left\[
-    "]" 'evil-tex-delims---\\left\[
-    "{" 'evil-tex-delims---\\left\\{
-    "}" 'evil-tex-delims---\\left\\{
-    "|" 'evil-tex-delims---\\left\\vert))
+;;(use-package evil-tex
+;;  :hook ((LaTeX-mode org-mode) . evil-tex-mode)
+;;  :config
+;;  (general-def evil-tex-delim-map
+;;    "(" 'evil-tex-delims---\\left\(
+;;    ")" 'evil-tex-delims---\\left\(
+;;    "[" 'evil-tex-delims---\\left\[
+;;    "]" 'evil-tex-delims---\\left\[
+;;    "{" 'evil-tex-delims---\\left\\{
+;;    "}" 'evil-tex-delims---\\left\\{
+;;    "|" 'evil-tex-delims---\\left\\vert))

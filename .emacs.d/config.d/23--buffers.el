@@ -4,8 +4,8 @@
 
 (global-auto-revert-mode)
 
-(general-def '(normal visual) 'override
-  "g r" 'revert-buffer-quick)
+;;(general-def '(normal visual) 'override
+;;  "g r" 'revert-buffer-quick)
 
 
 
@@ -65,16 +65,15 @@
 
 
 
-(general-def '(normal visual insert) 'override
-  ;;"C-w" 'bury-buffer ;; useful when using tab-line-mode
-  "C-<tab>"         'sk:next-buffer
-  "<C-iso-lefttab>" 'sk:previous-buffer)
+(bind-keys
+  ("C-<tab>"         . sk:next-buffer)
+  ("<C-iso-lefttab>" . sk:previous-buffer))
 
-(general-def '(normal visual) 'override
-  "SPC b q" 'bury-buffer
-  "SPC b h" 'previous-buffer
-  "SPC b l" 'next-buffer
-  "SPC b b" 'sk:switch-to-buffer
-  "SPC b B" 'switch-to-buffer
-  "SPC b k" 'sk:kill-current-buffer
-  "SPC b K" 'kill-buffer-and-window)
+(bind-keys :map mode-specific-map
+  ("b q" . bury-buffer)
+  ("b h" . previous-buffer)
+  ("b l" . next-buffer)
+  ("b b" . sk:switch-to-buffer)
+  ("b B" . switch-to-buffer)
+  ("b k" . sk:kill-current-buffer)
+  ("b K" . kill-buffer-and-window))

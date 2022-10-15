@@ -20,18 +20,15 @@
                       :weight     'bold
                       :foreground "#98be65")
 
-  (general-def '(normal insert) icomplete-minibuffer-map
-    "C-<return>" 'icomplete-fido-ret
-    "S-<return>" 'icomplete-fido-exit
-    "C-d"        'icomplete-fido-kill
-    "C-e"        'end-of-line
-    "C-a"        'beginning-of-line
-    "C-j"        'icomplete-forward-completions
-    "C-k"        'icomplete-backward-completions)
 
-  (general-def '(normal visual) 'override
-    "SPC t i" 'fido-mode
-    "SPC x"   'execute-extended-command)
+  (bind-keys :map icomplete-minibuffer-map
+    ("C-<return>" . icomplete-fido-ret)
+    ("S-<return>" . icomplete-fido-exit)
+    ("C-d" . icomplete-fido-kill)
+    ("C-e" . end-of-line)
+    ("C-a" . begining-of-line)
+    ("C-j" . icomplete-forward-completions)
+    ("C-k" . icomplete-backward-completions))
 
   (fido-mode)
   (fido-vertical-mode))

@@ -5,9 +5,9 @@
 ;; vterm ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vterm
-  :general ('normal 'override
-    "SPC v" 'vterm
-    "SPC V" 'vterm-other-window)
+  :bind (:map mode-specific-map
+    ("v" . vterm)
+    ("V" . vterm-other-window))
 
   :config
   (setq vterm-shell "/usr/bin/fish")

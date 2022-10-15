@@ -11,7 +11,7 @@
         evil-undo-system 'undo-redo)
 
   :config
-  (evil-mode 1)
+  ;;(evil-mode 1)
   (setq evil-want-minibuffer t)
   (setq evil-want-fine-undo t)
 

@@ -2,16 +2,16 @@
 
 
 
-(general-def '(normal visual) 'override
-  "SPC f f" 'find-file
-  "SPC f F" 'find-file-read-only
-  "SPC f p" 'find-file-at-point
-  "SPC f R" 'revert-buffer
-  "SPC f s" 'save-buffer
-  "SPC f S" 'save-some-buffers)
+(bind-keys :map mode-specific-map
+  ("f f" . find-file)
+  ("f F" . find-file-read-only)
+  ("f p" . find-file-at-point)
+  ("f R" . revert-buffer)
+  ("f s" . save-buffer)
+  ("f S" . save-some-buffers))
 
-(general-def '(normal visual) 'override
-  "SPC s" 'save-buffer)
+(bind-keys :map mode-specific-map
+  ("s" . save-buffer))
 
 
 
@@ -36,7 +36,7 @@
       (when file
         (find-file file))))
 
-  (general-def '(normal visual) 'override
-    "SPC f r" 'sk:recentf-find-file)
+  (bind-keys :map mode-specific-map
+    ("f r" . sk:recentf-find-file))
 
   (recentf-mode t))

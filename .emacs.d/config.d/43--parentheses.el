@@ -22,21 +22,21 @@
 
 
 
-(use-package evil-surround
-  :after evil
-  :demand t
-  :config
-  (setq-default evil-surround-pairs-alist (cons '(?„ . ("„" . "“")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cons '(?\“ . ("“" . "”")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cons '(?‚ . ("‚" . "‘")) evil-surround-pairs-alist))
-  (setq-default evil-surround-pairs-alist (cons '(?‘ . ("‘" . "’")) evil-surround-pairs-alist))
+;;(use-package evil-surround
+;;  :after evil
+;;  :demand t
+;;  :config
+;;  (setq-default evil-surround-pairs-alist (cons '(?„ . ("„" . "“")) evil-surround-pairs-alist))
+;;  (setq-default evil-surround-pairs-alist (cons '(?\“ . ("“" . "”")) evil-surround-pairs-alist))
+;;  (setq-default evil-surround-pairs-alist (cons '(?‚ . ("‚" . "‘")) evil-surround-pairs-alist))
+;;  (setq-default evil-surround-pairs-alist (cons '(?‘ . ("‘" . "’")) evil-surround-pairs-alist))
+;;
+;;  (global-evil-surround-mode 1))
 
-  (global-evil-surround-mode 1))
 
 
-
-(use-package evil-lion
-  :after evil
-  :general ('(normal visual) 'override
-    "g l" 'evil-lion-left
-    "g L" 'evil-lion-right))
+;;(use-package evil-lion
+;;  :after evil
+;;  :general ('(normal visual) 'override
+;;    "g l" 'evil-lion-left
+;;    "g L" 'evil-lion-right))

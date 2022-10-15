@@ -133,5 +133,5 @@
         (setq org-hide-emphasis-markers nil)
       (setq org-hide-emphasis-markers t))))
 
-(general-def '(normal visual) 'override
-  "SPC t p" 'sk:toggle-pretty-mode)
+(bind-keys :map mode-specific-map
+  ("t p" . sk:toggle-pretty-mode))
