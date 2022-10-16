@@ -52,5 +52,5 @@
 ;;  :general ('normal 'override "SPC t f" 'follow-mode))
 
 (use-package follow
-  :bind (:map mode-specific-map
+  :bind (:map sk:leader-map
          ("t f" . follow-mode)))

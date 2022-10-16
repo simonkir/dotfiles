@@ -2,7 +2,7 @@
 
 
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("f f" . find-file)
   ("f F" . find-file-read-only)
   ("f p" . find-file-at-point)
@@ -10,7 +10,7 @@
   ("f s" . save-buffer)
   ("f S" . save-some-buffers))
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("s" . save-buffer))
 
 
@@ -36,7 +36,7 @@
       (when file
         (find-file file))))
 
-  (bind-keys :map mode-specific-map
+  (bind-keys :map sk:leader-map
     ("f r" . sk:recentf-find-file))
 
   (recentf-mode t))

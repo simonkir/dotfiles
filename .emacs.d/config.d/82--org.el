@@ -201,7 +201,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   ;;  "SPC e"       'sk:org-edit-special-current-window
   ;;  "SPC E"       'sk:org-edit-special-new-window)
 
-  (bind-keys :map mode-specific-map
+  (bind-keys :map sk:leader-map
     ("e" . org-edit-src-exit)))
 
 

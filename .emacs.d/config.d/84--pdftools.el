@@ -62,7 +62,7 @@
 
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
-(define-key image-mode-map "R" 'image-rotate)
+(bind-keys :map image-mode-map ("R" . image-rotate))
 
 
 

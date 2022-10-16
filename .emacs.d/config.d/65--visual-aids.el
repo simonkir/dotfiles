@@ -5,7 +5,7 @@
 ; writing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column
-  :bind (:map mode-specific-map
+  :bind (:map sk:leader-map
     ("t v" . visual-fill-column-mode)
     ("t V" . set-fill-column))
 
@@ -15,7 +15,7 @@
 
 ; text scale ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("0" . text-scale-adjust)
   ("+" . text-scale-adjust)
   ("-" . text-scale-adjust))

@@ -17,8 +17,8 @@
 
 ; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(general-def '(normal visual) 'override
-  "SPC h p" 'describe-package
-  "SPC h f" 'describe-function
-  "SPC h v" 'describe-variable
-  "SPC h k" 'describe-key)
+(bind-keys :map sk:leader-map
+  ("h p" . describe-package)
+  ("h f" . describe-function)
+  ("h v" . describe-variable)
+  ("h k" . describe-key))

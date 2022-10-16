@@ -31,3 +31,5 @@
 
 (use-package bind-key
   :demand t)
+
+(setq sk:leader-map (make-sparse-keymap))

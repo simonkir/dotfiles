@@ -3,6 +3,6 @@
 
 
 (use-package calc
-  :bind (:map mode-specific-map ("#" . calc-dispatch))
+  :bind (:map sk:leader-map ("c" . calc-dispatch))
   :config
   (setq calc-multiplication-has-precedence nil))

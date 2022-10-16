@@ -30,5 +30,8 @@
     ("C-j" . icomplete-forward-completions)
     ("C-k" . icomplete-backward-completions))
 
+  (bind-keys :map sk:leader-map
+    ("x" . execute-extended-command))
+  
   (fido-mode)
   (fido-vertical-mode))

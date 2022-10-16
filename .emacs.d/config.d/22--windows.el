@@ -31,7 +31,7 @@
 
 
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("w o" . delete-other-windows)
   ("w 1" . delete-other-windows)
   ("w s" . sk:split-and-follow-horizontally)
@@ -55,7 +55,7 @@
 
 
 (use-package transpose-frame
-  :bind (:map mode-specific-map
+  :bind (:map sk:leader-map
     ("w w" . transpose-frame)
     ("w r" . rotate-frame-clockwise)
     ("w R" . rotate-frame-anticlockwise)

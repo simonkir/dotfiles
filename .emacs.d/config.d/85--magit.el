@@ -3,7 +3,7 @@
 
 
 (use-package magit
-  :bind (:map mode-specific-map
+  :bind (:map sk:leader-map
     ("g" . magit-file-dispatch)
     ("G" . magit-dispatch))
 

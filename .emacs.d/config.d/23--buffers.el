@@ -69,7 +69,7 @@
   ("C-<tab>"         . sk:next-buffer)
   ("<C-iso-lefttab>" . sk:previous-buffer))
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("b q" . bury-buffer)
   ("b h" . previous-buffer)
   ("b l" . next-buffer)

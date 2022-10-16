@@ -5,7 +5,7 @@
 ;; vterm ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vterm
-  :bind (:map mode-specific-map
+  :bind (:map sk:leader-map
     ("v" . vterm)
     ("V" . vterm-other-window))
 

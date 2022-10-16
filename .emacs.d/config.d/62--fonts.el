@@ -32,7 +32,7 @@
         (mixed-pitch-mode 'toggle)
         (mixed-pitch-mode 'toggle))))
 
-(bind-keys :map mode-specific-map
+(bind-keys :map sk:leader-map
   ("d f" . sk:set-face-fixed)
   ("d v" . sk:set-face-variable))
 
@@ -42,7 +42,7 @@
 
 (use-package mixed-pitch
   :hook ((org-mode TeX-mode text-mode) . mixed-pitch-mode)
-  :bind (:map mode-specific-map ("d m" . mixed-pitch-mode))
+  :bind (:map sk:leader-map ("d m" . mixed-pitch-mode))
   :config
   (setq mixed-pitch-variable-pitch-cursor nil)
   (setq mixed-pitch-set-height t)) ;; keep filled cursor
