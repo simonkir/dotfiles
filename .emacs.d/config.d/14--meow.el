@@ -69,6 +69,22 @@
             (meow-expand digit)
           (call-interactively 'meow-digit-argument)))))
 
+  (defun sk:yank-after-point ()
+    (interactive)
+    (save-excursion
+      (right-char)
+      (yank)))
+
+;;  (defun sk:jump-to-matching-parens ()
+;;    (interactive)
+;;    (let (method)
+;;      (save-excursion
+;;        (left-char)
+;;        (if (looking-at-p "\\s)")
+;;            (setq method 'backward-sexp)
+;;          (setq method 'forward-sexp)))
+;;      (call-intractively method)))
+  
 
 
   (bind-keys :map meow-motion-state-keymap
@@ -96,15 +112,17 @@
     ("-" . negative-argument)
     (";" . meow-reverse)                  ;; new binding
     ("'" . repeat)
+    ("*" . meow-block)
     ("," . meow-inner-of-thing)
     ("." . meow-bounds-of-thing)
     ("<" . meow-beginning-of-thing)
     (">" . meow-end-of-thing)
+    ;;("%" . sk:jump-to-matching-parens)
     ("a" . meow-append)
-    ("A" . meow-open-below)
     ("b" . meow-back-word)
     ("B" . meow-back-symbol)
     ("c" . meow-join)
+    ("C" . beginning-of-line)
     ("d" . meow-kill)
     ("e" . meow-next-word)
     ("E" . meow-next-symbol)
@@ -114,7 +132,6 @@
     ("h" . meow-left)
     ("H" . meow-left-expand)
     ("i" . meow-insert)
-    ("I" . meow-open-above)
     ("j" . meow-next)
     ("J" . meow-next-expand)
     ("k" . meow-prev)
@@ -124,9 +141,12 @@
     ("m" . meow-line)
     ("M" . meow-goto-line)
     ("n" . meow-search)
-    ("o" . meow-block)
-    ("O" . meow-to-block)
-    ("p" . meow-yank)
+    ;;("O" . meow-to-block)
+    ("o" . meow-open-below)
+    ("O" . meow-open-above)
+    ("p" . sk:yank-after-point)
+    ("P" . meow-yank)
+    ;;("P" . meow-yank-pop)
     ;;("q" . meow-quit)
     ("Q" . meow-goto-line)
     ("r" . meow-replace)
