@@ -31,28 +31,10 @@
 
   ; math settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode
-  ;;(setq LaTeX-math-abbrev-prefix "#")
   (setq TeX-insert-braces nil)
 
   (setq preview-scale-function      1.5)
-  (setq preview-auto-cache-preamble t)
-
-
-
-  ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;;(general-def '(normal visual) TeX-mode-map
-  ;;  "SPC SPC s"   'LaTeX-section            ;; insert section
-  ;;  "SPC SPC e"   'LaTeX-environment        ;; insert environment
-  ;;  "SPC SPC TAB" 'LaTeX-fill-environment)  ;; auto-indent
-  ;;
-  ;;(general-def '(normal visual) TeX-mode-map
-  ;;  "SPC SPC l l" 'preview-at-point
-  ;;  "SPC SPC l L" 'preview-clearout-at-point
-  ;;  "SPC SPC l b" 'preview-buffer
-  ;;  "SPC SPC l B" 'preview-clearout-buffer))
-  )
+  (setq preview-auto-cache-preamble t))
 
 
 
@@ -62,11 +44,10 @@
   (LaTeX-mode . sklatex-mode)
   (org-mode . sklatex-mode)
 
-  ;;:config
-  ;;(general-def 'normal (org-mode-map TeX-mode-map)
-  ;;  "SPC SPC k" 'sklatex-dispatch
-  ;;  "SPC SPC K" 'sklatex-mode)
-  )
+  :config
+  (general-def-leader :predicate '(or (derived-mode-p 'org-mode) (derived-mode-p 'latex-mode))
+    "SPC SPC k" 'sklatex-dispatch
+    "SPC SPC K" 'sklatex-mode))
 
 
 

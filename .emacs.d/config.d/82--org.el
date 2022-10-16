@@ -39,29 +39,28 @@
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;;(general-def '(normal visual) org-mode-map
-  ;;  "SPC SPC -" 'org-ctrl-c-minus ;; separator line in table
-  ;;  "SPC SPC b" 'org-cycle-list-bullet
-  ;;  "SPC SPC B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
+  (general-def-leader :predicate '(derived-mode-p 'org-mode)
+    "SPC SPC -" 'org-ctrl-c-minus ;; separator line in table
+    "SPC SPC b" 'org-cycle-list-bullet
+    "SPC SPC B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
 
-  ;;  "SPC SPC TAB"       'org-table-toggle-column-width
-  ;;  "SPC SPC <backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
-  ;;  "SPC SPC c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
+    "SPC SPC TAB"       'org-table-toggle-column-width
+    "SPC SPC <backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
+    "SPC SPC c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
 
-  ;;  "SPC SPC n" 'org-num-mode
-  ;;  "SPC SPC h" 'org-toggle-heading
-  ;;  "SPC SPC t" 'org-todo)
+    "SPC SPC n" 'org-num-mode
+    "SPC SPC h" 'org-toggle-heading
+    "SPC SPC t" 'org-todo)
 
-  ;;(general-def '(normal visual) org-mode-map
-  ;;  "RET" 'org-ctrl-c-ctrl-c
-  ;;  "g J" 'org-next-visible-heading
-  ;;  "g K" 'org-previous-visible-heading)
+  (general-def meow-normal-state-keymap :predicate '(derived-mode-p 'org-mode)
+    "RET" 'org-ctrl-c-ctrl-c)
+    ;;"g J" 'org-next-visible-heading
+    ;;"g K" 'org-previous-visible-heading)
 
-  ;;;; override org default tab key behaviour
-  ;;(general-def 'insert org-mode-map
-  ;;  "<tab>" 'sk:insert-tab-key
-  ;;  "TAB" 'sk:insert-tab-key
-  ;;  "C-#" '(lambda () (interactive) (insert "#")))
+  ;; override org default tab key behaviour
+  (general-def meow-insert-state-keymap :predicate '(derived-mode-p 'org-mode)
+    "<backtab>" 'sk:insert-backtab-key
+    "C-#" '(lambda () (interactive) (insert "#")))
 
   (general-def org-mode-map
     "C-#" '(lambda () (interactive) (insert "#")))
@@ -108,15 +107,15 @@
 
 
 
-  ;;(general-def '(normal visual) org-mode-map
-  ;;  "SPC SPC l l" 'sk:org-latex-preview-at-point
-  ;;  "SPC SPC l L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
-  ;;  "SPC SPC l b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
-  ;;  "SPC SPC l B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
-  ;;  "SPC SPC l +" 'sk:org-preview-latex-scale-increase
-  ;;  "SPC SPC l -" 'sk:org-preview-latex-scale-decrease
-  ;;  "SPC SPC l 0" 'sk:org-preview-latex-scale-reset
-  ;;  "SPC SPC l s" 'sk:org-preview-latex-scale-set)
+  (general-def-leader :predicate '(derived-mode-p 'org-mode)
+    "SPC SPC l l" 'sk:org-latex-preview-at-point
+    "SPC SPC l L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
+    "SPC SPC l b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
+    "SPC SPC l B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
+    "SPC SPC l +" 'sk:org-preview-latex-scale-increase
+    "SPC SPC l -" 'sk:org-preview-latex-scale-decrease
+    "SPC SPC l 0" 'sk:org-preview-latex-scale-reset
+    "SPC SPC l s" 'sk:org-preview-latex-scale-set)
 
 
 
@@ -152,10 +151,11 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-  ;;(general-def '(normal visual) org-mode-map
-  ;;  "SPC SPC i b" 'org-toggle-inline-images
-  ;;  "SPC SPC i B" 'org-remove-inline-images
-  ;;  "SPC SPC i r" 'org-redisplay-inline-images)
+  (general-def-leader :prediacte '(derived-mode-p 'org-mode)
+    "SPC SPC i i" 'sk:org-toggle-inline-images-at-point
+    "SPC SPC i b" 'org-toggle-inline-images
+    "SPC SPC i B" 'org-remove-inline-images
+    "SPC SPC i r" 'org-redisplay-inline-images)
 
   ;;(general-def 'normal org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
   ;;(general-def 'visual org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-in-region)
@@ -191,28 +191,28 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (defun sk:org-babel-eval-with-new-session ()
     (interactive)
     (sk:org-babel-kill-session-at-point)
-    (org-ctrl-c-ctrl-c))
+    (org-ctrl-c-ctrl-c)))
 
 
 
-  ;;(general-def '(normal visual) org-mode-map
-  ;;  "SPC SPC k"   'sk:org-babel-kill-session-at-point
-  ;;  "SPC SPC RET" 'sk:org-babel-eval-with-new-session
-  ;;  "SPC e"       'sk:org-edit-special-current-window
-  ;;  "SPC E"       'sk:org-edit-special-new-window)
-
-  (general-def-leader
-    "SPC e" 'org-edit-src-exit))
+;;  (general-def-leader :predicate '(not (derived-mode-p 'org-mode))
+;;    "SPC e" 'org-edit-src-exit)
+;;
+;;  (general-def-leader :prediacte '(derived-mode-p 'org-mode)
+;;    "SPC SPC k"   'sk:org-babel-kill-session-at-point
+;;    "SPC SPC RET" 'sk:org-babel-eval-with-new-session
+;;    "SPC e"       'sk:org-edit-special-current-window
+;;    "SPC E"       'sk:org-edit-special-new-window))
 
 
 
 ; export settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(use-package ox
-;;  :after org
-;;  :general ('normal org-mode-map
-;;    "SPC SPC X" 'org-export-dispatch
-;;    "SPC SPC x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+(use-package ox
+  :after org
+  :general (general-def-leader :predicate '(derived-mode-p 'org-mode)
+    "SPC SPC X" 'org-export-dispatch
+    "SPC SPC x" '(lambda () (interactive) (org-export-dispatch '(4)))))
 
 
 
