@@ -133,5 +133,5 @@
         (setq org-hide-emphasis-markers nil)
       (setq org-hide-emphasis-markers t))))
 
-(bind-keys :map sk:leader-map
-  ("t p" . sk:toggle-pretty-mode))
+(general-def-leader
+  "SPC t p" 'sk:toggle-pretty-mode)

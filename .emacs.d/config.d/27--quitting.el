@@ -37,7 +37,7 @@ i. e. killing all open buffers and quitting the terminal, unless there are unsta
 
 
 
-(bind-keys :map sk:leader-map
-  ;;("ESC" . keyboard-escape-quit) ;; unknown what this binding is good for
-  ("q"   . sk:soft-quit)
-  ("Q"   . sk:harsh-quit))
+(general-def-leader
+  ;;("SPC ESC" 'keyboard-escape-quit ;; unknown what this binding is good for
+  "SPC q"   'sk:soft-quit
+  "SPC Q"   'sk:harsh-quit)

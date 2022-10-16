@@ -5,9 +5,9 @@
 ;; vterm ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vterm
-  :bind (:map sk:leader-map
-    ("v" . vterm)
-    ("V" . vterm-other-window))
+  :general (general-def-leader
+    "SPC v" 'vterm
+    "SPC V" 'vterm-other-window)
 
   :config
   (setq vterm-shell "/usr/bin/fish")

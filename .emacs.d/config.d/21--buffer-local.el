@@ -43,8 +43,7 @@
 ;;(bind-key "g" 'avy-goto-char-timer meow-normal-state-keymap)
 
 (use-package avy
-  :bind (:map meow-normal-state-keymap
-         ("g" . 'avy-goto-char-timer)))
+  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
 
 
 
@@ -52,5 +51,4 @@
 ;;  :general ('normal 'override "SPC t f" 'follow-mode))
 
 (use-package follow
-  :bind (:map sk:leader-map
-         ("t f" . follow-mode)))
+  :general (general-def-leader "SPC t f" 'follow-mode))

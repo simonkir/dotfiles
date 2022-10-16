@@ -21,17 +21,17 @@
                       :foreground "#98be65")
 
 
-  (bind-keys :map icomplete-minibuffer-map
-    ("C-<return>" . icomplete-fido-ret)
-    ("S-<return>" . icomplete-fido-exit)
-    ("C-d" . icomplete-fido-kill)
-    ("C-e" . end-of-line)
-    ("C-a" . begining-of-line)
-    ("C-j" . icomplete-forward-completions)
-    ("C-k" . icomplete-backward-completions))
+  (general-def 'icomplete-minibuffer-map
+    "C-<return>" 'icomplete-fido-ret
+    "S-<return>" 'icomplete-fido-exit
+    "C-d" 'icomplete-fido-kill
+    "C-e" 'end-of-line
+    "C-a" 'begining-of-line
+    "C-j" 'icomplete-forward-completions
+    "C-k" 'icomplete-backward-completions)
 
-  (bind-keys :map sk:leader-map
-    ("x" . execute-extended-command))
+  (general-def-leader
+    "SPC x" 'execute-extended-command)
   
   (fido-mode)
   (fido-vertical-mode))

@@ -3,6 +3,6 @@
 
 
 (use-package calc
-  :bind (:map sk:leader-map ("c" . calc-dispatch))
+  :general (general-def-leader "SPC c" 'calc-dispatch)
   :config
   (setq calc-multiplication-has-precedence nil))

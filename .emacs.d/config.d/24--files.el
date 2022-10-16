@@ -2,16 +2,16 @@
 
 
 
-(bind-keys :map sk:leader-map
-  ("f f" . find-file)
-  ("f F" . find-file-read-only)
-  ("f p" . find-file-at-point)
-  ("f R" . revert-buffer)
-  ("f s" . save-buffer)
-  ("f S" . save-some-buffers))
+(general-def-leader
+  "SPC f f" 'find-file
+  "SPC f F" 'find-file-read-only
+  "SPC f p" 'find-file-at-point
+  "SPC f R" 'revert-buffer
+  "SPC f s" 'save-buffer
+  "SPC f S" 'save-some-buffers)
 
-(bind-keys :map sk:leader-map
-  ("s" . save-buffer))
+(general-def-leader
+  "SPC s" 'save-buffer)
 
 
 
@@ -36,7 +36,7 @@
       (when file
         (find-file file))))
 
-  (bind-keys :map sk:leader-map
-    ("f r" . sk:recentf-find-file))
+  (general-def-leader
+    "SPC f r" 'sk:recentf-find-file)
 
   (recentf-mode t))

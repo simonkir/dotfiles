@@ -35,5 +35,5 @@
 ;;  "<up>"    'evil-scroll-line-up
 ;;  "<down>"  'evil-scroll-line-down)
 
-(bind-keys :map sk:leader-map
-  ("d w" . sk:reading-mode))
+(general-def-leader
+  "SPC d w" 'sk:reading-mode)

@@ -3,16 +3,16 @@
 
 
 (use-package magit
-  :bind (:map sk:leader-map
-    ("g" . magit-file-dispatch)
-    ("G" . magit-dispatch))
+  :general (general-def-leader
+    "SPC g" 'magit-file-dispatch
+    "SPC G" 'magit-dispatch)
 
   :config
-  (bind-keys :map magit-mode-map
-    ("<backtab>" . magit-section-cycle-diffs)
-    ("<tab>" . magit-section-toggle)
-    ("TAB" . magit-section-toggle)
-    ("g" . nil)
-    ("g r" . magit-refresh)
-    ("x" . magit-delete-thing)
-    ("p" . magit-push)))
+  (general-def magit-mode-map
+    "<backtab>" 'magit-section-cycle-diffs
+    "<tab>" 'magit-section-toggle
+    "TAB" 'magit-section-toggle
+    "g" 'nil
+    "g r" 'magit-refresh
+    "x" 'magit-delete-thing
+    "p" 'magit-push))

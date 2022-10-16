@@ -7,9 +7,9 @@
   (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
   (setq dired-kill-when-opening-new-dired-buffer t)
 
-  (bind-keys :map dired-mode-map
-    ("h" . dired-up-directory)
-    ("l" . dired-find-file)))
+  (general-def 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
 
 
 

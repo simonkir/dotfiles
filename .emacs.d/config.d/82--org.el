@@ -63,8 +63,8 @@
   ;;  "TAB" 'sk:insert-tab-key
   ;;  "C-#" '(lambda () (interactive) (insert "#")))
 
-  (bind-keys :map org-mode-map
-    ("C-#" . (lambda () (interactive) (insert "#"))))
+  (general-def org-mode-map
+    "C-#" '(lambda () (interactive) (insert "#")))
 
 
 
@@ -201,8 +201,8 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   ;;  "SPC e"       'sk:org-edit-special-current-window
   ;;  "SPC E"       'sk:org-edit-special-new-window)
 
-  (bind-keys :map sk:leader-map
-    ("e" . org-edit-src-exit)))
+  (general-def-leader
+    "SPC e" 'org-edit-src-exit))
 
 
 

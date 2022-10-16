@@ -22,26 +22,27 @@
 
 
 
-  (bind-keys :map pdf-view-mode-map
-    ("<up>"    . pdf-view-previous-line-or-previous-page)
-    ("<down>"  . pdf-view-next-line-or-next-page)
-    ("<left>"  . image-backward-hscroll)
-    ("<right>" . image-forward-hscroll)
-
-    ("j"       . (lambda () (interactive) (pdf-view-next-line-or-next-page 4)))
-    ("k"       . (lambda () (interactive) (pdf-view-previous-line-or-previous-page 4)))
-    ("h"       . (lambda () (interactive) (image-backward-hscroll 10)))
-    ("l"       . (lambda () (interactive) (image-forward-hscroll 10)))
-    ("J"       . pdf-view-next-page)
-    ("K"       . pdf-view-previous-page)
-    ("<home>"  . image-bol)
-    ("<end>"   . image-eol)
-    ("<prior>" . image-bob)
-    ("<next>"  . image-eob)
-
-    ("W"       . pdf-view-fit-width-to-window)
-    ("H"       . pdf-view-fit-height-to-window)
-    ("="       . sk:pdf-view-fit))
+  (general-def pdf-view-mode-map
+    "<up>"    'pdf-view-previous-line-or-previous-page
+    "<down>"  'pdf-view-next-line-or-next-page
+    "<left>"  'image-backward-hscroll
+    "<right>" 'image-forward-hscroll
+    
+    "j"       '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
+    "k"       '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
+    "h"       '(lambda () (interactive) (image-backward-hscroll 10))
+    "l"       '(lambda () (interactive) (image-forward-hscroll 10))
+    "J"       'pdf-view-next-page
+    "K"       'pdf-view-previous-page
+    
+    "<home>"  'image-bol
+    "<end>"   'image-eol
+    "<prior>" 'image-bob
+    "<next>"  'image-eob
+    
+    "W"       'pdf-view-fit-width-to-window
+    "H"       'pdf-view-fit-height-to-window
+    "="       'sk:pdf-view-fit)
 
   ;;(general-def 'visual pdf-view-mode-map
   ;;  "SPC SPC w" 'pdf-annot-add-squiggly-markup-annotation
@@ -62,7 +63,7 @@
 
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
-(bind-keys :map image-mode-map ("R" . image-rotate))
+(general-def "R" 'image-rotate)
 
 
 
@@ -78,5 +79,5 @@ if COUNT isn't supplied, go to the last page"
           (doc-view-goto-page count)
         (doc-view-last-page)))
 
-  (bind-keys :map doc-view-mode-map
-    ("G" . sk:doc-view-goto-page)))
+  (general-def doc-view-mode-map
+    "G" 'sk:doc-view-goto-page))

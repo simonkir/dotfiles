@@ -79,8 +79,8 @@
   (setq cdlatex-math-symbol-prefix ?#)
 
   :config
-  (bind-keys :map org-cdlatex-mode-map
-    ("$" . cdlatex-dollar))
+  (general-def org-cdlatex-mode-map
+    "$" 'cdlatex-dollar)
 
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
@@ -106,12 +106,12 @@
           (?- "\\bar"  nil t nil nil)
           (?> "\\vec"  nil t nil nil)))
 
-  (bind-keys :map cdlatex-mode-map
-    ("TAB" . nil)
-    ("<tab>" . nil))
+  (general-def cdlatex-mode-map
+    "TAB" 'nil
+    "<tab>" 'nil)
 
-  (bind-keys :map org-mode-map
-    ("#" . cdlatex-math-symbol)))
+  (general-def org-mode-map
+    "#" 'cdlatex-math-symbol))
 
 
 

@@ -12,12 +12,12 @@
   (setq meow-expand-hint-remove-delay     2)
   (setq meow-display-thing-help           nil)
   
-  (setq meow-keypad-self-insert-undefined nil)
-  (setq meow-keypad-start-keys            nil)
-  (setq meow-keypad-ctrl-meta-prefix      nil)
-  (setq meow-keypad-meta-prefix           nil)
-  (setq meow-keypad-literal-prefix        nil)
-  (setq meow-keypad-leader-dispatch       sk:leader-map)
+  ;;(setq meow-keypad-self-insert-undefined nil)
+  ;;(setq meow-keypad-start-keys            nil)
+  ;;(setq meow-keypad-ctrl-meta-prefix      nil)
+  ;;(setq meow-keypad-meta-prefix           nil)
+  ;;(setq meow-keypad-literal-prefix        nil)
+  ;;(setq meow-keypad-leader-dispatch       sk:leader-map)
   
   (setq meow-mode-state-list '((vterm-mode . insert)))
   (setq meow-expand-exclude-mode-list nil)
@@ -88,6 +88,7 @@
 
 
   (bind-keys :map meow-motion-state-keymap
+    ("SPC" . nil)
     ("j" . meow-next)
     ("k" . meow-prev))
       
@@ -164,6 +165,7 @@
     ("y" . meow-save)
     ("Y" . meow-sync-grab)
     ("z" . meow-pop-selection)
+    ("SPC" . nil)
     ("<escape>" . meow-cancel-selection))
     
   (meow-global-mode 1))

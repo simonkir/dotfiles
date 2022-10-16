@@ -9,7 +9,7 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 
-(bind-keys ("M-SPC" . delete-horizontal-space))
+(general-def "M-SPC" 'delete-horizontal-space)
 
 
 
