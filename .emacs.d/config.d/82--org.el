@@ -37,36 +37,6 @@
 
 
 
-  ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (general-def-leader :predicate '(derived-mode-p 'org-mode)
-    "SPC SPC -" 'org-ctrl-c-minus ;; separator line in table
-    "SPC SPC b" 'org-cycle-list-bullet
-    "SPC SPC B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
-
-    "SPC SPC TAB"       'org-table-toggle-column-width
-    "SPC SPC <backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
-    "SPC SPC c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
-
-    "SPC SPC n" 'org-num-mode
-    "SPC SPC h" 'org-toggle-heading
-    "SPC SPC t" 'org-todo)
-
-  (general-def meow-normal-state-keymap :predicate '(derived-mode-p 'org-mode)
-    "RET" 'org-ctrl-c-ctrl-c)
-    ;;"g J" 'org-next-visible-heading
-    ;;"g K" 'org-previous-visible-heading)
-
-  ;; override org default tab key behaviour
-  (general-def meow-insert-state-keymap :predicate '(derived-mode-p 'org-mode)
-    "<backtab>" 'sk:insert-backtab-key
-    "C-#" '(lambda () (interactive) (insert "#")))
-
-  (general-def org-mode-map
-    "C-#" '(lambda () (interactive) (insert "#")))
-
-
-
   ; latex preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq sk:org-preview-latex-scale-increment 0.2)
@@ -191,7 +161,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (defun sk:org-babel-eval-with-new-session ()
     (interactive)
     (sk:org-babel-kill-session-at-point)
-    (org-ctrl-c-ctrl-c)))
+    (org-ctrl-c-ctrl-c))
 
 
 
@@ -203,6 +173,38 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 ;;    "SPC SPC RET" 'sk:org-babel-eval-with-new-session
 ;;    "SPC e"       'sk:org-edit-special-current-window
 ;;    "SPC E"       'sk:org-edit-special-new-window))
+
+
+
+  ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (general-def-leader :predicate '(derived-mode-p 'org-mode)
+    "SPC SPC -" 'org-ctrl-c-minus ;; separator line in table
+    "SPC SPC b" 'org-cycle-list-bullet
+    "SPC SPC B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
+
+    "SPC SPC TAB"       'org-table-toggle-column-width
+    "SPC SPC <backtab>" '(lambda () (interactive) (org-table-toggle-column-width '(4)))
+    "SPC SPC c"         '(lambda () (interactive) (org-ctrl-c-ctrl-c             '(4)))
+
+    "SPC SPC n" 'org-num-mode
+    "SPC SPC h" 'org-toggle-heading
+    "SPC SPC t" 'org-todo)
+
+  (general-def-leader :predicate '(derived-mode-p 'org-mode)
+    "RET" 'org-ctrl-c-ctrl-c)
+    ;;"g J" 'org-next-visible-heading
+    ;;"g K" 'org-previous-visible-heading)
+
+  ;; override org default tab key behaviour
+  (general-def meow-insert-state-keymap :predicate '(derived-mode-p 'org-mode)
+    "<backtab>" 'sk:insert-backtab-key
+    "C-#" '(lambda () (interactive) (insert "#")))
+
+  (general-def org-mode-map
+    "C-#" '(lambda () (interactive) (insert "#"))))
+
+
 
 
 

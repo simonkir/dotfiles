@@ -94,16 +94,3 @@
   (general-def org-mode-map
     "#" 'cdlatex-math-symbol))
 
-
-
-;;(use-package evil-tex
-;;  :hook ((LaTeX-mode org-mode) . evil-tex-mode)
-;;  :config
-;;  (general-def evil-tex-delim-map
-;;    "(" 'evil-tex-delims---\\left\(
-;;    ")" 'evil-tex-delims---\\left\(
-;;    "[" 'evil-tex-delims---\\left\[
-;;    "]" 'evil-tex-delims---\\left\[
-;;    "{" 'evil-tex-delims---\\left\\{
-;;    "}" 'evil-tex-delims---\\left\\{
-;;    "|" 'evil-tex-delims---\\left\\vert))
