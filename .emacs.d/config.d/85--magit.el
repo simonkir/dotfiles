@@ -8,6 +8,8 @@
     "SPC G" 'magit-dispatch)
 
   :config
+  (add-hook 'git-commit-setup-hook 'meow-insert)
+  
   (general-def magit-mode-map
     "<backtab>" 'magit-section-cycle-diffs
     "<tab>" 'magit-section-toggle

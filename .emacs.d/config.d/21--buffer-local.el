@@ -13,42 +13,31 @@
 
 
 
-;; TODO unbind keys in global map
-;;   → C-f and C-h behave weirdly when bound and moving with hjkl
-;;(bind-keys
-;;  ("C-f" . scroll-up)
-;;  ("C-b" . scroll-down)
-;;  ("C-e" . scroll-up-line)
-;;  ("C-y" . scroll-down-line)
-;;
-;;  ("C-w" . delete-backward-char)
-;;
-;;  ("C-h" . backward-char)
-;;  ("C-j" . next-line)
-;;  ("C-k" . previous-line)
-;;  ("C-l" . forward-char))
+(setq meow--kbd-forward-char "C-x f")
+(setq meow--kbd-backward-char "C-x b")
+
+(general-def
+  "C-x f" 'forward-char
+  "C-x b" 'backward-char
+  "C-f" 'scroll-up
+  "C-b" 'scroll-down
+  "C-e" 'scroll-up-line
+  "C-y" 'scroll-down-line)
+  
+(general-def meow-insert-state-keymap
+  "C-e" 'delete-backward-char
+  "C-w" 'backward-kill-word
+  "C-h" 'backward-char
+  "C-j" 'next-line
+  "C-k" 'previous-line
+  "C-l" 'forward-char)
 
 
-
-;;(use-package avy
-;;  :general ('(normal visual) 'override
-;;   "SPC a c" 'avy-goto-char-timer
-;;   "SPC a h" 'avy-org-goto-heading-timer
-;;   "SPC a w" 'avy-goto-word-or-subword-1
-;;   "SPC a W" 'avy-goto-word))
-
-;;(meow-normal-define-key
-;; '("g" . avy-goto-char-timer))
-
-;;(bind-key "g" 'avy-goto-char-timer meow-normal-state-keymap)
 
 (use-package avy
-  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
+  :general (:keymaps 'meow-normal-state-keymap "q" 'avy-goto-char-timer))
 
 
-
-;;(use-package follow
-;;  :general ('normal 'override "SPC t f" 'follow-mode))
 
 (use-package follow
   :general (general-def-leader "SPC t f" 'follow-mode))
