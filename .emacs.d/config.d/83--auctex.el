@@ -38,16 +38,16 @@
 
 
 
-(use-package sklatex
-  :ensure nil
-  :hook
-  (LaTeX-mode . sklatex-mode)
-  (org-mode . sklatex-mode)
-
-  :config
-  (general-def-leader :predicate '(or (derived-mode-p 'org-mode) (derived-mode-p 'latex-mode))
-    "SPC SPC k" 'sklatex-dispatch
-    "SPC SPC K" 'sklatex-mode))
+;;(use-package sklatex
+;;  :ensure nil
+;;  :hook
+;;  (LaTeX-mode . sklatex-mode)
+;;  (org-mode . sklatex-mode)
+;;
+;;  :config
+;;  (general-def-leader :predicate '(or (derived-mode-p 'org-mode) (derived-mode-p 'latex-mode))
+;;    "SPC SPC k" 'sklatex-dispatch
+;;    "SPC SPC K" 'sklatex-mode))
 
 
 

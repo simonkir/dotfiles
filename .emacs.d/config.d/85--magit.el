@@ -4,8 +4,8 @@
 
 (use-package magit
   :general (general-def-leader
-    "SPC g" 'magit-file-dispatch
-    "SPC G" 'magit-dispatch)
+    "g" 'magit-file-dispatch
+    "G" 'magit-dispatch)
 
   :config
   (add-hook 'git-commit-setup-hook 'meow-insert)

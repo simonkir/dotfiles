@@ -6,8 +6,8 @@
 
 (use-package visual-fill-column
   :general (general-def-leader
-    "SPC t v" 'visual-fill-column-mode
-    "SPC t V" 'set-fill-column)
+    "t v" 'visual-fill-column-mode
+    "t V" 'set-fill-column)
 
   :config (setq-default visual-fill-column-center-text t))
 
@@ -16,9 +16,9 @@
 ; text scale ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-def-leader
-  "SPC 0" 'text-scale-adjust
-  "SPC +" 'text-scale-adjust
-  "SPC -" 'text-scale-adjust)
+  "0" 'text-scale-adjust
+  "+" 'text-scale-adjust
+  "-" 'text-scale-adjust)
 
 
 

@@ -6,8 +6,8 @@
 
 (use-package vterm
   :general (general-def-leader
-    "SPC v" 'vterm
-    "SPC V" 'vterm-other-window)
+    "v" 'vterm
+    "V" 'vterm-other-window)
 
   :config
   (setq vterm-shell "/usr/bin/fish")

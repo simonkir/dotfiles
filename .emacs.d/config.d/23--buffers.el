@@ -70,10 +70,10 @@
   "<C-iso-lefttab>" 'sk:previous-buffer)
 
 (general-def-leader
-  "SPC b q" 'bury-buffer
-  "SPC b h" 'previous-buffer
-  "SPC b l" 'next-buffer
-  "SPC b b" 'sk:switch-to-buffer
-  "SPC b B" 'switch-to-buffer
-  "SPC b k" 'sk:kill-current-buffer
-  "SPC b K" 'kill-buffer-and-window)
+  "b q" 'bury-buffer
+  "b h" 'previous-buffer
+  "b l" 'next-buffer
+  "b b" 'sk:switch-to-buffer
+  "b B" 'switch-to-buffer
+  "b k" 'sk:kill-current-buffer
+  "b K" 'kill-buffer-and-window)

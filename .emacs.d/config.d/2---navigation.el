@@ -9,22 +9,10 @@
 
 
 
-(use-package which-key
-  :demand t
-  :config (which-key-mode))
-
-
-
 ; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(bind-keys :map meow-normal-state-keymap
-;;  ("SPC h p" . describe-package)
-;;  ("SPC h f" . describe-function)
-;;  ("SPC h v" . describe-variable)
-;;  ("SPC h k" . describe-key))
-
 (general-def-leader
- "SPC h p" 'describe-package
- "SPC h f" 'describe-function
- "SPC h v" 'describe-variable
- "SPC h k" 'describe-key)
+ "h p" 'describe-package
+ "h f" 'describe-function
+ "h v" 'describe-variable
+ "h k" 'describe-key)

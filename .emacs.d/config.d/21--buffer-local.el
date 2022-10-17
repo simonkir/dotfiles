@@ -37,9 +37,9 @@
 
 
 (use-package avy
-  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
+  :general (:keymaps 'meow-normal-state-keymap ":" 'avy-goto-char-timer))
 
 
 
 (use-package follow
-  :general (general-def-leader "SPC t f" 'follow-mode))
+  :general (general-def-leader "t f" 'follow-mode))

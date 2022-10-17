@@ -36,4 +36,4 @@
 ;;  "<down>"  'evil-scroll-line-down)
 
 (general-def-leader
-  "SPC d w" 'sk:reading-mode)
+  "d w" 'sk:reading-mode)

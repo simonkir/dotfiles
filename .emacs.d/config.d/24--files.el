@@ -3,15 +3,13 @@
 
 
 (general-def-leader
-  "SPC f f" 'find-file
-  "SPC f F" 'find-file-read-only
-  "SPC f p" 'find-file-at-point
-  "SPC f R" 'revert-buffer
-  "SPC f s" 'save-buffer
-  "SPC f S" 'save-some-buffers)
-
-(general-def-leader
-  "SPC s" 'save-buffer)
+  "f f" 'find-file
+  "f F" 'find-file-read-only
+  "f p" 'find-file-at-point
+  "f R" 'revert-buffer
+  "f s" 'save-buffer
+  "f S" 'save-some-buffers
+  "s"   'save-buffer)
 
 
 
@@ -37,6 +35,6 @@
         (find-file file))))
 
   (general-def-leader
-    "SPC f r" 'sk:recentf-find-file)
+    "f r" 'sk:recentf-find-file)
 
   (recentf-mode t))

@@ -31,7 +31,7 @@
     "C-k" 'icomplete-backward-completions)
 
   (general-def-leader
-    "SPC x" 'execute-extended-command)
+    "x" 'execute-extended-command)
   
   (fido-mode)
   (fido-vertical-mode))

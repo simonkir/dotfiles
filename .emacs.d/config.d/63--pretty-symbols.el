@@ -134,4 +134,4 @@
       (setq org-hide-emphasis-markers t))))
 
 (general-def-leader
-  "SPC t p" 'sk:toggle-pretty-mode)
+  "t p" 'sk:toggle-pretty-mode)

@@ -12,12 +12,12 @@
   (setq meow-expand-hint-remove-delay     2)
   (setq meow-display-thing-help           nil)
   
-  ;;(setq meow-keypad-self-insert-undefined nil)
-  ;;(setq meow-keypad-start-keys            nil)
-  ;;(setq meow-keypad-ctrl-meta-prefix      nil)
-  ;;(setq meow-keypad-meta-prefix           nil)
-  ;;(setq meow-keypad-literal-prefix        nil)
-  ;;(setq meow-keypad-leader-dispatch       sk:leader-map)
+  (setq meow-keypad-self-insert-undefined nil)
+  (setq meow-keypad-start-keys            nil)
+  (setq meow-keypad-ctrl-meta-prefix      nil)
+  (setq meow-keypad-meta-prefix           nil)
+  (setq meow-keypad-literal-prefix        nil)
+  (setq meow-keypad-leader-dispatch       sk:leader-map)
   
   (setq meow-mode-state-list '((vterm-mode . insert)))
   (setq meow-expand-exclude-mode-list nil)
@@ -88,11 +88,12 @@
 
 
   (general-def meow-motion-state-keymap
-    "SPC" 'nil
     "j"   'meow-next
     "k"   'meow-prev)
-      
-  (general-def meow-normal-state-keymap "SPC" nil)
+
+  ;;(general-def meow-keypad-state-keymap
+  ;;  "SPC" nil)
+  
   (general-def meow-normal-state-keymap
     "0" 'sk:meow-digit-argument-or-eval
     "9" 'sk:meow-digit-argument-or-eval
