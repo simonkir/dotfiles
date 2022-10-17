@@ -15,10 +15,12 @@
 
 (setq meow--kbd-forward-char "C-x f")
 (setq meow--kbd-backward-char "C-x b")
+(setq meow--kbd-yank "C-x y")
 
 (general-def
   "C-x f" 'forward-char
   "C-x b" 'backward-char
+  "C-x y" 'yank
   "C-f" 'scroll-up
   "C-b" 'scroll-down
   "C-e" 'scroll-up-line
@@ -35,7 +37,7 @@
 
 
 (use-package avy
-  :general (:keymaps 'meow-normal-state-keymap "q" 'avy-goto-char-timer))
+  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
 
 
 

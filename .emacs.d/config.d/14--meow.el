@@ -87,86 +87,75 @@
   
 
 
-  (bind-keys :map meow-motion-state-keymap
-    ("SPC" . nil)
-    ("j" . meow-next)
-    ("k" . meow-prev))
+  (general-def meow-motion-state-keymap
+    "SPC" 'nil
+    "j"   'meow-next
+    "k"   'meow-prev)
       
-  ;; TODO maybe remove? purpose of this doesnt seem clear
-  ;;(bind-keys :map mode-specific-map
-  ;;  ;; SPC j/k will run the original command in MOTION state.
-  ;;  ("j" . "H-j")
-  ;;  ("k" . "H-k"))
-
-  (bind-keys :map meow-normal-state-keymap
-    ("0" . sk:meow-digit-argument-or-eval)
-    ("9" . sk:meow-digit-argument-or-eval)
-    ("8" . sk:meow-digit-argument-or-eval)
-    ("7" . sk:meow-digit-argument-or-eval)
-    ("6" . sk:meow-digit-argument-or-eval)
-    ("5" . sk:meow-digit-argument-or-eval)
-    ("4" . sk:meow-digit-argument-or-eval)
-    ("3" . sk:meow-digit-argument-or-eval)
-    ("2" . sk:meow-digit-argument-or-eval)
-    ("1" . sk:meow-digit-argument-or-eval)
-    ("=" . indent-region)
-    ("-" . negative-argument)
-    (";" . meow-reverse)                  ;; new binding
-    ("'" . repeat)
-    ("*" . meow-block)
-    ("," . meow-inner-of-thing)
-    ("." . meow-bounds-of-thing)
-    ("<" . meow-beginning-of-thing)
-    (">" . meow-end-of-thing)
-    ;;("%" . sk:jump-to-matching-parens)
-    ("a" . meow-append)
-    ("b" . meow-back-word)
-    ("B" . meow-back-symbol)
-    ("c" . meow-join)
-    ("C" . beginning-of-line)
-    ("d" . meow-kill)
-    ("e" . meow-next-word)
-    ("E" . meow-next-symbol)
-    ("f" . meow-find)
-    ;;("g" . meow-cancel-selection)
-    ("G" . meow-grab)
-    ("h" . meow-left)
-    ("H" . meow-left-expand)
-    ("i" . meow-insert)
-    ("j" . meow-next)
-    ("J" . meow-next-expand)
-    ("k" . meow-prev)
-    ("K" . meow-prev-expand)
-    ("l" . meow-right)
-    ("L" . meow-right-expand)
-    ("m" . meow-line)
-    ("M" . meow-goto-line)
-    ("n" . meow-search)
-    ;;("O" . meow-to-block)
-    ("o" . meow-open-below)
-    ("O" . meow-open-above)
-    ("p" . sk:yank-after-point)
-    ("P" . meow-yank)
-    ;;("P" . meow-yank-pop)
-    ;;("q" . meow-quit)
-    ("Q" . meow-goto-line)
-    ("r" . meow-replace)
-    ("R" . meow-swap-grab)
-    ("s" . meow-change)
-    ;;("S" . sk:meow-surround)           ;; todo surround function
-    ("t" . meow-till)
-    ("u" . meow-undo)
-    ("U" . meow-undo-in-selection)
-    ("v" . meow-visit)                   ;; evtl rebind to / to free v bind
-    ("w" . meow-mark-word)
-    ("W" . meow-mark-symbol)
-    ("x" . meow-delete)
-    ("X" . meow-backward-delete)
-    ("y" . meow-save)
-    ("Y" . meow-sync-grab)
-    ("z" . meow-pop-selection)
-    ("SPC" . nil)
-    ("<escape>" . meow-cancel-selection))
+  (general-def meow-normal-state-keymap "SPC" nil)
+  (general-def meow-normal-state-keymap
+    "0" 'sk:meow-digit-argument-or-eval
+    "9" 'sk:meow-digit-argument-or-eval
+    "8" 'sk:meow-digit-argument-or-eval
+    "7" 'sk:meow-digit-argument-or-eval
+    "6" 'sk:meow-digit-argument-or-eval
+    "5" 'sk:meow-digit-argument-or-eval
+    "4" 'sk:meow-digit-argument-or-eval
+    "3" 'sk:meow-digit-argument-or-eval
+    "2" 'sk:meow-digit-argument-or-eval
+    "1" 'sk:meow-digit-argument-or-eval
+    "=" 'indent-region
+    "-" 'negative-argument
+    "." 'repeat
+    "*" 'meow-block
+    "<" 'meow-beginning-of-thing
+    ">" 'meow-end-of-thing
+    ";" 'meow-reverse
+    ;;"%" 'sk:jump-to-matching-parens
+    "a" 'meow-append
+    "A" 'meow-bounds-of-thing
+    "b" 'meow-back-word
+    "B" 'meow-back-symbol
+    "c" 'meow-join
+    "C" 'beginning-of-line
+    "d" 'meow-kill
+    "e" 'meow-next-word
+    "E" 'meow-next-symbol
+    "f" 'meow-find
+    "G" 'meow-grab
+    "h" 'meow-left
+    "H" 'meow-left-expand
+    "i" 'meow-insert
+    "I" 'meow-inner-of-thing
+    "j" 'meow-next
+    "J" 'meow-next-expand
+    "k" 'meow-prev
+    "K" 'meow-prev-expand
+    "l" 'meow-right
+    "L" 'meow-right-expand
+    "m" 'meow-line
+    "M" 'meow-goto-line
+    "n" 'meow-search
+    "o" 'meow-open-below
+    "O" 'meow-open-above
+    "p" 'sk:yank-after-point
+    "P" 'meow-yank
+    "r" 'meow-replace
+    "R" 'meow-swap-grab
+    "s" 'meow-change
+    ;;"S" 'sk:meow-surround           ;; todo surround function
+    "t" 'meow-till
+    "u" 'meow-undo
+    "U" 'meow-undo-in-selection
+    "v" 'meow-visit
+    "w" 'meow-mark-word
+    "W" 'meow-mark-symbol
+    "x" 'meow-delete
+    "X" 'meow-backward-delete
+    "y" 'meow-save
+    "Y" 'meow-sync-grab
+    "z" 'meow-pop-selection
+    "<escape>" 'meow-cancel-selection)
     
   (meow-global-mode 1))
   
