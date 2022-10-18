@@ -16,3 +16,9 @@
  "h f" 'describe-function
  "h v" 'describe-variable
  "h k" 'describe-key)
+
+(general-def help-mode-map
+  "h" 'meow-left
+  "l" 'meow-right
+  "n" 'help-go-forward
+  "p" 'help-go-back)
