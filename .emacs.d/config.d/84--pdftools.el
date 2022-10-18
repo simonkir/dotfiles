@@ -44,18 +44,17 @@
     "H"       'pdf-view-fit-height-to-window
     "="       'sk:pdf-view-fit)
 
-  ;;(general-def-leader :predicate '(derived-mode-p 'pdf-view-mode)
-  ;;  "SPC SPC w" 'pdf-annot-add-squiggly-markup-annotation
-  ;;  "SPC SPC h" 'pdf-annot-add-highlight-markup-annotation
-  ;;  "SPC SPC s" 'pdf-annot-add-strikethrough-markup-annotation
-  ;;  "SPC SPC u" 'pdf-annot-add-underline-markup-annotation
-  ;;  "SPC SPC H" 'pdf-annot-add-markup-annotation
-  ;;  "SPC SPC t" 'pdf-annot-add-text-annotation
-  ;;  "SPC SPC d" 'pdf-annot-delete
+  (general-def-localleader pdf-view-mode-map
+    "w" 'pdf-annot-add-squiggly-markup-annotation
+    "h" 'pdf-annot-add-highlight-markup-annotation
+    "s" 'pdf-annot-add-strikethrough-markup-annotation
+    "u" 'pdf-annot-add-underline-markup-annotation
+    "H" 'pdf-annot-add-markup-annotation
+    "t" 'pdf-annot-add-text-annotation
+    "d" 'pdf-annot-delete
 
-  ;;  "SPC SPC c" (lambda () (interactive) (pdf-view-redisplay))
-  ;;  "SPC SPC m" 'pdf-view-midnight-minor-mode))
-  )
+    "c" (lambda () (interactive) (pdf-view-redisplay))
+    "m" 'pdf-view-midnight-minor-mode))
     
 
 
