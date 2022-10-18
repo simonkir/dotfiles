@@ -7,15 +7,17 @@
 
 
 
+(setq sklatex--init-done nil)
+
 (define-minor-mode sklatex-mode
   "skLaTeX mode"
   :lighter " skLaTeX"
   :keymap (make-sparse-keymap)
-  (if sklatex-mode
-      (progn
-        (sklatex-activate-newline-keybinds)
-        (sklatex-activate-alignment-keybinds-equality)
-        (sklatex-activate-subscript-conversion))))
+  (unless sklatex--init-done
+    (setq sklatex--init-done t)
+    (sklatex-activate-newline-keybinds)
+    (sklatex-activate-alignment-keybinds-equality)
+    (sklatex-activate-subscript-conversion)))
 
 
 
@@ -31,103 +33,82 @@
 
 ; linebreak ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex-insert-linebreak ()
-  (interactive)
-  (if (sklatex-in-latex-p)
-      (progn
-        (unless (eq ?\s (char-before (point)))
-          (insert " "))
-        (insert "\\\\\n  "))
-    (cond ((derived-mode-p 'org-mode) (org-return))
-          ((derived-mode-p 'latex-mode) (TeX-newline))
-          (t (newline)))))
-
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
-  (general-def 'insert sklatex-mode-map
-    "RET" 'sklatex-insert-linebreak)
+  (setq TeX-newline-function 'electric-indent-just-newline)
+  (add-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
   (message "sklatex: newline keybinds activated"))
 
 (defun sklatex-deactivate-newline-keybinds ()
   (interactive)
-  (general-def 'insert sklatex-mode-map
-    "RET" nil)
+  (setq TeX-newline-function 'newline)
+  (remove-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
   (message "sklatex: newline keybinds deactivated"))
 
+(defun sklatex--insert-newline ()
+  (delete-horizontal-space)
+  (delete-backward-char 1)
+  (unless (eq ?\s (char-before (point)))
+    (insert " "))
+  (insert "\\\\\n  "))
+
+(defun sklatex-try-newline-conversion ()
+  (when (and (sklatex-in-latex-p)
+             (bolp)
+             (looking-at-p "$"))
+    (sklatex--insert-newline)))
 
 
 
 ; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sklatex--insert-aligned-char (char trailing-alignment)
-  (if (sklatex-in-latex-p)
-      (progn
-        (let (point-bol dummyvar)
-          (save-excursion
-            (beginning-of-line)
-            (setq point-bol (point)))
-          (dotimes (dummyvar (- 4 (- (point) point-bol)))
-            (insert " ")))
-        (insert (concat "&" char))
-        (if trailing-alignment
-            (insert "&")))
-    (insert char)))
+(setq sklatex-aligned-symbols '("=" ">" "<" "\\\\leq" "\\\\geq" "\\\\rightleftharpoons" "\\\\longrightarrow" "\\\\longleftarrow"))
+
+(defun sklatex--indent-for-symbol ()
+  (let (symbol-length
+        (point-eos (point)))
+    (sklatex--goto-beginning-of-symbol)
+    (setq symbol-length (- point-eos (point)))
+    (let ((point-bol (save-excursion (beginning-of-line) (point)))
+          (dummyvar nil))
+      (let ((indentation-depth (- 4 (- (point) point-bol))))
+        (dotimes (dummyvar indentation-depth)
+          (insert " "))))
+    (forward-char symbol-length)))
+
+(defun sklatex--goto-beginning-of-symbol ()
+  (re-search-backward "^\\| ")
+  (when (looking-at " ")
+    (forward-char)))
+
+(defun sklatex--insert-alignment-around-symbol ()
+  (save-excursion
+    (sklatex--goto-beginning-of-symbol)
+    (insert "&"))
+  (insert "&"))
+
+(defun sklatex-try-symbol-alignment ()
+  (interactive)
+  (when (sklatex-in-latex-p)
+    (let ((do-align nil))
+      (save-excursion
+        (sklatex--goto-beginning-of-symbol)
+        (dolist (element sklatex-aligned-symbols)
+          (when (looking-at-p element)
+            (setq do-align t))))
+      (when do-align
+        (sklatex--indent-for-symbol)
+        (sklatex--insert-alignment-around-symbol)))))
 
 (defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)
-  (general-def 'insert sklatex-mode-map
-    "|" '(lambda () (interactive) (sklatex--insert-aligned-char "|" nil))
-    "=" '(lambda () (interactive) (sklatex--insert-aligned-char "=" t))
-    "<" '(lambda () (interactive) (sklatex--insert-aligned-char "<" t))
-    ">" '(lambda () (interactive) (sklatex--insert-aligned-char ">" t)))
-  (message "sklatex: equality alignment keybinds activated"))
+  (add-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
+  (message "sklatex: alignment keybinds activated"))
 
 (defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
-  (general-def 'insert sklatex-mode-map
-    "|" nil
-    "=" nil
-    "<" nil
-    ">" nil)
-  (message "sklatex: equality alignment keybinds deactivated"))
-
-
-
-; matricies ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sklatex-activate-alignment-keybinds-matrix ()
-  (interactive)
-  (general-def 'insert sklatex-mode-map
-    "SPC" '(lambda () (interactive) (insert " & "))
-    "S-SPC" '(lambda () (interactive) (insert " ")))
-  (message "sklatex: matrix alignment keybinds activated"))
-
-(defun sklatex-deactivate-alignment-keybinds-matrix ()
-  (interactive)
-  (general-def 'insert sklatex-mode-map
-    "SPC" nil
-    "S-SPC" nil)
-  (message "sklatex: matrix alignment keybinds activated"))
-
-
-
-; all ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sklatex-deactivate-alignment-keybinds-all ()
-  (interactive)
-  (sklatex-deactivate-alignment-keybinds-equality)
-  (sklatex-deactivate-alignment-keybinds-matrix)
-  (message "sklatex: all alignment keybinds deactivated"))
-
-
-
-; escape binds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(general-def 'insert sklatex-mode-map
-  "C-|" '(lambda () (interactive) (insert "|"))
-  "C-=" '(lambda () (interactive) (insert "="))
-  "C-<" '(lambda () (interactive) (insert "<"))
-  "C->" '(lambda () (interactive) (insert ">")))
+  (remove-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
+  (message "sklatex: alignment keybinds deactivated"))
 
 
 
@@ -150,17 +131,6 @@
     (right-char)
     (delete-char 1)))
 
-(defun sklatex-delete-preceding-subscript ()
-  "user-invoked command to delete unwanted subscript that was inserted automatically
-
-not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
-  (interactive)
-  (when (sklatex-in-latex-p)
-    (left-char 4)
-    (delete-char 2)
-    (right-char)
-    (delete-char 1)))
-
 (defun sklatex-try-subscript-conversion ()
   "determine which subscript conversion should be done and execute said conversion"
   (interactive)
@@ -172,6 +142,8 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
          ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method '(sklatex--input-delete-subscript)))
          ((looking-at "$?[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
       (eval conversion-method))))
+
+
 
 (defun sklatex-activate-subscript-conversion ()
   (interactive)
@@ -185,23 +157,48 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 
 
 
+; removing sklatex-stuff  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sklatex--delete-alignment-operators ()
+  (unless (looking-at-p "&")
+    (re-search-backward "&"))
+  (delete-char 1)
+  (re-search-backward "&")
+  (delete-char 1))
+
+(defun sklatex--delete-single-subscript ()
+  "user-invoked command to delete unwanted subscript that was inserted automatically
+
+not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
+  (re-search-backward "_")
+  (delete-char 2)
+  (right-char)
+  (delete-char 1))
+
+(defun sklatex-remove-effect-at-point ()
+  (interactive)
+  (save-excursion
+    (left-char)
+    (cond
+     ((looking-at-p "&") (sklatex--delete-alignment-operators))
+     ((looking-at-p "}") (sklatex--delete-single-subscript)))))
+
+(general-def sklatex-mode-map
+  "C-s" 'sklatex-remove-effect-at-point)
+
+
+
 ; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-dispatch (key)
   (interactive "k")
   (cond ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
-        ((string= key "e") (sklatex-deactivate-alignment-keybinds-equality))
-        ((string= key "m") (sklatex-activate-alignment-keybinds-matrix))
-        ((string= key "M") (sklatex-deactivate-alignment-keybinds-matrix))
-        ((string= key "K") (sklatex-deactivate-alignment-keybinds-all))
+        ((string= key "E") (sklatex-deactivate-alignment-keybinds-equality))
         ((string= key "n") (sklatex-activate-newline-keybinds))
         ((string= key "N") (sklatex-deactivate-newline-keybinds))
         ((string= key "s") (sklatex-activate-subscript-conversion))
         ((string= key "S") (sklatex-deactivate-subscript-conversion))
         (t (message "%s: unsupported key" key))))
-
-(general-def 'insert sklatex-mode-map
-  "C-s" 'sklatex-delete-preceding-subscript)
 
 
 

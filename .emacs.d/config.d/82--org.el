@@ -19,6 +19,9 @@
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
 
+  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?< "@")))
+  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?> "@")))
+
   (add-hook 'org-mode-hook 'org-num-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'org-toggle-pretty-entities)

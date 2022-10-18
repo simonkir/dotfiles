@@ -38,16 +38,16 @@
 
 
 
-;;(use-package sklatex
-;;  :ensure nil
-;;  :hook
-;;  (LaTeX-mode . sklatex-mode)
-;;  (org-mode . sklatex-mode)
-;;
-;;  :config
-;;  (general-def-leader :predicate '(or (derived-mode-p 'org-mode) (derived-mode-p 'latex-mode))
-;;    "SPC SPC k" 'sklatex-dispatch
-;;    "SPC SPC K" 'sklatex-mode))
+(use-package sklatex
+  :ensure nil
+  :hook
+  (LaTeX-mode . sklatex-mode)
+  (org-mode . sklatex-mode)
+
+  :config
+  (general-def-localleader '(org-mode-map LaTeX-mode-map)
+    "k" 'sklatex-dispatch
+    "K" 'sklatex-mode))
 
 
 
@@ -69,9 +69,9 @@
         '((?F ("\\Phi"))
           (?w ("\\omega"))
           (?X ("\\xi"))
-          (?- ("\\leftrightarrow" "\\Leftrightarrow" "&\\rightleftharpoons&"))
-          (?> ("\\rightarrow" "\\Rightarrow" "&\\longrightarrow&"))
-          (?< ("\\leftarrow" "\\Leftarrow" "&\\longleftarrow&"))
+          (?- ("\\leftrightarrow" "\\Leftrightarrow" "\\rightleftharpoons"))
+          (?> ("\\rightarrow" "\\Rightarrow" "\\longrightarrow"))
+          (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
           (?| ("\\lor" "\\mapsto" "\\longmapsto"))
           (?/ ("\\lor" "" ""))
           (?& ("\\land" "\\wedge" ""))
