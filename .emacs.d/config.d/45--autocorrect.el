@@ -26,28 +26,13 @@
 
 
 
-(defun sk:org-remove-empty-bullet ()
-  "Remove empty org bullet after 'M-RET RET' in insert mode, or 'o RET' in normal mode"
-  (interactive)
-  (save-excursion
-    (forward-line -1)
-    (beginning-of-line)
-    (when (and (looking-at "^\\( \\|\\t\\)*\\(-\\|\\+\\|\\*\\|[[:digit:]]+\\.?)?\\)\\s-*$")
-               (not (sklatex-in-latex-p)))
-      (kill-line)
-      (delete-horizontal-space))))
-
-
-
 (define-minor-mode sk:autocorrect-mode nil
   :init-value nil
   :lighter (" AC")
   (if sk:autocorrect-mode
       (progn (add-hook 'post-self-insert-hook #'sk:dcaps-to-scaps nil 'local)
              (add-hook 'post-self-insert-hook #'sk:dspace-to-sspace nil 'local)
-             (add-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet nil 'local)
              (message "sk:autocorrect-mode activated"))
     (progn (remove-hook 'post-self-insert-hook #'sk:dcaps-to-scaps 'local)
            (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local)
-           (remove-hook 'post-self-insert-hook #'sk:org-remove-empty-bullet 'local)
            (message "sk:autocorrect-mode deactivated"))))

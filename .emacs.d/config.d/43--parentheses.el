@@ -18,7 +18,6 @@
 
   (add-to-list 'electric-pair-pairs '(8218 . 8216))  ;; ‚‘
   (add-to-list 'electric-pair-pairs '(8222 . 8220))) ;; „“
-  
 
 
 

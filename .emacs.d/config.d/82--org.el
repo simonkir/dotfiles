@@ -180,16 +180,20 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;;(defun meow-org-open-below ()
-  ;;  (interactive)
-  ;;  (cond ((org-at-table-p)
-  ;;         (org-table-insert-row '(4))
-  ;;         (meow-insert))
-  ;;        ((and (org-at-item-p)
-  ;;              (progn (end-of-visible-line)
-  ;;                     (org-insert-item (org-at-item-checkbox-p))))
-  ;;         (meow-insert))
-  ;;        (t (meow-open-below))))
+  (defun sk:org-return ()
+    (interactive)
+    (cond
+     ((org-at-table-p) (org-table-insert-row '(4)))
+     ((org-in-item-p)
+      (if (save-excursion
+            (beginning-of-line)
+            (org-element-property :contents-begin (org-element-context)))
+          (org-insert-item (org-at-item-checkbox-p))
+        (delete-region (line-beginning-position) (line-end-position))
+        (org-return)))
+     (t (org-return))))
+
+  
   
   (general-def-localleader org-mode-map
     "-" 'org-ctrl-c-minus ;; separator line in table
@@ -208,6 +212,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   ;;  "g K" 'org-previous-visible-heading)
 
   (general-def org-mode-map
+    "RET" 'sk:org-return
     "M-h" 'org-metaleft
     "M-H" 'org-shiftmetaleft
     "M-j" 'org-metadown
