@@ -69,6 +69,15 @@
             (meow-expand digit)
           (call-interactively 'meow-digit-argument)))))
 
+  (defun sk:toggle-case-after-point ()
+    (interactive)
+    (let* ((p (point))
+           (letter (char-after p))
+           (upcased (eq letter (upcase letter)))
+           (f (if upcased 'downcase-region 'upcase-region)))
+      (funcall f p (+ 1 p))
+      (forward-char)))
+
   (defun sk:yank-after-point ()
     (interactive)
     (save-excursion
@@ -84,16 +93,13 @@
 ;;            (setq method 'backward-sexp)
 ;;          (setq method 'forward-sexp)))
 ;;      (call-intractively method)))
-  
+
 
 
   (general-def meow-motion-state-keymap
     "j"   'meow-next
     "k"   'meow-prev)
 
-  ;;(general-def meow-keypad-state-keymap
-  ;;  "SPC" nil)
-  
   (general-def meow-normal-state-keymap
     "0" 'sk:meow-digit-argument-or-eval
     "9" 'sk:meow-digit-argument-or-eval
@@ -105,6 +111,7 @@
     "3" 'sk:meow-digit-argument-or-eval
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
+    "~" 'sk:toggle-case-after-point
     "=" 'indent-region
     "-" 'negative-argument
     "." 'repeat
@@ -123,6 +130,7 @@
     "e" 'meow-next-word
     "E" 'meow-next-symbol
     "f" 'meow-find
+    "g" nil
     "G" 'meow-grab
     "h" 'meow-left
     "H" 'meow-left-expand
@@ -147,12 +155,13 @@
     ;;"S" 'sk:meow-surround           ;; todo surround function
     "t" 'meow-till
     "u" 'meow-undo
-    "U" 'meow-undo-in-selection
+    "U" 'undo-redo
     "v" 'meow-visit
     "w" 'meow-mark-word
     "W" 'meow-mark-symbol
     "x" 'meow-delete
     "X" 'meow-backward-delete
+    "=" 'indent-region
     "y" 'meow-save
     "Y" 'meow-sync-grab
     "z" 'meow-pop-selection

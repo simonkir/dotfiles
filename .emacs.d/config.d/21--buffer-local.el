@@ -37,7 +37,7 @@
 
 
 (use-package avy
-  :general (:keymaps 'meow-normal-state-keymap ":" 'avy-goto-char-timer))
+  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
 
 
 
