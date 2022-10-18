@@ -209,15 +209,14 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     "h" 'org-toggle-heading
     "t" 'org-todo)
 
-  ;;(general-def meow-normal-state-keymap :predicate '(derived-mode-p 'org-mode)
-  ;;  "RET" 'org-ctrl-c-ctrl-c
-  ;;  "g j" 'org-forward-element
-  ;;  "g k" 'org-backward-element
-  ;;  "g J" 'org-next-visible-heading
-  ;;  "g K" 'org-previous-visible-heading)
-
   (general-def org-mode-map
     "RET" 'sk:org-return
+
+    "M-<prior>" 'org-backward-element
+    "M-<next>"  'org-forward-element
+    "C-<prior>" 'org-previous-visible-heading
+    "C-<next>"  'org-next-visible-heading
+     
     "M-h" 'org-metaleft
     "M-H" 'org-shiftmetaleft
     "M-j" 'org-metadown
