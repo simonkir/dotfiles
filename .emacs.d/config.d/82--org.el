@@ -19,6 +19,7 @@
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
 
+  ;; prevent < and > from being interpreted as delimiters
   (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?< "@")))
   (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?> "@")))
 
@@ -147,6 +148,15 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (setq org-confirm-babel-evaluate nil)
   (setq org-edit-src-content-indentation 0)
 
+  (defun sk:org-babel-kill-session-at-point ()
+    (interactive)
+    (kill-buffer (concat "*" (concat (nth 0 (org-babel-get-src-block-info)) "*"))))
+
+  (defun sk:org-babel-eval-with-new-session ()
+    (interactive)
+    (sk:org-babel-kill-session-at-point)
+    (org-ctrl-c-ctrl-c))
+
   (defun sk:leader-e ()
     (interactive)
     (if (derived-mode-p 'org-mode)
@@ -159,15 +169,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     (when (derived-mode-p 'org-mode)
       (let ((org-src-window-setup 'split-window-right))
         (org-edit-special))))
-
-  (defun sk:org-babel-kill-session-at-point ()
-    (interactive)
-    (kill-buffer (concat "*" (concat (nth 0 (org-babel-get-src-block-info)) "*"))))
-
-  (defun sk:org-babel-eval-with-new-session ()
-    (interactive)
-    (sk:org-babel-kill-session-at-point)
-    (org-ctrl-c-ctrl-c))
 
 
 
@@ -184,6 +185,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:org-return ()
+    "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
     (interactive)
     (cond
      ((org-at-table-p) (org-table-insert-row '(4)))

@@ -13,6 +13,9 @@
   "skLaTeX mode"
   :lighter " skLaTeX"
   :keymap (make-sparse-keymap)
+
+  ;; only activate everything once at startup and not on a per-buffer basis
+  ;; this way, everything activates / deactivates globally
   (unless sklatex--init-done
     (setq sklatex--init-done t)
     (sklatex-activate-newline-keybinds)
@@ -24,6 +27,7 @@
 ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-in-latex-p ()
+  "equivalent to `texmathp', but also works with latex-bocks in org-mode"
   (cond
    ((derived-mode-p 'latex-mode) (texmathp))
    ((derived-mode-p 'org-mode) (eq (car (org-element-context)) 'latex-environment))
@@ -176,6 +180,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   (delete-char 1))
 
 (defun sklatex-remove-effect-at-point ()
+  "depending on the previous character, remove effects added by sklatex"
   (interactive)
   (save-excursion
     (left-char)
@@ -191,6 +196,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 ; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-dispatch (key)
+  "control which sklatex effects are active"
   (interactive "k")
   (cond ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
         ((string= key "E") (sklatex-deactivate-alignment-keybinds-equality))

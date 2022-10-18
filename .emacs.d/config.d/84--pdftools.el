@@ -15,6 +15,7 @@
 
 
   (defun sk:pdf-view-fit ()
+    "fits pdf into window (alternating between fit-height and fit-width)"
     (interactive)
     (if (eq pdf-view-display-size 'fit-height)
         (pdf-view-fit-width-to-window)
@@ -40,6 +41,7 @@
     "<prior>" 'image-bob
     "<next>"  'image-eob
     
+    "M"       'pdf-view-goto-page
     "W"       'pdf-view-fit-width-to-window
     "H"       'pdf-view-fit-height-to-window
     "="       'sk:pdf-view-fit)

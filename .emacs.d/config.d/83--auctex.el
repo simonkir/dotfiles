@@ -11,9 +11,9 @@
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray\*" env-on)))
 
 
-
+  
   :config
-  (setq TeX-auto-save  t)
+  (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
@@ -24,7 +24,7 @@
   ; output / viewing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-mode  t)
+  (setq TeX-source-correlate-mode t)
   (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
 

@@ -13,6 +13,9 @@
 
 
 
+;; meow behaves weridly without these deifinitions
+;; see variable-help for details
+
 (setq meow--kbd-forward-char "C-x f")
 (setq meow--kbd-backward-char "C-x b")
 (setq meow--kbd-yank "C-x y")

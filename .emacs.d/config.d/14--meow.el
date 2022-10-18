@@ -70,6 +70,7 @@
           (call-interactively 'meow-digit-argument)))))
 
   (defun sk:toggle-case-after-point ()
+    "toggles case of letter after point / below cursor. equivalent to vim ~ key"
     (interactive)
     (let* ((p (point))
            (letter (char-after p))
@@ -130,7 +131,7 @@
     "e" 'meow-next-word
     "E" 'meow-next-symbol
     "f" 'meow-find
-    "g" nil
+    "g" nil                             ;; reserved for avy
     "G" 'meow-grab
     "h" 'meow-left
     "H" 'meow-left-expand
@@ -152,7 +153,7 @@
     "r" 'meow-replace
     "R" 'meow-swap-grab
     "s" 'meow-change
-    ;;"S" 'sk:meow-surround           ;; todo surround function
+    ;;"S" 'sk:meow-surround             ;; todo surround function
     "t" 'meow-till
     "u" 'meow-undo
     "U" 'undo-redo

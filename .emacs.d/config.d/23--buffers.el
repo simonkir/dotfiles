@@ -19,6 +19,7 @@
 (setq sk:ignored-buffers-regexp "\\(^\\s-*\\*+\\)\\|\\(^magit\\)\\|\\(^\\s-*tq-temp-epdfinfo\\)")
 
 (defun sk:buffer-list ()
+  "returns buffer-list without unimportant buffers (specified in `sk:ignored-buffers-regexp')"
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
     (dolist (element buffers)
       (when (string-match-p sk:ignored-buffers-regexp element)
