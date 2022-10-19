@@ -55,6 +55,18 @@
           (?p . paragraph)
           (?l . line)))
 
+  ;;(defun sk:meow-surround ()
+  ;;  (interactive)
+  ;;  (when meow--selection
+  ;;    (let ((thing (read-char))
+  ;;          (beg (region-beginning))
+  ;;          (end (+ 1 (region-end))))
+  ;;      (save-excursion
+  ;;        (goto-char beg)
+  ;;        (insert thing)
+  ;;        (goto-char end)
+  ;;        (insert thing)))))
+  
 
 
   ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -120,6 +132,7 @@
     "<" 'meow-beginning-of-thing
     ">" 'meow-end-of-thing
     ";" 'meow-reverse
+    ":" 'recenter-top-bottom 
     ;;"%" 'sk:jump-to-matching-parens
     "a" 'meow-append
     "A" 'meow-bounds-of-thing
