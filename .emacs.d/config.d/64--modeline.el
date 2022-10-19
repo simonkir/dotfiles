@@ -12,18 +12,30 @@
     (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
-    (set-face-attribute 'telephone-line-evil            nil :background "#282c34" :foreground "#bbc2cf")
+    (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b")
+    
+    (set-face-attribute 'telephone-line-evil            nil :background "#51afef" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-evil-emacs      nil :background "#ecbe7b" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-insert     nil :background "#98be65" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
-    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
-    (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b"))
+    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34"))
 
   (sk:mode-line-update-colors)
 
 
+
+  (telephone-line-defsegment sk:meow-state-segment ()
+    (when meow-global-mode
+      (cond
+       (meow-insert-mode
+        (propertize "I" 'face 'telephone-line-evil-insert))
+       ((and meow-normal-mode (not meow--selection)) "N")
+       ((and meow-normal-mode meow--selection) "V")
+       (meow-motion-mode "M")
+       (meow-keypad-mode "K")
+       (meow-beacon-mode "B"))))
 
   (telephone-line-defsegment sk:tl-vc-file-segment ()
     (if (buffer-file-name)
@@ -78,7 +90,7 @@
               (format "%s" (current-column))))))
 
   (setq telephone-line-lhs
-          '((evil   . (telephone-line-evil-tag-segment))
+          '((evil   . (sk:meow-state-segment))
             (accent . (sk:tl-vc-file-segment
                        telephone-line-process-segment))
             (nil    . (sk:tl-buffer-modified-segment
