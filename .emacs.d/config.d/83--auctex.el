@@ -60,6 +60,8 @@
   (setq cdlatex-math-symbol-prefix ?#)
 
   :config
+  (advice-add 'cdlatex-math-symbol :after '(lambda () (run-hooks 'post-self-insert-hook)))
+  
   (general-def org-cdlatex-mode-map
     "$" 'cdlatex-dollar)
 

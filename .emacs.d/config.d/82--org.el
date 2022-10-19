@@ -184,6 +184,8 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  (advice-add 'org-return :after '(lambda () (run-hooks 'post-self-insert-hook)))
+
   (defun sk:org-return ()
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
     (interactive)
