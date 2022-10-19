@@ -7,20 +7,26 @@
 
 
 
-(setq sklatex--init-done nil)
-
 (define-minor-mode sklatex-mode
   "skLaTeX mode"
   :lighter " skLaTeX"
   :keymap (make-sparse-keymap)
+  (when sklatex-mode
+    (message "sklatex-mode enabled")
+    (add-hook 'post-self-insert-hook 'sklatex-try-newline-conversion nil 'local)
+    (add-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment nil 'local)
+    (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion nil 'local))
+  (unless sklatex-mode
+    (message "sklatex-mode disabled")
+    (remove-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
+    (remove-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
+    (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)))
 
-  ;; only activate everything once at startup and not on a per-buffer basis
-  ;; this way, everything activates / deactivates globally
-  (unless sklatex--init-done
-    (setq sklatex--init-done t)
-    (sklatex-activate-newline-keybinds)
-    (sklatex-activate-alignment-keybinds-equality)
-    (sklatex-activate-subscript-conversion)))
+(defun sklatex-default-setup ()
+  (interactive)
+  (sklatex-activate-newline-keybinds)
+  (sklatex-activate-alignment-keybinds-equality)
+  (sklatex-activate-subscript-conversion))
 
 
 
@@ -40,13 +46,13 @@
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
   (setq TeX-newline-function 'electric-indent-just-newline)
-  (add-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
+  (setq sklatex--do-newline-conversion t)
   (message "sklatex: newline keybinds activated"))
 
 (defun sklatex-deactivate-newline-keybinds ()
   (interactive)
   (setq TeX-newline-function 'newline)
-  (remove-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
+  (setq sklatex--do-newline-conversion nil)
   (message "sklatex: newline keybinds deactivated"))
 
 (defun sklatex--insert-newline ()
@@ -57,8 +63,10 @@
   (insert "\\\\\n  "))
 
 (defun sklatex-try-newline-conversion ()
-  (when (and (sklatex-in-latex-p)
+  (when (and sklatex--do-newline-conversion
+             (sklatex-in-latex-p)
              (bolp)
+             (save-excursion (previous-line) (beginning-of-line) (not (looking-at "\\\\begin")))
              (looking-at-p "$"))
     (sklatex--insert-newline)))
 
@@ -92,8 +100,8 @@
   (insert "&"))
 
 (defun sklatex-try-symbol-alignment ()
-  (interactive)
-  (when (sklatex-in-latex-p)
+  (when (and sklatex--do-symbol-alignment
+             (sklatex-in-latex-p))
     (let ((do-align nil))
       (save-excursion
         (sklatex--goto-beginning-of-symbol)
@@ -106,12 +114,12 @@
 
 (defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)
-  (add-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
+  (setq sklatex--do-symbol-alignment t)
   (message "sklatex: alignment keybinds activated"))
 
 (defun sklatex-deactivate-alignment-keybinds-equality ()
   (interactive)
-  (remove-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
+  (setq sklatex--do-symbol-alignment nil)
   (message "sklatex: alignment keybinds deactivated"))
 
 
@@ -137,8 +145,8 @@
 
 (defun sklatex-try-subscript-conversion ()
   "determine which subscript conversion should be done and execute said conversion"
-  (interactive)
-  (when (sklatex-in-latex-p)
+  (when (and sklatex--do-subscript-conversion
+             (sklatex-in-latex-p))
     (let (conversion-method)
       (save-excursion
         (left-char 3)
@@ -151,12 +159,12 @@
 
 (defun sklatex-activate-subscript-conversion ()
   (interactive)
-  (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)
+  (setq sklatex--do-subscript-conversion t)
   (message "sklatex: automatic subscript activated"))
 
 (defun sklatex-deactivate-subscript-conversion ()
   (interactive)
-  (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)
+  (setq sklatex--do-subscript-conversion nil)
   (message "sklatex: automatic subscript deactivated"))
 
 
@@ -183,6 +191,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   "depending on the previous character, remove effects added by sklatex"
   (interactive)
   (save-excursion
+    (skip-syntax-backward "-")
     (left-char)
     (cond
      ((looking-at-p "&") (sklatex--delete-alignment-operators))
@@ -198,13 +207,15 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 (defun sklatex-dispatch (key)
   "control which sklatex effects are active"
   (interactive "k")
-  (cond ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
-        ((string= key "E") (sklatex-deactivate-alignment-keybinds-equality))
-        ((string= key "n") (sklatex-activate-newline-keybinds))
-        ((string= key "N") (sklatex-deactivate-newline-keybinds))
-        ((string= key "s") (sklatex-activate-subscript-conversion))
-        ((string= key "S") (sklatex-deactivate-subscript-conversion))
-        (t (message "%s: unsupported key" key))))
+  (cond
+   ((string= key "k") (sklatex-default-setup))
+   ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
+   ((string= key "E") (sklatex-deactivate-alignment-keybinds-equality))
+   ((string= key "n") (sklatex-activate-newline-keybinds))
+   ((string= key "N") (sklatex-deactivate-newline-keybinds))
+   ((string= key "s") (sklatex-activate-subscript-conversion))
+   ((string= key "S") (sklatex-deactivate-subscript-conversion))
+   (t (message "%s: unsupported key" key))))
 
 
 
