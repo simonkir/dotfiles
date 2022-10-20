@@ -26,7 +26,6 @@
 
   ; meow-thing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;;(meow-thing-register 'latex-align  '(pair ("&") ("&"))                  '(pair ("&") ("&")))
   (meow-thing-register 'quote-gqq    '(pair ("„") ("“"))                  '(pair ("„") ("“")))
   (meow-thing-register 'quote-gq     '(pair ("‚") ("‘"))                  '(pair ("‚") ("‘")))
   (meow-thing-register 'quote-eqq    '(pair ("“") ("”"))                  '(pair ("“") ("”")))
@@ -42,32 +41,22 @@
           (?\] . square)
           (?{ . curly)
           (?} . curly)
-          ;;(?& . latex-align)
+          (?\" . string)
+          ;; latex elements          
           (?r . latex-round)
           (?s . latex-square)
           (?c . latex-curly)
+          ;; quotes
           (?„ . quote-gqq)
           (?‚ . quote-gq)
           (?\“ . quote-eqq)
           (?\‘ . quote-eq)
-          (?\" . string)
+          ;; misc
+          (?s . symbol)
+          (?. . sentence)
           (?b . buffer)
           (?p . paragraph)
           (?l . line)))
-
-  ;;(defun sk:meow-surround ()
-  ;;  (interactive)
-  ;;  (when meow--selection
-  ;;    (let ((thing (read-char))
-  ;;          (beg (region-beginning))
-  ;;          (end (+ 1 (region-end))))
-  ;;      (save-excursion
-  ;;        (goto-char beg)
-  ;;        (insert thing)
-  ;;        (goto-char end)
-  ;;        (insert thing)))))
-  
-
 
   ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -125,6 +114,8 @@
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
     "~" 'sk:toggle-case-after-point
+    "(" 'backward-sexp
+    ")" 'forward-sexp
     "=" 'indent-region
     "-" 'negative-argument
     "." 'repeat
@@ -133,7 +124,6 @@
     ">" 'meow-end-of-thing
     ";" 'meow-reverse
     ":" 'recenter-top-bottom 
-    ;;"%" 'sk:jump-to-matching-parens
     "a" 'meow-append
     "A" 'meow-bounds-of-thing
     "b" 'meow-back-word
@@ -144,7 +134,7 @@
     "e" 'meow-next-word
     "E" 'meow-next-symbol
     "f" 'meow-find
-    "g" nil                             ;; reserved for avy
+    ;;"g" ;; reserved for avy
     "G" 'meow-grab
     "h" 'meow-left
     "H" 'meow-left-expand

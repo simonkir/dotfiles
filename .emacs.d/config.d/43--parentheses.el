@@ -21,6 +21,14 @@
 
 
 
+(use-package skparens
+  :demand t
+  :config
+  (general-def meow-normal-state-keymap
+    "S" 'skparens-surround-region-with))
+
+
+
 ;;(use-package evil-surround
 ;;  :after evil
 ;;  :demand t
