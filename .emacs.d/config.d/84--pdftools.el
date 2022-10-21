@@ -24,27 +24,22 @@
 
 
   (general-def pdf-view-mode-map
-    "<up>"    'pdf-view-previous-line-or-previous-page
-    "<down>"  'pdf-view-next-line-or-next-page
-    "<left>"  'image-backward-hscroll
-    "<right>" 'image-forward-hscroll
+    "h" 'image-backward-hscroll
+    "j" 'pdf-view-next-line-or-next-page
+    "k" 'pdf-view-previous-line-or-previous-page
+    "l" 'image-forward-hscroll
     
-    "j"       '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
-    "k"       '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
-    "h"       '(lambda () (interactive) (image-backward-hscroll 10))
-    "l"       '(lambda () (interactive) (image-forward-hscroll 10))
+    "<down>"  '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
+    "<up>"    '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
+    "<left>"  '(lambda () (interactive) (image-backward-hscroll 10))
+    "<right>" '(lambda () (interactive) (image-forward-hscroll 10))
     "J"       'pdf-view-next-page
     "K"       'pdf-view-previous-page
-    
-    "<home>"  'image-bol
-    "<end>"   'image-eol
-    "<prior>" 'image-bob
-    "<next>"  'image-eob
-    
-    "M"       'pdf-view-goto-page
-    "W"       'pdf-view-fit-width-to-window
-    "H"       'pdf-view-fit-height-to-window
-    "="       'sk:pdf-view-fit)
+
+    "b" 'pdf-view-set-slice-from-bounding-box
+    "B" 'pdf-view-reset-slice
+    "M" 'pdf-view-goto-page
+    "=" 'sk:pdf-view-fit)
 
   (general-def-localleader pdf-view-mode-map
     "w" 'pdf-annot-add-squiggly-markup-annotation
@@ -62,7 +57,18 @@
 
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
-(general-def image-mode-map "R" 'image-rotate)
+(general-def image-mode-map
+  "<" nil
+  ">" nil
+  "< l" 'image-bol
+  "> l" 'image-eol
+  "< b" 'image-bob
+  "> b" 'image-eob
+
+  "W" 'image-transform-fit-to-width
+  "H" 'image-transform-fit-to-height
+    
+  "R" 'image-rotate)
 
 
 
