@@ -97,4 +97,3 @@
 
   (general-def org-mode-map
     "#" 'cdlatex-math-symbol))
-

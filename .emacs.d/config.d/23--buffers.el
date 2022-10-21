@@ -4,9 +4,6 @@
 
 (global-auto-revert-mode)
 
-;;(general-def '(normal visual) 'override
-;;  "g r" 'revert-buffer-quick)
-
 
 
 (defun sk:uniquify (base extra-string)

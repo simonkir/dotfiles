@@ -227,8 +227,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-
-
 ; export settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package ox
@@ -260,8 +258,3 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   :config
   (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "☆" "✧" "•"))
   (setq org-superstar-item-bullet-alist '((42 . "•") (43 . (?\s (Bc . Bc) ?→)) (45 . "–"))))
-
-
-
-;;(use-package evil-org
-;;  :hook (org-mode . evil-org-mode))
