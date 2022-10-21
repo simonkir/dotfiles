@@ -25,7 +25,9 @@
   :demand t
   :config
   (general-def meow-normal-state-keymap
-    "S" 'skparens-surround-region-with))
+    "%" 'skparens-change
+    "D" 'skparens-delete
+    "S" 'skparens-surround-region))
 
 
 
