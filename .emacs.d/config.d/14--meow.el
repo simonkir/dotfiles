@@ -80,25 +80,10 @@
       (funcall f p (+ 1 p))
       (forward-char)))
 
-  (defun sk:yank-after-point ()
-    (interactive)
-    (save-excursion
-      (right-char)
-      (yank)))
-
-;;  (defun sk:jump-to-matching-parens ()
-;;    (interactive)
-;;    (let (method)
-;;      (save-excursion
-;;        (left-char)
-;;        (if (looking-at-p "\\s)")
-;;            (setq method 'backward-sexp)
-;;          (setq method 'forward-sexp)))
-;;      (call-intractively method)))
-
 
 
   (general-def meow-motion-state-keymap
+    "<escape>" nil
     "j"   'meow-next
     "k"   'meow-prev)
 
@@ -151,8 +136,8 @@
     "n" 'meow-search
     "o" 'meow-open-below
     "O" 'meow-open-above
-    "p" 'sk:yank-after-point
-    "P" 'meow-yank
+    "p" 'meow-yank
+    "P" 'meow-yank-pop
     "r" 'meow-replace
     "R" 'meow-swap-grab
     "s" 'meow-change

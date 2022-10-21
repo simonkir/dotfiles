@@ -5,7 +5,7 @@
 (defun sk:maybe-visit-unsaved-buffer ()
   "searches for unsaved file-visiting buffer. if there is one, switch to it
 
-returns t of some buffers are unsaved, returns nil if all buffers are saved"
+returns t if some buffers are unsaved, returns nil if all buffers are saved"
   (interactive)
   (let (unsaved-exists)
     (dolist (element (buffer-list))
@@ -20,7 +20,7 @@ returns t of some buffers are unsaved, returns nil if all buffers are saved"
 (defun sk:soft-quit ()
   "performes an soft quit of emacs
 
-i. e. closing the terminal, unless there are unstaged changes"
+i. e. closing the terminal, unless there are unsaved changes"
   (interactive)
   (unless (sk:maybe-visit-unsaved-buffer)
     (save-buffers-kill-terminal)))
@@ -28,16 +28,25 @@ i. e. closing the terminal, unless there are unstaged changes"
 (defun sk:harsh-quit ()
   "performes an harsh quit of emacs
 
-i. e. killing all open buffers and quitting the terminal, unless there are unstaged changes"
+i. e. killing all open buffers and quitting the terminal, unless there are unsaved changes"
   (interactive)
   (unless (sk:maybe-visit-unsaved-buffer)
     (dolist (element (sk:buffer-list))
       (kill-buffer element))
     (save-buffers-kill-terminal)))
 
+(defun sk:daemon-quit ()
+  "performes an daemon quit of emacs
+
+i. e. killing the terminal, unless there are unsaved changes"
+  (interactive)
+  (unless (sk:maybe-visit-unsaved-buffer)
+    (kill-emacs)))
+
 
 
 (general-def-leader
   ;;("ESC" 'keyboard-escape-quit ;; unknown what this binding is good for
+  "!" 'sk:daemon-quit
   "q" 'sk:soft-quit
   "Q" 'sk:harsh-quit)

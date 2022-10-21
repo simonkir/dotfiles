@@ -8,6 +8,7 @@
   (setq dired-kill-when-opening-new-dired-buffer t)
 
   (general-def 'dired-mode-map
+    "i" 'dired-toggle-read-only
     "h" 'dired-up-directory
     "l" 'dired-find-file))
 

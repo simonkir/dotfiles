@@ -135,3 +135,6 @@
 
 (general-def-leader
   "t p" 'sk:toggle-pretty-mode)
+
+(general-def
+  "C-c p" 'sk:toggle-pretty-mode)
