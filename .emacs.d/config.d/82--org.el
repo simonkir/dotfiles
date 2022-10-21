@@ -95,9 +95,12 @@
 
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (defun sk:org-toggle-inline-images (beg end)
-    "toggle image previews between `beg' and `end'."
-    (let ((overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
+  (defun sk:org-toggle-inline-images ()
+    "toggle image previews in the region, if it is active, and on the current line otherwise"
+    (interactive)
+    (let* ((beg (if (region-active-p) (region-beginning) (line-beginning-position)))
+           (end (if (region-active-p) (region-end) (line-end-position)))
+           (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
           (mapc (lambda (ov)
               (delete-overlay ov)
@@ -112,27 +115,15 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     (interactive)
     (save-excursion
       (re-search-forward "\\[\\[")
-      (sk:org-toggle-inline-images-at-point)))
+      (sk:org-toggle-inline-images)))
 
-  (defun sk:org-toggle-inline-images-at-point ()
-    "toggles image previews in the current line"
-    (interactive)
-    (sk:org-toggle-inline-images (line-beginning-position) (line-end-position)))
-
-  (defun sk:org-toggle-inline-images-in-region ()
-    (interactive)
-    (sk:org-toggle-inline-images (region-beginning) (region-end)))
-
-
+  
 
   (general-def-localleader org-mode-map
-    "i i" 'sk:org-toggle-inline-images-at-point
+    "i i" 'sk:org-toggle-inline-images
     "i b" 'org-toggle-inline-images
     "i B" 'org-remove-inline-images
     "i r" 'org-redisplay-inline-images)
-
-  ;;(general-def 'normal org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-at-point)
-  ;;(general-def 'visual org-mode-map "SPC SPC i i" 'sk:org-toggle-inline-images-in-region)
 
 
 
@@ -213,6 +204,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   (general-def org-mode-map
     "RET" 'sk:org-return
+    "M-RET" 'org-ctrl-c-ctrl-c
 
     "M-<prior>" 'org-backward-element
     "M-<next>"  'org-forward-element
