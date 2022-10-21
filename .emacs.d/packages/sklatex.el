@@ -55,20 +55,28 @@
   (setq sklatex--do-newline-conversion nil)
   (message "sklatex: newline keybinds deactivated"))
 
-(defun sklatex--insert-newline ()
+(defun sklatex--insert-newline-with-\\ ()
   (delete-horizontal-space)
   (delete-backward-char 1)
   (unless (eq ?\s (char-before (point)))
     (insert " "))
   (insert "\\\\\n  "))
 
+(defun sklatex--insert-newline-without-\\ ()
+  (delete-horizontal-space)
+  (delete-backward-char 1)
+  (unless (eq ?\s (char-before (point)))
+    (insert " "))
+  (insert "\n  "))
+
 (defun sklatex-try-newline-conversion ()
   (when (and sklatex--do-newline-conversion
              (sklatex-in-latex-p)
              (bolp)
-             (save-excursion (previous-line) (beginning-of-line) (not (looking-at "\\\\begin")))
              (looking-at-p "$"))
-    (sklatex--insert-newline)))
+    (if (save-excursion (previous-line) (beginning-of-line) (not (looking-at "\\\\begin\\|.*\\\\\\\\")))
+        (sklatex--insert-newline-with-\\)
+      (sklatex--insert-newline-without-\\))))
 
 
 
@@ -206,7 +214,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 
 (defun sklatex-dispatch (key)
   "control which sklatex effects are active"
-  (interactive "k")
+  (interactive "ksklatex-dispatch: (k) default setup – (e)quality keys – (n)ewline keys – (s)ubscript conversion")
   (cond
    ((string= key "k") (sklatex-default-setup))
    ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
