@@ -20,22 +20,36 @@
     (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
-    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34"))
+    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
+
+    (set-face-attribute 'meow-insert-indicator nil :inherit 'telephone-line-evil-insert)
+    (set-face-attribute 'meow-normal-indicator nil :inherit 'telephone-line-evil-normal)
+    (set-face-attribute 'meow-beacon-indicator nil :inherit 'telephone-line-evil-visual)
+    (set-face-attribute 'meow-motion-indicator nil :inherit 'telephone-line-evil-emacs)
+    (set-face-attribute 'meow-keypad-indicator nil :inherit 'telephone-line-evil-operator))
 
   (sk:mode-line-update-colors)
 
 
 
+  (defun telephone-line-modal-face (active)
+    (cond ((not active) 'mode-line-inactive)
+          ((and meow-normal-mode (region-active-p)) 'telephone-line-evil-visual)
+          (meow-normal-mode 'telephone-line-evil-normal)
+          (meow-insert-mode 'telephone-line-evil-insert)
+          (meow-motion-mode 'telephone-line-evil-emacs)
+          (meow-keypad-mode 'telephone-line-evil-operator)
+          (meow-beacon-mode 'telephone-line-evil-replace)))
+
   (telephone-line-defsegment sk:meow-state-segment ()
     (when meow-global-mode
       (cond
-       (meow-insert-mode
-        (propertize "I" 'face 'telephone-line-evil-insert))
-       ((and meow-normal-mode (not meow--selection)) "N")
-       ((and meow-normal-mode meow--selection) "V")
-       (meow-motion-mode "M")
-       (meow-keypad-mode "K")
-       (meow-beacon-mode "B"))))
+       ((and meow-normal-mode (region-active-p)) "VISUAL")
+       (meow-normal-mode "NORMAL")
+       (meow-insert-mode "INSERT")
+       (meow-motion-mode "MOTION")
+       (meow-keypad-mode "KEYPAD")
+       (meow-beacon-mode "BEACON"))))
 
   (telephone-line-defsegment sk:tl-vc-file-segment ()
     (if (buffer-file-name)
@@ -90,20 +104,20 @@
               (format "%s" (current-column))))))
 
   (setq telephone-line-lhs
-          '((evil   . (sk:meow-state-segment))
-            (accent . (sk:tl-vc-file-segment
-                       telephone-line-process-segment))
-            (nil    . (sk:tl-buffer-modified-segment
-                       sk:tl-dir-segment
-                       sk:tl-file-segment))))
+        '((evil   . (sk:meow-state-segment))
+          (accent . (sk:tl-vc-file-segment
+                     telephone-line-process-segment))
+          (nil    . (sk:tl-buffer-modified-segment
+                     sk:tl-dir-segment
+                     sk:tl-file-segment))))
 
   (setq telephone-line-rhs
-          '((nil    . (telephone-line-flycheck-segment
-                       telephone-line-misc-info-segment
-                       sk:tl-visual-mode-segment))
-            (accent . (telephone-line-major-mode-segment))
-            (evil   . (sk:tl-position-percentage-segment
-                       sk:tl-position-segment))))
+        '((nil    . (telephone-line-flycheck-segment
+                     telephone-line-misc-info-segment
+                     sk:tl-visual-mode-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil   . (sk:tl-position-percentage-segment
+                     sk:tl-position-segment))))
 
 
 
