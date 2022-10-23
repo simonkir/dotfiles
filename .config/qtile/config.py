@@ -210,7 +210,7 @@ def assign_app_group(client):
         if wm_class in list(d.values())[i]:
             group = list(d.keys())[i]
             client.togroup(group)
-            client.group.cmd_toscreen(toggle=False)
+            #client.group.cmd_toscreen(toggle=False)
 
 
    
@@ -522,6 +522,7 @@ def start_always():
 ###############################################################################
 
 # settings ####################################################################
+
 auto_fullscreen            = True
 bring_front_click          = False
 cursor_warp                = False
