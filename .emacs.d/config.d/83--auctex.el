@@ -17,6 +17,10 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
+  ;; \ character should be part of a word, so that you can operate on it in a better way
+  ;; e. g. when trying to meow-change a word like \delta
+  (add-hook 'LaTeX-mode-hook '(lambda () (modify-syntax-entry ?\\ "w")))
+  
   (add-hook 'LaTeX-mode-hook 'sk:autocorrect-mode)
 
 
@@ -76,7 +80,9 @@
           (?- ("\\leftrightarrow" "\\Leftrightarrow" "\\rightleftharpoons"))
           (?> ("\\rightarrow" "\\Rightarrow" "\\longrightarrow"))
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
-          (?| ("\\lor" "\\mapsto" "\\longmapsto"))
+          (?| ("\\mid" "\\mapsto" "\\longmapsto"))
+          (?$ ("\\mid" "" ""))
+          (?% ("\\nmid" "" ""))
           (?/ ("\\lor" "" ""))
           (?& ("\\land" "\\wedge" ""))
           (?! ("\\not" "" ""))

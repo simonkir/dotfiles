@@ -53,6 +53,8 @@
   (add-to-list 'prettify-symbols-alist '("\\left\\|" . (?‖ (Br . Bl) ?‖)))
   (add-to-list 'prettify-symbols-alist '("\\right\\|" . (?‖ (Br . Bl) ?‖)))
   (add-to-list 'prettify-symbols-alist '("\\mapsto" . (?\s (Bc . Bc) ?↦)))
+  (add-to-list 'prettify-symbols-alist '("\\mid" . (?\s (Bc . Bc) ?∣)))
+  (add-to-list 'prettify-symbols-alist '("\\nmid" . (?\s (Bc . Bc) ?∤)))
   (add-to-list 'prettify-symbols-alist '("\\rightleftharpoons" . (?\s (cl . bl) ?⟶ (bl . cl) ?⟵)))
   (add-to-list 'prettify-symbols-alist '("&\\rightleftharpoons&" . (?\s (cl . bl) ?⟶ (bl . cl) ?⟵)))
   (add-to-list 'prettify-symbols-alist '("\\longrightarrow" . "⟶"))

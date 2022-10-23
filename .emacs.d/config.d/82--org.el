@@ -23,6 +23,9 @@
   (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?< "@")))
   (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?> "@")))
 
+  ;; for doc, see 83--auctex.el
+  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?\\ "w")))
+
   (add-hook 'org-mode-hook 'org-num-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'org-toggle-pretty-entities)

@@ -9,7 +9,7 @@
   ; general settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq meow-use-cursor-position-hack     t)
-  (setq meow-expand-hint-remove-delay     2)
+  (setq meow-expand-hint-remove-delay     1.5)
   (setq meow-display-thing-help           nil)
   
   (setq meow-keypad-self-insert-undefined nil)
@@ -80,6 +80,11 @@
       (funcall f p (+ 1 p))
       (forward-char)))
 
+  (defun sk:meow-save-to-clipboard ()
+    (interactive)
+    (let ((meow-use-clipboard t))
+      (meow-save)))
+
 
 
   (general-def meow-motion-state-keymap
@@ -139,9 +144,8 @@
     "p" 'meow-yank
     "P" 'meow-yank-pop
     "r" 'meow-replace
-    "R" 'meow-swap-grab
+    ;;"R" 'meow-swap-grab
     "s" 'meow-change
-    ;;"S" 'sk:meow-surround             ;; todo surround function
     "t" 'meow-till
     "u" 'meow-undo
     "U" 'undo-redo
@@ -152,7 +156,8 @@
     "X" 'meow-backward-delete
     "=" 'indent-region
     "y" 'meow-save
-    "Y" 'meow-sync-grab
+    ;;"Y" 'meow-sync-grab
+    "Y" 'sk:meow-save-to-clipboard
     "z" 'meow-pop-selection
     "<escape>" 'meow-cancel-selection)
     
