@@ -30,6 +30,7 @@
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
+  (add-to-list 'prettify-symbols-alist '("&\\approx&" . "≈"))
   (add-to-list 'prettify-symbols-alist '("&\\geq&" . "≥"))
   (add-to-list 'prettify-symbols-alist '("&\\leq&" . "≤"))
   (add-to-list 'prettify-symbols-alist '("&|" . "|"))

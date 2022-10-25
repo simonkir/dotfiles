@@ -18,7 +18,5 @@
     "<backtab>" 'magit-section-cycle-diffs
     "<tab>" 'magit-section-toggle
     "TAB" 'magit-section-toggle
-    "g" 'nil
-    "g r" 'magit-refresh
     "x" 'magit-delete-thing
     "p" 'magit-push))
