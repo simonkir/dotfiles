@@ -6,9 +6,12 @@
   :demand t
   :config
   (defun sk:mode-line-update-colors ()
+    "set default colors of telephone-line
+
+useful when switching themes also changes the colors of the modeline"
     (interactive)
     (set-face-attribute 'mode-line                      nil :background "#202328" :foreground "#bbc2cf")
-    (set-face-attribute 'mode-line-inactive             nil :background "#282c34" :foreground "#bbc2cf")
+    (set-face-attribute 'mode-line-inactive             nil :background "#202328" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-accent-inactive nil :background "#282c34" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
@@ -20,13 +23,7 @@
     (set-face-attribute 'telephone-line-evil-normal     nil :background "#51afef" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-operator   nil :background "#46d9ff" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
-    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34")
-
-    (set-face-attribute 'meow-insert-indicator nil :inherit 'telephone-line-evil-insert)
-    (set-face-attribute 'meow-normal-indicator nil :inherit 'telephone-line-evil-normal)
-    (set-face-attribute 'meow-beacon-indicator nil :inherit 'telephone-line-evil-visual)
-    (set-face-attribute 'meow-motion-indicator nil :inherit 'telephone-line-evil-emacs)
-    (set-face-attribute 'meow-keypad-indicator nil :inherit 'telephone-line-evil-operator))
+    (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34"))
 
   (sk:mode-line-update-colors)
 

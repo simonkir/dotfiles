@@ -6,11 +6,11 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-;;(set-face-attribute 'line-number nil :foreground "#5b6268")
-(set-face-attribute 'line-number nil :foreground "#4c5259")
+(set-face-attribute 'line-number nil :foreground "#5b6268")
+;;(set-face-attribute 'line-number nil :foreground "#4c5259")
 (global-hl-line-mode 1)
 
 ;; display visual line numbers left of each buffer
 (setq display-line-numbers-type 'visual)
 (global-display-line-numbers-mode 1)
-(global-visual-line-mode)
+(global-visual-line-mode 1)
