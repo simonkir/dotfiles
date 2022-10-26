@@ -49,34 +49,31 @@ useful when switching themes also changes the colors of the modeline"
        (meow-beacon-mode "BEACON"))))
 
   (telephone-line-defsegment sk:tl-vc-file-segment ()
-    (if (buffer-file-name)
-        (let ((state (vc-state (buffer-file-name))))
-          (cond
-           ((eq state 'up-to-date) "·")
-           ((eq state 'edited) "×")
-           ((eq state 'needs-update) "u")
-           ((eq state 'needs-merge) "c")
-           (t "")))))
+    (when (buffer-file-name)
+      (let ((state (vc-state (buffer-file-name))))
+        (cond
+         ((eq state 'up-to-date) "·")
+         ((eq state 'edited) "×")
+         ((eq state 'needs-update) "u")
+         ((eq state 'needs-merge) "c")
+         (t "")))))
 
   (telephone-line-defsegment sk:tl-buffer-modified-segment ()
-    (if (and (buffer-modified-p) (not buffer-read-only) (buffer-file-name))
-        "×"
-      ""))
+    (when (and (buffer-modified-p) (not buffer-read-only) (buffer-file-name))
+      "×"))
 
   (telephone-line-defsegment sk:tl-dir-segment ()
-    (if (buffer-file-name)
-        (car (last (split-string (buffer-file-name) "/") 2))
-      ""))
+    (when (buffer-file-name)
+      (car (last (split-string (buffer-file-name) "/") 2))))
 
   (telephone-line-defsegment sk:tl-file-segment ()
     mode-line-buffer-identification)
 
   (telephone-line-defsegment sk:tl-visual-mode-segment ()
-    (if (eq evil-state 'visual)
-        (let ((beg (region-beginning))
-              (end (region-end)))
-          (format "%s/%s lines" (count-lines beg end) (count-lines beg end t)))
-      ""))
+    (when (region-active-p)
+      (let ((beg (region-beginning))
+            (end (region-end)))
+        (format "%s/%s lines" (count-lines beg end) (count-lines beg end t)))))
 
   (telephone-line-defsegment sk:tl-position-percentage-segment ()
     (let* ((current-line (cond
@@ -123,4 +120,6 @@ useful when switching themes also changes the colors of the modeline"
   (setq telephone-line-primary-right-separator    'telephone-line-identity-right)
   (setq telephone-line-secondary-right-separator  'telephone-line-identity-hollow-right)
 
+
+  
   (telephone-line-mode))

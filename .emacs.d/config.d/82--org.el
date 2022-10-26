@@ -225,7 +225,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   ;; override org default tab key behaviour
   (general-def org-mode-map
-    "<backtab>" 'sk:insert-backtab-key
     "C-#" '(lambda () (interactive) (insert "#"))))
 
 

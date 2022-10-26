@@ -27,10 +27,9 @@
   (let ((new-face (completing-read "new variable-pitch face: " sk:fonts-variable-pitch nil nil))
         (height 100))
     (set-face-attribute 'variable-pitch nil :family new-face :height height))
-  (if (eq mixed-pitch-mode t)
-      (progn
-        (mixed-pitch-mode 'toggle)
-        (mixed-pitch-mode 'toggle))))
+  (when mixed-pitch-mode
+    (mixed-pitch-mode 'toggle)
+    (mixed-pitch-mode 'toggle)))
 
 (general-def-leader
   "d f" 'sk:set-face-fixed

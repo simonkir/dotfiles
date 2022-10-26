@@ -29,6 +29,7 @@
   
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-mode t)
+  
   (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
 
@@ -66,6 +67,7 @@
   (setq cdlatex-math-symbol-prefix ?#)
 
   :config
+  ;; needed for sklatex alignment defuns
   (advice-add 'cdlatex-math-symbol :after '(lambda () (run-hooks 'post-self-insert-hook)))
   
   (general-def org-cdlatex-mode-map

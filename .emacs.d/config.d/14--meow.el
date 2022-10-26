@@ -66,7 +66,7 @@
     (let ((digit (- last-command-event ?0)))
       (if (or (< digit 0) (> digit 9))
           (message "digit not in range (digit = %s)" digit)
-        (if meow--selection
+        (if (region-active-p)
             (meow-expand digit)
           (call-interactively 'meow-digit-argument)))))
 
@@ -80,17 +80,12 @@
       (funcall f p (+ 1 p))
       (forward-char)))
 
-  (defun sk:meow-save-to-clipboard ()
-    (interactive)
-    (let ((meow-use-clipboard t))
-      (meow-save)))
-
 
 
   (general-def meow-motion-state-keymap
     "<escape>" nil
-    "j"   'meow-next
-    "k"   'meow-prev)
+    "j" 'meow-next
+    "k" 'meow-prev)
 
   (general-def meow-normal-state-keymap
     "0" 'sk:meow-digit-argument-or-eval
@@ -103,6 +98,8 @@
     "3" 'sk:meow-digit-argument-or-eval
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
+    
+    ;;"%" ;; reserved for skparens
     "~" 'sk:toggle-case-after-point
     "(" 'backward-sexp
     ")" 'forward-sexp
@@ -113,7 +110,8 @@
     "<" 'meow-beginning-of-thing
     ">" 'meow-end-of-thing
     ";" 'meow-reverse
-    ":" 'recenter-top-bottom 
+    ":" 'recenter-top-bottom
+    
     "a" 'meow-append
     "A" 'meow-bounds-of-thing
     "b" 'meow-back-word
@@ -121,9 +119,11 @@
     "c" 'meow-join
     "C" 'beginning-of-line
     "d" 'meow-kill
+    ;; "D" reserved for skparens
     "e" 'meow-next-word
     "E" 'meow-next-symbol
     "f" 'meow-find
+    ;;"F"
     ;;"g" ;; reserved for avy
     "G" 'meow-grab
     "h" 'meow-left
@@ -139,26 +139,32 @@
     "m" 'meow-line
     "M" 'meow-goto-line
     "n" 'meow-search
+    ;;"N"
     "o" 'meow-open-below
     "O" 'meow-open-above
     "p" 'meow-yank
     "P" 'meow-yank-pop
+    ;;"q" reserved for buffer-local stuff (e. g. quitting *Help* buffers)
+    ;;"Q"
     "r" 'meow-replace
-    ;;"R" 'meow-swap-grab
+    "R" 'meow-swap-grab
     "s" 'meow-change
+    ;;"S" ;; reserved for skparens
     "t" 'meow-till
-    "u" 'meow-undo
+    ;;"T"
+    "u" 'undo
     "U" 'undo-redo
     "v" 'meow-visit
+    ;;"V"
     "w" 'meow-mark-word
     "W" 'meow-mark-symbol
     "x" 'meow-delete
     "X" 'meow-backward-delete
-    "=" 'indent-region
     "y" 'meow-save
-    ;;"Y" 'meow-sync-grab
-    "Y" 'sk:meow-save-to-clipboard
+    "Y" 'meow-sync-grab
+    ;;"Y" 'clipboard-kill-ring-save
     "z" 'meow-pop-selection
+    ;;"Z"
     "<escape>" 'meow-cancel-selection)
     
   (meow-global-mode 1))

@@ -9,11 +9,12 @@
    ((eq last-command-event 'left) (call-interactively 'shrink-window-horizontally))
    ((eq last-command-event 'up) (call-interactively 'shrink-window))
    ((eq last-command-event 'down) (call-interactively 'enlarge-window))
-   ((eq last-command-event ?0) (call-interactively 'balance-windows)))
-  (message "Use <left>, <right>, <up>, <down>, 0 for further adjustment")
+   ((eq last-command-event ?0) (call-interactively 'balance-windows))
+   ((eq last-command-event ?=) (call-interactively 'balance-windows)))
+  (message "Use <left>, <right>, <up>, <down>, 0/= for further adjustment")
   (set-transient-map
    (let ((map (make-sparse-keymap)))
-     (dolist (key '(left right up down ?0))
+     (dolist (key '(left right up down ?0 ?=))
        (define-key map (vector key) (lambda () (interactive) (sk:resize-current-window))))
      map)))
 

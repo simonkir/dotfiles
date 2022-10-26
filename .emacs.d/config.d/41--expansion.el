@@ -38,6 +38,6 @@
           (t
            (call-interactively 'indent-for-tab-command))))
 
-  (general-def :predicate 'meow-insert-mode
+  (general-def meow-insert-state-keymap
     "<tab>"     'sk:insert-tab-key
     "<backtab>" 'sk:insert-backtab-key))

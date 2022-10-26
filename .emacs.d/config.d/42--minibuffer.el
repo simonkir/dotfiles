@@ -15,11 +15,9 @@
   (setq completion-auto-help 'lazy)
   (setq icomplete-compute-delay 0)
 
-  (set-face-attribute 'icomplete-selected-match nil
-                      :inherit    'default
-                      :weight     'bold
-                      :foreground "#98be65")
+  (set-face-attribute 'icomplete-selected-match nil :inherit 'default :weight 'bold :foreground "#98be65")
 
+  
 
   (general-def 'icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
@@ -31,7 +29,10 @@
     "C-k" 'icomplete-backward-completions)
 
   (general-def-leader
-    "x" 'execute-extended-command)
+    "x" 'execute-extended-command
+    "X" 'eval-expression)
+
+  
   
   (fido-mode)
   (fido-vertical-mode))
