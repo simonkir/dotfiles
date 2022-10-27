@@ -63,7 +63,7 @@
       ;; search-forward wouldnt see it in this position
       (backward-char)
       (search-forward old-closedelim)
-      (backward-char)
+      (backward-char (length old-closedelim)) ;; go to beginning of search-hit
       (delete-char (length old-closedelim))
       (insert new-closedelim))))
 
