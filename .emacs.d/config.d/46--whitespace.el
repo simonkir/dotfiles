@@ -1,0 +1,18 @@
+;;; -*- lexical-binding: t; -*-
+
+
+
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+(general-def "M-SPC" 'delete-horizontal-space)
+
+
+
+(use-package whitespace
+  :demand t
+  :config
+  (setq whitespace-style '(trailing empty indentation space-before-tab space-after-tab))
+  (setq whitespace-action '(auto-cleanup warn-if-read-only))
+
+  (global-whitespace-mode))
