@@ -44,6 +44,100 @@
 
 
 
+  ; general-purpose mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (advice-add 'org-return :after '(lambda () (run-hooks 'post-self-insert-hook)))
+
+  (defun sk:org-return ()
+    "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
+    (interactive)
+    (cond
+     ((org-at-table-p) (org-table-insert-row '(4)))
+     ;;((org-at-table-p)
+     ;; (if (save-excursion
+     ;;       (forward-line)
+     ;;       (beginning-of-line)
+     ;;       (looking-at-p "\\s-*|"))
+     ;;     (next-line)
+     ;;   (org-table-insert-row '(4))))
+     ((org-in-item-p)
+      (if (save-excursion
+            (beginning-of-line)
+            (org-element-property :contents-begin (org-element-context)))
+          (org-insert-item (org-at-item-checkbox-p))
+        (delete-region (line-beginning-position) (line-end-position))
+        (org-return)))
+     (t (org-return))))
+
+  
+  
+  (general-def-localleader org-mode-map
+    "-" 'org-ctrl-c-minus ;; separator line in table
+    "b" 'org-cycle-list-bullet
+    "B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
+    "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
+    "n" 'org-num-mode
+    "h" 'org-toggle-heading
+    "t" 'org-todo)
+
+  (general-def org-mode-map
+    "RET" 'sk:org-return
+    "M-RET" 'org-ctrl-c-ctrl-c
+
+    "M-<prior>" 'org-backward-element
+    "M-<next>"  'org-forward-element
+    "C-<prior>" 'org-previous-visible-heading
+    "C-<next>"  'org-next-visible-heading
+     
+    "M-h" 'org-metaleft
+    "M-H" 'org-shiftmetaleft
+    "M-j" 'org-metadown
+    "M-J" 'org-shiftmetadown
+    "M-k" 'org-metaup
+    "M-K" 'org-shiftmetaup
+    "M-l" 'org-metaright
+    "M-L" 'org-shiftmetaright)
+
+  ;; override org default tab key behaviour
+  (general-def org-mode-map
+    "C-#" '(lambda () (interactive) (insert "#")))
+
+
+
+  ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (defun sk:org-toggle-inline-images ()
+    "toggle image previews in the region, if it is active, and on the current line otherwise"
+    (interactive)
+    (let* ((beg (if (region-active-p) (region-beginning) (line-beginning-position)))
+           (end (if (region-active-p) (region-end) (line-end-position)))
+           (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
+      (if overlays-in-region
+          (mapc (lambda (ov)
+              (delete-overlay ov)
+              (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
+            overlays-in-region)
+        (org-display-inline-images t nil beg end))))
+
+  (defun sk:org-toggle-inline-images-after-babel-run ()
+    "activates image preview for babel results
+
+the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
+    (interactive)
+    (save-excursion
+      (re-search-forward "\\[\\[")
+      (sk:org-toggle-inline-images)))
+
+  
+
+  (general-def-localleader org-mode-map
+    "i i" 'sk:org-toggle-inline-images
+    "i b" 'org-toggle-inline-images
+    "i B" 'org-remove-inline-images
+    "i r" 'org-redisplay-inline-images)
+
+
+
   ; latex preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq sk:org-preview-latex-scale-increment 0.2)
@@ -96,40 +190,6 @@
 
 
 
-  ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (defun sk:org-toggle-inline-images ()
-    "toggle image previews in the region, if it is active, and on the current line otherwise"
-    (interactive)
-    (let* ((beg (if (region-active-p) (region-beginning) (line-beginning-position)))
-           (end (if (region-active-p) (region-end) (line-end-position)))
-           (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
-      (if overlays-in-region
-          (mapc (lambda (ov)
-              (delete-overlay ov)
-              (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
-            overlays-in-region)
-        (org-display-inline-images t nil beg end))))
-
-  (defun sk:org-toggle-inline-images-after-babel-run ()
-    "activates image preview for babel results
-
-the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
-    (interactive)
-    (save-excursion
-      (re-search-forward "\\[\\[")
-      (sk:org-toggle-inline-images)))
-
-  
-
-  (general-def-localleader org-mode-map
-    "i i" 'sk:org-toggle-inline-images
-    "i b" 'org-toggle-inline-images
-    "i B" 'org-remove-inline-images
-    "i r" 'org-redisplay-inline-images)
-
-
-
   ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   (org-babel-do-load-languages
@@ -172,60 +232,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   
   (general-def-localleader org-mode-map
     "k"   'sk:org-babel-kill-session-at-point
-    "RET" 'sk:org-babel-eval-with-new-session)
-
-
-
-  ; mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (advice-add 'org-return :after '(lambda () (run-hooks 'post-self-insert-hook)))
-
-  (defun sk:org-return ()
-    "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
-    (interactive)
-    (cond
-     ((org-at-table-p) (org-table-insert-row '(4)))
-     ((org-in-item-p)
-      (if (save-excursion
-            (beginning-of-line)
-            (org-element-property :contents-begin (org-element-context)))
-          (org-insert-item (org-at-item-checkbox-p))
-        (delete-region (line-beginning-position) (line-end-position))
-        (org-return)))
-     (t (org-return))))
-
-  
-  
-  (general-def-localleader org-mode-map
-    "-" 'org-ctrl-c-minus ;; separator line in table
-    "b" 'org-cycle-list-bullet
-    "B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
-    "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
-    "n" 'org-num-mode
-    "h" 'org-toggle-heading
-    "t" 'org-todo)
-
-  (general-def org-mode-map
-    "RET" 'sk:org-return
-    "M-RET" 'org-ctrl-c-ctrl-c
-
-    "M-<prior>" 'org-backward-element
-    "M-<next>"  'org-forward-element
-    "C-<prior>" 'org-previous-visible-heading
-    "C-<next>"  'org-next-visible-heading
-     
-    "M-h" 'org-metaleft
-    "M-H" 'org-shiftmetaleft
-    "M-j" 'org-metadown
-    "M-J" 'org-shiftmetadown
-    "M-k" 'org-metaup
-    "M-K" 'org-shiftmetaup
-    "M-l" 'org-metaright
-    "M-L" 'org-shiftmetaright)
-
-  ;; override org default tab key behaviour
-  (general-def org-mode-map
-    "C-#" '(lambda () (interactive) (insert "#"))))
+    "RET" 'sk:org-babel-eval-with-new-session))
 
 
 

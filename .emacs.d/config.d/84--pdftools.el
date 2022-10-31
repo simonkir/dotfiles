@@ -50,7 +50,7 @@
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete
 
-    "c" (lambda () (interactive) (pdf-view-redisplay))
+    "c" (lambda () (interactive) (pdf-view-redisplay t))
     "m" 'pdf-view-midnight-minor-mode))
     
 

@@ -112,14 +112,14 @@
   (add-to-list 'prettify-symbols-alist '("or" . "⋁"))
   (add-to-list 'prettify-symbols-alist '("def" . "ƒ")))
 
-(add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode())
-(add-hook 'org-mode-hook 'sk:prettify-symbols-LaTeX-mode())
-(add-hook 'latex-mode-hook 'sk:prettify-symbols-LaTeX-mode())
-(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode())
+(add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode)
+(add-hook 'org-mode-hook 'sk:prettify-symbols-LaTeX-mode)
+(add-hook 'latex-mode-hook 'sk:prettify-symbols-LaTeX-mode)
+(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode)
 
-(add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode())
-(add-hook 'python-mode-hook 'sk:prettify-symbols-python-mode())
-(add-hook 'glsl-mode 'sk:prettify-symbols-glsl-mode())
+(add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode)
+(add-hook 'python-mode-hook 'sk:prettify-symbols-python-mode)
+(add-hook 'glsl-mode 'sk:prettify-symbols-glsl-mode)
 
 (global-prettify-symbols-mode)
 
@@ -132,6 +132,7 @@
   (prettify-symbols-mode 'toggle)
   (when (derived-mode-p 'org-mode)
     (org-toggle-pretty-entities)
+    (org-superstar-mode 'toggle)
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
       (setq org-hide-emphasis-markers t))))
