@@ -20,15 +20,15 @@
   (setq org-fontify-quote-and-verse-blocks t)
 
   ;; prevent < and > from being interpreted as delimiters
-  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?< "@")))
-  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?> "@")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
 
   ;; for doc, see 83--auctex.el
-  (add-hook 'org-mode-hook '(lambda () (modify-syntax-entry ?\\ "w")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
 
-  (add-hook 'org-mode-hook 'org-num-mode)
-  (add-hook 'org-mode-hook 'org-indent-mode)
-  (add-hook 'org-mode-hook 'org-toggle-pretty-entities)
+  (add-hook 'org-mode-hook #'org-num-mode)
+  (add-hook 'org-mode-hook #'org-indent-mode)
+  (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
 
 
@@ -39,14 +39,15 @@
         '(("+" . "-") ("-" . "+")
           ("1." . "-") ("1)" . "-")))
 
-  (add-hook 'org-mode-hook 'sk:autocorrect-mode)
+  (add-hook 'org-mode-hook #'sk:autocorrect-mode)
+
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
 
 
 
   ; general-purpose mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (advice-add 'org-return :after '(lambda () (run-hooks 'post-self-insert-hook)))
+  (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (defun sk:org-return ()
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
@@ -69,13 +70,13 @@
         (org-return)))
      (t (org-return))))
 
-  
-  
+
+
   (general-def-localleader org-mode-map
     "-" 'org-ctrl-c-minus ;; separator line in table
     "b" 'org-cycle-list-bullet
-    "B" '(lambda () (interactive) (org-cycle-list-bullet 'previous))
-    "c" '(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
+    "B" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
+    "c" #'(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
     "n" 'org-num-mode
     "h" 'org-toggle-heading
     "t" 'org-todo)
@@ -88,7 +89,7 @@
     "M-<next>"  'org-forward-element
     "C-<prior>" 'org-previous-visible-heading
     "C-<next>"  'org-next-visible-heading
-     
+
     "M-h" 'org-metaleft
     "M-H" 'org-shiftmetaleft
     "M-j" 'org-metadown
@@ -100,7 +101,7 @@
 
   ;; override org default tab key behaviour
   (general-def org-mode-map
-    "C-#" '(lambda () (interactive) (insert "#")))
+    "C-#" #'(lambda () (interactive) (insert "#")))
 
 
 
@@ -128,7 +129,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
       (re-search-forward "\\[\\[")
       (sk:org-toggle-inline-images)))
 
-  
+
 
   (general-def-localleader org-mode-map
     "i i" 'sk:org-toggle-inline-images
@@ -180,9 +181,9 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   (general-def-localleader org-mode-map
     "l l" 'sk:org-latex-preview-at-point
-    "l L" '(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
-    "l b" '(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
-    "l B" '(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
+    "l L" #'(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
+    "l b" #'(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
+    "l B" #'(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
     "l +" 'sk:org-preview-latex-scale-increase
     "l -" 'sk:org-preview-latex-scale-decrease
     "l 0" 'sk:org-preview-latex-scale-reset
@@ -191,13 +192,13 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
   ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((gnuplot . t)))
    ;;'((jupyter . t)))
 
-  (add-hook 'org-babel-after-execute-hook 'sk:org-toggle-inline-images-after-babel-run)
+  (add-hook 'org-babel-after-execute-hook #'sk:org-toggle-inline-images-after-babel-run)
 
   (setq org-confirm-babel-evaluate nil)
   (setq org-edit-src-content-indentation 0)
@@ -229,7 +230,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (general-def-leader
     "e" 'sk:leader-e
     "E" 'sk:leader-E)
-  
+
   (general-def-localleader org-mode-map
     "k"   'sk:org-babel-kill-session-at-point
     "RET" 'sk:org-babel-eval-with-new-session))
@@ -242,7 +243,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   :after org
   :general (general-def-localleader org-mode-map
     "X" 'org-export-dispatch
-    "x" '(lambda () (interactive) (org-export-dispatch '(4)))))
+    "x" #'(lambda () (interactive) (org-export-dispatch '(4)))))
 
 
 

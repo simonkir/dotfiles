@@ -9,8 +9,8 @@
   (setq pdf-annot-activate-created-annotations t)
 
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
-  (add-hook 'pdf-view-mode-hook 'pdf-view-midnight-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-annot-minor-mode)
 
 
 
@@ -28,11 +28,11 @@
     "j" 'pdf-view-next-line-or-next-page
     "k" 'pdf-view-previous-line-or-previous-page
     "l" 'image-forward-hscroll
-    
-    "<down>"  '(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
-    "<up>"    '(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
-    "<left>"  '(lambda () (interactive) (image-backward-hscroll 10))
-    "<right>" '(lambda () (interactive) (image-forward-hscroll 10))
+
+    "<down>"  #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
+    "<up>"    #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
+    "<left>"  #'(lambda () (interactive) (image-backward-hscroll 10))
+    "<right>" #'(lambda () (interactive) (image-forward-hscroll 10))
     "J"       'pdf-view-next-page
     "K"       'pdf-view-previous-page
 
@@ -50,9 +50,9 @@
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete
 
-    "c" (lambda () (interactive) (pdf-view-redisplay t))
+    "c" #'(lambda () (interactive) (pdf-view-redisplay t))
     "m" 'pdf-view-midnight-minor-mode))
-    
+
 
 
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
@@ -67,7 +67,7 @@
 
   "W" 'image-transform-fit-to-width
   "H" 'image-transform-fit-to-height
-    
+
   "R" 'image-rotate)
 
 

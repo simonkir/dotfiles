@@ -11,14 +11,14 @@
   (setq meow-use-cursor-position-hack     t)
   (setq meow-expand-hint-remove-delay     1.5)
   (setq meow-display-thing-help           nil)
-  
+
   (setq meow-keypad-self-insert-undefined nil)
   (setq meow-keypad-start-keys            nil)
   (setq meow-keypad-ctrl-meta-prefix      nil)
   (setq meow-keypad-meta-prefix           nil)
   (setq meow-keypad-literal-prefix        nil)
   (setq meow-keypad-leader-dispatch       sk:leader-map)
-  
+
   (setq meow-mode-state-list '((vterm-mode . insert)))
   (setq meow-expand-exclude-mode-list nil)
 
@@ -42,7 +42,7 @@
           (?{ . curly)
           (?} . curly)
           (?\" . string)
-          ;; latex elements          
+          ;; latex elements
           (?r . latex-round)
           (?s . latex-square)
           (?c . latex-curly)
@@ -68,7 +68,7 @@
           (message "digit not in range (digit = %s)" digit)
         (if (region-active-p)
             (meow-expand digit)
-          (call-interactively 'meow-digit-argument)))))
+          (call-interactively #'meow-digit-argument)))))
 
   (defun sk:toggle-case-after-point ()
     "toggles case of letter after point / below cursor. equivalent to vim ~ key"
@@ -76,7 +76,7 @@
     (let* ((p (point))
            (letter (char-after p))
            (upcased (eq letter (upcase letter)))
-           (f (if upcased 'downcase-region 'upcase-region)))
+           (f (if upcased #'downcase-region #'upcase-region)))
       (funcall f p (+ 1 p))
       (forward-char)))
 
@@ -98,7 +98,7 @@
     "3" 'sk:meow-digit-argument-or-eval
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
-    
+
     ;;"%" ;; reserved for skparens
     "~" 'sk:toggle-case-after-point
     "(" 'backward-sexp
@@ -111,7 +111,7 @@
     ">" 'meow-end-of-thing
     ";" 'meow-reverse
     ":" 'recenter-top-bottom
-    
+
     "a" 'meow-append
     "A" 'meow-bounds-of-thing
     "b" 'meow-back-word
@@ -162,10 +162,8 @@
     "X" 'meow-backward-delete
     "y" 'meow-save
     "Y" 'meow-sync-grab
-    ;;"Y" 'clipboard-kill-ring-save
     "z" 'meow-pop-selection
     ;;"Z"
     "<escape>" 'meow-cancel-selection)
-    
+
   (meow-global-mode 1))
-  

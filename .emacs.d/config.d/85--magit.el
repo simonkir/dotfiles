@@ -8,12 +8,12 @@
     "G" 'magit-dispatch)
 
   :config
-  (add-hook 'git-commit-setup-hook 'meow-insert)
+  (add-hook 'git-commit-setup-hook #'meow-insert)
 
   (general-def magit-diff-mode-map
     "C-<tab>" 'sk:next-buffer
     "C-<backtab>" 'sk:previous-buffer)
-  
+
   (general-def magit-mode-map
     "<backtab>" 'magit-section-cycle-diffs
     "<tab>" 'magit-section-toggle

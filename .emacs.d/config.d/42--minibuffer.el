@@ -7,7 +7,7 @@
   :config
   ;; needed because icomplete--fido-mode-setup overwrites default settings
   (add-hook 'icomplete-minibuffer-setup-hook
-            (lambda () (setq-local completion-styles '(basic partial-completion substring initials flex))))
+            #'(lambda () (setq-local completion-styles '(basic partial-completion substring initials flex))))
 
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t)
@@ -17,7 +17,7 @@
 
   (set-face-attribute 'icomplete-selected-match nil :inherit 'default :weight 'bold :foreground "#98be65")
 
-  
+
 
   (general-def 'icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
@@ -32,7 +32,7 @@
     "x" 'execute-extended-command
     "X" 'eval-expression)
 
-  
-  
+
+
   (fido-mode)
   (fido-vertical-mode))

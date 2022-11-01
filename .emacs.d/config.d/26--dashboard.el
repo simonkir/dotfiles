@@ -2,7 +2,7 @@
 
 
 
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
+(setq initial-buffer-choice #'(lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
 
 (use-package dashboard
   :demand t

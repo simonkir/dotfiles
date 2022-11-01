@@ -11,7 +11,7 @@
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray\*" env-on)))
 
 
-  
+
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -19,17 +19,17 @@
 
   ;; \ character should be part of a word, so that you can operate on it in a better way
   ;; e. g. when trying to meow-change a word like \delta
-  (add-hook 'LaTeX-mode-hook '(lambda () (modify-syntax-entry ?\\ "w")))
-  
-  (add-hook 'LaTeX-mode-hook 'sk:autocorrect-mode)
+  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
+
+  (add-hook 'LaTeX-mode-hook #'sk:autocorrect-mode)
 
 
 
   ; output / viewing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-mode t)
-  
+
   (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
 
@@ -46,12 +46,11 @@
 (use-package sklatex
   :ensure nil
   :hook
-  (LaTeX-mode . sklatex-mode)
-  (org-mode . sklatex-mode)
+  ((LaTeX-mode org-mode) . sklatex-mode)
 
   :config
   (sklatex-default-setup)
-  
+
   (general-def-localleader '(org-mode-map LaTeX-mode-map)
     "k" 'sklatex-dispatch
     "K" 'sklatex-mode))
@@ -68,8 +67,8 @@
 
   :config
   ;; needed for sklatex alignment defuns
-  (advice-add 'cdlatex-math-symbol :after '(lambda () (run-hooks 'post-self-insert-hook)))
-  
+  (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
+
   (general-def org-cdlatex-mode-map
     "$" 'cdlatex-dollar)
 

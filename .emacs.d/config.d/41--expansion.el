@@ -18,25 +18,25 @@
   (defun sk:insert-backtab-key ()
     (interactive)
     (cond ((and (derived-mode-p 'org-mode)
-                (member (nth 0 (org-element-at-point)) '(table-row table)))
-           (call-interactively 'org-table-previous-field))
+                (member (nth 0 (org-element-at-point)) #'(table-row table)))
+           (call-interactively #'org-table-previous-field))
           (t (hippie-expand 0))))
 
   (defun sk:insert-tab-key ()
     (interactive)
     (cond ((and (derived-mode-p 'org-mode)
-                (member (nth 0 (org-element-at-point)) '(table-row table)))
-           (call-interactively 'org-table-next-field))
+                (member (nth 0 (org-element-at-point)) #'(table-row table)))
+           (call-interactively #'org-table-next-field))
           ((when yas-minor-mode
              (let ((yas-fallback-behavior 'return-nil))
                (yas-expand))))
           ((and (texmathp)
                 (not (derived-mode-p 'prog-mode)))
-           (call-interactively 'cdlatex-tab))
+           (call-interactively #'cdlatex-tab))
           ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
-           (call-interactively 'hippie-expand))
+           (call-interactively #'hippie-expand))
           (t
-           (call-interactively 'indent-for-tab-command))))
+           (call-interactively #'indent-for-tab-command))))
 
   (general-def meow-insert-state-keymap
     "<tab>"     'sk:insert-tab-key

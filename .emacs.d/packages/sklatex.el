@@ -13,14 +13,14 @@
   :keymap (make-sparse-keymap)
   (when sklatex-mode
     (message "sklatex-mode enabled")
-    (add-hook 'post-self-insert-hook 'sklatex-try-newline-conversion nil 'local)
-    (add-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment nil 'local)
-    (add-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion nil 'local))
+    (add-hook 'post-self-insert-hook #'sklatex-try-newline-conversion nil 'local)
+    (add-hook 'post-self-insert-hook #'sklatex-try-symbol-alignment nil 'local)
+    (add-hook 'post-self-insert-hook #'sklatex-try-subscript-conversion nil 'local))
   (unless sklatex-mode
     (message "sklatex-mode disabled")
-    (remove-hook 'post-self-insert-hook 'sklatex-try-newline-conversion)
-    (remove-hook 'post-self-insert-hook 'sklatex-try-symbol-alignment)
-    (remove-hook 'post-self-insert-hook 'sklatex-try-subscript-conversion)))
+    (remove-hook 'post-self-insert-hook #'sklatex-try-newline-conversion)
+    (remove-hook 'post-self-insert-hook #'sklatex-try-symbol-alignment)
+    (remove-hook 'post-self-insert-hook #'sklatex-try-subscript-conversion)))
 
 (defun sklatex-default-setup ()
   (interactive)
@@ -159,8 +159,8 @@
       (save-excursion
         (left-char 3)
         (cond
-         ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method '(sklatex--input-delete-subscript)))
-         ((looking-at "$?[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method '(sklatex--input-to-subscript)))))
+         ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method #'(sklatex--input-delete-subscript)))
+         ((looking-at "$?[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method #'(sklatex--input-to-subscript)))))
       (eval conversion-method))))
 
 
