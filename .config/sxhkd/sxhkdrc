@@ -40,10 +40,6 @@ super + alt + r
 super + Return
     alacritty
 
-# task manager
-super + alt + h
-    alacritty -e htop
-
 # text editor (emacsclient)
 super + alt + e
     emacsclient -cq
@@ -60,10 +56,6 @@ super + alt + z
 super + alt + b
       blender
 
-# youtube client
-super + alt + y
-    freetube
-
 # web browser
 super + alt + w
     firefox
@@ -76,10 +68,6 @@ super + alt + w
 super + alt + ctrl + w
     google-chrome-stable
 
-# mp4 player
-super + alt + v
-    vlc
-
 # office application
 super + alt + o
     libreoffice
@@ -88,21 +76,25 @@ super + alt + o
 super + alt + m
     molsketch
 
-# KiCAD
-super + alt + k
-    kicad
+# svg drawings
+super + alt + i
+    inkscape
+
+# # KiCAD
+# super + alt + k
+#     kicad
 
 # # discord (browser)
 # super + alt + d
 #     qutebrowser https://discord.com/channels/@me
 
-# discord (app)
-super + alt + shift + d
-    discord
-
-# steam
-super + alt + s
-    steam
+# # discord (app)
+# super + alt + shift + d
+#     discord
+#
+# # steam
+# super + alt + s
+#     steam
 
 # pulseaudio settings
 super + alt + p
@@ -128,7 +120,7 @@ ctrl + Print
 
 
 #################################################################
-# POLYBAR        
+# POLYBAR
 #################################################################
 
 #Hide polybar

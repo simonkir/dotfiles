@@ -142,7 +142,7 @@ keys = [
 ###     Key([mod, "mod1"], "j", lazy.layout.flip_down()),
 ###     Key([mod, "mod1"], "l", lazy.layout.flip_right()),
 ###     Key([mod, "mod1"], "h", lazy.layout.flip_left()),
-### 
+###
 ###     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
 ###     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 ###     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
@@ -200,7 +200,7 @@ def assign_app_group(client):
     d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox", "qutebrowser"]
     d[group_names[1]] = ["urxvt", "termite", "emacs", "Alacritty"]
     d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
-                         "Blender", "kicad", "molsketch",
+                         "Blender", "kicad", "org.inkscape.Inkscape", "molsketch",
                          "VirtualBox Machine", "VirtualBox Manager"]
     d[group_names[3]] = ["Chromium", "chromium", "google-chrome"]
 
@@ -213,7 +213,7 @@ def assign_app_group(client):
             #client.group.cmd_toscreen(toggle=False)
 
 
-   
+
 ###############################################################################
 #                                   LAYOUTS                                   #
 ###############################################################################
