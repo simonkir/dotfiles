@@ -36,8 +36,6 @@
     "J"       'pdf-view-next-page
     "K"       'pdf-view-previous-page
 
-    "b" 'pdf-view-set-slice-from-bounding-box
-    "B" 'pdf-view-reset-slice
     "M" 'pdf-view-goto-page
     "=" 'sk:pdf-view-fit)
 
@@ -50,6 +48,8 @@
     "t" 'pdf-annot-add-text-annotation
     "d" 'pdf-annot-delete
 
+    "b" 'pdf-view-set-slice-from-bounding-box
+    "B" 'pdf-view-reset-slice
     "c" #'(lambda () (interactive) (pdf-view-redisplay t))
     "m" 'pdf-view-midnight-minor-mode))
 

@@ -12,10 +12,11 @@
 ; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-def-leader
- "h p" 'describe-package
- "h f" 'describe-function
- "h v" 'describe-variable
- "h k" 'describe-key)
+ "h"   'describe-symbol
+ "H p" 'describe-package
+ "H f" 'describe-function
+ "H v" 'describe-variable
+ "H k" 'describe-key)
 
 (general-def help-mode-map
   "h" 'meow-left
