@@ -26,6 +26,9 @@
   ;; for doc, see 83--auctex.el
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
 
+  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
+
   (add-hook 'org-mode-hook #'org-num-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
