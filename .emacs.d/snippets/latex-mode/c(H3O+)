@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c(H3O+) (konzentration der oxinium-ionen)
+# key: ch3o
+# --
+c(H_{3}O^{+})

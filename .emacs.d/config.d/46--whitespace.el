@@ -12,7 +12,7 @@
 (use-package whitespace
   :demand t
   :config
-  (setq whitespace-style '(trailing empty indentation space-before-tab space-after-tab))
+  (setq whitespace-style '(trailing indentation space-before-tab space-after-tab))
   (setq whitespace-action '(auto-cleanup warn-if-read-only))
 
   (global-whitespace-mode))
