@@ -133,7 +133,7 @@
   (prettify-symbols-mode 'toggle)
   (when (derived-mode-p 'org-mode)
     (org-toggle-pretty-entities)
-    (org-superstar-mode 'toggle)
+    ;;(org-superstar-mode 'toggle) ;; has severe performance impact
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
       (setq org-hide-emphasis-markers t))))

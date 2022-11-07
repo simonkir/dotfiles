@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c(OH-) (konzentration der hydroxid-ionen)
+# key: coh
+# --
+c(OH^{-})

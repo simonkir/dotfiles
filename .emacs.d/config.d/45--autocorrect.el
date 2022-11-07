@@ -36,3 +36,8 @@
     (remove-hook 'post-self-insert-hook #'sk:dcaps-to-scaps 'local)
     (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local)
     (message "sk:autocorrect-mode deactivated")))
+
+
+
+(general-def-leader
+  "t c" 'sk:autocorrect-mode)
