@@ -84,6 +84,7 @@
 
   (general-def meow-motion-state-keymap
     "<escape>" nil
+    "C-z" 'meow-normal-mode
     "j" 'meow-next
     "k" 'meow-prev)
 
@@ -99,6 +100,7 @@
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
 
+    "C-z" 'meow-motion-mode
     ;;"%" ;; reserved for skparens
     "~" 'sk:toggle-case-after-point
     "(" 'backward-sexp
