@@ -135,7 +135,7 @@
 ; subscript conversion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex--input-to-subscript ()
-  "convert latex input to subscript"
+  "convert previous char to subscript"
   (save-excursion
     (left-char)
     (insert "_{")
@@ -143,8 +143,18 @@
     (insert "}"))
   (right-char))
 
+(defun sklatex--input-to-superscript ()
+  "convert previous char to superscript"
+  (save-excursion
+    (left-char)
+    (insert "^{")
+    (right-char)
+    (insert "}"))
+  (right-char))
+
+;; TODO fix, so that is works with subscripts of size greater than 1
 (defun sklatex--input-delete-subscript ()
-  "remove subscript on latex input"
+  "remove subscript on previous char"
   (save-excursion
     (left-char 5)
     (delete-char 2)
@@ -153,20 +163,33 @@
 
 (defun sklatex-try-subscript-conversion ()
   "determine which subscript conversion should be done and execute said conversion"
-  (when (and sklatex--do-subscript-conversion
-             (sklatex-in-latex-p))
-    (let (conversion-method)
-      (save-excursion
-        (left-char 3)
-        (cond
-         ((looking-at "[[:alnum:]]}[[:alnum:]]") (setq conversion-method #'(sklatex--input-delete-subscript)))
-         ((looking-at "$?[^[:alnum:]][[:alpha:]][[:alnum:]]") (setq conversion-method #'(sklatex--input-to-subscript)))))
-      (eval conversion-method))))
+  (let (conversion-method)
+    (save-excursion
+      (skip-chars-backward "[:alnum:]^_{}+-\\\\")
+      (cond
+       ;; chemical subscript (index numbers)
+       ((and sklatex--do-chemical-formula-conversion
+             (looking-at "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*[[:digit:]]"))
+        (setq conversion-method #'(sklatex--input-to-subscript)))
+       ;; chemical superscript (charges)
+       ((and sklatex--do-chemical-formula-conversion
+             (looking-at "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*[-+]"))
+        (setq conversion-method #'(sklatex--input-to-superscript)))
+       ;; delete mathematical subscript (when writing words)
+       ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
+             (looking-at "[[:alnum:]]*_{[[:alnum:]]}[[:alnum:]]"))
+        (setq conversion-method #'(sklatex--input-delete-subscript)))
+       ;; mathematical subscript (e. g. when using indexed quantities)
+       ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
+             (looking-at "[[:alpha:]][[:alnum:]][^[:alnum:]]"))
+        (setq conversion-method #'(sklatex--input-to-subscript)))))
+    (eval conversion-method)))
 
 
 
 (defun sklatex-activate-subscript-conversion ()
   (interactive)
+  (sklatex-deactivate-chemical-formula-conversion)
   (setq sklatex--do-subscript-conversion t)
   (message "sklatex: automatic subscript activated"))
 
@@ -174,6 +197,17 @@
   (interactive)
   (setq sklatex--do-subscript-conversion nil)
   (message "sklatex: automatic subscript deactivated"))
+
+(defun sklatex-activate-chemical-formula-conversion ()
+  (interactive)
+  (sklatex-deactivate-subscript-conversion)
+  (setq sklatex--do-chemical-formula-conversion t)
+  (message "sklatex: chemical formula conversion activated"))
+
+(defun sklatex-deactivate-chemical-formula-conversion ()
+  (interactive)
+  (setq sklatex--do-chemical-formula-conversion nil)
+  (message "sklatex: chemical formula conversion deactivated"))
 
 
 
@@ -214,7 +248,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
 
 (defun sklatex-dispatch (key)
   "control which sklatex effects are active"
-  (interactive "ksklatex-dispatch: (k) default setup – (e)quality keys – (n)ewline keys – (s)ubscript conversion")
+  (interactive "ksklatex-dispatch: (k) default setup – (e)quality keys – (n)ewline keys – (s)ubscript conversion – (c)hemical sub-/superscript conversion")
   (cond
    ((string= key "k") (sklatex-default-setup))
    ((string= key "e") (sklatex-activate-alignment-keybinds-equality))
@@ -223,6 +257,8 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
    ((string= key "N") (sklatex-deactivate-newline-keybinds))
    ((string= key "s") (sklatex-activate-subscript-conversion))
    ((string= key "S") (sklatex-deactivate-subscript-conversion))
+   ((string= key "c") (sklatex-activate-chemical-formula-conversion))
+   ((string= key "C") (sklatex-deactivate-chemical-formula-conversion))
    (t (message "%s: unsupported key" key))))
 
 
