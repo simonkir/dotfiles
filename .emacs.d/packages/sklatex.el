@@ -18,15 +18,16 @@
     (add-hook 'post-self-insert-hook #'sklatex-try-subscript-conversion nil 'local))
   (unless sklatex-mode
     (message "sklatex-mode disabled")
-    (remove-hook 'post-self-insert-hook #'sklatex-try-newline-conversion)
-    (remove-hook 'post-self-insert-hook #'sklatex-try-symbol-alignment)
-    (remove-hook 'post-self-insert-hook #'sklatex-try-subscript-conversion)))
+    (remove-hook 'post-self-insert-hook #'sklatex-try-newline-conversion 'local)
+    (remove-hook 'post-self-insert-hook #'sklatex-try-symbol-alignment 'local)
+    (remove-hook 'post-self-insert-hook #'sklatex-try-subscript-conversion 'local)))
 
 (defun sklatex-default-setup ()
   (interactive)
   (sklatex-activate-newline-keybinds)
   (sklatex-activate-alignment-keybinds-equality)
-  (sklatex-activate-subscript-conversion))
+  (sklatex-activate-subscript-conversion)
+  (message "sklatex: default keybinds activated (newline, alignment, subscript)"))
 
 
 
@@ -220,11 +221,11 @@
   (re-search-backward "&")
   (delete-char 1))
 
-(defun sklatex--delete-single-subscript ()
+(defun sklatex--delete-single-supersubscript ()
   "user-invoked command to delete unwanted subscript that was inserted automatically
 
 not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
-  (re-search-backward "_")
+  (re-search-backward "[\\^_]")
   (delete-char 2)
   (right-char)
   (delete-char 1))
@@ -233,11 +234,10 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   "depending on the previous character, remove effects added by sklatex"
   (interactive)
   (save-excursion
-    (skip-syntax-backward "-")
-    (left-char)
+    (re-search-backward "[&}]")
     (cond
      ((looking-at-p "&") (sklatex--delete-alignment-operators))
-     ((looking-at-p "}") (sklatex--delete-single-subscript)))))
+     ((looking-at-p "}") (sklatex--delete-single-supersubscript)))))
 
 (general-def sklatex-mode-map
   "C-s" 'sklatex-remove-effect-at-point)
