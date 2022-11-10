@@ -70,15 +70,17 @@
             (meow-expand digit)
           (call-interactively #'meow-digit-argument)))))
 
-  (defun sk:toggle-case-after-point ()
-    "toggles case of letter after point / below cursor. equivalent to vim ~ key"
+  (defun sk:toggle-case ()
+    "toggles case of letters in region. when there is no region, use char after point instead"
     (interactive)
-    (let* ((p (point))
-           (letter (char-after p))
+    (let* ((beg (if (region-active-p) (region-beginning) (point)))
+           (end (if (region-active-p) (region-end) (1+ (point))))
+           (letter (char-after beg))
            (upcased (eq letter (upcase letter)))
            (f (if upcased #'downcase-region #'upcase-region)))
-      (funcall f p (+ 1 p))
-      (forward-char)))
+      (funcall f beg end)
+      (unless (region-active-p)
+        (forward-char))))
 
 
 
@@ -102,7 +104,7 @@
 
     "C-z" 'meow-motion-mode
     ;;"%" ;; reserved for skparens
-    "~" 'sk:toggle-case-after-point
+    "~" 'sk:toggle-case
     "(" 'backward-sexp
     ")" 'forward-sexp
     "=" 'indent-region
