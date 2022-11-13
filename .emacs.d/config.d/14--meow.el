@@ -73,8 +73,8 @@
   (defun sk:toggle-case ()
     "toggles case of letters in region. when there is no region, use char after point instead"
     (interactive)
-    (let* ((beg (if (region-active-p) (region-beginning) (point)))
-           (end (if (region-active-p) (region-end) (1+ (point))))
+    (let* ((beg (point))
+           (end (1+ (point)))
            (letter (char-after beg))
            (upcased (eq letter (upcase letter)))
            (f (if upcased #'downcase-region #'upcase-region)))

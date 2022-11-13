@@ -38,7 +38,8 @@
   "w s" 'sk:split-and-follow-horizontally
   "w v" 'sk:split-and-follow-vertically
 
-  "w 0"       'sk:resize-current-window
+  "w ="       'balance-windows
+  "w 0"       'balance-windows
   "w <right>" 'sk:resize-current-window
   "w <left>"  'sk:resize-current-window
   "w <up>"    'sk:resize-current-window
