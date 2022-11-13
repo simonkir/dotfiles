@@ -2,4 +2,4 @@
 # name: square root
 # key: sqq
 # --
-\sqrt{$0}
+\sqrt{ $0 }
