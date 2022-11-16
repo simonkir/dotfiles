@@ -21,7 +21,7 @@
     (dolist (element buffers)
       (when (string-match-p sk:ignored-buffers-regexp element)
         (setq buffers (remove element buffers)))) ;; ensure element is deleted from buffers
-    buffers))
+    (sort buffers 'string<)))
 
 (defun sk:switch-to-buffer ()
   (interactive)
