@@ -16,7 +16,7 @@ useful when switching themes also changes the colors of the modeline"
     (set-face-attribute 'telephone-line-accent-active   nil :background "#3f444a" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-error           nil :background "#3f444a" :foreground "#ff6c6b")
     (set-face-attribute 'telephone-line-warning         nil :background "#3f444a" :foreground "#e5c07b")
-    
+
     (set-face-attribute 'telephone-line-evil            nil :background "#51afef" :foreground "#bbc2cf")
     (set-face-attribute 'telephone-line-evil-emacs      nil :background "#ecbe7b" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-insert     nil :background "#98be65" :foreground "#282c34")
@@ -85,7 +85,6 @@ useful when switching themes also changes the colors of the modeline"
            (percentage (/ (* 100 current-line) max-lines)))
       (concat (format "%s" percentage) "%%")))
 
-  ;; TODO modeline doesn't update often enough to display changes in (current-column)
   (telephone-line-defsegment sk:tl-position-segment ()
     (cond
      ((derived-mode-p 'pdf-view-mode)
@@ -113,6 +112,12 @@ useful when switching themes also changes the colors of the modeline"
           (evil   . (sk:tl-position-percentage-segment
                      sk:tl-position-segment))))
 
+  (advice-add #'meow-right :after #'force-mode-line-update)
+  (advice-add #'meow-right-expand :after #'force-mode-line-update)
+  (advice-add #'meow-left :after #'force-mode-line-update)
+  (advice-add #'meow-left-expand :after #'force-mode-line-update)
+  (advice-add #'meow-line :after #'force-mode-line-update)
+
 
 
   (setq telephone-line-primary-left-separator     'telephone-line-identity-left)
@@ -121,5 +126,5 @@ useful when switching themes also changes the colors of the modeline"
   (setq telephone-line-secondary-right-separator  'telephone-line-identity-hollow-right)
 
 
-  
+
   (telephone-line-mode))
