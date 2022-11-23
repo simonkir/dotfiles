@@ -76,6 +76,10 @@ super + alt + o
 super + alt + m
     molsketch
 
+# regular drawings
+super + alt + k
+    krita
+
 # svg drawings
 super + alt + i
     inkscape
