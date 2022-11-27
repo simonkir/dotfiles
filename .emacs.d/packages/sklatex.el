@@ -162,6 +162,9 @@
     (right-char)
     (delete-char 1)))
 
+(setq sklatex--chemical-formula-rx "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*")
+(setq sklatex--mathematical-quantity-rx "[[:alnum:]]*_{[[:alnum:]]}[[:alnum:]]")
+
 (defun sklatex-try-subscript-conversion ()
   "determine which subscript conversion should be done and execute said conversion"
   (let (conversion-method)
@@ -170,19 +173,19 @@
       (cond
        ;; chemical subscript (index numbers)
        ((and sklatex--do-chemical-formula-conversion
-             (looking-at "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*[[:digit:]]"))
+             (looking-at (concat sklatex--chemical-formula-rx "[[:digit:]]\\_>")))
         (setq conversion-method #'(sklatex--input-to-subscript)))
        ;; chemical superscript (charges)
        ((and sklatex--do-chemical-formula-conversion
-             (looking-at "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*[-+]"))
+             (looking-at (concat sklatex--chemical-formula-rx "[-+]\\_>")))
         (setq conversion-method #'(sklatex--input-to-superscript)))
        ;; delete mathematical subscript (when writing words)
        ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
-             (looking-at "[[:alnum:]]*_{[[:alnum:]]}[[:alnum:]]"))
+             (looking-at sklatex--mathematical-quantity-rx))
         (setq conversion-method #'(sklatex--input-delete-subscript)))
        ;; mathematical subscript (e. g. when using indexed quantities)
        ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
-             (looking-at "[[:alpha:]][[:alnum:]][^[:alnum:]]"))
+             (looking-at "[[:alpha:]][[:alnum:]]\\_>"))
         (setq conversion-method #'(sklatex--input-to-subscript)))))
     (eval conversion-method)))
 
