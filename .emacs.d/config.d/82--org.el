@@ -246,7 +246,9 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   :after org
   :general (general-def-localleader org-mode-map
     "X" 'org-export-dispatch
-    "x" #'(lambda () (interactive) (org-export-dispatch '(4)))))
+    "x" #'(lambda () (interactive) (org-export-dispatch '(4))))
+  :config
+  (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f")))
 
 
 
