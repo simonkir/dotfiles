@@ -8,9 +8,14 @@
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
 
+  (setq pdf-tools-enabled-modes '(pdf-view-midnight-minor-mode
+                                  pdf-view-auto-slice-minor-mode
+                                  pdf-annot-minor-mode
+                                  pdf-isearch-minor-mode
+                                  pdf-outline-minor-mode))
+
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
-  (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)
-  (add-hook 'pdf-view-mode-hook #'pdf-annot-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-tools-enable-minor-modes)
 
 
 

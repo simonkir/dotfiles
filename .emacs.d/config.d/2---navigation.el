@@ -16,7 +16,12 @@
  "H" 'describe-key)
 
 (general-def help-mode-map
+  "<escape>" 'meow-cancel-selection
   "h" 'meow-left
   "l" 'meow-right
+  "e" 'meow-next-word
+  "E" 'meow-next-symbol
+  "b" 'meow-back-word
+  "B" 'meow-back-symbol
   "n" 'help-go-forward
   "p" 'help-go-back)
