@@ -118,10 +118,11 @@
            (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
           (mapc (lambda (ov)
-              (delete-overlay ov)
-              (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
-            overlays-in-region)
-        (org-display-inline-images t nil beg end))))
+                  (delete-overlay ov)
+                  (setq org-inline-image-overlays (delete ov org-inline-image-overlays)))
+                overlays-in-region)
+        (org-display-inline-images t nil beg end)))
+    (message "org-mode: toggled image preview"))
 
   (defun sk:org-toggle-inline-images-after-babel-run ()
     "activates image preview for babel results
