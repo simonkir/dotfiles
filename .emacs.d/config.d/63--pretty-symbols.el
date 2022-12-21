@@ -31,6 +31,8 @@
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
   (add-to-list 'prettify-symbols-alist '("&\\approx&" . "≈"))
+  (add-to-list 'prettify-symbols-alist '("&\\leftrightarrow&" . (?\s (Bc . Bc) ?↔)))
+  (add-to-list 'prettify-symbols-alist '("&\\Leftrightarrow&" . (?\s (Bc . Bc) ?⇔)))
   (add-to-list 'prettify-symbols-alist '("&\\geq&" . "≥"))
   (add-to-list 'prettify-symbols-alist '("&\\leq&" . "≤"))
   (add-to-list 'prettify-symbols-alist '("&|" . "|"))
