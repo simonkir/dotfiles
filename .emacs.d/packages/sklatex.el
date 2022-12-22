@@ -26,8 +26,7 @@
   (interactive)
   (sklatex-activate-newline-keybinds)
   (sklatex-activate-alignment-keybinds-equality)
-  (sklatex-activate-subscript-conversion)
-  (message "sklatex: default keybinds activated (newline, alignment, subscript)"))
+  (message "sklatex: default keybinds activated (newline, alignment)"))
 
 
 
