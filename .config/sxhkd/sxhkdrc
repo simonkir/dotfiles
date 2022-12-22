@@ -95,10 +95,10 @@ super + alt + i
 # # discord (app)
 # super + alt + shift + d
 #     discord
-#
-# # steam
-# super + alt + s
-#     steam
+
+# spotify
+super + alt + s
+    firefox https://open.spotify.com
 
 # pulseaudio settings
 super + alt + p
