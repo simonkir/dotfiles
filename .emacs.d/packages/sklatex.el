@@ -7,6 +7,17 @@
 
 
 
+; definition of variables ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq sklatex--do-newline-conversion nil)
+(setq sklatex--do-symbol-alignment nil)
+(setq sklatex--do-subscript-conversion nil)
+(setq sklatex--do-chemical-formula-conversion nil)
+
+
+
+; minor mode / defaults ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (define-minor-mode sklatex-mode
   "skLaTeX mode"
   :lighter " skLaTeX"
