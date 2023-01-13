@@ -70,7 +70,12 @@
   (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (general-def org-cdlatex-mode-map
-    "$" 'cdlatex-dollar)
+    "$" nil
+    "'" 'cdlatex-math-modify
+    "_" 'cdlatex-sub-superscript
+    "^" 'cdlatex-sub-superscript)
+
+  (defun cdlatex--texmathp () t)
 
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
@@ -101,8 +106,9 @@
           (?> "\\vec"  nil t nil nil)))
 
   (general-def cdlatex-mode-map
-    "TAB" 'nil
-    "<tab>" 'nil)
+    "$" nil
+    "TAB" nil
+    "<tab>" nil)
 
   (general-def org-mode-map
     "#" 'cdlatex-math-symbol))
