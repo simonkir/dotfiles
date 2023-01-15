@@ -26,4 +26,5 @@
 
 (use-package highlight-indent-guides
   :hook ((prog-mode org-mode LaTeX-mode) . highlight-indent-guides-mode)
+  :general (general-def-leader "t h" 'highlight-indent-guides-mode)
   :config (setq highlight-indent-guides-method 'bitmap))

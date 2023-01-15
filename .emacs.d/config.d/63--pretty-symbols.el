@@ -142,7 +142,8 @@
     ;;(org-superstar-mode 'toggle) ;; has severe performance impact
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t))))
+      (setq org-hide-emphasis-markers t)))
+  (message "sk:pretty-mode toggled"))
 
 (general-def-leader
   "t p" 'sk:toggle-pretty-mode)
