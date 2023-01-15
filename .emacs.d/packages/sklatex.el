@@ -145,6 +145,9 @@
 
 ; subscript conversion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun sklatex--string-nth (pos string)
+  (substring string pos (1+ pos)))
+
 (defun sklatex--input-to-subscript ()
   "convert previous char to subscript"
   (save-excursion
@@ -154,14 +157,46 @@
     (insert "}"))
   (right-char))
 
-(defun sklatex--input-to-superscript ()
-  "convert previous char to superscript"
+(defun sklatex--input-to-charge ()
+  "convert previous char to charge (when using chemistry mode)"
   (save-excursion
-    (left-char)
-    (insert "^{")
-    (right-char)
-    (insert "}"))
-  (right-char))
+    (left-char 3)
+    (if (not (looking-at-p "[-+]"))
+        ;; insert superscript
+        (progn
+          (right-char 2)
+          (insert "^{")
+          (right-char)
+          (insert "}"))
+
+      ;; pull charge into superscript
+      (right-char 1)
+      (delete-char 1)
+      (right-char 1)
+      (insert "}")
+
+      ;; calculate and insert correct charge
+      ;; works by analysing and replacing the char string inside the superscript
+      (let* ((beg (progn (search-backward "{" (- (point) 5)) (1+ (point))))
+             (end (progn (search-forward "}" (+ (point) 5)) (1- (point))))
+             (charge-chars (buffer-substring-no-properties beg end))
+             (charge-chars (concat (if (= (length charge-chars) 2) "1" "") charge-chars)) ;; ensures format [[:digit:]][-+][-+]
+             (charge-sign-1 (if (string= (sklatex--string-nth 1 charge-chars) "-") -1 1))
+             (charge-1 (* charge-sign-1 (string-to-number (sklatex--string-nth 0 charge-chars))))
+             (charge-2 (if (string= (sklatex--string-nth 2 charge-chars) "-") -1 1))
+             (charge-0 (+ charge-1 charge-2)))
+        (if (eq charge-0 0)
+            ;; remove superscript
+            (delete-region (- beg 2) (1+ end))
+          ;; replace superscript with correct charge
+          (delete-region beg end)
+          (left-char)
+          (unless (= (abs charge-0) 1)
+            (insert (number-to-string (abs charge-0))))
+          (if (< charge-0 0)
+              (insert "-")
+            (insert "+"))))))
+  (search-forward "}"))
 
 ;; TODO fix, so that is works with subscripts of size greater than 1
 (defun sklatex--input-delete-subscript ()
@@ -172,7 +207,7 @@
     (right-char)
     (delete-char 1)))
 
-(setq sklatex--chemical-formula-rx "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*")
+(setq sklatex--chemical-formula-rx "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*\\(\\^{[[:digit:]+-]+}\\)?")
 (setq sklatex--mathematical-quantity-rx "[[:alnum:]]*_{[[:alnum:]]}[[:alnum:]]")
 
 (defun sklatex-try-subscript-conversion ()
@@ -188,7 +223,7 @@
        ;; chemical superscript (charges)
        ((and sklatex--do-chemical-formula-conversion
              (looking-at (concat sklatex--chemical-formula-rx "[-+]\\_>")))
-        (setq conversion-method #'(sklatex--input-to-superscript)))
+        (setq conversion-method #'(sklatex--input-to-charge)))
        ;; delete mathematical subscript (when writing words)
        ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
              (looking-at sklatex--mathematical-quantity-rx))
