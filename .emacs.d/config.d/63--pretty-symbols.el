@@ -2,6 +2,27 @@
 
 
 
+; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun sk:toggle-pretty-mode ()
+  (interactive)
+  (prettify-symbols-mode 'toggle)
+  (when (derived-mode-p 'org-mode)
+    (org-toggle-pretty-entities)
+    ;;(org-superstar-mode 'toggle) ;; has severe performance impact
+    (unless (local-variable-p 'org-hide-emphasis-markers)
+      (if org-hide-emphasis-markers
+          (setq org-hide-emphasis-markers nil)
+        (setq org-hide-emphasis-markers t))))
+  (message "sk:pretty-mode toggled"))
+
+(general-def-leader
+  "t p" 'sk:toggle-pretty-mode)
+
+(general-def
+  "C-c p" 'sk:toggle-pretty-mode)
+
+
 
 ; prettify symbols mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -129,24 +150,3 @@
 (add-hook 'glsl-mode 'sk:prettify-symbols-glsl-mode)
 
 (global-prettify-symbols-mode)
-
-
-
-; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sk:toggle-pretty-mode ()
-  (interactive)
-  (prettify-symbols-mode 'toggle)
-  (when (derived-mode-p 'org-mode)
-    (org-toggle-pretty-entities)
-    ;;(org-superstar-mode 'toggle) ;; has severe performance impact
-    (if org-hide-emphasis-markers
-        (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t)))
-  (message "sk:pretty-mode toggled"))
-
-(general-def-leader
-  "t p" 'sk:toggle-pretty-mode)
-
-(general-def
-  "C-c p" 'sk:toggle-pretty-mode)

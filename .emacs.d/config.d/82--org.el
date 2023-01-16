@@ -42,6 +42,13 @@
         '(("+" . "-") ("-" . "+")
           ("1." . "-") ("1)" . "-")))
 
+  (setq org-emphasis-alist
+        '(("*" bold)
+          ("/" italic)
+          ("_" underline)
+          ("=" org-verbatim verbatim)
+          ("~" org-code verbatim)))
+
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
 
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
