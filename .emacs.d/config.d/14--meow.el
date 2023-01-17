@@ -84,6 +84,9 @@
 
 
 
+  (general-def meow-insert-state-keymap
+    "C-z" 'meow-motion-mode)
+
   (general-def meow-motion-state-keymap
     "<escape>" nil
     "C-z" 'meow-normal-mode
