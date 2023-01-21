@@ -21,15 +21,15 @@ home = os.path.expanduser('~')
 # colors ######################################################################
 def init_colors():
     return [["#282c34", "#282c34"], # color 0, black
-            ["#ed254e", "#ed254e"], # color 1, red
-            ["#71f79f", "#71f79f"], # color 2, green
-            ["#f9dc5c", "#f9dc5c"], # color 3, yellow
-            ["#66abff", "#66abff"], # color 4, blue
-            ["#c74ded", "#c74ded"], # color 5, magenta
-            ["#00c1e4", "#00c1e4"], # color 6, teal
-            ["#dcdfe4", "#dcdfe4"], # color 7, silver
-            ["#c3c7d1", "#c3c7d1"], # foreground
-            ["#141925", "#141925"]] # background
+       ["#ed254e", "#ed254e"], # color 1, red
+       ["#71f79f", "#71f79f"], # color 2, green
+       ["#f9dc5c", "#f9dc5c"], # color 3, yellow
+       ["#66abff", "#66abff"], # color 4, blue
+       ["#c74ded", "#c74ded"], # color 5, magenta
+       ["#00c1e4", "#00c1e4"], # color 6, teal
+       ["#dcdfe4", "#dcdfe4"], # color 7, silver
+       ["#c3c7d1", "#c3c7d1"], # foreground
+       ["#141925", "#141925"]] # background
 
 
 colors = init_colors()
@@ -265,6 +265,7 @@ def init_widgets_list():
     widgets_list = [
 
         # workspaces ##########################################################
+
         widget.GroupBox(
             margin_y = 3, margin_x = 0,
             padding_y = 6, padding_x = 5,
@@ -281,7 +282,9 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # layout section ######################################################
+
         widget.CurrentLayoutIcon(
             scale = 0.7,
         ),
@@ -293,7 +296,9 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # window name section #################################################
+
         widget.CurrentScreen(
             font = "FontAwesome",
             active_text = "",
@@ -304,14 +309,9 @@ def init_widgets_list():
         widget.WindowName(
         ),
 
+
         # updates #############################################################
-        # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[5],
-        # ),
+
         widget.Image(
             filename = "~/.config/qtile/icons/updates.png",
             margin = icon_margin,
@@ -327,47 +327,15 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-        # # battery #############################################################
-        # widget.TextBox(
-        # #     font = "FontAwesome",
-        # #     fontsize = 16,
-        # #     text = "  ",
-        # #     padding = 0,
-        # #     foreground = colors[4],
-        # # ),
-        # widget.Image(
-        #     filename = "~/.config/qtile/icons/battery.png",
-        #     margin = icon_margin,
-        # ),
-        # widget.Battery(
-        #     #hide_threshold = 0.9, # doesnt hide icon
-        #     low_percentage = 0.2,
-        #     notify_below = 0.25,
-        #     charge_char = "∧",
-        #     discharge_char = "∨",
-        #     full_string = "full",
-        #     update_interval = 10,
-        #     background = colors[9],
-        # ),
-        # widget.Sep(
-        #     linewidth = sep_linewidth,
-        #     padding = sep_padding,
-        # ),
 
         # cpu #################################################################
-        # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[5],
-        # ),
+
         widget.Image(
             filename = "~/.config/qtile/icons/cpu.png",
             margin = icon_margin,
         ),
         widget.CPU(
-            format = "{load_percent}%",
+            format = "{load_percent} %",
             update_interval = 2,
         ),
         widget.Sep(
@@ -375,19 +343,15 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # temperature #########################################################
-        # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[5],
-        # ),
+
         widget.Image(
             filename = "~/.config/qtile/icons/temperature.png",
             margin = icon_margin,
         ),
         widget.ThermalSensor(
+            format = "{temp} {unit}",
             threshold = 70,
             foreground = colors[8],
             foreground_alert = colors[1],
@@ -397,20 +361,15 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # memory ##############################################################
-        # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[4],
-        # ),
+
         widget.Image(
             filename = "~/.config/qtile/icons/memory.png",
             margin = icon_margin,
         ),
         widget.Memory(
-            format = "{MemUsed:.1f}G",
+            format = "{MemUsed:.1f} G",
             measure_mem = "G",
             update_interval = 1,
         ),
@@ -419,14 +378,9 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # clock ###############################################################
-        # widget.TextBox(
-        #     font = "FontAwesome",
-        #     fontsize = 16,
-        #     text = "  ",
-        #     padding = 0,
-        #     foreground = colors[4],
-        # ),
+
         widget.Image(
             filename = "~/.config/qtile/icons/clock.png",
             margin = icon_margin,
@@ -439,7 +393,9 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+
         # systray #############################################################
+
         widget.Systray(
             icon_size = 20,
         ),
