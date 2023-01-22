@@ -25,7 +25,7 @@
   :demand t ;; needed for dashboard
   :config
   (setq recentf-max-saved-items 300)
-  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/*"))
+  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/elpa/*"))
   (add-to-list 'recentf-exclude (expand-file-name "/usr/share/emacs/*"))
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*org.org")
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*misc.org")

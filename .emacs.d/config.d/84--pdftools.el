@@ -7,6 +7,7 @@
   :config
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
+  (setq pdf-view-midnight-invert nil)
 
   (setq pdf-tools-enabled-modes '(pdf-view-midnight-minor-mode
                                   pdf-view-auto-slice-minor-mode
