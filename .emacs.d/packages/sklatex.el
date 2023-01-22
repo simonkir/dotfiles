@@ -3,9 +3,9 @@
 ;; Copyright (C) 2022  simonkir
 ;; Author: simonkir
 
+
+
 ;;; Code:
-
-
 
 ; definition of variables ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -49,6 +49,9 @@
    ((derived-mode-p 'latex-mode) (texmathp))
    ((derived-mode-p 'org-mode) (eq (car (org-element-context)) 'latex-environment))
    (t nil)))
+
+(defun sklatex--string-nth (pos string)
+  (substring string pos (1+ pos)))
 
 
 
@@ -132,6 +135,13 @@
         (sklatex--indent-for-symbol)
         (sklatex--insert-alignment-around-symbol)))))
 
+(defun sklatex--delete-alignment-operators ()
+  (unless (looking-at-p "&")
+    (re-search-backward "&" (- (point) 30)))
+  (delete-char 1)
+  (re-search-backward "&" (- (point) 30))
+  (delete-char 1))
+
 (defun sklatex-activate-alignment-keybinds-equality ()
   (interactive)
   (setq sklatex--do-symbol-alignment t)
@@ -145,9 +155,6 @@
 
 
 ; subscript conversion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sklatex--string-nth (pos string)
-  (substring string pos (1+ pos)))
 
 (defun sklatex--input-to-subscript ()
   "convert previous char to subscript"
@@ -199,41 +206,41 @@
             (insert "+"))))))
   (search-forward "}" (+ (point) 3)))
 
-;; TODO fix, so that is works with subscripts of size greater than 1
-(defun sklatex--input-delete-subscript ()
-  "remove subscript on previous char"
-  (save-excursion
-    (left-char 5)
-    (delete-char 2)
-    (right-char)
-    (delete-char 1)))
+(defun sklatex--delete-supersubscript ()
+  "user-invoked command to delete unwanted subscript that was inserted automatically
 
-(setq sklatex--chemical-formula-rx "[[:alpha:]]\\([[:alpha:]]*\\(_{[[:digit:]]+}\\)?\\)*\\(\\^{[[:digit:]+-]+}\\)?")
+not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
+  (re-search-backward "[\\^_]" (- (point) 30))
+  (delete-char 2)
+  (search-forward "}")
+  (delete-backward-char 1))
+
+(setq sklatex--chemical-formula-rx "\\([[:upper:]][[:lower:]]?\\(_{[[:digit:]]+}\\)?\\)+\\(\\^{[[:digit:]+-]+}\\)?")
 (setq sklatex--mathematical-quantity-rx "[[:alnum:]]*_{[[:alnum:]]}[[:alnum:]]")
 
 (defun sklatex-try-subscript-conversion ()
   "determine which subscript conversion should be done and execute said conversion"
-  (let (conversion-method)
-    (save-excursion
-      (skip-chars-backward "[:alnum:]^_{}+-\\\\")
-      (cond
-       ;; chemical subscript (index numbers)
-       ((and sklatex--do-chemical-formula-conversion
-             (looking-at (concat sklatex--chemical-formula-rx "[[:digit:]]\\_>")))
-        (setq conversion-method #'(sklatex--input-to-subscript)))
-       ;; chemical superscript (charges)
-       ((and sklatex--do-chemical-formula-conversion
-             (looking-at (concat sklatex--chemical-formula-rx "[-+]\\_>")))
-        (setq conversion-method #'(sklatex--input-to-charge)))
-       ;; delete mathematical subscript (when writing words)
-       ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
-             (looking-at sklatex--mathematical-quantity-rx))
-        (setq conversion-method #'(sklatex--input-delete-subscript)))
-       ;; mathematical subscript (e. g. when using indexed quantities)
-       ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
-             (looking-at "[[:alpha:]][[:alnum:]]\\_>"))
-        (setq conversion-method #'(sklatex--input-to-subscript)))))
-    (eval conversion-method)))
+  (let* ((conversion-method)
+         (end (point))
+         (beg (save-excursion (skip-chars-backward "[:alnum:]^_{}+-\\\\") (point)))
+         (symbol (buffer-substring beg end)))
+    (cond
+     ;; chemical subscript (index numbers)
+     ((and sklatex--do-chemical-formula-conversion
+           (string-match (concat sklatex--chemical-formula-rx "[[:digit:]]") symbol))
+      (sklatex--input-to-subscript))
+     ;; chemical superscript (charges)
+     ((and sklatex--do-chemical-formula-conversion
+           (string-match (concat sklatex--chemical-formula-rx "[-+]") symbol))
+      (sklatex--input-to-charge))
+     ;; delete mathematical subscript (when writing words)
+     ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
+           (string-match sklatex--mathematical-quantity-rx symbol))
+      (sklatex--delete-supersubscript))
+     ;; mathematical subscript (e. g. when using indexed quantities)
+     ((and sklatex--do-subscript-conversion (sklatex-in-latex-p)
+           (string-match "[[:alpha:]][[:alnum:]]" symbol))
+      (sklatex--input-to-subscript)))))
 
 
 
@@ -261,23 +268,7 @@
 
 
 
-; removing sklatex-stuff  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun sklatex--delete-alignment-operators ()
-  (unless (looking-at-p "&")
-    (re-search-backward "&" (- (point) 30)))
-  (delete-char 1)
-  (re-search-backward "&" (- (point) 30))
-  (delete-char 1))
-
-(defun sklatex--delete-single-supersubscript ()
-  "user-invoked command to delete unwanted subscript that was inserted automatically
-
-not meant to be called from elisp. for this purpose, see sklatex--input-delete-subscript"
-  (re-search-backward "[\\^_]" (- (point) 30))
-  (delete-char 2)
-  (right-char)
-  (delete-char 1))
+; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-remove-effect-at-point ()
   "depending on the previous character, remove effects added by sklatex"
@@ -286,14 +277,10 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
     (re-search-backward "[&}]" (- (point) 30))
     (cond
      ((looking-at-p "&") (sklatex--delete-alignment-operators))
-     ((looking-at-p "}") (sklatex--delete-single-supersubscript)))))
+     ((looking-at-p "}") (sklatex--delete-supersubscript)))))
 
 (general-def sklatex-mode-map
   "C-s" 'sklatex-remove-effect-at-point)
-
-
-
-; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sklatex-dispatch (key)
   "control which sklatex effects are active"
