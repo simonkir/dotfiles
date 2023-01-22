@@ -4,23 +4,11 @@
 
 ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sk:toggle-pretty-mode ()
-  (interactive)
-  (prettify-symbols-mode 'toggle)
-  (when (derived-mode-p 'org-mode)
-    (org-toggle-pretty-entities)
-    ;;(org-superstar-mode 'toggle) ;; has severe performance impact
-    (unless (local-variable-p 'org-hide-emphasis-markers)
-      (if org-hide-emphasis-markers
-          (setq org-hide-emphasis-markers nil)
-        (setq org-hide-emphasis-markers t))))
-  (message "sk:pretty-mode toggled"))
-
 (general-def-leader
-  "t p" 'sk:toggle-pretty-mode)
+  "t p" 'prettify-symbols-mode)
 
 (general-def
-  "C-c p" 'sk:toggle-pretty-mode)
+  "C-c p" 'prettify-symbols-mode)
 
 
 

@@ -80,6 +80,12 @@
         (org-return)))
      (t (org-return))))
 
+  (defun sk:org-toggle-emphasis-markers ()
+    (interactive)
+    (if org-hide-emphasis-markers
+        (setq org-hide-emphasis-markers nil)
+      (setq org-hide-emphasis-markers t)))
+
 
 
   (general-def-localleader org-mode-map
@@ -87,6 +93,8 @@
     "b" 'org-cycle-list-bullet
     "B" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
     "c" #'(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
+    "p" 'org-toggle-pretty-entities
+    "P" 'sk:org-toggle-emphasis-markers
     "n" 'org-num-mode
     "h" 'org-toggle-heading
     "t" 'org-todo)
