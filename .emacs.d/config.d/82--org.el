@@ -89,12 +89,14 @@
 
 
   (general-def-localleader org-mode-map
-    "-" 'org-ctrl-c-minus ;; separator line in table
     "b" 'org-cycle-list-bullet
     "B" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
     "c" #'(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
     "p" 'org-toggle-pretty-entities
     "P" 'sk:org-toggle-emphasis-markers
+    "-" 'org-ctrl-c-minus ;; separator line in table
+    "f" 'org-table-toggle-coordinate-overlays
+    "F" 'org-table-field-info
     "n" 'org-num-mode
     "h" 'org-toggle-heading
     "t" 'org-todo)

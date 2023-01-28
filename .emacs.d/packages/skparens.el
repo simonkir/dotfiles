@@ -21,6 +21,10 @@
         ("s" . ("\\left[ " . " \\right]"))
         ("c" . ("\\left\\{ " . " \\right\\}"))
         ("a" . ("\\left| " . " \\right|"))
+        ("R" . ("\\left(" . "\\right)"))
+        ("S" . ("\\left[" . "\\right]"))
+        ("C" . ("\\left\\{" . "\\right\\}"))
+        ("A" . ("\\left|" . "\\right|"))
         ;; elisp pairs
         ("`" . ("`" . "'"))
         ;; quotes

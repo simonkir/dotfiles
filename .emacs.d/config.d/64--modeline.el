@@ -64,7 +64,10 @@ useful when switching themes also changes the colors of the modeline"
 
   (telephone-line-defsegment sk:tl-dir-segment ()
     (when (buffer-file-name)
-      (car (last (split-string (buffer-file-name) "/") 2))))
+      (let ((s (car (last (split-string (buffer-file-name) "/") 2))))
+        (if (< (length s) 16)
+            s
+          (concat (substring s 0 15) "…")))))
 
   (telephone-line-defsegment sk:tl-file-segment ()
     mode-line-buffer-identification)
