@@ -78,6 +78,7 @@
   (add-to-list 'prettify-symbols-alist '("&\\longrightarrow&" . "⟶"))
   (add-to-list 'prettify-symbols-alist '("\\longleftarrow" . "⟵"))
   (add-to-list 'prettify-symbols-alist '("&\\longleftarrow&" . "⟵"))
+  (add-to-list 'prettify-symbols-alist '("\\vartheta" . "ϑ"))
   (add-to-list 'prettify-symbols-alist '("\\pm" . "±"))
   (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°")))
