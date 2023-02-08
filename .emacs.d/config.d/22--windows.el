@@ -30,6 +30,10 @@
   (balance-windows)
   (other-window 1))
 
+(defun sk:cycle-windows ()
+  (interactive)
+  (select-window (next-window (selected-window) nil (selected-frame))))
+
 
 
 (general-def-leader
@@ -52,7 +56,7 @@
   "w c" 'delete-window
   "w C" 'kill-buffer-and-window)
 
-(general-def "C-SPC" 'next-window-any-frame)
+(general-def "C-SPC" 'sk:cycle-windows)
 
 
 
