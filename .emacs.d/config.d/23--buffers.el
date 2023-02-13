@@ -29,25 +29,30 @@
 
 (defun sk:cycle-buffers (step)
   (let ((buffers (sk:buffer-list)))
-    (when buffers
-      ;; cycling logic
-      (let (nextpos)
-        (if (member (buffer-name) buffers)
-            (setq nextpos (+ (cl-position (buffer-name) buffers) step))
-          (setq nextpos 0))
-        (when (>= nextpos (length buffers))
-          (setq nextpos (- nextpos (length buffers))))
-        (when (< nextpos 0)
-          (setq nextpos (+ nextpos (length buffers))))
-        (switch-to-buffer (nth nextpos buffers) t))
-      ;; visualization in minibuffer
-      (let ((minibuffer-message-timeout 10)
-            (bmessage ""))
-        (dolist (element buffers)
-          (when (string= element (buffer-name))
-            (setq element (propertize element 'face '(:weight bold :foreground "#98be65"))))
-          (setq bmessage (concat bmessage element " / ")))
-        (minibuffer-message "%s" (substring bmessage 0 -3))))))
+    (if buffers
+        ;; cycle buffers
+        (progn
+          ;; cycling logic
+          (let (nextpos)
+            (if (member (buffer-name) buffers)
+                (setq nextpos (+ (cl-position (buffer-name) buffers) step))
+              (setq nextpos 0))
+            (when (>= nextpos (length buffers))
+              (setq nextpos (- nextpos (length buffers))))
+            (when (< nextpos 0)
+              (setq nextpos (+ nextpos (length buffers))))
+            (switch-to-buffer (nth nextpos buffers) t))
+          ;; visualization in minibuffer
+          (let ((minibuffer-message-timeout 10)
+                (bmessage ""))
+            (dolist (element buffers)
+              (when (string= element (buffer-name))
+                (setq element (propertize element 'face '(:weight bold :foreground "#98be65"))))
+              (setq bmessage (concat bmessage element " / ")))
+            (minibuffer-message "%s" (substring bmessage 0 -3))))
+      ;; visit dashboard if no buffers are open
+      (switch-to-buffer "*dashboard*")
+      (minibuffer-message "%s" (propertize "*dashboard*" 'face '(:weight bold :foreground "#98be65"))))))
 
 (defun sk:next-buffer ()
   (interactive)
