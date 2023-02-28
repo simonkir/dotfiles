@@ -5,6 +5,6 @@
 
 #+options: toc:nil H:4 num:3 todo:nil
 
-#+title: Lösungen 
-#+date: x 2022
+#+title: Lösungen
+#+date: x 2023
 #+author: Simon K., Js2

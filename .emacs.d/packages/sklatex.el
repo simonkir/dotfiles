@@ -1,6 +1,5 @@
 ;;; sklatex.el --- sklatex                           -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022  simonkir
 ;; Author: simonkir
 
 
