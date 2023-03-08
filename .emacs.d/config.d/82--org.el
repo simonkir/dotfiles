@@ -84,7 +84,9 @@
     (interactive)
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t)))
+      (setq org-hide-emphasis-markers t))
+    (org-restart-font-lock)
+    (message "org: toggled display of emphasis markers"))
 
 
 
