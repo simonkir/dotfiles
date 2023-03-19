@@ -95,7 +95,7 @@
 
 ; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq sklatex-aligned-symbols '("=" ">" "<" "\\\\approx" "\\\\leq" "\\\\geq" "\\\\Leftrightarrow"  "\\\\leftrightarrow" "\\\\rightleftharpoons" "\\\\longrightarrow" "\\\\longleftarrow"))
+(setq sklatex-aligned-symbols '("=" ">" "<" "\\\\approx" "\\\\leq" "\\\\geq" "\\\\Leftrightarrow"  "\\\\leftrightarrow" "\\\\rightleftharpoons" "\\\\longrightarrow" "\\\\longleftarrow" "\\\\overset{!}{=}"))
 
 (defun sklatex--indent-for-symbol ()
   (let (symbol-length

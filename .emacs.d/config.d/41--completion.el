@@ -29,7 +29,8 @@
            (call-interactively #'org-table-next-field))
           ((when yas-minor-mode
              (let ((yas-fallback-behavior 'return-nil))
-               (yas-expand))))
+               (if (yas-expand)
+                   (run-hooks 'post-self-insert-hook)))))
           ((and (texmathp)
                 (not (derived-mode-p 'prog-mode)))
            (call-interactively #'cdlatex-tab))

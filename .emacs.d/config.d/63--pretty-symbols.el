@@ -36,9 +36,12 @@
 
 (defun sk:prettify-symbols-LaTeX-mode ()
   ;;(add-to-list 'prettify-symbols-alist '("&" . (?\s (Bc . Bc) ?·)))
+  (add-to-list 'prettify-symbols-alist '("&" . "·"))
+  (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·)))
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
+  (add-to-list 'prettify-symbols-alist '("&\\overset{!}{=}&" . (?= (tc . bc) ?!)))
   (add-to-list 'prettify-symbols-alist '("&\\approx&" . "≈"))
   (add-to-list 'prettify-symbols-alist '("&\\leftrightarrow&" . (?\s (Bc . Bc) ?↔)))
   (add-to-list 'prettify-symbols-alist '("&\\Leftrightarrow&" . (?\s (Bc . Bc) ?⇔)))
