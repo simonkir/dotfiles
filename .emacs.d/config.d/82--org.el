@@ -240,7 +240,10 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     (if (derived-mode-p 'org-mode)
         (let ((org-src-window-setup 'current-window))
           (org-edit-special))
-      (org-edit-src-exit)))
+      (let ((buffer-name (buffer-name (current-buffer))))
+        (cond
+         ((string-match-p "Org Src" buffer-name) (org-edit-src-exit))
+         ((string-match-p "Formula" buffer-name) (org-table-fedit-finish '(4)))))))
 
   (defun sk:leader-E ()
     (interactive)
