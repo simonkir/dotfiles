@@ -5,7 +5,7 @@
 (use-package org
   :config
 
-  ; content ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; visuals ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-num-max-level 3)
   (setq org-return-follows-link t)
@@ -18,6 +18,24 @@
   (setq org-fontify-whole-heading-line t)
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
+
+  (defun sk:org-toggle-emphasis-markers ()
+    (interactive)
+    (if org-hide-emphasis-markers
+        (setq org-hide-emphasis-markers nil)
+      (setq org-hide-emphasis-markers t))
+    (org-restart-font-lock)
+    (message "org: toggled display of emphasis markers"))
+
+;;  (general-def-localleader org-mode-map
+;;    "p" 'org-toggle-pretty-entities
+;;    "P" 'sk:org-toggle-emphasis-markers)
+
+  (general-def org-mode-map
+    "C-c C-x C-h" 'org-toggle-pretty-entities
+    "C-c C-x H" 'sk:org-toggle-emphasis-markers)
+
+
 
   ;; prevent < and > from being interpreted as delimiters
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
@@ -32,6 +50,24 @@
   (add-hook 'org-mode-hook #'org-num-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
+
+
+
+  ; navigation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (setq org-goto-auto-isearch nil)
+
+;;  (general-def org-goto-map
+;;    "j" 'outline-next-visible-heading
+;;    "k" 'outline-previous-visible-heading
+;;    "l" 'outline-forward-same-level
+;;    "h" 'outline-backward-same-level)
+
+  (general-def org-mode-map
+    "M-<prior>" 'org-backward-element
+    "M-<next>"  'org-forward-element
+    "C-<prior>" 'org-previous-visible-heading
+    "C-<next>"  'org-next-visible-heading)
 
 
 
@@ -52,10 +88,6 @@
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
 
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-
-
-
-  ; general-purpose mappings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
@@ -80,37 +112,12 @@
         (org-return)))
      (t (org-return))))
 
-  (defun sk:org-toggle-emphasis-markers ()
-    (interactive)
-    (if org-hide-emphasis-markers
-        (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t))
-    (org-restart-font-lock)
-    (message "org: toggled display of emphasis markers"))
-
-
-
-  (general-def-localleader org-mode-map
-    "b" 'org-cycle-list-bullet
-    "B" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
-    "c" #'(lambda () (interactive) (org-ctrl-c-ctrl-c '(4)))
-    "p" 'org-toggle-pretty-entities
-    "P" 'sk:org-toggle-emphasis-markers
-    "-" 'org-ctrl-c-minus ;; separator line in table
-    "f" 'org-table-toggle-coordinate-overlays
-    "F" 'org-table-field-info
-    "n" 'org-num-mode
-    "h" 'org-toggle-heading
-    "t" 'org-todo)
+;;  (general-def org-mode-map
+;;    "C-c _" #'(lambda () (interactive) (org-cycle-list-bullet 'previous)))
 
   (general-def org-mode-map
     "RET" 'sk:org-return
     "M-RET" 'org-ctrl-c-ctrl-c
-
-    "M-<prior>" 'org-backward-element
-    "M-<next>"  'org-forward-element
-    "C-<prior>" 'org-previous-visible-heading
-    "C-<next>"  'org-next-visible-heading
 
     "M-h" 'org-metaleft
     "M-H" 'org-shiftmetaleft
@@ -121,7 +128,6 @@
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
 
-  ;; override org default tab key behaviour
   (general-def org-mode-map
     "C-#" #'(lambda () (interactive) (insert "#")))
 
@@ -154,11 +160,16 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-  (general-def-localleader org-mode-map
-    "i i" 'sk:org-toggle-inline-images
-    "i b" 'org-toggle-inline-images
-    "i B" 'org-remove-inline-images
-    "i r" 'org-redisplay-inline-images)
+;;  (general-def-localleader org-mode-map
+;;    "i i" 'sk:org-toggle-inline-images
+;;    "i b" 'org-toggle-inline-images
+;;    "i B" 'org-remove-inline-images
+;;    "i r" 'org-redisplay-inline-images)
+
+  (general-def org-mode-map
+    "C-c C-x C-v" 'sk:org-toggle-inline-images
+    "C-c C-x V" 'org-toggle-inline-images
+    "C-c C-x M-v" 'org-redisplay-inline-images)
 
 
 
@@ -202,15 +213,18 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-  (general-def-localleader org-mode-map
-    "l l" 'sk:org-latex-preview-at-point
-    "l L" #'(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
-    "l b" #'(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
-    "l B" #'(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
-    "l +" 'sk:org-preview-latex-scale-increase
-    "l -" 'sk:org-preview-latex-scale-decrease
-    "l 0" 'sk:org-preview-latex-scale-reset
-    "l s" 'sk:org-preview-latex-scale-set)
+;;  (general-def-localleader org-mode-map
+;;    "l l" 'sk:org-latex-preview-at-point
+;;    "l L" #'(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
+;;    "l b" #'(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
+;;    "l B" #'(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
+;;    "l +" 'sk:org-preview-latex-scale-increase
+;;    "l -" 'sk:org-preview-latex-scale-decrease
+;;    "l 0" 'sk:org-preview-latex-scale-reset
+;;    "l s" 'sk:org-preview-latex-scale-set)
+
+  (general-def org-mode-map
+    "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
 
 
@@ -267,9 +281,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 (use-package ox
   :after org
-  :general (general-def-localleader org-mode-map
-    "X" 'org-export-dispatch
-    "x" #'(lambda () (interactive) (org-export-dispatch '(4))))
   :config
   (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f")))
 

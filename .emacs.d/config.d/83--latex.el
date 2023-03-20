@@ -53,7 +53,11 @@
 
   (general-def-localleader '(org-mode-map LaTeX-mode-map)
     "k" 'sklatex-dispatch
-    "K" 'sklatex-mode))
+    "K" 'sklatex-mode)
+
+  (general-def '(org-mode-map LaTeX-mode-map)
+    "C-c k" 'sklatex-dispatch
+    "C-c K" 'sklatex-mode))
 
 
 

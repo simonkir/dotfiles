@@ -7,9 +7,6 @@
 (general-def-leader
   "t p" 'prettify-symbols-mode)
 
-(general-def
-  "C-c p" 'prettify-symbols-mode)
-
 
 
 ; prettify symbols mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

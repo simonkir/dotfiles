@@ -29,7 +29,6 @@
     "C-k" 'icomplete-backward-completions)
 
   (general-def-leader
-    "x" 'execute-extended-command
     "X" 'eval-expression)
 
 

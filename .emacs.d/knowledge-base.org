@@ -1,0 +1,85 @@
+#+startup: nonum
+
+* 2 – Navigation
+** Files
+- ~C-x x g~: revert buffer quick
+
+** Quitting
+- ~C-x C-c~: perform soft quit (= leaving all file-visiting buffers open)
+- ~C-x C~: perform harsh quit (= killing all file-visiting buffes)
+- ~C-x !~: perform daemon quit (= killing the daemon)
+
+* 4 – Usage
+- ~M-:~: eval expression
+
+* 6 – Visuals
+- ~C-x +/-/0~: change text size
+
+* 8 – Major / Minor Modes
+** Org
+*** Navigation
+**** General
+- ~C-c C-n/p~: go to next / previous heading
+- ~C-c C-f/b~: go to next / previous heading (while maintaining level)
+- ~C-c C-u~: backward to higher level heading
+
+**** TODO Org-Goto
+- ~C-c C-j~: launch org-goto
+
+*** Lists
+- ~C-c *~: turn list items into headlines
+- ~C-c -~: rotate checkbox type
+- TODO keybind for rotate checkbox backward
+- ~C-c C-c~: toggle checkbox status
+- ~C-u C-c C-c~: add / remove checkbox
+
+*** Headings
+- ~C-c C-t~: toggle TODO-state
+- ~C-c C-q~: set tags
+- ~C-u C-c C-q~: re-align tags
+
+*** Visibility
+- ~C-x n s/w~: narrow buffer to subtree / widen buffer
+
+*** Tables
+**** Tables
+- ~C-c |~: create table (with dimensions)
+- ~C-c -~: insert horizontal separator
+- ~C-c RET~: insert horizontal separator and move below it
+
+**** Spreadsheets
+- ~C-c *~: re-calculate current line
+- ~C-u C-c *~: re-calculate table
+- ~C-u C-u C-c *~: iterate current table to stability
+- ~C-c ?~: get info for current table field
+- ~C-c }~: toggle table field visualization
+
+**** Formula Editor
+- ~C-c '~: open formula editor
+- ~C-c C-q~: discard changes
+- ~C-c C-c~: apply changes
+- ~C-u C-c C-c~: apply changes and re-calculate table
+- ~C-c C-r~: toggle reference styles
+
+*** Visuals
+- ~C-c C-x C-h~: toggle pretty entities
+- ~C-c C-x H~: toggle emphasis markers
+- ~C-c C-x C-v~: toggle image preview (current line)
+- ~C-c C-x V~: toggle image preview (whole buffer)
+- ~C-c C-x M-v~: redisplay images
+- ~C-c C-x C-l~: toggle latex preview
+- ~C-c C-x L~: set latex preview scale
+
+*** Export
+- ~C-c C-e~: export dispatcher
+- ~C-u C-c C-e~: repeat last export action
+
+** Calc
+- ~C-x *~: calc-dispatch
+- ~C-x * *~: start calc (open last used interface)
+
+** Magit
+- ~C-c g~: magit-file-dispatch
+- ~C-x G~: magit-dispatch
+- ~C-x g~: magit-status
+

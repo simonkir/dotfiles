@@ -16,19 +16,19 @@
 ;; meow behaves weridly without these deifinitions
 ;; see variable-help for details
 
-(setq meow--kbd-forward-char "C-x f")
-(setq meow--kbd-backward-char "C-x b")
-(setq meow--kbd-yank "C-x y")
+(setq meow--kbd-forward-char "C-x 9 f")
+(setq meow--kbd-backward-char "C-x 9 b")
+(setq meow--kbd-yank "C-x 9 y")
 
 (general-def
-  "C-x f" 'forward-char
-  "C-x b" 'backward-char
-  "C-x y" 'yank
+  "C-x 9 f" 'forward-char
+  "C-x 9 b" 'backward-char
+  "C-x 9 y" 'yank
   "C-f" 'scroll-up
   "C-b" 'scroll-down
   "C-e" 'scroll-up-line
   "C-y" 'scroll-down-line)
-  
+
 (general-def meow-insert-state-keymap
   "C-e" 'delete-backward-char
   "C-w" 'backward-kill-word
@@ -41,8 +41,3 @@
 
 (use-package avy
   :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
-
-
-
-(use-package follow
-  :general (general-def-leader "t f" 'follow-mode))

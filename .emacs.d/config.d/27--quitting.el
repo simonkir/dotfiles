@@ -45,8 +45,13 @@ i. e. killing the terminal, unless there are unsaved changes"
 
 
 
-(general-def-leader
-  ;;("ESC" 'keyboard-escape-quit ;; unknown what this binding is good for
-  "!" 'sk:daemon-quit
-  "q" 'sk:soft-quit
-  "Q" 'sk:harsh-quit)
+;;(general-def-leader
+;;  ;;("ESC" 'keyboard-escape-quit ;; unknown what this binding is good for
+;;  "!" 'sk:daemon-quit
+;;  "q" 'sk:soft-quit
+;;  "Q" 'sk:harsh-quit)
+
+(general-def
+  "C-x C-c" 'sk:soft-quit
+  "C-x C" 'sk:harsh-quit
+  "C-x !" 'sk:daemon-quit)

@@ -13,11 +13,11 @@
   (setq meow-display-thing-help           nil)
 
   (setq meow-keypad-self-insert-undefined nil)
-  (setq meow-keypad-start-keys            nil)
+  (setq meow-keypad-start-keys            '((?c . ?c) (?u . ?u) (?x . ?x)))
   (setq meow-keypad-ctrl-meta-prefix      nil)
-  (setq meow-keypad-meta-prefix           nil)
-  (setq meow-keypad-literal-prefix        nil)
-  (setq meow-keypad-leader-dispatch       sk:leader-map)
+  (setq meow-keypad-meta-prefix           ?m)
+  (setq meow-keypad-literal-prefix        ?\s)
+  ;;(setq meow-keypad-leader-dispatch       sk:leader-map)
 
   (setq meow-mode-state-list '((vterm-mode . insert)))
   (setq meow-expand-exclude-mode-list nil)
