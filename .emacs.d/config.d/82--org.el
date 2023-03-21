@@ -35,18 +35,6 @@
     "C-c C-x C-h" 'org-toggle-pretty-entities
     "C-c C-x H" 'sk:org-toggle-emphasis-markers)
 
-
-
-  ;; prevent < and > from being interpreted as delimiters
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
-
-  ;; for doc, see 83--auctex.el
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-
-  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
-
   (add-hook 'org-mode-hook #'org-num-mode)
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
@@ -57,17 +45,41 @@
 
   (setq org-goto-auto-isearch nil)
 
-;;  (general-def org-goto-map
-;;    "j" 'outline-next-visible-heading
-;;    "k" 'outline-previous-visible-heading
-;;    "l" 'outline-forward-same-level
-;;    "h" 'outline-backward-same-level)
-
   (general-def org-mode-map
     "M-<prior>" 'org-backward-element
     "M-<next>"  'org-forward-element
     "C-<prior>" 'org-previous-visible-heading
-    "C-<next>"  'org-next-visible-heading)
+    "C-<next>"  'org-next-visible-heading
+
+    "C-c C-j" 'meow-sk:org-goto-mode)
+
+
+
+  ;; custom org-goto implementation
+  (setq meow-sk:org-goto-state-map (make-keymap))
+
+  (meow-define-state sk:org-goto
+    "custom meow implementation of org-goto"
+    :lighter " [G]"
+    :keymap meow-sk:org-goto-state-map)
+
+  (general-def meow-sk:org-goto-state-map
+    "TAB" 'org-cycle
+    "<tab>" 'org-cycle
+    "S-TAB" 'org-shifttab
+    "<backtab>" 'org-shifttab
+    "n" 'outline-next-visible-heading
+    "j" 'outline-next-visible-heading
+    "p" 'outline-previous-visible-heading
+    "k" 'outline-previous-visible-heading
+    "f" 'outline-forward-same-level
+    "l" 'outline-forward-same-level
+    "b" 'outline-backward-same-level
+    "h" 'outline-backward-same-level
+    "u" 'outline-up-heading
+    "q" 'meow-normal-mode
+    "ESC" 'meow-normal-mode
+    "RET" 'meow-normal-mode)
 
 
 
@@ -85,24 +97,26 @@
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
+  ;; prevent < and > from being interpreted as delimiters
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
+
+  ;; for doc, see 83--auctex.el
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
+
+  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
+
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
-
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
+
 
   (defun sk:org-return ()
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
     (interactive)
     (cond
      ((org-at-table-p) (org-table-insert-row '(4)))
-     ;;((org-at-table-p)
-     ;; (if (save-excursion
-     ;;       (forward-line)
-     ;;       (beginning-of-line)
-     ;;       (looking-at-p "\\s-*|"))
-     ;;     (next-line)
-     ;;   (org-table-insert-row '(4))))
      ((org-in-item-p)
       (if (save-excursion
             (beginning-of-line)
@@ -112,10 +126,10 @@
         (org-return)))
      (t (org-return))))
 
-;;  (general-def org-mode-map
-;;    "C-c _" #'(lambda () (interactive) (org-cycle-list-bullet 'previous)))
-
   (general-def org-mode-map
+    "C-c C-_" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
+    "C-#" #'(lambda () (interactive) (insert "#"))
+
     "RET" 'sk:org-return
     "M-RET" 'org-ctrl-c-ctrl-c
 
@@ -127,9 +141,6 @@
     "M-K" 'org-shiftmetaup
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
-
-  (general-def org-mode-map
-    "C-#" #'(lambda () (interactive) (insert "#")))
 
 
 

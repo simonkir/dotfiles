@@ -3,6 +3,7 @@
 * 2 – Navigation
 ** Files
 - ~C-x x g~: revert buffer quick
+- ~M-r~: move point to the top / mid / bottom of current window
 
 ** Quitting
 - ~C-x C-c~: perform soft quit (= leaving all file-visiting buffers open)
@@ -10,7 +11,17 @@
 - ~C-x !~: perform daemon quit (= killing the daemon)
 
 * 4 – Usage
+** General
 - ~M-:~: eval expression
+- ~M-%~: query-replace
+- ~C-M-%~: query-replace-regexp
+
+** Macros
+- ~F3~ / ~C-x (~: start macro recording
+- ~F4~ / ~C-x )~: stop macro recording
+- ~F4~ / ~C-x e~: execute last recorded macro
+- ~C-x C-k n~: name last recorded macro
+  + can be executed by assigned name using ~M-x~
 
 * 6 – Visuals
 - ~C-x +/-/0~: change text size
@@ -18,13 +29,10 @@
 * 8 – Major / Minor Modes
 ** Org
 *** Navigation
-**** General
+- ~C-c C-j~: org-goto (use below keybinds w/o ~C-c~ prefix)
 - ~C-c C-n/p~: go to next / previous heading
 - ~C-c C-f/b~: go to next / previous heading (while maintaining level)
 - ~C-c C-u~: backward to higher level heading
-
-**** TODO Org-Goto
-- ~C-c C-j~: launch org-goto
 
 *** Lists
 - ~C-c *~: turn list items into headlines

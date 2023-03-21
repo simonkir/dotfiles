@@ -36,7 +36,8 @@ useful when switching themes also changes the colors of the modeline"
           (meow-insert-mode 'telephone-line-evil-insert)
           (meow-motion-mode 'telephone-line-evil-emacs)
           (meow-keypad-mode 'telephone-line-evil-operator)
-          (meow-beacon-mode 'telephone-line-evil-replace)))
+          (meow-beacon-mode 'telephone-line-evil-replace)
+          (t 'mode-line)))
 
   (telephone-line-defsegment sk:meow-state-segment ()
     (when meow-global-mode
@@ -46,7 +47,8 @@ useful when switching themes also changes the colors of the modeline"
        (meow-insert-mode "INSERT")
        (meow-motion-mode "MOTION")
        (meow-keypad-mode "KEYPAD")
-       (meow-beacon-mode "BEACON"))))
+       (meow-beacon-mode "BEACON")
+       (t "CUSTOM"))))
 
   (telephone-line-defsegment sk:tl-vc-file-segment ()
     (when (buffer-file-name)
