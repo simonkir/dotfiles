@@ -17,7 +17,7 @@
   (setq meow-keypad-ctrl-meta-prefix      nil)
   (setq meow-keypad-meta-prefix           ?m)
   (setq meow-keypad-literal-prefix        ?\s)
-  ;;(setq meow-keypad-leader-dispatch       sk:leader-map)
+  (setq meow-keypad-leader-dispatch       sk:leader-map)
 
   (setq meow-mode-state-list '((vterm-mode . insert)))
   (setq meow-expand-exclude-mode-list nil)

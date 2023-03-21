@@ -45,19 +45,20 @@
     "M" 'pdf-view-goto-page
     "=" 'sk:pdf-view-fit)
 
-  (general-def-localleader pdf-view-mode-map
-    "w" 'pdf-annot-add-squiggly-markup-annotation
-    "h" 'pdf-annot-add-highlight-markup-annotation
-    "s" 'pdf-annot-add-strikethrough-markup-annotation
-    "u" 'pdf-annot-add-underline-markup-annotation
-    "H" 'pdf-annot-add-markup-annotation
-    "t" 'pdf-annot-add-text-annotation
-    "d" 'pdf-annot-delete
-
-    "b" 'pdf-view-set-slice-from-bounding-box
-    "B" 'pdf-view-reset-slice
-    "c" #'(lambda () (interactive) (pdf-view-redisplay t))
-    "m" 'pdf-view-midnight-minor-mode))
+;;  (general-def-localleader pdf-view-mode-map
+;;    "w" 'pdf-annot-add-squiggly-markup-annotation
+;;    "h" 'pdf-annot-add-highlight-markup-annotation
+;;    "s" 'pdf-annot-add-strikethrough-markup-annotation
+;;    "u" 'pdf-annot-add-underline-markup-annotation
+;;    "H" 'pdf-annot-add-markup-annotation
+;;    "t" 'pdf-annot-add-text-annotation
+;;    "d" 'pdf-annot-delete
+;;
+;;    "b" 'pdf-view-set-slice-from-bounding-box
+;;    "B" 'pdf-view-reset-slice
+;;    "c" #'(lambda () (interactive) (pdf-view-redisplay t))
+;;    "m" 'pdf-view-midnight-minor-mode)
+  )
 
 
 

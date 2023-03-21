@@ -269,11 +269,11 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   (general-def-leader
     "e" 'sk:leader-e
-    "E" 'sk:leader-E)
+    "E" 'sk:leader-E))
 
-  (general-def-localleader org-mode-map
-    "k"   'sk:org-babel-kill-session-at-point
-    "RET" 'sk:org-babel-eval-with-new-session))
+;;  (general-def-localleader org-mode-map
+;;    "k"   'sk:org-babel-kill-session-at-point
+;;    "RET" 'sk:org-babel-eval-with-new-session))
 
 
 
