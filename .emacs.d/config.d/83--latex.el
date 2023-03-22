@@ -88,6 +88,8 @@
           (?I ("\\notin" "\\Im"))
           (?w ("\\omega"))
           (?X ("\\xi"))
+          (?e ("\\varepsilon" "\\varepsilon" "\\exp"))
+          (?f ("\\varphi" "\\varphi" ""))
           (?- ("\\leftrightarrow" "\\Leftrightarrow" "\\rightleftharpoons"))
           (?> ("\\rightarrow" "\\Rightarrow" "\\longrightarrow"))
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
