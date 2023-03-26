@@ -51,6 +51,7 @@
     "C-<prior>" 'org-previous-visible-heading
     "C-<next>"  'org-next-visible-heading
 
+    "C-c C-l" 'outline-show-branches
     "C-c C-j" 'meow-sk:org-goto-mode)
 
 

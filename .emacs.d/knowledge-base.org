@@ -34,26 +34,31 @@
 - ~C-c C-f/b~: go to next / previous heading (while maintaining level)
 - ~C-c C-u~: backward to higher level heading
 
-*** Lists
-- ~C-c *~: turn list items into headlines
-- ~C-c -~: rotate checkbox type
-- TODO keybind for rotate checkbox backward
-- ~C-c C-c~: toggle checkbox status
-- ~C-u C-c C-c~: add / remove checkbox
+*** Visibility
+- ~C-x n s/b~: narrow buffer to subtree / block
+- ~C-x n w~: widen buffer (undo narrowing)
+- ~C-c C-l~: show all subheadings of current heading
 
 *** Headings
 - ~C-c C-t~: toggle TODO-state
 - ~C-c C-q~: set tags
 - ~C-u C-c C-q~: re-align tags
 
-*** Visibility
-- ~C-x n s/w~: narrow buffer to subtree / widen buffer
+*** Lists
+- ~C-c *~: turn list items into headlines
+- ~C-c -~: rotate checkbox type forward
+- ~C-c C-_~: rotate checkbox type backward
+- ~C-c C-c~: toggle checkbox status
+- ~C-u C-c C-c~: add / remove checkbox
 
 *** Tables
 **** Tables
 - ~C-c |~: create table (with dimensions)
 - ~C-c -~: insert horizontal separator
 - ~C-c RET~: insert horizontal separator and move below it
+- ~C-c C-c~: re-align table
+- ~C-c TAB~: hide / show current column
+- ~C-u C-u TAB~: show all columns
 
 **** Spreadsheets
 - ~C-c *~: re-calculate current line
