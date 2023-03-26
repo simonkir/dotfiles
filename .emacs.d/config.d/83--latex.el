@@ -68,6 +68,7 @@
 
   :init
   (setq cdlatex-math-symbol-prefix ?#)
+  (setq cdlatex-math-modify-prefix ?°)
 
   :config
   ;; needed for sklatex alignment defuns
@@ -75,9 +76,15 @@
 
   (general-def org-cdlatex-mode-map
     "$" nil
-    "'" 'cdlatex-math-modify
+    "°" 'cdlatex-math-modify
+    "#" 'cdlatex-math-symbol
     "_" 'cdlatex-sub-superscript
     "^" 'cdlatex-sub-superscript)
+
+  (general-def cdlatex-mode-map
+    "$" nil
+    "TAB" nil
+    "<tab>" nil)
 
   (defun cdlatex--texmathp () t)
 
@@ -109,12 +116,5 @@
         '((?. "\\dot"  nil t nil nil)
           (?: "\\ddot" nil t nil nil)
           (?- "\\bar"  nil t nil nil)
-          (?> "\\vec"  nil t nil nil)))
+          (?> "\\vec"  nil t nil nil))))
 
-  (general-def cdlatex-mode-map
-    "$" nil
-    "TAB" nil
-    "<tab>" nil)
-
-  (general-def org-mode-map
-    "#" 'cdlatex-math-symbol))
