@@ -87,12 +87,42 @@
 - ~C-c C-e~: export dispatcher
 - ~C-u C-c C-e~: repeat last export action
 
-** Calc
-- ~C-x *~: calc-dispatch
-- ~C-x * *~: start calc (open last used interface)
+** PDF-Tools
+*** Navigation
+- ~h/k/k/l~: scroll in small amounts
+- ~up/down/left/right~: scroll in large amounts
+- ~J/K~: next / previous page
+- ~M~: goto page
+- ~m~: save position in register
+- ~'~: jump to position in register
+
+*** View
+- ~R~: rotate page
+- ~W/H~: fit to width / height
+- ~=~: cycle fit to width / height
+- ~C-c g~: redisplay page
+
+*** Visuals
+- ~s b/r~: set / reset bounding box
+- ~C-c C-r m~: toggle pdf-view-midnight-minor-mode
+- ~C-c C-r t~: toggle pdf-view-themed-minor-mode
+
+*** Annotations
+- ~C-c C-a d~: delete annotation
+- ~C-c C-a l~: list annotations
+- ~C-c C-a <key>~: add annotation
+  + ~h~: highlight / markup
+  + ~o~: strikethrough
+  + ~s~: squiggly
+  + ~t~: text
+  + ~u~: underline
 
 ** Magit
 - ~C-c g~: magit-file-dispatch
 - ~C-x G~: magit-dispatch
 - ~C-x g~: magit-status
+
+** Calc
+- ~C-x *~: calc-dispatch
+- ~C-x * *~: start calc (open last used interface)
 

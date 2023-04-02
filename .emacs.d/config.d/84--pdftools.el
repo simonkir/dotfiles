@@ -34,31 +34,18 @@
     "j" 'pdf-view-next-line-or-next-page
     "k" 'pdf-view-previous-line-or-previous-page
     "l" 'image-forward-hscroll
-
     "<down>"  #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
     "<up>"    #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
     "<left>"  #'(lambda () (interactive) (image-backward-hscroll 10))
     "<right>" #'(lambda () (interactive) (image-forward-hscroll 10))
-    "J"       'pdf-view-next-page
-    "K"       'pdf-view-previous-page
-
+    "J" 'pdf-view-next-page
+    "K" 'pdf-view-previous-page
     "M" 'pdf-view-goto-page
-    "=" 'sk:pdf-view-fit)
 
-;;  (general-def-localleader pdf-view-mode-map
-;;    "w" 'pdf-annot-add-squiggly-markup-annotation
-;;    "h" 'pdf-annot-add-highlight-markup-annotation
-;;    "s" 'pdf-annot-add-strikethrough-markup-annotation
-;;    "u" 'pdf-annot-add-underline-markup-annotation
-;;    "H" 'pdf-annot-add-markup-annotation
-;;    "t" 'pdf-annot-add-text-annotation
-;;    "d" 'pdf-annot-delete
-;;
-;;    "b" 'pdf-view-set-slice-from-bounding-box
-;;    "B" 'pdf-view-reset-slice
-;;    "c" #'(lambda () (interactive) (pdf-view-redisplay t))
-;;    "m" 'pdf-view-midnight-minor-mode)
-  )
+    "=" 'sk:pdf-view-fit
+    "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
+    "C-c C-a d" 'pdf-annot-delete)
+
 
 
 
