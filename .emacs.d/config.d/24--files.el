@@ -19,6 +19,9 @@
   (gui-set-selection 'CLIPBOARD default-directory)
   (message "%s" default-directory))
 
+(general-def-leader
+  "t c" 'sk:cpwd)
+
 
 
 (use-package recentf

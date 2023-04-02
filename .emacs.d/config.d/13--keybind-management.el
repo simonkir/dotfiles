@@ -19,9 +19,6 @@
   :config
   (setq sk:leader-map (make-sparse-keymap))
   (general-create-definer general-def-leader :keymaps 'sk:leader-map)
-  ;;(general-create-definer general-def-localleader :prefix "<menu>")
-  ;;(general-def "<menu>" nil)
-
   (general-def package-menu-mode-map "U" 'package-menu-mark-upgrades))
 
 

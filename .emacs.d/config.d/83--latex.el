@@ -51,10 +51,6 @@
   :config
   (sklatex-default-setup)
 
-;;  (general-def-localleader '(org-mode-map LaTeX-mode-map)
-;;    "k" 'sklatex-dispatch
-;;    "K" 'sklatex-mode)
-
   (general-def '(org-mode-map LaTeX-mode-map)
     "C-c C-k" 'sklatex-dispatch
     "C-c K" 'sklatex-mode))

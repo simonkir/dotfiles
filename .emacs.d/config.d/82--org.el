@@ -27,10 +27,6 @@
     (org-restart-font-lock)
     (message "org: toggled display of emphasis markers"))
 
-;;  (general-def-localleader org-mode-map
-;;    "p" 'org-toggle-pretty-entities
-;;    "P" 'sk:org-toggle-emphasis-markers)
-
   (general-def org-mode-map
     "C-c C-x C-h" 'org-toggle-pretty-entities
     "C-c C-x H" 'sk:org-toggle-emphasis-markers)
@@ -174,12 +170,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
 
 
-;;  (general-def-localleader org-mode-map
-;;    "i i" 'sk:org-toggle-inline-images
-;;    "i b" 'org-toggle-inline-images
-;;    "i B" 'org-remove-inline-images
-;;    "i r" 'org-redisplay-inline-images)
-
   (general-def org-mode-map
     "C-c C-x C-v" 'sk:org-toggle-inline-images
     "C-c C-x V" 'org-toggle-inline-images
@@ -226,16 +216,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
       (message "not inside latex environment")))
 
 
-
-;;  (general-def-localleader org-mode-map
-;;    "l l" 'sk:org-latex-preview-at-point
-;;    "l L" #'(lambda () (interactive) (org-latex-preview '(4)))  ;; clear all latex previews
-;;    "l b" #'(lambda () (interactive) (org-latex-preview '(16))) ;; preview whole buffer
-;;    "l B" #'(lambda () (interactive) (org-latex-preview '(64))) ;; clear whole buffer
-;;    "l +" 'sk:org-preview-latex-scale-increase
-;;    "l -" 'sk:org-preview-latex-scale-decrease
-;;    "l 0" 'sk:org-preview-latex-scale-reset
-;;    "l s" 'sk:org-preview-latex-scale-set)
 
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
@@ -284,10 +264,6 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (general-def-leader
     "e" 'sk:leader-e
     "E" 'sk:leader-E))
-
-;;  (general-def-localleader org-mode-map
-;;    "k"   'sk:org-babel-kill-session-at-point
-;;    "RET" 'sk:org-babel-eval-with-new-session))
 
 
 
