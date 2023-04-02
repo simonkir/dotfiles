@@ -109,8 +109,10 @@
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
 
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
-  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
+
+  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
+  (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
 
 
   (defun sk:org-return ()
