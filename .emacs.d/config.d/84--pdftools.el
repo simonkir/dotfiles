@@ -44,7 +44,7 @@
 
     "=" 'sk:pdf-view-fit
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
-    "C-c C-a d" 'pdf-annot-delete)
+    "C-c C-a d" 'pdf-annot-delete))
 
 
 
