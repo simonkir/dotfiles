@@ -243,11 +243,15 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
     (sk:org-babel-kill-session-at-point)
     (org-ctrl-c-ctrl-c))
 
+
+
+  (setq org-src-window-setup 'plain)
+  (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
+
   (defun sk:leader-e ()
     (interactive)
     (if (derived-mode-p 'org-mode)
-        (let ((org-src-window-setup 'current-window))
-          (org-edit-special))
+        (org-edit-special)
       (let ((buffer-name (buffer-name (current-buffer))))
         (cond
          ((string-match-p "Org Src" buffer-name) (org-edit-src-exit))
@@ -256,7 +260,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
   (defun sk:leader-E ()
     (interactive)
     (when (derived-mode-p 'org-mode)
-      (let ((org-src-window-setup 'split-window-right))
+      (let ((display-buffer-alist '(("Org Src" . (display-buffer-pop-up-window)))))
         (org-edit-special))))
 
 
