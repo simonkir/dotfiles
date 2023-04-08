@@ -30,14 +30,14 @@
 
 
   (general-def pdf-view-mode-map
-    "h" 'image-backward-hscroll
-    "j" 'pdf-view-next-line-or-next-page
-    "k" 'pdf-view-previous-line-or-previous-page
-    "l" 'image-forward-hscroll
-    "<down>"  #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
-    "<up>"    #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
-    "<left>"  #'(lambda () (interactive) (image-backward-hscroll 10))
-    "<right>" #'(lambda () (interactive) (image-forward-hscroll 10))
+    "j" #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
+    "k" #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
+    "h" #'(lambda () (interactive) (image-backward-hscroll 10))
+    "l" #'(lambda () (interactive) (image-forward-hscroll 10))
+    "<up>" 'pdf-view-previous-line-or-previous-page
+    "<left>" 'image-backward-hscroll
+    "<down>" 'pdf-view-next-line-or-next-page
+    "<right>" 'image-forward-hscroll
     "J" 'pdf-view-next-page
     "K" 'pdf-view-previous-page
     "M" 'pdf-view-goto-page
@@ -45,7 +45,6 @@
     "=" 'sk:pdf-view-fit
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
     "C-c C-a d" 'pdf-annot-delete))
-
 
 
 
