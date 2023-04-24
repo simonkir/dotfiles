@@ -123,6 +123,26 @@
 - ~C-x g~: magit-status
 
 ** Calc
+*** Launching
 - ~C-x *~: calc-dispatch
 - ~C-x * *~: start calc (open last used interface)
+
+*** Modes
+- ~m a~: toggle algebraic mode
+- ~m r~: activate radians mode
+- ~m d~: activate degrees mode
+
+*** Display
+- ~d s~: activate scientific notation
+- ~d e~: activate engineering notation
+- ~d n~: activate normal notation
+
+*** Calculations
+- ~a x~: expand
+- ~a c~: collect / factor
+- ~a s~: simplify
+- ~a S~: solve equation
+- ~a d~: calculate derivative
+- ~a i~: calculate symbolic integral
+- ~a I~: calculate numeric integral
 
