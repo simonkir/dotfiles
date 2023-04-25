@@ -5,6 +5,27 @@
 - ~C-x x g~: revert buffer quick
 - ~M-r~: move point to the top / mid / bottom of current window
 
+** Dired
+*** General
+- ~o~: visit file in other window
+- ~(~: toggle file details
+- ~)~: toggle hidden files
+
+*** File Operations
+- ~!~: shell cmd on file
+- ~S~: make symlink
+- ~H~: make hardlink
+- ~% u~: rename to uppercase
+- ~% l~: rename to lowercase
+
+*** Marking
+- ~t~: invert marks
+- ~* .~: mark files with a given extension
+- ~* /~: mark all directories
+- ~~~: mark all backup files
+- ~#~: mark all autosave files
+- ~r~: mark garbage files
+
 ** Quitting
 - ~C-x C-c~: perform soft quit (= leaving all file-visiting buffers open)
 - ~C-x C~: perform harsh quit (= killing all file-visiting buffes)
