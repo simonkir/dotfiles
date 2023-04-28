@@ -30,9 +30,13 @@
   (balance-windows)
   (other-window 1))
 
-(defun sk:cycle-windows ()
+(defun sk:cycle-windows-forward ()
   (interactive)
   (select-window (next-window (selected-window) nil (selected-frame))))
+
+(defun sk:cycle-windows-backward ()
+  (interactive)
+  (select-window (previous-window (selected-window) nil (selected-frame))))
 
 
 
@@ -56,7 +60,9 @@
   "w c" 'delete-window
   "w C" 'kill-buffer-and-window)
 
-(general-def "C-SPC" 'sk:cycle-windows)
+(general-def
+  "C-SPC" 'sk:cycle-windows-forward
+  "C-S-SPC" 'sk:cycle-windows-backward)
 
 
 
