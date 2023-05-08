@@ -76,7 +76,8 @@
     "u" 'outline-up-heading
     "q" 'meow-normal-mode
     "ESC" 'meow-normal-mode
-    "RET" 'meow-normal-mode)
+    "RET" 'meow-normal-mode
+    "SPC" 'meow-keypad)
 
 
 
