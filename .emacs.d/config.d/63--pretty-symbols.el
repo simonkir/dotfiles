@@ -32,6 +32,7 @@
   (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝))))
 
 (defun sk:prettify-symbols-org-LaTeX-mode ()
+  (add-to-list 'prettify-symbols-alist '("\\pause" . "⏸"))
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
@@ -45,6 +46,7 @@
   (add-to-list 'prettify-symbols-alist '("\\\\" . (?\s (Bc . Bc) ?⏎)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{C}" . (?\s (Bc . Bc) ?ℂ)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{D}" . (?\s (Bc . Bc) ?𝔻)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{G}" . (?\s (Bc . Bc) ?𝔾)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{L}" . (?\s (Bc . Bc) ?𝕃)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{N}" . (?\s (Bc . Bc) ?ℕ)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{P}" . (?\s (Bc . Bc) ?ℙ)))

@@ -108,6 +108,10 @@
 - ~C-c C-e~: export dispatcher
 - ~C-u C-c C-e~: repeat last export action
 
+*** Beamer
+- ~C-c C-b~: adjust beamer environments
+  + example, definition, theorem, proof, …
+
 ** PDF-Tools
 *** Navigation
 - ~h/k/k/l~: scroll in small amounts
