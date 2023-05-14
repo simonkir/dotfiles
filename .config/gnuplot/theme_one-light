@@ -1,0 +1,27 @@
+# -*- mode: python -*-
+
+
+
+# one-dark color scheme #######################################################
+set term pngcairo background rgb "#fafafa" # black
+
+set grid          lc rgb "#000000" # grey
+set zeroaxis lt 1 lw 1 lc rgb "#000000" # black
+set border        lc rgb "#383a42" # black
+set tics   textcolor rgb "#383a42" # black
+set xlabel textcolor rgb "#383a42" # black
+set ylabel textcolor rgb "#383a42" # black
+set key    textcolor rgb "#383a42" # black
+
+set linetype 1  pt 3 ps 3 lw 2 lc rgb "#50a14f" # green
+set linetype 2  pt 3 ps 3 lw 2 lc rgb "#986801" # yellow
+set linetype 3  pt 3 ps 3 lw 2 lc rgb "#4078f2" # blue
+set linetype 4  pt 3 ps 3 lw 2 lc rgb "#e45649" # red
+set linetype 5  pt 3 ps 3 lw 2 lc rgb "#a626a4" # magenta
+set linetype 6  pt 3 ps 3 lw 2 lc rgb "#b751b6" # violet
+set linetype 7  pt 3 ps 3 lw 2 lc rgb "#0184bc" # cyan
+set linetype 8  pt 3 ps 3 lw 2 lc rgb "#005478" # cyan dark
+set linetype 9  pt 3 ps 3 lw 2 lc rgb "#a0bcf8" # blue dark
+set linetype 10 pt 3 ps 3 lw 2 lc rgb "#4db5bd" # teal
+set linetype 11 pt 3 ps 3 lw 2 lc rgb "#da8548" # orange
+set linetype cycle 11
