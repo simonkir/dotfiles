@@ -1,0 +1,13 @@
+# -*- mode: python -*-
+
+
+
+reset
+set term pngcairo font "Noto Serif"
+set tics nomirror
+set samples 500
+set format "%g"
+
+set border 3
+
+load "~/.config/gnuplot/theme_one-dark"
