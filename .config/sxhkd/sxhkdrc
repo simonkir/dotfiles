@@ -2,182 +2,109 @@
 
 
 
-#################################################################
-# WM-RELATED KEYBINDS
-#################################################################
-
-# Xkill
 super + Escape
     xkill
 
-# application launcher
-super +  d
-    rofi -show drun -theme ~/.config/rofi/themes/simonkir-dmenu.rasi
-
-# lockscreen
-super + 9
-    betterlockscreen -l
-
-# logout dialog
-super + 0
-    archlinux-logout
-
-# toggle dark mode
-super + alt + f
-    ~/.config/picom/toggle-darkmode.sh
-
-
-
-#################################################################
-# APPLICATIONS
-#################################################################
-
-#reload sxhkd:
-super + alt + r
-    pkill -USR1 -x sxhkd
-
-# terminal
 super + Return
     alacritty
 
-# text editor (emacsclient)
-super + alt + e
-    emacsclient -cq
 
-# standalone emacs
-super + alt + shift + e
-    emacs
 
-# pdf viewer
-super + alt + z
-    zathura
+super + 9
+    betterlockscreen -l
 
-# blender
+super + 0
+    archlinux-logout
+
 super + alt + b
       blender
 
-# web browser
-super + alt + w
-    firefox
+super +  d
+    rofi -show drun -theme ~/.config/rofi/themes/simonkir-dmenu.rasi
 
-# # secondary web browser
-# super + alt + shift + w
-#     qutebrowser
+super + alt + e
+    emacsclient -cq
 
-# tertiary web browser
-super + alt + ctrl + w
-    google-chrome-stable
+super + alt + shift + e
+    emacs
 
-# office application
-super + alt + o
-    libreoffice
+super + alt + f
+    ~/.config/picom/toggle-darkmode.sh
 
-# chemical drawings
-super + alt + m
-    molsketch
-
-# regular drawings
-super + alt + k
-    krita
-
-# svg drawings
 super + alt + i
     inkscape
 
-# # KiCAD
-# super + alt + k
-#     kicad
+super + alt + k
+    krita
 
-# # discord (browser)
-# super + alt + d
-#     qutebrowser https://discord.com/channels/@me
+super + alt + m
+    minecraft-launcher
 
-# # discord (app)
-# super + alt + shift + d
-#     discord
+super + alt + o
+    libreoffice
 
-# spotify
-super + alt + s
-    firefox https://open.spotify.com
-
-# pulseaudio settings
 super + alt + p
     pavucontrol
 
 super + alt + shift + p
     paprefs
 
+super + alt + r
+    pkill -USR1 -x sxhkd
+
+super + alt + s
+    firefox https://open.spotify.com
+
+super + alt + w
+    firefox
+
+# super + y
+#    polybar-msg cmd toggle
+
+# super + alt + shift + w
+#     qutebrowser
+
+super + alt + ctrl + w
+    google-chrome-stable
+
+# super + alt + z
+#     zathura
 
 
-#################################################################
-# SCREENSHOTS
-#################################################################
 
-#Scrot
 Print
     scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
 
-#screeenshooter
 ctrl + Print
      xfce4-screenshooter
 
 
 
-#################################################################
-# POLYBAR
-#################################################################
-
-#Hide polybar
-super + y
-    polybar-msg cmd toggle
-
-
-
-#################################################################
-# MULTIMEDIA KEYS
-#################################################################
-
-#Raises volume
 XF86AudioRaiseVolume
     amixer set Master 10%+
 
-#Lowers volume
 XF86AudioLowerVolume
     amixer set Master 10%-
 
-#Mute
 XF86AudioMute
     amixer -D pulse set Master 1+ toggle
 
-#Playerctl works for Pragha, Spotify and others
-#Delete the line for playerctl if you want to use mpc
-#and replace it with the corresponding code
-#mpc works for e.g.ncmpcpp
-#mpc toggle
-#mpc next
-#mpc prev
-#mpc stop
-
-#PLAY
 XF86AudioPlay
     playerctl play-pause
 
-#Next
 XF86AudioNext
     playerctl next
 
-#previous
 XF86AudioPrev
     playerctl previous
 
-#Stop
 XF86AudioStop
     playerctl stop
 
-#Brightness up
+
+
 XF86MonBrightnessUp
     xbacklight -inc 10
 
-#Brightness down
 XF86MonBrightnessDown
     xbacklight -dec 10
