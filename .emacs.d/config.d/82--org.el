@@ -19,6 +19,8 @@
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
 
+  (setq org-highlight-latex-and-related '(native))
+
   (defun sk:org-toggle-emphasis-markers ()
     (interactive)
     (if org-hide-emphasis-markers

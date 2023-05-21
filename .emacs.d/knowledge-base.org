@@ -109,6 +109,8 @@
 - ~C-u C-c C-e~: repeat last export action
 
 *** Beamer
+https://github.com/fniessen/refcard-org-beamer
+
 - ~C-c C-b~: adjust beamer environments
   + example, definition, theorem, proof, …
 
