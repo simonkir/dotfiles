@@ -14,7 +14,7 @@ set ylabel textcolor rgb "#383a42" # black
 set key    textcolor rgb "#383a42" # black
 
 set linetype 1  pt 3 ps 3 lw 2 lc rgb "#50a14f" # green
-set linetype 2  pt 3 ps 3 lw 2 lc rgb "#986801" # yellow
+set linetype 2  pt 3 ps 3 lw 2 lc rgb "#da8548" # yellow
 set linetype 3  pt 3 ps 3 lw 2 lc rgb "#4078f2" # blue
 set linetype 4  pt 3 ps 3 lw 2 lc rgb "#e45649" # red
 set linetype 5  pt 3 ps 3 lw 2 lc rgb "#a626a4" # magenta
@@ -23,5 +23,5 @@ set linetype 7  pt 3 ps 3 lw 2 lc rgb "#0184bc" # cyan
 set linetype 8  pt 3 ps 3 lw 2 lc rgb "#005478" # cyan dark
 set linetype 9  pt 3 ps 3 lw 2 lc rgb "#a0bcf8" # blue dark
 set linetype 10 pt 3 ps 3 lw 2 lc rgb "#4db5bd" # teal
-set linetype 11 pt 3 ps 3 lw 2 lc rgb "#da8548" # orange
+set linetype 11 pt 3 ps 3 lw 2 lc rgb "#986801" # orange
 set linetype cycle 11
