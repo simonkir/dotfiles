@@ -87,12 +87,14 @@
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-paired-parens "$([{")
   (setq cdlatex-math-symbol-alist
-        '((?F ("\\Phi"))
+        '((?c ("\\quad" "" "\\cos"))
+          (?e ("\\varepsilon" "\\epsilon" "\\exp"))
+          (?f ("\\varphi" "\\phi" ""))
+          (?F ("\\Phi"))
           (?I ("\\notin" "\\Im"))
           (?w ("\\omega"))
           (?X ("\\xi"))
-          (?e ("\\varepsilon" "\\varepsilon" "\\exp"))
-          (?f ("\\varphi" "\\varphi" ""))
+          (?~ ("\\approx" "\\sim" "\\simeq"))
           (?- ("\\leftrightarrow" "\\Leftrightarrow" "\\rightleftharpoons"))
           (?> ("\\rightarrow" "\\Rightarrow" "\\longrightarrow"))
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
@@ -106,8 +108,7 @@
           (?= ("\\neq" "" ""))
           (?° ("\\degree" "" ""))
           (?+ ("\\pm"))
-          (?: ("\\ldots"))
-          (?c ("\\quad" "" "\\cos"))))
+          (?: ("\\ldots"))))
 
   (setq cdlatex-math-modify-alist
         '((?. "\\dot"  nil t nil nil)
