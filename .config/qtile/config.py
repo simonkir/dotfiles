@@ -202,7 +202,9 @@ def assign_app_group(client):
     d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
                          "Blender", "kicad", "org.inkscape.Inkscape", "molsketch",
                          "VirtualBox Machine", "VirtualBox Manager"]
-    d[group_names[3]] = ["Chromium", "chromium", "google-chrome"]
+    d[group_names[3]] = ["Chromium", "chromium", "google-chrome",
+                         "minecraft-launcher", "Minecraft Launcher",
+                         "sun-awt-X11-XFramePeer", "net-minecraft-launchwrapper-Launch"]
 
     wm_class = client.window.get_wm_class()[0]
 
