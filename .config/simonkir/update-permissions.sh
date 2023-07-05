@@ -10,6 +10,7 @@ chmod +x ~/.config/spectrwm/scripts/bar.sh
 chmod +x ~/.screenlayout/default.sh
 chmod +x ~/.emacs.d/launch-daemon.sh
 chmod +x ~/.config/simonkir/random-wallpaper.sh
+chmod +x ~/.config/conky/launch-conky.sh
 
 # picom
 chmod +x ~/.config/picom/picom.sh

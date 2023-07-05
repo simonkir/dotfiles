@@ -12,3 +12,4 @@ xfce4-power-manager &
 ~/.config/picom/picom.sh &
 ~/.emacs.d/launch-daemon.sh &
 ~/.config/simonkir/random-wallpaper.sh &
+~/.config/conky/launch-conky.sh &
