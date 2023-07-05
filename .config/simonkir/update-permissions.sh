@@ -9,6 +9,7 @@ chmod +x ~/.config/vifm/scripts/vifmrun
 chmod +x ~/.config/spectrwm/scripts/bar.sh
 chmod +x ~/.screenlayout/default.sh
 chmod +x ~/.emacs.d/launch-daemon.sh
+chmod +x ~/.config/simonkir/random-wallpaper.sh
 
 # picom
 chmod +x ~/.config/picom/picom.sh
