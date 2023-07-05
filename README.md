@@ -22,12 +22,3 @@ This is a repository for all of my dotfiles.
 * [conversion: Stackoverflow](https://stackoverflow.com/questions/10637378/how-do-i-convert-a-bare-git-repository-into-a-normal-one-in-place)
 
 for further documentation.
-
-# Usage
-## Configuration specific
-Documentation on specific applications can be found in `documentation/`
-
-## `update.sh`
-- found in `~/documentation/update.sh`
-- updates permissions for some scripts
-- compiles some configs (e. g. i3 config)
