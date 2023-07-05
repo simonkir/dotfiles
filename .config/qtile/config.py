@@ -452,8 +452,8 @@ def init_screens():
         subprocess.call([home + '/.screenlayout/default.sh'])
     except FileNotFoundError:
         pass
-    return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.65)),
-            Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.65))]
+    return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.9)),
+            Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.9))]
 screens = init_screens()
 
 
