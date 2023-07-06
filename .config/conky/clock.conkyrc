@@ -11,9 +11,8 @@ conky.config = {
     own_window_transparent = true,
 
     alignment = "tl",
-    gap_x = 50,
+    gap_x = 40,
     gap_y = 50,
-    xinerama_head = 1,
 
 -- Text settings #
     use_xft = true,
