@@ -10,21 +10,20 @@ conky.config = {
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
     own_window_transparent = true,
 
--- Text settings #
     use_xft = true,
     xftalpha = 0.5,
-    uppercase = false,
-    lowercase = true,
     override_utf8_locale = true,
 
--- Color scheme #
     default_color = "white",
     color1 = "#212021",
     color2 = "white",
+
+    lua_load = "~/.config/conky/clock.lua"
+
 };
 
 conky.text = [[
-${offset 32}${color2}${font Aliquam:bold:size=104}${time %H}
-${offset 112}${voffset -80}${font Aliquam:size=80}${time %M}
-${voffset -80}${font Aliquam::UltraLight:bold:size=18}${time %p %A, %d. %B}
+${offset 32}${color2}${font Aliquam:bold:size=104}${lua hour}
+${offset 112}${voffset -80}${font Aliquam:size=80}${lua minute}
+${voffset -80}${font Aliquam::UltraLight:bold:size=18}${lua date}
 ]];
