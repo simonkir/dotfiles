@@ -2,17 +2,13 @@
 
 conky.config = {
 
-    update_interval = 5,
+    update_interval = 2,
     double_buffer = true,
 
     own_window = true,
     own_window_type = 'override',
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
     own_window_transparent = true,
-
-    alignment = "tl",
-    gap_x = 40,
-    gap_y = 50,
 
 -- Text settings #
     use_xft = true,
@@ -28,7 +24,7 @@ conky.config = {
 };
 
 conky.text = [[
-${offset 80}${color2}${font Aliquam:bold:size=104}${time %H}
-${offset 160}${voffset -80}${font Aliquam:size=80}${time %M}${font Aliquam::UltraLight:bold:size=18}
-${offset 48}${voffset 10}${time %p %A, %d. %B}
+${offset 32}${color2}${font Aliquam:bold:size=104}${time %H}
+${offset 112}${voffset -80}${font Aliquam:size=80}${time %M}
+${voffset -80}${font Aliquam::UltraLight:bold:size=18}${time %p %A, %d. %B}
 ]];

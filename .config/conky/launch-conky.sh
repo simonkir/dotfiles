@@ -1,5 +1,5 @@
 #!/bin/bash
 
 killall conky
-conky --config=$HOME/.config/conky/clock.conkyrc &
-conky --config=$HOME/.config/conky/clock.conkyrc -x -1900 &
+conky --config=$HOME/.config/conky/clock.conkyrc --alignment tr -x 80 &
+conky --config=$HOME/.config/conky/clock.conkyrc --alignment tl -x -1840 &
