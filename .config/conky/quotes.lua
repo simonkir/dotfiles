@@ -26,6 +26,8 @@ function getRandomLineFromCSV(filename)
     local lines = loadCSV(filename)
 
     if #lines > 0 then
+        -- generate the same quotes on both screens
+        -- math.randomseed(os.date("%d") * os.date("%H") * os.date("%M"))
         local randomIndex = math.random(#lines)
         local fields = lines[randomIndex]
         local field1 = fields[1]

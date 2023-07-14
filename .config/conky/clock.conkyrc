@@ -6,8 +6,9 @@ conky.config = {
     double_buffer = true,
 
     own_window = true,
-    own_window_type = 'override',
-    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_class = "conky",
+    own_window_type = "override",
+    own_window_hints = "undecorated,below,sticky,skip_taskbar,skip_pager",
     own_window_transparent = true,
 
     use_xft = true,
