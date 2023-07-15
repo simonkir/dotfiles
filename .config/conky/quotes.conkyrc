@@ -2,7 +2,7 @@
 
 conky.config = {
 
-    update_interval = 7200,
+    update_interval = 10,
     double_buffer = true,
 
     own_window = true,
