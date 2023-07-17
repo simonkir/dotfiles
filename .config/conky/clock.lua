@@ -1,25 +1,16 @@
 function conky_hour()
-    local currentTime = os.date("*t")
-    local hour = string.format("%02d", currentTime.hour)
-    return hour
+    return os.date("%H")
 end
 
 function conky_minute()
-    local currentTime = os.date("*t")
-    local minute = string.format("%02d", currentTime.min)
-    return minute
+    return os.date("%M")
 end
 
 function conky_date()
-    local currentTime = os.date("*t")
+    local weekday = os.date("%A")
+    local day = os.date("%d")
+    local month = os.date("%B")
 
-    local weekdays = {"sonntag", "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag"}
-    local months = {"januar", "februar", "märz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember"}
-
-    local weekday = weekdays[currentTime.wday]
-    local day = string.format("%02d", currentTime.day)
-    local month = months[currentTime.month]
-
-    local currentDate = weekday .. ", " .. day .. ". " .. month
+    local currentDate = weekday:lower() .. ", " .. day .. ". " .. month:lower()
     return currentDate
 end
