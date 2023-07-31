@@ -41,8 +41,6 @@
 
 
 (general-def-leader
-  "w o" 'delete-other-windows
-  "w 1" 'delete-other-windows
   "w s" 'sk:split-and-follow-horizontally
   "w v" 'sk:split-and-follow-vertically
 
@@ -53,10 +51,8 @@
   "w <up>"    'sk:resize-current-window
   "w <down>"  'sk:resize-current-window
 
-  "w h" 'windmove-left
-  "w j" 'windmove-down
-  "w k" 'windmove-up
-  "w l" 'windmove-right
+  "w o" 'delete-other-windows
+  "w 1" 'delete-other-windows
   "w c" 'delete-window
   "w C" 'kill-buffer-and-window)
 

@@ -4,11 +4,8 @@
 
 (general-def-leader
   "f f" 'find-file
-  "f F" 'find-file-read-only
-  "f p" 'find-file-at-point
   "f R" 'revert-buffer-quick
   "f s" 'save-buffer
-  "f S" 'save-some-buffers
   "s"   'save-buffer)
 
 

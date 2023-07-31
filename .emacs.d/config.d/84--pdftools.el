@@ -76,20 +76,3 @@
   "H" 'image-transform-fit-to-height
 
   "R" 'image-rotate)
-
-
-
-(use-package doc-view
-  :config
-  (setq doc-view-continuous t)
-
-  (defun sk:doc-view-goto-page (count)
-    "Goto page COUNT
-if COUNT isn't supplied, go to the last page"
-      (interactive "P")
-      (if count
-          (doc-view-goto-page count)
-        (doc-view-last-page)))
-
-  (general-def doc-view-mode-map
-    "G" 'sk:doc-view-goto-page))

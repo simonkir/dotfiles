@@ -73,9 +73,6 @@
   "<C-iso-lefttab>" 'sk:previous-buffer)
 
 (general-def-leader
-  "b q" 'bury-buffer
-  "b h" 'previous-buffer
-  "b l" 'next-buffer
   "b b" 'sk:switch-to-buffer
   "b B" 'switch-to-buffer
   "b k" 'sk:kill-current-buffer

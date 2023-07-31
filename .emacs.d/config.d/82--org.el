@@ -44,11 +44,6 @@
   (setq org-goto-auto-isearch nil)
 
   (general-def org-mode-map
-    "M-<prior>" 'org-backward-element
-    "M-<next>"  'org-forward-element
-    "C-<prior>" 'org-previous-visible-heading
-    "C-<next>"  'org-next-visible-heading
-
     "C-c C-l" 'outline-show-branches
     "C-c C-j" 'meow-sk:org-goto-mode)
 
