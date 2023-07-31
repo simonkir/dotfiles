@@ -9,23 +9,35 @@
   (setq pdf-annot-activate-created-annotations t)
   (setq pdf-view-midnight-invert nil)
 
-  (setq pdf-tools-enabled-modes '(pdf-view-midnight-minor-mode
-                                  pdf-view-auto-slice-minor-mode
-                                  pdf-annot-minor-mode
-                                  pdf-isearch-minor-mode
-                                  pdf-outline-minor-mode))
-
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
-  (add-hook 'pdf-view-mode-hook #'pdf-tools-enable-minor-modes)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-auto-slice-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-annot-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-isearch-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'pdf-outline-minor-mode)
+  (add-hook 'pdf-view-mode-hook #'sk:pdf-view-auto-fit-to-window-minor-mode)
 
 
 
-  (defun sk:pdf-view-fit ()
-    "fits pdf into window (alternating between fit-height and fit-width)"
+  (defun sk:pdf-view-fit-to-window ()
+    "fits pdf into window (automatically detect if fit-height or fit-width should be used)"
     (interactive)
-    (if (eq pdf-view-display-size 'fit-height)
-        (pdf-view-fit-width-to-window)
-      (pdf-view-fit-height-to-window)))
+    (let* ((pdf-width (car (pdf-view-image-size t)))
+           (pdf-height (cdr (pdf-view-image-size t)))
+           (pdf-aspect-ratio (/ (* 1.0 pdf-width) pdf-height))
+           (window-width (window-pixel-width))
+           (window-height (window-pixel-height))
+           (window-aspect-ratio (/ (* 1.0 window-width) window-height)))
+      (if (> pdf-aspect-ratio window-aspect-ratio)
+          (pdf-view-fit-width-to-window)
+        (pdf-view-fit-height-to-window))))
+
+  (define-minor-mode sk:pdf-view-auto-fit-to-window-minor-mode
+    "automatically fit viewed pages to the current window, so that the whole page is always visible"
+    :lighter " "
+    (if sk:pdf-view-auto-fit-to-window-minor-mode
+        (add-hook 'pdf-view-after-change-page-hook #'sk:pdf-view-fit-to-window nil 'local)
+      (remove-hook 'pdf-view-after-change-page-hook #'sk:pdf-view-fit-to-window 'local)))
 
 
 
@@ -42,8 +54,10 @@
     "K" 'pdf-view-previous-page
     "M" 'pdf-view-goto-page
 
-    "=" 'sk:pdf-view-fit
+    "=" 'sk:pdf-view-fit-to-window
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
+    "C-c C-r s" 'pdf-view-auto-slice-minor-mode
+    "C-C C-r z" 'sk:pdf-view-auto-fit-to-window-minor-mode
     "C-c C-a d" 'pdf-annot-delete))
 
 

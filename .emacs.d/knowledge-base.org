@@ -120,19 +120,22 @@ https://github.com/fniessen/refcard-org-beamer
 - ~up/down/left/right~: scroll in large amounts
 - ~J/K~: next / previous page
 - ~M~: goto page
+- ~o~: display outline
 - ~m~: save position in register
 - ~'~: jump to position in register
 
 *** View
 - ~R~: rotate page
+- ~=~: fit to window
 - ~W/H~: fit to width / height
-- ~=~: cycle fit to width / height
 - ~C-c g~: redisplay page
 
 *** Visuals
 - ~s b/r~: set / reset bounding box
 - ~C-c C-r m~: toggle pdf-view-midnight-minor-mode
+- ~C-c C-r s~: toggle pdf-view-auto-slice-minor-mode
 - ~C-c C-r t~: toggle pdf-view-themed-minor-mode
+- ~C-c C-r z~: toggle sk:pdf-view-auto-fit-to-window-minor-mode
 
 *** Annotations
 - ~C-c C-a d~: delete annotation
