@@ -177,34 +177,14 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
 
   ; latex preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (setq sk:org-preview-latex-scale-increment 0.2)
   (setq sk:org-preview-latex-scale 1.5)
-  (setq sk:org-preview-latex-default-scale sk:org-preview-latex-scale)
-  (plist-put org-format-latex-options :scale sk:org-preview-latex-default-scale)
-
-  (defun sk:org-preview-latex-scale--aftermath ()
-    (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
-    (message "%s" (concat "latex preview scale set to " (number-to-string sk:org-preview-latex-scale))))
-
-  (defun sk:org-preview-latex-scale-increase ()
-    (interactive)
-    (setq sk:org-preview-latex-scale (+ sk:org-preview-latex-scale sk:org-preview-latex-scale-increment))
-    (sk:org-preview-latex-scale--aftermath))
-
-  (defun sk:org-preview-latex-scale-decrease ()
-    (interactive)
-    (setq sk:org-preview-latex-scale (- sk:org-preview-latex-scale sk:org-preview-latex-scale-increment))
-    (sk:org-preview-latex-scale--aftermath))
+  (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
 
   (defun sk:org-preview-latex-scale-set (new-scale)
     (interactive "nnew preview scale: ")
     (setq sk:org-preview-latex-scale new-scale)
-    (sk:org-preview-latex-scale--aftermath))
-
-  (defun sk:org-preview-latex-scale-reset ()
-    (interactive)
-    (setq sk:org-preview-latex-scale sk:org-preview-latex-default-scale)
-    (sk:org-preview-latex-scale--aftermath))
+    (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
+    (message "latex preview scale set to %s" sk:org-preview-latex-scale))
 
   (defun sk:org-latex-preview-at-point ()
     (interactive)
