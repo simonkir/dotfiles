@@ -1,4 +1,4 @@
--- -*- mode: conf -*-
+# -*- mode: conf -*-
 
 conky.config = {
 
@@ -16,15 +16,12 @@ conky.config = {
     override_utf8_locale = true,
 
     default_color = "white",
-    color1 = "#212021",
-    color2 = "white",
 
     lua_load = "~/.config/conky/clock.lua"
 
 };
 
 conky.text = [[
-${offset 32}${color2}${font Aliquam:bold:size=104}${lua hour}
-${offset 112}${voffset -80}${font Aliquam:size=80}${lua minute}
-${voffset -80}${font Aliquam::UltraLight:bold:size=18}${lua date}
+${alignc}${font Calibri:bold:size=100}${lua hour}:${lua minute}
+${alignc}${voffset -116}${font Calibri:bold:size=18}${lua date}
 ]];
