@@ -1,6 +1,13 @@
 #+startup: nonum
 
+* 1 – Meow
+- ~*~: mark (or expand marked) block
+
 * 2 – Navigation
+** Buffer-Local
+- ~C-e~: delete last char
+- ~C-w~: delete last word
+
 ** Files
 - ~C-x x g~: revert buffer quick
 - ~M-r~: move point to the top / mid / bottom of current window
@@ -26,11 +33,6 @@
 - ~#~: mark all autosave files
 - ~r~: mark garbage files
 
-** Quitting
-- ~C-x C-c~: perform soft quit (= leaving all file-visiting buffers open)
-- ~C-x C~: perform harsh quit (= killing all file-visiting buffes)
-- ~C-x !~: perform daemon quit (= killing the daemon)
-
 * 4 – Usage
 ** General
 - ~M-:~: eval expression
@@ -44,26 +46,12 @@
 - ~C-x C-k n~: name last recorded macro
   + can be executed by assigned name using ~M-x~
 
-* 6 – Visuals
-- ~C-x +/-/0~: change text size
-
 * 8 – Major / Minor Modes
 ** Org
-*** Navigation
-- ~C-c C-j~: org-goto (use below keybinds w/o ~C-c~ prefix)
-- ~C-c C-n/p~: go to next / previous heading
-- ~C-c C-f/b~: go to next / previous heading (while maintaining level)
-- ~C-c C-u~: backward to higher level heading
-
 *** Visibility
 - ~C-x n s/b~: narrow buffer to subtree / block
 - ~C-x n w~: widen buffer (undo narrowing)
 - ~C-c C-l~: show all subheadings of current heading
-
-*** Headings
-- ~C-c C-t~: toggle TODO-state
-- ~C-c C-q~: set tags
-- ~C-u C-c C-q~: re-align tags
 
 *** Lists
 - ~C-c *~: turn list items into headlines
@@ -146,11 +134,6 @@ https://github.com/fniessen/refcard-org-beamer
   + ~s~: squiggly
   + ~t~: text
   + ~u~: underline
-
-** Magit
-- ~C-c g~: magit-file-dispatch
-- ~C-x G~: magit-dispatch
-- ~C-x g~: magit-status
 
 ** Calc
 *** Launching

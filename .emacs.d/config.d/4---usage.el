@@ -11,4 +11,4 @@
   (message "%s" (format-time-string "%a, %d.%m.%Y (KW %W), %H:%M:%S %Z")))
 
 (general-def-leader
-  "t t" 'sk:print-time)
+  "d t" 'sk:print-time)

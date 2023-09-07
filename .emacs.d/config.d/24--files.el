@@ -17,7 +17,7 @@
   (message "%s" default-directory))
 
 (general-def-leader
-  "t c" 'sk:cpwd)
+  "d c" 'sk:cpwd)
 
 
 

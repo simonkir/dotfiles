@@ -23,8 +23,6 @@
     "C-<return>" 'icomplete-fido-ret
     "S-<return>" 'icomplete-fido-exit
     "C-d" 'icomplete-fido-kill
-    "C-e" 'end-of-line
-    "C-a" 'begining-of-line
     "C-j" 'icomplete-forward-completions
     "C-k" 'icomplete-backward-completions)
 
