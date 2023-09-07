@@ -1,3 +1,7 @@
+# -*- mode: snippet -*-
+# name: default template
+# key: tempdef
+# --
 #+latex_class: article
 #+latex_class_options: [a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german,gensymb}
@@ -5,6 +9,6 @@
 
 #+options: toc:nil H:4 num:3 todo:nil
 
-#+title: Lösungen
-#+date: x 2023
-#+author: Simon K., Js2
+#+title: $1
+#+date: `(format-time-string "%d. %B  %Y")`
+#+author: ${2:simonkir}$0
