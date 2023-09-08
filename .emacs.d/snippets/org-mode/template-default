@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: default template
 # key: tempdef
+# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+latex_class: article
 #+latex_class_options: [a4paper,hidelinks]

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# key: jjl_
-# name: jupyter-julia
-# condition: (not (eq (car (org-element-context)) 'latex-environment))
-# --
-#+begin_src jupyter-julia :session ${1:jl}
-  $0
-#+end_src

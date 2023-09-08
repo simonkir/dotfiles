@@ -2,4 +2,4 @@
 # name: text (math env)
 # key: ttt
 # --
-& \text{$0}
+\text{$0}
