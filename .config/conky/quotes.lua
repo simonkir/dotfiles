@@ -35,17 +35,21 @@ function getRandomQuoteFromCSV(filename)
     math.randomseed(pid * os.date("%d%H") * os.date("%Y%m"))
 
     -- read random quote
-    local randomIndex = math.random(#lines)
-    local fields = lines[randomIndex]
-    local field1 = fields[1]
-    local field2 = fields[2]
+    local quoteAuthor = ""
+    local quoteText = ""
+
+    repeat
+        local fields = lines[math.random(#lines)]
+        quoteAuthor = fields[1]
+        quoteText = fields[2]
+    until #quoteText < 100
 
     -- formatting the result
-    if field1 == "" then
-        field1 = "Unknown Author"
+    if quoteAuthor == "" then
+        quoteAuthor = "Unknown Author"
     end
 
-    return field1:upper() .. "\n„" .. field2 .. "“"
+    return quoteAuthor:upper() .. "\n„" .. quoteText .. "“"
 end
 
 function conky_quote()
