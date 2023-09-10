@@ -52,8 +52,8 @@
   (sklatex-default-setup)
 
   (general-def '(org-mode-map LaTeX-mode-map)
-    "C-c C-q" 'sklatex-dispatch
-    "C-c Q" 'sklatex-mode))
+    "C-c C-a" 'sklatex-dispatch
+    "C-c A" 'sklatex-mode))
 
 
 

@@ -11,6 +11,11 @@
 
 
 
+(use-package lua-mode
+  :config (setq lua-indent-level 4))
+
+
+
 ;;(use-package glsl-mode
 ;;  :config
 ;;  (defun sk:glsl-compile-file-to-image ()

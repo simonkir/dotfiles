@@ -78,7 +78,7 @@ useful when switching themes also changes the colors of the modeline"
     (when (region-active-p)
       (let ((beg (region-beginning))
             (end (region-end)))
-        (format "%s/%s lines" (count-lines beg end) (count-lines beg end t)))))
+        (format "%sC, %sW, %s/%sL" (- end beg) (count-words beg end) (count-lines beg end) (count-lines beg end t)))))
 
   (telephone-line-defsegment sk:tl-position-percentage-segment ()
     (let* ((current-line (cond

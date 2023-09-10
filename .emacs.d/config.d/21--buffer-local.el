@@ -9,7 +9,7 @@
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-wheel-follow-mouse t)
 
-(advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (setf (point) isearch-other-end))))
+(advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (goto-char isearch-other-end))))
 
 
 
