@@ -115,7 +115,7 @@ https://github.com/fniessen/refcard-org-beamer
 *** View
 - ~R~: rotate page
 - ~=~: fit to window
-- ~W/H~: fit to width / height
+- ~W/H/P~: fit to width / height / window
 - ~C-c g~: redisplay page
 
 *** Visuals
