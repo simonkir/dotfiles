@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: less or equal to
-# key: &<&=
-# --
-&\\leq&

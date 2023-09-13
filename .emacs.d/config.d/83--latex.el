@@ -100,6 +100,7 @@
           (?f ("\\varphi" "\\phi" ""))
           (?F ("\\Phi" "" ""))
           (?I ("\\notin" "\\Im" ""))
+          (?S ("\\sum" "\\Sigma" "\\arcsin"))
           (?w ("\\omega" "" ""))
           (?X ("\\xi" "" ""))
           (?~ ("\\approx" "\\sim" "\\simeq"))

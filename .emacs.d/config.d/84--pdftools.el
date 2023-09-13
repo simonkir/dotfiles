@@ -32,6 +32,7 @@
     "K" 'pdf-view-previous-page
     "M" 'pdf-view-goto-page
 
+    "=" nil
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
     "C-c C-r s" 'pdf-view-auto-slice-minor-mode
     "C-c C-a d" 'pdf-annot-delete))
