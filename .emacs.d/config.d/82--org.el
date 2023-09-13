@@ -96,11 +96,15 @@
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
 
-  ;; for doc, see 83--auctex.el
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-
   ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
+
+  ;; other latex stuff (see 83--auctex.el for doc)
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
+
+
 
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))

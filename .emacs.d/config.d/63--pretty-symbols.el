@@ -34,6 +34,7 @@
 (defun sk:prettify-symbols-org-LaTeX-mode ()
   (add-to-list 'prettify-symbols-alist '("\\pause" . "⏸"))
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
+  (add-to-list 'prettify-symbols-alist '("&\\neq&" . "≠"))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
   (add-to-list 'prettify-symbols-alist '("&\\overset{!}{=}&" . (?= (tc . bc) ?!)))

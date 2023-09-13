@@ -17,11 +17,14 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
-  ;; \ character should be part of a word, so that you can operate on it in a better way
-  ;; e. g. when trying to meow-change a word like \delta
-  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-
   (add-hook 'LaTeX-mode-hook #'sk:autocorrect-mode)
+
+  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
+  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
+  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
+
+  (general-def 'LaTeX-mode-map
+    "$" nil)
 
 
 
@@ -65,13 +68,16 @@
   :init
   (setq cdlatex-math-symbol-prefix ?#)
   (setq cdlatex-math-modify-prefix ?°)
+  (setq cdlatex-takeover-dollar nil)
 
   :config
+  (setq cdlatex-paired-parens "")
+  (setq cdlatex-simplify-sub-super-scripts nil)
+
   ;; needed for sklatex alignment defuns
   (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (general-def org-cdlatex-mode-map
-    "$" nil
     "°" 'cdlatex-math-modify
     "#" 'cdlatex-math-symbol
     "_" 'cdlatex-sub-superscript
@@ -79,13 +85,15 @@
 
   (general-def cdlatex-mode-map
     "$" nil
+    "|" nil
+    "(" nil
+    "[" nil
+    "{" nil
     "TAB" nil
     "<tab>" nil)
 
   (defun cdlatex--texmathp () t)
 
-  (setq cdlatex-simplify-sub-super-scripts nil)
-  (setq cdlatex-paired-parens "$([{")
   (setq cdlatex-math-symbol-alist
         '((?c ("\\quad" "" "\\cos"))
           (?e ("\\varepsilon" "\\epsilon" "\\exp"))
