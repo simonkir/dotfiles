@@ -56,8 +56,8 @@
           (?\“ . quote-eqq)
           (?\‘ . quote-eq)
           ;; misc
-          (?s . symbol)
           (?. . sentence)
+          (?w . symbol)
           (?b . buffer)
           (?p . paragraph)
           (?l . line)))
