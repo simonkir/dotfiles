@@ -56,6 +56,7 @@
   (add-to-list 'prettify-symbols-alist '("\\bot" . (?\s (Bc . Bc) ?⊥)))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°"))
   (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
+  (add-to-list 'prettify-symbols-alist '("\\lightning" . (?\s (Bc . Bc) ?↯)))
   (add-to-list 'prettify-symbols-alist '("\\longleftarrow" . "⟵"))
   (add-to-list 'prettify-symbols-alist '("\\longrightarrow" . "⟶"))
   (add-to-list 'prettify-symbols-alist '("\\mapsto" . (?\s (Bc . Bc) ?↦)))
