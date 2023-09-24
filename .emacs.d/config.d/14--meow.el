@@ -31,6 +31,7 @@
   (meow-thing-register 'quote-eqq    '(pair ("“") ("”"))                  '(pair ("“") ("”")))
   (meow-thing-register 'quote-eq     '(pair ("‘") ("’"))                  '(pair ("‘") ("’")))
   (meow-thing-register 'abs          '(pair ("|") ("|"))                  '(pair ("|") ("|")))
+  (meow-thing-register 'latex-math   '(pair ("$") ("$"))                  '(pair ("$") ("$")))
   (meow-thing-register 'latex-abs    '(pair ("\\left|") ("\\right|"))     '(pair ("\\left|") ("\\right|")))
   (meow-thing-register 'latex-round  '(pair ("\\left(") ("\\right)"))     '(pair ("\\left(") ("\\right)")))
   (meow-thing-register 'latex-square '(pair ("\\left[") ("\\right]"))     '(pair ("\\left[") ("\\right]")))
@@ -46,6 +47,7 @@
           (?| . abs)
           (?\" . string)
           ;; latex elements
+          (?\$ . latex-math)
           (?a . latex-abs)
           (?r . latex-round)
           (?s . latex-square)
