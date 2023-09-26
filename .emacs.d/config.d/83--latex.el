@@ -78,6 +78,7 @@
   (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (general-def org-cdlatex-mode-map
+    "'" nil
     "°" 'cdlatex-math-modify
     "#" 'cdlatex-math-symbol
     "_" 'cdlatex-sub-superscript
