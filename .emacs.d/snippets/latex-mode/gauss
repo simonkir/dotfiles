@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: gauss matrix env
+# key: gauss
+# --
+\begin{gmatrix}[p]
+    $0
+    \rowops
+  \end{gmatrix}

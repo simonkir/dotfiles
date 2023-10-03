@@ -2,4 +2,4 @@
 # name: limit
 # key: lim
 # --
-\lim_{${1:n \rightarrow \infty}}$0
+\lim_{${0:x \rightarrow \infty}}

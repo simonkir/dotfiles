@@ -111,6 +111,7 @@
 
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
   (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
+  (add-to-list 'org-latex-packages-alist '("" "gauss" t))
 
 
   (defun sk:org-return ()

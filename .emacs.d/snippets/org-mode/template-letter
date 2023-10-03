@@ -4,23 +4,25 @@
 # condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+latex_class: scrlttr2
-#+latex_class_options: [a4paper,11pt,ngerman,foldmarks=false,fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
+#+latex_class_options: [a4paper,11pt,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[skip=\baselineskip]{parskip}
-\renewcommand*{\raggedsignature}{\raggedright}
+#+latex_header: \usepackage{german,gensymb}
+#+latex: \renewcommand*{\raggedsignature}{\raggedright}
 
 #+options: toc:nil
 #+date: `(format-time-string "%d. %B %Y")`
 
-\setkomavar{fromname}{${1:simonkir}}
-\setkomavar{fromaddress}{${2:simonkir's address}}
+\setkomavar{fromname}{${2:simonkir}}
+\setkomavar{fromaddress}{${3:simonkir's address}}
 \setkomavar{fromphone}[]{}
 \setkomavar{fromemail}[]{}
 
-#+begin_letter ${3:recipient}\\\\${4:recipient's address}
+#+attr_latex: :options {${4:recipient}\\\\${5:recipient's address}}
+#+begin_letter
 
-\setkomavar{subject}{${5:subject}}
+\setkomavar{subject}{${6:subject}}
 
-\opening{${6:greeting}}
+\opening{${7:greeting}}
 
 $0
 

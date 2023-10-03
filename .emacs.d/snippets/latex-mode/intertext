@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: intertext (math env)
+# key: ittt
+# --
+\intertext{$0}
