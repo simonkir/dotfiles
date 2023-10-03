@@ -58,38 +58,30 @@
 
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
-  (setq TeX-newline-function 'electric-indent-just-newline)
   (setq sklatex--do-newline-conversion t)
   (message "sklatex: newline keybinds activated"))
 
 (defun sklatex-deactivate-newline-keybinds ()
   (interactive)
-  (setq TeX-newline-function 'newline)
   (setq sklatex--do-newline-conversion nil)
   (message "sklatex: newline keybinds deactivated"))
 
-(defun sklatex--insert-newline-with-\\ ()
-  (delete-horizontal-space)
-  (delete-backward-char 1)
-  (unless (eq ?\s (char-before (point)))
-    (insert " "))
-  (insert "\\\\\n  "))
+(defun sklatex--insert-mathnewline-in-line-before ()
+  (save-excursion
+    (previous-line)
+    (end-of-line)
+    (insert " \\\\")))
 
-(defun sklatex--insert-newline-without-\\ ()
-  (delete-horizontal-space)
-  (delete-backward-char 1)
-  (unless (eq ?\s (char-before (point)))
-    (insert " "))
-  (insert "\n  "))
+(defun sklatex--delete-mathnewline ()
+  (unless (looking-at "\\\\\\\\")
+    (re-search-backward "\\\\\\\\") (- (point) 30))
+  (delete-char 2))
 
 (defun sklatex-try-newline-conversion ()
   (when (and sklatex--do-newline-conversion
-             (sklatex-in-latex-p)
-             (bolp)
-             (looking-at-p "$"))
-    (if (save-excursion (previous-line) (beginning-of-line) (not (looking-at "\\\\begin\\|.*\\\\\\\\")))
-        (sklatex--insert-newline-with-\\)
-      (sklatex--insert-newline-without-\\))))
+             (sklatex-in-latex-p))
+    (unless (save-excursion (previous-line) (beginning-of-line) (looking-at "\\\\begin\\|.*\\\\\\\\"))
+        (sklatex--insert-mathnewline-in-line-before))))
 
 
 
@@ -273,10 +265,11 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   "depending on the previous character, remove effects added by sklatex"
   (interactive)
   (save-excursion
-    (re-search-backward "[&}]" (- (point) 30))
+    (re-search-backward "[&}]\\|\\\\\\\\" (- (point) 30))
     (cond
      ((looking-at-p "&") (sklatex--delete-alignment-operators))
-     ((looking-at-p "}") (sklatex--delete-supersubscript)))))
+     ((looking-at-p "}") (sklatex--delete-supersubscript))
+     ((looking-at-p "\\\\\\\\") (sklatex--delete-mathnewline)))))
 
 (general-def sklatex-mode-map
   "C-s" 'sklatex-remove-effect-at-point)
