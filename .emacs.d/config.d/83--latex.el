@@ -110,7 +110,7 @@
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
           (?\( ("\\subset" "\\subseteq" ""))
           (?\) ("\\supset" "\\supseteq" ""))
-          (?| ("\\mid" "\\mapsto" "\\longmapsto"))
+          (?| ("\\BAR" "\\mapsto" "\\longmapsto"))
           (?$ ("\\mid" "" ""))
           (?% ("\\nmid" "" ""))
           (?/ ("\\lor" "\\cup" ""))

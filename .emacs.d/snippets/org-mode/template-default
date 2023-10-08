@@ -7,6 +7,7 @@
 #+latex_class_options: [a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german,gensymb}
 #+latex_header: \renewcommand{\thesubsection}{\alph{subsection}}
+#+latex_header: \newcommand{\BAR}{\hspace{-\arraycolsep} \strut\vrule \hspace{-\arraycolsep}}
 
 #+options: toc:nil H:4 num:3 todo:nil
 
