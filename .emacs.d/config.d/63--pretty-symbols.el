@@ -49,6 +49,8 @@
   (add-to-list 'prettify-symbols-alist '("&\\overset{!}{=}&" . (?= (tc . bc) ?!)))
   (add-to-list 'prettify-symbols-alist '("&\\geq&" . "≥"))
   (add-to-list 'prettify-symbols-alist '("&\\leq&" . "≤"))
+  (add-to-list 'prettify-symbols-alist '("&\\leftrightarrow&" . (?\s (Bc . Bc) ?↔)))
+  (add-to-list 'prettify-symbols-alist '("&\\Leftrightarrow&" . (?\s (Bc . Bc) ?⇔)))
   (add-to-list 'prettify-symbols-alist '("&\\rightleftharpoons&" . (?\s (cl . bl) ?⟶ (bl . cl) ?⟵)))
   (add-to-list 'prettify-symbols-alist '("&\\longrightarrow&" . "⟶"))
   (add-to-list 'prettify-symbols-alist '("&\\longleftarrow&" . "⟵"))
@@ -67,7 +69,6 @@
   (add-to-list 'prettify-symbols-alist '("\\pm" . "±"))
   (add-to-list 'prettify-symbols-alist '("\\rightleftharpoons" . (?\s (cl . bl) ?⟶ (bl . cl) ?⟵)))
   (add-to-list 'prettify-symbols-alist '("\\subseteq" . (?\s (Bc . Bc) ?⊆)))
-  (add-to-list 'prettify-symbols-alist '("\\sum" . "Σ"))
   (add-to-list 'prettify-symbols-alist '("\\supseteq" . (?\s (Bc . Bc) ?⊇)))
   (add-to-list 'prettify-symbols-alist '("\\top" . (?\s (Bc . Bc) ?⊤)))
   (add-to-list 'prettify-symbols-alist '("\\vartheta" . "ϑ"))
@@ -83,8 +84,6 @@
   (add-to-list 'prettify-symbols-alist '("\\right|" . "‖"))
   (add-to-list 'prettify-symbols-alist '("\\left\\|" . (?‖ (Br . Bl) ?‖)))
   (add-to-list 'prettify-symbols-alist '("\\right\\|" . (?‖ (Br . Bl) ?‖)))
-  (add-to-list 'prettify-symbols-alist '("&\\leftrightarrow&" . (?\s (Bc . Bc) ?↔)))
-  (add-to-list 'prettify-symbols-alist '("&\\Leftrightarrow&" . (?\s (Bc . Bc) ?⇔)))
 
   ;; double-struck letters
   (add-to-list 'prettify-symbols-alist '("\\mathbb{C}" . (?\s (Bc . Bc) ?ℂ)))
