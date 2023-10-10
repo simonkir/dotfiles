@@ -66,13 +66,19 @@
   (setq sklatex--do-newline-conversion nil)
   (message "sklatex: newline keybinds deactivated"))
 
-(defun sklatex--insert-mathnewline-in-line-before ()
+(defun sklatex--mathnewline-insert-in-line-before ()
   (save-excursion
     (previous-line)
-    (end-of-line)
-    (insert " \\\\")))
+    (save-excursion
+      (beginning-of-line)
+      (unless (looking-at "\s*$")
+        (end-of-line)
+        (insert " ")))
+    (save-excursion
+      (end-of-line)
+      (insert "\\\\"))))
 
-(defun sklatex--delete-mathnewline ()
+(defun sklatex--mathnewline-delete ()
   (unless (looking-at "\\\\\\\\")
     (re-search-backward "\\\\\\\\") (- (point) 30))
   (delete-char 2))
@@ -81,7 +87,7 @@
   (when (and sklatex--do-newline-conversion
              (sklatex-in-latex-p))
     (unless (save-excursion (previous-line) (beginning-of-line) (looking-at ".*\\(\\\\end\\|\\\\begin\\|.*\\\\\\\\\\)"))
-        (sklatex--insert-mathnewline-in-line-before))))
+        (sklatex--mathnewline-insert-in-line-before))))
 
 
 
@@ -269,7 +275,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
     (cond
      ((looking-at-p "&") (sklatex--delete-alignment-operators))
      ((looking-at-p "}") (sklatex--delete-supersubscript))
-     ((looking-at-p "\\\\\\\\") (sklatex--delete-mathnewline)))))
+     ((looking-at-p "\\\\\\\\") (sklatex--mathnewline-delete)))))
 
 (general-def sklatex-mode-map
   "C-s" 'sklatex-remove-effect-at-point)

@@ -14,6 +14,8 @@
 (use-package electric
   :demand t
   :config
+  (setq-default electric-indent-inhibit t)
+
   (electric-pair-mode)
 
   (add-to-list 'electric-pair-pairs '(8218 . 8216))  ;; ‚‘
