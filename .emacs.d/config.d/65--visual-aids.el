@@ -36,12 +36,14 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
     (let* ((line-width 1)
            (padding-left (/ (- character-width line-width) 2))
            (padding-right (- character-width padding-left line-width))
-           (row (append (make-list padding-left zrep) (make-list line-width crep) (make-list padding-right zrep)))
+           (row (append (make-list padding-left zrep)
+                        (make-list line-width crep)
+                        (make-list padding-right zrep)))
            rows)
       (dotimes (i character-height rows)
         (setq rows (cons row rows)))))
 
-  (setq highlight-indent-guides-bitmap-function 'sk:highlight-indent-guides--bitmap-line)
+  (setq highlight-indent-guides-bitmap-function #'sk:highlight-indent-guides--bitmap-line)
   (setq highlight-indent-guides-method 'bitmap)
 
   ;; face settings

@@ -118,7 +118,8 @@
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
     (interactive)
     (cond
-     ((org-at-table-p) (org-table-insert-row '(4)))
+     ((org-at-table-p)
+      (org-table-insert-row '(4)))
      ((org-in-item-p)
       (if (save-excursion
             (beginning-of-line)
@@ -126,7 +127,8 @@
           (org-insert-item (org-at-item-checkbox-p))
         (delete-region (line-beginning-position) (line-end-position))
         (org-return)))
-     (t (org-return))))
+     (t
+      (org-return))))
 
   (general-def org-mode-map
     "C-c C-_" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))

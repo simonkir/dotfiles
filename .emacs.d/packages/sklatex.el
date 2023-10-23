@@ -86,7 +86,10 @@
 (defun sklatex-try-newline-conversion ()
   (when (and sklatex--do-newline-conversion
              (sklatex-in-latex-p))
-    (unless (save-excursion (previous-line) (beginning-of-line) (looking-at ".*\\(\\\\end\\|\\\\begin\\|.*\\\\\\\\\\)"))
+    (unless (save-excursion
+              (previous-line)
+              (beginning-of-line)
+              (looking-at ".*\\(\\\\end\\|\\\\begin\\|.*\\\\\\\\\\)"))
         (sklatex--mathnewline-insert-in-line-before))))
 
 
