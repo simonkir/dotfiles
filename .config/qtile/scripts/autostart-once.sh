@@ -4,6 +4,7 @@ sxhkd -c ~/.config/sxhkd/sxhkdrc &
 
 volumeicon &
 nm-applet &
+blueberry-tray &
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
