@@ -10,17 +10,6 @@
 
 
 
-(defun sk:cpwd ()
-  "print and copy current working directory to system clipboard"
-  (interactive)
-  (gui-set-selection 'CLIPBOARD default-directory)
-  (message "%s" default-directory))
-
-(general-def-leader
-  "d c" 'sk:cpwd)
-
-
-
 (use-package recentf
   :demand t ;; needed for dashboard
   :config
