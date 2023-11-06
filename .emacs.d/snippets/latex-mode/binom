@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: binomial coefficient
+# key: binom
+# --
+\binom{$0}{}
