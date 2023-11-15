@@ -151,10 +151,16 @@
   ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:org-toggle-inline-images ()
-    "toggle image previews in the region, if it is active, and on the current line otherwise"
+    "toggle image previews in the region, if it is active, and the next image after point otherwise"
     (interactive)
-    (let* ((beg (if (region-active-p) (region-beginning) (line-beginning-position)))
-           (end (if (region-active-p) (region-end) (line-end-position)))
+    (let* ((beg (if (region-active-p)
+                    (region-beginning)
+                  (line-beginning-position)))
+           (end (if (region-active-p)
+                    (region-end)
+                  (save-excursion
+                    (re-search-forward "\\]\\]")
+                    (line-end-position))))
            (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
       (if overlays-in-region
           (mapc (lambda (ov)
@@ -164,14 +170,15 @@
         (org-display-inline-images t nil beg end)))
     (message "org-mode: toggled image preview"))
 
-  (defun sk:org-toggle-inline-images-after-babel-run ()
-    "activates image preview for babel results
-
-the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
-    (interactive)
-    (save-excursion
-      (re-search-forward "\\[\\[")
-      (sk:org-toggle-inline-images)))
+;;  (defun sk:org-toggle-inline-images-after-babel-run ()
+;;    "activates image preview for babel results
+;;
+;;the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
+;;    (interactive)
+;;    (save-excursion
+;;      (search-forward "#+end_src")
+;;      (re-search-forward "\\[\\[" (+ (point) 30))
+;;      (sk:org-toggle-inline-images)))
 
 
 
@@ -214,7 +221,7 @@ the function looks for an `#+end_src', followed by an empty line and a `#+RESULT
    '((gnuplot . t)))
    ;;'((jupyter . t)))
 
-  (add-hook 'org-babel-after-execute-hook #'sk:org-toggle-inline-images-after-babel-run)
+  ;;(add-hook 'org-babel-after-execute-hook #'sk:org-toggle-inline-images-after-babel-run)
 
   (setq org-confirm-babel-evaluate nil)
   (setq org-edit-src-content-indentation 0)
