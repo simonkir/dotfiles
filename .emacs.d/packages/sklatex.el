@@ -45,8 +45,13 @@
 (defun sklatex-in-latex-p ()
   "equivalent to `texmathp', but also works with latex-bocks in org-mode"
   (cond
-   ((derived-mode-p 'latex-mode) (texmathp))
-   ((derived-mode-p 'org-mode) (eq (car (org-element-context)) 'latex-environment))
+   ((derived-mode-p 'latex-mode)
+     (texmathp)
+     (if (string= (car texmathp-why) "$")
+       nil
+     t))
+   ((derived-mode-p 'org-mode)
+    (eq (car (org-element-context)) 'latex-environment))
    (t nil)))
 
 (defun sklatex--string-nth (pos string)
