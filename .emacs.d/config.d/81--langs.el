@@ -11,6 +11,13 @@
 
 
 
+(use-package maxima
+  :init
+  (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
+  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))
+
+
+
 (use-package lua-mode
   :config (setq lua-indent-level 4))
 

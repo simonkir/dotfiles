@@ -31,11 +31,14 @@
              (let ((yas-fallback-behavior 'return-nil))
                (if (yas-expand)
                    (run-hooks 'post-self-insert-hook)))))
-          ((and (texmathp)
-                (not (derived-mode-p 'prog-mode)))
-           (call-interactively #'cdlatex-tab))
           ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
-           (call-interactively #'hippie-expand))
+           (cond
+            ((and (derived-mode-p 'latex-mode)
+                  (not (derived-mode-p 'prog-mode))
+                  (texmathp))
+             (call-interactively #'cdlatex-tab))
+            ((derived-mode-p 'maxima-mode) (call-interactively #'maxima-complete))
+            (t (call-interactively #'hippie-expand))))
           (t
            (call-interactively #'indent-for-tab-command))))
 
