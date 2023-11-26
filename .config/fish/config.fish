@@ -24,6 +24,7 @@ export EDITOR="emacsclient -cq"
 
 # aliases ##################################################################
 
+alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -alh'
 alias mv='mv -i'

@@ -1,0 +1,11 @@
+alias la='ls -a'
+alias ll='ls -lh'
+alias lla='ls -alh'
+alias mv='mv -i'
+alias rm='rm -I'
+
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
