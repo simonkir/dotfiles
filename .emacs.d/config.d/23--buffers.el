@@ -14,12 +14,15 @@
 
 
 (setq sk:ignored-buffers-regexp "\\(^\\s-*\\*+\\)\\|\\(^magit\\)\\|\\(^\\s-*tq-temp-epdfinfo\\)")
+(setq sk:unignored-buffers-regexp "\\*maxima\\*")
+(setq sk:fallback-buffer "*dashboard*")
 
 (defun sk:buffer-list ()
   "returns buffer-list without unimportant buffers (specified in `sk:ignored-buffers-regexp')"
   (let ((buffers (mapcar 'buffer-name (buffer-list))))
     (dolist (element buffers)
-      (when (string-match-p sk:ignored-buffers-regexp element)
+      (when (and (not (string-match-p sk:unignored-buffers-regexp element))
+                 (string-match-p sk:ignored-buffers-regexp element))
         (setq buffers (remove element buffers)))) ;; ensure element is deleted from buffers
     (sort buffers 'string<)))
 
@@ -50,9 +53,9 @@
                 (setq element (propertize element 'face '(:weight bold :foreground "#98be65"))))
               (setq bmessage (concat bmessage element " / ")))
             (minibuffer-message "%s" (substring bmessage 0 -3))))
-      ;; visit dashboard if no buffers are open
-      (switch-to-buffer "*dashboard*")
-      (minibuffer-message "%s" (propertize "*dashboard*" 'face '(:weight bold :foreground "#98be65"))))))
+      ;; visit fallback buffer if no buffers are open
+      (switch-to-buffer sk:fallback-buffer)
+      (minibuffer-message "%s" (propertize sk:fallback-buffer 'face '(:weight bold :foreground "#98be65"))))))
 
 (defun sk:next-buffer ()
   (interactive)
