@@ -3,6 +3,11 @@
 
 
 (use-package org
+  :init
+  (general-def "C-x C-n" 'org-agenda)
+
+
+
   :config
 
   ; visuals ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -145,6 +150,38 @@
     "M-K" 'org-shiftmetaup
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
+
+
+
+  ; agenda ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (setq org-directory "~/.emacs.d/org-dir")
+  (setq org-agenda-files '("~/.emacs.d/org-dir"))
+
+  (setq calendar-week-start-day 1)
+  (setq org-agenda-window-setup 'current-window)
+
+  (setq org-agenda-custom-commands '(("n" "Dashboard"
+                                      ((agenda "" ((org-agenda-overriding-header "")
+                                                   (org-agenda-start-on-weekday nil)
+                                                   (org-agenda-span 14)
+                                                   (org-deadline-warning-days 0)
+                                                   (org-agenda-skip-scheduled-if-done t)
+                                                   (org-agenda-skip-deadline-if-done t)
+                                                   (org-agenda-use-time-grid nil)))
+                                       (todo "" ((org-agenda-overriding-header "Undeadlined Tasks")
+                                                 (org-agenda-skip-function #'(org-agenda-skip-if nil '(scheduled deadline)))))
+                                       (todo "DONE" ((org-agenda-overriding-header "DONE Tasks")))))))
+
+  (general-def org-agenda-mode-map
+    "W" 'org-agenda-fortnight-view
+    "M" 'org-agenda-month-view)
+
+  (general-def calendar-mode-map
+    "M-h" 'calendar-backward-day
+    "M-j" 'calendar-forward-week
+    "M-k" 'calendar-backward-week
+    "M-l" 'calendar-forward-day)
 
 
 

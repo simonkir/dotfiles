@@ -14,7 +14,7 @@
 
 
 (setq sk:ignored-buffers-regexp "\\(^\\s-*\\*+\\)\\|\\(^magit\\)\\|\\(^\\s-*tq-temp-epdfinfo\\)")
-(setq sk:unignored-buffers-regexp "\\*maxima\\*")
+(setq sk:unignored-buffers-regexp "\\*maxima\\*\\|\\*Org Agenda\\*")
 (setq sk:fallback-buffer "*dashboard*")
 
 (defun sk:buffer-list ()

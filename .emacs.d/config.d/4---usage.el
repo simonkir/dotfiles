@@ -31,13 +31,7 @@
            (end-date-time (time-add start-date-time (* 86400 4)))
            (start-date-string (format-time-string "%d.%m." start-date-time))
            (end-date-string (format-time-string "%d.%m." end-date-time)))
-      (insert (format "* KW %s: %s – %s\n" calendar-week start-date-string end-date-string))
-      (dotimes (day-offset 5)
-        (let* ((day-time (time-add start-date-time (* 86400 day-offset)))
-               (day-string (format-time-string "%a %d.%m." day-time))
-               (subheading-content "- [ ] res"))
-          (message "%s" day-offset)
-          (insert (format "** %s [0/1]\n%s\n\n" day-string subheading-content)))))))
+      (insert (format "* KW %s: %s – %s\n\n" calendar-week start-date-string end-date-string)))))
 
 
 
