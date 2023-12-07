@@ -4,7 +4,9 @@
 
 (use-package org
   :init
-  (general-def "C-x C-n" 'org-agenda)
+  (general-def
+    "C-x C-n" 'org-agenda
+    "C-x C-t" 'org-capture)
 
 
 
@@ -153,27 +155,43 @@
 
 
 
-  ; agenda ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; agenda stuff ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-directory "~/.emacs.d/org-dir")
-  (setq org-agenda-files '("~/.emacs.d/org-dir"))
+  (setq org-agenda-files '("~/.emacs.d/org-dir/"))
+  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
 
+  (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
-  (setq org-agenda-window-setup 'current-window)
 
-  (setq org-agenda-custom-commands '(("n" "Dashboard"
-                                      ((agenda "" ((org-agenda-overriding-header "")
-                                                   (org-agenda-start-on-weekday nil)
-                                                   (org-agenda-span 14)
-                                                   (org-deadline-warning-days 0)
-                                                   (org-agenda-skip-scheduled-if-done t)
-                                                   (org-agenda-skip-deadline-if-done t)
-                                                   (org-agenda-use-time-grid nil)))
-                                       (todo "" ((org-agenda-overriding-header "Undeadlined Tasks")
-                                                 (org-agenda-skip-function #'(org-agenda-skip-if nil '(scheduled deadline)))))
-                                       (todo "DONE" ((org-agenda-overriding-header "DONE Tasks")))))))
+  (set-face-attribute 'org-column nil :background nil)
+  (setq org-columns-default-format-for-agenda "%CATEGORY(Type) %TODO(State) %1PRIORITY %25ITEM(Task) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+
+  (setq org-agenda-block-separator "")
+  (setq org-agenda-window-setup 'current-window)
+  (setq org-deadline-warning-days most-positive-fixnum)
+
+  (setq org-agenda-custom-commands
+        '(("n" "Dashboard"
+           ((agenda "" ((org-agenda-overriding-header "")
+                        (org-agenda-start-on-weekday nil)
+                        (org-agenda-span 14)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-skip-scheduled-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-agenda-use-time-grid nil)))
+            (todo "" ((org-agenda-overriding-header "Undeadlined Tasks")
+                      (org-agenda-todo-ignore-scheduled t)
+                      (org-agenda-todo-ignore-deadlines t)))
+            ;;(search "-Deadline+Scheduled")
+            (todo "DONE" ((org-agenda-overriding-header "DONE Tasks"))))
+                        ((org-agenda-view-columns-initially t)))))
 
   (general-def org-agenda-mode-map
+    "c" 'org-agenda-columns
+    "C" 'org-columns
+    "q" 'org-agenda-exit
+    "Q" 'org-agenda-quit
     "W" 'org-agenda-fortnight-view
     "M" 'org-agenda-month-view)
 
@@ -182,6 +200,17 @@
     "M-j" 'calendar-forward-week
     "M-k" 'calendar-backward-week
     "M-l" 'calendar-forward-day)
+
+
+
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
+
+  (setq org-capture-templates '(("t" "TODO entry" entry (file "/tmp/org-capture.org")
+                                 "* TODO %?"
+                                 :empty-lines 1)))
+
+  (general-def org-capture-mode-map
+    "C-c C-c" nil)
 
 
 
