@@ -164,8 +164,8 @@
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
 
-  (set-face-attribute 'org-column nil :background nil)
-  (setq org-columns-default-format-for-agenda "%CATEGORY(Type) %TODO(State) %1PRIORITY %25ITEM(Task) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+  (advice-add 'org-agenda-columns :before (lambda () (interactive) (set-face-attribute 'org-column nil :background nil)))
+  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %25ITEM(Task) %EFFORT(Dur.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
 
   (setq org-agenda-block-separator "")
   (setq org-agenda-window-setup 'current-window)
@@ -188,18 +188,22 @@
                         ((org-agenda-view-columns-initially t)))))
 
   (general-def org-agenda-mode-map
+    "l" 'forward-char
+    "h" 'backward-char
+    "p" 'org-agenda-set-property
     "c" 'org-agenda-columns
     "C" 'org-columns
-    "q" 'org-agenda-exit
-    "Q" 'org-agenda-quit
     "W" 'org-agenda-fortnight-view
-    "M" 'org-agenda-month-view)
+    "M" 'org-agenda-month-view
+    "q" 'org-agenda-exit
+    "Q" 'org-agenda-quit)
 
-  (general-def calendar-mode-map
-    "M-h" 'calendar-backward-day
-    "M-j" 'calendar-forward-week
-    "M-k" 'calendar-backward-week
-    "M-l" 'calendar-forward-day)
+  (general-def org-columns-map
+    "p" nil
+    "q" nil
+    "Q" 'org-columns-quit
+    "-" 'org-columns-previous-allowed-value
+    "+" 'org-columns-next-allowed-value)
 
 
 
