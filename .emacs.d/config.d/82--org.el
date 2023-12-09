@@ -99,27 +99,8 @@
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
-  ;; prevent < and > from being interpreted as delimiters
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
-
-  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
-
-  ;; other latex stuff (see 83--auctex.el for doc)
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
-
-
-
   (add-hook 'org-mode-hook #'sk:autocorrect-mode)
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
-
-  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-  (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
-  (add-to-list 'org-latex-packages-alist '("" "gauss" t))
-
 
   (defun sk:org-return ()
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
@@ -259,7 +240,25 @@
 
 
 
-  ; latex preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; latex settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
+  (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
+  (add-to-list 'org-latex-packages-alist '("" "gauss" t))
+
+  ;; prevent < and > from being interpreted as delimiters
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
+
+  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
+
+  ;; other latex stuff (see 83--auctex.el for doc)
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
+  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
+
+
 
   (setq sk:org-preview-latex-scale 1.5)
   (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
