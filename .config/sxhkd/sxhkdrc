@@ -17,7 +17,7 @@ super + 0
     archlinux-logout
 
 super + alt + b
-      blender
+    blender
 
 super + alt + c
     ~/.config/conky/launch-conky.sh
@@ -70,14 +70,8 @@ super + alt + shift + w
 super + alt + ctrl + w
     google-chrome-stable
 
-# super + y
-#    polybar-msg cmd toggle
-
-# super + alt + shift + w
-#     qutebrowser
-
-# super + alt + z
-#     zathura
+super + alt + y
+    ~/.config/simonkir/bluetooth-connect.sh
 
 
 
