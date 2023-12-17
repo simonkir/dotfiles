@@ -33,8 +33,9 @@
     "M" 'pdf-view-goto-page
 
     "=" nil
+    "s a" 'pdf-view-auto-slice-minor-mode
+    "s s" 'pdf-view-set-slice-using-mouse
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
-    "C-c C-r s" 'pdf-view-auto-slice-minor-mode
     "C-c C-a d" 'pdf-annot-delete))
 
 

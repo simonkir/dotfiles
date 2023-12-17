@@ -145,8 +145,13 @@
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
 
-  (advice-add 'org-agenda-columns :before (lambda () (interactive) (set-face-attribute 'org-column nil :background nil)))
-  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %25ITEM(Task) %EFFORT(Dur.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+  (set-face-attribute 'org-column nil :background 'unspecified)
+  ;;(advice-add 'org-agenda-columns :before (lambda () (interactive) (set-face-attribute 'org-column nil :background 'unspecified)))
+  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %ITEM(Task) %EFFORT(Dur.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+
+  (advice-add 'org-agenda-exit :before (lambda () (interactive) (org-save-all-org-buffers)))
+  (advice-add 'org-agenda-quit :before (lambda () (interactive) (org-save-all-org-buffers)))
+  (advice-add 'org-agenda-Quit :before (lambda () (interactive) (org-save-all-org-buffers)))
 
   (setq org-agenda-block-separator "")
   (setq org-agenda-window-setup 'current-window)
@@ -166,9 +171,12 @@
                       (org-agenda-todo-ignore-deadlines t)))
             ;;(search "-Deadline+Scheduled")
             (todo "DONE" ((org-agenda-overriding-header "DONE Tasks"))))
-                        ((org-agenda-view-columns-initially t)))))
+           ((org-agenda-view-columns-initially t)))))
 
   (general-def org-agenda-mode-map
+    "t" nil
+    "m" nil
+    "D" 'org-agenda-goto-date
     "l" 'forward-char
     "h" 'backward-char
     "p" 'org-agenda-set-property
@@ -182,6 +190,19 @@
   (general-def org-columns-map
     "p" nil
     "q" nil
+    "s" nil
+    "1" nil
+    "2" nil
+    "3" nil
+    "4" nil
+    "5" nil
+    "6" nil
+    "7" nil
+    "8" nil
+    "9" nil
+    "0" nil
+    "e" nil
+    "t" 'org-columns-edit-value
     "Q" 'org-columns-quit
     "-" 'org-columns-previous-allowed-value
     "+" 'org-columns-next-allowed-value)
