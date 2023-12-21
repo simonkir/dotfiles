@@ -1,5 +1,5 @@
 --[[
-    `quotes.csv' contains quotes in the format of ``QUOTE;AUTHOR''
+    `quotes.csv' contains quotes in the format of ``"AUTHOR","QUOTE"''
     the file should be located in ~/.config/conky/
     the AUTHOR field can be left blank
 ]]--
@@ -11,7 +11,7 @@ function loadCSV(filename)
 
     for line in file:lines() do
         local fields = {}
-        for field in line:gmatch('([^;]*);') do
+        for field in line:gmatch('"([^"]*)"') do
             table.insert(fields, field)
         end
         table.insert(lines, fields)
@@ -40,8 +40,8 @@ function getRandomQuoteFromCSV(filename)
 
     repeat
         local fields = lines[math.random(#lines)]
-        quoteText = fields[1]
-        quoteAuthor = fields[2]
+        quoteAuthor = fields[1]
+        quoteText = fields[2]
     until #quoteText < 100
 
     -- formatting the result
