@@ -35,6 +35,8 @@
     "=" nil
     "s a" 'pdf-view-auto-slice-minor-mode
     "s s" 'pdf-view-set-slice-using-mouse
+    "s b" 'pdf-view-set-slice-from-bounding-box
+    "s p" 'pdf-view-set-slice-from-bounding-box
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
     "C-c C-a d" 'pdf-annot-delete))
 

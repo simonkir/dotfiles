@@ -166,10 +166,9 @@
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-use-time-grid nil)))
-            (todo "" ((org-agenda-overriding-header "Undeadlined Tasks")
+            (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
                       (org-agenda-todo-ignore-scheduled t)
                       (org-agenda-todo-ignore-deadlines t)))
-            ;;(search "-Deadline+Scheduled")
             (todo "DONE" ((org-agenda-overriding-header "DONE Tasks"))))
            ((org-agenda-view-columns-initially t)))))
 
