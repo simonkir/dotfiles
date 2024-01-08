@@ -21,7 +21,8 @@
 
   (setq meow-expand-exclude-mode-list nil)
   (setq meow-mode-state-list '((org-agenda-mode . motion)
-                               (org-capture-mode . insert)))
+                               (org-capture-mode . insert)
+                               (eat-mode . insert)))
 
 
 

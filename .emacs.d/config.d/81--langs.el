@@ -7,14 +7,21 @@
 
 
 
-(use-package gnuplot)
+(use-package eat
+  :general ("C-x C-t" 'eat))
 
 
 
 (use-package maxima
   :init
   (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
-  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))
+  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode))
+
+  :general ("C-x *" 'maxima))
+
+
+
+(use-package gnuplot)
 
 
 
