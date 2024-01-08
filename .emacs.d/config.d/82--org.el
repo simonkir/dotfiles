@@ -4,9 +4,9 @@
 
 (use-package org
   :init
-  (general-def
-    "C-x C-n" 'org-agenda
-    "C-x C-r" 'org-capture)
+  (general-def-leader
+    "r n" 'org-agenda
+    "r c" 'org-capture)
 
 
 
@@ -210,7 +210,7 @@
 
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
 
-  (setq org-capture-templates '(("r" "TODO entry" entry (file "/tmp/org-capture.org")
+  (setq org-capture-templates '(("c" "TODO entry" entry (file "/tmp/org-capture.org")
                                  "* TODO %?"
                                  :empty-lines 1)))
 

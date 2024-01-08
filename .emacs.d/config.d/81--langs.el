@@ -8,7 +8,7 @@
 
 
 (use-package eat
-  :general ("C-x C-t" 'eat))
+  :general (general-def-leader "r t" 'eat))
 
 
 
@@ -17,7 +17,7 @@
   (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode))
 
-  :general ("C-x *" 'maxima))
+  :general (general-def-leader "r m" 'maxima))
 
 
 

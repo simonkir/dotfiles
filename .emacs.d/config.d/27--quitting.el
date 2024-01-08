@@ -40,12 +40,15 @@ i. e. killing all open buffers and quitting the terminal, unless there are unsav
 
 i. e. killing the terminal, unless there are unsaved changes"
   (interactive)
-  (unless (sk:maybe-visit-unsaved-buffer)
-    (kill-emacs)))
+  (when (yes-or-no-p "Really perform sk:daemon-quit? ")
+    (unless (sk:maybe-visit-unsaved-buffer)
+      (kill-emacs))))
 
 
 
-(general-def
-  "C-x C-c" 'sk:soft-quit
-  "C-x C" 'sk:harsh-quit
-  "C-x !" 'sk:daemon-quit)
+(general-def-leader
+  "q" 'sk:soft-quit
+  "Q" 'sk:harsh-quit
+  "!" 'sk:daemon-quit)
+
+(general-def "C-x C-c" nil)
