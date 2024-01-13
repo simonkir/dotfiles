@@ -18,6 +18,12 @@
   (gui-set-selection 'CLIPBOARD default-directory)
   (message "%s" default-directory))
 
+(defun sk:cpfn ()
+  "print and copy current file name to system clipboard"
+  (interactive)
+  (gui-set-selection 'CLIPBOARD buffer-file-name)
+  (message "%s" buffer-file-name))
+
 
 
 (defun sk:org-insert-weekly-todo-list (count)
@@ -36,5 +42,6 @@
 
 
 (general-def-leader
-  "d c" 'sk:cpwd
+  "d c" 'sk:cpfn
+  "d C" 'sk:cpwd
   "d t" 'sk:print-time)

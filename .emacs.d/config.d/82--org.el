@@ -147,7 +147,7 @@
 
   (set-face-attribute 'org-column nil :background 'unspecified)
   ;;(advice-add 'org-agenda-columns :before (lambda () (interactive) (set-face-attribute 'org-column nil :background 'unspecified)))
-  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %ITEM(Task) %EFFORT(Dur.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %ITEM(Task) %EFFORT(Eff.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
 
   (advice-add 'org-agenda-exit :before (lambda () (interactive) (org-save-all-org-buffers)))
   (advice-add 'org-agenda-quit :before (lambda () (interactive) (org-save-all-org-buffers)))
