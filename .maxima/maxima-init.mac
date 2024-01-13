@@ -16,6 +16,17 @@ load(eigen);
 /* define some helper functions */
 log10(x) := log(x)/log(10);
 log2(x) := log(x)/log(2);
+ln(x) := log(x);
+
+arcsin(x) := asin(x);
+arccos(x) := acos(x);
+arctan(x) := atan(x);
+arccot(x) := acot(x);
+
+arsinh(x) := asinh(x);
+arcosh(x) := acosh(x);
+artanh(x) := atanh(x);
+arcoth(x) := acoth(x);
 
 deg2rad(x) := 2*%pi*x/360;
 rad2deg(x) := 360*x/2/%pi;
