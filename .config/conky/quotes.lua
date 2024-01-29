@@ -34,24 +34,29 @@ function getRandomQuoteFromCSV(filename)
     pid = stat_file_contents:match("(%d+)")
     math.randomseed(pid * os.date("%d%H") * os.date("%Y%m"))
 
-    -- read random quote
-    local quoteAuthor = ""
-    local quoteText = ""
+    local fields
 
     repeat
-        local fields = lines[math.random(#lines)]
-        quoteAuthor = fields[1]
-        quoteText = fields[2]
-    until #quoteText < 100
+        fields = lines[math.random(#lines)]
+    until #fields[2] < 100
 
-    -- formatting the result
-    if quoteAuthor == "" then
-        quoteAuthor = "Unknown Author"
-    end
-
-    return quoteAuthor:upper() .. "\n„" .. quoteText .. "“"
+    return fields
 end
 
 function conky_quote()
-    return getRandomQuoteFromCSV(os.getenv("HOME") .. "/.config/conky/quotes.csv")
+    local quote = getRandomQuoteFromCSV(os.getenv("HOME") .. "/.config/conky/quotes.csv")
+    local quoteAuthor = quote[1]
+    local quoteText = quote[2]
+
+    -- remove trailing full-stop from quoteText
+    if string.sub(quoteText, -1) == "." then
+        quoteText = string.sub(quoteText, 1, -2)
+    end
+
+    -- add anonymous author in case none is given
+    if quoteAuthor == "" then
+        quoteAuthor = "Anonymous"
+    end
+
+    return quoteAuthor:lower() .. ":\n~ " .. quoteText:lower()
 end

@@ -12,5 +12,5 @@ function conky_date()
     local month = os.date("%B")
 
     local currentDate = weekday .. ", " .. day .. ". " .. month
-    return currentDate
+    return currentDate:lower()
 end
