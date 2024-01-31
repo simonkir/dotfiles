@@ -73,6 +73,9 @@ super + alt + ctrl + w
 super + alt + y
     ~/.config/simonkir/bluetooth-connect.sh
 
+super + alt + shift + y
+    ~/.config/simonkir/bluetooth-disconnect.sh
+
 
 
 Print

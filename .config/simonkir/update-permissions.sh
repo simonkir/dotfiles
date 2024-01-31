@@ -33,3 +33,4 @@ chmod +x ~/.config/picom/toggle-darkmode.sh
 
 # custom scripts
 chmod +x ~/.config/simonkir/bluetooth-connect.sh
+chmod +x ~/.config/simonkir/bluetooth-disconnect.sh
