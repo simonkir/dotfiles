@@ -13,4 +13,9 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons    t)
   (setq dashboard-center-content    t)
-  (dashboard-setup-startup-hook))
+
+  (dashboard-setup-startup-hook)
+  (add-hook 'server-after-make-frame-hook
+            #'(lambda ()
+                (let ((dashboard-force-refresh t))
+                  (dashboard-insert-startupify-lists)))))

@@ -25,7 +25,9 @@ useful when switching themes also changes the colors of the modeline"
     (set-face-attribute 'telephone-line-evil-replace    nil :background "#ff6c6b" :foreground "#282c34")
     (set-face-attribute 'telephone-line-evil-visual     nil :background "#c678dd" :foreground "#282c34"))
 
-  (sk:mode-line-update-colors)
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'sk:mode-line-update-colors)
+    (sk:mode-line-update-colors))
 
 
 
