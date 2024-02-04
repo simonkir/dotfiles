@@ -128,7 +128,8 @@
     ":" 'recenter-top-bottom
 
     "a" 'meow-append
-    "A" 'meow-bounds-of-thing
+    ;;"A" 'meow-bounds-of-thing
+    "A" nil ;; reserved for skparens
     "b" 'meow-back-word
     "B" 'meow-back-symbol
     "c" 'meow-join
@@ -144,7 +145,8 @@
     "h" 'meow-left
     "H" 'meow-left-expand
     "i" 'meow-insert
-    "I" 'meow-inner-of-thing
+    ;; "I" 'meow-inner-of-thing
+    "I" nil ;; reserved for skparens
     "j" 'meow-next
     "J" 'meow-next-expand
     "k" 'meow-prev

@@ -29,4 +29,6 @@
   (general-def meow-normal-state-keymap
     "%" 'skparens-change
     "D" 'skparens-delete
-    "S" 'skparens-surround-region))
+    "S" 'skparens-insert
+    "A" 'skparens-mark-outer
+    "I" 'skparens-mark-inner))
