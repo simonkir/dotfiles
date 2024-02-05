@@ -18,10 +18,10 @@
   (setq meow-keypad-meta-prefix           ?m)
   (setq meow-keypad-literal-prefix        ?\s)
   (setq meow-keypad-leader-dispatch       sk:leader-map)
+  (setq meow-keypad-describe-delay        most-positive-fixnum)
 
   (setq meow-expand-exclude-mode-list nil)
   (setq meow-mode-state-list '((org-agenda-mode . motion)
-                               (org-capture-mode . insert)
                                (eat-mode . insert)))
 
 

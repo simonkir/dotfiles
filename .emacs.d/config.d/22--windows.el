@@ -32,11 +32,13 @@
 
 (defun sk:cycle-windows-forward ()
   (interactive)
-  (select-window (next-window (selected-window) nil (selected-frame))))
+  (select-window (next-window (selected-window) nil (selected-frame)))
+  (run-hooks 'window-configuration-change-hook))
 
 (defun sk:cycle-windows-backward ()
   (interactive)
-  (select-window (previous-window (selected-window) nil (selected-frame))))
+  (select-window (previous-window (selected-window) nil (selected-frame)))
+  (run-hooks 'window-configuration-change-hook))
 
 
 
@@ -69,3 +71,17 @@
     "w R" 'rotate-frame-anticlockwise
     "w F" 'flip-frame
     "w f" 'flop-frame))
+
+
+
+(use-package zoom
+  :demand t
+  :config
+  ;; this causes zoom to only balance when there are 3+ windows
+  (setq zoom-size '(0.5 . 0.5))
+
+  (general-def-leader
+    "t z" 'zoom-mode
+    "w z" 'zoom)
+
+  (zoom-mode))
