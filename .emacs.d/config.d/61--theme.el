@@ -25,6 +25,11 @@
   (defalias 'solaire-mode-line-active-face 'mode-line-active)
   (defalias 'solaire-mode-line-inactive-face 'mode-line-inactive)
 
+  (dolist (face '((mode-line . solaire-mode-line-face)
+                  (mode-line-active . solaire-mode-line-active-face)
+                  (mode-line-inactive . solaire-mode-line-inactive-face)))
+    (setq solaire-mode-remap-alist (delete face solaire-mode-remap-alist)))
+
   (if (daemonp)
       (add-hook 'server-after-make-frame-hook #'solaire-global-mode))
   (solaire-global-mode))
