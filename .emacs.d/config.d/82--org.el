@@ -184,12 +184,16 @@
     "W" 'org-agenda-fortnight-view
     "M" 'org-agenda-month-view
     "q" 'org-agenda-exit
-    "Q" 'org-agenda-quit)
+    "Q" 'org-agenda-quit
+    "n" 'org-agenda-next-date-line
+    "p" 'org-agenda-previous-date-line)
 
   (general-def org-columns-map
     "p" nil
     "q" nil
     "s" nil
+    "e" nil
+    "n" nil
     "1" nil
     "2" nil
     "3" nil
@@ -200,7 +204,6 @@
     "8" nil
     "9" nil
     "0" nil
-    "e" nil
     "t" 'org-columns-edit-value
     "Q" 'org-columns-quit
     "-" 'org-columns-previous-allowed-value

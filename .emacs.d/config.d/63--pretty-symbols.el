@@ -20,6 +20,8 @@
   ;; environments
   (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
   (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝)))
+  (add-to-list 'prettify-symbols-alist '("#+begin_src" . (?\s (Bc . Bc) ?⮟)))
+  (add-to-list 'prettify-symbols-alist '("#+end_src" . (?\s (Bc . Bc) ?⮝)))
   (add-to-list 'prettify-symbols-alist '("#+begin_quote" . (?\s (bc . bc) ?“)))
   (add-to-list 'prettify-symbols-alist '("#+end_quote" . (?\s (bc . bc) ?”)))
 

@@ -3,7 +3,8 @@
 
 
 (use-package eat
-  :general (general-def-leader "r t" 'eat))
+  :general (general-def-leader "r t" 'eat)
+  :config (general-def 'eat-semi-char-mode-map "C-SPC" nil))
 
 
 
