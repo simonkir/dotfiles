@@ -16,9 +16,3 @@
   (setq sk:leader-map (make-sparse-keymap))
   (general-create-definer general-def-leader :keymaps 'sk:leader-map)
   (general-def package-menu-mode-map "U" 'package-menu-mark-upgrades))
-
-
-
-(use-package which-key
-  :demand t
-  :config (which-key-mode))
