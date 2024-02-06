@@ -24,23 +24,29 @@
 
   (defun sk:insert-tab-key ()
     (interactive)
-    (cond ((and (derived-mode-p 'org-mode)
-                (member (nth 0 (org-element-at-point)) #'(table-row table)))
-           (call-interactively #'org-table-next-field))
-          ((when yas-minor-mode
-             (let ((yas-fallback-behavior 'return-nil))
-               (if (yas-expand)
-                   (run-hooks 'post-self-insert-hook)))))
-          ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
-           (cond
-            ((and (derived-mode-p 'latex-mode)
-                  (not (derived-mode-p 'prog-mode))
-                  (texmathp))
-             (call-interactively #'cdlatex-tab))
-            ((derived-mode-p 'maxima-mode) (call-interactively #'maxima-complete))
-            (t (call-interactively #'hippie-expand))))
-          (t
-           (call-interactively #'indent-for-tab-command))))
+    (cond
+     ;; org-table tabbing
+     ;; before snippet to avoid unwanted interferences
+     ((and (derived-mode-p 'org-mode)
+           (member (nth 0 (org-element-at-point)) #'(table-row table)))
+      (call-interactively #'org-table-next-field))
+     ;; snippet exapnsion
+     ((when yas-minor-mode
+        (let ((yas-fallback-behavior 'return-nil))
+          (when (yas-expand)
+            (run-hooks 'post-self-insert-hook)))))
+     ;; completion (depending in major-mode)
+     ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
+      (cond
+       ((and (derived-mode-p 'latex-mode)
+             (not (derived-mode-p 'prog-mode))
+             (texmathp))
+        (call-interactively #'cdlatex-tab))
+       ((derived-mode-p 'maxima-mode) (call-interactively #'maxima-complete))
+       (t (call-interactively #'hippie-expand))))
+     ;; indentation
+     (t
+      (call-interactively #'indent-for-tab-command))))
 
   (general-def meow-insert-state-keymap
     "<tab>"     'sk:insert-tab-key

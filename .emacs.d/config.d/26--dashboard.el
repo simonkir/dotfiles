@@ -8,7 +8,8 @@
   :demand t
   :config
   (setq dashboard-banner-logo-png   "~/.emacs.d/logos/xemacs_color.png")
-  (setq dashboard-items             '((recents . 15)))
+  ;;(setq dashboard-items             '((recentf . 15)))
+  (setq dashboard-items             nil)
   (setq dashboard-startup-banner    'logo)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons    t)
