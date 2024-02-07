@@ -9,11 +9,10 @@
 
 
 (use-package maxima
+  :general (general-def-leader "r m" 'maxima)
   :init
   (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
-  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode))
-
-  :general (general-def-leader "r m" 'maxima))
+  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))
 
 
 

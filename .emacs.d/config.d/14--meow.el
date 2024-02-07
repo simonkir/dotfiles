@@ -26,47 +26,7 @@
 
 
 
-  ; meow-thing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  (meow-thing-register 'quote-gqq    '(pair ("„") ("“"))                  '(pair ("„") ("“")))
-  (meow-thing-register 'quote-gq     '(pair ("‚") ("‘"))                  '(pair ("‚") ("‘")))
-  (meow-thing-register 'quote-eqq    '(pair ("“") ("”"))                  '(pair ("“") ("”")))
-  (meow-thing-register 'quote-eq     '(pair ("‘") ("’"))                  '(pair ("‘") ("’")))
-  (meow-thing-register 'abs          '(pair ("|") ("|"))                  '(pair ("|") ("|")))
-  (meow-thing-register 'latex-math   '(pair ("$") ("$"))                  '(pair ("$") ("$")))
-  (meow-thing-register 'latex-abs    '(pair ("\\left|") ("\\right|"))     '(pair ("\\left|") ("\\right|")))
-  (meow-thing-register 'latex-round  '(pair ("\\left(") ("\\right)"))     '(pair ("\\left(") ("\\right)")))
-  (meow-thing-register 'latex-square '(pair ("\\left[") ("\\right]"))     '(pair ("\\left[") ("\\right]")))
-  (meow-thing-register 'latex-curly  '(pair ("\\left\\{") ("\\right\\}")) '(pair ("\\left\\{") ("\\right\\}")))
-
-  (setq meow-char-thing-table
-        '((?\( . round)
-          (?\) . round)
-          (?\[ . square)
-          (?\] . square)
-          (?{ . curly)
-          (?} . curly)
-          (?| . abs)
-          (?\" . string)
-          ;; latex elements
-          (?\$ . latex-math)
-          (?a . latex-abs)
-          (?r . latex-round)
-          (?s . latex-square)
-          (?c . latex-curly)
-          ;; quotes
-          (?„ . quote-gqq)
-          (?‚ . quote-gq)
-          (?\“ . quote-eqq)
-          (?\‘ . quote-eq)
-          ;; misc
-          (?. . sentence)
-          (?w . symbol)
-          (?b . buffer)
-          (?p . paragraph)
-          (?l . line)))
-
-  ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (defun sk:meow-digit-argument-or-eval ()
     "when there is a region, act like eval, otherwise use digit-argument"
@@ -91,6 +51,8 @@
         (forward-char))))
 
 
+
+  ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   (general-def meow-insert-state-keymap
     "C-z" 'meow-motion-mode)

@@ -2,9 +2,31 @@
 
 
 
-(blink-cursor-mode -1)
+(defalias 'yes-or-no 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq-default use-dialog-box nil)
 
 
+
+; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-def-leader
+  "h" 'describe-symbol
+  "H" 'describe-key)
+
+(general-def help-mode-map
+  "<escape>" 'meow-cancel-selection
+  "h" 'meow-left
+  "l" 'meow-right
+  "H" 'help-go-back
+  "L" 'help-go-forward
+  "n" 'help-go-forward
+  "p" 'help-go-back)
+
+
+
+; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sk:print-time ()
   (interactive)
@@ -23,21 +45,6 @@
   (interactive)
   (gui-set-selection 'CLIPBOARD buffer-file-name)
   (message "%s" buffer-file-name))
-
-
-
-(defun sk:org-insert-weekly-todo-list (count)
-  "Insert a calendar week heading in Org-mode."
-  (interactive "nheadline count: ")
-  (dotimes (week-offset count)
-    (let* ((week-time (time-add (current-time) (* 86400 7 week-offset)))
-           (calendar-week (format-time-string "%V" week-time))
-           (day-of-week (string-to-number (format-time-string "%u")))
-           (start-date-time (time-subtract week-time (* 86400 (- day-of-week 1))))
-           (end-date-time (time-add start-date-time (* 86400 4)))
-           (start-date-string (format-time-string "%d.%m." start-date-time))
-           (end-date-string (format-time-string "%d.%m." end-date-time)))
-      (insert (format "* KW %s: %s – %s\n\n" calendar-week start-date-string end-date-string)))))
 
 
 
