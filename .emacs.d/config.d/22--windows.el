@@ -75,13 +75,13 @@
 
 
 (use-package zoom
-  :demand t
-  :config
-  ;; this causes zoom to only balance when there are 3+ windows
-  (setq zoom-size '(0.5 . 0.5))
-
-  (general-def-leader
+  :general (general-def-leader
     "t z" 'zoom-mode
     "w z" 'zoom)
+  :config
+  ;; this doesnt seem to work
+  ;;(setq zoom-ignored-major-modes '(calc-mode calendar-mode))
+  ;;(setq zoom-ignored-buffer-name-regexps "^\\**Calc")
 
-  (zoom-mode))
+  ;; this causes zoom to only balance when there are 3+ windows
+  (setq zoom-size '(0.5 . 0.5)))
