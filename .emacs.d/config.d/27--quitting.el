@@ -2,27 +2,33 @@
 
 
 
-(defun sk:maybe-visit-unsaved-buffer ()
-  "searches for unsaved file-visiting buffer. if there is one, switch to it
+(defun sk:maybe-save-all-buffers ()
+  "searches for unsaved file-visiting buffer.
+if there is one, switch to it and prompt whether to save, not save or abort current action
 
-returns t if some buffers are unsaved, returns nil if all buffers are saved"
+returns t if all buffers are saved"
   (interactive)
-  (let (unsaved-exists)
+  (let (unsaved-buffers
+        decision
+        (abort nil))
     (dolist (element (buffer-list))
       (when (and (buffer-modified-p element) (buffer-file-name element))
-        (setq unsaved-exists t)
-        (message "visiting unsaved buffer: %s" element)
-        (switch-to-buffer element t)))
-    (if unsaved-exists
-        t
-      nil)))
+        (switch-to-buffer element t)
+        (setq decision (read-char (concat "unsaved buffer: " (buffer-name element) ". [s]ave, [i]gnore, [a]bort?")))
+        (cond
+         ((eq decision ?s) (save-buffer))
+         ((eq decision ?i) nil)
+         (t (setq abort t)))))
+    (not abort)))
+
+
 
 (defun sk:soft-quit ()
   "performes an soft quit of emacs
 
 i. e. closing the terminal, unless there are unsaved changes"
   (interactive)
-  (unless (sk:maybe-visit-unsaved-buffer)
+  (when (sk:maybe-save-all-buffers)
     (save-buffers-kill-terminal)))
 
 (defun sk:harsh-quit ()
@@ -30,10 +36,11 @@ i. e. closing the terminal, unless there are unsaved changes"
 
 i. e. killing all open buffers and quitting the terminal, unless there are unsaved changes"
   (interactive)
-  (unless (sk:maybe-visit-unsaved-buffer)
+  (when (sk:maybe-save-all-buffers)
     (dolist (element (sk:buffer-list))
       (kill-buffer element))
     (save-buffers-kill-terminal)))
+
 
 (defun sk:daemon-quit ()
   "performes an daemon quit of emacs
@@ -41,7 +48,7 @@ i. e. killing all open buffers and quitting the terminal, unless there are unsav
 i. e. killing the terminal, unless there are unsaved changes"
   (interactive)
   (when (yes-or-no-p "Really perform sk:daemon-quit? ")
-    (unless (sk:maybe-visit-unsaved-buffer)
+    (when (sk:maybe-save-all-buffers)
       (kill-emacs))))
 
 
