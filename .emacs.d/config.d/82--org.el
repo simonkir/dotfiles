@@ -3,8 +3,7 @@
 
 
 (use-package org
-  :init
-  (general-def-leader
+  :general (general-def-leader
     "r n" 'org-agenda
     "r c" 'org-capture)
 
@@ -211,8 +210,8 @@
 
 
 
+  (setq org-bookmark-names-plist nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
-
   (setq org-capture-templates '(("c" "TODO entry" entry (file "/tmp/org-capture.org")
                                  "* TODO %?"
                                  :empty-lines 1)))

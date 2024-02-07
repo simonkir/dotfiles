@@ -11,7 +11,7 @@
 
 
 (use-package recentf
-  :demand t ;; needed for dashboard
+  :demand t
   :config
   (setq recentf-max-saved-items 300)
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/elpa/*"))
@@ -35,3 +35,14 @@
     "f r" 'sk:recentf-find-file)
 
   (recentf-mode t))
+
+
+
+(use-package bookmark
+  :demand t
+  :config
+  ;; always save bookmarks after changes have been made
+  (setq bookmark-save-flag 1)
+
+  (general-def-leader
+    "f b" 'bookmark-jump))
