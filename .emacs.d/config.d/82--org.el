@@ -4,8 +4,10 @@
 
 (use-package org
   :general (general-def-leader
-    "r n" 'org-agenda
-    "r c" 'org-capture)
+             "r n" #'(lambda () (interactive) (org-agenda nil "n"))
+             "r N" 'org-agenda
+             "r c" '(lambda () (interactive) (org-capture nil "c"))
+             "r C" 'org-capture)
 
 
 
@@ -155,11 +157,11 @@
   (setq org-agenda-block-separator "")
   (setq org-agenda-window-setup 'current-window)
   (setq org-deadline-warning-days most-positive-fixnum)
+  (setq org-agenda-start-on-weekday nil)
 
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-start-on-weekday nil)
                         (org-agenda-span 14)
                         (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
@@ -174,6 +176,8 @@
   (general-def org-agenda-mode-map
     "t" nil
     "m" nil
+    "r" 'org-agenda-redo-all
+    "g" 'org-agenda-redo
     "D" 'org-agenda-goto-date
     "l" 'forward-char
     "h" 'backward-char

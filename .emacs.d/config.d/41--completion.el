@@ -36,7 +36,7 @@
           (when (yas-expand)
             (run-hooks 'post-self-insert-hook)))))
      ;; completion (depending in major-mode)
-     ((string-match-p "[[:alnum:]]" (char-to-string (preceding-char)))
+     ((string-match-p "[[:alnum:]}]" (char-to-string (preceding-char)))
       (cond
        ((and (derived-mode-p 'latex-mode)
              (not (derived-mode-p 'prog-mode))

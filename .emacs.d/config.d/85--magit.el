@@ -8,7 +8,12 @@
     "G" 'magit-dispatch)
 
   :config
-  (add-hook 'git-commit-setup-hook #'meow-insert)
+  ;; enter insert mode if commit message is empty
+  (add-hook 'git-commit-setup-hook
+            #'(lambda ()
+                (interactive)
+                (when (looking-at-p "^$")
+                  (meow-insert))))
 
   (general-def magit-diff-mode-map
     "C-<tab>" 'sk:next-buffer

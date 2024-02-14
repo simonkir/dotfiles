@@ -33,6 +33,7 @@
     "M" 'pdf-view-goto-page
 
     "=" nil
+    "C-c C-r C-s" 'pdf-view-auto-slice-minor-mode
     "s a" 'pdf-view-auto-slice-minor-mode
     "s s" 'pdf-view-set-slice-using-mouse
     "s b" 'pdf-view-set-slice-from-bounding-box
