@@ -12,11 +12,6 @@
 ; prettify symbols mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun sk:prettify-symbols-org-mode ()
-  ;; symbols
-  (add-to-list 'prettify-symbols-alist '("[ ]" . "☐"))
-  (add-to-list 'prettify-symbols-alist '("[-]" . (?☐ (Bc . Bc) ?-)))
-  (add-to-list 'prettify-symbols-alist '("[X]" . "☑"))
-
   ;; environments
   (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
   (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝)))
