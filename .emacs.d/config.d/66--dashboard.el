@@ -6,7 +6,7 @@
   :demand t
   :config
   (setq dashboard-startup-banner 'logo)
-  (setq dashboard-banner-logo-png "~/.emacs.d/logos/xemacs_color.png")
+  (setq dashboard-banner-logo-png "~/.emacs.d/logos/mac256.png")
 
   (setq dashboard-center-content t)
   (setq dashboard-items '((bookmarks . 15)))
