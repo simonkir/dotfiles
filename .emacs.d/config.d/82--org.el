@@ -146,71 +146,45 @@
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
 
-  (set-face-attribute 'org-column nil :background 'unspecified)
-  ;;(advice-add 'org-agenda-columns :before (lambda () (interactive) (set-face-attribute 'org-column nil :background 'unspecified)))
-  (setq org-columns-default-format-for-agenda "%TODO(State) %CATEGORY(Type) %1PRIORITY %ITEM(Task) %EFFORT(Eff.) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
-
   (advice-add 'org-agenda-exit :before (lambda () (interactive) (org-save-all-org-buffers)))
   (advice-add 'org-agenda-quit :before (lambda () (interactive) (org-save-all-org-buffers)))
   (advice-add 'org-agenda-Quit :before (lambda () (interactive) (org-save-all-org-buffers)))
 
   (setq org-agenda-block-separator "")
   (setq org-agenda-window-setup 'current-window)
-  (setq org-deadline-warning-days most-positive-fixnum)
   (setq org-agenda-start-on-weekday nil)
+
+  (setq org-agenda-prefix-format
+        '((agenda . "  %i %-12:c%?-12tEff.: %-8e %s")
+          (todo . "  %i %-12:c")
+          (tags . "  %i %-12:c")
+          (search . "  %i %-12:c")))
 
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-span 14)
+                        (org-agenda-span 'fortnight)
                         (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
+                        (org-deadline-warning-days 0)
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
                       (org-agenda-todo-ignore-scheduled t)
                       (org-agenda-todo-ignore-deadlines t)))
-            (todo "DONE" ((org-agenda-overriding-header "DONE Tasks"))))
-           ((org-agenda-view-columns-initially t)))))
+            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
 
   (general-def org-agenda-mode-map
-    "t" nil
-    "m" nil
     "r" 'org-agenda-redo-all
     "g" 'org-agenda-redo
     "D" 'org-agenda-goto-date
-    "l" 'forward-char
-    "h" 'backward-char
-    "p" 'org-agenda-set-property
-    "c" 'org-agenda-columns
-    "C" 'org-columns
+    "P" 'org-agenda-set-property
     "W" 'org-agenda-fortnight-view
     "M" 'org-agenda-month-view
     "q" 'org-agenda-exit
     "Q" 'org-agenda-quit
     "n" 'org-agenda-next-date-line
     "p" 'org-agenda-previous-date-line)
-
-  (general-def org-columns-map
-    "p" nil
-    "q" nil
-    "s" nil
-    "e" nil
-    "n" nil
-    "1" nil
-    "2" nil
-    "3" nil
-    "4" nil
-    "5" nil
-    "6" nil
-    "7" nil
-    "8" nil
-    "9" nil
-    "0" nil
-    "t" 'org-columns-edit-value
-    "Q" 'org-columns-quit
-    "-" 'org-columns-previous-allowed-value
-    "+" 'org-columns-next-allowed-value)
 
 
 
