@@ -18,3 +18,12 @@
 (setq display-line-numbers-type 'visual)
 (set-face-attribute 'line-number nil :foreground "#5b6268")
 (global-display-line-numbers-mode 1)
+
+
+
+; text scale ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-def-leader
+  "0" 'text-scale-adjust
+  "+" 'text-scale-adjust
+  "-" 'text-scale-adjust)

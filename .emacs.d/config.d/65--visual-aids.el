@@ -2,15 +2,6 @@
 
 
 
-; text scale ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(general-def-leader
-  "0" 'text-scale-adjust
-  "+" 'text-scale-adjust
-  "-" 'text-scale-adjust)
-
-
-
 ; writing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package visual-fill-column

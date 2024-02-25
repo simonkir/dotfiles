@@ -4,7 +4,8 @@
 
 ;; for dashboard package
 (use-package all-the-icons
-  :demand t)
+  :demand t
+  :config (setq inhibit-compacting-font-caches nil))
 
 (use-package svg-tag-mode
   :hook (org-mode org-agenda-mode)

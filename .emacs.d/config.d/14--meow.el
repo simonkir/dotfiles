@@ -39,7 +39,7 @@
           (call-interactively #'meow-digit-argument)))))
 
   (defun sk:toggle-case ()
-    "toggles case of letters in region. when there is no region, use char after point instead"
+    "toggles case of char after point"
     (interactive)
     (let* ((beg (point))
            (end (1+ (point)))

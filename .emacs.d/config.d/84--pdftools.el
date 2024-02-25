@@ -20,6 +20,9 @@
 
 
   (general-def pdf-view-mode-map
+    "J" 'pdf-view-next-page
+    "K" 'pdf-view-previous-page
+    "M" 'pdf-view-goto-page
     "j" #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
     "k" #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
     "h" #'(lambda () (interactive) (image-backward-hscroll 10))
@@ -28,16 +31,13 @@
     "<left>" 'image-backward-hscroll
     "<down>" 'pdf-view-next-line-or-next-page
     "<right>" 'image-forward-hscroll
-    "J" 'pdf-view-next-page
-    "K" 'pdf-view-previous-page
-    "M" 'pdf-view-goto-page
 
     "=" nil
     "C-c C-r C-s" 'pdf-view-auto-slice-minor-mode
     "s a" 'pdf-view-auto-slice-minor-mode
-    "s s" 'pdf-view-set-slice-using-mouse
     "s b" 'pdf-view-set-slice-from-bounding-box
     "s p" 'pdf-view-set-slice-from-bounding-box
+    "s s" 'pdf-view-set-slice-using-mouse
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
     "C-c C-a d" 'pdf-annot-delete))
 
@@ -53,8 +53,8 @@
   "< b" 'image-bob
   "> b" 'image-eob
 
+  "H" 'image-transform-fit-to-height
   "P" 'image-transform-fit-to-window
   "W" 'image-transform-fit-to-width
-  "H" 'image-transform-fit-to-height
 
   "R" 'image-rotate)

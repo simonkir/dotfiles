@@ -175,16 +175,16 @@
             (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
 
   (general-def org-agenda-mode-map
-    "r" 'org-agenda-redo-all
-    "g" 'org-agenda-redo
     "D" 'org-agenda-goto-date
-    "P" 'org-agenda-set-property
-    "W" 'org-agenda-fortnight-view
+    "g" 'org-agenda-redo
     "M" 'org-agenda-month-view
+    "n" 'org-agenda-next-date-line
+    "p" 'org-agenda-previous-date-line
+    "P" 'org-agenda-set-property
     "q" 'org-agenda-exit
     "Q" 'org-agenda-quit
-    "n" 'org-agenda-next-date-line
-    "p" 'org-agenda-previous-date-line)
+    "r" 'org-agenda-redo-all
+    "W" 'org-agenda-fortnight-view)
 
 
 
