@@ -35,12 +35,9 @@
           ;; org todo items
           ("TODO" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo :inverse t))))
           ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done))))
-          ("\\[ \\]" . ((lambda (tag) (svg-tag-make " " :padding 2 :radius 0 :face 'org-checkbox))))
+          ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))
           ("\\[-\\]" . ((lambda (tag) (svg-tag-make "⧖" :padding 1 :radius 0 :face 'org-checkbox))))
           ("\\[X\\]" . ((lambda (tag) (svg-tag-make "⨯" :padding 1 :radius 0 :face 'org-done))))
-
-          ;; org "settings"
-          ;;("#\\+[A-Za-z]+:" . ((lambda (tag) (svg-tag-make tag :radius 0 :beg 2 :end -1 :face 'org-meta-line))))
 
           ;; org priorities
           ("\\[#A\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'error))))
@@ -49,12 +46,12 @@
 
           ;; org date- / time- / duration stamps
           (,(format "<%s>" sk:date-re) . ((lambda (tag) (svg-tag-make tag :radius 0 :beg 1 :end -1))))
-          (,(format "\\(<%s \\)%s>" sk:date-re sk:day-time-re) . ((lambda (tag) (svg-tag-make tag :radius 0 :beg 1 :inverse nil :crop-right t))))
-          (,(format "<%s \\(%s>\\)" sk:date-re sk:day-time-re) . ((lambda (tag) (svg-tag-make tag :radius 0 :end -1 :inverse t :crop-left t))))
+          (,(format "\\(<%s \\)%s>" sk:date-re sk:day-time-re) . ((lambda (tag) (svg-tag-make tag :face 'org-scheduled :radius 0 :beg 1 :crop-left t :crop-right t))))
+          (,(format "<%s \\(%s>\\)" sk:date-re sk:day-time-re) . ((lambda (tag) (svg-tag-make tag :face 'org-scheduled :radius 0 :end -1 :crop-left t))))
 
           ;; org-agenda
-          ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :radius 0 :crop-right t :end -1 :face 'org-scheduled))))
           ("Deadline: \\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :end -1 :face 'org-imminent-deadline))))
+          ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :inverse (not (derived-mode-p 'org-agenda-mode)) :radius 0 :crop-right t :end -1 :face 'org-scheduled))))
 
           ;; mby add progress bars ? (look into svg-tag-mode github exmaples)
           )))
