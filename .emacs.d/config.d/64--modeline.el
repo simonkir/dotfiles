@@ -62,10 +62,6 @@ useful when switching themes also changes the colors of the modeline"
          ((eq state 'needs-merge) "c")
          (t "")))))
 
-  (telephone-line-defsegment sk:tl-buffer-modified-segment ()
-    (when (and (buffer-modified-p) (not buffer-read-only) (buffer-file-name))
-      "×"))
-
   (telephone-line-defsegment sk:tl-dir-segment ()
     (when (buffer-file-name)
       (let ((s (car (last (split-string (buffer-file-name) "/") 2))))
@@ -107,8 +103,7 @@ useful when switching themes also changes the colors of the modeline"
         '((evil   . (sk:meow-state-segment))
           (accent . (sk:tl-vc-file-segment
                      telephone-line-process-segment))
-          (nil    . (sk:tl-buffer-modified-segment
-                     sk:tl-dir-segment
+          (nil    . (sk:tl-dir-segment
                      sk:tl-file-segment))))
 
   (setq telephone-line-rhs
