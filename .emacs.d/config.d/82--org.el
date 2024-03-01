@@ -145,20 +145,7 @@
 
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
-
-  (advice-add 'org-agenda-exit :before (lambda () (interactive) (org-save-all-org-buffers)))
-  (advice-add 'org-agenda-quit :before (lambda () (interactive) (org-save-all-org-buffers)))
-  (advice-add 'org-agenda-Quit :before (lambda () (interactive) (org-save-all-org-buffers)))
-
-  (setq org-agenda-block-separator "")
   (setq org-agenda-window-setup 'current-window)
-  (setq org-agenda-start-on-weekday nil)
-
-  (setq org-agenda-prefix-format
-        '((agenda . "  %i %-12:c%?-12tEff.: %-8e %s")
-          (todo . "  %i %-12:c")
-          (tags . "  %i %-12:c")
-          (search . "  %i %-12:c")))
 
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
@@ -172,7 +159,16 @@
             (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
                       (org-agenda-todo-ignore-scheduled t)
                       (org-agenda-todo-ignore-deadlines t)))
-            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
+            (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
+           ((org-agenda-start-on-weekday nil)
+            (org-agenda-block-separator "")
+            (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
+                                           (todo priority-down alpha-up)))
+            (org-agenda-prefix-format
+             '((agenda . "  %i %-12:c%?-12tEff.: %-8e %s")
+               (todo . "  %i %-12:c")
+               (tags . "  %i %-12:c")
+               (search . "  %i %-12:c")))))))
 
   (general-def org-agenda-mode-map
     "D" 'org-agenda-goto-date
