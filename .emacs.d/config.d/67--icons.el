@@ -2,10 +2,13 @@
 
 
 
-;; for dashboard package
-(use-package all-the-icons
-  :demand t
-  :config (setq inhibit-compacting-font-caches nil))
+;; better glyph & icon rendering performance
+(setq inhibit-compacting-font-caches nil)
+
+;; for dashboard & doom-modeline packages
+(use-package nerd-icons :demand t)
+
+
 
 (use-package svg-tag-mode
   :hook (org-mode org-agenda-mode)

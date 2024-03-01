@@ -24,6 +24,13 @@
   (setq meow-mode-state-list '((org-agenda-mode . motion)
                                (eat-mode . insert)))
 
+  ;; mainly used in doom-modeline
+  (set-face-attribute 'meow-motion-indicator nil :foreground "#ecbe7b")
+  (set-face-attribute 'meow-insert-indicator nil :foreground "#98be65")
+  (set-face-attribute 'meow-normal-indicator nil :foreground "#51afef")
+  (set-face-attribute 'meow-beacon-indicator nil :foreground "#ff6c6b")
+  (set-face-attribute 'meow-keypad-indicator nil :foreground "#c678dd")
+
 
 
   ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

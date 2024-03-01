@@ -28,12 +28,6 @@
 
 ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun sk:print-time ()
-  (interactive)
-  (message "%s" (format-time-string "%a, %d.%m.%Y (KW %W), %H:%M:%S %Z")))
-
-
-
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"
   (interactive)
@@ -50,5 +44,4 @@
 
 (general-def-leader
   "d c" 'sk:cpfn
-  "d C" 'sk:cpwd
-  "d t" 'sk:print-time)
+  "d C" 'sk:cpwd)

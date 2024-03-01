@@ -13,7 +13,7 @@
 
   ;;(setq dashboard-set-heading-icons t) ;; atm, there is an issue with oction definition
   (setq dashboard-set-file-icons t)
-  (setq dashboard-icon-type 'all-the-icons)
+  (setq dashboard-icon-type 'nerd-icons)
 
   (setq initial-buffer-choice #'(lambda () (get-buffer "*dashboard*"))) ;; emacsclient defaults to *scratch*
   (dashboard-setup-startup-hook)
