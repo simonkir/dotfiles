@@ -19,7 +19,7 @@
   (setq org-return-follows-link t)
   (setq org-image-actual-width nil)
 
-  (setq org-startup-folded t)
+  ;;(setq org-startup-folded t)
   (setq org-hide-leading-stars t)
   (setq org-hide-emphasis-markers t)
 
