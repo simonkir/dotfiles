@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * helper-functions
 (defun sk:maybe-save-all-buffers ()
   "searches for unsaved file-visiting buffer.
 if there is one, switch to it and prompt whether to save, not save or abort current action
@@ -21,8 +20,7 @@ returns t if all buffers are saved"
          (t (setq abort t)))))
     (not abort)))
 
-
-
+; * sk:soft-quit
 (defun sk:soft-quit ()
   "performes an soft quit of emacs
 
@@ -31,6 +29,7 @@ i. e. closing the terminal, unless there are unsaved changes"
   (when (sk:maybe-save-all-buffers)
     (save-buffers-kill-terminal)))
 
+; * sk:harsh-quit
 (defun sk:harsh-quit ()
   "performes an harsh quit of emacs
 
@@ -41,7 +40,7 @@ i. e. killing all open buffers and quitting the terminal, unless there are unsav
       (kill-buffer element))
     (save-buffers-kill-terminal)))
 
-
+; * sk:daemon-quit
 (defun sk:daemon-quit ()
   "performes an daemon quit of emacs
 
@@ -51,8 +50,7 @@ i. e. killing the terminal, unless there are unsaved changes"
     (when (sk:maybe-save-all-buffers)
       (kill-emacs))))
 
-
-
+; * keybinds
 (general-def-leader
   "q" 'sk:soft-quit
   "Q" 'sk:harsh-quit

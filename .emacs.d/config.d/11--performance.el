@@ -1,7 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
 ;; some performance improvements found in the doom emacs faq
 
 (setq gc-cons-threshold most-positive-fixnum)

@@ -1,16 +1,12 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * general settings
 (defalias 'yes-or-no 'y-or-n-p)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq-default use-dialog-box nil)
 
-
-
-; help ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * help
 (general-def-leader
   "h" 'describe-symbol
   "H" 'describe-key)
@@ -24,10 +20,7 @@
   "n" 'help-go-forward
   "p" 'help-go-back)
 
-
-
-; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * convenience functions
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"
   (interactive)
@@ -39,8 +32,6 @@
   (interactive)
   (gui-set-selection 'CLIPBOARD buffer-file-name)
   (message "%s" buffer-file-name))
-
-
 
 (general-def-leader
   "d c" 'sk:cpfn

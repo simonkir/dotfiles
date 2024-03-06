@@ -1,15 +1,16 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * pdf-tools
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
+; ** general settings
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
   (setq pdf-view-midnight-invert nil)
 
+; ** active minor-modes
   (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)
   (add-hook 'pdf-view-mode-hook #'pdf-view-auto-slice-minor-mode)
@@ -17,8 +18,7 @@
   (add-hook 'pdf-view-mode-hook #'pdf-isearch-minor-mode)
   (add-hook 'pdf-view-mode-hook #'pdf-outline-minor-mode)
 
-
-
+; ** keybinds
   (general-def pdf-view-mode-map
     "J" 'pdf-view-next-page
     "K" 'pdf-view-previous-page
@@ -41,8 +41,7 @@
     "C-c g" #'(lambda () (interactive) (pdf-view-redisplay t))
     "C-c C-a d" 'pdf-annot-delete))
 
-
-
+; * image-mode
 (add-hook 'image-mode-hook #'(lambda () (display-line-numbers-mode -1)))
 
 (general-def image-mode-map

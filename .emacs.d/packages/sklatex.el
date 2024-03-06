@@ -6,17 +6,13 @@
 
 ;;; Code:
 
-; definition of variables ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * variables
 (setq sklatex--do-newline-conversion nil)
 (setq sklatex--do-symbol-alignment nil)
 (setq sklatex--do-subscript-conversion nil)
 (setq sklatex--do-chemical-formula-conversion nil)
 
-
-
-; minor mode / defaults ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * minor mode definition
 (define-minor-mode sklatex-mode
   "skLaTeX mode"
   :lighter " skLaTeX"
@@ -38,10 +34,7 @@
   (sklatex-activate-alignment-keybinds-equality)
   (message "sklatex: default keybinds activated (newline, alignment)"))
 
-
-
-; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * helper functions
 (defun sklatex-in-latex-p ()
   "equivalent to `texmathp', but also works with latex-bocks in org-mode"
   (cond
@@ -57,10 +50,8 @@
 (defun sklatex--string-nth (pos string)
   (substring string pos (1+ pos)))
 
-
-
-; linebreak ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * main functionality
+; ** linebreak
 (defun sklatex-activate-newline-keybinds ()
   (interactive)
   (setq sklatex--do-newline-conversion t)
@@ -97,10 +88,7 @@
               (looking-at ".*\\(\\\\end\\|\\\\begin\\|.*\\\\\\\\\\)"))
         (sklatex--mathnewline-insert-in-line-before))))
 
-
-
-; equality ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** equality
 (setq sklatex-aligned-symbols '("=" ">" "<" "\\\\neq" "\\\\approx" "\\\\leq" "\\\\geq" "\\\\rightleftharpoons" "\\\\longrightarrow" "\\\\overset{!}{=}" "\\\\BAR"))
 
 (defun sklatex--indent-for-symbol ()
@@ -157,10 +145,7 @@
   (setq sklatex--do-symbol-alignment nil)
   (message "sklatex: alignment keybinds deactivated"))
 
-
-
-; subscript conversion ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** subscript conversion
 (defun sklatex--input-to-subscript ()
   "convert previous char to subscript"
   (save-excursion
@@ -271,10 +256,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
   (setq sklatex--do-chemical-formula-conversion nil)
   (message "sklatex: chemical formula conversion deactivated"))
 
-
-
-; user inferface ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * keybinds
 (defun sklatex-remove-effect-at-point ()
   "depending on the previous character, remove effects added by sklatex"
   (interactive)

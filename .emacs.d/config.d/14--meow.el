@@ -1,17 +1,20 @@
 ;; -*- lexical-binding: t; -*-
 
-
-
+; * meow
 (use-package meow
   :demand t
   :config
 
-  ; general settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** general settings
   (setq meow-use-cursor-position-hack     t)
   (setq meow-expand-hint-remove-delay     1.5)
   (setq meow-display-thing-help           nil)
 
+  (setq meow-expand-exclude-mode-list nil)
+  (setq meow-mode-state-list '((org-agenda-mode . motion)
+                               (eat-mode . insert)))
+
+; ** keypad settings
   (setq meow-keypad-self-insert-undefined nil)
   (setq meow-keypad-start-keys            '((?c . ?c) (?u . ?u) (?x . ?x)))
   (setq meow-keypad-ctrl-meta-prefix      nil)
@@ -20,10 +23,7 @@
   (setq meow-keypad-leader-dispatch       sk:leader-map)
   (setq meow-keypad-describe-delay        most-positive-fixnum)
 
-  (setq meow-expand-exclude-mode-list nil)
-  (setq meow-mode-state-list '((org-agenda-mode . motion)
-                               (eat-mode . insert)))
-
+; ** faces
   ;; mainly used in doom-modeline
   (set-face-attribute 'meow-motion-indicator nil :foreground "#ecbe7b")
   (set-face-attribute 'meow-insert-indicator nil :foreground "#98be65")
@@ -33,8 +33,7 @@
 
 
 
-  ; helper functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** helper functions
   (defun sk:meow-digit-argument-or-eval ()
     "when there is a region, act like eval, otherwise use digit-argument"
     (interactive)
@@ -59,8 +58,7 @@
 
 
 
-  ; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** keybinds
   (general-def meow-insert-state-keymap
     "C-z" 'meow-motion-mode)
 

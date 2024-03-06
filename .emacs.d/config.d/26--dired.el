@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * dired
 (use-package dired
   :config
   (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
@@ -14,8 +13,6 @@
     "l" 'dired-find-file
     "r" 'dired-flag-garbage-files
     ")" 'dired-omit-mode))
-
-
 
 (use-package dired-x
   :hook

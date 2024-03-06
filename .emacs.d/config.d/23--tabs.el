@@ -1,14 +1,21 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * centaur-tabs
 (use-package centaur-tabs
+; ** startup
   :init
   (if (daemonp)
       (add-hook 'server-after-make-frame-hook #'centaur-tabs-mode)
     (add-hook 'after-init-hook #'centaur-tabs-mode))
 
   :config
+; ** general settings
+  (setq centaur-tabs-label-fixed-length 12)
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-set-bar 'left)
+  (setq centaur-tabs-set-icons t)
+
+; ** tab grouping
   (defun sk:centaur-tabs-buffer-groups ()
     '("Everything"))
 
@@ -28,17 +35,7 @@
   (setq centaur-tabs-buffer-groups-function #'sk:centaur-tabs-buffer-groups)
   (setq centaur-tabs-hide-tab-function #'sk:centaur-tabs-hide-tab)
 
-  ;;(centaur-tabs-enable-buffer-alphabetical-reordering)
-  ;;(setq centaur-tabs-adjust-buffer-order t)
-
-  (setq centaur-tabs-label-fixed-length 12)
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-set-bar 'left)
-  (setq centaur-tabs-set-icons t)
-
-  ;; disable centaur-tabs locally in these major modes
-  ;;(add-hook 'dashboard-mode-hook #'centaur-tabs-local-mode)
-
+; ** keybinds
   (general-def
     "C-<tab>" 'centaur-tabs-forward
     "C-<iso-lefttab>" 'centaur-tabs-backward))

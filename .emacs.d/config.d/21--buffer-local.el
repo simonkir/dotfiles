@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding t; -*-
 
-
-
+; * general settings
 (setq scroll-conservatively 100)
 (setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
 
@@ -12,6 +11,8 @@
 (advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (goto-char isearch-other-end))))
 
 
+
+; * keybinds
 
 ;; meow behaves weridly without these deifinitions
 ;; see variable-help for details
@@ -39,5 +40,6 @@
 
 
 
+; * avy
 (use-package avy
   :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))

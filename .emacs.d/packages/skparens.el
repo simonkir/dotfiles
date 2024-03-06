@@ -7,6 +7,7 @@
 
 
 
+; * variables
 (setq skparens-pair-alist
       '(("(" . ("( " . " )"))
         ("[" . ("[ " . " ]"))
@@ -36,6 +37,7 @@
 (setq skparens--supported-nested-pairs
       '("(" ")" "[" "]" "{" "}"))
 
+; * helper functions
 (defun skparens--read-delim (&optional readstring)
   "read skparens-delimiter from the user"
   (if readstring
@@ -75,6 +77,7 @@
       (setq point-end (point)))
     (cons point-beg point-end)))
 
+; * major functions
 (defun skparens-mark-inner (char)
   (interactive (list (skparens--read-delim)))
   (let ((bounds (skparens--get-bounds char))

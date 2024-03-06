@@ -1,16 +1,13 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * show-paren-mode
 (show-paren-mode)
 
-
-
+; * rainbow-delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-
-
+; * electric
 (use-package electric
   :demand t
   :config
@@ -21,8 +18,7 @@
   (add-to-list 'electric-pair-pairs '(8218 . 8216))  ;; ‚‘
   (add-to-list 'electric-pair-pairs '(8222 . 8220))) ;; „“
 
-
-
+; * skparens
 (use-package skparens
   :demand t
   :config

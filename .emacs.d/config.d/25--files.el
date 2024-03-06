@@ -1,15 +1,13 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * keybinds
 (general-def-leader
   "f f" 'find-file
   "f R" 'revert-buffer-quick
   "f s" 'save-buffer
   "s"   'save-buffer)
 
-
-
+; * recentf
 (use-package recentf
   :demand t
   :config
@@ -36,8 +34,7 @@
 
   (recentf-mode t))
 
-
-
+; * bookmark
 (use-package bookmark
   :demand t
   :config

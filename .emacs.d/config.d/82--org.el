@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * org
 (use-package org
   :general (general-def-leader
              "r n" #'(lambda () (interactive) (org-agenda nil "n"))
@@ -9,12 +8,9 @@
              "r c" '(lambda () (interactive) (org-capture nil "c"))
              "r C" 'org-capture)
 
-
-
   :config
 
-  ; visuals ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** visuals
   (setq org-num-max-level 3)
   (setq org-return-follows-link t)
   (setq org-image-actual-width nil)
@@ -45,10 +41,7 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-
-
-  ; navigation ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** navigation
   (setq org-goto-auto-isearch nil)
 
   (general-def org-mode-map
@@ -84,10 +77,7 @@
     "RET" 'meow-normal-mode
     "SPC" 'meow-keypad)
 
-
-
-  ; editing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** editing
   (setq org-blank-before-new-entry '((heading . t) (plain-list-item . nil)))
   (setq org-list-demote-modify-bullet
         '(("+" . "-") ("-" . "+")
@@ -135,10 +125,7 @@
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
 
-
-
-  ; agenda stuff ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** agenda, capture
   (setq org-directory "~/.emacs.d/org-dir")
   (setq org-agenda-files '("~/.emacs.d/org-dir/"))
   (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
@@ -193,10 +180,7 @@
   (general-def org-capture-mode-map
     "C-c C-c" nil)
 
-
-
-  ; image preview ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** image preview
   (defun sk:org-toggle-inline-images ()
     "toggle image previews in the region, if it is active, and the next image after point otherwise"
     (interactive)
@@ -234,10 +218,7 @@
     "C-c C-x V" 'org-toggle-inline-images
     "C-c C-x M-v" 'org-redisplay-inline-images)
 
-
-
-  ; latex settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** latex settings
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
   (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
   (add-to-list 'org-latex-packages-alist '("" "gauss" t))
@@ -277,10 +258,7 @@
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
-
-
-  ; org-babel ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** org-babel
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((gnuplot . t)))
@@ -326,10 +304,7 @@
     "e" 'sk:leader-e
     "E" 'sk:leader-E))
 
-
-
-; export settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * ox (export pkgs)
 (use-package ox
   :after org
   :config
@@ -351,8 +326,7 @@
                                     ("\\subsection{%s}" . "\\subsection*{%s}")
                                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
 
-
-
+; * org-superstar
 (use-package org-superstar
   :hook (org-mode . org-superstar-mode)
   :config

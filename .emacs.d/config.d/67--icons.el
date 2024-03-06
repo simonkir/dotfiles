@@ -1,18 +1,18 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * general settings
 ;; better glyph & icon rendering performance
 (setq inhibit-compacting-font-caches nil)
 
+; * nerd-icons
 ;; for dashboard & doom-modeline packages
 (use-package nerd-icons :demand t)
 
-
-
+; * svg-tag-mode
 (use-package svg-tag-mode
   :hook (org-mode org-agenda-mode)
   :config
+; ** agenda hack
   (defun sk:org-agenda-show-svg ()
     (let* ((case-fold-search nil)
            (keywords (mapcar #'svg-tag--build-keywords svg-tag--active-tags))
@@ -28,6 +28,7 @@
 
   (add-hook 'org-agenda-finalize-hook #'sk:org-agenda-show-svg)
 
+; ** icon definition
   (let* ((date-re "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}")
          (time-re "[0-9]\\{2\\}:[0-9]\\{2\\}")
          (day-re "[A-Za-z]\\{2,3\\}")

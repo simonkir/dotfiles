@@ -1,9 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
-; theme ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * doom-themes
 (use-package doom-themes
   :demand t
   :config
@@ -12,10 +9,7 @@
       (add-hook 'server-after-make-frame-hook #'(lambda () (load-theme 'doom-one t)) -10)
     (load-theme 'doom-one t)))
 
-
-
-; solarie mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * solarie mode
 (use-package solaire-mode
   :after doom-themes
   :demand t

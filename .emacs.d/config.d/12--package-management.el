@@ -1,9 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
-;; use-package
-
+; * use-package
 (require 'package)
 (setq package-enable-at-startup nil)
 

@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * icomplete
 (use-package icomplete
   :demand t
   :config
@@ -17,8 +16,6 @@
 
   (set-face-attribute 'icomplete-selected-match nil :inherit 'default :weight 'bold :foreground "#98be65")
 
-
-
   (general-def 'icomplete-minibuffer-map
     "C-<return>" 'icomplete-fido-ret
     "S-<return>" 'icomplete-fido-exit
@@ -28,8 +25,6 @@
 
   (general-def-leader
     "X" 'eval-expression)
-
-
 
   (fido-mode)
   (fido-vertical-mode))

@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * magit
 (use-package magit
   :general (general-def-leader
     "g" 'magit-file-dispatch

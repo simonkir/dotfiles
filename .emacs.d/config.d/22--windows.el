@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * helper functions
+; ** resizing
 (defun sk:resize-current-window ()
   (interactive)
   (cond
@@ -18,6 +18,7 @@
        (define-key map (vector key) (lambda () (interactive) (sk:resize-current-window))))
      map)))
 
+; ** splitting
 (defun sk:split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
@@ -30,6 +31,7 @@
   (balance-windows)
   (other-window 1))
 
+; ** cycling
 (defun sk:cycle-windows-forward ()
   (interactive)
   (select-window (next-window (selected-window) nil (selected-frame)))
@@ -40,8 +42,7 @@
   (select-window (previous-window (selected-window) nil (selected-frame)))
   (run-hooks 'window-configuration-change-hook))
 
-
-
+; * keybinds
 (general-def-leader
   "w s" 'sk:split-and-follow-horizontally
   "w v" 'sk:split-and-follow-vertically
@@ -62,8 +63,7 @@
   "C-SPC" 'sk:cycle-windows-forward
   "C-S-SPC" 'sk:cycle-windows-backward)
 
-
-
+; * transpose-frame
 (use-package transpose-frame
   :general (general-def-leader
     "w w" 'transpose-frame
@@ -72,8 +72,7 @@
     "w F" 'flip-frame
     "w f" 'flop-frame))
 
-
-
+; * zoom
 (use-package zoom
   :general (general-def-leader
     "t z" 'zoom-mode

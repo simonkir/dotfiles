@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * dashboard
 (use-package dashboard
   :demand t
   :config

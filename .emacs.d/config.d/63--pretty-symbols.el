@@ -1,16 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
-; keybinds ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * keybinds
 (general-def-leader
   "t p" 'prettify-symbols-mode)
 
-
-
-; prettify symbols mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * prettify symbols mode
+; ** org-mode definitions
 (defun sk:prettify-symbols-org-mode ()
   ;; environments
   (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
@@ -33,6 +28,7 @@
   (add-to-list 'prettify-symbols-alist '("#+subtitle" . (?\s (Bc . Bc) ?𝙩)))
   (add-to-list 'prettify-symbols-alist '("#+title" . (?\s (Bc . Bc) ?𝙏))))
 
+; ** org- & latex-mode definitions
 (defun sk:prettify-symbols-org-LaTeX-mode ()
   ;; aligned operators
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
@@ -94,10 +90,12 @@
   (add-to-list 'prettify-symbols-alist '("\\mathbb{W}" . (?\s (Bc . Bc) ?𝕎)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{Z}" . (?\s (Bc . Bc) ?ℤ))))
 
+; ** latex-mode definitions
 (defun sk:prettify-symbols-LaTeX-mode ()
   (add-to-list 'prettify-symbols-alist '("&" . "·"))
   (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·))))
 
+; ** hooks & activation
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode)
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
 (add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode)

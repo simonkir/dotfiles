@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * helper functions
 (defun sk:dcaps-to-scaps ()
   "Convert word in DOuble CApitals to Single Capitals while typing."
   (interactive)
@@ -13,8 +12,6 @@
                  (not (sklatex-in-latex-p)))
         (capitalize-region (point) end)))))
 
-
-
 (defun sk:dspace-to-sspace ()
   "Convert two or more spaces to single space while typing."
   (interactive)
@@ -24,8 +21,7 @@
          (eq (car (org-element-context)) 'paragraph)
          (just-one-space))))
 
-
-
+; * minor-mode definition
 (define-minor-mode sk:autocorrect-mode nil
   :init-value nil
   :lighter (" AC")

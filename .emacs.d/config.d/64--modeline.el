@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * sk:mode-line-diminish-mode
 (define-minor-mode sk:mode-line-diminish-mode
   "sk:modeline-diminish minor mode. hides unimportant stuff"
   :global t
@@ -18,8 +17,7 @@
   "d t" 'sk:mode-line-diminish-mode
   "t d" 'sk:mode-line-diminish-mode)
 
-
-
+; * doom-modeline
 (use-package doom-modeline
   :demand t
   :config

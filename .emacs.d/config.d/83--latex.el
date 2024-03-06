@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * auctex
 (use-package tex
   :ensure auctex
   :init
@@ -10,9 +9,8 @@
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on)))
   (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray\*" env-on)))
 
-
-
   :config
+; ** general settings
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
@@ -26,26 +24,19 @@
   (general-def 'LaTeX-mode-map
     "$" nil)
 
-
-
-  ; output / viewing ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** output / viewing
   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-source-correlate-mode t)
 
   (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
 
-
-
-  ; math settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; ** math settings
   (setq TeX-insert-braces nil)
 
   (setq preview-scale-function      1.5)
   (setq preview-auto-cache-preamble t))
 
-
-
+; * sklatex
 (use-package sklatex
   :ensure nil
   :hook
@@ -59,7 +50,7 @@
     "C-c A" 'sklatex-mode))
 
 
-
+; * cdlatex
 (use-package cdlatex
   :hook
   (LaTeX-mode . cdlatex-mode)
@@ -71,6 +62,7 @@
   (setq cdlatex-takeover-dollar nil)
 
   :config
+; ** general settings
   (setq cdlatex-paired-parens "")
   (setq cdlatex-simplify-sub-super-scripts nil)
 
@@ -95,6 +87,7 @@
 
   (defun cdlatex--texmathp () t)
 
+; ** cdlatex-math-symbol-alist
   (setq cdlatex-math-symbol-alist
         '((?c ("\\quad" "" "\\cos"))
           (?e ("\\varepsilon" "\\epsilon" "\\exp"))
@@ -122,6 +115,7 @@
           (?+ ("\\pm" "" ""))
           (?: ("\\ldots" "" ""))))
 
+; ** cdlatex-math-modify-alist
   (setq cdlatex-math-modify-alist
         '((?. "\\dot"  nil t nil nil)
           (?: "\\ddot" nil t nil nil)

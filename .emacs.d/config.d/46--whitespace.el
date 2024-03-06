@@ -1,14 +1,12 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * indentation settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 
 (general-def "M-SPC" 'delete-horizontal-space)
 
-
-
+; * whitespace
 (use-package whitespace
   :demand t
   :config

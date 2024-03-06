@@ -1,10 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * hippie-exp
 (use-package hippie-exp
   :demand t
   :config
+; ** general settings
   (setq tab-always-indent t)
   (setq hippie-expand-try-functions-list
         '(try-complete-file-name-partially
@@ -15,6 +15,7 @@
           try-complete-lisp-symbol-partially
           try-complete-lisp-symbol))
 
+; ** tab / backtab keybinds
   (defun sk:insert-backtab-key ()
     (interactive)
     (cond ((and (derived-mode-p 'org-mode)

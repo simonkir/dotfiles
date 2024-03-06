@@ -1,16 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
-; font settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * general settings
 (set-face-attribute 'default nil :family "Monospace" :height 100)
 (set-face-attribute 'variable-pitch nil :family "Noto Serif" :height 100)
 
-
-
-; font switching ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * font switching
 (setq sk:fonts-fixed-pitch '("Monospace" "Roboto Mono" "Source Code Pro"))
 (setq sk:fonts-variable-pitch '("Noto Serif" "C059" "Georgia" "Ubuntu" "Noto Sans"))
 
@@ -35,10 +29,7 @@
   "d f" 'sk:set-face-fixed
   "d v" 'sk:set-face-variable)
 
-
-
-; mixed-pitch mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; * mixed-pitch mode
 (use-package mixed-pitch
   :hook ((org-mode TeX-mode text-mode) . mixed-pitch-mode)
   :general (general-def-leader "d m" 'mixed-pitch-mode)

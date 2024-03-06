@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-
-
+; * yasnippet
 (use-package yasnippet
   :demand t
   :config
