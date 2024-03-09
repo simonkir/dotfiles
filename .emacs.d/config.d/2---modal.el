@@ -31,8 +31,6 @@
   (set-face-attribute 'meow-beacon-indicator nil :foreground "#ff6c6b")
   (set-face-attribute 'meow-keypad-indicator nil :foreground "#c678dd")
 
-
-
 ; ** helper functions
   (defun sk:meow-digit-argument-or-eval ()
     "when there is a region, act like eval, otherwise use digit-argument"
@@ -55,8 +53,6 @@
       (funcall f beg end)
       (unless (region-active-p)
         (forward-char))))
-
-
 
 ; ** keybinds
   (general-def meow-insert-state-keymap
@@ -149,5 +145,16 @@
     "z" 'meow-pop-selection
     ;;"Z"
     "<escape>" 'meow-cancel-selection)
+
+  ;; meow behaves weridly without these definitions
+  ;; see variable-help for details
+  (setq meow--kbd-forward-char "C-x 9 f")
+  (setq meow--kbd-backward-char "C-x 9 b")
+  (setq meow--kbd-yank "C-x 9 y")
+
+  (general-def
+    "C-x 9 f" 'forward-char
+    "C-x 9 b" 'backward-char
+    "C-x 9 y" 'yank)
 
   (meow-global-mode 1))

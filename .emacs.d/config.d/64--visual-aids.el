@@ -1,32 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * visual-fill-column
-(use-package visual-fill-column
-  :general (general-def-leader
-    "t v" 'visual-fill-column-mode
-    "t V" 'set-fill-column)
-
-  :config (setq-default visual-fill-column-center-text t))
-
-; * outline mode
-(use-package outline
-  :hook (prog-mode . outline-minor-mode)
-  :config
-  (setq outline-minor-mode-cycle t)
-  ;;(setq outline-default-state 1)
-
-  (add-hook 'prog-mode-hook #'(lambda () (setq-local outline-regexp (concat comment-start "+ *\\*+"))))
-
-  (general-def-leader
-    "v n" 'outline-next-visible-heading
-    "v p" 'outline-previous-visible-heading
-    "v f" 'outline-forward-same-level
-    "v b" 'outline-backward-same-level
-    "v u" 'outline-up-heading
-    "v l" 'outline-show-branches
-    "v v" 'outline-show-only-headings
-    "v a" 'outline-show-all))
-
 ; * indent guides
 (use-package highlight-indent-guides
   :hook ((prog-mode) . highlight-indent-guides-mode)
@@ -57,4 +30,16 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   ;; responsive setting
   (setq highlight-indent-guides-responsive 'top)
   (setq highlight-indent-guides-delay 0))
+
+; * visual-fill-column
+(use-package visual-fill-column
+  :general (general-def-leader
+    "t v" 'visual-fill-column-mode
+    "t V" 'set-fill-column)
+
+  :config (setq-default visual-fill-column-center-text t))
+
+; * rainbow-delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 

@@ -1,15 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * auto-revert-mode
-(global-auto-revert-mode)
-
-; * uniquify
-(defun sk:uniquify (base extra-string)
-  (concat base " (" (mapconcat #'identity extra-string "/") ")"))
-
-(setq uniquify-buffer-name-style 'sk:uniquify)
-
-; * sk:buffer settings
+; * sk:functions
+; ** definitions
 (setq sk:ignored-buffers-regexp "\\(^\\s-*\\*+\\)\\|\\(^magit\\)\\|\\(^\\s-*tq-temp-epdfinfo\\)")
 (setq sk:unignored-buffers-regexp "\\*maxima\\*\\|\\*Org Agenda\\*")
 
@@ -30,9 +22,19 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
-; * keybinds
+; ** keybinds
 (general-def-leader
   "b b" 'sk:switch-to-buffer
   "b B" 'switch-to-buffer
   "b k" 'sk:kill-current-buffer
   "b K" 'kill-buffer-and-window)
+
+; * auto-revert-mode
+(global-auto-revert-mode)
+
+; * uniquify
+(defun sk:uniquify (base extra-string)
+  (concat base " (" (mapconcat #'identity extra-string "/") ")"))
+
+(setq uniquify-buffer-name-style 'sk:uniquify)
+

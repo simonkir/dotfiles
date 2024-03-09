@@ -15,7 +15,7 @@
   (setq org-return-follows-link t)
   (setq org-image-actual-width nil)
 
-  ;;(setq org-startup-folded t)
+  (setq org-startup-folded t)
   (setq org-hide-leading-stars t)
   (setq org-hide-emphasis-markers t)
 
@@ -90,7 +90,7 @@
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
-  (add-hook 'org-mode-hook #'sk:autocorrect-mode)
+  ;; compatibility with sklatex linebreaks
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (defun sk:org-return ()

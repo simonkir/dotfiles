@@ -1,10 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * hippie-exp
+; * in-buffer completion
+; ** hippie-exp
 (use-package hippie-exp
   :demand t
   :config
-; ** general settings
+; *** general settings
   (setq tab-always-indent t)
   (setq hippie-expand-try-functions-list
         '(try-complete-file-name-partially
@@ -15,7 +16,7 @@
           try-complete-lisp-symbol-partially
           try-complete-lisp-symbol))
 
-; ** tab / backtab keybinds
+; *** tab / backtab keybinds
   (defun sk:insert-backtab-key ()
     (interactive)
     (cond ((and (derived-mode-p 'org-mode)
@@ -52,3 +53,36 @@
   (general-def meow-insert-state-keymap
     "<tab>"     'sk:insert-tab-key
     "<backtab>" 'sk:insert-backtab-key))
+
+; * minibuffer completion
+; ** icomplete
+(use-package icomplete
+  :demand t
+  :config
+; *** general settings
+  ;; needed because icomplete--fido-mode-setup overwrites default settings
+  (add-hook 'icomplete-minibuffer-setup-hook
+            #'(lambda () (setq-local completion-styles '(basic partial-completion substring initials flex))))
+
+  (setq read-file-name-completion-ignore-case t)
+  (setq read-buffer-completion-ignore-case t)
+  (setq completion-ignore-case t)
+  (setq completion-auto-help 'lazy)
+  (setq icomplete-compute-delay 0)
+
+  (set-face-attribute 'icomplete-selected-match nil :inherit 'default :weight 'bold :foreground "#98be65")
+
+; *** keybinds
+  (general-def 'icomplete-minibuffer-map
+    "C-<return>" 'icomplete-fido-ret
+    "S-<return>" 'icomplete-fido-exit
+    "C-d" 'icomplete-fido-kill
+    "C-j" 'icomplete-forward-completions
+    "C-k" 'icomplete-backward-completions)
+
+  (general-def-leader
+    "X" 'eval-expression)
+
+; *** fido mode
+  (fido-mode)
+  (fido-vertical-mode))

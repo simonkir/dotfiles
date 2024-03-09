@@ -10,21 +10,8 @@
 
 (advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (goto-char isearch-other-end))))
 
-
-
 ; * keybinds
-
-;; meow behaves weridly without these deifinitions
-;; see variable-help for details
-
-(setq meow--kbd-forward-char "C-x 9 f")
-(setq meow--kbd-backward-char "C-x 9 b")
-(setq meow--kbd-yank "C-x 9 y")
-
 (general-def
-  "C-x 9 f" 'forward-char
-  "C-x 9 b" 'backward-char
-  "C-x 9 y" 'yank
   "C-f" 'scroll-up
   "C-b" 'scroll-down
   "C-e" 'scroll-up-line
@@ -38,8 +25,24 @@
   "C-k" 'previous-line
   "C-l" 'forward-char)
 
-
-
 ; * avy
 (use-package avy
-  :general (:keymaps 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
+  :general (general-def 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
+
+; * outline mode
+(use-package outline
+  :hook (prog-mode . outline-minor-mode)
+  :config
+  (setq outline-minor-mode-cycle t)
+  (add-hook 'prog-mode-hook #'(lambda () (setq-local outline-regexp (concat comment-start "+ *\\*+"))))
+
+  (general-def-leader
+    "v n" 'outline-next-visible-heading
+    "v p" 'outline-previous-visible-heading
+    "v f" 'outline-forward-same-level
+    "v b" 'outline-backward-same-level
+    "v a" 'outline-show-all
+    "v l" 'outline-show-branches
+    "v u" 'outline-up-heading
+    "v v" 'outline-show-only-headings))
+

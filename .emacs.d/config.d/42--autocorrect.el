@@ -32,3 +32,7 @@
     (remove-hook 'post-self-insert-hook #'sk:dcaps-to-scaps 'local)
     (remove-hook 'post-self-insert-hook #'sk:dspace-to-sspace 'local)
     (message "sk:autocorrect-mode deactivated")))
+
+(add-hook 'org-mode-hook #'sk:autocorrect-mode)
+(add-hook 'LaTeX-mode-hook #'sk:autocorrect-mode)
+

@@ -15,8 +15,6 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
-  (add-hook 'LaTeX-mode-hook #'sk:autocorrect-mode)
-
   (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
   (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
   (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))

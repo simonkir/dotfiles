@@ -6,21 +6,55 @@
 
 (setq-default use-dialog-box nil)
 
-; * help
-(general-def-leader
-  "h" 'describe-symbol
-  "H" 'describe-key)
+; * yasnippet
+(use-package yasnippet
+  :demand t
+  :config
+  (general-def yas-minor-mode-map
+    "<tab>" nil
+    "TAB" nil)
 
-(general-def help-mode-map
-  "<escape>" 'meow-cancel-selection
-  "h" 'meow-left
-  "l" 'meow-right
-  "H" 'help-go-back
-  "L" 'help-go-forward
-  "n" 'help-go-forward
-  "p" 'help-go-back)
+  (yas-global-mode))
 
-; * convenience functions
+; * parentheses
+; ** electric
+(use-package electric
+  :demand t
+  :config
+  (setq-default electric-indent-inhibit t)
+
+  (electric-pair-mode)
+
+  (add-to-list 'electric-pair-pairs '(8218 . 8216))  ;; ‚‘
+  (add-to-list 'electric-pair-pairs '(8222 . 8220))) ;; „“
+
+; ** skparens
+(use-package skparens
+  :demand t
+  :config
+  (general-def meow-normal-state-keymap
+    "%" 'skparens-change
+    "D" 'skparens-delete
+    "S" 'skparens-insert
+    "A" 'skparens-mark-outer
+    "I" 'skparens-mark-inner))
+
+; * indentation
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+; * whitespace
+(general-def "M-SPC" 'delete-horizontal-space)
+
+(use-package whitespace
+  :demand t
+  :config
+  (setq whitespace-style '(trailing indentation space-before-tab space-after-tab))
+  (setq whitespace-action '(auto-cleanup warn-if-read-only))
+
+  (global-whitespace-mode))
+
+; * sk:functions
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"
   (interactive)
