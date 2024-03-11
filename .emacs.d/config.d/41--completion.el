@@ -18,6 +18,10 @@
 
 ; *** tab / backtab keybinds
   (defun sk:insert-backtab-key ()
+    "determines and performs desired action on backtab input
+
+when in org-table: go to previous field
+else: un-expand last expansion"
     (interactive)
     (cond ((and (derived-mode-p 'org-mode)
                 (member (nth 0 (org-element-at-point)) #'(table-row table)))
@@ -25,6 +29,13 @@
           (t (hippie-expand 0))))
 
   (defun sk:insert-tab-key ()
+    "determines and performs desired action on tab input
+
+when in org-table: go to next field
+when snippet expandable: expand corresponding snippet
+when writing in org- / latex-mode: call 'cdlatex-tab'
+when writing in other modes: call 'hippie-expand'
+else: indent"
     (interactive)
     (cond
      ;; org-table tabbing

@@ -15,10 +15,12 @@
     (sort buffers 'string<)))
 
 (defun sk:switch-to-buffer ()
+  "interactively switch to buffer in 'sk:buffer-list'"
   (interactive)
   (switch-to-buffer (completing-read "Switch to buffer: " (sk:buffer-list)) t))
 
 (defun sk:kill-current-buffer ()
+  "kills currently visited buffer"
   (interactive)
   (kill-buffer (current-buffer)))
 

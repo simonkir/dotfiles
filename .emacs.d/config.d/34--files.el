@@ -42,7 +42,7 @@
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*mitschrieb.pdf")
 
   (defun sk:recentf-find-file ()
-    "Find a recent file using completing-read."
+    "find a recent file using 'completing-read'"
     (interactive)
     (let ((file (completing-read "Choose recent file: " recentf-list nil t)))
       (when file

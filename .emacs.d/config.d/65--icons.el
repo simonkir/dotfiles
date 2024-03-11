@@ -14,6 +14,7 @@
   :config
 ; ** agenda hack
   (defun sk:org-agenda-show-svg ()
+    "show svg-tags inside org-agenda views. hack copied from svg-tag-mode README"
     (let* ((case-fold-search nil)
            (keywords (mapcar #'svg-tag--build-keywords svg-tag--active-tags))
            (keyword (car keywords)))

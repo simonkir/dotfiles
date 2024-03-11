@@ -10,6 +10,7 @@
 
 ; ** switching defuns
 (defun sk:set-face-fixed ()
+  "set and apply 'default' font face"
   (interactive)
   (let* ((new-face (completing-read "new fixed-pitch face: " sk:fonts-fixed-pitch nil nil))
          (height (if (string= new-face "Inconsolata")
@@ -18,6 +19,7 @@
     (set-face-attribute 'default nil :family new-face :height height)))
 
 (defun sk:set-face-variable ()
+  "set and apply 'variable' font face"
   (interactive)
   (let ((new-face (completing-read "new variable-pitch face: " sk:fonts-variable-pitch nil nil))
         (height 100))
@@ -42,6 +44,7 @@
 ; * prettification
 ; ** org-mode definitions
 (defun sk:prettify-symbols-org-mode ()
+  "add org-specific prettifications to 'prettify-symbols-alist'"
   ;; environments
   (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
   (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝)))
@@ -65,6 +68,9 @@
 
 ; ** org- & latex-mode definitions
 (defun sk:prettify-symbols-org-LaTeX-mode ()
+  "add latex-specific prettifications to 'prettify-symbols-alist'
+
+also displayed in org documents"
   ;; aligned operators
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
@@ -127,6 +133,9 @@
 
 ; ** latex-mode definitions
 (defun sk:prettify-symbols-LaTeX-mode ()
+  "add latex-specific prettifications to 'prettify-symbols-alist'
+
+not displayed in org documents unless in #+begin_latex environment"
   (add-to-list 'prettify-symbols-alist '("&" . "·"))
   (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·))))
 

@@ -3,6 +3,11 @@
 ; * sk:functions
 ; ** resizing
 (defun sk:resize-current-window ()
+  "interactively resize the current window using the arrow keys
+
+<left> / <right>: increase / decrease width
+<up> / <down>: increase / decrease height
+0 / =: balance windows"
   (interactive)
   (cond
    ((eq last-command-event 'right) (call-interactively #'enlarge-window-horizontally))
@@ -20,12 +25,14 @@
 
 ; ** splitting
 (defun sk:split-and-follow-horizontally ()
+  "create a horizontal split and change focus to newly split window"
   (interactive)
   (split-window-below)
   (balance-windows)
   (other-window 1))
 
 (defun sk:split-and-follow-vertically ()
+  "create a vertical split and change focus to newly split window"
   (interactive)
   (split-window-right)
   (balance-windows)
@@ -33,11 +40,13 @@
 
 ; ** cycling
 (defun sk:cycle-windows-forward ()
+  "cycle visible windows forward"
   (interactive)
   (select-window (next-window (selected-window) nil (selected-frame)))
   (run-hooks 'window-configuration-change-hook))
 
 (defun sk:cycle-windows-backward ()
+  "cycle visible windows backward"
   (interactive)
   (select-window (previous-window (selected-window) nil (selected-frame)))
   (run-hooks 'window-configuration-change-hook))

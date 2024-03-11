@@ -2,7 +2,7 @@
 
 ; * helper functions
 (defun sk:dcaps-to-scaps ()
-  "Convert word in DOuble CApitals to Single Capitals while typing."
+  "convert word in DOuble CApitals to Single Capitals while typing."
   (interactive)
   (save-excursion
     (let ((end (point)))
@@ -13,7 +13,7 @@
         (capitalize-region (point) end)))))
 
 (defun sk:dspace-to-sspace ()
-  "Convert two or more spaces to single space while typing."
+  "convert two or more spaces to single space while typing"
   (interactive)
   (save-excursion
     (left-char)

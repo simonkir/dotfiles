@@ -26,6 +26,7 @@
   (setq org-highlight-latex-and-related '(native))
 
   (defun sk:org-toggle-emphasis-markers ()
+    "toggle display of emphasis markers"
     (interactive)
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
@@ -241,12 +242,14 @@
   (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
 
   (defun sk:org-preview-latex-scale-set (new-scale)
+    "interactively reads a new latex preview scale"
     (interactive "nnew preview scale: ")
     (setq sk:org-preview-latex-scale new-scale)
     (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
     (message "latex preview scale set to %s" sk:org-preview-latex-scale))
 
   (defun sk:org-latex-preview-at-point ()
+    "toggles preview of latex-code at point"
     (interactive)
     (if (or (org-in-block-p '("latex"))
             (org-in-regexp "\$.*\$"))
@@ -284,6 +287,7 @@
   (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
 
   (defun sk:leader-e ()
+    "determine and perform desired action on <leader>-e input"
     (interactive)
     (if (derived-mode-p 'org-mode)
         (org-edit-special)
@@ -293,6 +297,7 @@
          ((string-match-p "Formula" buffer-name) (org-table-fedit-finish '(4)))))))
 
   (defun sk:leader-E ()
+    "determine and perform desired action on <leader>-E input"
     (interactive)
     (when (derived-mode-p 'org-mode)
       (let ((display-buffer-alist '(("Org Src" . (display-buffer-pop-up-window)))))
