@@ -9,6 +9,29 @@
       (add-hook 'server-after-make-frame-hook #'(lambda () (load-theme 'doom-one t)) -10)
     (load-theme 'doom-one t)))
 
+; * transparency
+;; initial state
+(setq sk:alpha-background 95)
+(add-to-list 'default-frame-alist `(alpha-background . ,sk:alpha-background))
+
+(defun sk:toggle-transparent-background ()
+  "toggle transparent background"
+  (interactive)
+  (if (= 100 (frame-parameter nil 'alpha-background))
+      (set-frame-parameter nil 'alpha-background sk:alpha-background)
+    (set-frame-parameter nil 'alpha-background 100)))
+
+(defun sk:set-alpha-background (alpha)
+  "interactiveley reads a new background alpha value"
+  (interactive "nnew background alpha value (in %%): ")
+  (setq sk:alpha-background alpha)
+  (set-frame-parameter nil 'alpha-background sk:alpha-background)
+  (message "background alpha value set to %s %%" sk:alpha-background))
+
+(general-def-leader
+  "d t" 'sk:toggle-transparent-background
+  "d T" 'sk:set-alpha-background)
+
 ; * solarie mode
 (use-package solaire-mode
   :after doom-themes

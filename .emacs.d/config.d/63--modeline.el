@@ -14,8 +14,7 @@
     (display-time-mode 1)))
 
 (general-def sk:leader-map
-  "d t" 'sk:mode-line-diminish-mode
-  "t d" 'sk:mode-line-diminish-mode)
+  "d d" 'sk:mode-line-diminish-mode)
 
 ; * doom-modeline
 (use-package doom-modeline
