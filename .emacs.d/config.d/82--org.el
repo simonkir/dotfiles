@@ -42,47 +42,18 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-; ** navigation
-  (setq org-goto-auto-isearch nil)
 
-  (general-def org-mode-map
-    "C-c C-l" 'outline-show-branches
-    "C-c C-j" 'meow-sk:org-goto-mode)
-
-
-
-  ;; custom org-goto implementation
-  (setq meow-sk:org-goto-state-map (make-keymap))
-
-  (meow-define-state sk:org-goto
-    "custom meow implementation of org-goto"
-    :lighter " [G]"
-    :keymap meow-sk:org-goto-state-map)
-
-  (general-def meow-sk:org-goto-state-map
-    "TAB" 'org-cycle
-    "<tab>" 'org-cycle
-    "S-TAB" 'org-shifttab
-    "<backtab>" 'org-shifttab
-    "n" 'outline-next-visible-heading
-    "j" 'outline-next-visible-heading
-    "p" 'outline-previous-visible-heading
-    "k" 'outline-previous-visible-heading
-    "f" 'outline-forward-same-level
-    "l" 'outline-forward-same-level
-    "b" 'outline-backward-same-level
-    "h" 'outline-backward-same-level
-    "u" 'outline-up-heading
-    "q" 'meow-normal-mode
-    "ESC" 'meow-normal-mode
-    "RET" 'meow-normal-mode
-    "SPC" 'meow-keypad)
 
 ; ** editing
-  (setq org-blank-before-new-entry '((heading . t) (plain-list-item . nil)))
+  (setq org-blank-before-new-entry
+        '((heading . t)
+          (plain-list-item . nil)))
+
   (setq org-list-demote-modify-bullet
-        '(("+" . "-") ("-" . "+")
-          ("1." . "-") ("1)" . "-")))
+        '(("+" . "-")
+          ("-" . "+")
+          ("1." . "-")
+          ("1)" . "-")))
 
   (setq org-emphasis-alist
         '(("*" bold)
@@ -154,7 +125,7 @@
                                            (todo priority-down alpha-up)))
             (org-agenda-prefix-format
              '((agenda . "  %i %-12:c%?-12tEff.: %-8e %s")
-               (todo . "  %i %-12:c")
+               (todo . "  %i %-12:cEff.: %-8e")
                (tags . "  %i %-12:c")
                (search . "  %i %-12:c")))))))
 
@@ -261,7 +232,7 @@
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
-; ** org-babel
+; ** src blocks, org-babel
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((gnuplot . t)))
