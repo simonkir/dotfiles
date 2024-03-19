@@ -41,8 +41,41 @@
     "v p" 'outline-previous-visible-heading
     "v f" 'outline-forward-same-level
     "v b" 'outline-backward-same-level
-    "v a" 'outline-show-all
-    "v l" 'outline-show-branches
-    "v u" 'outline-up-heading
-    "v v" 'outline-show-only-headings))
 
+    "v a" 'outline-show-all
+    "v h" 'outline-show-only-headings
+    "v l" 'outline-show-branches
+    "v o" 'outline-hide-other
+    "v u" 'outline-up-heading
+    "v v" 'outline-hide-sublevels))
+
+; * narrowing
+(defun sk:narrow-or-widen ()
+  "narrows or widens based on object under cursor and active region"
+  (interactive)
+  (cond
+   ;; org: close editing buffer
+   ((string-match-p "Org Src" (buffer-name (current-buffer))) (org-edit-src-exit))
+   ((string-match-p "Formula" (buffer-name (current-buffer))) (org-table-fedit-finish '(4)))
+
+   ;; org: edit element in special buffer
+   ((and (derived-mode-p 'org-mode)
+         (member (car (org-element-context))
+                 '(src-block
+                   latex-environment
+                   latex-fragment
+                   table-cell
+                   table-row)))
+    (org-edit-special))
+
+   ;; narrow-to-region commands
+   ((buffer-narrowed-p) (widen))
+   ((region-active-p) (narrow-to-region (region-beginning) (region-end)))
+   ((derived-mode-p 'org-mode) (org-narrow-to-subtree))
+   ((derived-mode-p 'prog-mode) (narrow-to-defun))
+
+   ;; fallback
+   (t (message "no suitable narrowing possible"))))
+
+(general-def-leader
+  "e" 'sk:narrow-or-widen)

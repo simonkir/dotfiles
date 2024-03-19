@@ -97,6 +97,22 @@
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
 
+; ** narrowing
+  ;; see `sk:narrow-or-widen' for regular src- / table-editing
+
+  (setq org-src-window-setup 'plain)
+  (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
+
+  (defun sk:leader-E ()
+    "determine and perform desired action on <leader>-E input"
+    (interactive)
+    (when (derived-mode-p 'org-mode)
+      (let ((display-buffer-alist '(("Org Src" . (display-buffer-pop-up-window)))))
+        (org-edit-special))))
+
+  (general-def-leader
+    "E" 'sk:leader-E)
+
 ; ** agenda, capture
   (setq org-directory "~/.emacs.d/org-dir")
   (setq org-agenda-files '("~/.emacs.d/org-dir/"))
@@ -232,7 +248,7 @@
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
-; ** src blocks, org-babel
+; ** org-babel
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((gnuplot . t)))
@@ -250,35 +266,7 @@
   (defun sk:org-babel-eval-with-new-session ()
     (interactive)
     (sk:org-babel-kill-session-at-point)
-    (org-ctrl-c-ctrl-c))
-
-
-
-  (setq org-src-window-setup 'plain)
-  (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
-
-  (defun sk:leader-e ()
-    "determine and perform desired action on <leader>-e input"
-    (interactive)
-    (if (derived-mode-p 'org-mode)
-        (org-edit-special)
-      (let ((buffer-name (buffer-name (current-buffer))))
-        (cond
-         ((string-match-p "Org Src" buffer-name) (org-edit-src-exit))
-         ((string-match-p "Formula" buffer-name) (org-table-fedit-finish '(4)))))))
-
-  (defun sk:leader-E ()
-    "determine and perform desired action on <leader>-E input"
-    (interactive)
-    (when (derived-mode-p 'org-mode)
-      (let ((display-buffer-alist '(("Org Src" . (display-buffer-pop-up-window)))))
-        (org-edit-special))))
-
-
-
-  (general-def-leader
-    "e" 'sk:leader-e
-    "E" 'sk:leader-E))
+    (org-ctrl-c-ctrl-c)))
 
 ; * ox (export pkgs)
 (use-package ox
