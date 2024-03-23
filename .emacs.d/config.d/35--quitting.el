@@ -36,8 +36,9 @@ i. e. closing the terminal, unless there are unsaved changes"
 i. e. killing all open buffers and quitting the terminal, unless there are unsaved changes"
   (interactive)
   (when (sk:maybe-save-all-buffers)
-    (dolist (element (sk:buffer-list))
-      (kill-buffer element))
+    (dolist (element (centaur-tabs-buffer-list))
+      (unless (string= (buffer-name element) "*dashboard*")
+        (kill-buffer element)))
     (save-buffers-kill-terminal)))
 
 ; * sk:daemon-quit

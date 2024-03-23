@@ -1,6 +1,5 @@
 ;;; skparens.el --- skparens                           -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022  simonkir
 ;; Author: simonkir
 
 ;;; Code:
@@ -12,10 +11,12 @@
       '(("(" . ("( " . " )"))
         ("[" . ("[ " . " ]"))
         ("{" . ("{ " . " }"))
+
         ;; no spaces in between
         (")" . ("(" . ")"))
         ("]" . ("[" . "]"))
         ("}" . ("{" . "}"))
+
         ;; latex pairs
         ("r" . ("\\left( " . " \\right)"))
         ("s" . ("\\left[ " . " \\right]"))
@@ -25,17 +26,18 @@
         ("S" . ("\\left[" . "\\right]"))
         ("C" . ("\\left\\{" . "\\right\\}"))
         ("A" . ("\\left|" . "\\right|"))
+
         ;; lang-specific pairs
         ("`" . ("`" . "'"))       ;; elisp symbol quote
         ("\\" . ("/* " . " */"))  ;; c-like comment
+
         ;; quotes
         ("„" . ("„" . "“"))
         ("“" . ("“" . "”"))
         ("‚" . ("‚" . "‘"))
         ("‘" . ("‘" . "’"))))
 
-(setq skparens--supported-nested-pairs
-      '("(" ")" "[" "]" "{" "}"))
+(setq skparens--supported-nested-pairs '("(" ")" "[" "]" "{" "}"))
 
 ; * helper functions
 (defun skparens--read-delim (&optional readstring)

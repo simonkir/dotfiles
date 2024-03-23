@@ -17,7 +17,7 @@
           try-complete-lisp-symbol))
 
 ; *** tab / backtab keybinds
-  (defun sk:insert-backtab-key ()
+  (defun sk:complete-at-point-undo ()
     "determines and performs desired action on backtab input
 
 when in org-table: go to previous field
@@ -28,7 +28,7 @@ else: un-expand last expansion"
            (call-interactively #'org-table-previous-field))
           (t (hippie-expand 0))))
 
-  (defun sk:insert-tab-key ()
+  (defun sk:complete-at-point ()
     "determines and performs desired action on tab input
 
 when in org-table: go to next field
@@ -43,11 +43,13 @@ else: indent"
      ((and (derived-mode-p 'org-mode)
            (member (nth 0 (org-element-at-point)) #'(table-row table)))
       (call-interactively #'org-table-next-field))
+
      ;; snippet exapnsion
      ((when yas-minor-mode
         (let ((yas-fallback-behavior 'return-nil))
           (when (yas-expand)
             (run-hooks 'post-self-insert-hook)))))
+
      ;; completion (depending in major-mode)
      ((string-match-p "[[:alnum:]}]" (char-to-string (preceding-char)))
       (cond
@@ -57,13 +59,13 @@ else: indent"
         (call-interactively #'cdlatex-tab))
        ((derived-mode-p 'maxima-mode) (call-interactively #'maxima-complete))
        (t (call-interactively #'hippie-expand))))
+
      ;; indentation
-     (t
-      (call-interactively #'indent-for-tab-command))))
+     (t (call-interactively #'indent-for-tab-command))))
 
   (general-def meow-insert-state-keymap
-    "<tab>"     'sk:insert-tab-key
-    "<backtab>" 'sk:insert-backtab-key))
+    "<tab>"     'sk:complete-at-point
+    "<backtab>" 'sk:complete-at-point-undo))
 
 ; * minibuffer completion
 ; ** icomplete
