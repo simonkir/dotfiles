@@ -6,12 +6,12 @@
   :config
   (doom-themes-org-config)
   (if (daemonp)
-      (add-hook 'server-after-make-frame-hook #'(lambda () (load-theme 'doom-one t)) -10)
-    (load-theme 'doom-one t)))
+      (add-hook 'server-after-make-frame-hook #'(lambda () (load-theme 'doom-palenight t)) -10)
+    (load-theme 'doom-palenight t)))
 
 ; * transparency
 ;; initial state
-(setq sk:alpha-background 95)
+(setq sk:alpha-background 90)
 (add-to-list 'default-frame-alist `(alpha-background . ,sk:alpha-background))
 
 (defun sk:toggle-transparent-background ()

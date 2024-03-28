@@ -18,21 +18,20 @@ mod = "mod4"
 mod1 = "alt"
 home = os.path.expanduser('~')
 
+
+
 # colors ######################################################################
-def init_colors():
-    return [["#282c34", "#282c34"], # color 0, black
-       ["#ed254e", "#ed254e"], # color 1, red
-       ["#71f79f", "#71f79f"], # color 2, green
-       ["#f9dc5c", "#f9dc5c"], # color 3, yellow
-       ["#66abff", "#66abff"], # color 4, blue
-       ["#c74ded", "#c74ded"], # color 5, magenta
-       ["#00c1e4", "#00c1e4"], # color 6, teal
-       ["#dcdfe4", "#dcdfe4"], # color 7, silver
-       ["#c3c7d1", "#c3c7d1"], # foreground
-       ["#141925", "#141925"]] # background
 
-
-colors = init_colors()
+colors = ["#292d3e", # color 0, black
+          "#ff5370", # color 1, red
+          "#c3e88d", # color 2, green
+          "#ffcb6b", # color 3, yellow
+          "#82aaff", # color 4, blue
+          "#c792ea", # color 5, magenta
+          "#89ddff", # color 6, cyan
+          "#eeffff", # color 7, silver
+          "#eeffff", # foreground
+          "#292d3e"] # background
 
 
 

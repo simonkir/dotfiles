@@ -1,8 +1,8 @@
 // -*- mode: css -*-
 
 * {
-    background-color:           #282c34;
-    text-color:                 #abb2bf;
+    background-color:           #292d3e;
+    text-color:                 #eeffff;
     height:                     24px;
     font:                       "Noto Sans 10";
 }
@@ -21,9 +21,9 @@
 
 #prompt {
     font:                       "Noto Sans 10";
-    background-color:           #61afef;
-    text-color:                 #282c34;
-    padding:                    4px;
+    background-color:           #82aaff;
+    text-color:                 #292d3e;
+    padding:                    2px;
 }
 
 #listview {
@@ -37,9 +37,9 @@
 }
 
 #element {
-    padding:                    2px 8px;
+    padding:                    2px 2px;
 }
 
 #element selected {
-    background-color:           #98c379;
+    background-color:           #c3e88d;
 }

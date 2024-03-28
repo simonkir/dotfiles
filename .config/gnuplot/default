@@ -10,4 +10,4 @@ set format "%g"
 
 set border 3
 
-load "~/.config/gnuplot/theme_one-dark"
+load "~/.config/gnuplot/theme_palenight"
