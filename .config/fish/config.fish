@@ -2,6 +2,11 @@
 export WINIT_X11_SCALE_FACTOR=1
 export EDITOR="emacsclient -cq"
 
+# * visuals
+fish_config prompt choose scales
+fish_config theme choose Dracula
+set -U fish_greeting
+
 # * aliases
 alias la='ls -a'
 alias ll='ls -lh'
