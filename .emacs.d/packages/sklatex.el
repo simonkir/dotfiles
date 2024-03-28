@@ -2,8 +2,6 @@
 
 ;; Author: simonkir
 
-
-
 ;;; Code:
 
 ; * variables
@@ -285,8 +283,7 @@ not meant to be called from elisp. for this purpose, see sklatex--input-delete-s
    ((string= key "C") (sklatex-deactivate-chemical-formula-conversion))
    (t (message "%s: unsupported key" key))))
 
-
-
+; * package
 (provide 'sklatex)
 
 ;;; sklatex.el ends here

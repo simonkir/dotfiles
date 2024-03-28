@@ -1,19 +1,13 @@
 /* -*- mode: maxima -*- */
 
-
-
-/* general settings */
+/* * general settings */
 leftjust: true;
 
-
-
-/* load some commonly used packages */
+/* * packages */
 load(vect);
 load(eigen);
 
-
-
-/* define some helper functions */
+/* * helper functions */
 log10(x) := log(x)/log(10);
 log2(x) := log(x)/log(2);
 ln(x) := log(x);

@@ -1,3 +1,18 @@
+# * general settings
+[scrolling]
+history = 50000
+
+[shell]
+program = "/bin/fish"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 11
+y = 11
+
+# * theme
 [colors.bright]
 black = "#242837"
 blue = "#5fafff"
@@ -22,6 +37,7 @@ yellow = "#ffcb6b"
 background = "#292d3e"
 foreground = "#eeffff"
 
+# * font
 [font]
 size = 11.0
 
@@ -41,15 +57,3 @@ style = "Italic"
 family = "monospace"
 style = "Regular"
 
-[scrolling]
-history = 50000
-
-[shell]
-program = "/bin/fish"
-
-[window]
-opacity = 0.9
-
-[window.padding]
-x = 11
-y = 11

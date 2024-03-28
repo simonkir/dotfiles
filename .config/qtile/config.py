@@ -1,3 +1,4 @@
+# * imports
 import os
 import re
 import socket
@@ -8,20 +9,23 @@ from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
 #import arcobattery
 
-
-
-###############################################################################
-#                                     VARS                                    #
-###############################################################################
-
+# * general settings
 mod = "mod4"
 mod1 = "alt"
 home = os.path.expanduser('~')
 
+auto_fullscreen            = True
+bring_front_click          = False
+cursor_warp                = False
+follow_mouse_focus         = True
+focus_on_window_activation = "smart"
+reconfigure_screens        = True
 
+dgroups_key_binder = None
+dgroups_app_rules = []
+main = None
 
-# colors ######################################################################
-
+# * theme
 colors = ["#292d3e", # color 0, black
           "#ff5370", # color 1, red
           "#c3e88d", # color 2, green
@@ -33,14 +37,7 @@ colors = ["#292d3e", # color 0, black
           "#eeffff", # foreground
           "#292d3e"] # background
 
-
-
-###############################################################################
-#                                   KEYBINDS                                  #
-###############################################################################
-
-# keybinds ####################################################################
-
+# * keybinds
 keys = [
 
     # SUPER + FUNCTION KEYS
@@ -50,19 +47,16 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart()),
 
 
-    # QTILE LAYOUT KEYS
+# ** layout, screens, focus
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
-    # CHANGE SCREENS
     Key([mod], "Tab", lazy.next_screen()),
     Key([mod, "shift" ], "Tab", lazy.prev_screen()),
 
-    # CYCLE WINDOWS
-    Key(["mod1"], "Tab",          lazy.group.next_window()),
+    Key(["mod1"], "Tab", lazy.group.next_window()),
     Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
 
-    # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Left", lazy.layout.left()),
@@ -72,7 +66,7 @@ keys = [
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
 
-    # RESIZE UP, DOWN, LEFT, RIGHT
+# ** resizing
     Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
@@ -118,10 +112,9 @@ keys = [
         lazy.layout.increase_nmaster(),
         ),
 
-    # FLIP LAYOUT FOR MONADTALL/MONADWIDE
+# ** monadtall / -wide layout
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
-    # MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
@@ -132,10 +125,11 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
 
-    # TOGGLE FLOATING LAYOUT
+# ** foating layout
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),
     Key([mod], "s", lazy.window.toggle_floating()),
 
+# ** bsp layout
 ###     # FLIP LAYOUT FOR BSP
 ###     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
 ###     Key([mod, "mod1"], "j", lazy.layout.flip_down()),
@@ -150,7 +144,7 @@ keys = [
 
     ]
 
-# mouse configuration #########################################################
+# ** mouse
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
@@ -158,13 +152,8 @@ mouse = [
          start=lazy.window.get_size())
 ]
 
-
-
-###############################################################################
-#                                    GROUPS                                   #
-###############################################################################
-
-# workspace initialization ####################################################
+# * workspaces
+# ** initialization
 groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -179,7 +168,7 @@ for i in range(len(group_names)):
             label=group_labels[i],
         ))
 
-# workspace keybinds ##########################################################
+# ** keybinds
 for i in groups:
     keys.extend([
 
@@ -191,7 +180,7 @@ for i in groups:
         Key([mod, "control"], i.name, lazy.window.togroup(i.name), lazy.group[i.name].toscreen()),
     ])
 
-# assign applications to workspaces ###########################################
+# ** window rules
 @hook.subscribe.client_new
 def assign_app_group(client):
     d = {}
@@ -214,12 +203,20 @@ def assign_app_group(client):
             client.togroup(group)
             #client.group.cmd_toscreen(toggle=False)
 
+# * layouts
+# ** initialization
+layouts = [
+    layout.MonadTall(**layout_theme),
+    layout.MonadWide(**layout_theme),
+    layout.RatioTile(**layout_theme),
+    layout.Max(**layout_theme)
+]
 
+# ** floating layout
+floating_types = ["notification", "toolbar", "splash", "dialog"]
+floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
 
-###############################################################################
-#                                   LAYOUTS                                   #
-###############################################################################
-
+# ** margin layout
 def init_layout_theme():
     return {"margin":        0,
             "border_width":  0,
@@ -229,24 +226,8 @@ def init_layout_theme():
 
 layout_theme = init_layout_theme()
 
-layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.MonadWide(**layout_theme),
-    layout.RatioTile(**layout_theme),
-    layout.Max(**layout_theme)
-]
-
-# floating ####################################################################
-floating_types = ["notification", "toolbar", "splash", "dialog"]
-floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
-
-
-
-###############################################################################
-#                                     BAR                                     #
-###############################################################################
-
-# default settings ############################################################
+# * bar
+# ** settings
 def init_widgets_defaults():
     return dict(font="Noto Sans",
                 fontsize = 12,
@@ -261,13 +242,12 @@ icon_margin = 5
 sep_linewidth = 1
 sep_padding = 10
 
-# widget list #################################################################
+# ** widgets
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
 
-        # workspaces ##########################################################
-
+# *** workspaces
         widget.GroupBox(
             margin_y = 3, margin_x = 0,
             padding_y = 6, padding_x = 5,
@@ -284,9 +264,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # layout section ######################################################
-
+# *** layout
         widget.CurrentLayoutIcon(
             scale = 0.7,
         ),
@@ -298,9 +276,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # window name section #################################################
-
+# *** window-name
         widget.CurrentScreen(
             font = "FontAwesome",
             active_text = "",
@@ -311,9 +287,7 @@ def init_widgets_list():
         widget.WindowName(
         ),
 
-
-        # updates #############################################################
-
+# *** updates
         widget.Image(
             filename = "~/.config/qtile/icons/updates.png",
             margin = icon_margin,
@@ -329,9 +303,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # cpu #################################################################
-
+# *** cpu
         widget.Image(
             filename = "~/.config/qtile/icons/cpu.png",
             margin = icon_margin,
@@ -345,9 +317,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # temperature #########################################################
-
+# *** temperature
         widget.Image(
             filename = "~/.config/qtile/icons/temperature.png",
             margin = icon_margin,
@@ -363,9 +333,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # memory ##############################################################
-
+# *** memory
         widget.Image(
             filename = "~/.config/qtile/icons/memory.png",
             margin = icon_margin,
@@ -380,9 +348,7 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # clock ###############################################################
-
+# *** clock
         widget.Image(
             filename = "~/.config/qtile/icons/clock.png",
             margin = icon_margin,
@@ -395,15 +361,15 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-
-        # systray #############################################################
-
+# *** systray
         widget.Systray(
             icon_size = 20,
         ),
     ]
     return widgets_list
 
+# * screen layout
+# ** bar widgets
 widgets_list = init_widgets_list()
 
 def init_widgets(has_tray=False):
@@ -446,6 +412,7 @@ def init_widgets(has_tray=False):
 widgets_screen1 = init_widgets(True)  # tray
 widgets_screen2 = init_widgets(False) # no tray
 
+# ** screen layout
 def init_screens():
     try:
         subprocess.call([home + '/.screenlayout/default.sh'])
@@ -455,12 +422,7 @@ def init_screens():
             Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.9))]
 screens = init_screens()
 
-
-
-###############################################################################
-#                                  AUTOSTART                                  #
-###############################################################################
-
+# * autostart
 @hook.subscribe.startup_once
 def start_once():
     #home = os.path.expanduser('~')
@@ -472,22 +434,3 @@ def start_always():
     #subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
     #home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart-always.sh'])
-
-
-
-###############################################################################
-#                                     MISC                                    #
-###############################################################################
-
-# settings ####################################################################
-
-auto_fullscreen            = True
-bring_front_click          = False
-cursor_warp                = False
-follow_mouse_focus         = True
-focus_on_window_activation = "smart"
-reconfigure_screens        = True
-
-dgroups_key_binder = None
-dgroups_app_rules = []
-main = None

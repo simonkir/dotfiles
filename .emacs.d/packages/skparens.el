@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-
-
 ; * variables
 (setq skparens-pair-alist
       '(("(" . ("( " . " )"))
@@ -129,8 +127,7 @@
       (goto-char beg)
       (insert opendelim))))
 
-
-
+; * package
 (provide 'skparens)
 
 ;;; skparens.el ends here

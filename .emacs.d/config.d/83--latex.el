@@ -47,7 +47,6 @@
     "C-c C-a" 'sklatex-dispatch
     "C-c A" 'sklatex-mode))
 
-
 ; * cdlatex
 (use-package cdlatex
   :hook

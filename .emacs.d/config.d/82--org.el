@@ -42,9 +42,8 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-
-
 ; ** editing
+; *** settings
   (setq org-blank-before-new-entry
         '((heading . t)
           (plain-list-item . nil)))
@@ -62,9 +61,7 @@
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
-  ;; compatibility with sklatex linebreaks
-  (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
-
+; *** keybinds
   (defun sk:org-return ()
     "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
     (interactive)
@@ -80,6 +77,9 @@
         (org-return)))
      (t
       (org-return))))
+
+  ;; compatibility with sklatex linebreaks
+  (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
   (general-def org-mode-map
     "C-c C-_" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
@@ -114,6 +114,7 @@
     "E" 'sk:leader-E)
 
 ; ** agenda, capture
+; *** general settings
   (setq org-directory "~/.emacs.d/org-dir")
   (setq org-agenda-files '("~/.emacs.d/org-dir/"))
   (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
@@ -122,6 +123,7 @@
   (setq calendar-week-start-day 1)
   (setq org-agenda-window-setup 'current-window)
 
+; *** agenda views
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
@@ -145,6 +147,7 @@
                (tags . "  %i %-12:c")
                (search . "  %i %-12:c")))))))
 
+; *** agenda keybinds
   (general-def org-agenda-mode-map
     "D" 'org-agenda-goto-date
     "g" 'org-agenda-redo
@@ -157,8 +160,7 @@
     "r" 'org-agenda-redo-all
     "W" 'org-agenda-fortnight-view)
 
-
-
+; *** capture
   (setq org-bookmark-names-plist nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
   (setq org-capture-templates '(("c" "TODO entry" entry (file "/tmp/org-capture.org")
@@ -199,18 +201,18 @@
 ;;      (re-search-forward "\\[\\[" (+ (point) 30))
 ;;      (sk:org-toggle-inline-images)))
 
-
-
   (general-def org-mode-map
     "C-c C-x C-v" 'sk:org-toggle-inline-images
     "C-c C-x V" 'org-toggle-inline-images
     "C-c C-x M-v" 'org-redisplay-inline-images)
 
 ; ** latex settings
+; *** math settings
   (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
   (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
   (add-to-list 'org-latex-packages-alist '("" "gauss" t))
 
+; *** syntax table adjustments
   ;; prevent < and > from being interpreted as delimiters
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
@@ -223,8 +225,7 @@
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
 
-
-
+; *** latex preview
   (setq sk:org-preview-latex-scale 1.5)
   (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
 
@@ -242,8 +243,6 @@
             (org-in-regexp "\$.*\$"))
         (org-latex-preview)
       (message "not inside latex environment")))
-
-
 
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
@@ -273,8 +272,6 @@
   :after org
   :config
   (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f")))
-
-
 
 (use-package ox-latex
   :after ox

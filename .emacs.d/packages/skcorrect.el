@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-
-
 ; * helper functions
 (defun skcorrect--dcaps-to-scaps ()
   "convert word in DOuble CApitals to Single Capitals while typing."
@@ -39,6 +37,7 @@
     (remove-hook 'post-self-insert-hook #'skcorrect--dspace-to-sspace 'local)
     (message "skcorrect-mode deactivated")))
 
+; * package
 (provide 'skcorrect)
 
 ;;; skcorrect.el ends here

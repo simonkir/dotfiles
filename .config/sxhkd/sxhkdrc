@@ -1,21 +1,6 @@
-# -*- mode: python -*-
+# -*- mode: conf -*-
 
-
-
-super + Escape
-    xkill
-
-super + Return
-    alacritty
-
-
-
-super + 9
-    betterlockscreen -l
-
-super + 0
-    archlinux-logout
-
+# * alphabetical
 super + alt + b
     blender
 
@@ -76,16 +61,27 @@ super + alt + y
 super + alt + shift + y
     ~/.config/simonkir/bluetooth-disconnect.sh
 
+# * window-manager stuff
+super + Escape
+    xkill
 
+super + Return
+    alacritty
 
+super + 9
+    betterlockscreen -l
+
+super + 0
+    archlinux-logout
+
+# * screenshots
 Print
     scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
 
 ctrl + Print
      xfce4-screenshooter
 
-
-
+# * multimedia
 XF86AudioRaiseVolume
     amixer set Master 10%+
 
@@ -107,8 +103,7 @@ XF86AudioPrev
 XF86AudioStop
     playerctl stop
 
-
-
+# * backlight
 XF86MonBrightnessUp
     xbacklight -inc 10
 
