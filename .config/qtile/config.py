@@ -205,6 +205,15 @@ def assign_app_group(client):
 
 # * layouts
 # ** initialization
+def init_layout_theme():
+    return {"margin":        0,
+            "border_width":  0,
+            "border_focus":  "#5e81ac",
+            "border_normal": "#4c566a"
+            }
+
+layout_theme = init_layout_theme()
+
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
@@ -215,16 +224,6 @@ layouts = [
 # ** floating layout
 floating_types = ["notification", "toolbar", "splash", "dialog"]
 floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
-
-# ** margin layout
-def init_layout_theme():
-    return {"margin":        0,
-            "border_width":  0,
-            "border_focus":  "#5e81ac",
-            "border_normal": "#4c566a"
-            }
-
-layout_theme = init_layout_theme()
 
 # * bar
 # ** settings
