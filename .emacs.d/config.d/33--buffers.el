@@ -28,6 +28,6 @@
 
 ; * uniquify
 (defun sk:uniquify (base extra-string)
-  (concat base " (" (mapconcat #'identity extra-string "/") ")"))
+  (concat (mapconcat #'identity extra-string "/") ": " base))
 
 (setq uniquify-buffer-name-style 'sk:uniquify)

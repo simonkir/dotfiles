@@ -31,10 +31,21 @@
 
 ; * outline mode
 (use-package outline
-  :hook (prog-mode . outline-minor-mode)
+  :hook ((prog-mode conf-mode) . outline-minor-mode)
   :config
   (setq outline-minor-mode-cycle t)
-  (add-hook 'prog-mode-hook #'(lambda () (setq-local outline-regexp (concat comment-start "+ *\\*+"))))
+
+  (defun sk:setup-outline-mode ()
+    "sets up correct outline-regexp and outline-level definitions according to major-mode
+
+should be called after changing the major mode"
+    (let ((sk-outline-regexp (concat (string-trim comment-start) "+ *\\*+"))
+          (sk-outline-level #'outline-level))
+      (setq-local outline-regexp sk-outline-regexp)
+      (setq-local outline-level sk-outline-level)))
+
+  (add-hook 'prog-mode-hook #'sk:setup-outline-mode)
+  (add-hook 'conf-mode-hook #'sk:setup-outline-mode)
 
   (general-def-leader
     "v n" 'outline-next-visible-heading

@@ -3,6 +3,7 @@
 ; * keybinds
 (general-def-leader
   "f f" 'find-file
+  "f F" 'find-file-at-point
   "f R" 'revert-buffer-quick
   "f s" 'save-buffer
   "s"   'save-buffer)

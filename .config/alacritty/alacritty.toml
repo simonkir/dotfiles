@@ -3,7 +3,7 @@
 history = 50000
 
 [shell]
-program = "/bin/fish"
+program = "/usr/bin/fish"
 
 [window]
 opacity = 0.9
