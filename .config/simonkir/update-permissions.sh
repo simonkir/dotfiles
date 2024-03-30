@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env fish
 
 # * window-manager scripts
 # ** general

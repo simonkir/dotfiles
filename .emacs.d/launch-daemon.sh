@@ -1,3 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env fish
 
-while emacs --fg-daemon "$@"; [[ $? -ne 123 ]]; do :; done
+while emacs --fg-daemon; and test $status != 123
+end

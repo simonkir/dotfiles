@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env fish
 
 killall picom
 picom --config ~/.config/picom/picom.conf &
