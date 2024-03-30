@@ -49,7 +49,7 @@ i. e. killing the terminal, unless there are unsaved changes"
   (interactive)
   (when (yes-or-no-p "Really perform sk:daemon-quit? ")
     (when (sk:maybe-save-all-buffers)
-      (kill-emacs))))
+      (kill-emacs nil t))))
 
 ; * keybinds
 (general-def-leader

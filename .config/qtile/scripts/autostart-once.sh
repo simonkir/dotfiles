@@ -4,7 +4,7 @@
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 xfce4-power-manager &
 
-~/.emacs.d/launch-daemon.sh &
+emacs --daemon &
 sxhkd -c ~/.config/sxhkd/sxhkdrc &
 
 ~/.config/picom/picom.sh &
