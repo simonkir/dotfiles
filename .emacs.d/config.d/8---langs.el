@@ -8,11 +8,7 @@
 
   :config
   ;; enter insert mode if commit message is empty
-  (add-hook 'git-commit-setup-hook
-            #'(lambda ()
-                (interactive)
-                (when (looking-at-p "^$")
-                  (meow-insert))))
+  (add-hook 'git-commit-setup-hook #'(lambda () (when (looking-at-p "^$") (meow-insert))))
 
   (general-def magit-mode-map
     "<backtab>" 'magit-section-cycle-diffs

@@ -40,7 +40,7 @@ end
 # * visuals
 fish_config prompt choose scales
 fish_config theme choose Dracula
-set -U fish_greeting
 
-# * autostart
-#neofetch
+function fish_greeting
+    neofetch
+end
