@@ -32,6 +32,8 @@
     "<down>" 'pdf-view-next-line-or-next-page
     "<right>" 'image-forward-hscroll
 
+    "v" 'isearch-forward
+
     "=" nil
     "C-c C-r C-s" 'pdf-view-auto-slice-minor-mode
     "s a" 'pdf-view-auto-slice-minor-mode

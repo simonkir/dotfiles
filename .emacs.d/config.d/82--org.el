@@ -28,6 +28,7 @@
   (defun sk:org-toggle-emphasis-markers ()
     "toggle display of emphasis markers"
     (interactive)
+    (org-toggle-link-display)
     (if org-hide-emphasis-markers
         (setq org-hide-emphasis-markers nil)
       (setq org-hide-emphasis-markers t))
@@ -180,6 +181,7 @@
            (end (if (region-active-p)
                     (region-end)
                   (save-excursion
+                    (beginning-of-line)
                     (re-search-forward "\\]\\]")
                     (line-end-position))))
            (overlays-in-region (seq-intersection (overlays-in beg end) org-inline-image-overlays)))
@@ -190,16 +192,6 @@
                 overlays-in-region)
         (org-display-inline-images t nil beg end)))
     (message "org-mode: toggled image preview"))
-
-;;  (defun sk:org-toggle-inline-images-after-babel-run ()
-;;    "activates image preview for babel results
-;;
-;;the function looks for an `#+end_src', followed by an empty line and a `#+RESULTS:', which is the default syntax for image (link) results. otherwise, no image will be previewed due to the risk of previewing something unintended."
-;;    (interactive)
-;;    (save-excursion
-;;      (search-forward "#+end_src")
-;;      (re-search-forward "\\[\\[" (+ (point) 30))
-;;      (sk:org-toggle-inline-images)))
 
   (general-def org-mode-map
     "C-c C-x C-v" 'sk:org-toggle-inline-images

@@ -45,7 +45,8 @@ i. e. killing all open buffers and quitting the terminal, unless there are unsav
 (defun sk:daemon-quit ()
   "performes an daemon quit of emacs
 
-i. e. killing the terminal, unless there are unsaved changes"
+i. e. killing the terminal, unless there are unsaved changes
+note: when using standalone, makes emacs restart"
   (interactive)
   (when (yes-or-no-p "Really perform sk:daemon-quit? ")
     (when (sk:maybe-save-all-buffers)

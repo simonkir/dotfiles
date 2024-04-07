@@ -40,12 +40,11 @@ colors = ["#292d3e", # color 0, black
 # * keybinds
 keys = [
 
-    # SUPER + FUNCTION KEYS
+# ** window management
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-
 
 # ** layout, screens, focus
     Key([mod], "n", lazy.layout.normalize()),
