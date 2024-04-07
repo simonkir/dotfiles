@@ -54,6 +54,13 @@
 
   (global-whitespace-mode))
 
+; * marginalia (minibuffer annotations)
+(use-package marginalia
+  :demand t
+  :config
+  (general-def minibuffer-local-map "M-f" 'marginalia-cycle)
+  (marginalia-mode))
+
 ; * sk:functions
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"

@@ -5,8 +5,19 @@
 (setq inhibit-compacting-font-caches nil)
 
 ; * nerd-icons
-;; for dashboard & doom-modeline packages
+; ** base package
 (use-package nerd-icons :demand t)
+
+; ** nerd-icons-completion (minibuffer icons)
+(use-package nerd-icons-completion
+  :demand t
+  :config
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+  (nerd-icons-completion-mode))
+
+; ** nerd-icons-dired
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
 
 ; * svg-tag-mode
 (use-package svg-tag-mode
