@@ -293,6 +293,7 @@ def init_widgets_list():
         widget.CheckUpdates(
             custom_command = "checkupdates",
             display_format = "{updates}",
+            initial_text = "⧖",
             no_update_string = "0",
             update_interval = 1800,
         ),
@@ -373,42 +374,21 @@ widgets_list = init_widgets_list()
 def init_widgets(has_tray=False):
     widgets = init_widgets_list()
 
+    # note: dirty code, but does the job
+    #       be careful when changing widget order
+    #       should be fixed at some point
     if not has_tray:
-        # delete tray
-        # because the tray is *always* the last element, no complicated code
-        # such as the one below for checkupdates widget is required
-        del widgets[-2:-1]
+        widgets.pop(-1) # remove systray widget
+        widgets.pop(-1) # remove sep widget
 
-        # bug: on dual monitor setup, the non-tray widget would always display 0
-        # therefore: remove checkupdates widget on non-tray screens
-        checkupdates_instance = None
-        # get checkupdates widget (to gather its index in the next step)
-        for x in widgets:
-            # somehow, an AttributeError is raised when no CheckUpdates widget
-            # is in the widgets list
-            try:
-                isinst = isinstance(x, widget.check_updates.CheckUpdates)
-            except AttributeError:
-                pass
-            else:
-                if isinst:
-                    checkupdates_instance = x
-
-        # get checkupdates widget index, if the widget is present
-        try:
-            update_index = widgets.index(checkupdates_instance)
-        # no checkupdates widget found
-        except ValueError:
-            pass
-        # no exception raised, thus deleting the widget
-        # note: this only works if the widget isn't the outermost one
-        else:
-            del widgets[update_index-1:update_index+2]
+        widgets.pop(7) # remove update icon
+        widgets.pop(7) # remove update widget
+        widgets.pop(7) # remove separator right of update widget
 
     return widgets
 
-widgets_screen1 = init_widgets(True)  # tray
-widgets_screen2 = init_widgets(False) # no tray
+widgets_screen_primary = init_widgets(has_tray=True)
+widgets_screen_secondary = init_widgets(has_tray=False)
 
 # ** screen layout
 def init_screens():
@@ -417,8 +397,8 @@ def init_screens():
     except FileNotFoundError:
         return
     else:
-        return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.9)),
-                Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.9))]
+        return [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
+                Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
 
 screens = init_screens()
 
