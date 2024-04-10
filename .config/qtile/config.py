@@ -413,11 +413,13 @@ widgets_screen2 = init_widgets(False) # no tray
 # ** screen layout
 def init_screens():
     try:
-        subprocess.call([home + '/.screenlayout/default.sh'])
+        subprocess.call([home + '/.config/simonkir/screenlayout.sh'])
     except FileNotFoundError:
-        pass
-    return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.9)),
-            Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.9))]
+        return
+    else:
+        return [Screen(bottom=bar.Bar(widgets=widgets_screen1, size=26, opacity=0.9)),
+                Screen(bottom=bar.Bar(widgets=widgets_screen2, size=26, opacity=0.9))]
+
 screens = init_screens()
 
 # * autostart

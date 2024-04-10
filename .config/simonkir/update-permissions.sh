@@ -18,7 +18,7 @@ chmod +x ~/.config/herbstluftwm/autostart.d/monitor-settings
 chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 
 # * functionality
-chmod +x ~/.screenlayout/default.sh
+chmod +x ~/.config/simonkir/screenlayout.sh
 #chmod +x ~/.config/vifm/scripts/vifmimg
 #chmod +x ~/.config/vifm/scripts/vifmrun
 

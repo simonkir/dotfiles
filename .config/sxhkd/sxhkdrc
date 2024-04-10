@@ -43,6 +43,9 @@ super + alt + shift + p
 super + alt + r
     pkill -USR1 -x sxhkd
 
+super + alt + t
+    ~/.config/simonkir/screenlayout.sh
+
 super + alt + s
     brave https://open.spotify.com
 
