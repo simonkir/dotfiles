@@ -15,6 +15,12 @@
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
   (nerd-icons-completion-mode))
 
+; ** nerd-icons-corfu
+(use-package nerd-icons-corfu
+  :demand t
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
 ; ** nerd-icons-dired
 (use-package nerd-icons-dired
   :hook (dired-mode . nerd-icons-dired-mode))
