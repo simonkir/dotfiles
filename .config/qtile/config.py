@@ -302,6 +302,26 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+# *** battery
+        widget.Image(
+            filename = "~/.config/qtile/icons/battery.png",
+            margin = icon_margin,
+        ),
+        widget.Battery(
+            format = "{char:2s}{percent:.1%}",
+            charge_char = "▲",
+            discharge_char = "▼",
+            full_char = "▶",
+            show_short_text = False,
+            low_foreground = colors[1],
+            low_percentage = 0.2,
+            update_interval = 10,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
 # *** cpu
         widget.Image(
             filename = "~/.config/qtile/icons/cpu.png",
