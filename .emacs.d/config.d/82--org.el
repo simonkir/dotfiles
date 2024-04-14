@@ -129,7 +129,6 @@
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
                         (org-agenda-span 'fortnight)
-                        (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-deadline-warning-days 0)

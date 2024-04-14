@@ -28,6 +28,7 @@
         ;; lang-specific pairs
         ("`" . ("`" . "'"))       ;; elisp symbol quote
         ("\\" . ("/* " . " */"))  ;; c-like comment
+        ("f" . ("f\"" . "\""))    ;; python f-string
 
         ;; quotes
         ("„" . ("„" . "“"))

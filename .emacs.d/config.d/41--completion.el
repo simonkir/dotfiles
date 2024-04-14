@@ -39,7 +39,7 @@ else: un-expand last expansion"
   (interactive)
   (cond ((and (derived-mode-p 'org-mode)
               (member (nth 0 (org-element-at-point)) #'(table-row table)))
-         (call-interactively #'org-table-previous-field))
+         (org-table-previous-field))
         (t (message "not implemented yet"))))
 
 (general-def meow-insert-state-keymap
@@ -60,7 +60,7 @@ else: indent"
    ;; before snippet to avoid unwanted interferences
    ((and (derived-mode-p 'org-mode)
          (member (nth 0 (org-element-at-point)) #'(table-row table)))
-    (call-interactively #'org-table-next-field))
+    (org-table-next-field))
 
    ;; snippet exapnsion
    ((when yas-minor-mode
@@ -68,18 +68,19 @@ else: indent"
         (when (yas-expand)
           (run-hooks 'post-self-insert-hook)))))
 
-   ;; completion (depending in major-mode)
+   ;; completion (depending on major-mode)
    ((string-match-p "[[:alnum:]}]" (char-to-string (preceding-char)))
     (cond
      ((and (derived-mode-p 'latex-mode)
            (not (derived-mode-p 'prog-mode))
            (texmathp))
-      (call-interactively #'cdlatex-tab))
-     ((derived-mode-p 'maxima-mode) (call-interactively #'maxima-complete))
-     (t (call-interactively #'completion-at-point))))
+      (cdlatex-tab))
+     ((derived-mode-p 'maxima-mode) (maxima-complete))
+     (t (completion-at-point))))
 
    ;; indentation
-   (t (call-interactively #'indent-for-tab-command))))
+   (t (indent-for-tab-command))))
+
 
 (general-def meow-insert-state-keymap
   "<tab>"     'sk:complete-at-point)

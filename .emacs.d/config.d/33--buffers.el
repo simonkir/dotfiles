@@ -2,15 +2,6 @@
 
 ; * sk:functions
 ; ** definitions
-(defun sk:switch-to-buffer ()
-  "interactively switch to buffer in 'centaur-tabs-buffer-list'"
-  (interactive)
-  (switch-to-buffer
-   (completing-read
-    "Switch to buffer: "
-    (mapcar (lambda (arg) (buffer-name arg)) (centaur-tabs-buffer-list)))
-   t))
-
 (defun sk:kill-current-buffer ()
   "kills currently visited buffer"
   (interactive)
@@ -18,8 +9,7 @@
 
 ; ** keybinds
 (general-def-leader
-  "b b" 'sk:switch-to-buffer
-  "b B" 'switch-to-buffer
+  "b b" 'switch-to-buffer
   "b k" 'sk:kill-current-buffer
   "b K" 'kill-buffer-and-window)
 
