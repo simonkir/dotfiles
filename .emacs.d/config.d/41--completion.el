@@ -85,34 +85,35 @@ else: indent"
   "<tab>"     'sk:complete-at-point)
 
 ; * minibuffer completion
-; ** icomplete
-(use-package icomplete
+; ** vertico
+(use-package vertico
   :demand t
   :config
-; *** general settings
-  ;; needed because icomplete--fido-mode-setup overwrites default settings
-  (add-hook 'icomplete-minibuffer-setup-hook
-            #'(lambda () (setq-local completion-styles '(basic partial-completion substring initials flex))))
-
+  (setq completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
   (setq read-buffer-completion-ignore-case t)
-  (setq completion-ignore-case t)
+
+  (setq completion-styles '(basic partial-completion substring initials flex))
   (setq completion-auto-help 'lazy)
-  (setq icomplete-compute-delay 0)
 
-  (set-face-attribute 'icomplete-selected-match nil :inherit 'default :weight 'bold :foreground "#98be65")
+  (setq vertico-preselect 'first)
 
-; *** keybinds
-  (general-def 'icomplete-minibuffer-map
-    "C-<return>" 'icomplete-fido-ret
-    "S-<return>" 'icomplete-fido-exit
-    "C-d" 'icomplete-fido-kill
-    "C-j" 'icomplete-forward-completions
-    "C-k" 'icomplete-backward-completions)
+  (general-def vertico-map
+    "C-w" 'vertico-directory-delete-word
+    "C-<backspace>" 'vertico-directory-delete-word
+    "<backspace>" 'vertico-directory-delete-char
+    "<return>" 'vertico-directory-enter
+    "<tab>" 'minibuffer-complete
+    "C-j" 'vertico-next
+    "C-k" 'vertico-previous)
 
-  (general-def-leader
-    "X" 'eval-expression)
+  (vertico-mode)
+  (vertico-indexed-mode))
 
-; *** fido mode
-  (fido-mode)
-  (fido-vertical-mode))
+; ** vertico-posframe
+(use-package vertico-posframe
+  :demand t
+  :after vertico
+  :config
+  (setq vertico-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
+  (vertico-posframe-mode))
