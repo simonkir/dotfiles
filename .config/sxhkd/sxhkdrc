@@ -72,6 +72,9 @@ super + Return
     alacritty
 
 super + 9
+    betterlockscreen -l --suspend
+
+super + shift + 9
     betterlockscreen -l
 
 super + 0

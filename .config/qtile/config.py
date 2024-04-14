@@ -308,7 +308,7 @@ def init_widgets_list():
             margin = icon_margin,
         ),
         widget.Battery(
-            format = "{char:2s}{percent:.1%}",
+            format = "{char:2s}{percent:.0%}",
             charge_char = "▲",
             discharge_char = "▼",
             full_char = "▶",
@@ -328,7 +328,7 @@ def init_widgets_list():
             margin = icon_margin,
         ),
         widget.CPU(
-            format = "{load_percent} %",
+            format = "{load_percent}%",
             update_interval = 2,
         ),
         widget.Sep(
