@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * magit
+; * tools
+; ** magit
 (use-package magit
   :general (general-def-leader
     "g" 'magit-file-dispatch
@@ -17,35 +18,30 @@
     "x" 'magit-delete-thing
     "p" 'magit-push))
 
-; * eat
+; ** eww
+(use-package eww
+  :config
+  (setq eww-search-prefix "http://frogfind.com/?q="))
+
+; ** eat
 (use-package eat
   :general (general-def-leader "r t" 'eat)
   :config (general-def 'eat-semi-char-mode-map "C-SPC" nil))
 
-; * maxima
+; ** maxima
 (use-package maxima
   :general (general-def-leader "r m" 'maxima)
   :init
   (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))
 
-; * calc
+; ** calc
 (use-package calc
   :config
   (setq calc-algebraic-mode 'total)
   (setq calc-multiplication-has-precedence nil))
 
-; * gnuplot
-(use-package gnuplot)
-
-; * fish
-(use-package fish-mode)
-
-; * lua
-(use-package lua-mode
-  :config (setq lua-indent-level 4))
-
-; * help major mode
+; ** help major mode
 (general-def-leader
   "h" 'describe-symbol
   "H" 'describe-key)
@@ -58,4 +54,15 @@
   "L" 'help-go-forward
   "n" 'help-go-forward
   "p" 'help-go-back)
+
+; * langs
+; * gnuplot
+(use-package gnuplot)
+
+; ** fish
+(use-package fish-mode)
+
+; ** lua
+(use-package lua-mode
+  :config (setq lua-indent-level 4))
 
