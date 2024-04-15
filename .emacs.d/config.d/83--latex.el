@@ -89,10 +89,12 @@
         '((?c ("\\quad" "" "\\cos"))
           (?e ("\\varepsilon" "\\epsilon" "\\exp"))
           (?f ("\\varphi" "\\phi" ""))
+          (?B ("\\bot" "" ""))
           (?F ("\\Phi" "" ""))
           (?I ("\\notin" "\\Im" ""))
           (?P ("\\prod" "\\Pi" ""))
           (?S ("\\sum" "\\Sigma" "\\arcsin"))
+          (?T ("\\top" "" "\\arctan"))
           (?w ("\\omega" "" ""))
           (?X ("\\xi" "" ""))
           (?~ ("\\approx" "\\sim" "\\leadsto"))
@@ -114,7 +116,8 @@
 
 ; ** cdlatex-math-modify-alist
   (setq cdlatex-math-modify-alist
-        '((?. "\\dot"  nil t nil nil)
+        '((?d "\\mathbb" nil t nil nil)
+          (?. "\\dot"  nil t nil nil)
           (?: "\\ddot" nil t nil nil)
           (?- "\\bar"  nil t nil nil)
           (?> "\\vec"  nil t nil nil))))

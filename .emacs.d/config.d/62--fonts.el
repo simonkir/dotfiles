@@ -123,6 +123,7 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\mathbb{C}" . (?\s (Bc . Bc) ?ℂ)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{D}" . (?\s (Bc . Bc) ?𝔻)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{G}" . (?\s (Bc . Bc) ?𝔾)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{K}" . (?\s (Bc . Bc) ?𝕂)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{L}" . (?\s (Bc . Bc) ?𝕃)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{N}" . (?\s (Bc . Bc) ?ℕ)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{P}" . (?\s (Bc . Bc) ?ℙ)))
