@@ -397,6 +397,15 @@ def init_widgets(has_tray=False):
     # note: dirty code, but does the job
     #       be careful when changing widget order
     #       should be fixed at some point
+
+    try:
+        with open("/sys/class/power_supply/BAT0/capacity") as f:
+            pass
+    except FileNotFoundError:
+        widgets.pop(10) # remove battery icon
+        widgets.pop(10) # remove battery widget
+        widgets.pop(10) # remove separator right of battery widget
+
     if not has_tray:
         widgets.pop(-1) # remove systray widget
         widgets.pop(-1) # remove sep widget
