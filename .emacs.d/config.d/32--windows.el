@@ -96,11 +96,17 @@
   (defun sk:centaur-tabs-hide-tab (x)
     (let ((name (format "%s" x)))
       (cond
-       ((window-dedicated-p (selected-window)) t)
+       ;; show agenda buffer, hide newly opened org-buffers
+       ((member x org-agenda-new-buffers) t)
+       ((string-prefix-p "*Org Agenda*" name) nil)
+
+       ;; explicitly show buffers
        ((string-prefix-p "*dashboard*" name) nil)
        ((string-prefix-p "*eat*" name) nil)
-       ((string-prefix-p "*Org Agenda*" name) nil)
        ((string-prefix-p "*maxima*" name) nil)
+
+       ;; hide buffers
+       ((window-dedicated-p (selected-window)) t)
        ((string-prefix-p "CAPTURE-" name) t)
        ((string-prefix-p "magit" name) t)
        ((string-prefix-p "*" name) t)

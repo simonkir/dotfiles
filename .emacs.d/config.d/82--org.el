@@ -163,7 +163,7 @@
 ; *** capture
   (setq org-bookmark-names-plist nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
-  (setq org-capture-templates '(("c" "TODO entry" entry (file "/tmp/org-capture.org")
+  (setq org-capture-templates '(("c" "TODO entry" entry (file "~/.emacs.d/org-dir/capture.org")
                                  "* TODO %?"
                                  :empty-lines 1)))
 
