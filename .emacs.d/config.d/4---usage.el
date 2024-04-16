@@ -1,21 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * general settings
-(defalias 'yes-or-no 'y-or-n-p)
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(setq-default use-dialog-box nil)
-
-; * yasnippet
-(use-package yasnippet
-  :demand t
-  :config
-  (general-def yas-minor-mode-map
-    "<tab>" nil
-    "TAB" nil)
-
-  (yas-global-mode))
-
 ; * parentheses
 ; ** electric
 (use-package electric
@@ -40,10 +24,11 @@
     "I" 'skparens-mark-inner))
 
 ; * indentation
+; ** tab settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 
-; * whitespace
+; ** whitespace pkg
 (general-def "M-SPC" 'delete-horizontal-space)
 
 (use-package whitespace
@@ -54,12 +39,25 @@
 
   (global-whitespace-mode))
 
-; * marginalia (minibuffer annotations)
-(use-package marginalia
+; * yasnippet
+(use-package yasnippet
   :demand t
   :config
-  (general-def minibuffer-local-map "M-f" 'marginalia-cycle)
-  (marginalia-mode))
+  (general-def yas-minor-mode-map
+    "<tab>" nil
+    "TAB" nil)
+
+  (yas-global-mode))
+
+; * skcorrect
+(use-package skcorrect
+  :hook ((org-mode LaTeX-mode) . skcorrect-mode))
+
+; * prompts
+(defalias 'yes-or-no 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq-default use-dialog-box nil)
 
 ; * sk:functions
 (defun sk:cpwd ()
