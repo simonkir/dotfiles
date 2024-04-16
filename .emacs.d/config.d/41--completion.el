@@ -21,7 +21,7 @@
   :demand t
   :config
   (setq tab-always-indent 'complete)
-  (setq corfu-preselect 'first)
+  (setq corfu-preselect 'prompt)
   (setq corfu-cycle t)
 
   (general-def corfu-map
@@ -37,10 +37,14 @@
 when in org-table: go to previous field
 else: un-expand last expansion"
   (interactive)
-  (cond ((and (derived-mode-p 'org-mode)
-              (member (nth 0 (org-element-at-point)) #'(table-row table)))
-         (org-table-previous-field))
-        (t (message "not implemented yet"))))
+  (cond
+   ;; org-mode table cell navigation
+   ((and (derived-mode-p 'org-mode)
+         (member (nth 0 (org-element-at-point)) #'(table-row table)))
+    (org-table-previous-field))
+
+   ;; decrease indentation
+   (t nil)))
 
 (general-def meow-insert-state-keymap
   "<backtab>" 'sk:complete-at-point-undo)
@@ -103,6 +107,7 @@ else: indent"
     "C-w" 'vertico-directory-delete-word
     "C-<backspace>" 'vertico-directory-delete-word
     "<backspace>" 'vertico-directory-delete-char
+    "<S-return>" 'vertico-exit-input
     "<return>" 'vertico-directory-enter
     "<tab>" 'minibuffer-complete
     "C-j" 'vertico-next

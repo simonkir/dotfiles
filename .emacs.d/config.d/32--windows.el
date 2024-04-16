@@ -97,7 +97,7 @@
     (let ((name (format "%s" x)))
       (cond
        ;; show agenda buffer, hide newly opened org-buffers
-       ((member x org-agenda-new-buffers) t)
+       ((ignore-error 'void-variable (member x org-agenda-new-buffers)) t)
        ((string-prefix-p "*Org Agenda*" name) nil)
 
        ;; explicitly show buffers
