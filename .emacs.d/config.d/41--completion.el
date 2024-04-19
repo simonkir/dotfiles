@@ -5,9 +5,6 @@
 (use-package cape
   :demand t
   :config
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster))
 
 ; ** dabbrev (backend)
@@ -29,6 +26,13 @@
     "<backtab>" 'corfu-previous)
 
   (global-corfu-mode))
+
+; ** capf-setup
+(add-hook 'after-change-major-mode-hook
+          #' (lambda ()
+               (add-to-list 'completion-at-point-functions #'cape-file 'append)
+               (add-to-list 'completion-at-point-functions #'cape-dabbrev 'append)))
+               ;;(add-to-list 'completion-at-point-functions #'dabbrev-capf 'append)))
 
 ; ** backtab key
 (defun sk:complete-at-point-undo ()
@@ -84,7 +88,6 @@ else: indent"
 
    ;; indentation
    (t (indent-for-tab-command))))
-
 
 (general-def meow-insert-state-keymap
   "<tab>"     'sk:complete-at-point)

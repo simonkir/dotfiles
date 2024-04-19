@@ -56,7 +56,7 @@
   "p" 'help-go-back)
 
 ; * langs
-; * gnuplot
+; ** gnuplot
 (use-package gnuplot)
 
 ; ** fish

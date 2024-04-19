@@ -142,10 +142,10 @@
             (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
                                            (todo priority-down alpha-up)))
             (org-agenda-prefix-format
-             '((agenda . "  %i %-12:c%?-12tEff.: %-8e %s")
-               (todo . "  %i %-12:cEff.: %-8e")
-               (tags . "  %i %-12:c")
-               (search . "  %i %-12:c")))))))
+             '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
+               (todo . "  %i %-8:cEff.: %-8e")
+               (tags . "  %i %-8:c")
+               (search . "  %i %-8:c")))))))
 
 ; *** agenda keybinds
   (general-def org-agenda-mode-map
