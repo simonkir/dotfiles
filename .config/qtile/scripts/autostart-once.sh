@@ -8,8 +8,6 @@ emacs --daemon &
 sxhkd -c ~/.config/sxhkd/sxhkdrc &
 
 ~/.config/picom/picom.sh &
-~/.config/simonkir/random-wallpaper.sh &
-~/.config/conky/launch-conky.sh &
 
 volumeicon &
 nm-applet &

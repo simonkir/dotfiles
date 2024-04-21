@@ -311,6 +311,7 @@ def init_widgets_list():
             format = "{char:2s}{percent:.0%}",
             charge_char = "▲",
             discharge_char = "▼",
+            not_charging_char = "▶",
             full_char = "▶",
             show_short_text = False,
             low_foreground = colors[1],
@@ -421,13 +422,8 @@ widgets_screen_secondary = init_widgets(has_tray=False)
 
 # ** screen layout
 def init_screens():
-    try:
-        subprocess.call([home + '/.config/simonkir/screenlayout.sh'])
-    except FileNotFoundError:
-        return
-    else:
-        return [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
-                Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
+    return [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
+            Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
 
 screens = init_screens()
 
