@@ -5,8 +5,7 @@
   :general (general-def-leader
              "r n" #'(lambda () (interactive) (org-agenda nil "n"))
              "r N" 'org-agenda
-             "r c" '(lambda () (interactive) (org-capture nil "c"))
-             "r C" 'org-capture)
+             "r c" 'org-capture)
 
   :config
 
@@ -43,7 +42,7 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-; ** editing
+; ** content
 ; *** settings
   (setq org-blank-before-new-entry
         '((heading . t)
@@ -86,6 +85,9 @@
     "C-c C-_" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
     "C-#" #'(lambda () (interactive) (insert "#"))
 
+    "C-c C-," 'org-priority
+    "C-c ," 'org-insert-structure-template
+
     "RET" 'sk:org-return
     "M-RET" 'org-ctrl-c-ctrl-c
 
@@ -114,11 +116,10 @@
   (general-def-leader
     "E" 'sk:leader-E)
 
-; ** agenda, capture
+; ** agenda
 ; *** general settings
   (setq org-directory "~/.emacs.d/org-dir")
   (setq org-agenda-files '("~/.emacs.d/org-dir/"))
-  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
 
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
@@ -128,7 +129,7 @@
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-span 'fortnight)
+                        (org-agenda-span 'week)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-deadline-warning-days 0)
@@ -160,11 +161,16 @@
     "r" 'org-agenda-redo-all
     "W" 'org-agenda-fortnight-view)
 
-; *** capture
+; ** capture
   (setq org-bookmark-names-plist nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
-  (setq org-capture-templates '(("c" "TODO entry" entry (file "~/.emacs.d/org-dir/capture.org")
-                                 "* TODO %?"
+  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
+
+  (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
+                                 "* TODO [#B] %?"
+                                 :empty-lines 1)
+                                ("v" "uni TODO entry" entry (file "")
+                                 "* TODO [#B] %?\n- [ ] wdh letzte v\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen"
                                  :empty-lines 1)))
 
   (general-def org-capture-mode-map
