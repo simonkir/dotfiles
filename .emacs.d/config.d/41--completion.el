@@ -28,11 +28,14 @@
   (global-corfu-mode))
 
 ; ** capf-setup
+;; general capfs
 (add-hook 'after-change-major-mode-hook
           #' (lambda ()
                (add-to-list 'completion-at-point-functions #'cape-file 'append)
                (add-to-list 'completion-at-point-functions #'cape-dabbrev 'append)))
-               ;;(add-to-list 'completion-at-point-functions #'dabbrev-capf 'append)))
+
+;; lang-specific capfs
+(add-hook 'org-mode-hook #'(lambda () (setq completion-at-point-functions '())))
 
 ; ** backtab key
 (defun sk:complete-at-point-undo ()

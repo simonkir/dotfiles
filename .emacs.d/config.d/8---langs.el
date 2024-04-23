@@ -32,6 +32,8 @@
     "r m" 'sk:run-maxima)
 
   :config
+  (setq eat-kill-buffer-on-exit t)
+
   (defun sk:run-ipython ()
     (interactive)
     (eat "/usr/bin/env ipython" t))

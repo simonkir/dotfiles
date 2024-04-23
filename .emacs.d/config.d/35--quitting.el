@@ -13,7 +13,7 @@ returns t if all buffers are saved"
     (dolist (element (buffer-list))
       (when (and (buffer-modified-p element) (buffer-file-name element))
         (switch-to-buffer element t)
-        (setq decision (read-char (concat "unsaved buffer: " (buffer-name element) ". [s]ave, [i]gnore, [a]bort?")))
+        (setq decision (read-char (format "unsaved buffer: %s. [s]ave, [i]gnore, [a]bort?" (buffer-name element))))
         (cond
          ((eq decision ?s) (save-buffer))
          ((eq decision ?i) nil)
