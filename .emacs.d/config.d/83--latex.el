@@ -17,7 +17,6 @@
 
   (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
   (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
-  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
 
   (general-def 'LaTeX-mode-map
     "$" nil)

@@ -214,7 +214,6 @@
   ;; other latex stuff (see 83--auctex.el for doc)
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
   (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?| "$")))
 
 ; *** latex preview
   (setq sk:org-preview-latex-scale 1.5)

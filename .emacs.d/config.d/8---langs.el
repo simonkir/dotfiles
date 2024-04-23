@@ -25,12 +25,30 @@
 
 ; ** eat
 (use-package eat
-  :general (general-def-leader "r t" 'eat)
-  :config (general-def 'eat-semi-char-mode-map "C-SPC" nil))
+  :general
+  (general-def-leader
+    "r t" 'sk:run-fish
+    "r p" 'sk:run-ipython
+    "r m" 'sk:run-maxima)
+
+  :config
+  (defun sk:run-ipython ()
+    (interactive)
+    (eat "/usr/bin/env ipython" t))
+
+  (defun sk:run-fish ()
+    (interactive)
+    (eat "/usr/bin/env fish" t))
+
+  (defun sk:run-maxima ()
+    (interactive)
+    (eat "/usr/bin/env maxima") t)
+
+  (general-def '(eat-semi-char-mode-map eat-char-mode-map)
+    "C-SPC" nil))
 
 ; ** maxima
 (use-package maxima
-  :general (general-def-leader "r m" 'maxima)
   :init
   (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))

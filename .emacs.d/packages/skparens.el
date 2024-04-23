@@ -19,11 +19,13 @@
         ("r" . ("\\left( " . " \\right)"))
         ("s" . ("\\left[ " . " \\right]"))
         ("c" . ("\\left\\{ " . " \\right\\}"))
-        ("a" . ("\\left| " . " \\right|"))
+        ("a" . ("\\left\\vert " . " \\right\\vert"))
+        ("n" . ("\\left\\Vert " . " \\right\\Vert"))
         ("R" . ("\\left(" . "\\right)"))
         ("S" . ("\\left[" . "\\right]"))
         ("C" . ("\\left\\{" . "\\right\\}"))
-        ("A" . ("\\left|" . "\\right|"))
+        ("A" . ("\\left\\vert" . "\\right\\vert"))
+        ("N" . ("\\left\\vert " . " \\right\\vert"))
 
         ;; lang-specific pairs
         ("`" . ("`" . "'"))       ;; elisp symbol quote

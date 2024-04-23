@@ -71,7 +71,7 @@
   "add latex-specific prettifications to 'prettify-symbols-alist'
 
 also displayed in org documents"
-  ;; aligned operators
+; *** aligned operators
   (add-to-list 'prettify-symbols-alist '("&=&" . "="))
   (add-to-list 'prettify-symbols-alist '("&<&" . "<"))
   (add-to-list 'prettify-symbols-alist '("&>&" . ">"))
@@ -89,7 +89,34 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("&\\longrightarrow&" . "⟶"))
   (add-to-list 'prettify-symbols-alist '("&\\longleftarrow&" . "⟵"))
 
-  ;; misc
+; *** braces
+  (add-to-list 'prettify-symbols-alist '("\\left(" . (?\s (Bc . Bc) ?⸨)))
+  (add-to-list 'prettify-symbols-alist '("\\right)" . (?\s (Bc . Bc) ?⸩)))
+  (add-to-list 'prettify-symbols-alist '("\\left[" . "⟦"))
+  (add-to-list 'prettify-symbols-alist '("\\right]" . "⟧"))
+  (add-to-list 'prettify-symbols-alist '("\\left\\{" . "⦃"))
+  (add-to-list 'prettify-symbols-alist '("\\right\\}" . "⦄"))
+  (add-to-list 'prettify-symbols-alist '("\\left\\vert" . "‖"))
+  (add-to-list 'prettify-symbols-alist '("\\right\\vert" . "‖"))
+  (add-to-list 'prettify-symbols-alist '("\\left\\Vert" . "⦀"))
+  (add-to-list 'prettify-symbols-alist '("\\right\\Vert" . "⦀"))
+  (add-to-list 'prettify-symbols-alist '("\\left\\langle" . "⟪"))
+  (add-to-list 'prettify-symbols-alist '("\\right\\rangle" . "⟫"))
+
+; *** double-struck letters
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{C}" . (?\s (Bc . Bc) ?ℂ)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{D}" . (?\s (Bc . Bc) ?𝔻)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{G}" . (?\s (Bc . Bc) ?𝔾)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{K}" . (?\s (Bc . Bc) ?𝕂)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{L}" . (?\s (Bc . Bc) ?𝕃)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{N}" . (?\s (Bc . Bc) ?ℕ)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{P}" . (?\s (Bc . Bc) ?ℙ)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{Q}" . (?\s (Bc . Bc) ?ℚ)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{R}" . (?\s (Bc . Bc) ?ℝ)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{W}" . (?\s (Bc . Bc) ?𝕎)))
+  (add-to-list 'prettify-symbols-alist '("\\mathbb{Z}" . (?\s (Bc . Bc) ?ℤ)))
+
+; *** misc
   (add-to-list 'prettify-symbols-alist '("\\bot" . (?\s (Bc . Bc) ?⊥)))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°"))
   (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
@@ -105,32 +132,7 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\subseteq" . (?\s (Bc . Bc) ?⊆)))
   (add-to-list 'prettify-symbols-alist '("\\supseteq" . (?\s (Bc . Bc) ?⊇)))
   (add-to-list 'prettify-symbols-alist '("\\top" . (?\s (Bc . Bc) ?⊤)))
-  (add-to-list 'prettify-symbols-alist '("\\vartheta" . "ϑ"))
-
-  ;; braces
-  (add-to-list 'prettify-symbols-alist '("\\left(" . (?\s (Bc . Bc) ?⸨)))
-  (add-to-list 'prettify-symbols-alist '("\\right)" . (?\s (Bc . Bc) ?⸩)))
-  (add-to-list 'prettify-symbols-alist '("\\left[" . "⟦"))
-  (add-to-list 'prettify-symbols-alist '("\\right]" . "⟧"))
-  (add-to-list 'prettify-symbols-alist '("\\left\\{" . "⦃"))
-  (add-to-list 'prettify-symbols-alist '("\\right\\}" . "⦄"))
-  (add-to-list 'prettify-symbols-alist '("\\left|" . "‖"))
-  (add-to-list 'prettify-symbols-alist '("\\right|" . "‖"))
-  (add-to-list 'prettify-symbols-alist '("\\left\\|" . (?‖ (Br . Bl) ?‖)))
-  (add-to-list 'prettify-symbols-alist '("\\right\\|" . (?‖ (Br . Bl) ?‖)))
-
-  ;; double-struck letters
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{C}" . (?\s (Bc . Bc) ?ℂ)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{D}" . (?\s (Bc . Bc) ?𝔻)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{G}" . (?\s (Bc . Bc) ?𝔾)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{K}" . (?\s (Bc . Bc) ?𝕂)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{L}" . (?\s (Bc . Bc) ?𝕃)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{N}" . (?\s (Bc . Bc) ?ℕ)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{P}" . (?\s (Bc . Bc) ?ℙ)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{Q}" . (?\s (Bc . Bc) ?ℚ)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{R}" . (?\s (Bc . Bc) ?ℝ)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{W}" . (?\s (Bc . Bc) ?𝕎)))
-  (add-to-list 'prettify-symbols-alist '("\\mathbb{Z}" . (?\s (Bc . Bc) ?ℤ))))
+  (add-to-list 'prettify-symbols-alist '("\\vartheta" . "ϑ")))
 
 ; ** latex-mode definitions
 (defun sk:prettify-symbols-LaTeX-mode ()
