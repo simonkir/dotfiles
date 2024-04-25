@@ -42,7 +42,7 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-; ** content
+; ** editing
 ; *** settings
   (setq org-blank-before-new-entry
         '((heading . t)
@@ -61,23 +61,49 @@
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
-; *** keybinds
-  (defun sk:org-return ()
-    "custom org-return. respects lists and tables like one would expect in a normal ms word-like editor"
-    (interactive)
-    (cond
-     ((org-at-table-p)
-      (org-table-insert-row '(4)))
-     ((org-in-item-p)
-      (if (save-excursion
-            (beginning-of-line)
-            (org-element-property :contents-begin (org-element-context)))
-          (org-insert-item (org-at-item-checkbox-p))
-        (delete-region (line-beginning-position) (line-end-position))
-        (org-return)))
-     (t
-      (org-return))))
+; *** functions
+  ;; inspired from github.com/alphapapa/unpackaged.el
+  (defun sk:org-return (&optional default)
+    "custom `org-return'. respects lists and tables like one would expect in a normal dwim editor
 
+with prefix arg, call `org-return'"
+    (interactive "P")
+    (if default
+        (org-return)
+      (cond
+       ;; tables
+       ((org-at-table-p)
+        (cond ((save-excursion
+                 (beginning-of-line)
+                 ;; See `org-table-next-field'.
+                 (cl-loop with end = (line-end-position)
+                          for cell = (org-element-table-cell-parser)
+                          always (equal (org-element-property :contents-begin cell)
+                                        (org-element-property :contents-end cell))
+                          while (re-search-forward "|" end t)))
+               ;; Empty row: end the table.
+               (delete-region (line-beginning-position) (line-end-position))
+               (org-return))
+              (t
+               ;; Non-empty row: call `org-return'.
+               (org-return))))
+
+       ;; lists (incl. checkboxes)
+       ((org-in-item-p)
+        (if (save-excursion
+              (beginning-of-line)
+              (org-element-property :contents-begin (org-element-context)))
+            ;; add new item
+            (org-insert-item (org-at-item-checkbox-p))
+          ;; empty item, finish list
+          (delete-region (line-beginning-position) (line-end-position))
+          (org-return)))
+
+       ;; fallback
+       (t
+        (org-return)))))
+
+; *** keybinds
   ;; compatibility with sklatex linebreaks
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
