@@ -54,7 +54,9 @@
     (setq svg-tag-tags
           `(
             ;; org todo items
+            ("PREP" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done :inverse t))))
             ("TODO" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo :inverse t))))
+            ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-imminent-deadline :inverse t))))
             ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done))))
             ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))
             ("\\[-\\]" . ((lambda (tag) (svg-tag-make "⧖" :padding 1 :radius 0 :face 'org-checkbox))))

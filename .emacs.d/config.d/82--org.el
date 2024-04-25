@@ -121,6 +121,8 @@
   (setq org-directory "~/.emacs.d/org-dir")
   (setq org-agenda-files '("~/.emacs.d/org-dir/"))
 
+  (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))
+
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
   (setq org-agenda-window-setup 'current-window)
@@ -129,10 +131,11 @@
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-span 'week)
+                        (org-agenda-span 'fortnight)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
-                        (org-deadline-warning-days 0)
+                        (org-agenda-skip-deadline-prewarning-if-scheduled t)
+                        (org-deadline-warning-days 2)
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
                       (org-agenda-todo-ignore-scheduled t)
@@ -142,6 +145,7 @@
             (org-agenda-block-separator "")
             (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
                                            (todo priority-down alpha-up)))
+            (org-agenda-deadline-leaders '("Deadline:   " "In %2d d.:  " "%1d d. ago:  "))
             (org-agenda-prefix-format
              '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
                (todo . "  %i %-8:cEff.: %-8e")
@@ -167,10 +171,10 @@
   (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
 
   (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
-                                 "* TODO [#B] %?"
+                                 "* TODO %?"
                                  :empty-lines 1)
                                 ("v" "uni TODO entry" entry (file "")
-                                 "* TODO [#B] %?\n- [ ] wdh letzte v\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen"
+                                 "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
                                  :empty-lines 1)))
 
   (general-def org-capture-mode-map
