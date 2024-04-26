@@ -54,24 +54,24 @@
     (setq svg-tag-tags
           `(
             ;; org todo items
-            ("PREP" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done :inverse t))))
+            ("PREP" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-upcoming-distant-deadline))))
             ("TODO" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo :inverse t))))
-            ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-imminent-deadline :inverse t))))
-            ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done))))
-            ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))
-            ("\\[-\\]" . ((lambda (tag) (svg-tag-make "⧖" :padding 1 :radius 0 :face 'org-checkbox))))
-            ("\\[X\\]" . ((lambda (tag) (svg-tag-make "⨯" :padding 1 :radius 0 :face 'org-done))))
-
-            ;; org priorities
+            ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-imminent-deadline))))
+            ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done :inverse t))))
             ("\\[#A\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'error))))
             ("\\[#B\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-todo))))
             ("\\[#C\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-done))))
+
+            ;; org checkboxes
+            ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))
+            ("\\[-\\]" . ((lambda (tag) (svg-tag-make "⧖" :padding 1 :radius 0 :face 'org-checkbox))))
+            ("\\[X\\]" . ((lambda (tag) (svg-tag-make "⨯" :padding 1 :radius 0 :face 'org-done))))
 
             ;; org date- / time- / duration stamps
             (,(format "<%s>" date-re) . ((lambda (tag) (svg-tag-make tag :radius 0 :beg 1 :end -1))))
             (,(format "\\(<%s \\)%s>" date-re day-time-re) . ((lambda (tag) (svg-tag-make tag :face 'org-scheduled :radius 0 :beg 1 :crop-left t :crop-right t))))
             (,(format "<%s \\(%s>\\)" date-re day-time-re) . ((lambda (tag) (svg-tag-make tag :face 'org-scheduled :radius 0 :end -1 :crop-left t))))
 
-            ;; org-agenda
-            ("Deadline: \\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :end -1 :face 'org-imminent-deadline))))
-            ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :inverse (not (derived-mode-p 'org-agenda-mode)) :radius 0 :crop-right t :end -1 :face 'org-scheduled))))))))
+           ;; org-agenda / regular org-files
+            ("Deadlined:\\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :end -1 :radius 0 :inverse t :face 'org-imminent-deadline))))
+            ("Scheduled:\\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :end -1 :inverse t :radius 0 :face 'org-scheduled))))))))

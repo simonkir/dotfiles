@@ -158,10 +158,9 @@ with prefix arg, call `org-return'"
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "")
                         (org-agenda-span 'fortnight)
+                        (org-deadline-warning-days 2)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
-                        (org-agenda-skip-deadline-prewarning-if-scheduled t)
-                        (org-deadline-warning-days 2)
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
                       (org-agenda-todo-ignore-scheduled t)
@@ -171,7 +170,8 @@ with prefix arg, call `org-return'"
             (org-agenda-block-separator "")
             (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
                                            (todo priority-down alpha-up)))
-            (org-agenda-deadline-leaders '("Deadline:   " "In %2d d.:  " "%1d d. ago:  "))
+            (org-agenda-scheduled-leaders '("Scheduled: " "Sched. %1dx: "))
+            (org-agenda-deadline-leaders '("Deadlined: " "In %1d d.:   " "%1d d. ago:  "))
             (org-agenda-prefix-format
              '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
                (todo . "  %i %-8:cEff.: %-8e")
