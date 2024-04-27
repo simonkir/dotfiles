@@ -162,7 +162,7 @@ with prefix arg, call `org-return'"
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-use-time-grid nil)))
-            (todo "" ((org-agenda-overriding-header "Unscheduled, Undeadlined Tasks")
+            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
                       (org-agenda-todo-ignore-scheduled t)
                       (org-agenda-todo-ignore-deadlines t)))
             (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
@@ -178,7 +178,7 @@ with prefix arg, call `org-return'"
                (tags . "  %i %-8:c")
                (search . "  %i %-8:c")))))))
 
-; *** agenda keybinds
+; *** keybinds
   (general-def org-agenda-mode-map
     "D" 'org-agenda-goto-date
     "g" 'org-agenda-redo

@@ -56,7 +56,7 @@
             ;; org todo items
             ("PREP" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-upcoming-distant-deadline))))
             ("TODO" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo :inverse t))))
-            ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-imminent-deadline))))
+            ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo))))
             ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done :inverse t))))
             ("\\[#A\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'error))))
             ("\\[#B\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-todo))))
@@ -73,5 +73,5 @@
             (,(format "<%s \\(%s>\\)" date-re day-time-re) . ((lambda (tag) (svg-tag-make tag :face 'org-scheduled :radius 0 :end -1 :crop-left t))))
 
            ;; org-agenda / regular org-files
-            ("Deadlined:\\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :end -1 :radius 0 :inverse t :face 'org-imminent-deadline))))
-            ("Scheduled:\\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :end -1 :inverse t :radius 0 :face 'org-scheduled))))))))
+            ("Deadlined: \\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :end -1 :radius 0 :inverse t :face 'org-imminent-deadline))))
+            ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :end -1 :inverse t :radius 0 :face 'org-scheduled))))))))
