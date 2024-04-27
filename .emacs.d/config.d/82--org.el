@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 ; * org
+; ** init section
 (use-package org
   :general (general-def-leader
              "r n" #'(lambda () (interactive) (org-agenda nil "n"))
@@ -9,20 +10,25 @@
 
   :config
 
-; ** visuals
+; ** org-files / general org
+; *** visuals
   (setq org-num-max-level 3)
-  (setq org-return-follows-link t)
-  (setq org-image-actual-width nil)
-
   (setq org-startup-folded t)
+  (setq org-return-follows-link t)
+
   (setq org-hide-leading-stars t)
   (setq org-hide-emphasis-markers t)
-
   (setq org-fontify-whole-heading-line t)
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
-
   (setq org-highlight-latex-and-related '(native))
+
+  (setq org-emphasis-alist
+        '(("*" bold)
+          ("/" italic)
+          ("_" underline)
+          ("=" org-verbatim verbatim)
+          ("~" org-code verbatim)))
 
   (defun sk:org-toggle-emphasis-markers ()
     "toggle display of emphasis markers"
@@ -42,26 +48,8 @@
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
-; ** editing
-; *** settings
-  (setq org-blank-before-new-entry
-        '((heading . t)
-          (plain-list-item . nil)))
-
-  (setq org-list-demote-modify-bullet
-        '(("+" . "-")
-          ("-" . "+")
-          ("1." . "-")
-          ("1)" . "-")))
-
-  (setq org-emphasis-alist
-        '(("*" bold)
-          ("/" italic)
-          ("_" underline)
-          ("=" org-verbatim verbatim)
-          ("~" org-code verbatim)))
-
-; *** functions
+; *** editing
+; **** sk:org-return
   ;; inspired from github.com/alphapapa/unpackaged.el
   (defun sk:org-return (&optional default)
     "custom `org-return'. respects lists and tables like one would expect in a normal dwim editor
@@ -103,10 +91,10 @@ with prefix arg, call `org-return'"
        (t
         (org-return)))))
 
-; *** keybinds
   ;; compatibility with sklatex linebreaks
   (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
+; **** keybinds
   (general-def org-mode-map
     "C-c C-_" #'(lambda () (interactive) (org-cycle-list-bullet 'previous))
     "C-#" #'(lambda () (interactive) (insert "#"))
@@ -126,10 +114,11 @@ with prefix arg, call `org-return'"
     "M-l" 'org-metaright
     "M-L" 'org-shiftmetaright)
 
-; ** narrowing
+; *** narrowing
   ;; see `sk:narrow-or-widen' for regular src- / table-editing
 
   (setq org-src-window-setup 'plain)
+  (setq org-edit-src-content-indentation 0)
   (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
 
   (defun sk:leader-E ()
@@ -142,71 +131,20 @@ with prefix arg, call `org-return'"
   (general-def-leader
     "E" 'sk:leader-E)
 
-; ** agenda
-; *** general settings
-  (setq org-directory "~/.emacs.d/org-dir")
-  (setq org-agenda-files '("~/.emacs.d/org-dir/"))
+; *** lists
+  (setq org-blank-before-new-entry
+        '((heading . t)
+          (plain-list-item . nil)))
 
-  (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))
+  (setq org-list-demote-modify-bullet
+        '(("+" . "-")
+          ("-" . "+")
+          ("1." . "-")
+          ("1)" . "-")))
 
-  (setq vc-follow-symlinks t)
-  (setq calendar-week-start-day 1)
-  (setq org-agenda-window-setup 'current-window)
+; *** images
+  (setq org-image-actual-width nil)
 
-; *** agenda views
-  (setq org-agenda-custom-commands
-        '(("n" "Dashboard"
-           ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-span 'fortnight)
-                        (org-deadline-warning-days 2)
-                        (org-agenda-skip-scheduled-if-done t)
-                        (org-agenda-skip-deadline-if-done t)
-                        (org-agenda-use-time-grid nil)))
-            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
-                      (org-agenda-todo-ignore-scheduled t)
-                      (org-agenda-todo-ignore-deadlines t)))
-            (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
-           ((org-agenda-start-on-weekday nil)
-            (org-agenda-block-separator "")
-            (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
-                                           (todo priority-down alpha-up)))
-            (org-agenda-scheduled-leaders '("Scheduled: " "Sched. %1dx: "))
-            (org-agenda-deadline-leaders '("Deadlined: " "In %1d d.:   " "%1d d. ago:  "))
-            (org-agenda-prefix-format
-             '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
-               (todo . "  %i %-8:cEff.: %-8e")
-               (tags . "  %i %-8:c")
-               (search . "  %i %-8:c")))))))
-
-; *** keybinds
-  (general-def org-agenda-mode-map
-    "D" 'org-agenda-goto-date
-    "g" 'org-agenda-redo
-    "M" 'org-agenda-month-view
-    "n" 'org-agenda-next-date-line
-    "p" 'org-agenda-previous-date-line
-    "P" 'org-agenda-set-property
-    "q" 'org-agenda-exit
-    "Q" 'org-agenda-quit
-    "r" 'org-agenda-redo-all
-    "W" 'org-agenda-fortnight-view)
-
-; ** capture
-  (setq org-bookmark-names-plist nil)
-  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
-  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
-
-  (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
-                                 "* TODO %?"
-                                 :empty-lines 1)
-                                ("v" "uni TODO entry" entry (file "")
-                                 "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
-                                 :empty-lines 1)))
-
-  (general-def org-capture-mode-map
-    "C-c C-c" nil)
-
-; ** image preview
   (defun sk:org-toggle-inline-images ()
     "toggle image previews in the region, if it is active, and the next image after point otherwise"
     (interactive)
@@ -233,25 +171,22 @@ with prefix arg, call `org-return'"
     "C-c C-x V" 'org-toggle-inline-images
     "C-c C-x M-v" 'org-redisplay-inline-images)
 
-; ** latex settings
-; *** math settings
-  (add-to-list 'org-latex-packages-alist '("" "IEEEtrantools" t))
-  (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
-  (add-to-list 'org-latex-packages-alist '("" "gauss" t))
+; *** latex
+; **** packages
+  (setq org-latex-packages-alist
+        '(("" "IEEEtrantools" t)
+          ("" "gensymb" t)
+          ("" "gauss" t)))
 
-; *** syntax table adjustments
-  ;; prevent < and > from being interpreted as delimiters
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?< "@")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?> "@")))
+; **** syntax table adjustments
+  (add-hook 'org-mode-hook #'(lambda ()
+                               (modify-syntax-entry ?< "@") ;; prevent < and > from being
+                               (modify-syntax-entry ?> "@") ;; interpreted as delimiters
+                               (modify-syntax-entry ?\\ "w")
+                               (modify-syntax-entry ?^ "_") ;; allows prettification of super-/subscripts
+                               (modify-syntax-entry ?$ "$")))
 
-  ;; for prettify compatibility, e. g. in \mathbb{N}^{+}
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?^ "_")))
-
-  ;; other latex stuff (see 83--auctex.el for doc)
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-  (add-hook 'org-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
-
-; *** latex preview
+; **** latex preview
   (setq sk:org-preview-latex-scale 1.5)
   (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
 
@@ -273,6 +208,68 @@ with prefix arg, call `org-return'"
   (general-def org-mode-map
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
+; ** agenda
+; *** agenda settings
+  (setq org-directory "~/.emacs.d/org-dir")
+  (setq org-agenda-files '("~/.emacs.d/org-dir/"))
+
+  (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))
+
+  (setq vc-follow-symlinks t)
+  (setq calendar-week-start-day 1)
+  (setq org-agenda-window-setup 'current-window)
+
+  (general-def org-agenda-mode-map
+    "D" 'org-agenda-goto-date
+    "g" 'org-agenda-redo
+    "M" 'org-agenda-month-view
+    "n" 'org-agenda-next-date-line
+    "p" 'org-agenda-previous-date-line
+    "P" 'org-agenda-set-property
+    "q" 'org-agenda-exit
+    "Q" 'org-agenda-quit
+    "r" 'org-agenda-redo-all
+    "W" 'org-agenda-fortnight-view)
+
+; *** agenda views
+  (setq org-agenda-custom-commands
+        '(("n" "Dashboard"
+           ((agenda "" ((org-agenda-overriding-header "")
+                        (org-agenda-span 'fortnight)
+                        (org-deadline-warning-days 2)
+                        (org-agenda-skip-scheduled-if-done t)
+                        (org-agenda-use-time-grid nil)))
+            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
+                      (org-agenda-todo-ignore-scheduled t)
+                      (org-agenda-todo-ignore-deadlines t)))
+            (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
+           ((org-agenda-start-on-weekday nil)
+            (org-agenda-block-separator "")
+            (org-agenda-sorting-strategy '((agenda time-up priority-down alpha-up)
+                                           (todo priority-down alpha-up)))
+            (org-agenda-scheduled-leaders '("Scheduled: " "Sched. %1dx: "))
+            (org-agenda-deadline-leaders '("Deadlined: " "In %1d d.:   " "%1d d. ago:  "))
+            (org-agenda-prefix-format
+             '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
+               (todo . "  %i %-8:cEff.: %-8e")
+               (tags . "  %i %-8:c")
+               (search . "  %i %-8:c")))))))
+
+; *** capture
+  (setq org-bookmark-names-plist nil)
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
+  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
+
+  (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
+                                 "* TODO %?"
+                                 :empty-lines 1)
+                                ("v" "uni TODO entry" entry (file "")
+                                 "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
+                                 :empty-lines 1)))
+
+  (general-def org-capture-mode-map
+    "C-c C-c" nil)
+
 ; ** org-babel
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -282,7 +279,6 @@ with prefix arg, call `org-return'"
   ;;(add-hook 'org-babel-after-execute-hook #'sk:org-toggle-inline-images-after-babel-run)
 
   (setq org-confirm-babel-evaluate nil)
-  (setq org-edit-src-content-indentation 0)
 
   (defun sk:org-babel-kill-session-at-point ()
     (interactive)
@@ -293,20 +289,18 @@ with prefix arg, call `org-return'"
     (sk:org-babel-kill-session-at-point)
     (org-ctrl-c-ctrl-c)))
 
-; * ox (export pkgs)
-(use-package ox
-  :after org
-  :config
-  (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f")))
-
+; * ox-latex (latex export)
 (use-package ox-latex
-  :after ox
   :config
+  (setq org-latex-compiler "xetex")
+  (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
+
   (add-to-list 'org-latex-classes '("report-nopart" "\\documentclass[11pt]{report}"
                                     ("\\chapter{%s}" . "\\chapter*{%s}")
                                     ("\\section{%s}" . "\\section*{%s}")
                                     ("\\subsection{%s}" . "\\subsection*{%s}")
                                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
   (add-to-list 'org-latex-classes '("scrlttr2" "\\documentclass[11pt]{scrlttr2}"
                                     ("\\chapter{%s}" . "\\chapter*{%s}")
                                     ("\\section{%s}" . "\\section*{%s}")

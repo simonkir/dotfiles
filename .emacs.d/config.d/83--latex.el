@@ -15,8 +15,9 @@
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
 
-  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?\\ "w")))
-  (add-hook 'LaTeX-mode-hook #'(lambda () (modify-syntax-entry ?$ "$")))
+  (add-hook 'LaTeX-mode-hook #'(lambda ()
+                                 (modify-syntax-entry ?\\ "w")
+                                 (modify-syntax-entry ?$ "$")))
 
   (general-def 'LaTeX-mode-map
     "$" nil)
