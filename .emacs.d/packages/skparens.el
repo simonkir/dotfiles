@@ -9,23 +9,27 @@
       '(("(" . ("( " . " )"))
         ("[" . ("[ " . " ]"))
         ("{" . ("{ " . " }"))
+        ("<" . ("< " . " >"))
 
-        ;; no spaces in between
         (")" . ("(" . ")"))
         ("]" . ("[" . "]"))
         ("}" . ("{" . "}"))
+        (">" . ("<" . ">"))
 
         ;; latex pairs
+        ("a" . ("\\left\\vert " . " \\right\\vert"))
+        ("c" . ("\\left\\{ " . " \\right\\}"))
+        ("n" . ("\\left\\Vert " . " \\right\\Vert"))
         ("r" . ("\\left( " . " \\right)"))
         ("s" . ("\\left[ " . " \\right]"))
-        ("c" . ("\\left\\{ " . " \\right\\}"))
-        ("a" . ("\\left\\vert " . " \\right\\vert"))
-        ("n" . ("\\left\\Vert " . " \\right\\Vert"))
+        ("v" . ("\\left\\langle " . " \\right\\rangle"))
+
+        ("A" . ("\\left\\vert" . "\\right\\vert"))
+        ("C" . ("\\left\\{" . "\\right\\}"))
+        ("N" . ("\\left\\vert " . " \\right\\vert"))
         ("R" . ("\\left(" . "\\right)"))
         ("S" . ("\\left[" . "\\right]"))
-        ("C" . ("\\left\\{" . "\\right\\}"))
-        ("A" . ("\\left\\vert" . "\\right\\vert"))
-        ("N" . ("\\left\\vert " . " \\right\\vert"))
+        ("V" . ("\\left\\langle" . "\\right\\rangle"))
 
         ;; lang-specific pairs
         ("`" . ("`" . "'"))       ;; elisp symbol quote
