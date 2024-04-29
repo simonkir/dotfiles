@@ -182,25 +182,19 @@ for i in groups:
 # ** window rules
 @hook.subscribe.client_new
 def assign_app_group(client):
-    d = {}
-    ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-    d[group_names[0]] = ["Navigator", "Firefox", "navigator", "firefox",
-                         "brave-browser", "Brave-browser", "qutebrowser"]
-    d[group_names[1]] = ["urxvt", "termite", "emacs", "Alacritty"]
-    d[group_names[2]] = ["krita", "libreoffice", "org.pwmt.zathura",
-                         "Blender", "kicad", "org.inkscape.Inkscape", "molsketch",
-                         "VirtualBox Machine", "VirtualBox Manager"]
-    d[group_names[3]] = ["Chromium", "chromium", "google-chrome",
-                         "minecraft-launcher", "Minecraft Launcher",
-                         "sun-awt-X11-XFramePeer", "net-minecraft-launchwrapper-Launch"]
-
+    # get first field of WM_CLASS
     wm_class = client.window.get_wm_class()[0]
 
-    for i in range(len(d)):
-        if wm_class in list(d.values())[i]:
-            group = list(d.keys())[i]
-            client.togroup(group)
-            #client.group.cmd_toscreen(toggle=False)
+    d = {
+        group_names[0]: ["navigator", "firefox", "brave-browser", "qutebrowser"],
+        group_names[1]: ["emacs", "Emacs-29-3", "alacritty"],
+        group_names[2]: ["krita", "libreoffice", "org.pwmt.zathura", "blender", "org.inkscape.inkscape"],
+        group_names[3]: ["chromium", "google-chrome"]
+    }
+
+    for key, val in d.items():
+        if wm_class.lower() in map(str.lower, val):
+            client.togroup(key)
 
 # * layouts
 # ** initialization
