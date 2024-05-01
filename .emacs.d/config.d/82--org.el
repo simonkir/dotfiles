@@ -105,6 +105,14 @@ with prefix arg, call `org-return'"
     "RET" 'sk:org-return
     "M-RET" 'org-ctrl-c-ctrl-c
 
+    ;; disable these, use own outline keybinds instead
+    ;; see 31--buffer-local.el
+    "C-c C-n" nil
+    "C-c C-p" nil
+    "C-c C-f" nil
+    "C-c C-b" nil
+    "C-c C-u" nil
+
     "M-h" 'org-metaleft
     "M-H" 'org-shiftmetaleft
     "M-j" 'org-metadown
