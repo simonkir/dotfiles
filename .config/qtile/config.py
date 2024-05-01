@@ -1,41 +1,38 @@
 # * imports
-import os
-import re
-import socket
-import subprocess
-from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
+import os, subprocess
+from libqtile.config import Key, Screen, Group, Drag
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
-from libqtile.widget import Spacer
-#import arcobattery
 
 # * general settings
 mod = "mod4"
 mod1 = "alt"
 home = os.path.expanduser('~')
 
-auto_fullscreen            = True
-bring_front_click          = False
-cursor_warp                = False
-follow_mouse_focus         = True
+cursor_warp = False
+auto_fullscreen = True
+bring_front_click = False
+follow_mouse_focus = True
+reconfigure_screens = True
 focus_on_window_activation = "smart"
-reconfigure_screens        = True
 
 dgroups_key_binder = None
 dgroups_app_rules = []
 main = None
 
 # * theme
-colors = ["#292d3e", # color 0, black
-          "#ff5370", # color 1, red
-          "#c3e88d", # color 2, green
-          "#ffcb6b", # color 3, yellow
-          "#82aaff", # color 4, blue
-          "#c792ea", # color 5, magenta
-          "#89ddff", # color 6, cyan
-          "#eeffff", # color 7, silver
-          "#eeffff", # foreground
-          "#292d3e"] # background
+colors = [
+    "#292d3e", # color 0, black
+    "#ff5370", # color 1, red
+    "#c3e88d", # color 2, green
+    "#ffcb6b", # color 3, yellow
+    "#82aaff", # color 4, blue
+    "#c792ea", # color 5, magenta
+    "#89ddff", # color 6, cyan
+    "#eeffff", # color 7, silver
+    "#eeffff", # foreground
+    "#292d3e"  # background
+]
 
 # * keybinds
 keys = [
@@ -156,7 +153,7 @@ mouse = [
 groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
-group_labels = group_names
+group_labels = group_names[:]
 group_layouts = ["max", "max", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
 
 for i in range(len(group_names)):
@@ -198,14 +195,12 @@ def assign_app_group(client):
 
 # * layouts
 # ** initialization
-def init_layout_theme():
-    return {"margin":        0,
-            "border_width":  0,
-            "border_focus":  "#5e81ac",
-            "border_normal": "#4c566a"
-            }
-
-layout_theme = init_layout_theme()
+layout_theme = {
+    "margin":        0,
+    "border_width":  0,
+    "border_focus":  "#5e81ac",
+    "border_normal": "#4c566a"
+}
 
 layouts = [
     layout.MonadTall(**layout_theme),
@@ -220,24 +215,22 @@ floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
 
 # * bar
 # ** settings
-def init_widgets_defaults():
-    return dict(font="Noto Sans",
-                fontsize = 12,
-                padding = 2,
-                foreground = colors[8],
-                background = colors[9],
-                )
-
-widget_defaults = init_widgets_defaults()
-
-icon_margin = 5
-sep_linewidth = 1
-sep_padding = 10
+widget_defaults = {
+    "font": "Noto Sans",
+    "fontsize": 12,
+    "padding": 2,
+    "foreground": colors[8],
+    "background": colors[9],
+}
 
 # ** widgets
+# function needed bc windget_list cannot be deepcopied easily
 def init_widgets_list():
-    prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-    widgets_list = [
+    icon_margin = 5
+    sep_linewidth = 1
+    sep_padding = 10
+
+    return [
 
 # *** workspaces
         widget.GroupBox(
@@ -258,7 +251,7 @@ def init_widgets_list():
 
 # *** layout
         widget.CurrentLayoutIcon(
-            scale = 0.7,
+            scale = 0.6,
         ),
         widget.CurrentLayout(
             font = "Noto Sans Bold",
@@ -270,7 +263,6 @@ def init_widgets_list():
 
 # *** window-name
         widget.CurrentScreen(
-            font = "FontAwesome",
             active_text = "",
             inactive_text = "",
             active_color = colors[8],
@@ -337,10 +329,11 @@ def init_widgets_list():
             margin = icon_margin,
         ),
         widget.ThermalSensor(
-            format = "{temp} {unit}",
+            format = "{temp}{unit}",
             threshold = 70,
             foreground = colors[8],
             foreground_alert = colors[1],
+            update_interval = 2,
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -353,9 +346,9 @@ def init_widgets_list():
             margin = icon_margin,
         ),
         widget.Memory(
-            format = "{MemUsed:.1f} G",
+            format = "{MemUsed:.1f}G",
             measure_mem = "G",
-            update_interval = 1,
+            update_interval = 2,
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -369,6 +362,7 @@ def init_widgets_list():
         ),
         widget.Clock(
             format = "%H:%M",
+            update_interval = 1,
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -378,14 +372,11 @@ def init_widgets_list():
 # *** systray
         widget.Systray(
             icon_size = 20,
-        ),
+        )
     ]
-    return widgets_list
 
 # * screen layout
-# ** bar widgets
-widgets_list = init_widgets_list()
-
+# ** primary / secondary widget list
 def init_widgets(has_tray=False):
     widgets = init_widgets_list()
 
@@ -415,21 +406,14 @@ widgets_screen_primary = init_widgets(has_tray=True)
 widgets_screen_secondary = init_widgets(has_tray=False)
 
 # ** screen layout
-def init_screens():
-    return [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
-            Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
-
-screens = init_screens()
+screens = [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
+           Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
 
 # * autostart
 @hook.subscribe.startup_once
 def start_once():
-    #home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart-once.sh'])
 
 @hook.subscribe.startup
 def start_always():
-    # Set the cursor to something sane in X
-    #subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
-    #home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart-always.sh'])
