@@ -217,9 +217,9 @@ with prefix arg, call `org-return'"
     "C-c C-x L" 'sk:org-preview-latex-scale-set)
 
 ; ** agenda
-; *** agenda settings
+; *** general settings
   (setq org-directory "~/.emacs.d/org-dir")
-  (setq org-agenda-files '("~/.emacs.d/org-dir/"))
+  (setq org-agenda-files `(,org-directory))
 
   (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))
 
@@ -242,26 +242,37 @@ with prefix arg, call `org-return'"
 ; *** agenda views
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
-           ((agenda "" ((org-agenda-overriding-header "")
-                        (org-agenda-span 'fortnight)
+           ((agenda "" ((org-agenda-overriding-header "Agenda")
+                        (org-agenda-span 'day)
                         (org-deadline-warning-days 2)
+                        (org-agenda-skip-scheduled-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-agenda-use-time-grid nil)))
+            (agenda "" ((org-agenda-overriding-header "Calendar")
+                        (org-agenda-span 'week)
+                        (org-agenda-start-on-weekday nil)
+                        (org-agenda-start-day "+1d")
+                        (org-scheduled-past-days 0)
+                        (org-deadline-past-days 0)
+                        (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
                       (org-agenda-todo-ignore-scheduled t)
                       (org-agenda-todo-ignore-deadlines t)))
             (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
-           ((org-agenda-start-on-weekday 1)
-            (org-agenda-block-separator "")
+           ((org-agenda-block-separator "")
             (org-agenda-sorting-strategy '((agenda time-up priority-down todo-state-up alpha-up)
-                                           (todo priority-down todo-state-up alpha-up)))
-            (org-agenda-scheduled-leaders '("Scheduled: " "Sched. %1dx: "))
+                                           (todo priority-down todo-state-up alpha-up)
+                                           (tags priority-down todo-state-up alpha-up)
+                                           (search alpha-up)))
+            (org-agenda-scheduled-leaders '("Scheduled: " "Sche. %1dx: "))
             (org-agenda-deadline-leaders '("Deadlined: " "In %1d d.:  " "%1d d. ago: "))
             (org-agenda-prefix-format
-             '((agenda . "  %i %-8:c%?-12tEff.: %-8e %s")
-               (todo . "  %i %-8:cEff.: %-8e")
-               (tags . "  %i %-8:c")
-               (search . "  %i %-8:c")))))))
+             '((agenda . "  %i %-10:c%?-12t %s")
+               (todo . "  %i %-10:c")
+               (tags . "  %i %-10:c")
+               (search . "  %i %-10:c")))))))
 
 ; *** capture
   (setq org-bookmark-names-plist nil)
