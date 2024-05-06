@@ -21,10 +21,6 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-; ** nerd-icons-dired
-(use-package nerd-icons-dired
-  :hook (dired-mode . nerd-icons-dired-mode))
-
 ; * svg-tag-mode
 (use-package svg-tag-mode
   :hook (org-mode org-agenda-mode)

@@ -8,24 +8,35 @@
   "f s" 'save-buffer
   "s"   'save-buffer)
 
-; * dired
-(use-package dired
+; * dirvish
+(use-package dirvish
+  :demand t
+  :after dired
   :config
-  (setq dired-dwim-target t) ;; when two windows are next to each other, move / copy files between them
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  (setq dired-listing-switches "-alh")
+  (setq dired-dwim-target t)
+  (setq dirvish-reuse-session nil) ;; always delete unused buffers
+  (setq dirvish-attributes '(vc-state subtree-state nerd-icons git-msg file-time file-size))
+  (setq dirvish-preview-dispatchers '(vc-diff archive image gif pdf))
+  (setq dirvish-default-layout '(0 0 0.4))
 
-  (general-def 'dired-mode-map
+  (setq dirvish-use-header-line t)
+  (setq dirvish-header-line-height 22)
+  (setq dirvish-mode-line-height doom-modeline-height)
+  (setq dirvish-hide-cursor nil) ;; dont highlight current line
+
+  (general-def 'dirvish-mode-map
+    "<tab>" 'dirvish-subtree-toggle
+    "/" 'dirvish-narrow
+    ")" 'dired-omit-mode
+    "p" 'dirvish-layout-toggle
+
     "i" 'dired-toggle-read-only
     "h" 'dired-up-directory
-    "l" 'dired-find-file
-    "r" 'dired-flag-garbage-files
-    ")" 'dired-omit-mode))
+    "l" 'dired-find-file)
 
-(use-package dired-x
-  :hook
-  (dired-mode . dired-hide-details-mode)
-  (dired-mode . dired-omit-mode))
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+  (dirvish-override-dired-mode))
 
 ; * recentf
 (use-package recentf
