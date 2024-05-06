@@ -6,11 +6,10 @@
 #+latex_class: article
 #+latex_class_options: [a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german}
-#+latex_header: \newcommand{\BAR}{\hspace{-\arraycolsep} \strut\vrule \hspace{-\arraycolsep}}
-#+latex_header: \renewcommand{\thesubsection}{\alph{subsection}}
+# #+latex_header: \renewcommand{\thesubsection}{\alph{subsection}}
 
 #+options: toc:nil H:4 num:3 todo:nil
 
 #+title: $1
-#+date: `(format-time-string "%d. %B  %Y")`
+#+date: `(format-time-string "%d. %B %Y")`
 #+author: ${2:simonkir}$0
