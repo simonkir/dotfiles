@@ -91,25 +91,23 @@
     ":" 'recenter-top-bottom
 
     "a" 'meow-append
-    ;;"A" 'meow-bounds-of-thing
-    "A" nil ;; reserved for skparens
+    ;; "A" nil ;; reserved for skparens
     "b" 'meow-back-word
     "B" 'meow-back-symbol
     "c" 'meow-join
     "C" 'beginning-of-line
     "d" 'meow-kill
-    ;; "D" reserved for skparens
+    ;; "D" nil ;;reserved for skparens
     "e" 'meow-next-word
     "E" 'meow-next-symbol
     "f" 'meow-find
-    ;;"F"
-    ;;"g" ;; reserved for avy
+    ;;"F" nil
+    ;;"g" nil ;; reserved for avy
     "G" 'meow-grab
     "h" 'meow-left
     "H" 'meow-left-expand
     "i" 'meow-insert
-    ;; "I" 'meow-inner-of-thing
-    "I" nil ;; reserved for skparens
+    ;;"I" nil ;; reserved for skparens
     "j" 'meow-next
     "J" 'meow-next-expand
     "k" 'meow-prev
@@ -117,25 +115,25 @@
     "l" 'meow-right
     "L" 'meow-right-expand
     "m" 'meow-line
-    "M" 'meow-goto-line
+    ;; "M" nil ;; reserved for consult
     "n" 'meow-search
-    ;;"N"
+    ;;"N" nil
     "o" 'meow-open-below
     "O" 'meow-open-above
     "p" 'meow-yank
-    "P" 'meow-yank-pop
-    ;;"q" reserved for buffer-local stuff (e. g. quitting *Help* buffers)
-    ;;"Q"
+    ;;"P" nil ;; reserved for consult
+    ;;"q" nil ;; reserved for buffer-local stuff (e. g. quitting *Help* buffers)
+    ;;"Q" nil
     "r" 'meow-replace
     "R" 'meow-swap-grab
     "s" 'meow-change
-    ;;"S" ;; reserved for skparens
+    ;;"S" nil ;; reserved for skparens
     "t" 'meow-till
-    ;;"T"
+    ;;"T" nil
     "u" 'undo
     "U" 'undo-redo
-    "v" 'meow-visit
-    ;;"V"
+    ;;"v" nil ;; reserved for consult
+    "V" 'meow-visit
     "w" 'meow-mark-word
     "W" 'meow-mark-symbol
     "x" 'meow-delete
@@ -143,7 +141,7 @@
     "y" 'meow-save
     "Y" 'meow-sync-grab
     "z" 'meow-pop-selection
-    ;;"Z"
+    ;;"Z" nil
     "<escape>" 'meow-cancel-selection)
 
   ;; meow behaves weridly without these definitions

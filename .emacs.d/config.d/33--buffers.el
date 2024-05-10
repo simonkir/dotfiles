@@ -9,7 +9,7 @@
 
 ; ** keybinds
 (general-def-leader
-  "b b" 'switch-to-buffer
+  ;;"b b" nil ;; reserved for consult
   "b k" 'sk:kill-current-buffer
   "b K" 'kill-buffer-and-window)
 

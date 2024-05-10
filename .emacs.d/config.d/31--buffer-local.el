@@ -1,4 +1,4 @@
-;;; -*- lexical-binding t; -*-
+;;; -*- lexical-binding: t; -*-
 
 ; * general settings
 (setq scroll-conservatively 100)
@@ -54,8 +54,8 @@ should be called after changing the major mode"
     "v b" 'outline-backward-same-level
 
     "v a" 'outline-show-all
-    "v h" 'outline-show-only-headings
     "v l" 'outline-show-branches
+    ;;"v j" nil ;; reserved for consult
     "v o" 'outline-hide-other
     "v u" 'outline-up-heading
     "v v" 'outline-hide-sublevels))

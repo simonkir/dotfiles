@@ -50,9 +50,6 @@
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*mitschrieb.tex")
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*mitschrieb.pdf")
 
-  (general-def-leader
-    "f r" 'recentf-open)
-
   (recentf-mode t))
 
 ; * bookmark
@@ -60,7 +57,4 @@
   :demand t
   :config
   ;; always save bookmarks after changes have been made
-  (setq bookmark-save-flag 1)
-
-  (general-def-leader
-    "f b" 'bookmark-jump))
+  (setq bookmark-save-flag 1))
