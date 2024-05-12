@@ -6,7 +6,15 @@
   :config
   (setq eglot-autoshutdown t)
   (setq eglot-events-buffer-size 0)
-  (setq eglot-ignored-server-capabilities '(:hoverProvider)))
+
+  ;; general server settings
+  (setq eglot-ignored-server-capabilities '(:hoverProvider)) ;; dont show descriptions in minibuffer
+
+  ;; server-specific settings
+  (add-to-list 'eglot-server-programs
+               '((python-mode python-ts-mode) .
+                 ("jedi-language-server" :initializationOptions
+                  (:completion (:disableSnippets t))))))
 
 ; * xref
 (use-package xref
