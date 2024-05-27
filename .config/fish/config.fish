@@ -8,6 +8,7 @@ abbr -a "ll" "ls -lh"
 abbr -a "lla" "ls -lha"
 abbr -a "mv" "mv -i"
 abbr -a "rm" "rm -I"
+abbr -a "gspdf" "gs -q -dNOPAUSE -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook"
 #abbr -a "vifm" "~/.config/vifm/scripts/vifmrun"
 
 function multicd
