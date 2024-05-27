@@ -260,19 +260,37 @@ with prefix arg, call `org-return'"
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
                       (org-agenda-todo-ignore-with-date t)))
-            (todo "DONE" ((org-agenda-overriding-header "Done Tasks"))))
-           ((org-agenda-block-separator "")
-            (org-agenda-sorting-strategy '((agenda time-up priority-down todo-state-up alpha-up)
-                                           (todo priority-down todo-state-up alpha-up)
-                                           (tags priority-down todo-state-up alpha-up)
-                                           (search alpha-up)))
-            (org-agenda-scheduled-leaders '("Scheduled: " "Sche. %1dx: "))
-            (org-agenda-deadline-leaders '("Deadlined: " "In %1d d.:  " "%1d d. ago: "))
-            (org-agenda-prefix-format
-             '((agenda . "  %i %-10:c%?-12t %s")
-               (todo . "  %i %-10:c")
-               (tags . "  %i %-10:c")
-               (search . "  %i %-10:c")))))))
+            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))
+          ("w" "Weekly Calendar"
+           ((agenda "" ((org-agenda-overriding-header "Calendar")
+                        (org-agenda-span 'week)
+                        (org-agenda-start-on-weekday 1)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-skip-scheduled-if-done t)
+                        (org-agenda-skip-deadline-if-done t)
+                        (org-scheduled-past-days 0)
+                        (org-deadline-past-days 0)
+                        (org-deadline-warning-days 0)
+                        (org-agenda-use-time-grid nil)))
+            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
+                      (org-agenda-todo-ignore-with-date t)))
+            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
+
+  (setq org-agenda-block-separator "")
+  (setq org-agenda-scheduled-leaders '("Scheduled:  " "Sch. %2dd.: "))
+  (setq org-agenda-deadline-leaders '("Deadlined:  " "In %2dd.:   " "Past %2dd.: "))
+
+  (setq org-agenda-sorting-strategy
+        '((agenda time-up priority-down todo-state-up alpha-up)
+          (todo priority-down todo-state-up alpha-up)
+          (tags priority-down todo-state-up alpha-up)
+          (search alpha-up)))
+
+  (setq org-agenda-prefix-format
+   '((agenda . "  %i %-10:c%?-12t %s")
+     (todo . "  %i %-10:c")
+     (tags . "  %i %-10:c")
+     (search . "  %i %-10:c")))
 
 ; *** capture
   (setq org-bookmark-names-plist nil)
