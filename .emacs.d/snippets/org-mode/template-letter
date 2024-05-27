@@ -7,6 +7,7 @@
 #+latex_class_options: [a4paper,11pt,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[skip=\baselineskip]{parskip}
 #+latex_header: \usepackage{german}
+# #+latex_header: \renewcommand{\familydefault}{\sfdefault}
 #+latex: \renewcommand*{\raggedsignature}{\raggedright}
 
 #+options: toc:nil

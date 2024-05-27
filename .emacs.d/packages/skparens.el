@@ -36,6 +36,7 @@
         ("\\" . ("/* " . " */"))  ;; c-like comment
         ("f" . ("f\"" . "\""))    ;; python f-string
         ("F" . ("f\"{" . "}\""))  ;; python f-string (for surrounding vars)
+        ("=" . ("f\"{" . " = }\""))  ;; python f-string (for surrounding vars)
 
         ;; quotes
         ("„" . ("„" . "“"))

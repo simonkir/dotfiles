@@ -6,10 +6,11 @@
 #+latex_class: article
 #+latex_class_options: [a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german}
+# #+latex_header: \renewcommand{\familydefault}{\sfdefault}
 # #+latex_header: \renewcommand{\thesubsection}{\alph{subsection}}
 
-#+options: toc:nil H:4 num:3 todo:nil
+#+options: toc:nil H:4 num:3 todo:nil p:nil
 
 #+title: $1
-#+date: `(format-time-string "%d. %B %Y")`
 #+author: ${2:simonkir}$0
+#+date: {{{time("%d. %B %Y")}}}
