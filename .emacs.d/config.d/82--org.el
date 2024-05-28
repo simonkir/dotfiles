@@ -287,10 +287,10 @@ with prefix arg, call `org-return'"
           (search alpha-up)))
 
   (setq org-agenda-prefix-format
-   '((agenda . "  %i %-10:c%?-12t %s")
-     (todo . "  %i %-10:c")
-     (tags . "  %i %-10:c")
-     (search . "  %i %-10:c")))
+   '((agenda . "  %i %-7:c%?-12t %s")
+     (todo . "  %i %-7:c")
+     (tags . "  %i %-7:c")
+     (search . "  %i %-7:c")))
 
 ; *** capture
   (setq org-bookmark-names-plist nil)
