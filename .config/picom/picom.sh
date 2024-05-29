@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
 
 killall picom
-picom --config ~/.config/picom/picom.conf &
-#picom --config ~/.config/picom/picom.conf --glx-fshader-win "$(cat ~/.config/picom/darkmode.glsl)" &
+picom --config ~/.config/picom/picom.conf --window-shader-fg ~/.config/picom/darkmode.glsl &
