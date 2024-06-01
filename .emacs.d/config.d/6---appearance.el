@@ -11,10 +11,11 @@
 (global-visual-line-mode 1)
 
 ; * line numbers
-;; display visual line numbers left of each buffer
-(setq display-line-numbers-type 'visual)
-(set-face-attribute 'line-number nil :foreground "#5b6268")
-(global-display-line-numbers-mode 1)
+(use-package display-line-numbers
+  :hook ((prog-mode text-mode help-mode conf-mode org-agenda-mode) . display-line-numbers-mode)
+  :config
+  (setq display-line-numbers-type 'visual)
+  (set-face-attribute 'line-number nil :foreground "#5b6268"))
 
 ; * text scale
 (general-def-leader

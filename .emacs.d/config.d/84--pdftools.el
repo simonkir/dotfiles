@@ -8,10 +8,8 @@
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-view-resize-factor 1.1)
   (setq pdf-annot-activate-created-annotations t)
-  (setq pdf-view-midnight-invert nil)
 
 ; ** active minor-modes
-  (add-hook 'pdf-view-mode-hook #'(lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)
   (add-hook 'pdf-view-mode-hook #'pdf-view-auto-slice-minor-mode)
   (add-hook 'pdf-view-mode-hook #'pdf-annot-minor-mode)
