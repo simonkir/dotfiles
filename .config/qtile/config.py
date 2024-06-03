@@ -1,7 +1,7 @@
 # * imports
 import os, subprocess
 from libqtile.config import Key, Screen, Group, Drag
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
 # * general settings
