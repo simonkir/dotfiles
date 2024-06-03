@@ -300,8 +300,11 @@ with prefix arg, call `org-return'"
   (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
                                  "* TODO %?"
                                  :empty-lines 1)
-                                ("v" "uni TODO entry" entry (file "")
+                                ("v" "uni veranstaltung TODO entry" entry (file "")
                                  "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
+                                 :empty-lines 1)
+                                ("a" "uni abgabe TODO entry" entry (file "")
+                                 "* PREP %?\n- [ ] machen\n- [ ] vergleichen\n- [ ] abgeben"
                                  :empty-lines 1)))
 
   (general-def org-capture-mode-map

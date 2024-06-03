@@ -13,4 +13,4 @@
 
 #+title: $1
 #+author: ${2:simonkir}$0
-#+date: {{{time("%d. %B %Y")}}}
+#+date: {{{time(%d. %B %Y)}}}

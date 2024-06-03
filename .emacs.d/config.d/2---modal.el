@@ -78,6 +78,7 @@
 
     "C-z" 'meow-motion-mode
     ;;"%" ;; reserved for skparens
+    "#" 'comment-or-uncomment-region
     "~" 'sk:toggle-case
     "(" 'backward-sexp
     ")" 'forward-sexp
