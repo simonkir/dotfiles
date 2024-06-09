@@ -304,7 +304,7 @@ with prefix arg, call `org-return'"
                                  "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
                                  :empty-lines 1)
                                 ("a" "uni abgabe TODO entry" entry (file "")
-                                 "* PREP %?\n- [ ] machen\n- [ ] vergleichen\n- [ ] abgeben"
+                                 "* TODO %?\n- [ ] machen\n- [ ] vergleichen\n- [ ] abgeben"
                                  :empty-lines 1)))
 
   (general-def org-capture-mode-map
