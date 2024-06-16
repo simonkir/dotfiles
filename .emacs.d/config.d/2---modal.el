@@ -23,14 +23,6 @@
   (setq meow-keypad-leader-dispatch       sk:leader-map)
   (setq meow-keypad-describe-delay        most-positive-fixnum)
 
-; ** faces
-  ;; mainly used in doom-modeline
-  (set-face-attribute 'meow-motion-indicator nil :foreground "#ecbe7b")
-  (set-face-attribute 'meow-insert-indicator nil :foreground "#98be65")
-  (set-face-attribute 'meow-normal-indicator nil :foreground "#c678dd")
-  (set-face-attribute 'meow-beacon-indicator nil :foreground "#ff6c6b")
-  (set-face-attribute 'meow-keypad-indicator nil :foreground "#89ddff")
-
 ; ** helper functions
   (defun sk:meow-digit-argument-or-eval ()
     "when there is a region, act like eval, otherwise use digit-argument"

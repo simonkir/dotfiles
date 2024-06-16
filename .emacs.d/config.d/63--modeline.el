@@ -24,6 +24,14 @@
   (setq doom-modeline-bar-width 3)
   (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
 
+  (setq doom-modeline-modal-icon t)
+  (setq doom-modeline-modal-modern-icon nil)
+  (set-face-attribute 'doom-modeline-evil-motion-state nil :foreground "#ecbe7b")
+  (set-face-attribute 'doom-modeline-evil-insert-state nil :foreground "#98be65")
+  (set-face-attribute 'doom-modeline-evil-normal-state nil :foreground "#c678dd")
+  (set-face-attribute 'doom-modeline-evil-visual-state nil :foreground "#ff6c6b")
+  (set-face-attribute 'doom-modeline-evil-operator-state nil :foreground "#89ddff")
+
   (setq doom-modeline-workspace-name nil)
   (setq doom-modeline-persp-name nil)
   (setq doom-modeline-buffer-encoding nil)

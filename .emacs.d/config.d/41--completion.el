@@ -129,6 +129,7 @@ else: indent"
   :config
   (setq vertico-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
   (vertico-posframe-mode))
+
 ; ** marginalia
 (use-package marginalia
   :demand t
