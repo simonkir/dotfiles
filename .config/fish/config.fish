@@ -11,6 +11,11 @@ abbr -a "rm" "rm -I"
 abbr -a "gspdf" "gs -q -dNOPAUSE -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook"
 #abbr -a "vifm" "~/.config/vifm/scripts/vifmrun"
 
+function mkcd
+    mkdir $argv[1]
+    cd $argv[1]
+end
+
 function multicd
     echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 end
