@@ -297,15 +297,9 @@ with prefix arg, call `org-return'"
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
   (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
 
-  (setq org-capture-templates '(("c" "generic TODO entry" entry (file "")
-                                 "* TODO %?"
-                                 :empty-lines 1)
-                                ("v" "uni veranstaltung TODO entry" entry (file "")
-                                 "* PREP %?\n- [ ] res\n- [ ] vorarb\n- [ ] vl anschauen\n- [ ] wdh"
-                                 :empty-lines 1)
-                                ("a" "uni abgabe TODO entry" entry (file "")
-                                 "* TODO %?\n- [ ] machen\n- [ ] vergleichen\n- [ ] abgeben"
-                                 :empty-lines 1)))
+  (setq org-capture-templates
+        '(("c" "generic TODO entry" entry (file "") "* TODO %?\n" :empty-lines 1)
+          ("v" "generic PREP entry" entry (file "") "* PREP %?\n" :empty-lines 1)))
 
   (general-def org-capture-mode-map
     "C-c C-c" nil)
