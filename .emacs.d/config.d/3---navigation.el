@@ -16,3 +16,10 @@
     "P" 'consult-yank-pop
     "M" 'consult-goto-line
     "v" 'consult-line))
+
+; * xref
+(use-package xref
+  :general
+  (general-def-leader
+    "v ." 'xref-find-definitions-other-window
+    "v :" 'xref-find-references))

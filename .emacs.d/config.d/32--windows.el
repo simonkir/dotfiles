@@ -72,54 +72,6 @@
   "C-SPC" 'sk:cycle-windows-forward
   "C-S-SPC" 'sk:cycle-windows-backward)
 
-; * centaur-tabs
-(use-package centaur-tabs
-; ** startup
-  :init
-  (if (daemonp)
-      (add-hook 'server-after-make-frame-hook #'centaur-tabs-mode)
-    (add-hook 'after-init-hook #'centaur-tabs-mode))
-
-  :config
-; ** general settings
-  (setq centaur-tabs-label-fixed-length 12)
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-set-bar 'left)
-
-  (setq centaur-tabs-icon-type 'nerd-icons)
-  (setq centaur-tabs-set-icons t)
-
-; ** tab grouping
-  (defun sk:centaur-tabs-buffer-groups ()
-    '("Everything"))
-
-  (defun sk:centaur-tabs-hide-tab (x)
-    (let ((name (format "%s" x)))
-      (cond
-       ;; show agenda buffer, hide newly opened org-buffers
-       ((ignore-error 'void-variable (member x org-agenda-new-buffers)) t)
-       ((string-prefix-p "*Org Agenda*" name) nil)
-
-       ;; explicitly show buffers
-       ((string-prefix-p "*dashboard*" name) nil)
-       ((string-prefix-p "*eat*" name) nil)
-       ((string-prefix-p "*maxima*" name) nil)
-
-       ;; hide buffers
-       ((window-dedicated-p (selected-window)) t)
-       ((string-prefix-p "CAPTURE-" name) t)
-       ((string-prefix-p "magit" name) t)
-       ((string-prefix-p "*" name) t)
-       ((string-prefix-p " *" name) t))))
-
-  (setq centaur-tabs-buffer-groups-function #'sk:centaur-tabs-buffer-groups)
-  (setq centaur-tabs-hide-tab-function #'sk:centaur-tabs-hide-tab)
-
-; ** keybinds
-  (general-def
-    "C-<tab>" 'centaur-tabs-forward
-    "C-<iso-lefttab>" 'centaur-tabs-backward))
-
 ; * transpose-frame
 (use-package transpose-frame
   :general (general-def-leader
@@ -129,15 +81,3 @@
     "w F" 'flip-frame
     "w f" 'flop-frame))
 
-; * zoom
-(use-package zoom
-  :general (general-def-leader
-    "t z" 'zoom-mode
-    "w z" 'zoom)
-  :config
-  ;; this doesnt seem to work
-  ;;(setq zoom-ignored-major-modes '(calc-mode calendar-mode))
-  ;;(setq zoom-ignored-buffer-name-regexps "^\\**Calc")
-
-  ;; this causes zoom to only balance when there are 3+ windows
-  (setq zoom-size '(0.5 . 0.5)))

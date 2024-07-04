@@ -76,9 +76,6 @@
   "p" 'help-go-back)
 
 ; * langs
-; ** gnuplot
-(use-package gnuplot)
-
 ; ** fish
 (use-package fish-mode)
 

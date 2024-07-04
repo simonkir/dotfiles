@@ -1,27 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * embark
-(use-package embark
-  :general (general-def
-    "<menu>" 'embark-act
-    "C-s" 'embark-isearch-forward)
-
-  :config
-  (setq embark-mixed-indicator-delay 1)
-
-  (general-def 'embark-become-file+buffer-map
-    "r" 'consult-recent-file
-    "B" 'consult-bookmark
-    "b" 'consult-buffer
-    "p" 'consult-project-buffer)
-
-  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
-  (vertico-multiform-mode))
-
-(use-package embark-consult
-  :demand t
-  :after embark)
-
 ; * parentheses
 ; ** electric
 (use-package electric

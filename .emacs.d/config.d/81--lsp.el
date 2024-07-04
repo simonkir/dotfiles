@@ -15,10 +15,3 @@
                '((python-mode python-ts-mode) .
                  ("jedi-language-server" :initializationOptions
                   (:completion (:disableSnippets t))))))
-
-; * xref
-(use-package xref
-  :general
-  (general-def-leader
-    "v ." 'xref-find-definitions-other-window
-    "v :" 'xref-find-references))

@@ -1,19 +1,18 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * in-buffer completion
-; ** cape (backend)
+; * cape (backend)
 (use-package cape
   :demand t
   :config
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster))
 
-; ** dabbrev (backend)
+; * dabbrev (backend)
 (use-package dabbrev
   :demand t
   :config
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
 
-; ** corfu (frontend)
+; * corfu (frontend)
 (use-package corfu
   :demand t
   :config
@@ -27,7 +26,7 @@
 
   (global-corfu-mode))
 
-; ** capf-setup
+; * capf-setup
 ;; general capfs
 (add-hook 'after-change-major-mode-hook
           #' (lambda ()
@@ -37,7 +36,7 @@
 ;; lang-specific capfs
 (add-hook 'org-mode-hook #'(lambda () (setq completion-at-point-functions '())))
 
-; ** backtab key
+; * backtab key
 (defun sk:complete-at-point-undo ()
   "determines and performs desired action on backtab input
 
@@ -56,7 +55,7 @@ else: un-expand last expansion"
 (general-def meow-insert-state-keymap
   "<backtab>" 'sk:complete-at-point-undo)
 
-; ** tab key
+; * tab key
 (defun sk:complete-at-point ()
   "determines and performs desired action on tab input
 
@@ -94,46 +93,3 @@ else: indent"
 
 (general-def meow-insert-state-keymap
   "<tab>"     'sk:complete-at-point)
-
-; * minibuffer completion
-; ** vertico
-(use-package vertico
-  :demand t
-  :config
-  (setq completion-ignore-case t)
-  (setq read-file-name-completion-ignore-case t)
-  (setq read-buffer-completion-ignore-case t)
-
-  (setq completion-styles '(basic partial-completion substring initials flex))
-  (setq completion-auto-help 'lazy)
-
-  (setq vertico-preselect 'first)
-
-  (general-def vertico-map
-    "C-w" 'vertico-directory-delete-word
-    "C-<backspace>" 'vertico-directory-delete-word
-    "<backspace>" 'vertico-directory-delete-char
-    "<S-return>" 'vertico-exit-input
-    "<return>" 'vertico-directory-enter
-    "<tab>" 'minibuffer-complete
-    "C-j" 'vertico-next
-    "C-k" 'vertico-previous)
-
-  (vertico-mode)
-  (vertico-indexed-mode))
-
-; ** vertico-posframe
-(use-package vertico-posframe
-  :demand t
-  :after vertico
-  :config
-  (setq vertico-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
-  (vertico-posframe-mode))
-
-; ** marginalia
-(use-package marginalia
-  :demand t
-  :config
-  (general-def minibuffer-local-map "M-f" 'marginalia-cycle)
-  (marginalia-mode))
-
