@@ -14,7 +14,10 @@
   :after dired
   :config
   (setq dired-dwim-target t)
-  (setq dirvish-reuse-session nil) ;; always delete unused buffers
+  (setq wdired-allow-to-change-permissions t)
+  (setq wdired-allow-to-redirect-links t)
+
+  (setq dirvish-reuse-session t) ;; always keep last dirvish buffer open
   (setq dirvish-attributes '(vc-state subtree-state nerd-icons git-msg file-time file-size))
   (setq dirvish-preview-dispatchers '(vc-diff archive image gif pdf))
   (setq dirvish-default-layout '(0 0 0.4))
