@@ -184,7 +184,7 @@ def assign_app_group(client):
 
     d = {
         group_names[0]: ["navigator", "firefox", "brave-browser", "qutebrowser"],
-        group_names[1]: ["emacs", "Emacs-29-3", "alacritty"],
+        group_names[1]: ["emacs", "Emacs-29-4", "alacritty"],
         group_names[2]: ["krita", "libreoffice", "org.pwmt.zathura", "blender", "org.inkscape.inkscape"],
         group_names[3]: ["chromium", "google-chrome"]
     }
