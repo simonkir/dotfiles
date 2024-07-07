@@ -1,26 +1,21 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * embark
-(use-package embark
-  :general (general-def
-    "C-." 'embark-act
-    "C-s" 'embark-isearch-forward)
+; * consult
+(use-package consult
+  :general
+  (general-def-leader
+    "b b" 'consult-buffer
+    "b B" 'consult-project-buffer
+    "w b" 'consult-buffer-other-window
+    "f b" 'consult-bookmark
+    "f r" 'consult-recent-file
+    "v e" 'consult-flymake
+    "v j" 'consult-outline)
 
-  :config
-  (setq embark-mixed-indicator-delay 0)
-
-  (general-def 'embark-become-file+buffer-map
-    "r" 'consult-recent-file
-    "B" 'consult-bookmark
-    "b" 'consult-buffer
-    "p" 'consult-project-buffer)
-
-  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
-  (vertico-multiform-mode))
-
-(use-package embark-consult
-  :demand t
-  :after embark)
+  (general-def meow-normal-state-keymap
+    "P" 'consult-yank-pop
+    "M" 'consult-goto-line
+    "v" 'consult-line))
 
 ; * vertico
 (use-package vertico

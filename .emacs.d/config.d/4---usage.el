@@ -53,12 +53,6 @@
 (use-package skcorrect
   :hook ((org-mode LaTeX-mode) . skcorrect-mode))
 
-; * prompts
-(defalias 'yes-or-no 'y-or-n-p)
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(setq-default use-dialog-box nil)
-
 ; * sk:functions
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"
