@@ -17,14 +17,16 @@
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-allow-to-redirect-links t)
 
-  (setq dirvish-reuse-session t) ;; always keep last dirvish buffer open
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+  (setq dirvish-time-format-string "%Y-%m-%d %H:%M")
   (setq dirvish-attributes '(vc-state subtree-state nerd-icons git-msg file-time file-size))
+
   (setq dirvish-preview-dispatchers '(vc-diff archive image gif pdf))
   (setq dirvish-default-layout '(0 0 0.4))
+  (setq dirvish-reuse-session t) ;; always keep last dirvish buffer open
 
-  (setq dirvish-use-header-line t)
-  (setq dirvish-header-line-height 22)
   (setq dirvish-mode-line-height doom-modeline-height)
+  (setq dirvish-header-line-height 22)
   (setq dirvish-hide-cursor nil) ;; dont highlight current line
 
   (general-def 'dirvish-mode-map
@@ -36,8 +38,6 @@
     "i" 'dired-toggle-read-only
     "h" 'dired-up-directory
     "l" 'dired-find-file)
-
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
 
   (dirvish-override-dired-mode))
 
