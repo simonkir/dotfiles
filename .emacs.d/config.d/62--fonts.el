@@ -38,7 +38,26 @@
   (setq mixed-pitch-variable-pitch-cursor nil)
   (setq mixed-pitch-set-height t)) ;; keep filled cursor
 
-; * prettification
+; * ligatures
+(use-package ligature
+  :demand t
+  :config
+  (ligature-set-ligatures
+   't
+   '("www" "ff" "ffi" "fi" "fj" "fl" "ft" "Fl" "Tl"
+     ("-" "-+") ;; horizontal lines
+     ("|" "[|-]+"))) ;; tables
+
+  (ligature-set-ligatures
+   '(prog-mode eat-mode)
+   '("**" "!=" ">=" "<=" "==" "&&" "||"
+     ":=" "++" "--" "</" "/>" "::" "__" "#!"
+     "/*" "*/" "//" ";;" ";;;" "\\n" "\\\\"
+     ("0" "x[0-9A-fa-f]+"))) ;; hexadecimals
+
+  (global-ligature-mode))
+
+; * prettify-symbols-mode
 ; ** org-mode definitions
 (defun sk:prettify-symbols-org-mode ()
   "add org-specific prettifications to 'prettify-symbols-alist'"
