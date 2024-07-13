@@ -216,7 +216,7 @@ floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
 # * bar
 # ** settings
 widget_defaults = {
-    "font": "Noto Sans",
+    "font": "Fira Code",
     "fontsize": 12,
     "padding": 2,
     "foreground": colors[8],
@@ -234,11 +234,14 @@ def init_widgets_list():
 
 # *** workspaces
         widget.GroupBox(
-            margin_y = 3, margin_x = 0,
-            padding_y = 6, padding_x = 5,
+            margin_y = 4, margin_x = 0,
+            padding_y = 0, padding_x = 3,
             borderwidth = 0,
+
             disable_drag = True,
             highlight_method = "text",
+
+            font = widget_defaults["font"] + " Bold",
             fontsize = 16,
             this_current_screen_border = colors[4],
             active = colors[5],
@@ -254,7 +257,7 @@ def init_widgets_list():
             scale = 0.6,
         ),
         widget.CurrentLayout(
-            font = "Noto Sans Bold",
+            font = widget_defaults["font"] + " Bold"
         ),
         widget.Sep(
             linewidth = sep_linewidth,

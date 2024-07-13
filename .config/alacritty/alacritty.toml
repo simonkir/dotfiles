@@ -42,18 +42,18 @@ foreground = "#eeffff"
 size = 10.0
 
 [font.bold]
-family = "monospace"
+family = "Fira Code"
 style = "Bold"
 
 [font.bold_italic]
-family = "monospace"
+family = "Fira Code"
 style = "Bold Italic"
 
 [font.italic]
-family = "monospace"
+family = "Fira Code"
 style = "Italic"
 
 [font.normal]
-family = "monospace"
+family = "Fira Code"
 style = "Regular"
 
