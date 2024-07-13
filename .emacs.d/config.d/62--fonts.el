@@ -51,15 +51,8 @@
   (add-to-list 'prettify-symbols-alist '("#+end_quote" . (?\s (bc . bc) ?”)))
 
   ;; misc
-  ;;(add-to-list 'prettify-symbols-alist '("#+attr_latex" . (?\s (Bc . Bc) ?l (Bc . Bc) ?_)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+attr_org" . (?\s (Bc . Bc) ?o (Bc . Bc) ?_)))
   (add-to-list 'prettify-symbols-alist '("#+author" . (?\s (Bc . Bc) ?𝘼)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+caption" . (?\s (Bc . Bc) ?»)))
   (add-to-list 'prettify-symbols-alist '("#+date" . (?\s (Bc . Bc) ?𝘿)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+latex_class" . (?\s (Bc . Bc) ?🄻)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+latex_class_options" . (?\s (Bc . Bc) ?🄻)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+latex_header" . (?\s (Bc . Bc) ?🅻)))
-  ;;(add-to-list 'prettify-symbols-alist '("#+options" . (?\s (Bc . Bc) ?☸)))
   (add-to-list 'prettify-symbols-alist '("#+subtitle" . (?\s (Bc . Bc) ?𝙩)))
   (add-to-list 'prettify-symbols-alist '("#+title" . (?\s (Bc . Bc) ?𝙏))))
 
@@ -86,7 +79,7 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("&\\longrightarrow&" . "⟶"))
   (add-to-list 'prettify-symbols-alist '("&\\longleftarrow&" . "⟵"))
 
-; *** braces
+; *** double-struck braces
   (add-to-list 'prettify-symbols-alist '("\\left(" . (?\s (Bc . Bc) ?⸨)))
   (add-to-list 'prettify-symbols-alist '("\\right)" . (?\s (Bc . Bc) ?⸩)))
   (add-to-list 'prettify-symbols-alist '("\\left[" . "⟦"))
@@ -140,11 +133,17 @@ not displayed in org documents unless in #+begin_latex environment"
   (add-to-list 'prettify-symbols-alist '("&" . "·"))
   (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·))))
 
+; ** prog-mode definitions
+(defun sk:prettify-symbols-prog-mode ()
+  "clear, then add general programming prettifications to `prettify-symbols-alist'"
+  (setq-local prettify-symbols-alist nil))
+
 ; ** hooks & activation
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode)
 (add-hook 'org-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
 (add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode)
 (add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
+(add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode)
 
 (global-prettify-symbols-mode)
 
