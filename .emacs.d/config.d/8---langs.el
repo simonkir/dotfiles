@@ -28,6 +28,8 @@
   :general
   (general-def-leader
     "r t" 'sk:run-fish
+    "r f" 'sk:run-fish
+    "r b" 'sk:run-bash
     "r p" 'sk:run-ipython
     "r m" 'sk:run-maxima)
 
@@ -41,6 +43,10 @@
   (defun sk:run-fish ()
     (interactive)
     (eat "/usr/bin/env fish" t))
+
+  (defun sk:run-bash ()
+    (interactive)
+    (eat "/usr/bin/env bash" t))
 
   (defun sk:run-maxima ()
     (interactive)
