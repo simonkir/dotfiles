@@ -30,8 +30,7 @@
     "r t" 'sk:run-fish
     "r f" 'sk:run-fish
     "r b" 'sk:run-bash
-    "r p" 'sk:run-ipython
-    "r m" 'sk:run-maxima)
+    "r p" 'sk:run-ipython)
 
   :config
   (setq eat-kill-buffer-on-exit t)
@@ -48,18 +47,8 @@
     (interactive)
     (eat "/usr/bin/env bash" t))
 
-  (defun sk:run-maxima ()
-    (interactive)
-    (eat "/usr/bin/env maxima") t)
-
   (general-def '(eat-semi-char-mode-map eat-char-mode-map)
     "C-SPC" nil))
-
-; ** maxima
-(use-package maxima
-  :init
-  (add-to-list 'auto-mode-alist (cons "\\.mac\\'" 'maxima-mode))
-  (add-to-list 'interpreter-mode-alist (cons "maxima" 'maxima-mode)))
 
 ; ** calc
 (use-package calc
