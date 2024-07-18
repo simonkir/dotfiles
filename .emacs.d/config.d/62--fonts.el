@@ -3,11 +3,11 @@
 ; * font switching
 ; ** default fonts
 (setq sk:fonts-fixed-pitch '("Fira Code" "Hack" "Liberation Mono" "Monospace"))
-(setq sk:fonts-variable-pitch '("Noto Serif" "C059" "Georgia"))
+(setq sk:fonts-variable-pitch '("Noto Serif" "C059" "P052" "Georgia"))
 (setq sk:font-size 95)
 
-(set-face-attribute 'default nil :family "Fira Code" :height sk:font-size)
-(set-face-attribute 'variable-pitch nil :family "Noto Serif" :height sk:font-size)
+(set-face-attribute 'default nil :family (car sk:fonts-fixed-pitch) :height sk:font-size)
+(set-face-attribute 'variable-pitch nil :family (car sk:fonts-variable-pitch) :height sk:font-size)
 
 ; ** switching defuns
 (defun sk:set-face-fixed ()
