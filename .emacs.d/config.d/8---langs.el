@@ -18,11 +18,6 @@
     "x" 'magit-delete-thing
     "p" 'magit-push))
 
-; ** eww
-(use-package eww
-  :config
-  (setq eww-search-prefix "http://frogfind.com/?q="))
-
 ; ** eat
 (use-package eat
   :general

@@ -72,7 +72,9 @@ should be called after changing the major mode"
    ;; org: edit element in special buffer
    ((and (derived-mode-p 'org-mode)
          (member (car (org-element-context))
-                 '(src-block
+                 '(comment-block
+                   example-block
+                   src-block
                    latex-environment
                    latex-fragment
                    table-cell

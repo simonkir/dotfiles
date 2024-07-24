@@ -41,6 +41,13 @@
 
   (dirvish-override-dired-mode))
 
+; * tramp
+(use-package tramp
+  :general
+  (general-def-leader
+    "b c" 'tramp-cleanup-all-buffers
+    "b C" 'tramp-cleanup-all-connections))
+
 ; * recentf
 (use-package recentf
   :demand t

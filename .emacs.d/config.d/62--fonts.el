@@ -41,12 +41,14 @@
 ; * ligatures
 (use-package ligature
   :demand t
+  :general (general-def-leader "d l" 'ligature-mode)
   :config
   (ligature-set-ligatures
    't
    '("www" "ff" "ffi" "fi" "fj" "fl" "ft" "Fl" "Tl"
      ("-" "-+") ;; horizontal lines
-     ("|" "[|-]+"))) ;; tables
+     ("|" "[|-]+") ;; tables
+     ("-" "[-|]+")))
 
   (ligature-set-ligatures
    '(prog-mode eat-mode)
