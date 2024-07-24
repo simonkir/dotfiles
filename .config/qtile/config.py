@@ -154,7 +154,7 @@ groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 group_labels = group_names[:]
-group_layouts = ["max", "max", "max", "max", "monadtall", "monadtall", "max", "monadtall"]
+group_layouts = ["max" for i in group_names]
 
 for i in range(len(group_names)):
     groups.append(
@@ -190,7 +190,7 @@ def assign_app_group(client):
     }
 
     for key, val in d.items():
-        if wm_class.lower() in map(str.lower, val):
+        if wm_class.lower() in [i.lower() for i in val]:
             client.togroup(key)
 
 # * layouts
