@@ -2,7 +2,7 @@
 
 ; * eglot
 (use-package eglot
-  :hook (python-mode . eglot-ensure)
+  :general (general-def-leader "r l" 'eglot)
   :config
   (setq eglot-autoshutdown t)
   (setq eglot-events-buffer-size 0)
