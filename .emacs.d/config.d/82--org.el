@@ -3,13 +3,13 @@
 ; * org
 ; ** init section
 (use-package org
-  :general (general-def-leader
-             "r n" #'(lambda () (interactive) (org-agenda nil "n"))
-             "r N" 'org-agenda
-             "r c" 'org-capture)
+  :general
+  (general-def-leader
+    "r n" 'sk:org-agenda-dashboard
+    "r N" 'org-agenda
+    "r c" 'org-capture)
 
   :config
-
 ; ** org-files / general org
 ; *** visuals
   (setq org-num-max-level 3)
@@ -226,6 +226,10 @@ with prefix arg, call `org-return'"
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
   (setq org-agenda-window-setup 'current-window)
+
+  (defun sk:org-agenda-dashboard ()
+    (interactive)
+    (org-agenda nil "n"))
 
   (general-def org-agenda-mode-map
     "D" 'org-agenda-goto-date

@@ -63,15 +63,6 @@
 ; ** org-mode definitions
 (defun sk:prettify-symbols-org-mode ()
   "add org-specific prettifications to 'prettify-symbols-alist'"
-  ;; environments
-  (add-to-list 'prettify-symbols-alist '("#+begin_latex latex" . (?\s (Bc . Bc) ?⮟)))
-  (add-to-list 'prettify-symbols-alist '("#+end_latex" . (?\s (Bc . Bc) ?⮝)))
-  (add-to-list 'prettify-symbols-alist '("#+begin_src" . (?\s (Bc . Bc) ?»)))
-  (add-to-list 'prettify-symbols-alist '("#+end_src" . (?\s (Bc . Bc) ?«)))
-  (add-to-list 'prettify-symbols-alist '("#+begin_quote" . (?\s (bc . bc) ?“)))
-  (add-to-list 'prettify-symbols-alist '("#+end_quote" . (?\s (bc . bc) ?”)))
-
-  ;; misc
   (add-to-list 'prettify-symbols-alist '("#+author" . (?\s (Bc . Bc) ?𝘼)))
   (add-to-list 'prettify-symbols-alist '("#+date" . (?\s (Bc . Bc) ?𝘿)))
   (add-to-list 'prettify-symbols-alist '("#+subtitle" . (?\s (Bc . Bc) ?𝙩)))
