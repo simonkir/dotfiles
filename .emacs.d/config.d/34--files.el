@@ -68,3 +68,7 @@
   :config
   ;; always save bookmarks after changes have been made
   (setq bookmark-save-flag 1))
+
+; * auto-revert-mode
+(global-auto-revert-mode)
+
