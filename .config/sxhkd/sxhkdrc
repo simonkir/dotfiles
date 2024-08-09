@@ -1,14 +1,14 @@
 # -*- mode: conf -*-
 
 # * alphabetical
+super + alt + a
+    emacsclient -cq --eval "(sk:org-agenda-dashboard)"
+
 super + alt + b
-    blender
+    brave https://meteoblue.com
 
 super + alt + c
-    ~/.config/conky/launch-conky.sh
-
-super + d
-    rofi -show drun -theme ~/.config/rofi/themes/simonkir-dmenu.rasi
+    brave https://calendar.google.com
 
 super + alt + e
     emacsclient -cq
@@ -18,6 +18,9 @@ super + alt + shift + e
 
 super + alt + f
     ~/.config/picom/toggle-darkmode.sh
+
+super + alt + g
+    ~/.config/conky/launch-conky.sh
 
 super + alt + h
     ~/.config/simonkir/random-wallpaper.sh
@@ -29,7 +32,10 @@ super + alt + k
     krita
 
 super + alt + m
-    minecraft-launcher
+    brave https://mail.google.com
+
+super + alt + n
+    brave https://web.whatsapp.com
 
 super + alt + o
     libreoffice
@@ -41,10 +47,7 @@ super + alt + shift + p
     paprefs
 
 super + alt + r
-    pkill -USR1 -x sxhkd
-
-super + alt + t
-    ~/.config/simonkir/screenlayout.sh
+    ~/.config/sxhkd/launch-sxhkd.sh
 
 super + alt + s
     brave https://open.spotify.com
@@ -58,11 +61,14 @@ super + alt + shift + w
 super + alt + ctrl + w
     google-chrome-stable
 
-super + alt + y
+super + alt + x
     ~/.config/simonkir/bluetooth-connect.sh
 
-super + alt + shift + y
+super + alt + shift + x
     ~/.config/simonkir/bluetooth-disconnect.sh
+
+super + alt + y
+    brave https://youtube.com
 
 # * window-manager stuff
 super + Escape

@@ -5,8 +5,7 @@
 xfce4-power-manager &
 
 emacs --daemon &
-sxhkd -c ~/.config/sxhkd/sxhkdrc &
-
+~/.config/sxhkd/launch-sxhkd.sh &
 ~/.config/picom/picom.sh &
 
 volumeicon &

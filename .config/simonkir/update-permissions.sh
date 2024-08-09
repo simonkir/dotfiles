@@ -19,12 +19,13 @@ chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 
 # * functionality
 chmod +x ~/.config/simonkir/screenlayout.sh
+chmod +x ~/.config/sxhkd/launch-sxhkd.sh
 #chmod +x ~/.config/vifm/scripts/vifmimg
 #chmod +x ~/.config/vifm/scripts/vifmrun
 
 # * visuals
 chmod +x ~/.config/picom/picom.sh
-#chmod +x ~/.config/picom/toggle-darkmode.sh
+chmod +x ~/.config/picom/toggle-darkmode.sh
 chmod +x ~/.config/simonkir/random-wallpaper.sh
 chmod +x ~/.config/conky/launch-conky.sh
 chmod +x ~/.config/polybar/launch.sh

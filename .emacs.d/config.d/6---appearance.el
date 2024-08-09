@@ -37,6 +37,6 @@
   ;;(setq dashboard-set-heading-icons t) ;; atm, there is an issue with oction definition
 
   ;; open dashboard when opening a new frame
-  (if (daemonp)
-      (add-hook 'server-after-make-frame-hook #'(lambda () (dashboard-open)))
-    (dashboard-open)))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-force-refresh t) ;; always show icons
+  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
