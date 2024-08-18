@@ -28,6 +28,9 @@ super + alt + h
 super + alt + i
     inkscape
 
+super + alt + j
+    brave https://web.whatsapp.com
+
 super + alt + k
     krita
 
@@ -35,7 +38,7 @@ super + alt + m
     brave https://mail.google.com
 
 super + alt + n
-    brave https://web.whatsapp.com
+    brave https://keep.google.com/u/1/
 
 super + alt + o
     libreoffice

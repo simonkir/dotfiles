@@ -22,7 +22,6 @@
 (use-package eat
   :general
   (general-def-leader
-    "r t" 'sk:run-fish
     "r f" 'sk:run-fish
     "r b" 'sk:run-bash
     "r p" 'sk:run-ipython)
