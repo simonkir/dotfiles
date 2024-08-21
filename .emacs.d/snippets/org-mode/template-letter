@@ -7,7 +7,7 @@
 #+latex_class_options: [a4paper,11pt,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[skip=\baselineskip]{parskip}
 #+latex_header: \usepackage{german}
-# #+latex_header: \renewcommand{\familydefault}{\sfdefault}
+#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
 #+latex: \renewcommand*{\raggedsignature}{\raggedright}
 
 #+options: toc:nil
@@ -21,13 +21,13 @@
 #+attr_latex: :options {${4:recipient}\\\\${5:recipient's address}}
 #+begin_letter
 
-\setkomavar{subject}{${6:subject}}
+\setkomavar{subject}{${6:SUBJECT}}
 
-\opening{${7:greeting}}
+\opening{${7:GREETING}}
 
 $0
 
-\closing{Freundliche Grüße}
+\closing{GREETING}
 
 # \ps PS: …
 

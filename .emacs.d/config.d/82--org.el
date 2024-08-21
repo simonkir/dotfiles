@@ -331,7 +331,7 @@ with prefix arg, call `org-return'"
 (use-package ox-latex
   :config
   (setq org-latex-compiler "xetex")
-  (setq org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
+  (setq org-latex-pdf-process '("latexmk -f -pdflua -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
 
   (add-to-list 'org-latex-classes '("report-nopart" "\\documentclass[11pt]{report}"
                                     ("\\chapter{%s}" . "\\chapter*{%s}")
