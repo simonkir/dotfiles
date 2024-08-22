@@ -271,20 +271,52 @@ def init_widgets_list():
             active_color = colors[8],
             inactive_color = colors[8],
         ),
+        widget.WindowCount(
+            text_format = "[{num}]",
+        ),
         widget.WindowName(
         ),
 
-# *** updates
+# *** temperature
         widget.Image(
-            filename = "~/.config/qtile/icons/updates.png",
+            filename = "~/.config/qtile/icons/temperature.svg",
             margin = icon_margin,
         ),
-        widget.CheckUpdates(
-            custom_command = "checkupdates",
-            display_format = "{updates}",
-            initial_text = "⧖",
-            no_update_string = "0",
-            update_interval = 1800,
+        widget.ThermalSensor(
+            format = "{temp}{unit}",
+            threshold = 70,
+            foreground = colors[8],
+            foreground_alert = colors[1],
+            update_interval = 2,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
+# *** cpu
+        widget.Image(
+            filename = "~/.config/qtile/icons/cpu.svg",
+            margin = icon_margin,
+        ),
+        widget.CPU(
+            format = "{load_percent}%",
+            update_interval = 2,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
+# *** memory
+        widget.Image(
+            filename = "~/.config/qtile/icons/memory.svg",
+            margin = icon_margin,
+        ),
+        widget.Memory(
+            format = "{MemUsed:.1f}G",
+            measure_mem = "G",
+            update_interval = 2,
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -293,7 +325,7 @@ def init_widgets_list():
 
 # *** battery
         widget.Image(
-            filename = "~/.config/qtile/icons/battery.png",
+            filename = "~/.config/qtile/icons/battery.svg",
             margin = icon_margin,
         ),
         widget.Battery(
@@ -312,55 +344,9 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
-# *** cpu
-        widget.Image(
-            filename = "~/.config/qtile/icons/cpu.png",
-            margin = icon_margin,
-        ),
-        widget.CPU(
-            format = "{load_percent}%",
-            update_interval = 2,
-        ),
-        widget.Sep(
-            linewidth = sep_linewidth,
-            padding = sep_padding,
-        ),
-
-# *** temperature
-        widget.Image(
-            filename = "~/.config/qtile/icons/temperature.png",
-            margin = icon_margin,
-        ),
-        widget.ThermalSensor(
-            format = "{temp}{unit}",
-            threshold = 70,
-            foreground = colors[8],
-            foreground_alert = colors[1],
-            update_interval = 2,
-        ),
-        widget.Sep(
-            linewidth = sep_linewidth,
-            padding = sep_padding,
-        ),
-
-# *** memory
-        widget.Image(
-            filename = "~/.config/qtile/icons/memory.png",
-            margin = icon_margin,
-        ),
-        widget.Memory(
-            format = "{MemUsed:.1f}G",
-            measure_mem = "G",
-            update_interval = 2,
-        ),
-        widget.Sep(
-            linewidth = sep_linewidth,
-            padding = sep_padding,
-        ),
-
 # *** clock
         widget.Image(
-            filename = "~/.config/qtile/icons/clock.png",
+            filename = "~/.config/qtile/icons/clock.svg",
             margin = icon_margin,
         ),
         widget.Clock(
@@ -391,17 +377,13 @@ def init_widgets(has_tray=False):
         with open("/sys/class/power_supply/BAT0/capacity") as f:
             pass
     except FileNotFoundError:
-        widgets.pop(10) # remove battery icon
-        widgets.pop(10) # remove battery widget
-        widgets.pop(10) # remove separator right of battery widget
+        widgets.pop(7) # remove battery icon
+        widgets.pop(7) # remove battery widget
+        widgets.pop(7) # remove separator right of battery widget
 
     if not has_tray:
         widgets.pop(-1) # remove systray widget
         widgets.pop(-1) # remove sep widget
-
-        widgets.pop(7) # remove update icon
-        widgets.pop(7) # remove update widget
-        widgets.pop(7) # remove separator right of update widget
 
     return widgets
 
