@@ -8,9 +8,4 @@ emacs --daemon &
 ~/.config/sxhkd/launch-sxhkd.sh &
 ~/.config/picom/picom.sh &
 
-volumeicon &
 nm-applet &
-
-if not bluetoothctl show | grep -q "No default controller available"
-    blueberry-tray &
-end

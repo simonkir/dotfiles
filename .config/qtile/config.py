@@ -41,6 +41,7 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
     Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod], "r", lazy.reload_config()),
     Key([mod, "shift"], "r", lazy.restart()),
 
 # ** layout, screens, focus
@@ -344,6 +345,26 @@ def init_widgets_list():
             padding = sep_padding,
         ),
 
+# *** bluetooth
+        widget.Image(
+            filename = "~/.config/qtile/icons/bluetooth.svg",
+            margin = icon_margin,
+        ),
+        widget.Bluetooth(
+            default_text = "{num_connected_devices}",
+            adapter_format = "{name} {powered}{discovery}",
+            device_format = "{name} {symbol}{battery_level}",
+            device_battery_format = " {battery}%",
+            symbol_powered = ("◆", "◇"),
+            symbol_discovery = (" …", ""),
+            symbol_paired = "◇",
+            symbol_connected = "◆",
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
 # *** clock
         widget.Image(
             filename = "~/.config/qtile/icons/clock.svg",
@@ -373,13 +394,13 @@ def init_widgets(has_tray=False):
     #       be careful when changing widget order
     #       should be fixed at some point
 
-    try:
-        with open("/sys/class/power_supply/BAT0/capacity") as f:
-            pass
-    except FileNotFoundError:
-        widgets.pop(7) # remove battery icon
-        widgets.pop(7) # remove battery widget
-        widgets.pop(7) # remove separator right of battery widget
+    # try:
+    #     with open("/sys/class/power_supply/BAT0/capacity") as f:
+    #         pass
+    # except FileNotFoundError:
+    #     widgets.pop(7) # remove battery icon
+    #     widgets.pop(7) # remove battery widget
+    #     widgets.pop(7) # remove separator right of battery widget
 
     if not has_tray:
         widgets.pop(-1) # remove systray widget

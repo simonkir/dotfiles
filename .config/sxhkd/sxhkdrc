@@ -5,10 +5,19 @@ super + alt + a
     emacsclient -cq --eval "(sk:org-agenda-dashboard)"
 
 super + alt + b
-    brave https://meteoblue.com
+    ~/.config/simonkir/bluetooth-connect.sh
+
+super + alt + shift + b
+    ~/.config/simonkir/bluetooth-disconnect.sh
+
+super + alt + ctrl + b
+    blueberry
 
 super + alt + c
     brave https://calendar.google.com
+
+super + alt + d
+    ~/.config/picom/toggle-darkmode.sh
 
 super + alt + e
     emacsclient -cq
@@ -17,7 +26,7 @@ super + alt + shift + e
     emacs
 
 super + alt + f
-    ~/.config/picom/toggle-darkmode.sh
+    brave https://meteoblue.com
 
 super + alt + g
     ~/.config/conky/launch-conky.sh
@@ -63,12 +72,6 @@ super + alt + shift + w
 
 super + alt + ctrl + w
     google-chrome-stable
-
-super + alt + x
-    ~/.config/simonkir/bluetooth-connect.sh
-
-super + alt + shift + x
-    ~/.config/simonkir/bluetooth-disconnect.sh
 
 super + alt + y
     brave https://youtube.com

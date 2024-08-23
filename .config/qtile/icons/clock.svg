@@ -31,7 +31,8 @@
      inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g1" />
+     inkscape:current-layer="g1"
+     showgrid="false" />
   <linearGradient
      id="SVGID_1_"
      gradientUnits="userSpaceOnUse"
@@ -43,12 +44,12 @@
        offset="0"
        stop-color="#ffa68d"
        id="stop2"
-       style="stop-color:#296dff;stop-opacity:1;" />
+       style="stop-color:#154fff;stop-opacity:1;" />
     <stop
        offset="1"
        stop-color="#fd3a84"
        id="stop1"
-       style="stop-color:#60fffd;stop-opacity:1;" />
+       style="stop-color:#2cf7ff;stop-opacity:1;" />
   </linearGradient>
   <g
      id="g3">

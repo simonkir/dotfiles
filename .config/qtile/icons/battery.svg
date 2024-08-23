@@ -16,17 +16,95 @@
   <defs
      id="defs3">
     <linearGradient
+       id="linearGradient28">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop27"
+         style="stop-color:#4a35ff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop28"
+         style="stop-color:#ef5fff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient26">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop25"
+         style="stop-color:#543fff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop26"
+         style="stop-color:#ef5fff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient24">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop23"
+         style="stop-color:#ab3fff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop24"
+         style="stop-color:#ef5fff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient22">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop21"
+         style="stop-color:#a632ff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop22"
+         style="stop-color:#ee59ff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient20">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop19"
+         style="stop-color:#8d27ff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop20"
+         style="stop-color:#ff4beb;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient18">
+      <stop
+         offset="0"
+         stop-color="#00b59c"
+         id="stop13"
+         style="stop-color:#9631ff;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#9cffac"
+         id="stop18"
+         style="stop-color:#2aa0ff;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient17">
       <stop
          offset="0"
          stop-color="#00b59c"
          id="stop16"
-         style="stop-color:#8053ff;stop-opacity:1;" />
+         style="stop-color:#7c31ff;stop-opacity:1;" />
       <stop
          offset="1"
          stop-color="#9cffac"
          id="stop17"
-         style="stop-color:#4cc9ff;stop-opacity:1;" />
+         style="stop-color:#2a82ff;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient15">
@@ -108,7 +186,7 @@
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient15"
+       xlink:href="#linearGradient26"
        id="linearGradient12"
        x1="444.17889"
        y1="512"
@@ -118,12 +196,12 @@
        gradientTransform="matrix(1.1965233,0,0,1.3636024,-106.53172,-105.64365)" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient17"
+       xlink:href="#linearGradient28"
        id="linearGradient13"
-       x1="444.17889"
+       x1="391"
        y1="512"
-       x2="60.178905"
-       y2="0"
+       x2="121"
+       y2="0.21714133"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-60.821093,-0.21714133)" />
   </defs>
@@ -136,10 +214,10 @@
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     showgrid="true"
-     inkscape:zoom="4.6459125"
-     inkscape:cx="137.10977"
-     inkscape:cy="321.25013"
+     showgrid="false"
+     inkscape:zoom="1.1614781"
+     inkscape:cx="91.263021"
+     inkscape:cy="257.00011"
      inkscape:window-width="1920"
      inkscape:window-height="1054"
      inkscape:window-x="1920"
@@ -161,7 +239,7 @@
        dotted="false"
        gridanglex="30"
        gridanglez="30"
-       visible="true" />
+       visible="false" />
   </sodipodi:namedview>
   <linearGradient
      id="lg1">
