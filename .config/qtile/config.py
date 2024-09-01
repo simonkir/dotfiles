@@ -272,9 +272,6 @@ def init_widgets_list():
             active_color = colors[8],
             inactive_color = colors[8],
         ),
-        widget.WindowCount(
-            text_format = "[{num}]",
-        ),
         widget.WindowName(
         ),
 

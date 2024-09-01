@@ -51,12 +51,12 @@
          stop-color="#FE0844"
          id="stop1"
          offset="0"
-         style="stop-color:#ff5847;stop-opacity:1;" />
+         style="stop-color:#ff592c;stop-opacity:1;" />
       <stop
          offset="1"
          stop-color="#FEB302"
          id="stop2"
-         style="stop-color:#ff3e9a;stop-opacity:1;" />
+         style="stop-color:#ff329c;stop-opacity:1;" />
     </linearGradient>
   </defs>
 </svg>
