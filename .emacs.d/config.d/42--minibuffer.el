@@ -21,13 +21,6 @@
 (use-package vertico
   :demand t
   :config
-  (setq completion-ignore-case t)
-  (setq read-file-name-completion-ignore-case t)
-  (setq read-buffer-completion-ignore-case t)
-
-  (setq completion-styles '(basic partial-completion substring initials flex))
-  (setq completion-auto-help 'lazy)
-
   (setq vertico-preselect 'first)
 
   (general-def vertico-map

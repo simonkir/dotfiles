@@ -1,32 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * cape (backend)
-(use-package cape
-  :demand t
-  :config
-  (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster))
+; * general settings
+; ** completion styles
+(setq completion-styles '(orderless basic partial-completion))
+(setq completion-auto-help 'lazy)
 
-; * dabbrev (backend)
-(use-package dabbrev
-  :demand t
-  :config
-  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
-
-; * corfu (frontend)
-(use-package corfu
-  :demand t
-  :config
-  (setq tab-always-indent 'complete)
-  (setq corfu-preselect 'prompt)
-  (setq corfu-cycle t)
-
-  (general-def corfu-map
-    "<tab>" 'corfu-next
-    "<backtab>" 'corfu-previous)
-
-  (global-corfu-mode))
-
-; * capf-setup
+; ** completion-at-point-functions
 ;; general capfs
 (add-hook 'after-change-major-mode-hook
           #' (lambda ()
@@ -35,6 +14,44 @@
 
 ;; lang-specific capfs
 (add-hook 'org-mode-hook #'(lambda () (setq completion-at-point-functions '())))
+
+; ** misc
+(setq completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+(setq read-buffer-completion-ignore-case t)
+
+; * backends
+; ** cape
+(use-package cape
+  :demand t
+  :config
+  (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster))
+
+; ** dabbrev
+(use-package dabbrev
+  :demand t
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode))
+
+; ** orderless
+(use-package orderless
+  :demand t)
+
+; * frontend (corfu)
+(use-package corfu
+  :demand t
+  :config
+  (setq tab-always-indent 'complete)
+  (setq corfu-quit-no-match nil)
+  (setq corfu-preselect 'prompt)
+  (setq corfu-cycle t)
+
+  (general-def corfu-map
+    "C-SPC"  'corfu-insert-separator
+    "<tab>" 'corfu-next
+    "<backtab>" 'corfu-previous)
+
+  (global-corfu-mode))
 
 ; * backtab key
 (defun sk:complete-at-point-undo ()
