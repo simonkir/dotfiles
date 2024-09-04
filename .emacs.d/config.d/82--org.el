@@ -333,17 +333,35 @@ with prefix arg, call `org-return'"
   (setq org-latex-compiler "xetex")
   (setq org-latex-pdf-process '("latexmk -f -pdflua -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
 
-  (add-to-list 'org-latex-classes '("report-nopart" "\\documentclass[11pt]{report}"
-                                    ("\\chapter{%s}" . "\\chapter*{%s}")
-                                    ("\\section{%s}" . "\\section*{%s}")
-                                    ("\\subsection{%s}" . "\\subsection*{%s}")
-                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-
-  (add-to-list 'org-latex-classes '("scrlttr2" "\\documentclass[11pt]{scrlttr2}"
-                                    ("\\chapter{%s}" . "\\chapter*{%s}")
-                                    ("\\section{%s}" . "\\section*{%s}")
-                                    ("\\subsection{%s}" . "\\subsection*{%s}")
-                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+  (setq org-latex-classes
+        '(("scrlttr2" "\\documentclass{scrlttr2}"
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("article" "\\documentclass{article}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("report" "\\documentclass{report}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("report-nopart" "\\documentclass{report}"
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("book" "\\documentclass{book}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
 
 ; * org-superstar
 (use-package org-superstar

@@ -4,10 +4,11 @@
 # condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+latex_class: article
-#+latex_class_options: [a4paper,hidelinks]
+#+latex_class_options: [11pt,a4paper,hidelinks]
 #+latex_header: \usepackage{a4wide,german}
 #+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
 # #+latex_header: \renewcommand{\thesubsection}{\alph{subsection}}
+# #+latex_header: \renewcommand{\chaptername}{Abschnitt}
 
 #+options: toc:nil H:4 num:3 todo:nil p:nil
 

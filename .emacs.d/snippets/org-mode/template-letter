@@ -4,7 +4,7 @@
 # condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+latex_class: scrlttr2
-#+latex_class_options: [a4paper,11pt,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
+#+latex_class_options: [11pt,a4paper,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[skip=\baselineskip]{parskip}
 #+latex_header: \usepackage{german}
 #+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
