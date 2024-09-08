@@ -3,24 +3,25 @@
 ; * font switching
 ; ** default fonts
 (setq sk:fonts-fixed-pitch '("Fira Code" "Hack" "Liberation Mono" "Monospace"))
-(setq sk:fonts-variable-pitch '("Noto Serif" "C059" "P052" "Georgia"))
-(setq sk:font-size 95)
+(setq sk:fonts-variable-pitch '("Georgia" "C059" "P052" "Noto Serif"))
+(setq sk:fixed-font-size 95)
+(setq sk:variable-font-size 105)
 
-(set-face-attribute 'default nil :family (car sk:fonts-fixed-pitch) :height sk:font-size)
-(set-face-attribute 'variable-pitch nil :family (car sk:fonts-variable-pitch) :height sk:font-size)
+(set-face-attribute 'default nil :family (car sk:fonts-fixed-pitch) :height sk:fixed-font-size)
+(set-face-attribute 'variable-pitch nil :family (car sk:fonts-variable-pitch) :height sk:variable-font-size)
 
 ; ** switching defuns
 (defun sk:set-face-fixed ()
   "set and apply 'default' font face"
   (interactive)
   (let* ((new-face (completing-read "new fixed-pitch face: " sk:fonts-fixed-pitch nil nil)))
-    (set-face-attribute 'default nil :family new-face :height sk:font-size)))
+    (set-face-attribute 'default nil :family new-face :height sk:fixed-font-size)))
 
 (defun sk:set-face-variable ()
   "set and apply 'variable' font face"
   (interactive)
   (let ((new-face (completing-read "new variable-pitch face: " sk:fonts-variable-pitch nil nil)))
-    (set-face-attribute 'variable-pitch nil :family new-face :height sk:font-size))
+    (set-face-attribute 'variable-pitch nil :family new-face :height sk:variable-font-size))
   (when mixed-pitch-mode
     (mixed-pitch-mode 'toggle)
     (mixed-pitch-mode 'toggle)))
