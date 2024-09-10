@@ -280,6 +280,10 @@ def init_widgets_list():
             filename = "~/.config/qtile/icons/temperature.svg",
             margin = icon_margin,
         ),
+        widget.Image(
+            filename = "~/.config/qtile/icons/temperature.png",
+            margin = icon_margin,
+        ),
         widget.ThermalSensor(
             format = "{temp}{unit}",
             threshold = 70,
@@ -294,7 +298,7 @@ def init_widgets_list():
 
 # *** cpu
         widget.Image(
-            filename = "~/.config/qtile/icons/cpu.svg",
+            filename = "~/.config/qtile/icons/cpu.png",
             margin = icon_margin,
         ),
         widget.CPU(
@@ -308,7 +312,7 @@ def init_widgets_list():
 
 # *** memory
         widget.Image(
-            filename = "~/.config/qtile/icons/memory.svg",
+            filename = "~/.config/qtile/icons/memory.png",
             margin = icon_margin,
         ),
         widget.Memory(
@@ -323,7 +327,7 @@ def init_widgets_list():
 
 # *** battery
         widget.Image(
-            filename = "~/.config/qtile/icons/battery.svg",
+            filename = "~/.config/qtile/icons/battery.png",
             margin = icon_margin,
         ),
         widget.Battery(
@@ -344,7 +348,7 @@ def init_widgets_list():
 
 # *** bluetooth
         widget.Image(
-            filename = "~/.config/qtile/icons/bluetooth.svg",
+            filename = "~/.config/qtile/icons/bluetooth.png",
             margin = icon_margin,
         ),
         widget.Bluetooth(
@@ -364,7 +368,7 @@ def init_widgets_list():
 
 # *** clock
         widget.Image(
-            filename = "~/.config/qtile/icons/clock.svg",
+            filename = "~/.config/qtile/icons/clock.png",
             margin = icon_margin,
         ),
         widget.Clock(
