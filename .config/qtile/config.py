@@ -21,36 +21,34 @@ dgroups_app_rules = []
 main = None
 
 # * theme
-colors = [
-    "#292d3e", # color 0, black
-    "#ff5370", # color 1, red
-    "#c3e88d", # color 2, green
-    "#ffcb6b", # color 3, yellow
-    "#82aaff", # color 4, blue
-    "#c792ea", # color 5, magenta
-    "#89ddff", # color 6, cyan
-    "#eeffff", # color 7, silver
-    "#eeffff", # foreground
-    "#292d3e"  # background
-]
+colors = {
+    "black"      : "#292d3e",
+    "red"        : "#ff5370",
+    "green"      : "#c3e88d",
+    "yellow"     : "#ffcb6b",
+    "blue"       : "#82aaff",
+    "magenta"    : "#c792ea",
+    "cyan"       : "#89ddff",
+    "white"      : "#eeffff",
+    "foreground" : "#eeffff",
+    "background" : "#292d3e"
+}
 
 # * keybinds
 keys = [
 
-# ** window management
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod], "q", lazy.window.kill()),
-    Key([mod, "shift"], "q", lazy.window.kill()),
+# ** restarting
     Key([mod], "r", lazy.reload_config()),
     Key([mod, "shift"], "r", lazy.restart()),
 
-# ** layout, screens, focus
+# ** windows
+# *** layouts
+    Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
-    Key([mod], "Tab", lazy.next_screen()),
-    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
-
+# *** focus
     Key(["mod1"], "Tab", lazy.group.next_window()),
     Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
 
@@ -63,7 +61,7 @@ keys = [
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
 
-# ** resizing
+# *** resizing
     Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
@@ -109,7 +107,12 @@ keys = [
         lazy.layout.increase_nmaster(),
         ),
 
-# ** monadtall / -wide layout
+# ** screens
+    Key([mod], "Tab", lazy.next_screen()),
+    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
+
+# ** layout-specific
+# *** monadtall / -wide layout
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
@@ -122,11 +125,11 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
 
-# ** foating layout
+# *** foating layout
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),
     Key([mod], "s", lazy.window.toggle_floating()),
 
-# ** bsp layout
+# *** bsp layout
 ###     # FLIP LAYOUT FOR BSP
 ###     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
 ###     Key([mod, "mod1"], "j", lazy.layout.flip_down()),
@@ -157,24 +160,15 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 group_labels = group_names[:]
 group_layouts = ["max" for i in group_names]
 
-for i in range(len(group_names)):
-    groups.append(
-        Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
-        ))
+for grname, grlayout, grlabel in zip(group_names, group_layouts, group_labels):
+    groups.append(Group(name=grname, layout=grlayout, label=grlabel))
 
 # ** keybinds
-for i in groups:
+for grname in group_names:
     keys.extend([
-
-        #CHANGE WORKSPACES
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-
-        # MOVE WINDOW TO SELECTED WORKSPACE 1-8
-        Key([mod, "shift"],   i.name, lazy.window.togroup(i.name)),
-        Key([mod, "control"], i.name, lazy.window.togroup(i.name), lazy.group[i.name].toscreen()),
+        Key([mod], grname, lazy.group[grname].toscreen()),
+        Key([mod, "shift"],   grname, lazy.window.togroup(grname)),
+        Key([mod, "control"], grname, lazy.window.togroup(grname), lazy.group[grname].toscreen()),
     ])
 
 # ** window rules
@@ -184,9 +178,9 @@ def assign_app_group(client):
     wm_class = client.window.get_wm_class()[0]
 
     d = {
-        group_names[0]: ["navigator", "firefox", "brave-browser", "qutebrowser"],
+        group_names[0]: ["navigator", "firefox", "brave-browser"],
         group_names[1]: ["emacs", "Emacs-29-4", "alacritty"],
-        group_names[2]: ["krita", "libreoffice", "org.pwmt.zathura", "blender", "org.inkscape.inkscape"],
+        group_names[2]: ["krita", "org.inkscape.inkscape", "libreoffice"],
         group_names[3]: ["chromium", "google-chrome"]
     }
 
@@ -197,10 +191,10 @@ def assign_app_group(client):
 # * layouts
 # ** initialization
 layout_theme = {
-    "margin":        0,
-    "border_width":  0,
-    "border_focus":  "#5e81ac",
-    "border_normal": "#4c566a"
+    "margin"        :  0,
+    "border_width"  :  0,
+    "border_focus"  :  "#5e81ac",
+    "border_normal" : "#4c566a"
 }
 
 layouts = [
@@ -220,17 +214,17 @@ widget_defaults = {
     "font": "Fira Code",
     "fontsize": 12,
     "padding": 2,
-    "foreground": colors[8],
-    "background": colors[9],
+    "foreground": colors["foreground"],
+    "background": colors["background"],
 }
 
-# ** widgets
-# function needed bc windget_list cannot be deepcopied easily
-def init_widgets_list():
-    icon_margin = 5
-    sep_linewidth = 1
-    sep_padding = 10
+icon_margin = 5
+sep_linewidth = 1
+sep_padding = 10
 
+# ** widgets
+# function needed, bc deepcopying the list is hard
+def init_widget_list():
     return [
 
 # *** workspaces
@@ -244,9 +238,9 @@ def init_widgets_list():
 
             font = widget_defaults["font"] + " Bold",
             fontsize = 16,
-            this_current_screen_border = colors[4],
-            active = colors[5],
-            inactive = colors[8],
+            this_current_screen_border = colors["blue"],
+            active = colors["magenta"],
+            inactive = colors["foreground"],
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -269,8 +263,7 @@ def init_widgets_list():
         widget.CurrentScreen(
             active_text = "",
             inactive_text = "",
-            active_color = colors[8],
-            inactive_color = colors[8],
+            active_color = colors["foreground"],
         ),
         widget.WindowName(
         ),
@@ -287,8 +280,8 @@ def init_widgets_list():
         widget.ThermalSensor(
             format = "{temp}{unit}",
             threshold = 70,
-            foreground = colors[8],
-            foreground_alert = colors[1],
+            foreground = colors["foreground"],
+            foreground_alert = colors["red"],
             update_interval = 2,
         ),
         widget.Sep(
@@ -337,7 +330,7 @@ def init_widgets_list():
             not_charging_char = "▶",
             full_char = "▶",
             show_short_text = False,
-            low_foreground = colors[1],
+            low_foreground = colors["red"],
             low_percentage = 0.2,
             update_interval = 10,
         ),
@@ -387,34 +380,9 @@ def init_widgets_list():
     ]
 
 # * screen layout
-# ** primary / secondary widget list
-def init_widgets(has_tray=False):
-    widgets = init_widgets_list()
-
-    # note: dirty code, but does the job
-    #       be careful when changing widget order
-    #       should be fixed at some point
-
-    # try:
-    #     with open("/sys/class/power_supply/BAT0/capacity") as f:
-    #         pass
-    # except FileNotFoundError:
-    #     widgets.pop(7) # remove battery icon
-    #     widgets.pop(7) # remove battery widget
-    #     widgets.pop(7) # remove separator right of battery widget
-
-    if not has_tray:
-        widgets.pop(-1) # remove systray widget
-        widgets.pop(-1) # remove sep widget
-
-    return widgets
-
-widgets_screen_primary = init_widgets(has_tray=True)
-widgets_screen_secondary = init_widgets(has_tray=False)
-
-# ** screen layout
-screens = [Screen(bottom=bar.Bar(widgets=widgets_screen_primary, size=26, opacity=0.9)),
-           Screen(bottom=bar.Bar(widgets=widgets_screen_secondary, size=26, opacity=0.9))]
+# note: dirty code, be careful when changing widget order
+screens = [Screen(bottom=bar.Bar(widgets=init_widget_list(), size=26, opacity=0.9)),
+           Screen(bottom=bar.Bar(widgets=init_widget_list()[:-2], size=26, opacity=0.9))]
 
 # * autostart
 @hook.subscribe.startup_once
