@@ -21,7 +21,8 @@
   (interactive)
   (save-excursion
     (left-char)
-    (and (looking-at " +")
+    (and (derived-mode-p 'org-mode)
+         (looking-at " +")
          (eq (car (org-element-context)) 'paragraph)
          (just-one-space))))
 
