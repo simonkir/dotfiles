@@ -53,7 +53,7 @@
 
 ; ** keybinds
 (general-def-leader
-  "w s" 'sk:split-and-follow-horizontally
+  "w h" 'sk:split-and-follow-horizontally
   "w v" 'sk:split-and-follow-vertically
 
   "w ="       'balance-windows
@@ -91,34 +91,48 @@
 
 ; ** tab grouping
   (defun sk:centaur-tabs-buffer-groups ()
-    '("Everything"))
-
-  (defun sk:centaur-tabs-hide-tab (x)
-    (let ((name (format "%s" x)))
+    (let ((buffer (current-buffer))
+          (name (buffer-name))
+          (default '("1"))
+          (semi-hidden '("5"))
+          (hidden '("8")))
       (cond
-       ;; show agenda buffer, hide newly opened org-buffers
-       ((ignore-error 'void-variable (member x org-agenda-new-buffers)) t)
-       ((string-prefix-p "*Org Agenda*" name) nil)
-
        ;; explicitly show buffers
-       ((string-prefix-p "*dashboard*" name) nil)
-       ((string-prefix-p "*eat*" name) nil)
-       ((string-prefix-p "*maxima*" name) nil)
+       ((string-prefix-p "*eat*" name) default)
+       ((string-prefix-p "*Org Src" name) default)
+       ((string-prefix-p "*Org Agenda*" name) default)
+
+       ;; semi-hide buffers
+       ((ignore-error 'void-variable (member buffer org-agenda-new-buffers)) semi-hidden)
+       ((string-prefix-p "CAPTURE-" name) semi-hidden)
+       ((string-prefix-p "magit" name) semi-hidden)
 
        ;; hide buffers
-       ((window-dedicated-p (selected-window)) t)
-       ((string-prefix-p "CAPTURE-" name) t)
-       ((string-prefix-p "magit" name) t)
-       ((string-prefix-p "*" name) t)
-       ((string-prefix-p " *" name) t))))
+       ((window-dedicated-p (selected-window)) hidden)
+       ((string-prefix-p "*" name) hidden)
+       ((string-prefix-p " *" name) hidden)
+
+       (t default))))
 
   (setq centaur-tabs-buffer-groups-function #'sk:centaur-tabs-buffer-groups)
+
+; ** tab hiding
+  (defun sk:centaur-tabs-hide-tab (buffer)
+    nil)
+
+  (setq centaur-tabs-hide-tabs-hooks nil)
   (setq centaur-tabs-hide-tab-function #'sk:centaur-tabs-hide-tab)
 
 ; ** keybinds
   (general-def
-    "C-<tab>" 'centaur-tabs-forward
-    "C-<iso-lefttab>" 'centaur-tabs-backward))
+    "C-<tab>" 'centaur-tabs-forward-tab
+    "C-<iso-lefttab>" 'centaur-tabs-backward-tab)
+
+  (general-def-leader
+    "w f" 'centaur-tabs-forward-tab
+    "w b" 'centaur-tabs-backward-tab
+    "w n" 'centaur-tabs-forward-group
+    "w p" 'centaur-tabs-backward-group))
 
 ; * transpose-frame
 (use-package transpose-frame
@@ -126,6 +140,6 @@
     "w w" 'transpose-frame
     "w r" 'rotate-frame-clockwise
     "w R" 'rotate-frame-anticlockwise
-    "w F" 'flip-frame
-    "w f" 'flop-frame))
+    "w S" 'flip-frame
+    "w s" 'flop-frame))
 
