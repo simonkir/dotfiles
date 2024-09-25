@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: plot tabular data (using gnuplot)
 # key: tpl
-# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+name: `(format-time-string "%Y%m%d-%H%M%S")`
 | $2 | $3 |

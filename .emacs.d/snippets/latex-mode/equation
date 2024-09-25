@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: equation (IEEEeqnarray)
+# key: eq
+# --
+\begin{IEEEeqnarray*}{rCl'l+x*}
+  $0
+\end{IEEEeqnarray*}

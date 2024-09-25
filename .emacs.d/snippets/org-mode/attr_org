@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: attr_org
 # key: ao
-# condition: (not (eq (car (org-element-context)) 'latex-environment))
 # --
 #+attr_org: $0

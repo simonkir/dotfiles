@@ -1,7 +1,0 @@
-# -*_ mode: snippet -*-
-# name: python src block
-# key: srcpy
-# condition: (not (eq (car (org-element-context)) 'latex-environment))
-# --
-#+begin_src python $0
-#+end_src
