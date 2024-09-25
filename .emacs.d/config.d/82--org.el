@@ -10,7 +10,7 @@
     "r c" 'org-capture)
 
   :config
-; ** org-files / general org
+; ** general org
 ; *** visuals
   (setq org-num-max-level 3)
   (setq org-startup-folded t)
@@ -21,7 +21,6 @@
   (setq org-fontify-whole-heading-line t)
   (setq org-fontify-done-headline t)
   (setq org-fontify-quote-and-verse-blocks t)
-  (setq org-highlight-latex-and-related '(native))
 
   (setq org-emphasis-alist
         '(("*" bold)
@@ -104,6 +103,7 @@ with prefix arg, call `org-return'"
 
     "RET" 'sk:org-return
     "M-RET" 'org-ctrl-c-ctrl-c
+    "C-M-<return>" 'org-return
 
     ;; disable these, use own outline keybinds instead
     ;; see 31--buffer-local.el
@@ -180,19 +180,54 @@ with prefix arg, call `org-return'"
     "C-c C-x M-v" 'org-redisplay-inline-images)
 
 ; *** latex
-; **** packages
+; **** general settings
+  (setq org-highlight-latex-and-related '(native))
+
   (setq org-latex-packages-alist
         '(("" "IEEEtrantools" t)
           ("" "gensymb" t)
           ("" "gauss" t)))
 
-; **** syntax table adjustments
   (add-hook 'org-mode-hook #'(lambda ()
                                (modify-syntax-entry ?< "@") ;; prevent < and > from being
                                (modify-syntax-entry ?> "@") ;; interpreted as delimiters
                                (modify-syntax-entry ?\\ "w")
                                (modify-syntax-entry ?^ "_") ;; allows prettification of super-/subscripts
                                (modify-syntax-entry ?$ "$")))
+
+; **** export settings
+  (setq org-latex-compiler "lualatex")
+  (setq org-latex-pdf-process '("latexmk -f -pdflua -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
+
+  (setq org-latex-classes
+        '(("article" "\\documentclass{article}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("report" "\\documentclass{report}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("report-nopart" "\\documentclass{report}"
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("book" "\\documentclass{book}"
+           ("\\part{%s}" . "\\part*{%s}")
+           ("\\chapter{%s}" . "\\chapter*{%s}")
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+          ("scrlttr2" "\\documentclass{scrlttr2}")
+          ("fmcmppk" "\\documentclass{fmcmppk}"
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 ; **** latex preview
   (setq sk:org-preview-latex-scale 1.5)
@@ -326,42 +361,6 @@ with prefix arg, call `org-return'"
     (interactive)
     (sk:org-babel-kill-session-at-point)
     (org-ctrl-c-ctrl-c)))
-
-; * ox-latex (latex export)
-(use-package ox-latex
-  :config
-  (setq org-latex-compiler "xetex")
-  (setq org-latex-pdf-process '("latexmk -f -pdflua -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
-
-  (setq org-latex-classes
-        '(("scrlttr2" "\\documentclass{scrlttr2}"
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("article" "\\documentclass{article}"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-          ("report" "\\documentclass{report}"
-           ("\\part{%s}" . "\\part*{%s}")
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("report-nopart" "\\documentclass{report}"
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-          ("book" "\\documentclass{book}"
-           ("\\part{%s}" . "\\part*{%s}")
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
 
 ; * org-superstar
 (use-package org-superstar

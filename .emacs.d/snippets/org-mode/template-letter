@@ -5,8 +5,8 @@
 # --
 #+latex_class: scrlttr2
 #+latex_class_options: [11pt,a4paper,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
-#+latex_header: \usepackage[skip=\baselineskip]{parskip}
-#+latex_header: \usepackage{german}
+#+latex_header: \usepackage{parskip}
+#+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
 #+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
 #+latex: \renewcommand*{\raggedsignature}{\raggedright}
 

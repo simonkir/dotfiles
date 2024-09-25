@@ -5,9 +5,9 @@
   :ensure auctex
   :init
   ;; in init because org-mode needs it too
-  (setq texmathp-tex-commands '())
-  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray" env-on)))
-  (add-to-list 'texmathp-tex-commands (quote ("IEEEeqnarray\*" env-on)))
+  (setq texmathp-tex-commands
+        '(("IEEEeqnarray" env-on)
+          ("IEEEeqnarray\*" env-on)))
 
   :config
 ; ** general settings
@@ -19,20 +19,28 @@
                                  (modify-syntax-entry ?\\ "w")
                                  (modify-syntax-entry ?$ "$")))
 
+; ** compilation, output, viewing
+  (setq-default TeX-engine 'luatex)
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+  (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
+
+  (TeX-source-correlate-mode)
+
+; ** parens
+  (setq TeX-insert-braces nil)
   (general-def 'LaTeX-mode-map
     "$" nil)
 
-; ** output / viewing
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-  (setq TeX-source-correlate-mode t)
-
-  (add-to-list 'TeX-source-correlate-method '(pdf . synctex))
-
 ; ** math settings
-  (setq TeX-insert-braces nil)
-
-  (setq preview-scale-function      1.5)
+  (setq preview-scale-function 1.5)
   (setq preview-auto-cache-preamble t))
+
+; ** auctex-latexmk
+(use-package auctex-latexmk
+  :after tex
+  :demand t
+  :config
+  (auctex-latexmk-setup))
 
 ; * sklatex
 (use-package sklatex

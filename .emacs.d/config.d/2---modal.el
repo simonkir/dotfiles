@@ -76,12 +76,13 @@
     ")" 'forward-sexp
     "=" 'indent-region
     "-" 'negative-argument
-    "." 'repeat
+    "," 'meow-reverse
+    "." 'recenter-top-bottom
+    ";" 'replace-string
+    ":" 'query-replace
     "*" 'meow-block
     "<" 'meow-beginning-of-thing
     ">" 'meow-end-of-thing
-    ";" 'meow-reverse
-    ":" 'recenter-top-bottom
 
     "a" 'meow-append
     ;; "A" nil ;; reserved for skparens
