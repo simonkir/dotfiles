@@ -3,6 +3,7 @@
 ; * auctex
 (use-package tex
   :ensure auctex
+  :pin manual
   :init
   ;; in init because org-mode needs it too
   (setq texmathp-tex-commands
@@ -14,6 +15,7 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq TeX-error-overview-open-after-TeX-run nil)
+  (setq LaTeX-indent-level 0)
 
   (add-hook 'LaTeX-mode-hook #'(lambda ()
                                  (modify-syntax-entry ?\\ "w")
@@ -45,14 +47,9 @@
 ; * sklatex
 (use-package sklatex
   :ensure nil
-  :hook
-  ((LaTeX-mode org-mode) . sklatex-mode)
-
+  :hook ((LaTeX-mode org-mode) . sklatex-mode)
   :config
-  (sklatex-default-setup)
-
   (general-def '(org-mode-map LaTeX-mode-map)
-    "C-c C-a" 'sklatex-dispatch
     "C-c A" 'sklatex-mode))
 
 ; * cdlatex
@@ -118,7 +115,7 @@
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
           (?\( ("\\subset" "\\subseteq" ""))
           (?\) ("\\supset" "\\supseteq" ""))
-          (?| ("\\BAR" "\\mapsto" "\\longmapsto"))
+          (?| ("\\mapsto" "\\longmapsto" ""))
           (?$ ("\\mid" "" ""))
           (?% ("\\nmid" "" ""))
           (?/ ("\\lor" "\\cup" ""))

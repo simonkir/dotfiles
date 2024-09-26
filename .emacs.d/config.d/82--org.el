@@ -88,10 +88,7 @@ with prefix arg, call `org-return'"
 
        ;; fallback
        (t
-        (org-return)))))
-
-  ;; compatibility with sklatex linebreaks
-  (advice-add 'org-return :after #'(lambda () (run-hooks 'post-self-insert-hook)))
+        (org-return 'indent)))))
 
 ; **** keybinds
   (general-def org-mode-map
@@ -185,8 +182,7 @@ with prefix arg, call `org-return'"
 
   (setq org-latex-packages-alist
         '(("" "IEEEtrantools" t)
-          ("" "gensymb" t)
-          ("" "gauss" t)))
+          ("" "gensymb" t)))
 
   (add-hook 'org-mode-hook #'(lambda ()
                                (modify-syntax-entry ?< "@") ;; prevent < and > from being

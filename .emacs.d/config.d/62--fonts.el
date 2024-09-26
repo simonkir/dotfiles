@@ -81,7 +81,6 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("&|" . "|"))
   (add-to-list 'prettify-symbols-alist '("\\\\" . (?\s (Bc . Bc) ?⏎)))
   (add-to-list 'prettify-symbols-alist '("&\\approx&" . "≈"))
-  (add-to-list 'prettify-symbols-alist '("&\\BAR&" . "‖"))
   (add-to-list 'prettify-symbols-alist '("&\\neq&" . "≠"))
   (add-to-list 'prettify-symbols-alist '("&\\overset{!}{=}&" . (?= (tc . bc) ?!)))
   (add-to-list 'prettify-symbols-alist '("&\\geq&" . "≥"))
