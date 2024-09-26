@@ -1,16 +1,14 @@
 ;;; -*- lexical-binding: t; -*-
 
 ; * sk:functions
-; ** definitions
-(defun sk:kill-current-buffer ()
-  "kills currently visited buffer"
+(defun sk:kill-this-buffer ()
+  "unconditionally kill the current buffer"
   (interactive)
   (kill-buffer (current-buffer)))
 
-; ** keybinds
 (general-def-leader
   ;;"b b" nil ;; reserved for consult
-  "b k" 'sk:kill-current-buffer
+  "b k" 'sk:kill-this-buffer
   "b K" 'kill-buffer-and-window)
 
 ; * uniquify

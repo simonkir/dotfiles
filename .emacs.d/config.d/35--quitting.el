@@ -1,56 +1,38 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * helper-functions
-(defun sk:maybe-save-all-buffers ()
-  "searches for unsaved file-visiting buffer.
-if there is one, switch to it and prompt whether to save, not save or abort current action
-
-returns t if all buffers are saved"
+; * helper functions
+(defun sk:kill-terminal ()
+  "kill the currently active terminal"
   (interactive)
-  (let (unsaved-buffers
-        decision
-        (abort nil))
-    (dolist (element (buffer-list))
-      (when (and (buffer-modified-p element) (buffer-file-name element))
-        (switch-to-buffer element t)
-        (setq decision (read-char (format "unsaved buffer: %s. [s]ave, [i]gnore, [a]bort?" (buffer-name element))))
-        (cond
-         ((eq decision ?s) (save-buffer))
-         ((eq decision ?i) nil)
-         (t (setq abort t)))))
-    (not abort)))
+  (if (frame-parameter nil 'client)
+      (delete-frame)
+    (kill-emacs)))
 
 ; * sk:soft-quit
 (defun sk:soft-quit ()
-  "performes an soft quit of emacs
-
-i. e. closing the terminal, unless there are unsaved changes"
+  "performes an soft quit of emacs, i. e. closing the terminal"
   (interactive)
-  (when (sk:maybe-save-all-buffers)
-    (save-buffers-kill-terminal)))
+  (save-some-buffers)
+  (sk:kill-terminal))
 
 ; * sk:harsh-quit
 (defun sk:harsh-quit ()
-  "performes an harsh quit of emacs
-
-i. e. killing all open buffers and quitting the terminal, unless there are unsaved changes"
+  "performes an harsh quit of emacs, i. e. killing all open buffers and quitting the terminal"
   (interactive)
-  (when (sk:maybe-save-all-buffers)
-    (dolist (element (centaur-tabs-buffer-list))
-      (unless (string= (buffer-name element) "*dashboard*")
-        (kill-buffer element)))
-    (save-buffers-kill-terminal)))
+  (save-some-buffers)
+  (let ((kill-buffer-query-functions nil))
+   (dolist (buffer (centaur-tabs-buffer-list))
+     (set-buffer-modified-p nil)
+     (kill-buffer buffer)))
+  (sk:kill-terminal))
 
 ; * sk:daemon-quit
 (defun sk:daemon-quit ()
-  "performes an daemon quit of emacs
-
-i. e. killing the terminal, unless there are unsaved changes
-note: when using standalone, makes emacs restart"
+  "performes an daemon quit of emacs, i. e. killing and restarting the emacs process"
   (interactive)
   (when (yes-or-no-p "Really perform sk:daemon-quit? ")
-    (when (sk:maybe-save-all-buffers)
-      (kill-emacs nil t))))
+    (save-some-buffers)
+    (kill-emacs nil t)))
 
 ; * keybinds
 (general-def-leader
