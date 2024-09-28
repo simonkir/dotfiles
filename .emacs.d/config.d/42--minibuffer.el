@@ -42,7 +42,11 @@
   :after vertico
   :config
   (setq vertico-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
-  (setq vertico-posframe-truncate-lines nil)
+  (setq vertico-posframe-parameters '((left-fringe . 4) (right-fringe . 4)))
+
+  (setq vertico-posframe-truncate-lines t)
+  (setq vertico-posframe-border-width 2)
+
   (vertico-posframe-mode))
 
 ; * marginalia

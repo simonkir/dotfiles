@@ -18,6 +18,20 @@
     "x" 'magit-delete-thing
     "p" 'magit-push))
 
+(use-package transient-posframe
+  :demand t
+  :after magit
+  :config
+  (setq transient-posframe-poshandler #'posframe-poshandler-window-bottom-center)
+  (setq transient-posframe-parameters '((left-fringe . 6) (right-fringe . 6)))
+  (setq transient-posframe-min-width nil)
+  (setq transient-posframe-min-height nil)
+
+  (setq transient-posframe-border-width 2)
+  (set-face-attribute 'transient-posframe-border nil :inherit 'vertico-posframe-border :background nil)
+
+  (transient-posframe-mode))
+
 ; ** eat
 (use-package eat
   :general
