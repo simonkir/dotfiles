@@ -258,22 +258,6 @@ with prefix arg, call `org-return'"
   (setq calendar-week-start-day 1)
   (setq org-agenda-window-setup 'current-window)
 
-  (defun sk:org-agenda-dashboard ()
-    (interactive)
-    (org-agenda nil "n"))
-
-  (general-def org-agenda-mode-map
-    "D" 'org-agenda-goto-date
-    "g" 'org-agenda-redo
-    "M" 'org-agenda-month-view
-    "n" 'org-agenda-next-date-line
-    "p" 'org-agenda-previous-date-line
-    "P" 'org-agenda-set-property
-    "q" 'org-agenda-exit
-    "Q" 'org-agenda-quit
-    "r" 'org-agenda-redo-all
-    "W" 'org-agenda-fortnight-view)
-
 ; *** agenda views
   (setq org-agenda-custom-commands
         '(("n" "Dashboard"
@@ -295,20 +279,6 @@ with prefix arg, call `org-return'"
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
                       (org-agenda-todo-ignore-with-date t)))
-            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))
-          ("w" "Weekly Calendar"
-           ((agenda "" ((org-agenda-overriding-header "Calendar")
-                        (org-agenda-span 'week)
-                        (org-agenda-start-on-weekday 1)
-                        (org-deadline-warning-days 0)
-                        (org-agenda-skip-scheduled-if-done t)
-                        (org-agenda-skip-deadline-if-done t)
-                        (org-scheduled-past-days 0)
-                        (org-deadline-past-days 0)
-                        (org-deadline-warning-days 0)
-                        (org-agenda-use-time-grid nil)))
-            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
-                      (org-agenda-todo-ignore-with-date t)))
             (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
 
   (setq org-agenda-block-separator "")
@@ -316,16 +286,33 @@ with prefix arg, call `org-return'"
   (setq org-agenda-deadline-leaders '("Deadlined:  " "In %2dd.:   " "Past %2dd.: "))
 
   (setq org-agenda-sorting-strategy
-        '((agenda time-up priority-down todo-state-up category-up alpha-up)
-          (todo priority-down todo-state-up category-up alpha-up)
-          (tags priority-down todo-state-up category-up alpha-up)
+        '((agenda time-up priority-down category-up todo-state-up alpha-up)
+          (todo priority-down category-up todo-state-up alpha-up)
+          (tags priority-down category-up todo-state-up alpha-up)
           (search alpha-up)))
 
   (setq org-agenda-prefix-format
-   '((agenda . "  %i %-7:c%?-12t %s")
-     (todo . "  %i %-7:c")
-     (tags . "  %i %-7:c")
-     (search . "  %i %-7:c")))
+   '((agenda . "%i %-7:c%?-12t %s")
+     (todo . "%i %-7:c")
+     (tags . "%i %-7:c")
+     (search . "%i %-7:c")))
+
+  (defun sk:org-agenda-dashboard ()
+    (interactive)
+    (org-agenda nil "n"))
+
+; *** keybinds
+  (general-def org-agenda-mode-map
+    "D" 'org-agenda-goto-date
+    "g" 'org-agenda-redo
+    "M" 'org-agenda-month-view
+    "n" 'org-agenda-next-date-line
+    "p" 'org-agenda-previous-date-line
+    "P" 'org-agenda-set-property
+    "q" 'org-agenda-exit
+    "Q" 'org-agenda-quit
+    "r" 'org-agenda-redo-all
+    "W" 'org-agenda-fortnight-view)
 
 ; *** capture
   (setq org-bookmark-names-plist nil)
