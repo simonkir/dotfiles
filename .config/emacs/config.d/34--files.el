@@ -53,7 +53,7 @@
   :demand t
   :config
   (setq recentf-max-saved-items 300)
-  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/elpa/*"))
+  (add-to-list 'recentf-exclude (expand-file-name (concat user-emacs-directory "elpa/*")))
   (add-to-list 'recentf-exclude (expand-file-name "/usr/share/emacs/*"))
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*aufgaben.tex")
   (add-to-list 'recentf-exclude "^.*/[[:digit:]]*-*aufgaben.pdf")

@@ -15,4 +15,4 @@
        ((and (eq isdir nil) (string= (substring path -3) ".el"))
         (load (file-name-sans-extension fullpath)))))))
 
-(load-directory "~/.emacs.d/config.d")
+(load-directory (concat user-emacs-directory "config.d"))

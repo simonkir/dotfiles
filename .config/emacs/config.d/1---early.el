@@ -17,7 +17,7 @@
 
 ; ** package-archives
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/packages"))
+(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "packages")))
 (package-initialize)
 
 ; ** use-package

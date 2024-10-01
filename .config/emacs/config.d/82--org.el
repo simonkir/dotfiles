@@ -249,7 +249,7 @@ with prefix arg, call `org-return'"
 
 ; ** agenda
 ; *** general settings
-  (setq org-directory "~/.emacs.d/org-dir")
+  (setq org-directory (expand-file-name (concat user-emacs-directory "org-dir")))
   (setq org-agenda-files `(,org-directory))
 
   (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))

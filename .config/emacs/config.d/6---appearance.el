@@ -30,7 +30,7 @@
   (setq dashboard-items '((bookmarks . 15)))
   (setq dashboard-center-content t)
   (setq dashboard-startup-banner 'logo)
-  (setq dashboard-banner-logo-png "~/.emacs.d/logos/mac256.png")
+  (setq dashboard-banner-logo-png (expand-file-name (concat user-emacs-directory "logos/mac256.png")))
 
   (setq dashboard-set-file-icons t)
   (setq dashboard-icon-type 'nerd-icons)
