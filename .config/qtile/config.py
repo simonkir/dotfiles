@@ -1,6 +1,6 @@
 # * imports
 import os, subprocess
-from libqtile.config import Key, Screen, Group, Drag
+from libqtile.config import Key, Drag, Group, Screen
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
@@ -152,39 +152,33 @@ mouse = [
          start=lazy.window.get_size())
 ]
 
-# * workspaces
-# ** initialization
+# * groups
 groups = []
+group_names = [i for i in "12345678"]
+group_layouts = {i: "max" for i in group_names}
 
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
-group_labels = group_names[:]
-group_layouts = ["max" for i in group_names]
-
-for grname, grlayout, grlabel in zip(group_names, group_layouts, group_labels):
-    groups.append(Group(name=grname, layout=grlayout, label=grlabel))
-
-# ** keybinds
 for grname in group_names:
+    groups.append(Group(name=grname,
+                        layout=group_layouts[grname]))
     keys.extend([
         Key([mod], grname, lazy.group[grname].toscreen()),
-        Key([mod, "shift"],   grname, lazy.window.togroup(grname)),
+        Key([mod, "shift"], grname, lazy.window.togroup(grname)),
         Key([mod, "control"], grname, lazy.window.togroup(grname), lazy.group[grname].toscreen()),
     ])
 
-# ** window rules
 @hook.subscribe.client_new
 def assign_app_group(client):
     # get first field of WM_CLASS
     wm_class = client.window.get_wm_class()[0]
 
-    d = {
-        group_names[0]: ["navigator", "firefox", "brave-browser"],
-        group_names[1]: ["emacs", "Emacs-29-4", "alacritty"],
-        group_names[2]: ["krita", "org.inkscape.inkscape", "libreoffice"],
-        group_names[3]: ["chromium", "google-chrome"]
+    rules = {
+        "1": ["navigator", "firefox", "brave-browser"],
+        "2": ["emacs", "Emacs-29-4"],
+        "3": ["alacritty"],
+        "4": ["krita", "org.inkscape.inkscape", "libreoffice"],
     }
 
-    for key, val in d.items():
+    for key, val in rules.items():
         if wm_class.lower() in [i.lower() for i in val]:
             client.togroup(key)
 
@@ -269,10 +263,6 @@ def init_widget_list():
         ),
 
 # *** temperature
-        widget.Image(
-            filename = "~/.config/qtile/icons/temperature.svg",
-            margin = icon_margin,
-        ),
         widget.Image(
             filename = "~/.config/qtile/icons/temperature.png",
             margin = icon_margin,
