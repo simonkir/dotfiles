@@ -1,9 +1,6 @@
 # -*- mode: conf -*-
 
 # * alphabetical
-super + alt + a
-    emacsclient -cq --eval "(sk:org-agenda-dashboard)"
-
 super + alt + b
     ~/.config/simonkir/bluetooth-connect.sh
 
@@ -16,6 +13,9 @@ super + alt + ctrl + b
 super + alt + c
     brave https://calendar.google.com
 
+super + alt + shift + c
+    emacsclient -cq --eval "(sk:org-agenda-dashboard)"
+
 super + alt + d
     ~/.config/picom/toggle-darkmode.sh
 
@@ -27,12 +27,6 @@ super + alt + shift + e
 
 super + alt + f
     brave https://meteoblue.com
-
-super + alt + g
-    ~/.config/conky/launch-conky.sh
-
-super + alt + h
-    ~/.config/simonkir/random-wallpaper.sh
 
 super + alt + i
     inkscape
@@ -64,6 +58,9 @@ super + alt + r
 super + alt + s
     brave https://open.spotify.com
 
+super + alt + t
+    brave https://deepl.com
+
 super + alt + w
     brave
 
@@ -72,6 +69,12 @@ super + alt + shift + w
 
 super + alt + ctrl + w
     google-chrome-stable
+
+super + alt + x
+    ~/.config/simonkir/random-wallpaper.sh
+
+super + alt + shift + x
+    ~/.config/conky/launch-conky.sh
 
 super + alt + y
     brave https://youtube.com
