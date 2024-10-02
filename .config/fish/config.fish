@@ -48,5 +48,5 @@ fish_config prompt choose scales
 fish_config theme choose Dracula
 
 function fish_greeting
-    neofetch
+    hyfetch
 end
