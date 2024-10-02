@@ -1,6 +1,6 @@
 # * imports
 import os, subprocess
-from libqtile.config import Key, Drag, Group, Screen
+from libqtile.config import Key, Drag, Group, Match, Screen
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
@@ -37,38 +37,37 @@ colors = {
 # * keybinds
 keys = [
 
-# ** restarting
-    Key([mod], "r", lazy.reload_config()),
-    Key([mod, "shift"], "r", lazy.restart()),
-
-# ** windows
-# *** layouts
+# ** layouts
     Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod], "s", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
+# ** windows
 # *** focus
     Key(["mod1"], "Tab", lazy.group.next_window()),
     Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
 
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
+    Key([mod], "Tab", lazy.next_screen()),
+    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
+
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
 
+# *** swapping
+    Key([mod, "shift"], "f", lazy.layout.flip()),
+
+    Key([mod, "shift"], "h", lazy.layout.swap_left()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+
 # *** resizing
+    Key([mod], "n", lazy.layout.normalize()),
+
     Key([mod, "control"], "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        ),
-    Key([mod, "control"], "Right",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
@@ -80,18 +79,7 @@ keys = [
         lazy.layout.decrease_ratio(),
         lazy.layout.add(),
         ),
-    Key([mod, "control"], "Left",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        ),
     Key([mod, "control"], "k",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        ),
-    Key([mod, "control"], "Up",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
@@ -101,48 +89,11 @@ keys = [
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
         ),
-    Key([mod, "control"], "Down",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        ),
 
-# ** screens
-    Key([mod], "Tab", lazy.next_screen()),
-    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
-
-# ** layout-specific
-# *** monadtall / -wide layout
-    Key([mod, "shift"], "f", lazy.layout.flip()),
-
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "Left", lazy.layout.swap_left()),
-    Key([mod, "shift"], "Right", lazy.layout.swap_right()),
-
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
-
-# *** foating layout
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
-    Key([mod], "s", lazy.window.toggle_floating()),
-
-# *** bsp layout
-###     # FLIP LAYOUT FOR BSP
-###     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
-###     Key([mod, "mod1"], "j", lazy.layout.flip_down()),
-###     Key([mod, "mod1"], "l", lazy.layout.flip_right()),
-###     Key([mod, "mod1"], "h", lazy.layout.flip_left()),
-###
-###     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
-###     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-###     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-###     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
-###     Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
-
-    ]
+# ** restarting
+    Key([mod], "r", lazy.reload_config()),
+    Key([mod, "shift"], "r", lazy.restart()),
+]
 
 # ** mouse
 mouse = [
@@ -157,50 +108,47 @@ groups = []
 group_names = [i for i in "12345678"]
 group_layouts = {i: "max" for i in group_names}
 
+# group name : wm_class (first or second field)
+group_rules = {i: [] for i in group_names}
+group_rules["1"] = ["firefox", "brave-browser"]
+group_rules["2"] = ["emacs", "emacs-29-4"]
+group_rules["3"] = ["Alacritty"]
+group_rules["4"] = ["krita", "Inkscape", "libreoffice"]
+
 for grname in group_names:
     groups.append(Group(name=grname,
-                        layout=group_layouts[grname]))
+                        layout=group_layouts[grname],
+                        matches=[Match(wm_class=i) for i in group_rules[grname]]))
     keys.extend([
         Key([mod], grname, lazy.group[grname].toscreen()),
         Key([mod, "shift"], grname, lazy.window.togroup(grname)),
         Key([mod, "control"], grname, lazy.window.togroup(grname), lazy.group[grname].toscreen()),
     ])
 
-@hook.subscribe.client_new
-def assign_app_group(client):
-    # get first field of WM_CLASS
-    wm_class = client.window.get_wm_class()[0]
-
-    rules = {
-        "1": ["navigator", "firefox", "brave-browser"],
-        "2": ["emacs", "Emacs-29-4"],
-        "3": ["alacritty"],
-        "4": ["krita", "org.inkscape.inkscape", "libreoffice"],
-    }
-
-    for key, val in rules.items():
-        if wm_class.lower() in [i.lower() for i in val]:
-            client.togroup(key)
 
 # * layouts
 # ** initialization
-layout_theme = {
-    "margin"        :  0,
-    "border_width"  :  0,
-    "border_focus"  :  "#5e81ac",
-    "border_normal" : "#4c566a"
+layout_theme_border = {
+    "border_width"  : 1,
+    "border_focus"  : colors["blue"],
+    "border_normal" : colors["background"]
+}
+
+layout_theme_no_border = {
+    "border_width": 0,
+    "fullscreen_border_width": 0
 }
 
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.MonadWide(**layout_theme),
-    layout.RatioTile(**layout_theme),
-    layout.Max(**layout_theme)
+    layout.RatioTile(**layout_theme_border),
+    layout.MonadTall(**layout_theme_border),
+    layout.MonadWide(**layout_theme_border),
+    layout.Max(**layout_theme_no_border),
 ]
 
 # ** floating layout
 floating_types = ["notification", "toolbar", "splash", "dialog"]
-floating_layout = layout.Floating(fullscreen_border_width = 0, border_width = 0)
+floating_layout = layout.Floating(**layout_theme_no_border)
 
 # * bar
 # ** settings
@@ -221,20 +169,25 @@ sep_padding = 10
 def init_widget_list():
     return [
 
-# *** workspaces
+# *** groups
         widget.GroupBox(
             margin_y = 4, margin_x = 0,
-            padding_y = 0, padding_x = 3,
-            borderwidth = 0,
+            padding_y = 0, padding_x = 1,
+            borderwidth = 2,
 
             disable_drag = True,
-            highlight_method = "text",
+            highlight_method = "line",
 
             font = widget_defaults["font"] + " Bold",
             fontsize = 16,
-            this_current_screen_border = colors["blue"],
-            active = colors["magenta"],
+
+            active = colors["blue"],
             inactive = colors["foreground"],
+            highlight_color = colors["background"],
+            this_current_screen_border = colors["blue"], # current screen, focused group
+            this_screen_border = colors["magenta"], # other screens, focused groups
+            other_screen_border = colors["background"], # current screen, focused groups on other screens
+            other_current_screen_border = colors["background"], # other screens, focused groups on other screens
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -254,11 +207,6 @@ def init_widget_list():
         ),
 
 # *** window-name
-        widget.CurrentScreen(
-            active_text = "",
-            inactive_text = "",
-            active_color = colors["foreground"],
-        ),
         widget.WindowName(
         ),
 
