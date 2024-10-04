@@ -35,7 +35,7 @@
           (call-interactively #'meow-digit-argument)))))
 
   (defun sk:toggle-case ()
-    "toggles case of char after point"
+    "toggles case of char at / after point"
     (interactive)
     (let* ((beg (point))
            (end (1+ (point)))
@@ -43,8 +43,35 @@
            (upcased (eq letter (upcase letter)))
            (f (if upcased #'downcase-region #'upcase-region)))
       (funcall f beg end)
-      (unless (region-active-p)
-        (forward-char))))
+      (forward-char)))
+
+  (defun sk:replace-string-in-buffer ()
+    "replace string in buffer"
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      (call-interactively #'replace-string)))
+
+  (defun sk:query-replace-string-in-buffer ()
+    "query-replace string in buffer"
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      (call-interactively #'query-replace)))
+
+  (defun sk:replace-regexp-in-buffer ()
+    "replace regexp in buffer"
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      (call-interactively #'replace-regexp)))
+
+  (defun sk:query-replace-regexp-in-buffer ()
+    "query-replace regexp in buffer"
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      (call-interactively #'query-replace-regexp)))
 
 ; ** keybinds
   (general-def meow-insert-state-keymap
@@ -67,22 +94,26 @@
     "3" 'sk:meow-digit-argument-or-eval
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
-
-    "C-z" 'meow-motion-mode
+    ;; "!" nil
+    ;; "\"" nil
+    "§" 'sk:replace-string-in-buffer
+    "$" 'sk:query-replace-string-in-buffer
     ;;"%" ;; reserved for skparens
-    "#" 'comment-or-uncomment-region
-    "~" 'sk:toggle-case
+    "&" 'sk:replace-regexp-in-buffer
+    "/" 'sk:query-replace-regexp-in-buffer
     "(" 'backward-sexp
     ")" 'forward-sexp
     "=" 'indent-region
+
+    "#" 'comment-or-uncomment-region
+    "~" 'sk:toggle-case
     "-" 'negative-argument
-    "," 'meow-reverse
-    "." 'recenter-top-bottom
-    ";" 'replace-string
-    ":" 'query-replace
+    ";" 'meow-reverse
+    ":" 'recenter-top-bottom
     "*" 'meow-block
     "<" 'meow-beginning-of-thing
     ">" 'meow-end-of-thing
+    "C-z" 'meow-motion-mode
 
     "a" 'meow-append
     ;; "A" nil ;; reserved for skparens
