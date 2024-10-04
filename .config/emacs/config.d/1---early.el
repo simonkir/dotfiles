@@ -25,6 +25,10 @@
 (setq use-package-always-defer t)
 (setq use-package-always-ensure t)
 
+; * custom
+(setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
+(load custom-file)
+
 ; * keybinds / general
 ;; explanation:
 ;; general-def-leader binds into sk:leader-map
