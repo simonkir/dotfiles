@@ -49,10 +49,6 @@
 
   (yas-global-mode))
 
-; * skcorrect
-(use-package skcorrect
-  :hook ((org-mode LaTeX-mode) . skcorrect-mode))
-
 ; * sk:functions
 (defun sk:cpwd ()
   "print and copy current working directory to system clipboard"

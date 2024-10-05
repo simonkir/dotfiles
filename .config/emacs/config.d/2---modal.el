@@ -94,16 +94,17 @@
     "3" 'sk:meow-digit-argument-or-eval
     "2" 'sk:meow-digit-argument-or-eval
     "1" 'sk:meow-digit-argument-or-eval
-    ;; "!" nil
+    ;; "!" nil ;; reserved for jinx
     ;; "\"" nil
     "§" 'sk:replace-string-in-buffer
     "$" 'sk:query-replace-string-in-buffer
-    ;;"%" ;; reserved for skparens
+    ;;"%" nil ;; reserved for skparens
     "&" 'sk:replace-regexp-in-buffer
     "/" 'sk:query-replace-regexp-in-buffer
     "(" 'backward-sexp
     ")" 'forward-sexp
     "=" 'indent-region
+    ;; "?" nil ;; reserved for jinx
 
     "#" 'comment-or-uncomment-region
     "~" 'sk:toggle-case
