@@ -317,7 +317,7 @@ with prefix arg, call `org-return'"
 ; *** capture
   (setq org-bookmark-names-plist nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 1))))
-  (setq org-default-notes-file "~/.emacs.d/org-dir/notes.org")
+  (setq org-default-notes-file (expand-file-name (concat user-emacs-directory "org-dir/notes.org")))
 
   (setq org-capture-templates
         '(("c" "generic TODO entry" entry (file "") "* TODO %?\n" :empty-lines 1)

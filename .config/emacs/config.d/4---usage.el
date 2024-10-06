@@ -14,8 +14,7 @@
 
 ; ** skparens
 (use-package skparens
-  :demand t
-  :config
+  :general
   (general-def meow-normal-state-keymap
     "%" 'skparens-change
     "D" 'skparens-delete

@@ -6,22 +6,22 @@
   :config
 
 ; ** general settings
-  (setq meow-use-cursor-position-hack     t)
-  (setq meow-expand-hint-remove-delay     1.5)
-  (setq meow-display-thing-help           nil)
+  (setq meow-use-cursor-position-hack t)
+  (setq meow-expand-hint-remove-delay 1.5)
+  (setq meow-display-thing-help nil)
 
   (setq meow-expand-exclude-mode-list nil)
   (setq meow-mode-state-list '((org-agenda-mode . motion)
                                (eat-mode . insert)))
 
 ; ** keypad settings
+  (setq meow-keypad-start-keys '((?c . ?c) (?u . ?u) (?x . ?x)))
+  (setq meow-keypad-meta-prefix ?m)
+  (setq meow-keypad-literal-prefix ?\s)
+  (setq meow-keypad-ctrl-meta-prefix nil)
   (setq meow-keypad-self-insert-undefined nil)
-  (setq meow-keypad-start-keys            '((?c . ?c) (?u . ?u) (?x . ?x)))
-  (setq meow-keypad-ctrl-meta-prefix      nil)
-  (setq meow-keypad-meta-prefix           ?m)
-  (setq meow-keypad-literal-prefix        ?\s)
-  (setq meow-keypad-leader-dispatch       sk:leader-map)
-  (setq meow-keypad-describe-delay        most-positive-fixnum)
+  (setq meow-keypad-leader-dispatch sk:leader-map)
+  (setq meow-keypad-describe-delay most-positive-fixnum)
 
 ; ** helper functions
   (defun sk:meow-digit-argument-or-eval ()
@@ -107,7 +107,10 @@
     ;; "?" nil ;; reserved for jinx
 
     "#" 'comment-or-uncomment-region
-    "~" 'sk:toggle-case
+    "~ ~" 'sk:toggle-case
+    "~ c" 'capitalize-dwim
+    "~ l" 'downcase-dwim
+    "~ u" 'upcase-dwim
     "-" 'negative-argument
     ";" 'meow-reverse
     ":" 'recenter-top-bottom
