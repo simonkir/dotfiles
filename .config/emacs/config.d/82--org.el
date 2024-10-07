@@ -220,6 +220,9 @@ with prefix arg, call `org-return'"
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
           ("scrlttr2" "\\documentclass{scrlttr2}")
+          ("moderncv" "\\documentclass{moderncv}"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}"))
           ("fmcmppk" "\\documentclass{fmcmppk}"
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph{%s}" . "\\paragraph*{%s}")
