@@ -3,8 +3,9 @@
 # key: tempdef
 # --
 #+latex_class: article
-#+latex_class_options: [11pt,a4paper,hidelinks]
-#+latex_header: \usepackage{a4wide,parskip}
+#+latex_class_options: [11pt,hidelinks]
+#+latex_header: \usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
+#+latex_header: \usepackage{parskip}
 #+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
 #+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
 
