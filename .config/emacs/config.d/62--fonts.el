@@ -2,10 +2,10 @@
 
 ; * font switching
 ; ** default fonts
-(setq sk:fonts-fixed-pitch '("Fira Code" "Hack" "Liberation Mono" "Monospace"))
-(setq sk:fonts-variable-pitch '("Georgia" "C059" "P052" "Noto Serif"))
-(setq sk:fixed-font-size 95)
-(setq sk:variable-font-size 105)
+(defvar sk:fonts-fixed-pitch '("Fira Code" "Hack" "Liberation Mono" "Monospace") "alist of fixed pitch fonts. first entry is default.")
+(defvar sk:fonts-variable-pitch '("Georgia" "C059" "P052" "Noto Serif") "alist of variable pitch fonts. first entry is default.")
+(defvar sk:fixed-font-size 95 "font size of fixed pitch font")
+(defvar sk:variable-font-size 105 "font size of variable pitch font")
 
 (set-face-attribute 'default nil :family (car sk:fonts-fixed-pitch) :height sk:fixed-font-size)
 (set-face-attribute 'variable-pitch nil :family (car sk:fonts-variable-pitch) :height sk:variable-font-size)

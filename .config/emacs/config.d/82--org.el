@@ -229,7 +229,7 @@ with prefix arg, call `org-return'"
            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 ; **** latex preview
-  (setq sk:org-preview-latex-scale 1.5)
+  (defvar sk:org-preview-latex-scale 1.5 "org latex preview scale factor")
   (plist-put org-format-latex-options :scale sk:org-preview-latex-scale)
 
   (defun sk:org-preview-latex-scale-set (new-scale)

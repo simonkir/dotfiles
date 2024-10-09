@@ -11,7 +11,7 @@
 
 ; * transparency
 ;; initial state
-(setq sk:alpha-background 90)
+(defvar sk:alpha-background 90 "alpha (in %) of the frame")
 (add-to-list 'default-frame-alist `(alpha-background . ,sk:alpha-background))
 
 (defun sk:toggle-transparent-background ()

@@ -5,7 +5,7 @@
 ;;; Code:
 
 ; * variables
-(setq skparens-pair-alist
+(defvar skparens-pair-alist
       '(("(" . ("( " . " )"))
         ("[" . ("[ " . " ]"))
         ("{" . ("{ " . " }"))
@@ -42,9 +42,10 @@
         ("„" . ("„" . "“"))
         ("“" . ("“" . "”"))
         ("‚" . ("‚" . "‘"))
-        ("‘" . ("‘" . "’"))))
+        ("‘" . ("‘" . "’")))
+      "alist of cons cells of a trigger key and a cons cell of opening (left) and closing (right) delimiter")
 
-(setq skparens--supported-nested-pairs '("(" ")" "[" "]" "{" "}"))
+(defvar skparens--supported-nested-pairs '("(" ")" "[" "]" "{" "}"))
 
 ; * helper functions
 (defun skparens--read-delim (&optional readstring)

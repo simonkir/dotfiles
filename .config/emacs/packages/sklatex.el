@@ -5,19 +5,18 @@
 ;;; Code:
 
 ; * variables
-(setq sklatex-do-linebreak-conversion t)
-(setq sklatex-do-symbol-alignment t)
-(setq sklatex-do-subscript-conversion nil)
+(defvar sklatex-do-linebreak-conversion t "if non-nil, attempt linebreak conversion")
+(defvar sklatex-do-symbol-alignment t "if non-nil, attempt symbol alignment")
+(defvar sklatex-do-subscript-conversion nil "if non-nil, attempt subscript conversion")
 
-(setq sklatex-standard-math-symbol-width 2)
-(setq sklatex-search-limit 30)
+(defvar sklatex-standard-math-symbol-width 2 "standard width (in chars) of mathematical symbol in latex notation")
+(defvar sklatex-search-limit 30 "backwards / forwards search limit")
 
-(setq sklatex-aligned-symbols
+(defvar sklatex-aligned-symbols
       '("=" "\\\\neq" "\\\\approx" "\\\\overset{!}{=}"
-        ">" "<" "\\\\leq" "\\\\geq"
-        ;; "\\\\le" "\\\\ge"
+        ">" "<" "\\\\leq" "\\\\geq" ;; "\\\\le" "\\\\ge"
         ;; "\\\\rightleftharpoons" "\\\\longrightarrow"
-        ))
+        ) "alist of aligned symbols (see symbol alignment)")
 
 ; * minor mode definition
 (define-minor-mode sklatex-mode
