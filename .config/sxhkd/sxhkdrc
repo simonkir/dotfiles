@@ -1,6 +1,9 @@
 # -*- mode: conf -*-
 
 # * alphabetical
+super + alt + a
+    emacsclient -cq --eval "(sk:org-agenda-dashboard)"
+
 super + alt + b
     ~/.config/simonkir/bluetooth-connect.sh
 
@@ -12,9 +15,6 @@ super + alt + ctrl + b
 
 super + alt + c
     brave https://calendar.google.com
-
-super + alt + shift + c
-    emacsclient -cq --eval "(sk:org-agenda-dashboard)"
 
 super + alt + d
     ~/.config/picom/toggle-darkmode.sh
@@ -59,6 +59,9 @@ super + alt + s
     brave https://open.spotify.com
 
 super + alt + t
+    brave https://wiktionary.org/
+
+super + alt + shift + t
     brave https://deepl.com
 
 super + alt + w
