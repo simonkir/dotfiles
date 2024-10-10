@@ -45,7 +45,7 @@
 (use-package tramp
   :general
   (general-def-leader
-    "b c" 'tramp-cleanup-all-buffers
+    "b c" 'tramp-cleanup-connection
     "b C" 'tramp-cleanup-all-connections))
 
 ; * recentf

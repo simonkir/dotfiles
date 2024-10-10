@@ -104,6 +104,8 @@
 
        ;; semi-hide buffers
        ((ignore-error 'void-variable (member buffer org-agenda-new-buffers)) semi-hidden)
+       ((string-prefix-p "*tramp" name) semi-hidden)
+       ((string-prefix-p "*Diff" name) semi-hidden)
        ((string-prefix-p "CAPTURE-" name) semi-hidden)
        ((string-prefix-p "magit" name) semi-hidden)
 
