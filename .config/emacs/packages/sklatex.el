@@ -157,9 +157,6 @@
      ((looking-at-p "[_^]") (sklatex--delete-supersubscript))
      ((looking-at-p "\\\\\\\\") (sklatex--linebreak-delete)))))
 
-(general-def sklatex-mode-map
-  "C-s" 'sklatex-remove-effect-at-point)
-
 ; * package
 (provide 'sklatex)
 

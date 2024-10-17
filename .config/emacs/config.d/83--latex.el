@@ -49,8 +49,8 @@
   :ensure nil
   :hook ((LaTeX-mode org-mode) . sklatex-mode)
   :config
-  (general-def '(org-mode-map LaTeX-mode-map)
-    "C-c A" 'sklatex-mode))
+  (general-def sklatex-mode-map
+    "C-a" 'sklatex-remove-effect-at-point))
 
 ; * cdlatex
 (use-package cdlatex
