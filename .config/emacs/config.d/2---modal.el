@@ -75,7 +75,7 @@ when region is active, replace in region, else replace in buffer"
         (beginning-of-buffer))
       (call-interactively #'replace-regexp)))
 
-  (defun sk:query-replace-regexp-in-buffer ()
+  (defun sk:query-replace-regexp ()
     "sk:query-replace-regexp string (see `query-replace-regexp')
 
 when region is active, replace in region, else replace in buffer"

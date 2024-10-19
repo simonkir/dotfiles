@@ -1,76 +1,100 @@
 ;;; -*- lexical-binding: t; -*-
 
 ; * sk:functions
-; ** resizing
-(defun sk:resize-current-window ()
-  "interactively resize the current window using the arrow keys
+(defun sk:split-and-follow-horizontally (arg)
+  "create a horizontal split and change focus to newly split window
 
-<left> / <right>: increase / decrease width
-<up> / <down>: increase / decrease height
-0 / =: balance windows"
-  (interactive)
-  (cond
-   ((eq last-command-event 'right) (call-interactively #'enlarge-window-horizontally))
-   ((eq last-command-event 'left) (call-interactively #'shrink-window-horizontally))
-   ((eq last-command-event 'up) (call-interactively #'shrink-window))
-   ((eq last-command-event 'down) (call-interactively #'enlarge-window))
-   ((eq last-command-event ?0) (call-interactively #'balance-windows))
-   ((eq last-command-event ?=) (call-interactively #'balance-windows)))
-  (message "Use <left>, <right>, <up>, <down>, 0/= for further adjustment")
-  (set-transient-map
-   (let ((map (make-sparse-keymap)))
-     (dolist (key '(left right up down ?0 ?=))
-       (define-key map (vector key) (lambda () (interactive) (sk:resize-current-window))))
-     map)))
-
-; ** splitting
-(defun sk:split-and-follow-horizontally ()
-  "create a horizontal split and change focus to newly split window"
-  (interactive)
+with ARG, dont balance windows afterwards"
+  (interactive "P")
   (split-window-below)
-  (balance-windows)
+  (unless arg
+    (balance-windows))
   (other-window 1))
 
-(defun sk:split-and-follow-vertically ()
-  "create a vertical split and change focus to newly split window"
-  (interactive)
+(defun sk:split-and-follow-vertically (arg)
+  "create a vertical split and change focus to newly split window
+
+with ARG, dont balance windows afterwards"
+  (interactive "P")
   (split-window-right)
-  (balance-windows)
+  (unless arg
+    (balance-windows))
   (other-window 1))
 
-; ** cycling
-(defun sk:cycle-windows-forward ()
-  "cycle visible windows forward"
-  (interactive)
-  (select-window (next-window (selected-window) nil (selected-frame)))
-  (run-hooks 'window-configuration-change-hook))
-
-(defun sk:cycle-windows-backward ()
-  "cycle visible windows backward"
-  (interactive)
-  (select-window (previous-window (selected-window) nil (selected-frame)))
-  (run-hooks 'window-configuration-change-hook))
-
-; ** keybinds
 (general-def-leader
-  "w h" 'sk:split-and-follow-horizontally
   "w v" 'sk:split-and-follow-vertically
+  "w V" 'sk:split-and-follow-horizontally
+  "w =" 'balance-windows)
 
-  "w ="       'balance-windows
-  "w 0"       'balance-windows
-  "w <right>" 'sk:resize-current-window
-  "w <left>"  'sk:resize-current-window
-  "w <up>"    'sk:resize-current-window
-  "w <down>"  'sk:resize-current-window
+; * ace-window
+(use-package ace-window
+; ** keybinds
+  :general
+  ("C-SPC" 'sk:other-window
+   "C-S-SPC" 'other-window)
 
-  "w o" 'delete-other-windows
-  "w 1" 'delete-other-windows
-  "w c" 'delete-window
-  "w C" 'kill-buffer-and-window)
+  (general-def-leader
+    "w c" 'sk:delete-window
+    "w o" 'sk:delete-other-windows
+    "w m" 'sk:swap-window)
 
-(general-def
-  "C-SPC" 'sk:cycle-windows-forward
-  "C-S-SPC" 'sk:cycle-windows-backward)
+  :config
+; ** general config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-dispatch-alist '())
+  (set-face-attribute 'aw-leading-char-face nil :foreground nil :inherit 'error)
+
+  (ace-window-posframe-mode)
+
+; ** sk:functions
+  (defun sk:other-window ()
+    "when there are more than 2 windows, seelct a window using ace-window. else, select the other window"
+    (interactive)
+    ;; no problems with default ace-swap-windows
+    ;; own function due to consistency
+    (let ((aw-dispatch-always nil))
+      (ace-select-window)))
+
+  (defun sk:delete-window (arg)
+    "when there are more than 2 windows, delete a window using ace-window. else, delete the current window.
+
+with prefix-arg, don't balance windows afterwards"
+    (interactive "P")
+    ;; problems with default ace-delete-window:
+    ;; – with 2 windows, deletes the unselected one
+    ;; – with 1 window, deletes the frame
+    (if (> (count-windows) 2)
+        (let ((aw-dispatch-always t))
+          (ace-delete-window))
+      (delete-window))
+    (unless arg
+      (balance-windows)))
+
+  (defun sk:delete-other-windows ()
+    "delete other windows using ace-window."
+    (interactive)
+    ;; problems with default ace-delete-other-windows:
+    ;; – with 2 windows, doesnt ask which window should be kept
+    (when (> (count-windows) 1)
+      (let ((aw-dispatch-always t))
+        (ace-delete-other-windows))))
+
+  (defun sk:swap-window ()
+    "when there are more than 2 windows, swap two windows using ace-window. else, swap both windows."
+    (interactive)
+    ;; no problems with default ace-swap-windows
+    ;; own function due to consistency
+    (let ((aw-dispatch-always nil))
+      (ace-swap-window))))
+
+; * transpose-frame
+(use-package transpose-frame
+  :general (general-def-leader
+    "w w" 'transpose-frame
+    "w r" 'rotate-frame-clockwise
+    "w R" 'rotate-frame-anticlockwise
+    "w S" 'flip-frame
+    "w s" 'flop-frame))
 
 ; * centaur-tabs
 (use-package centaur-tabs
@@ -135,13 +159,4 @@
     "w b" 'centaur-tabs-backward-tab
     "w n" 'centaur-tabs-forward-group
     "w p" 'centaur-tabs-backward-group))
-
-; * transpose-frame
-(use-package transpose-frame
-  :general (general-def-leader
-    "w w" 'transpose-frame
-    "w r" 'rotate-frame-clockwise
-    "w R" 'rotate-frame-anticlockwise
-    "w S" 'flip-frame
-    "w s" 'flop-frame))
 
