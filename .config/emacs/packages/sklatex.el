@@ -41,7 +41,11 @@
     (while (looking-at-p "^$")
       (backward-char))
     (and (texmathp)
-         (not (member (car texmathp-why) '("$" "Org mode embedded math"))))))
+         (not (member (car texmathp-why)
+                      '("$"
+                        "Org mode embedded math"
+                        "cdlatex-math-symbol in org-mode"))))))
+
 
 (defun sklatex--backwards-search-limit ()
   (- (point) sklatex-search-limit))
@@ -58,9 +62,11 @@
 
 (defun sklatex--linebreak-delete ()
   (let ((linebreak-re "\\\\\\\\"))
-    (unless (looking-at linebreak-re)
+    (unless (looking-at-p linebreak-re)
       (re-search-backward linebreak-re) (sklatex--backwards-search-limit))
-    (delete-char 2)))
+    (delete-char 2)
+    (when (member (char-before (point)) '(?\s))
+      (delete-char -1))))
 
 (defun sklatex-try-linebreak-conversion ()
   (when (and sklatex-do-linebreak-conversion
@@ -68,7 +74,7 @@
     (unless (save-excursion
               (previous-line)
               (beginning-of-line)
-              (looking-at ".*\\(\\\\end\\|\\\\begin\\|\\\\\\\\\\)"))
+              (looking-at-p ".*\\(\\\\end\\|\\\\begin\\|\\\\\\\\\\)"))
         (sklatex--linebreak-insert-in-line-before))))
 
 ; ** equality alignment

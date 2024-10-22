@@ -67,6 +67,7 @@
 ; ** general settings
   (setq cdlatex-paired-parens "")
   (setq cdlatex-simplify-sub-super-scripts nil)
+  (setq cdlatex-sub-super-scripts-outside-math-mode nil)
 
   ;; needed for sklatex alignment defuns
   (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
@@ -87,8 +88,6 @@
     "TAB" nil
     "<tab>" nil)
 
-  (defun cdlatex--texmathp () t)
-
 ; ** cdlatex-math-symbol-alist
   (setq cdlatex-math-symbol-alist
         '((?B ("\\bot" "" ""))
@@ -102,6 +101,7 @@
           (?L ("\\Lambda" "\\mathcal{L}"))
           (?N ("\\nabla" "\\mathbb{N}"))
           (?P ("\\prod" "\\Pi" ""))
+          (?q ("\\vartheta" "\\theta"))
           (?Q ("\\Theta" "\\mathbb{Q}"))
           (?R ("" "\\mathbb{R}"))
           (?S ("\\Sigma" "\\mathbb{S}" "\\arcsin"))
