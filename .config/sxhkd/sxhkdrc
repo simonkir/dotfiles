@@ -107,10 +107,10 @@ ctrl + Print
 
 # * multimedia
 XF86AudioRaiseVolume
-    amixer set Master 10%+
+    amixer set Master 6%+
 
 XF86AudioLowerVolume
-    amixer set Master 10%-
+    amixer set Master 6%-
 
 XF86AudioMute
     amixer -D pulse set Master 1+ toggle

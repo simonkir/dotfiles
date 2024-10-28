@@ -212,7 +212,7 @@ def init_widget_list():
 
 # *** temperature
         widget.Image(
-            filename = "~/.config/qtile/icons/temperature.png",
+            filename = "~/.config/qtile/icons/temperature.svg",
             margin = icon_margin,
         ),
         widget.ThermalSensor(
@@ -229,7 +229,7 @@ def init_widget_list():
 
 # *** cpu
         widget.Image(
-            filename = "~/.config/qtile/icons/cpu.png",
+            filename = "~/.config/qtile/icons/cpu.svg",
             margin = icon_margin,
         ),
         widget.CPU(
@@ -243,7 +243,7 @@ def init_widget_list():
 
 # *** memory
         widget.Image(
-            filename = "~/.config/qtile/icons/memory.png",
+            filename = "~/.config/qtile/icons/memory.svg",
             margin = icon_margin,
         ),
         widget.Memory(
@@ -258,7 +258,7 @@ def init_widget_list():
 
 # *** battery
         widget.Image(
-            filename = "~/.config/qtile/icons/battery.png",
+            filename = "~/.config/qtile/icons/battery.svg",
             margin = icon_margin,
         ),
         widget.Battery(
@@ -279,7 +279,7 @@ def init_widget_list():
 
 # *** bluetooth
         widget.Image(
-            filename = "~/.config/qtile/icons/bluetooth.png",
+            filename = "~/.config/qtile/icons/bluetooth.svg",
             margin = icon_margin,
         ),
         widget.Bluetooth(
@@ -297,9 +297,24 @@ def init_widget_list():
             padding = sep_padding,
         ),
 
+# *** volume
+        widget.Image(
+            filename = "~/.config/qtile/icons/volume.svg",
+            margin = icon_margin,
+        ),
+        widget.Volume(
+            mute_format = "–",
+            emoji = False,
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
+
 # *** clock
         widget.Image(
-            filename = "~/.config/qtile/icons/clock.png",
+            filename = "~/.config/qtile/icons/clock.svg",
             margin = icon_margin,
         ),
         widget.Clock(
