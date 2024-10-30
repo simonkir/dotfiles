@@ -124,12 +124,16 @@
           (?= ("\\neq" "" ""))
           (?° ("\\degree" "" ""))
           (?+ ("\\pm" "" ""))
+          (?* ("\\times" "\\circ" ""))
           (?: ("\\ldots" "" ""))))
 
 ; ** cdlatex-math-modify-alist
   (setq cdlatex-math-modify-alist
         '((?d "\\mathbb" nil t nil nil)
-          (?. "\\dot"  nil t nil nil)
+          (?~ "\\tilde" nil t nil nil)
+          (?^ "\\hat" nil t nil nil)
+          (?. "\\dot" nil t nil nil)
           (?: "\\ddot" nil t nil nil)
-          (?- "\\bar"  nil t nil nil)
-          (?> "\\vec"  nil t nil nil))))
+          (?… "\\dddot" nil t nil nil)
+          (?- "\\bar" nil t nil nil)
+          (?> "\\vec" nil t nil nil))))

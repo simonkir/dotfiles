@@ -119,6 +119,15 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\mathbb{W}" . (?\s (Bc . Bc) ?𝕎)))
   (add-to-list 'prettify-symbols-alist '("\\mathbb{Z}" . (?\s (Bc . Bc) ?ℤ)))
 
+; *** pseudo font effects
+  (add-to-list 'prettify-symbols-alist '("\\tilde" . "~"))
+  (add-to-list 'prettify-symbols-alist '("\\dot" . "·"))
+  (add-to-list 'prettify-symbols-alist '("\\ddot" . (?· (Br . Bc) ?·)))
+  (add-to-list 'prettify-symbols-alist '("\\dddot" . (?· (Br . Bc) ?· (Br . Bc) ?·)))
+  (add-to-list 'prettify-symbols-alist '("\\hat" . "^"))
+  (add-to-list 'prettify-symbols-alist '("\\bar" . "–"))
+  (add-to-list 'prettify-symbols-alist '("\\vec" . "→"))
+
 ; *** misc
   (add-to-list 'prettify-symbols-alist '("\\bot" . (?\s (Bc . Bc) ?⊥)))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°"))
@@ -141,7 +150,7 @@ also displayed in org documents"
 (defun sk:prettify-symbols-LaTeX-mode ()
   "add latex-specific prettifications to 'prettify-symbols-alist'
 
-not displayed in org documents unless in #+begin_latex environment"
+not displayed in org documents unless in latex env"
   (add-to-list 'prettify-symbols-alist '("&" . "·"))
   (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·))))
 
