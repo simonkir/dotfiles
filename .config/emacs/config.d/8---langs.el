@@ -56,6 +56,7 @@
     (eat "/usr/bin/env bash" t))
 
   (general-def '(eat-semi-char-mode-map eat-char-mode-map)
+    "SPC" 'meow-keypad
     "C-SPC" nil))
 
 ; ** calc

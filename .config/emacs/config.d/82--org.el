@@ -255,7 +255,7 @@ with prefix arg, call `org-return'"
   (setq org-directory (expand-file-name (concat user-emacs-directory "org-dir")))
   (setq org-agenda-files `(,org-directory))
 
-  (setq org-todo-keywords '("PREP" "TODO" "POST" "DONE"))
+  (setq org-todo-keywords '((sequence "PREP" "TODO" "POST" "|" "DONE")))
 
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
