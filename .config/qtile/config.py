@@ -156,11 +156,11 @@ widget_defaults = {
     "font": "Fira Code",
     "fontsize": 12,
     "padding": 2,
+    "margin": 5,
     "foreground": colors["foreground"],
     "background": colors["background"],
 }
 
-icon_margin = 5
 sep_linewidth = 1
 sep_padding = 10
 
@@ -213,7 +213,6 @@ def init_widget_list():
 # *** temperature
         widget.Image(
             filename = "~/.config/qtile/icons/temperature.svg",
-            margin = icon_margin,
         ),
         widget.ThermalSensor(
             format = "{temp}{unit}",
@@ -230,7 +229,6 @@ def init_widget_list():
 # *** cpu
         widget.Image(
             filename = "~/.config/qtile/icons/cpu.svg",
-            margin = icon_margin,
         ),
         widget.CPU(
             format = "{load_percent}%",
@@ -244,7 +242,6 @@ def init_widget_list():
 # *** memory
         widget.Image(
             filename = "~/.config/qtile/icons/memory.svg",
-            margin = icon_margin,
         ),
         widget.Memory(
             format = "{MemUsed:.1f}G",
@@ -259,7 +256,6 @@ def init_widget_list():
 # *** battery
         widget.Image(
             filename = "~/.config/qtile/icons/battery.svg",
-            margin = icon_margin,
         ),
         widget.Battery(
             format = "{char:2s}{percent:.0%}",
@@ -280,7 +276,6 @@ def init_widget_list():
 # *** bluetooth
         widget.Image(
             filename = "~/.config/qtile/icons/bluetooth.svg",
-            margin = icon_margin,
         ),
         widget.Bluetooth(
             default_text = "{num_connected_devices}",
@@ -300,7 +295,6 @@ def init_widget_list():
 # *** volume
         widget.Image(
             filename = "~/.config/qtile/icons/volume.svg",
-            margin = icon_margin,
         ),
         widget.Volume(
             mute_format = "–",
@@ -315,7 +309,6 @@ def init_widget_list():
 # *** clock
         widget.Image(
             filename = "~/.config/qtile/icons/clock.svg",
-            margin = icon_margin,
         ),
         widget.Clock(
             format = "%H:%M",
@@ -329,13 +322,21 @@ def init_widget_list():
 # *** systray
         widget.Systray(
             icon_size = 20,
-        )
+        ),
+        widget.Spacer(
+            length = 5,
+        ),
     ]
 
 # * screen layout
+widget_list_full = init_widget_list()
+widget_list_wo_tray = init_widget_list()
+widget_list_wo_tray.pop(-2)
+widget_list_wo_tray.pop(-2)
+
 # note: dirty code, be careful when changing widget order
-screens = [Screen(bottom=bar.Bar(widgets=init_widget_list(), size=26, opacity=0.9)),
-           Screen(bottom=bar.Bar(widgets=init_widget_list()[:-2], size=26, opacity=0.9))]
+screens = [Screen(bottom=bar.Bar(widgets=widget_list_full, size=26, opacity=0.9)),
+           Screen(bottom=bar.Bar(widgets=widget_list_wo_tray, size=26, opacity=0.9))]
 
 # * autostart
 @hook.subscribe.startup_once
