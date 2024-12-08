@@ -124,7 +124,7 @@
           (?= ("\\neq" "" ""))
           (?° ("\\degree" "" ""))
           (?+ ("\\pm" "" ""))
-          (?* ("\\times" "\\circ" ""))
+          (?* ("\\times" "\\otimes" "\\circ"))
           (?: ("\\ldots" "" ""))))
 
 ; ** cdlatex-math-modify-alist

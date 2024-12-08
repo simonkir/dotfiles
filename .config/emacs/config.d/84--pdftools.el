@@ -55,5 +55,6 @@
   "H" 'image-transform-fit-to-height
   "P" 'image-transform-fit-to-window
   "W" 'image-transform-fit-to-width
+  "=" 'image-transform-reset-to-original
 
   "R" 'image-rotate)

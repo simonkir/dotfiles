@@ -58,7 +58,7 @@
   "determines and performs desired action on backtab input
 
 when in org-table: go to previous field
-else: un-expand last expansion"
+else: do nothing"
   (interactive)
   (cond
    ;; org-mode table cell navigation
@@ -78,8 +78,8 @@ else: un-expand last expansion"
 
 when in org-table: go to next field
 when snippet expandable: expand corresponding snippet
-when writing in org- / latex-mode: call 'cdlatex-tab'
-when writing in other modes: call 'hippie-expand'
+when writing in org-/latex-mode: complete using 'cdlatex-tab'
+when writing in other modes: complete using 'completion-at-point'
 else: indent"
   (interactive)
   (cond
@@ -102,7 +102,6 @@ else: indent"
            (not (derived-mode-p 'prog-mode))
            (texmathp))
       (cdlatex-tab))
-     ((derived-mode-p 'maxima-mode) (maxima-complete))
      (t (completion-at-point))))
 
    ;; indentation
