@@ -37,6 +37,9 @@ super + alt + j
 super + alt + k
     krita
 
+super + alt + l
+    emacsclient -cq --eval "(sk:run-ipython)"
+
 super + alt + m
     brave https://mail.google.com
 
