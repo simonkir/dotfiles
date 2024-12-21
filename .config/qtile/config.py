@@ -1,13 +1,11 @@
 # * imports
 import os, subprocess
-from libqtile.config import Key, Drag, Group, Match, Screen
+from libqtile.config import EzKey, EzDrag, Group, Match, Screen
 from libqtile.lazy import lazy
 from libqtile import layout, bar, widget, hook
 
 # * general settings
-mod = "mod4"
-mod1 = "alt"
-home = os.path.expanduser('~')
+home = os.path.expanduser("~")
 
 cursor_warp = False
 auto_fullscreen = True
@@ -38,75 +36,74 @@ colors = {
 keys = [
 
 # ** layouts
-    Key([mod, "shift"], "q", lazy.window.kill()),
-    Key([mod], "s", lazy.window.toggle_floating()),
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod], "space", lazy.next_layout()),
+    EzKey("M-<space>", lazy.next_layout()),
 
 # ** windows
+# *** status
+    EzKey("M-S-q", lazy.window.kill()),
+    EzKey("M-v", lazy.window.toggle_floating()),
+    EzKey("M-c", lazy.window.toggle_fullscreen()),
+
 # *** focus
-    Key(["mod1"], "Tab", lazy.group.next_window()),
-    Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
+    EzKey("A-<Tab>", lazy.group.next_window()),
+    EzKey("A-S-<Tab>", lazy.group.prev_window()),
 
-    Key([mod], "Tab", lazy.next_screen()),
-    Key([mod, "shift" ], "Tab", lazy.prev_screen()),
+    EzKey("M-<Tab>", lazy.next_screen()),
+    EzKey("M-S-<Tab>", lazy.prev_screen()),
 
-    Key([mod], "k", lazy.layout.up()),
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
+    EzKey("M-k", lazy.layout.up()),
+    EzKey("M-j", lazy.layout.down()),
+    EzKey("M-h", lazy.layout.left()),
+    EzKey("M-l", lazy.layout.right()),
+
+    EzKey("M-a", lazy.switch_window(1)),
+    EzKey("M-s", lazy.switch_window(2)),
+    EzKey("M-d", lazy.switch_window(3)),
+    EzKey("M-f", lazy.switch_window(4)),
+    EzKey("M-g", lazy.switch_window(5)),
 
 # *** swapping
-    Key([mod, "shift"], "f", lazy.layout.flip()),
+    EzKey("M-S-h", lazy.layout.move_left()),
+    EzKey("M-S-j", lazy.layout.move_down()),
+    EzKey("M-S-k", lazy.layout.move_up()),
+    EzKey("M-S-l", lazy.layout.move_right()),
 
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+    EzKey("M-C-h", lazy.layout.integrate_left()),
+    EzKey("M-C-j", lazy.layout.integrate_down()),
+    EzKey("M-C-k", lazy.layout.integrate_up()),
+    EzKey("M-C-l", lazy.layout.integrate_right()),
+
+    EzKey("M-b", lazy.layout.mode_vertical()),
+    EzKey("M-S-b", lazy.layout.mode_vertical_split()),
+    EzKey("M-r", lazy.layout.mode_horizontal()),
+    EzKey("M-S-r", lazy.layout.mode_horizontal_split()),
 
 # *** resizing
-    Key([mod], "n", lazy.layout.normalize()),
+    EzKey("M-z", lazy.layout.grow_width(-30)),
+    EzKey("M-u", lazy.layout.grow_height(-30)),
+    EzKey("M-i", lazy.layout.grow_height(30)),
+    EzKey("M-o", lazy.layout.grow_width(30)),
 
-    Key([mod, "control"], "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        ),
-    Key([mod, "control"], "h",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        ),
-    Key([mod, "control"], "k",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        ),
-    Key([mod, "control"], "j",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        ),
+    EzKey("M-n", lazy.layout.reset_size()),
 
 # ** restarting
-    Key([mod], "r", lazy.reload_config()),
-    Key([mod, "shift"], "r", lazy.restart()),
+    EzKey("M-S-r", lazy.reload_config()),
+    EzKey("M-C-r", lazy.restart()),
 ]
 
 # ** mouse
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size())
+    EzDrag("M-1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    EzDrag("M-3", lazy.window.set_size_floating(), start=lazy.window.get_size())
 ]
 
 # * groups
 groups = []
 group_names = [i for i in "12345678"]
+
 group_layouts = {i: "max" for i in group_names}
+group_layouts["2"] = "plasma"
+group_layouts["3"] = "plasma"
 
 # group name : wm_class (first or second field)
 group_rules = {i: [] for i in group_names}
@@ -120,29 +117,31 @@ for grname in group_names:
                         layout=group_layouts[grname],
                         matches=[Match(wm_class=i) for i in group_rules[grname]]))
     keys.extend([
-        Key([mod], grname, lazy.group[grname].toscreen()),
-        Key([mod, "shift"], grname, lazy.window.togroup(grname)),
-        Key([mod, "control"], grname, lazy.window.togroup(grname), lazy.group[grname].toscreen()),
+        EzKey(f"M-{grname}", lazy.group[grname].toscreen()),
+        EzKey(f"M-S-{grname}", lazy.window.togroup(grname)),
+        EzKey(f"M-C-{grname}", lazy.window.togroup(grname), lazy.group[grname].toscreen()),
     ])
 
-
 # * layouts
-# ** initialization
+# ** defaults
 layout_theme_border = {
-    "border_width"  : 1,
-    "border_focus"  : colors["blue"],
-    "border_normal" : colors["background"]
+    "border_width": 1,
+    "border_focus": colors["blue"],
+    "border_focus_fixed": colors["green"],
+    "border_normal": colors["background"],
+    "border_normal_fixed": colors["background"],
+    "border_on_single": False,
+    "fullscreen_border_width": 0,
 }
 
 layout_theme_no_border = {
     "border_width": 0,
-    "fullscreen_border_width": 0
+    "fullscreen_border_width": 0,
 }
 
+# ** initialization
 layouts = [
-    layout.RatioTile(**layout_theme_border),
-    layout.MonadTall(**layout_theme_border),
-    layout.MonadWide(**layout_theme_border),
+    layout.Plasma(**layout_theme_border),
     layout.Max(**layout_theme_no_border),
 ]
 
@@ -200,6 +199,10 @@ def init_widget_list():
         ),
         widget.CurrentLayout(
             font = widget_defaults["font"] + " Bold"
+        ),
+        widget.Plasma(
+            horizontal = "R",
+            vertical = "B",
         ),
         widget.Sep(
             linewidth = sep_linewidth,
@@ -341,8 +344,8 @@ screens = [Screen(bottom=bar.Bar(widgets=widget_list_full, size=26, opacity=0.9)
 # * autostart
 @hook.subscribe.startup_once
 def start_once():
-    subprocess.call([home + '/.config/qtile/scripts/autostart-once.sh'])
+    subprocess.call([home + "/.config/qtile/scripts/autostart-once.sh"])
 
 @hook.subscribe.startup
 def start_always():
-    subprocess.call([home + '/.config/qtile/scripts/autostart-always.sh'])
+    subprocess.call([home + "/.config/qtile/scripts/autostart-always.sh"])
