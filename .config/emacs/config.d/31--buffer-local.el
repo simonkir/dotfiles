@@ -27,7 +27,12 @@
 
 ; * avy
 (use-package avy
-  :general (general-def 'meow-normal-state-keymap "g" 'avy-goto-char-timer))
+  :general
+  (general-def 'meow-normal-state-keymap
+    "g" 'avy-goto-char-timer)
+  
+  :config
+  (setq avy-all-windows 'all-frames))
 
 ; * outline mode
 (use-package outline

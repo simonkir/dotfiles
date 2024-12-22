@@ -4,10 +4,17 @@
 (use-package embark
   :general (general-def
     "C-." 'embark-act
-    "C-s" 'embark-isearch-forward)
+    "C-s" 'embark-isearch-forward
+    "C-r" 'embark-isearch-backward)
 
   :config
-  (setq embark-mixed-indicator-delay 0)
+  (setq embark-help-key "?")
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  (setq embark-indicators
+        '(embark-minimal-indicator
+          embark-highlight-indicator
+          embark-isearch-highlight-indicator))
 
   (general-def 'embark-become-file+buffer-map
     "r" 'consult-recent-file

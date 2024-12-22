@@ -5,19 +5,19 @@
   "kill the currently active terminal"
   (interactive)
   (if (frame-parameter nil 'client)
-      (delete-frame)
+      (progn (delete-other-frames) (delete-frame))
     (kill-emacs)))
 
 ; * sk:soft-quit
 (defun sk:soft-quit ()
-  "performes an soft quit of emacs, i. e. closing the terminal"
+  "performes an soft quit of emacs, i. e. closing all frames"
   (interactive)
   (save-some-buffers)
   (sk:kill-terminal))
 
 ; * sk:harsh-quit
 (defun sk:harsh-quit ()
-  "performes an harsh quit of emacs, i. e. killing all open buffers and quitting the terminal"
+  "performes an harsh quit of emacs, i. e. killing all open buffers and closing all frames"
   (interactive)
   (save-some-buffers)
   (let ((kill-buffer-query-functions nil))

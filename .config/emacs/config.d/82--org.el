@@ -122,15 +122,14 @@ with prefix arg, call `org-return'"
 ; *** narrowing
   ;; see `sk:narrow-or-widen' for regular src- / table-editing
 
-  (setq org-src-window-setup 'plain)
   (setq org-edit-src-content-indentation 0)
-  (setq display-buffer-alist '(("Org Src" . (display-buffer-same-window))))
+  (setq org-src-window-setup 'current-window)
 
   (defun sk:leader-E ()
     "determine and perform desired action on <leader>-E input"
     (interactive)
     (when (derived-mode-p 'org-mode)
-      (let ((display-buffer-alist '(("Org Src" . (display-buffer-pop-up-window)))))
+      (let ((org-src-window-setup 'other-frame))
         (org-edit-special))))
 
   (general-def-leader
