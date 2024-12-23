@@ -1,21 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
-; * consult
-(use-package consult
-  :general
-  (general-def-leader
-    "b b" 'consult-buffer
-    "b B" 'consult-project-buffer
-    "w b" 'consult-buffer-other-window
-    "f b" 'consult-bookmark
-    "f r" 'consult-recent-file
-    "v e" 'consult-flymake
-    "v j" 'consult-outline)
+; * prompts
+(defalias 'yes-or-no 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
-  (general-def meow-normal-state-keymap
-    "P" 'consult-yank-pop
-    "M" 'consult-goto-line
-    "v" 'consult-line))
+(setq-default use-dialog-box nil)
 
 ; * vertico
 (use-package vertico
@@ -36,7 +25,6 @@
   (vertico-mode)
   (vertico-indexed-mode))
 
-; * vertico-posframe
 (use-package vertico-posframe
   :demand t
   :after vertico
@@ -48,6 +36,35 @@
   (setq vertico-posframe-border-width 2)
 
   (vertico-posframe-mode))
+
+; * embark
+(use-package embark
+  :general (general-def
+    "C-." 'embark-act
+    "C-s" 'embark-isearch-forward
+    "C-r" 'embark-isearch-backward)
+
+  :config
+  (setq embark-help-key "?")
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  (setq embark-indicators
+        '(embark-minimal-indicator
+          embark-highlight-indicator
+          embark-isearch-highlight-indicator))
+
+  (general-def 'embark-become-file+buffer-map
+    "r" 'consult-recent-file
+    "B" 'consult-bookmark
+    "b" 'consult-buffer
+    "p" 'consult-project-buffer)
+
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
+  (vertico-multiform-mode))
+
+(use-package embark-consult
+  :demand t
+  :after embark)
 
 ; * marginalia
 (use-package marginalia
