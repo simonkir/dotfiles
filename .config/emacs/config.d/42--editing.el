@@ -10,6 +10,44 @@
 
   (yas-global-mode))
 
+; * replace
+(use-package visual-regexp
+; ** keybinds
+  :general
+  (general-def meow-normal-state-keymap
+    "r" 'sk:visual-replace-regexp
+    "R" 'sk:visual-query-replace-regexp)
+
+  :config
+; ** custom functions
+  (defun sk:visual-replace-regexp ()
+    "sk:replace-regexp string (see `vr/replace')
+
+when region is active, replace in region, else replace in buffer"
+    (interactive)
+    (save-excursion
+      (unless (region-active-p)
+        (beginning-of-buffer))
+      (call-interactively #'vr/replace)))
+
+  (defun sk:visual-query-replace-regexp ()
+    "sk:query-replace-regexp string (see `vr/query-replace')
+
+when region is active, replace in region, else replace in buffer"
+    (interactive)
+    (save-excursion
+      (unless (region-active-p)
+        (beginning-of-buffer))
+      (call-interactively #'vr/query-replace)))
+
+; ** general settings
+  (setq vr/auto-show-help nil)
+  (setq vr/match-separator-use-custom-face t)
+
+  (general-def vr/minibuffer-keymap
+    "C-k" 'previous-history-element
+    "C-j" 'next-history-element))
+
 ; * parentheses
 ; ** electric
 (use-package electric
@@ -39,9 +77,11 @@
 
 ; ** spell checking
 (use-package jinx
-  :general (general-def meow-normal-state-keymap
+  :general
+  (general-def meow-normal-state-keymap
     "!" 'jinx-correct
     "?" 'jinx-mode)
+
   :config
   (setq-default jinx-languages "de_DE"))
 

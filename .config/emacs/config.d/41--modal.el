@@ -45,46 +45,6 @@
       (funcall f beg end)
       (forward-char)))
 
-  (defun sk:replace-string ()
-    "sk:replace string (see `replace-string')
-
-when region is active, replace in region, else replace in buffer"
-    (interactive)
-    (save-excursion
-      (unless (region-active-p)
-        (beginning-of-buffer))
-      (call-interactively #'replace-string)))
-
-  (defun sk:query-replace-string ()
-    "sk:query-replace string (see `query-replace')
-
-when region is active, replace in region, else replace in buffer"
-    (interactive)
-    (save-excursion
-      (unless (region-active-p)
-        (beginning-of-buffer))
-      (call-interactively #'query-replace)))
-
-  (defun sk:replace-regexp ()
-    "sk:replace-regexp string (see `replace-regexp')
-
-when region is active, replace in region, else replace in buffer"
-    (interactive)
-    (save-excursion
-      (unless (region-active-p)
-        (beginning-of-buffer))
-      (call-interactively #'replace-regexp)))
-
-  (defun sk:query-replace-regexp ()
-    "sk:query-replace-regexp string (see `query-replace-regexp')
-
-when region is active, replace in region, else replace in buffer"
-    (interactive)
-    (save-excursion
-      (unless (region-active-p)
-        (beginning-of-buffer))
-      (call-interactively #'query-replace-regexp)))
-
 ; ** keybinds
   (general-def meow-insert-state-keymap
     "C-z" 'meow-motion-mode)
@@ -165,16 +125,12 @@ when region is active, replace in region, else replace in buffer"
     ;;"P" nil ;; reserved for consult
     ;;"q" nil ;; reserved for buffer-local stuff (e. g. quitting *Help* buffers)
     ;;"Q" nil
-    "r r" 'sk:replace-regexp
-    "r R" 'sk:query-replace-regexp
-    "r s" 'sk:replace-string
-    "r S" 'sk:query-replace-string
-    "r y" 'meow-replace
-    "R" 'meow-swap-grab
+    ;; "r" nil ;; reserved for visual-regexp
+    ;; "R" nil ;; reserved for visual-regexp
     "s" 'meow-change
     ;;"S" nil ;; reserved for skparens
     "t" 'meow-till
-    ;;"T" nil
+    "T" 'meow-swap-grab
     "u" 'undo
     "U" 'undo-redo
     ;;"v" nil ;; reserved for consult
