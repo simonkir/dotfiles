@@ -1,16 +1,19 @@
 # * general settings
-[scrolling]
-history = 50000
-
-[terminal.shell]
-program = "/usr/bin/fish"
+terminal.shell.program = "/usr/bin/fish"
+mouse.hide_when_typing = true
+scrolling.history = 50000
 
 [window]
 opacity = 0.9
+padding.x = 11
+padding.y = 11
 
-[window.padding]
-x = 11
-y = 11
+[cursor]
+style.shape = "Beam"
+style.blinking = "On"
+
+vi_mode_style.shape = "Block"
+vi_mode_style.blinking = "Off"
 
 # * theme
 [colors.bright]

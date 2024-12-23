@@ -21,28 +21,6 @@ function multicd
 end
 abbr --add dotdot --regex '^\.\.+$' --function multicd
 
-# * keybinds
-function fish_hybrid_key_bindings --description \
-"Vi-style bindings that inherit emacs-style bindings in all modes"
-    # copy emacs keybinds into each mode
-    fish_default_key_bindings -M insert
-    fish_default_key_bindings -M normal
-    fish_default_key_bindings -M visual
-
-    # make vi keybinds take precedence over emacs keybinds
-    fish_vi_key_bindings --no-erase
-end
-
-if test $TERM = "eat-truecolor"
-    set -g fish_key_bindings fish_default_key_bindings
-    set fish_cursor_default line
-else
-    set -g fish_key_bindings fish_hybrid_key_bindings
-    set fish_cursor_insert line
-    set fish_cursor_replace underscore
-    set fish_cursor_replace_one underscore
-end
-
 # * visuals
 fish_config prompt choose scales
 fish_config theme choose Dracula
