@@ -35,6 +35,7 @@
   (setq vertico-posframe-truncate-lines t)
   (setq vertico-posframe-border-width 2)
 
+  (vertico-multiform-mode) ;; used by embark
   (vertico-posframe-mode))
 
 ; * embark
@@ -53,14 +54,13 @@
           embark-highlight-indicator
           embark-isearch-highlight-indicator))
 
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
+
   (general-def 'embark-become-file+buffer-map
     "r" 'consult-recent-file
     "B" 'consult-bookmark
     "b" 'consult-buffer
-    "p" 'consult-project-buffer)
-
-  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
-  (vertico-multiform-mode))
+    "p" 'consult-project-buffer))
 
 (use-package embark-consult
   :demand t

@@ -69,6 +69,8 @@
   (setq cdlatex-simplify-sub-super-scripts nil)
   (setq cdlatex-sub-super-scripts-outside-math-mode nil)
 
+  (setq cdlatex-auto-help-delay most-positive-fixnum)
+
   ;; needed for sklatex alignment defuns
   (advice-add 'cdlatex-math-symbol :after #'(lambda () (run-hooks 'post-self-insert-hook)))
 
