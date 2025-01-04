@@ -125,7 +125,7 @@
           (?q ("\\vartheta" "\\theta" ""))
           (?Q ("\\Theta" "\\mathbb{Q}" ""))
           (?r ("\\rho" "\\varrho" ""))
-          (?R ("" "\\mathbb {R}" ""))
+          (?R ("" "\\mathbb{R}" ""))
           (?s ("\\sigma" "\\varsigma" "\\sin"))
           (?S ("\\Sigma" "\\mathcal{S}" "\\arcsin"))
           (?t ("\\tau" "" "\\tan"))

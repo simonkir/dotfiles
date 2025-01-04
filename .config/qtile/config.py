@@ -9,6 +9,7 @@ home = os.path.expanduser("~")
 
 cursor_warp = False
 auto_fullscreen = True
+auto_minimize = False
 bring_front_click = False
 follow_mouse_focus = True
 reconfigure_screens = True

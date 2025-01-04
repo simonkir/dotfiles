@@ -44,7 +44,7 @@ super + alt + m
     brave https://mail.google.com
 
 super + alt + n
-    brave https://keep.google.com/u/1/
+    ~/.config/simonkir/nextcloud.sh
 
 super + alt + o
     libreoffice
