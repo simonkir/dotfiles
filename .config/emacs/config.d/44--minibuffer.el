@@ -23,6 +23,7 @@
     "C-k" 'vertico-previous)
 
   (vertico-mode)
+  (vertico-multiform-mode) ;; used by embark
   (vertico-indexed-mode))
 
 (use-package vertico-posframe
@@ -35,7 +36,6 @@
   (setq vertico-posframe-truncate-lines t)
   (setq vertico-posframe-border-width 2)
 
-  (vertico-multiform-mode) ;; used by embark
   (vertico-posframe-mode))
 
 ; * embark

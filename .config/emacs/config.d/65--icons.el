@@ -70,4 +70,8 @@
 
            ;; org-agenda / regular org-files
             ("Deadlined: \\|DEADLINE: " . ((lambda (tag) (svg-tag-make tag :end -1 :radius 0 :inverse t :face 'org-imminent-deadline))))
-            ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :end -1 :inverse t :radius 0 :face 'org-scheduled))))))))
+            ("Scheduled: \\|SCHEDULED: " . ((lambda (tag) (svg-tag-make tag :end -1 :inverse t :radius 0 :face 'org-scheduled)))))))
+
+; ** keybinds
+  (general-def-leader
+    "d s" 'svg-tag-mode))
