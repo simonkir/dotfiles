@@ -8,7 +8,12 @@
   "f s" 'save-buffer
   "s"   'save-buffer)
 
-; * dirvish
+; * file browser
+; ** dired
+;; (use-package dired
+;;   :demand t)
+
+; ** dirvish
 (use-package dirvish
   :demand t
   :after dired
@@ -20,26 +25,31 @@
   (add-hook 'dired-mode-hook #'dired-omit-mode)
   (setq dirvish-time-format-string "%Y-%m-%d %H:%M")
   (setq dirvish-attributes '(vc-state subtree-state nerd-icons git-msg file-time file-size))
-
-  (setq dirvish-preview-dispatchers '(vc-diff archive image gif pdf))
-  (setq dirvish-default-layout '(0 0 0.7))
+  (setq dirvish-hide-cursor nil) ;; dont highlight current line
   (setq dirvish-reuse-session t) ;; always keep last dirvish buffer open
 
+  (setq dirvish-preview-dispatchers '(vc-diff archive image gif pdf))
+  (setq dirvish-default-layout '(0 0 0.75))
+  (setq dirvish-layout-recipes `(,dirvish-default-layout (0 0 0.4) (1 0.2 0.3) (1 0.2 0.5)))
+
+  (setq dirvish-mode-line-format '(:left (path vc-info) :right (index sort)))
   (setq dirvish-mode-line-height doom-modeline-height)
-  (setq dirvish-header-line-height 22)
-  (setq dirvish-hide-cursor nil) ;; dont highlight current line
+  (setq dirvish-use-header-line nil)
 
   (general-def 'dirvish-mode-map
     "<tab>" 'dirvish-subtree-toggle
     "/" 'dirvish-narrow
     ")" 'dired-omit-mode
     "p" 'dirvish-layout-toggle
+    "P" 'dirvish-layout-switch
 
     "i" 'dired-toggle-read-only
     "h" 'dired-up-directory
     "l" 'dired-find-file)
 
-  (dirvish-override-dired-mode))
+  (dirvish-override-dired-mode)
+  ;; (dirvish-peek-mode)
+  )
 
 ; * tramp
 (use-package tramp
