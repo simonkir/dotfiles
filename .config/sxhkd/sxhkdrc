@@ -4,6 +4,9 @@
 super + alt + a
     emacsclient -cq --eval "(sk:org-agenda-dashboard)"
 
+super + alt + shift + a
+    brave https://tasks.google.com
+
 super + alt + b
     ~/.config/simonkir/bluetooth-connect.sh
 
@@ -14,7 +17,13 @@ super + alt + ctrl + b
     blueberry
 
 super + alt + c
+    ~/.config/simonkir/nextcloud-calendar.sh
+
+super + alt + shift + c
     brave https://calendar.google.com
+
+super + alt + ctrl + c
+    ~/.config/simonkir/nextcloud-contacts.sh
 
 super + alt + d
     ~/.config/picom/toggle-darkmode.sh
@@ -26,7 +35,10 @@ super + alt + shift + e
     emacs
 
 super + alt + f
-    brave https://meteoblue.com
+    ~/.config/simonkir/nextcloud-files.sh
+
+super + alt + shift + f
+    ~/.config/simonkir/nextcloud-memories.sh
 
 super + alt + i
     inkscape
@@ -44,7 +56,7 @@ super + alt + m
     brave https://mail.google.com
 
 super + alt + n
-    ~/.config/simonkir/nextcloud.sh
+    ~/.config/simonkir/nextcloud-notes.sh
 
 super + alt + o
     libreoffice

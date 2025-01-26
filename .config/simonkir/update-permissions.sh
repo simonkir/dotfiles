@@ -20,8 +20,6 @@ chmod +x ~/.config/herbstluftwm/scripts/picom-launch.sh
 # * functionality
 chmod +x ~/.config/simonkir/screenlayout.sh
 chmod +x ~/.config/sxhkd/launch-sxhkd.sh
-#chmod +x ~/.config/vifm/scripts/vifmimg
-#chmod +x ~/.config/vifm/scripts/vifmrun
 
 # * visuals
 chmod +x ~/.config/picom/picom.sh
@@ -30,6 +28,13 @@ chmod +x ~/.config/simonkir/random-wallpaper.sh
 chmod +x ~/.config/conky/launch-conky.sh
 chmod +x ~/.config/polybar/launch.sh
 chmod +x ~/.config/polybar/scripts/tempcores.sh
+
+# * nextcloud
+chmod +x ~/.config/simonkir/nextcloud-calendar.sh
+chmod +x ~/.config/simonkir/nextcloud-contacts.sh
+chmod +x ~/.config/simonkir/nextcloud-files.sh
+chmod +x ~/.config/simonkir/nextcloud-memories.sh
+chmod +x ~/.config/simonkir/nextcloud-notes.sh
 
 # * bluetooth
 chmod +x ~/.config/simonkir/bluetooth-connect.sh
