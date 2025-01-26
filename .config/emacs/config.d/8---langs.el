@@ -11,13 +11,7 @@
   ;; enter insert mode if commit message is empty
   (add-hook 'git-commit-setup-hook #'(lambda () (when (looking-at-p "^$") (meow-insert))))
 
-  (defun sk:magit-bury-buffer-function (kill-buffer)
-    (if (length> (visible-frame-list) (if (daemonp) 2 1))
-        (delete-frame)
-      (quit-window kill-buffer)))
-
-  (setq magit-bury-buffer-function #'sk:magit-bury-buffer-function)
-  (setq magit-commit-show-diff nil)
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
 
   (general-def magit-mode-map
     "<backtab>" 'magit-section-cycle-diffs
@@ -85,6 +79,8 @@
   "L" 'help-go-forward
   "n" 'help-go-forward
   "p" 'help-go-back)
+
+(add-to-list 'display-buffer-alist '("Help" . (display-buffer-pop-up-frame)))
 
 ; * langs
 ; ** fish
