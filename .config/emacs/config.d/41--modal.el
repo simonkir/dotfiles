@@ -130,7 +130,10 @@
     "s" 'meow-change
     ;;"S" nil ;; reserved for skparens
     "t" 'meow-till
-    "T" 'meow-swap-grab
+    "T T" 'meow-swap-grab
+    "T w" 'transpose-words
+    "T x" 'transpose-sexps
+    "T c" 'transpose-chars
     "u" 'undo
     "U" 'undo-redo
     ;;"v" nil ;; reserved for consult

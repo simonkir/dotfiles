@@ -288,9 +288,9 @@ with prefix arg, call `org-return'"
   (setq org-agenda-deadline-leaders '("Deadlined:  " "In %2dd.:   " "Past %2dd.: "))
 
   (setq org-agenda-sorting-strategy
-        '((agenda time-up priority-down category-up todo-state-up alpha-up)
-          (todo priority-down category-up todo-state-up alpha-up)
-          (tags priority-down category-up todo-state-up alpha-up)
+        '((agenda time-up priority-down category-up alpha-up)
+          (todo priority-down category-up alpha-up)
+          (tags priority-down category-up alpha-up)
           (search alpha-up)))
 
   (setq org-agenda-prefix-format
