@@ -49,9 +49,6 @@ super + alt + j
 super + alt + k
     krita
 
-super + alt + l
-    emacsclient -cq --eval "(sk:run-ipython)"
-
 super + alt + m
     brave https://mail.google.com
 
@@ -62,10 +59,7 @@ super + alt + o
     libreoffice
 
 super + alt + p
-    pavucontrol
-
-super + alt + shift + p
-    paprefs
+    emacsclient -cq --eval "(sk:run-ipython)"
 
 super + alt + r
     ~/.config/sxhkd/launch-sxhkd.sh
@@ -76,11 +70,11 @@ super + alt + s
 super + alt + shift + s
     brave https://open.spotify.com
 
-super + alt + t
-    brave https://wiktionary.org/
+super + alt + v
+    pavucontrol
 
-super + alt + shift + t
-    brave https://deepl.com
+super + alt + shift + v
+    paprefs
 
 super + alt + w
     brave
