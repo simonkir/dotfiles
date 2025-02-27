@@ -12,6 +12,7 @@
   (add-hook 'git-commit-setup-hook #'(lambda () (when (looking-at-p "^$") (meow-insert))))
 
   (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (setq magit-format-file-function #'magit-format-file-nerd-icons)
 
   (general-def magit-mode-map
     "<backtab>" 'magit-section-cycle-diffs

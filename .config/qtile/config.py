@@ -109,7 +109,7 @@ group_layouts["3"] = "plasma"
 # group name : wm_class (first or second field)
 group_rules = {i: [] for i in group_names}
 group_rules["1"] = ["firefox", "brave-browser", "spotify"]
-group_rules["2"] = ["emacs", "emacs-29-4"]
+group_rules["2"] = ["emacs", "emacs-30-1"]
 group_rules["3"] = ["Alacritty"]
 group_rules["4"] = ["krita", "Inkscape", "libreoffice"]
 

@@ -56,7 +56,8 @@
   :general
   (general-def-leader
     "b c" 'tramp-cleanup-connection
-    "b C" 'tramp-cleanup-all-connections)
+    "b C" 'tramp-cleanup-all-buffers)
+
   :config
   (setq tramp-default-method "ssh")
   (setq tramp-use-ssh-controlmaster-options nil))
