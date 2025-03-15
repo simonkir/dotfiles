@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
 ; * helper functions
-(defun sk:kill-terminal ()
-  "kill the currently active terminal"
+(defun sk:kill-all-terminals ()
+  "kill the currently active terminals"
   (interactive)
   (if (frame-parameter nil 'client)
       (progn (delete-other-frames) (delete-frame))
@@ -13,7 +13,7 @@
   "performes an soft quit of emacs, i. e. closing all frames"
   (interactive)
   (save-some-buffers)
-  (sk:kill-terminal))
+  (sk:kill-all-terminals))
 
 ; * sk:harsh-quit
 (defun sk:harsh-quit ()
@@ -21,10 +21,10 @@
   (interactive)
   (save-some-buffers)
   (let ((kill-buffer-query-functions nil))
-   (dolist (buffer (centaur-tabs-buffer-list))
+   (dolist (buffer (buffer-list))
      (set-buffer-modified-p nil)
      (kill-buffer buffer)))
-  (sk:kill-terminal))
+  (sk:kill-all-terminals))
 
 ; * sk:daemon-quit
 (defun sk:daemon-quit ()

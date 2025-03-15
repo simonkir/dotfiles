@@ -79,7 +79,9 @@
   "H" 'help-go-back
   "L" 'help-go-forward
   "n" 'help-go-forward
-  "p" 'help-go-back)
+  "p" 'help-go-back
+  "q" 'bury-buffer
+  "Q" 'quit-window)
 
 (add-to-list 'display-buffer-alist '("Help" . (display-buffer-pop-up-frame)))
 
