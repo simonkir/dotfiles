@@ -3,7 +3,7 @@
 # key: templttr
 # --
 #+latex_class: scrlttr2
-#+latex_class_options: [11pt,ngerman,foldmarks=${1:false},fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
+#+latex_class_options: [11pt,ngerman,enlargefirstpage=true,firstfoot=false,foldmarks=false,fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
 #+latex_header: \usepackage{parskip}
 #+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
@@ -13,21 +13,21 @@
 #+options: toc:nil
 #+date: `(format-time-string "%d. %B %Y")`
 
-\setkomavar{fromname}{${2:simonkir}}
-\setkomavar{fromaddress}{${3:simonkir's address}}
+\setkomavar{fromname}{SIMONKIR}
+\setkomavar{fromaddress}{SIMONKIR'S ADDRESS}
 \setkomavar{fromphone}[]{}
 \setkomavar{fromemail}[]{}
 
-#+attr_latex: :options {${4:recipient}\\\\${5:recipient's address}}
+#+attr_latex: :options {RECIPIENT\\\\RECIPIENT'S ADDRESS}
 #+begin_letter
 
-\setkomavar{subject}{${6:SUBJECT}}
+\setkomavar{subject}{SUBJECT}
 
-\opening{${7:GREETING}}
+\opening{GREETING}
 
 $0
 
-\closing{GREETING}
+\closing{SALUTATION}
 
 # \ps PS: …
 

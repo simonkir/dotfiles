@@ -10,7 +10,8 @@
   ;;"b b" nil ;; reserved for consult
   "b k" 'sk:kill-this-buffer
   "b K" 'kill-buffer-and-window
-  "b q" 'bury-buffer)
+  "b q" 'bury-buffer
+  "b Q" 'unbury-buffer)
 
 ; * uniquify
 (defun sk:uniquify (base extra-string)
