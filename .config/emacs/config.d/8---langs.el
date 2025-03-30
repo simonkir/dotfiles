@@ -67,6 +67,12 @@
   (setq calc-algebraic-mode 'total)
   (setq calc-multiplication-has-precedence nil))
 
+; ** dictionary
+(use-package dictionary
+  :config
+  (setq dictionary-server "dict.org")
+  (setq dictionary-use-single-buffer t))
+
 ; ** help major mode
 (general-def-leader
   "h" 'describe-symbol
@@ -103,6 +109,8 @@
     "b" 'sk:scroll-page-up
     "e" 'sk:scroll-line-down
     "y" 'sk:scroll-line-up
+    "d" 'dictionary-search
+    "D" 'dictionary-match-words
     "o" 'nov-goto-toc
     "h" 'meow-left
     "l" 'meow-right))

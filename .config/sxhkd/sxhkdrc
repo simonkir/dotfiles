@@ -70,6 +70,9 @@ super + alt + s
 super + alt + shift + s
     brave https://open.spotify.com
 
+super + alt + t
+    brave https://dict.org
+
 super + alt + v
     pavucontrol
 

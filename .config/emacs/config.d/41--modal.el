@@ -78,7 +78,7 @@
     ;; "$" nil
     ;;"%" nil ;; reserved for skparens
     ;; "&" nil
-    ;; "/" nil
+    "/" 'dictionary-search
     "(" 'backward-sexp
     ")" 'forward-sexp
     "=" 'indent-region
