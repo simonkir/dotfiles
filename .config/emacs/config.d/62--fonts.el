@@ -60,6 +60,10 @@
 
   (global-ligature-mode))
 
+; * emojis
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+
 ; * prettify-symbols-mode
 ; ** org-mode definitions
 (defun sk:prettify-symbols-org-mode ()
