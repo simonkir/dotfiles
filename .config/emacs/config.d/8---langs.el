@@ -99,6 +99,10 @@
   (general-def 'nov-mode-map
     "t" nil
     "r" nil
+    "f" 'sk:scroll-page-down
+    "b" 'sk:scroll-page-up
+    "e" 'sk:scroll-line-down
+    "y" 'sk:scroll-line-up
     "o" 'nov-goto-toc
     "h" 'meow-left
     "l" 'meow-right))

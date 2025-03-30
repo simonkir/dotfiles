@@ -47,6 +47,12 @@
 
 ; ** keybinds
   (general-def meow-insert-state-keymap
+    "C-e" 'delete-backward-char
+    "C-w" 'backward-kill-word
+    "C-h" 'backward-char
+    "C-j" 'next-line
+    "C-k" 'previous-line
+    "C-l" 'forward-char
     "C-z" 'meow-motion-mode)
 
   (general-def meow-motion-state-keymap

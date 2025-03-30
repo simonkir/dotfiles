@@ -1,36 +1,53 @@
 ;;; -*- lexical-binding: t; -*-
 
 ; * general settings
-(setq scroll-conservatively 100)
-(setq scroll-margin 5) ;; begin scrolling when the cursor is 5 lines above the last displayed line
+(advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (goto-char isearch-other-end))))
 
-(setq mouse-wheel-scroll-amount '(5 ((shift) . hscroll)))
+; * scrolling
+(setq scroll-conservatively 101)
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . hscroll)))
 (setq mouse-wheel-progressive-speed nil)
 (setq mouse-wheel-follow-mouse t)
 
-(advice-add 'isearch-exit :after #'(lambda () (when isearch-forward (goto-char isearch-other-end))))
+(setq pixel-scroll-precision-interpolate-page t)
+(setq pixel-scroll-precision-large-scroll-height 19)
+(pixel-scroll-precision-mode 1)
 
-; * keybinds
+(defun sk:scroll-line-down ()
+  (interactive)
+  (pixel-scroll-precision-interpolate -40 nil 1))
+
+(defun sk:scroll-line-up ()
+  (interactive)
+  (pixel-scroll-precision-interpolate 40 nil 1))
+
+(defun sk:scroll-page-down ()
+  (interactive)
+  (pixel-scroll-precision-interpolate (* (window-text-height nil t) -0.75) nil 1))
+
+(defun sk:scroll-page-up ()
+  (interactive)
+  (pixel-scroll-precision-interpolate (* (window-text-height nil t) 0.75) nil 1))
+
 (general-def
-  "C-f" 'scroll-up
-  "C-b" 'scroll-down
-  "C-e" 'scroll-up-line
-  "C-y" 'scroll-down-line)
+  "C-f" 'sk:scroll-page-down
+  "C-b" 'sk:scroll-page-up
+  "C-e" 'sk:scroll-line-down
+  "C-y" 'sk:scroll-line-up)
 
-(general-def meow-insert-state-keymap
-  "C-e" 'delete-backward-char
-  "C-w" 'backward-kill-word
-  "C-h" 'backward-char
-  "C-j" 'next-line
-  "C-k" 'previous-line
-  "C-l" 'forward-char)
+;; (general-def
+;;   "C-f" 'pixel-scroll-interpolate-down
+;;   "C-b" 'pixel-scroll-interpolate-up
+;;   "C-e" 'pixel-scroll-up
+;;   "C-y" 'pixel-scroll-down)
 
 ; * avy
 (use-package avy
   :general
   (general-def 'meow-normal-state-keymap
     "g" 'avy-goto-char-timer)
-  
+
   :config
   (setq avy-all-windows 'all-frames))
 
