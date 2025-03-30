@@ -37,7 +37,11 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
     "t v" 'visual-fill-column-mode
     "t V" 'set-fill-column)
 
-  :config (setq-default visual-fill-column-center-text t))
+  :config
+  (setq-default visual-fill-column-center-text t)
+  (setq visual-fill-column-enable-sensible-window-split t)
+
+  (advice-add 'text-scale-adjust :after #'visual-fill-column-adjust))
 
 ; * rainbow-delimiters
 (use-package rainbow-delimiters

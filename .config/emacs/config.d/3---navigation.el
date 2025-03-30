@@ -20,6 +20,7 @@
 ; ** general settings
   ;; (setq consult-narrow-key ">")
   (setq consult-widen-key "<")
+  (setq consult-preview-key nil)
 
 ; ** consult-buffer
   (defun sk:file-visiting-buffer-list ()

@@ -86,6 +86,23 @@
 (add-to-list 'display-buffer-alist '("Help" . (display-buffer-pop-up-frame)))
 
 ; * langs
+; ** epub
+(use-package nov
+  :init
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+  :config
+  (setq nov-header-line-format nil)
+  (setq nov-variable-pitch nil)
+  (setq nov-text-width t)
+
+  (general-def 'nov-mode-map
+    "t" nil
+    "r" nil
+    "o" 'nov-goto-toc
+    "h" 'meow-left
+    "l" 'meow-right))
+
 ; ** fish
 (use-package fish-mode)
 

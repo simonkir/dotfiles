@@ -33,7 +33,7 @@
 
 ; * mixed-pitch mode
 (use-package mixed-pitch
-  :hook ((org-mode TeX-mode text-mode) . mixed-pitch-mode)
+  :hook ((org-mode TeX-mode nov-mode) . mixed-pitch-mode)
   :general (general-def-leader "d m" 'mixed-pitch-mode)
   :config
   (setq mixed-pitch-variable-pitch-cursor nil)
