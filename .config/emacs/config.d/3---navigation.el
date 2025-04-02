@@ -37,6 +37,14 @@
           (add-to-list 'result (buffer-name buffer))))
       result))
 
+  (defun sk:dired-buffer-list ()
+    (let ((result '()))
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+          (when (derived-mode-p 'dired-mode)
+           (add-to-list 'result (buffer-name buffer)))))
+      result))
+
   (defvar sk:consult--source-file-visiting-buffer
     `( :name "File Visiting Buffer"
        :narrow ?f
@@ -57,9 +65,20 @@
        :history buffer-name-history
        :items ,#'sk:vc-buffer-list ))
 
+  (defvar sk:consult--source-dired-buffer
+    `( :name "Dired Buffer"
+       :narrow ?d
+       :hidden t
+       :category buffer
+       :face consult-buffer
+       :state ,#'consult--buffer-state
+       :history buffer-name-history
+       :items ,#'sk:dired-buffer-list ))
+
   (setq consult-buffer-sources '(consult--source-buffer
                                  sk:consult--source-file-visiting-buffer
                                  sk:consult--source-vc-buffer
+                                 sk:consult--source-dired-buffer
                                  consult--source-project-buffer-hidden
                                  consult--source-modified-buffer
                                  consult--source-hidden-buffer))
