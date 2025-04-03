@@ -86,10 +86,8 @@
   "L" 'help-go-forward
   "n" 'help-go-forward
   "p" 'help-go-back
-  "q" 'bury-buffer
-  "Q" 'quit-window)
-
-(add-to-list 'display-buffer-alist '("Help" . (display-buffer-pop-up-frame)))
+  "q" 'quit-window
+  "Q" 'bury-buffer)
 
 ; * langs
 ; ** epub
@@ -105,12 +103,14 @@
   (general-def 'nov-mode-map
     "t" nil
     "r" nil
+    "g" 'avy-goto-char-timer
     "f" 'sk:scroll-page-down
     "b" 'sk:scroll-page-up
     "e" 'sk:scroll-line-down
     "y" 'sk:scroll-line-up
     "d" 'dictionary-search
     "D" 'dictionary-match-words
+    "§" 'count-words
     "o" 'nov-goto-toc
     "h" 'meow-left
     "l" 'meow-right))

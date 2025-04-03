@@ -74,7 +74,7 @@
     "1" 'sk:meow-digit-argument-or-eval
     ;; "!" nil ;; reserved for jinx
     ;; "\"" nil
-    ;; "§" nil
+    "§" 'count-words
     ;; "$" nil
     ;;"%" nil ;; reserved for skparens
     ;; "&" nil
