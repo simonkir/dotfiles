@@ -61,7 +61,8 @@
             ;; org checkboxes
             ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))
             ("\\[-\\]" . ((lambda (tag) (svg-tag-make "⧖" :padding 1 :radius 0 :face 'org-checkbox))))
-            ("\\[X\\]" . ((lambda (tag) (svg-tag-make "⨯" :padding 1 :radius 0 :face 'org-done))))
+            ;; ("\\[X\\]" . ((lambda (tag) (svg-tag-make "✔" :padding 1 :radius 0 :face 'org-done))))
+            ("\\[X\\]" . ((lambda (tag) (svg-tag-make "✘" :padding 1 :radius 0 :face 'org-done))))
 
             ;; org date- / time- / duration stamps
             (,(format "<%s>" date-re) . ((lambda (tag) (svg-tag-make tag :radius 0 :beg 1 :end -1))))

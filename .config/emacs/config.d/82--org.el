@@ -11,42 +11,6 @@
 
   :config
 ; ** general org
-; *** visuals
-  (setq org-num-max-level 3)
-  (setq org-startup-folded t)
-  (setq org-return-follows-link t)
-
-  (setq org-hide-leading-stars t)
-  (setq org-hide-emphasis-markers t)
-  (setq org-fontify-whole-heading-line t)
-  (setq org-fontify-done-headline t)
-  (setq org-fontify-quote-and-verse-blocks t)
-
-  (setq org-emphasis-alist
-        '(("*" bold)
-          ("/" italic)
-          ("_" underline)
-          ("=" org-verbatim verbatim)
-          ("~" org-code verbatim)))
-
-  (defun sk:org-toggle-emphasis-markers ()
-    "toggle display of emphasis markers"
-    (interactive)
-    (org-toggle-link-display)
-    (if org-hide-emphasis-markers
-        (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t))
-    (org-restart-font-lock)
-    (message "org: toggled display of emphasis markers"))
-
-  (general-def org-mode-map
-    "C-c C-x C-h" 'org-toggle-pretty-entities
-    "C-c C-x H" 'sk:org-toggle-emphasis-markers)
-
-  (add-hook 'org-mode-hook #'org-num-mode)
-  (add-hook 'org-mode-hook #'org-indent-mode)
-  (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
-
 ; *** editing
 ; **** sk:org-return
   ;; inspired from github.com/alphapapa/unpackaged.el
@@ -122,6 +86,9 @@ with prefix arg, call `org-return'"
 ; *** narrowing
   ;; see `sk:narrow-or-widen' for regular src- / table-editing
 
+  (setq org-startup-folded t)
+  (setq org-fold-catch-invisible-edits 'error)
+
   (setq org-edit-src-content-indentation 0)
   (setq org-src-window-setup 'current-window)
 
@@ -134,6 +101,47 @@ with prefix arg, call `org-return'"
 
   (general-def-leader
     "E" 'sk:leader-E)
+
+; *** headings
+  (setq org-num-max-level 3)
+  (setq org-hide-leading-stars t)
+
+  (setq org-auto-align-tags nil)
+  (setq org-tags-column 0)
+  (setq org-agenda-tags-column 0)
+
+  (setq org-fontify-whole-heading-line t)
+  (setq org-fontify-done-headline t)
+
+  (add-hook 'org-mode-hook #'org-num-mode)
+
+; *** text
+  (setq org-return-follows-link t)
+
+  (setq org-hide-emphasis-markers t)
+  (setq org-emphasis-alist
+        '(("*" bold)
+          ("/" italic)
+          ("_" underline)
+          ("=" org-verbatim verbatim)
+          ("~" org-code verbatim)))
+
+  (defun sk:org-toggle-emphasis-markers ()
+    "toggle display of emphasis markers"
+    (interactive)
+    (org-toggle-link-display)
+    (if org-hide-emphasis-markers
+        (setq org-hide-emphasis-markers nil)
+      (setq org-hide-emphasis-markers t))
+    (org-restart-font-lock)
+    (message "org: toggled display of emphasis markers"))
+
+  (general-def org-mode-map
+    "C-c C-x C-h" 'org-toggle-pretty-entities
+    "C-c C-x H" 'sk:org-toggle-emphasis-markers)
+
+  (add-hook 'org-mode-hook #'org-indent-mode)
+  (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
 ; *** lists
   (setq org-blank-before-new-entry
@@ -329,10 +337,10 @@ with prefix arg, call `org-return'"
     "C-c C-c" nil)
 
 ; ** org-babel
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((gnuplot . t)))
-   ;;'((jupyter . t)))
+  ;; (org-babel-do-load-languages
+  ;;  'org-babel-load-languages
+  ;;  '((gnuplot . t)))
+  ;;  '((jupyter . t)))
 
   ;;(add-hook 'org-babel-after-execute-hook #'sk:org-toggle-inline-images-after-babel-run)
 
@@ -347,9 +355,20 @@ with prefix arg, call `org-return'"
     (sk:org-babel-kill-session-at-point)
     (org-ctrl-c-ctrl-c)))
 
+; * org-appear
+(use-package org-appear
+  :demand t
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autolinks t)
+  (setq org-appear-autosubmarkers t)
+  (setq org-appear-inside-latex t))
+
 ; * org-superstar
 (use-package org-superstar
   :hook (org-mode . org-superstar-mode)
   :config
-  (setq org-superstar-headline-bullets-list '("❃" "★" "✦" "☆" "✧" "•"))
+  (setq org-superstar-cycle-headline-bullets nil)
+  (setq org-superstar-headline-bullets-list '(?✻ ?✦ ?✧ ?• ?▪ ?▫))
   (setq org-superstar-item-bullet-alist '((42 . "•") (43 . (?\s (Bc . Bc) ?→)) (45 . "–"))))
+
