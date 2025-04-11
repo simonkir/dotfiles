@@ -21,6 +21,8 @@
     "J" 'pdf-view-next-page
     "K" 'pdf-view-previous-page
     "M" 'pdf-view-goto-page
+    "C-f" 'scroll-up
+    "C-b" 'scroll-down
     "j" #'(lambda () (interactive) (pdf-view-next-line-or-next-page 4))
     "k" #'(lambda () (interactive) (pdf-view-previous-line-or-previous-page 4))
     "h" #'(lambda () (interactive) (image-backward-hscroll 10))

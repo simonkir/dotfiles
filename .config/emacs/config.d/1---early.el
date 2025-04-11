@@ -23,7 +23,6 @@
 ; ** use-package
 (setq use-package-verbose t)
 (setq use-package-always-defer t)
-(setq use-package-always-ensure t)
 
 ; * custom
 (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))

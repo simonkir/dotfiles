@@ -46,7 +46,7 @@
 
 ; * sklatex
 (use-package sklatex
-  :ensure nil
+  ;; :ensure nil
   :hook ((LaTeX-mode org-mode) . sklatex-mode)
   :config
   (general-def sklatex-mode-map
