@@ -1,6 +1,7 @@
 # * env vars
 set -gx WINIT_X11_SCALE_FACTOR 1
-set -gx EDITOR "emacsclient -cq"
+set -gx EDITOR "emacsclient -tq"
+set -gx VISUAL "emacsclient -cq"
 
 # * aliases
 abbr -a "la" "ls -a"
@@ -9,7 +10,6 @@ abbr -a "lla" "ls -lha"
 abbr -a "mv" "mv -i"
 abbr -a "rm" "rm -I"
 abbr -a "gspdf" "gs -q -dNOPAUSE -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook"
-#abbr -a "vifm" "~/.config/vifm/scripts/vifmrun"
 
 function mkcd
     mkdir $argv[1]

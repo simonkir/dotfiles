@@ -27,15 +27,26 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
 
 # Preferred editor
-export EDITOR='nvim'
+export EDITOR="emacsclient -tq"
+export VISUAL="emacsclient -cq"
 
 # aliases
+alias ls='ls --color=auto'
+alias la="ls -a"
 alias ll='ls -lh'
 alias lla='ls -alh'
 alias mv='mv -i'
 alias rm='rm -I'
-alias vifm='~/.config/vifm/scripts/vifmrun'
-alias git-dtf='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
+alias ......="cd ../../../../../"
 
 # set vim mode
 bindkey -v
