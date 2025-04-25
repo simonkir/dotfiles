@@ -61,8 +61,7 @@
   (global-ligature-mode))
 
 ; * emojis
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+(use-package emojify)
 
 ; * prettify-symbols-mode
 ; ** org-mode definitions
@@ -72,6 +71,8 @@
   (add-to-list 'prettify-symbols-alist '("#+date" . (?\s (Bc . Bc) ?𝘿)))
   (add-to-list 'prettify-symbols-alist '("#+subtitle" . (?\s (Bc . Bc) ?𝙩)))
   (add-to-list 'prettify-symbols-alist '("#+title" . (?\s (Bc . Bc) ?𝙏))))
+
+(add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode)
 
 ; ** org- & latex-mode definitions
 (defun sk:prettify-symbols-org-LaTeX-mode ()
@@ -150,6 +151,10 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\top" . (?\s (Bc . Bc) ?⊤)))
   (add-to-list 'prettify-symbols-alist '("\\vartheta" . "ϑ")))
 
+; *** activation
+(add-hook 'org-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
+(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
+
 ; ** latex-mode definitions
 (defun sk:prettify-symbols-LaTeX-mode ()
   "add latex-specific prettifications to 'prettify-symbols-alist'
@@ -158,21 +163,18 @@ not displayed in org documents unless in latex env"
   (add-to-list 'prettify-symbols-alist '("&" . "·"))
   (add-to-list 'prettify-symbols-alist '("&&" . (?· (Br . Bl) ?·))))
 
+(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode)
+
 ; ** prog-mode definitions
 (defun sk:prettify-symbols-prog-mode ()
   "clear, then add general programming prettifications to `prettify-symbols-alist'"
   (setq-local prettify-symbols-alist nil))
 
-; ** hooks & activation
-(add-hook 'org-mode-hook 'sk:prettify-symbols-org-mode)
-(add-hook 'org-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
-(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-LaTeX-mode)
-(add-hook 'LaTeX-mode-hook 'sk:prettify-symbols-org-LaTeX-mode)
 (add-hook 'prog-mode-hook 'sk:prettify-symbols-prog-mode)
 
-(global-prettify-symbols-mode)
-
-; ** keybinds
+; ** activation
 (general-def-leader
   "t p" 'prettify-symbols-mode)
+
+(global-prettify-symbols-mode)
 

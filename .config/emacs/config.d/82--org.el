@@ -126,20 +126,6 @@ with prefix arg, call `org-return'"
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
-  (defun sk:org-toggle-emphasis-markers ()
-    "toggle display of emphasis markers"
-    (interactive)
-    (org-toggle-link-display)
-    (if org-hide-emphasis-markers
-        (setq org-hide-emphasis-markers nil)
-      (setq org-hide-emphasis-markers t))
-    (org-restart-font-lock)
-    (message "org: toggled display of emphasis markers"))
-
-  (general-def org-mode-map
-    "C-c C-x C-h" 'org-toggle-pretty-entities
-    "C-c C-x H" 'sk:org-toggle-emphasis-markers)
-
   (add-hook 'org-mode-hook #'org-indent-mode)
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 

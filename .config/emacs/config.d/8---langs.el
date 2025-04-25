@@ -100,6 +100,8 @@
   (setq nov-variable-pitch nil)
   (setq nov-text-width t)
 
+  (add-hook 'nov-mode-hook 'emojify-mode)
+
   (general-def 'nov-mode-map
     "t" nil
     "r" nil
