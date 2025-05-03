@@ -149,7 +149,7 @@
     "x" 'meow-delete
     "X" 'meow-backward-delete
     "y" 'meow-save
-    "Y" 'meow-sync-grab
+    "Y" 'meow-clipboard-save
     "z" 'meow-pop-selection
     ;;"Z" nil
     "<escape>" 'meow-cancel-selection)

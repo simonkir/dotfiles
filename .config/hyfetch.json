@@ -10,7 +10,7 @@
     },
     "backend": "neofetch",
     "args": null,
-    "distro": null,
+    "distro": "arcolinux",
     "pride_month_shown": [],
     "pride_month_disable": false
 }
