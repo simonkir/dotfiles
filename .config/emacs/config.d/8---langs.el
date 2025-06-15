@@ -100,7 +100,12 @@
   (setq nov-variable-pitch nil)
   (setq nov-text-width t)
 
-  (add-hook 'nov-mode-hook 'emojify-mode)
+  (add-hook 'nov-mode-hook #'(lambda ()
+                               (set-fill-column 0)
+                               (text-scale-increase 2)))
+
+  (add-hook 'nov-mode-hook #'visual-fill-column-mode)
+  (add-hook 'nov-mode-hook #'emojify-mode)
 
   (general-def 'nov-mode-map
     "t" nil
