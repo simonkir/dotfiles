@@ -33,6 +33,7 @@
     "<right>" 'image-forward-hscroll
 
     "v" 'isearch-forward
+    "Y" 'pdf-view-kill-ring-save
 
     "=" nil
     "C-c C-r C-s" 'pdf-view-auto-slice-minor-mode

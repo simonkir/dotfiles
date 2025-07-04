@@ -5,9 +5,11 @@
 #+latex_class: article
 #+latex_class_options: [11pt,hidelinks]
 #+latex_header: \usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
+#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
+# #+latex_header: \usepackage{setspace} \onehalfspacing
 #+latex_header: \usepackage{parskip}
 #+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
-#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
+#+language: de
 
 #+options: toc:nil H:4 num:3 todo:nil p:nil
 

@@ -55,8 +55,10 @@
 (use-package tramp
   :general
   (general-def-leader
-    "b c" 'tramp-cleanup-connection
-    "b C" 'tramp-cleanup-all-buffers)
+    "f c c" 'tramp-cleanup-connection
+    "f c t" 'tramp-cleanup-this-connection
+    "f c a" 'tramp-cleanup-all-connections
+    "f c b" 'tramp-cleanup-all-buffers)
 
   :config
   (setq tramp-default-method "ssh")

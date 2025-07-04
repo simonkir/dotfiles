@@ -139,6 +139,7 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\mathbb{Z}" . (?\s (Bc . Bc) ?ℤ)))
 
 ; *** pseudo font effects
+  (add-to-list 'prettify-symbols-alist '("\\underline" . "_"))
   (add-to-list 'prettify-symbols-alist '("\\tilde" . "~"))
   (add-to-list 'prettify-symbols-alist '("\\dot" . "·"))
   (add-to-list 'prettify-symbols-alist '("\\ddot" . (?· (Br . Bc) ?·)))

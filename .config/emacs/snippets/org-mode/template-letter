@@ -5,9 +5,12 @@
 #+latex_class: scrlttr2
 #+latex_class_options: [11pt,ngerman,enlargefirstpage=true,firstfoot=false,foldmarks=false,fromalign=right,fromemail=false,fromphone=false,fromrule=afteraddress]
 #+latex_header: \usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
+#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
+# #+latex_header: \usepackage{setspace} \onehalfspacing
 #+latex_header: \usepackage{parskip}
 #+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
-#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
+#+language: de
+
 #+latex: \renewcommand*{\raggedsignature}{\raggedright}
 
 #+options: toc:nil
