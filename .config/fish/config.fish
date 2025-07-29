@@ -10,6 +10,7 @@ abbr -a "lla" "ls -lha"
 abbr -a "mv" "mv -i"
 abbr -a "rm" "rm -I"
 abbr -a "gspdf" "gs -q -dNOPAUSE -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook"
+abbr -a "magick" "magick -density 300"
 
 function mkcd
     mkdir $argv[1]

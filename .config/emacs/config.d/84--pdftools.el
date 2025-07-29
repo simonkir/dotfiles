@@ -7,7 +7,7 @@
 ; ** general settings
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-view-resize-factor 1.1)
-  (setq pdf-annot-activate-created-annotations t)
+  (setq pdf-info-restart-process-p t)
 
 ; ** active minor-modes
   (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode)

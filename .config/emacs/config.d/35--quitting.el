@@ -4,6 +4,7 @@
 (defun sk:kill-all-terminals ()
   "kill the currently active terminals"
   (interactive)
+  (recentf-save-list)
   (if (frame-parameter nil 'client)
       (progn (delete-other-frames) (delete-frame))
     (kill-emacs)))
