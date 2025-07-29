@@ -30,8 +30,6 @@ chmod +x ~/.config/polybar/launch.sh
 chmod +x ~/.config/polybar/scripts/tempcores.sh
 
 # * nextcloud
-chmod +x ~/.config/simonkir/nextcloud-calendar.sh
-chmod +x ~/.config/simonkir/nextcloud-contacts.sh
 chmod +x ~/.config/simonkir/nextcloud-files.sh
 chmod +x ~/.config/simonkir/nextcloud-memories.sh
 chmod +x ~/.config/simonkir/nextcloud-notes.sh

@@ -17,13 +17,13 @@ super + alt + ctrl + b
     blueberry
 
 super + alt + c
-    ~/.config/simonkir/nextcloud-calendar.sh
+    thunderbird -calendar
 
 super + alt + shift + c
     brave https://calendar.google.com
 
 super + alt + ctrl + c
-    ~/.config/simonkir/nextcloud-contacts.sh
+    thunderbird -addressbook
 
 super + alt + d
     ~/.config/picom/toggle-darkmode.sh
@@ -50,7 +50,7 @@ super + alt + k
     krita
 
 super + alt + m
-    brave https://mail.google.com
+    thunderbird -mail
 
 super + alt + n
     ~/.config/simonkir/nextcloud-notes.sh
