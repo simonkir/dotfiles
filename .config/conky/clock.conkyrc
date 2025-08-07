@@ -17,7 +17,7 @@ conky.config = {
 
     default_color = "white",
 
-    lua_load = "~/.config/conky/clock.lua"
+    lua_load = "clock.lua"
 
 };
 

@@ -8,7 +8,7 @@
 set -l screencount (xrandr --prop | grep " connected" | wc -l)
 
 if test $screencount = 2
-    xrandr --output eDP1 --auto --output HDMI1 --primary --auto --right-of eDP1
+    xrandr --output eDP-1 --auto --output HDMI-1 --primary --auto --right-of eDP-1
 else if test $screencount = 1
-    xrandr --output eDP1 --primary --auto --output HDMI1 --off
+    xrandr --output eDP-1 --primary --auto --output HDMI-1 --off
 end

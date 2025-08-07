@@ -20,7 +20,7 @@ conky.config = {
     color1 = "#212021",
     color2 = "white",
 
-    lua_load = "~/.config/conky/quotes.lua",
+    lua_load = "quotes.lua",
 
 };
 

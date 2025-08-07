@@ -85,9 +85,6 @@ super + alt + w
 super + alt + shift + w
     firefox
 
-super + alt + ctrl + w
-    google-chrome-stable
-
 super + alt + x
     ~/.config/simonkir/random-wallpaper.sh
 
@@ -109,9 +106,6 @@ super + 9
 
 super + shift + 9
     betterlockscreen -l
-
-super + 0
-    archlinux-logout
 
 # * screenshots
 Print
