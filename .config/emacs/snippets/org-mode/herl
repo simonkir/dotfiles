@@ -1,0 +1,7 @@
+# -*_ mode: snippet -*-
+# name: drawer herleitung
+# key: herl
+# --
+:herleitung:
+$0
+:END:
