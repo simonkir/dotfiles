@@ -4,9 +4,6 @@
 super + alt + a
     emacsclient -cq --eval "(sk:org-agenda-dashboard)"
 
-super + alt + shift + a
-    brave https://tasks.google.com
-
 super + alt + b
     ~/.config/simonkir/bluetooth-connect.sh
 
@@ -20,7 +17,7 @@ super + alt + c
     thunderbird -calendar
 
 super + alt + shift + c
-    brave https://calendar.google.com
+    firefox https://calendar.google.com
 
 super + alt + ctrl + c
     thunderbird -addressbook
@@ -44,7 +41,7 @@ super + alt + i
     inkscape
 
 super + alt + j
-    brave https://web.whatsapp.com
+    firefox https://web.whatsapp.com
 
 super + alt + k
     krita
@@ -67,12 +64,6 @@ super + alt + r
 super + alt + s
     spotify-launcher
 
-super + alt + shift + s
-    brave https://open.spotify.com
-
-super + alt + t
-    brave https://dict.org
-
 super + alt + v
     pavucontrol
 
@@ -80,9 +71,6 @@ super + alt + shift + v
     paprefs
 
 super + alt + w
-    brave
-
-super + alt + shift + w
     firefox
 
 super + alt + x
@@ -92,7 +80,7 @@ super + alt + shift + x
     ~/.config/conky/launch-conky.sh
 
 super + alt + y
-    brave https://youtube.com
+    firefox https://youtube.com
 
 # * window-manager stuff
 super + Escape
