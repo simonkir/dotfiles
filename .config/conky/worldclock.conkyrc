@@ -17,11 +17,11 @@ conky.config = {
 
     default_color = "white",
 
-    lua_load = "clock.lua"
-
 };
 
 conky.text = [[
-${alignc}${font Calibri:bold:size=100}${time %H:%M}
-${alignc}${voffset -116}${font Calibri:bold:size=18}${lua date}
+${alignc}${font Calibri:bold:size=48}${tztime America/Chicago %H:%M}
+${voffset -56}${alignc}${font Calibri:bold:size=16}Chicago
+${voffset 10}${alignc}${font Calibri:bold:size=48}${tztime America/New_York %H:%M}
+${voffset -56}${alignc}${font Calibri:bold:size=16}New York City
 ]];
