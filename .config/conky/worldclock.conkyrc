@@ -20,8 +20,8 @@ conky.config = {
 };
 
 conky.text = [[
-${alignc}${font Calibri:bold:size=48}${tztime America/Chicago %H:%M}
+${alignc}${font Calibri:bold:size=48}${tztime Europe/Berlin %H:%M}
+${voffset -56}${alignc}${font Calibri:bold:size=16}Berlin
+${voffset 10}${alignc}${font Calibri:bold:size=48}${tztime America/Chicago %H:%M}
 ${voffset -56}${alignc}${font Calibri:bold:size=16}Chicago
-${voffset 10}${alignc}${font Calibri:bold:size=48}${tztime America/New_York %H:%M}
-${voffset -56}${alignc}${font Calibri:bold:size=16}New York City
 ]];
