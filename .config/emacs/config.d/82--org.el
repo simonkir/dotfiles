@@ -297,8 +297,14 @@ with prefix arg, call `org-return'"
     (interactive)
     (org-agenda nil "n"))
 
+  (defun sk:org-agenda-goto-other-frame ()
+    (interactive)
+    (let ((display-buffer-overriding-action '(display-buffer-pop-up-frame)))
+     (org-agenda-goto)))
+
 ; *** keybinds
   (general-def org-agenda-mode-map
+    "<tab>" 'sk:org-agenda-goto-other-frame
     "D" 'org-agenda-goto-date
     "g" 'org-agenda-redo
     "M" 'org-agenda-month-view
