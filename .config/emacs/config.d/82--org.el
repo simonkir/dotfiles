@@ -362,5 +362,6 @@ with prefix arg, call `org-return'"
   :config
   (setq org-superstar-cycle-headline-bullets nil)
   (setq org-superstar-headline-bullets-list '(?✻ ?✦ ?✧ ?• ?▪ ?▫))
-  (setq org-superstar-item-bullet-alist '((42 . "•") (43 . (?\s (Bc . Bc) ?→)) (45 . "–"))))
+  ;; (setq org-superstar-item-bullet-alist '((42 . ?•) (43 . (?\s (Bc . Bc) ?→)) (45 . ?–)))
+  (setq org-superstar-item-bullet-alist '((42 . ?•) (43 . ?→) (45 . ?–))))
 

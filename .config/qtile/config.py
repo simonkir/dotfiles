@@ -110,7 +110,7 @@ group_layouts["4"] = "plasma"
 # group name : wm_class (first or second field)
 group_rules = {i: [] for i in group_names}
 group_rules["1"] = ["firefox", "brave-browser", "vivaldi-stable"]
-group_rules["2"] = ["emacs", "libreoffice"]
+group_rules["2"] = ["emacs", "emacs-30-2", "libreoffice"]
 group_rules["3"] = ["Alacritty"]
 group_rules["4"] = ["thunderbird"]
 group_rules["5"] = ["spotify"]
@@ -198,9 +198,9 @@ def init_widget_list():
         ),
 
 # *** layout
-        widget.CurrentLayoutIcon(
-            scale = 0.6,
-        ),
+        # widget.CurrentLayoutIcon(
+        #     scale = 0.6,
+        # ),
         widget.CurrentLayout(
             font = widget_defaults["font"] + " Bold"
         ),
