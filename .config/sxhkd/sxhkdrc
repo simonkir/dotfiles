@@ -64,6 +64,12 @@ super + alt + r
 super + alt + s
     spotify-launcher
 
+super + alt + t
+    firefox https://linguee.com
+
+super + alt + shift + t
+    firefox https://websters1913.com
+
 super + alt + v
     pavucontrol
 

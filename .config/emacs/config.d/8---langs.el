@@ -69,6 +69,13 @@
 
 ; ** dictionary
 (use-package dictionary
+  :general
+  (general-def 'meow-normal-state-keymap
+    "/" 'dictionary-search)
+
+  (general-def-leader
+    "t d" 'dictionary)
+
   :config
   (setq dictionary-server "dict.org")
   (setq dictionary-use-single-buffer t))
