@@ -215,11 +215,7 @@ with prefix arg, call `org-return'"
           ("scrlttr2" "\\documentclass{scrlttr2}")
           ("moderncv" "\\documentclass{moderncv}"
            ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}"))
-          ("fmcmppk" "\\documentclass{fmcmppk}"
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+           ("\\subsection{%s}" . "\\subsection*{%s}"))))
 
 ; **** latex preview
   (defvar sk:org-preview-latex-scale 1.5 "org latex preview scale factor")

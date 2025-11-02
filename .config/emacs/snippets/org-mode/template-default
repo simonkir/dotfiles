@@ -13,6 +13,8 @@
 
 #+options: toc:nil H:4 num:3 todo:nil p:nil
 
-#+title: $1
-#+author: ${2:simonkir}$0
+#+title: TITLE
+#+author: SIMONKIR
 #+date: {{{time(%d. %B %Y)}}}
+
+$0

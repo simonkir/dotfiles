@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: beamer template
+# key: tempbeamer
+# --
+#+startup: beamer
+#+latex_class: beamer
+#+latex_class_options: [11pt,hidelinks,aspectratio=1610]
+#+latex_header: \usepackage{gensymb}
+#+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
+# #+latex_header: \usepackage{setspace} \onehalfspacing
+#+latex_header: \usepackage{parskip}
+#+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
+#+language: de
+
+#+beamer_header: \usefonttheme{serif} \beamertemplatenavigationsymbolsempty
+#+beamer_color_theme: rose
+#+beamer_inner_theme: rectangles
+# #+beamer_outer_theme: shadow
+
+#+options: toc:nil H:1 num:3 todo:nil
+
+#+title: TITLE
+#+date: AUTHOR
+#+author:
+
+$0
+
