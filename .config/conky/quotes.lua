@@ -34,11 +34,12 @@ function getRandomQuoteFromCSV(filename)
     pid = stat_file_contents:match("(%d+)")
     math.randomseed(pid * os.date("%d%H") * os.date("%Y%m"))
 
-    repeat
-        fields = lines[math.random(#lines)]
-    until #fields[1] < 100
+    return lines[math.random(#lines)]
+    -- repeat
+    --     fields = lines[math.random(#lines)]
+    -- until True
 
-    return fields
+    -- return fields
 end
 
 function conky_quote()
@@ -57,5 +58,24 @@ function conky_quote()
         quoteAuthor = "Anonymous"
     end
 
-    return quoteAuthor:lower() .. quoteTitle:lower() .. ":\n~ " .. quoteText:lower()
+    -- wrap long quotes
+    local maxLineLength = 90
+    local quoteTextWrapped = ""
+    local line = ""
+
+    for word in quoteText:gmatch("%S+") do
+        if #line + #word + 1 > maxLineLength then
+            quoteTextWrapped = quoteTextWrapped .. line .. "\n"
+            line = ""
+        end
+
+        if line == "" then
+            line = word
+        else
+            line = line .. " " .. word
+        end
+    end
+    quoteTextWrapped = quoteTextWrapped .. line
+
+    return quoteTextWrapped:lower() .. "\n\n" .. "~ " .. quoteAuthor:lower() .. quoteTitle:lower()
 end
