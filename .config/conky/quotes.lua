@@ -1,7 +1,7 @@
 --[[
-    `quotes.csv' contains quotes in the format of ``"AUTHOR","QUOTE"''
+    `quotes.csv' contains quotes in the format of ``"QUOTE","AUTHOR","TITLE"''
     the file should be located in ~/.config/conky/
-    the AUTHOR field can be left blank
+    the AUTHOR and/or TITLE fields can be left blank
 ]]--
 
 -- load the csv file into a table
@@ -34,23 +34,22 @@ function getRandomQuoteFromCSV(filename)
     pid = stat_file_contents:match("(%d+)")
     math.randomseed(pid * os.date("%d%H") * os.date("%Y%m"))
 
-    local fields
-
     repeat
         fields = lines[math.random(#lines)]
-    until #fields[2] < 100
+    until #fields[1] < 100
 
     return fields
 end
 
 function conky_quote()
     local quote = getRandomQuoteFromCSV(os.getenv("HOME") .. "/.config/conky/quotes.csv")
-    local quoteAuthor = quote[1]
-    local quoteText = quote[2]
+    local quoteText = quote[1]
+    local quoteAuthor = quote[2]
+    local quoteTitle = quote[3]
 
-    -- remove trailing full-stop from quoteText
-    if string.sub(quoteText, -1) == "." then
-        quoteText = string.sub(quoteText, 1, -2)
+    -- surround title in parentheses
+    if quoteTitle ~= "" then
+        quoteTitle = " (" .. quoteTitle .. ")"
     end
 
     -- add anonymous author in case none is given
@@ -58,5 +57,5 @@ function conky_quote()
         quoteAuthor = "Anonymous"
     end
 
-    return quoteAuthor:lower() .. ":\n~ " .. quoteText:lower()
+    return quoteAuthor:lower() .. quoteTitle:lower() .. ":\n~ " .. quoteText:lower()
 end
