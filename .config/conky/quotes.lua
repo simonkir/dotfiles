@@ -47,10 +47,13 @@ function conky_quote()
     local quoteText = quote[1]
     local quoteAuthor = quote[2]
     local quoteTitle = quote[3]
+    local quoteSource = ""
 
     -- surround title in parentheses
     if quoteTitle ~= "" then
-        quoteTitle = " (" .. quoteTitle .. ")"
+        quoteSource = quoteAuthor .. ": " .. quoteTitle .. "."
+    else
+        quoteSource = quoteAuthor .. "."
     end
 
     -- add anonymous author in case none is given
@@ -77,5 +80,5 @@ function conky_quote()
     end
     quoteTextWrapped = quoteTextWrapped .. line
 
-    return quoteTextWrapped:lower() .. "\n\n" .. "~ " .. quoteAuthor:lower() .. quoteTitle:lower()
+    return quoteTextWrapped:lower() .. "\n\n" .. "~ " .. quoteSource:lower()
 end
