@@ -5,6 +5,7 @@ PS1='[\u@\h \W]\$ '
 # * env vars
 export EDITOR="emacsclient -tq"
 export VISUAL="emacsclient -cq"
+export BROWSER="firefox"
 
 # * settings
 bind "set completion-ignore-case on" #ignore upper and lowercase when TAB completion

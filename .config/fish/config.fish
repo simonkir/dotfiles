@@ -2,6 +2,7 @@
 set -gx WINIT_X11_SCALE_FACTOR 1
 set -gx EDITOR "emacsclient -tq"
 set -gx VISUAL "emacsclient -cq"
+set -gx BROWSER "firefox"
 
 # * aliases
 abbr -a "la" "ls -a"

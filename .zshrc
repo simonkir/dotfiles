@@ -29,6 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor
 export EDITOR="emacsclient -tq"
 export VISUAL="emacsclient -cq"
+export BROWSER="firefox"
 
 # aliases
 alias ls='ls --color=auto'
