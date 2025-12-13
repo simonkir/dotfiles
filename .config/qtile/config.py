@@ -112,7 +112,7 @@ group_rules = {i: [] for i in group_names}
 group_rules["1"] = ["firefox", "brave-browser", "vivaldi-stable"]
 group_rules["2"] = ["emacs", "emacs-30-2", "libreoffice"]
 group_rules["3"] = ["Alacritty"]
-group_rules["4"] = ["thunderbird"]
+group_rules["4"] = ["thunderbird", "org.mozilla.Thunderbird"]
 group_rules["5"] = ["spotify"]
 group_rules["6"] = ["krita", "Inkscape"]
 
