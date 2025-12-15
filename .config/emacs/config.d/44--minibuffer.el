@@ -23,7 +23,7 @@
     "C-k" 'vertico-previous)
 
   (vertico-mode)
-  (vertico-multiform-mode) ;; used by embark
+  (vertico-multiform-mode) ;; used by embark, jinx
   (vertico-indexed-mode))
 
 (use-package vertico-posframe

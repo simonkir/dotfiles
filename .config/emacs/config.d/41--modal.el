@@ -82,7 +82,7 @@
     "(" 'backward-sexp
     ")" 'forward-sexp
     "=" 'indent-region
-    ;; "?" nil ;; reserved for jinx
+    ;; "?" nil ;; reserved for languagetools
 
     "#" 'comment-or-uncomment-region
     "~ ~" 'sk:toggle-case

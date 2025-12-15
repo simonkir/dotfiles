@@ -79,11 +79,43 @@ when region is active, replace in region, else replace in buffer"
 (use-package jinx
   :general
   (general-def meow-normal-state-keymap
-    "!" 'jinx-correct
-    "?" 'jinx-mode)
+    "!" 'jinx-correct)
+
+  (general-def-leader
+    "t s" 'jinx-mode
+    "t S" 'jinx-languages)
 
   :config
-  (setq-default jinx-languages "de_DE"))
+  (setq-default jinx-languages "de_DE en_US")
+  (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20) (vertico-count . 40))))
+
+; ** grammer checking
+(use-package languagetool
+  :general
+  (general-def-leader
+    "t g s" 'languagetool-server-start
+    "t g S" 'languagetool-server-stop
+    "t g h" 'languagetool-server-mode
+    "t g c" 'languagetool-check
+    "t g l" 'languagetool-set-language)
+
+  (general-def meow-normal-state-keymap
+    "?" 'languagetool-correct-at-point)
+
+  :init
+  (setq languagetool-java-arguments '("-Dfile.encoding=UTF-8" "-cp" "/usr/share/languagetool:/usr/share/java/languagetool/*"))
+  (setq languagetool-console-command "org.languagetool.commandline.Main")
+  (setq languagetool-server-command "org.languagetool.server.HTTPServer")
+
+  (setq languagetool-server-arguments '("--level PICKY"))
+  (setq languagetool-console-arguments '("--level PICKY"))
+
+  :config
+  (setq languagetool-mother-tongue "de-DE")
+  (setq languagetool-hint-idle-delay 0)
+
+  ;; TODO enable picky mode
+  )
 
 ; * indentation
 ; ** tab settings
