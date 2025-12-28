@@ -1,5 +1,3 @@
-# -*- mode: conf -*-
-
 # * alphabetical
 super + alt + a
     emacsclient -cq --eval "(sk:org-agenda-dashboard)"
@@ -93,6 +91,9 @@ super + Escape
     xkill
 
 super + Return
+    alacritty
+
+super + KP_Enter
     alacritty
 
 super + 9

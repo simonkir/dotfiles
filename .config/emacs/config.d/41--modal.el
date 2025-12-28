@@ -53,7 +53,10 @@
     "C-j" 'next-line
     "C-k" 'previous-line
     "C-l" 'forward-char
-    "C-z" 'meow-motion-mode)
+    "C-z" 'meow-motion-mode
+
+    ;; "<tab>" nil ;; reserved for tab completion
+    "<backtab>" 'undo)
 
   (general-def meow-motion-state-keymap
     "<escape>" nil
