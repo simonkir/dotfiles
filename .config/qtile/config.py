@@ -186,11 +186,12 @@ def init_widget_list():
 
             active = colors["blue"],
             inactive = colors["foreground"],
+            urgent_border = colors["red"],
             highlight_color = colors["background"],
             this_current_screen_border = colors["blue"], # current screen, focused group
             this_screen_border = colors["magenta"], # other screens, focused groups
-            other_screen_border = colors["background"], # current screen, focused groups on other screens
-            other_current_screen_border = colors["background"], # other screens, focused groups on other screens
+            other_screen_border = colors["background"], # current screen, unfocused groups
+            other_current_screen_border = colors["background"], # other screens, unfocused groups
         ),
         widget.Sep(
             linewidth = sep_linewidth,
