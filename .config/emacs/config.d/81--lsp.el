@@ -2,7 +2,13 @@
 
 ; * eglot
 (use-package eglot
-  :general (general-def-leader "r l" 'eglot)
+  :general
+  (general-def-leader
+    "l l" 'eglot
+    "l L" 'eglot-shutdown
+    "l a" 'eglot-code-action
+    "l r" 'eglot-rename)
+
   :config
   (setq eglot-autoshutdown t)
   (setq eglot-events-buffer-size 0)
@@ -15,3 +21,4 @@
                '((python-mode python-ts-mode) .
                  ("jedi-language-server" :initializationOptions
                   (:completion (:disableSnippets t))))))
+

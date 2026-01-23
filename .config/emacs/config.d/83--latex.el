@@ -102,7 +102,7 @@
           (?D ("\\Delta" "\\nabla" ""))
           (?e ("\\varepsilon" "\\epsilon" "\\exp"))
           (?E ("\\exists" "" "\\ln"))
-          (?f ("\\varphi" "\\phi" ""))
+          (?f ("\\phi" "\\varphi" ""))
           (?F ("\\Phi" "" ""))
           (?g ("\\gamma" "" "\\lg"))
           (?G ("\\Gamma" "" "10^{?}"))
@@ -122,7 +122,7 @@
           (?N ("" "" ""))
           (?p ("\\pi" "\\varpi" ""))
           (?P ("\\Pi" "" ""))
-          (?q ("\\vartheta" "\\theta" ""))
+          (?q ("\\theta" "\\vartheta" ""))
           (?Q ("\\Theta" "" ""))
           (?r ("\\rho" "\\varrho" ""))
           (?R ("" "" ""))
@@ -165,7 +165,7 @@
           (?> ("\\rightarrow" "\\Rightarrow" "\\longrightarrow"))
           (?' ("\\prime" "" ""))
           (?. ("\\cdot" "\\circ" ""))
-          (?: ("\\ldots" "" ""))))
+          (?: ("\\ldots" "\\therefore" ""))))
 
 ; ** cdlatex-math-modify-alist
   (setq cdlatex-math-modify-alist

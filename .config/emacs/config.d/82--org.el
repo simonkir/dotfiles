@@ -255,7 +255,7 @@ with prefix arg, call `org-return'"
         '(("n" "Dashboard"
            ((agenda "" ((org-agenda-overriding-header "Agenda")
                         (org-agenda-span 'day)
-                        (org-deadline-warning-days 2)
+                        (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-use-time-grid nil)))
