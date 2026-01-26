@@ -7,7 +7,7 @@
   (general-def-leader
     "r n" 'sk:org-agenda-dashboard
     "r N" 'org-agenda
-    "r c" 'org-capture)
+    "r s" 'org-capture)
 
   :config
 ; ** general org
@@ -323,6 +323,22 @@ with prefix arg, call `org-return'"
 
   (general-def org-capture-mode-map
     "C-c C-c" nil)
+
+; *** clocking
+  (setq org-clock-persist t)
+
+  (setq org-clock-idle-time 10)
+  (setq org-clock-x11idle-program-name "xprintidle")
+
+  (general-def org-mode-map
+    "C-c C-x C-r" 'org-resolve-clocks
+    "C-c C-x D" 'org-clock-remove-overlays)
+
+  (general-def-leader
+    "r c o" 'org-clock-out
+    "r c l" 'org-clock-in-last
+    "r c r" 'org-clock-resolve
+    "r c q" 'org-clock-cancel)
 
 ; ** org-babel
   ;; (org-babel-do-load-languages
