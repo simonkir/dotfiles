@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: default template
-# key: tempdef
+# name: homework template
+# key: temphw
 # --
 #+latex_class: article
 #+latex_class_options: [11pt,hidelinks]
@@ -13,11 +13,11 @@
 #+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
 #+language: de
 
-#+options: toc:nil H:4 num:3 todo:nil p:nil
+#+options: toc:nil H:3 num:nil todo:nil p:nil
 
-#+title: TITLE
-#+subtitle: SUBTITLE
-#+author: SIMONKIR
-#+date: {{{time(%d. %B %Y)}}}
+#+title: Homework NN
+#+subtitle: CLASS-SEC / SEMESTER
+#+author: SIMONKIR / NR
+#+date: MMMMM DD, 2026
 
 $0
