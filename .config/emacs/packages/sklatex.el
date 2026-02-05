@@ -78,6 +78,11 @@
         (sklatex--linebreak-insert-in-line-before))))
 
 ; ** equality alignment
+(defun sklatex--current-line-aligned-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at-p "^.*&.*$")))
+
 (defun sklatex--goto-beginning-of-symbol ()
   (skip-chars-backward "[:alnum:]^_{}+-\\\\" (sklatex--backwards-search-limit)))
 
@@ -106,7 +111,8 @@
 
 (defun sklatex-try-symbol-alignment ()
   (when (and sklatex-do-symbol-alignment
-             (sklatex-in-latex-p))
+             (sklatex-in-latex-p)
+             (not (sklatex--current-line-aligned-p)))
     (let ((do-align nil))
       (save-excursion
         (sklatex--goto-beginning-of-symbol)
