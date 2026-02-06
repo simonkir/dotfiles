@@ -169,11 +169,27 @@
 
 ; ** cdlatex-math-modify-alist
   (setq cdlatex-math-modify-alist
-        '((?d "\\mathbb" nil t nil nil)
-          (?~ "\\tilde" nil t nil nil)
-          (?^ "\\hat" nil t nil nil)
-          (?. "\\dot" nil t nil nil)
-          (?: "\\ddot" nil t nil nil)
-          (?… "\\dddot" nil t nil nil)
-          (?- "\\bar" nil t nil nil)
-          (?> "\\vec" nil t nil nil))))
+  '((?0    "\\textstyle"         nil        nil nil nil)
+    (?1    "\\displaystyle"      nil        nil nil nil)
+    (?2    "\\scriptstyle"       nil        nil nil nil)
+    (?3    "\\scriptscriptstyle" nil        nil nil nil)
+
+    (?b    "\\bm"                "\\textbf" t   nil nil)
+    (?c    "\\mathcal"           nil        t   nil nil)
+    (?d    "\\mathbb"            nil        t   nil nil)
+    (?f    "\\mathfrak"          nil        t   nil nil)
+    (?r    "\\mathrm"            "\\textrm" t   nil nil)
+    (?t    "\\text"              nil        t   nil nil)
+    (?T    "\\overline"          nil        t   nil nil)
+
+    (?~    "\\tilde"             nil        t   nil nil)
+    (?^    "\\hat"               nil        t   nil nil)
+    (?.    "\\dot"               nil        t   nil nil)
+    (?:    "\\ddot"              nil        t   nil nil)
+    (?…    "\\dddot"             nil        t   nil nil)
+    (?-    "\\bar"               nil        t   nil nil)
+    (?>    "\\vec"               nil        t   nil nil)
+    (?\_   "\\underline"         nil        t   nil nil)
+    (?\{   "\\overbrace"         nil        t   nil nil)
+    (?\}   "\\underbrace"        nil        t   nil nil))))
+

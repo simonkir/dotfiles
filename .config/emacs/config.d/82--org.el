@@ -175,7 +175,8 @@ with prefix arg, call `org-return'"
 
   (setq org-latex-packages-alist
         '(("" "IEEEtrantools" t)
-          ("" "gensymb" t)))
+          ("" "gensymb" t)
+          ("" "bm" t)))
 
   (add-hook 'org-mode-hook #'(lambda ()
                                (modify-syntax-entry ?< "@") ;; prevent < and > from being
