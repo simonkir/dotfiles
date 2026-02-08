@@ -51,6 +51,12 @@
     "<tab>" 'corfu-next
     "<backtab>" 'corfu-previous)
 
+  (setq corfu-popupinfo-delay '(2.0 . 0.0))
+  (setq corfu-popupinfo-hide t)
+  (corfu-popupinfo-mode)
+
+  (corfu-indexed-mode)
+
   (global-corfu-mode))
 
 ; * backtab key

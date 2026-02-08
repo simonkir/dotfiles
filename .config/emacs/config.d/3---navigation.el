@@ -5,7 +5,7 @@
 ; ** keybinds
   :general
   (general-def-leader
-    "b b" 'consult-buffer
+    ;; temporarily switched back to `switch-to-buffer' ;; "b b" 'consult-buffer
     "f b" 'consult-bookmark
     "f r" 'consult-recent-file
     "v e" 'consult-flymake

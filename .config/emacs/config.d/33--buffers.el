@@ -8,6 +8,7 @@
 
 (general-def-leader
   ;;"b b" nil ;; reserved for consult
+  "b b" 'switch-to-buffer
   "b B" 'ibuffer
   "b k" 'sk:kill-this-buffer
   "b q" 'bury-buffer
