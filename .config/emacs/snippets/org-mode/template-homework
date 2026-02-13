@@ -5,13 +5,13 @@
 #+latex_class: article
 #+latex_class_options: [11pt,hidelinks]
 
-#+latex_header: \usepackage[a4paper,includeheadfoot,margin=2.54cm]{geometry}
+#+latex_header: \usepackage[letterpaper,includeheadfoot,margin=1in]{geometry}
 #+latex_header: \usepackage{fontspec} \setmainfont[Ligatures=TeX]{Georgia}
 # #+latex_header: \usepackage{setspace} \onehalfspacing
 #+latex_header: \usepackage{parskip}
 
-#+latex_header: \usepackage[ngerman]{babel} \babelhyphenation{}
-#+language: de
+#+latex_header: \usepackage[english]{babel} \babelhyphenation{}
+#+language: en
 
 #+options: toc:nil H:3 num:nil todo:nil p:nil
 

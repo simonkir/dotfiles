@@ -33,6 +33,7 @@
   (interactive)
   (when (yes-or-no-p "Really perform sk:daemon-quit? ")
     (save-some-buffers)
+    (sk:kill-all-terminals)
     (kill-emacs nil t)))
 
 ; * keybinds

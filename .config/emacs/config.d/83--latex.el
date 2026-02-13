@@ -33,6 +33,10 @@
   (general-def 'LaTeX-mode-map
     "$" nil)
 
+; ** font locking
+  (setq-default font-latex-match-bold-command-keywords '(("bm" "{")))
+  (setq-default font-latex-match-underline-command-keywords '(("vec" "{")))
+
 ; ** math settings
   (setq preview-scale-function 1.5)
   (setq preview-auto-cache-preamble t))
