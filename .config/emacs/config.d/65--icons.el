@@ -55,8 +55,9 @@
             ("POST" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-todo))))
             ("DONE" . ((lambda (tag) (svg-tag-make tag :radius 0 :face 'org-done :inverse t))))
             ("\\[#A\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'error))))
-            ("\\[#B\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-todo))))
-            ("\\[#C\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-done))))
+            ("\\[#B\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'warning))))
+            ("\\[#C\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-todo))))
+            ("\\[#D\\]" . ((lambda (tag) (svg-tag-make tag :radius 0 :inverse t :beg 2 :end -1 :face 'org-done))))
 
             ;; org checkboxes
             ("\\[ \\]" . ((lambda (tag) (svg-tag-make "" :padding 2 :radius 0 :face 'org-checkbox))))

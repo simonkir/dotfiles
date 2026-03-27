@@ -246,6 +246,8 @@ with prefix arg, call `org-return'"
   (setq org-agenda-files `(,org-directory))
 
   (setq org-todo-keywords '((sequence "PREP" "TODO" "POST" "|" "DONE")))
+  (setq org-priority-highest ?A)
+  (setq org-priority-lowest ?D)
 
   (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
@@ -271,17 +273,16 @@ with prefix arg, call `org-return'"
                         (org-agenda-skip-deadline-if-done t)
                         (org-agenda-use-time-grid nil)))
             (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
-                      (org-agenda-todo-ignore-with-date t)))
-            (todo "DONE" ((org-agenda-overriding-header "Done Tasks")))))))
+                      (org-agenda-todo-ignore-with-date t)))))))
 
   (setq org-agenda-block-separator "")
   (setq org-agenda-scheduled-leaders '("Scheduled:  " "Sch. %2dd.: "))
   (setq org-agenda-deadline-leaders '("Deadlined:  " "In %2dd.:   " "Past %2dd.: "))
 
   (setq org-agenda-sorting-strategy
-        '((agenda category-up time-up priority-down alpha-up)
-          (todo category-up priority-down alpha-up)
-          (tags category-up priority-down alpha-up)
+        '((agenda category-up time-up alpha-up)
+          (todo category-up alpha-up)
+          (tags category-up alpha-up)
           (search alpha-up)))
 
   (setq org-agenda-prefix-format
@@ -308,8 +309,8 @@ with prefix arg, call `org-return'"
     "n" 'org-agenda-next-date-line
     "p" 'org-agenda-previous-date-line
     "P" 'org-agenda-set-property
-    "q" 'org-agenda-exit
-    "Q" 'org-agenda-quit
+    "q" 'org-agenda-quit
+    "Q" 'org-agenda-exit
     "r" 'org-agenda-redo-all
     "W" 'org-agenda-fortnight-view)
 
