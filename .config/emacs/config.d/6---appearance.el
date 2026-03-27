@@ -32,11 +32,11 @@
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-banner-logo-png (expand-file-name (concat user-emacs-directory "logos/mac256.png")))
 
-  (setq dashboard-set-file-icons t)
   (setq dashboard-icon-type 'nerd-icons)
-  ;;(setq dashboard-set-heading-icons t) ;; atm, there is an issue with oction definition
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-force-refresh t) ;; always refresh/show icons on startup
 
   ;; open dashboard when opening a new frame
   (dashboard-setup-startup-hook)
-  (setq dashboard-force-refresh t) ;; always show icons
-  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
+  (setq initial-buffer-choice 'dashboard-open))
