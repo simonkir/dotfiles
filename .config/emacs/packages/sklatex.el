@@ -54,11 +54,12 @@
 ; ** linebreak
 (defun sklatex--linebreak-insert-in-line-before ()
   (save-excursion
-    (previous-line)
-    (end-of-line)
-    (unless (member (char-before (point)) '(?\s ?\n))
-      (insert " "))
-    (insert "\\\\")))
+    (let ((line-move-visual nil))
+      (previous-line)
+      (end-of-line)
+      (unless (member (char-before (point)) '(?\s ?\n))
+        (insert " "))
+      (insert "\\\\"))))
 
 (defun sklatex--linebreak-delete ()
   (let ((linebreak-re "\\\\\\\\"))
@@ -72,10 +73,11 @@
   (when (and sklatex-do-linebreak-conversion
              (sklatex-in-latex-p))
     (unless (save-excursion
-              (previous-line)
-              (beginning-of-line)
-              (looking-at-p ".*\\(\\\\end\\|\\\\begin\\|\\\\\\\\\\)"))
-        (sklatex--linebreak-insert-in-line-before))))
+              (let ((line-move-visual nil))
+                (previous-line)
+                (beginning-of-line)
+                (looking-at-p ".*\\(\\\\end\\|\\\\begin\\|\\\\\\\\\\)")))
+              (sklatex--linebreak-insert-in-line-before))))
 
 ; ** equality alignment
 (defun sklatex--current-line-aligned-p ()
