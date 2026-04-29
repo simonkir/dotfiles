@@ -149,8 +149,10 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\vec" . "→"))
 
 ; *** misc
+  (add-to-list 'prettify-symbols-alist '("\\%" . "%"))
   (add-to-list 'prettify-symbols-alist '("\\bot" . (?\s (Bc . Bc) ?⊥)))
   (add-to-list 'prettify-symbols-alist '("\\degree" . "°"))
+  (add-to-list 'prettify-symbols-alist '("\\dollar" . "$"))
   (add-to-list 'prettify-symbols-alist '("\\ldots" . "…"))
   (add-to-list 'prettify-symbols-alist '("\\lightning" . (?\s (Bc . Bc) ?↯)))
   (add-to-list 'prettify-symbols-alist '("\\longleftarrow" . "⟵"))

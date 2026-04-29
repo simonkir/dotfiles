@@ -96,7 +96,7 @@
 
 ; ** cdlatex-math-symbol-alist
   (setq cdlatex-math-symbol-alist
-        '((?a ("\\alpha" "" ""))
+        '((?a ("\\alpha" "\\propto" ""))
           (?A ("\\forall" "\\aleph" ""))
           (?b ("\\beta" "" ""))
           (?B ("\\bot" "\\mathcal{B}" ""))
@@ -149,8 +149,8 @@
 
           (?° ("\\degree" "" ""))
           (?! ("\\neg" "\\lightning" ""))
-          (?% ("\\nmid" "" ""))
-          (?$ ("\\mid" "" ""))
+          (?% ("\\%" "\\nmid" ""))
+          (?$ ("\\dollar" "\\mid" ""))
           (?& ("\\wedge" "\\cap" "\\bigcap"))
           (?/ ("\\lor" "\\cup" "\\bigcup"))
           (?8 ("\\infty" "" ""))
@@ -162,7 +162,7 @@
 
           (?~ ("\\approx" "\\sim" "\\leadsto"))
           (?- ("\\leftrightarrow" "\\longleftrightarrow" "\\rightleftharpoons"))
-          (?+ ("\\pm" "" ""))
+          (?+ ("\\pm" "\\plus" "\\star"))
           (?* ("\\times" "\\otimes" "\\square"))
           (?| ("\\mapsto" "\\longmapsto" ""))
           (?< ("\\leftarrow" "\\Leftarrow" "\\longleftarrow"))
