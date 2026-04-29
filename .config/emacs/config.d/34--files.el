@@ -5,8 +5,9 @@
   "f f" 'find-file
   "f F" 'find-alternate-file
   "f R" 'revert-buffer-quick
-  "f s" 'save-buffer
-  "s"   'save-buffer)
+
+  "s"   'save-buffer
+  "S"   'save-some-buffers)
 
 ; * file browser
 ; ** dired

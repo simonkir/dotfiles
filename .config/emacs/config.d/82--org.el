@@ -176,7 +176,8 @@ with prefix arg, call `org-return'"
   (setq org-latex-packages-alist
         '(("" "IEEEtrantools" t)
           ("" "gensymb" t)
-          ("" "bm" t)))
+          ("" "bm" t)
+          ("" "minted" t)))
 
   (add-hook 'org-mode-hook #'(lambda ()
                                (modify-syntax-entry ?< "@") ;; prevent < and > from being
@@ -186,6 +187,8 @@ with prefix arg, call `org-return'"
                                (modify-syntax-entry ?$ "$")))
 
 ; **** export settings
+  (setq org-latex-src-block-backend 'minted)
+
   (setq org-latex-compiler "lualatex")
   (setq org-latex-pdf-process '("latexmk -f -pdflua -interaction=nonstopmode -shell-escape -output-directory=%o %f"))
 
