@@ -97,10 +97,13 @@ super + KP_Enter
     alacritty
 
 super + 9
-    betterlockscreen -l --suspend
+    betterlockscreen -l & systemctl sleep
 
 super + shift + 9
     betterlockscreen -l
+
+super + ctrl + 9
+    betterlockscreen -l & systemctl hibernate
 
 # * screenshots
 Print

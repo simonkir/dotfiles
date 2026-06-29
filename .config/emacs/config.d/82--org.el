@@ -332,6 +332,7 @@ with prefix arg, call `org-return'"
 ; *** clocking
   (setq org-clock-persist t)
   (setq org-clock-display-default-range 'untilnow)
+  (setq org-clock-mode-line-total 'current)
 
   (setq org-clock-idle-time 10)
   (setq org-clock-x11idle-program-name "xprintidle")
