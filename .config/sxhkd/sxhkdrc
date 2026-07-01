@@ -21,7 +21,10 @@ super + alt + ctrl + c
     thunderbird -addressbook
 
 super + alt + d
-    ~/.config/picom/toggle-darkmode.sh
+    digikam
+
+super + alt + shift + d
+    ~/.config/simonkir/nextcloud-memories.sh
 
 super + alt + e
     emacsclient -cq
@@ -31,9 +34,6 @@ super + alt + shift + e
 
 super + alt + f
     ~/.config/simonkir/nextcloud-files.sh
-
-super + alt + shift + f
-    ~/.config/simonkir/nextcloud-memories.sh
 
 super + alt + i
     inkscape

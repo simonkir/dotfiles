@@ -114,7 +114,7 @@ group_rules["2"] = ["emacs", "emacs-30-2", "libreoffice"]
 group_rules["3"] = ["Alacritty"]
 group_rules["4"] = ["thunderbird", "org.mozilla.Thunderbird"]
 group_rules["5"] = ["spotify"]
-group_rules["6"] = ["krita", "Inkscape"]
+group_rules["6"] = ["krita", "Inkscape", "digikam"]
 
 for grname in group_names:
     groups.append(Group(name=grname,
