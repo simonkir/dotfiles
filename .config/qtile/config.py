@@ -218,6 +218,30 @@ def init_widget_list():
         widget.WindowName(
         ),
 
+# *** notify
+        widget.Notify(
+            scroll = True,
+            scroll_step = 1,
+            scroll_interval = 0.02,
+            width = 500,
+            # max_chars = 200,
+
+            default_timeout = 20,
+            default_timeout_low = 15,
+            default_timeout_urgent = 120,
+
+            foreground = colors["foreground"],
+            foreground_low = colors["foreground"],
+            foreground_urgent = colors["red"],
+            background = colors["background"],
+            background_low = colors["background"],
+            background_urgent = colors["background"],
+        ),
+        widget.Sep(
+            linewidth = sep_linewidth,
+            padding = sep_padding,
+        ),
+
 # *** temperature
         widget.Image(
             filename = "~/.config/qtile/icons/temperature.svg",
