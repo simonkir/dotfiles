@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+; * symlinks
+(setq vc-follow-symlinks t)
+
 ; * keybinds
 (general-def-leader
   "f f" 'find-file

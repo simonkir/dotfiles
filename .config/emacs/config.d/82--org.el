@@ -185,7 +185,8 @@ with prefix arg, call `org-return'"
   (setq org-highlight-latex-and-related '(native))
 
   (setq org-latex-packages-alist
-        '(("" "IEEEtrantools" t)
+        '(("AUTO" "babel" t ("pdflatex" "xelatex" "lualatex"))
+          ("" "IEEEtrantools" t)
           ("" "gensymb" t)
           ("" "bm" t)
           ("" "minted" t)))
@@ -263,7 +264,6 @@ with prefix arg, call `org-return'"
   (setq org-priority-highest ?A)
   (setq org-priority-lowest ?D)
 
-  (setq vc-follow-symlinks t)
   (setq calendar-week-start-day 1)
   (setq org-agenda-window-setup 'current-window)
 
@@ -356,7 +356,8 @@ with prefix arg, call `org-return'"
     "r c o" 'org-clock-out
     "r c l" 'org-clock-in-last
     "r c r" 'org-clock-resolve
-    "r c q" 'org-clock-cancel)
+    "r c q" 'org-clock-cancel
+    "r c x" 'org-clock-cancel)
 
 ; ** org-babel
   ;; (org-babel-do-load-languages
