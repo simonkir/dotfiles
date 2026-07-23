@@ -126,7 +126,18 @@ with prefix arg, call `org-return'"
           ("=" org-verbatim verbatim)
           ("~" org-code verbatim)))
 
+  (setq org-use-sub-superscripts "{}")
+
   (add-hook 'org-mode-hook #'org-indent-mode)
+
+; *** prettification
+  ;; default org prettification does not feature distinct symbols for some greek letters
+  ;; org-pretty-entities takes precedence over prettify-symbols-mode
+  ;; rest of prettifications (that don't interfere w/ org-pretty-entities) specified in 62--fonts.el
+  (setq org-entities-user
+        '(("nu" "\\nu" t "&nu;" "nu" "nu" "𝜈")
+          ("epsilon" "\\epsilon" t "&epsilon;" "epsilon" "epsilon" "ϵ")))
+
   (add-hook 'org-mode-hook #'org-toggle-pretty-entities)
 
 ; *** lists

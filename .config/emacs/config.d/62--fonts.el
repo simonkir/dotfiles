@@ -161,6 +161,7 @@ also displayed in org documents"
   (add-to-list 'prettify-symbols-alist '("\\mid" . (?\s (Bc . Bc) ?∣)))
   (add-to-list 'prettify-symbols-alist '("\\nmid" . (?\s (Bc . Bc) ?∤)))
   (add-to-list 'prettify-symbols-alist '("\\pause" . "⏸"))
+  (add-to-list 'prettify-symbols-alist '("\\plus" . "+"))
   (add-to-list 'prettify-symbols-alist '("\\pm" . "±"))
   (add-to-list 'prettify-symbols-alist '("\\rightleftharpoons" . (?\s (cl . bl) ?⟶ (bl . cl) ?⟵)))
   (add-to-list 'prettify-symbols-alist '("\\subseteq" . (?\s (Bc . Bc) ?⊆)))
@@ -191,7 +192,7 @@ not displayed in org documents unless in latex env"
 
 ; ** activation
 (general-def-leader
-  "t p" 'prettify-symbols-mode)
+  "d p" 'prettify-symbols-mode)
 
 (global-prettify-symbols-mode)
 
