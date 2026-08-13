@@ -47,6 +47,9 @@ super + alt + k
 super + alt + m
     thunderbird -mail
 
+super + alt + shift + m
+    emacsclient -cq --eval "(sk:osm-home)"
+
 super + alt + n
     ~/.config/simonkir/nextcloud-notes.sh
 
