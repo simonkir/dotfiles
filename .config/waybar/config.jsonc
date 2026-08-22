@@ -1,0 +1,118 @@
+// -*- mode: js-json -*-
+
+{
+// * general settings
+    "position": "bottom",
+    "height": 24,
+    "spacing": 4,
+
+// * module list
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/submap"
+        // "hyprland/scratchpad",
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "image#temperature",
+        "temperature",
+        "image#cpu",
+        "cpu",
+        "image#memory",
+        "memory",
+        "image#battery",
+        "battery",
+        "image#pulseaudio",
+        "pulseaudio",
+        "image#clock",
+        "clock",
+        "tray"
+    ],
+
+// * module configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "warp-on-scroll": false,
+    },
+    // "hyprland/submap": {
+    //     "format": "{icon} {submap}",
+    // },
+    "hyprland/window": {
+        "separate-outputs": true,
+        "icon": true,
+        "icon-size": 16,
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        "icons": {
+          "blueman": "bluetooth",
+        }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%H:%M:%S}",
+        "interval": 1,
+    },
+    "cpu": {
+        "format": "{usage}% ",
+    },
+    "memory": {
+        "format": "{}% ",
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 70,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 25,
+            "critical": 15,
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+    },
+    "pulseaudio": {
+        "format": "{volume}%",
+        "format-bluetooth": "{volume}% ",
+        "format-bluetooth-muted": " ",
+        "format-muted": "",
+    },
+    "image#battery": {
+        "path": "~/.config/simonkir/icons/battery.png",
+        "interval": 0,
+    },
+    "image#clock": {
+        "path": "~/.config/simonkir/icons/clock.svg",
+        "interval": 0,
+    },
+    "image#cpu": {
+        "path": "~/.config/simonkir/icons/cpu.svg",
+        "interval": 0,
+    },
+    "image#memory": {
+        "path": "~/.config/simonkir/icons/memory.svg",
+        "interval": 0,
+    },
+    "image#pulseaudio": {
+        "path": "~/.config/simonkir/icons/volume.svg",
+        "interval": 0,
+    },
+    "image#temperature": {
+        "path": "~/.config/simonkir/icons/temperature.svg",
+        "interval": 0,
+    },
+}

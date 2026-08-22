@@ -252,7 +252,7 @@ def init_widget_list():
 
 # *** temperature
         widget.Image(
-            filename = "~/.config/qtile/icons/temperature.svg",
+            filename = "~/.config/simonkir/icons/temperature.svg",
         ),
         widget.ThermalSensor(
             format = "{temp}{unit}",
@@ -268,7 +268,7 @@ def init_widget_list():
 
 # *** cpu
         widget.Image(
-            filename = "~/.config/qtile/icons/cpu.svg",
+            filename = "~/.config/simonkir/icons/cpu.svg",
         ),
         widget.CPU(
             format = "{load_percent}%",
@@ -281,7 +281,7 @@ def init_widget_list():
 
 # *** memory
         widget.Image(
-            filename = "~/.config/qtile/icons/memory.svg",
+            filename = "~/.config/simonkir/icons/memory.svg",
         ),
         widget.Memory(
             format = "{MemUsed:.1f}G",
@@ -295,7 +295,7 @@ def init_widget_list():
 
 # *** battery
         widget.Image(
-            filename = "~/.config/qtile/icons/battery.svg",
+            filename = "~/.config/simonkir/icons/battery.svg",
         ),
         widget.Battery(
             format = "{char:2s}{percent:.0%}",
@@ -315,7 +315,7 @@ def init_widget_list():
 
 # *** bluetooth
         widget.Image(
-            filename = "~/.config/qtile/icons/bluetooth.svg",
+            filename = "~/.config/simonkir/icons/bluetooth.svg",
         ),
         widget.Bluetooth(
             default_text = "{num_connected_devices}",
@@ -334,7 +334,7 @@ def init_widget_list():
 
 # *** volume
         widget.Image(
-            filename = "~/.config/qtile/icons/volume.svg",
+            filename = "~/.config/simonkir/icons/volume.svg",
         ),
         widget.Volume(
             mute_format = "–",
@@ -348,7 +348,7 @@ def init_widget_list():
 
 # *** clock
         widget.Image(
-            filename = "~/.config/qtile/icons/clock.svg",
+            filename = "~/.config/simonkir/icons/clock.svg",
         ),
         widget.Clock(
             format = "%H:%M",
