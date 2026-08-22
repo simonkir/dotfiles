@@ -1,3 +1,4 @@
+-- * windows
 hl.config({
     general = {
         gaps_in  = 5,
@@ -9,13 +10,6 @@ hl.config({
             active_border   = { colors = {"rgba(89ddffff)", "rgba(82aaffff)"}, angle = 45 },
             inactive_border = "rgba(292d3eff)",
         },
-
-        resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
-
-        layout = "dwindle",
     },
 
     decoration = {
@@ -41,12 +35,6 @@ hl.config({
         },
     },
 
-    animations = {
-        enabled = true,
-    },
-})
-
-hl.config({
     misc = {
         force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
@@ -54,23 +42,22 @@ hl.config({
 })
 
 -- "Smart gaps" / "No gaps when only"
-hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
-hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
-hl.window_rule({
-    name  = "no-gaps-wtv1",
-    match = { float = false, workspace = "w[tv1]" },
-    border_size = 0,
-    rounding    = 0,
+-- hl.workspace_rule({ workspace = "1", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
+-- hl.window_rule({match = { float = false, workspace = "w[tv1]" }, border_size = 0, rounding = 0,})
+-- hl.window_rule({match = { float = false, workspace = "f[1]" },   border_size = 0, rounding = 0,})
+
+-- * cursor
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+
+-- * animations
+hl.config({
+    animations = {
+        enabled = true,
+    },
 })
-hl.window_rule({
-    name  = "no-gaps-f1",
-    match = { float = false, workspace = "f[1]" },
-    border_size = 0,
-    rounding    = 0,
-})
-
-
-
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
