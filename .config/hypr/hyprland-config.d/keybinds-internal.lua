@@ -1,9 +1,13 @@
 -- * general keybinds
 hl.bind("SUPER + SHIFT + Q", hl.dsp.window.close())
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("xkill"))
+hl.gesture({ fingers = 3, direction = "down", action = "close" })
+
 hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 
--- * workspace keybinds
+
+-- * workspace/monitor keybinds
+-- ** workspace focus
 for i = 1, 8 do
     hl.bind("SUPER + " .. i,             hl.dsp.focus({ workspace = i, on_current_monitor = true }))
     hl.bind("SUPER + SHIFT + " .. i,     hl.dsp.window.move({ workspace = i, follow = false }))
@@ -13,8 +17,9 @@ for i = 1, 8 do
     end)
 end
 
-hl.bind("ALT + TAB", hl.dsp.window.cycle_next({ tiled = true }))
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
+-- ** monitur focus
 hl.bind("SUPER + TAB",  hl.dsp.focus({ monitor = "+1" }))
 hl.bind("SUPER + SHIFT + TAB",  hl.dsp.workspace.swap_monitors({ monitor1 = "eDP-1", monitor2 = "HDMI-A-1"}))
 hl.bind("SUPER + CTRL + TAB", function()
@@ -22,32 +27,16 @@ hl.bind("SUPER + CTRL + TAB", function()
         hl.dispatch(hl.dsp.focus({ monitor = "+1" }))
 end)
 
-hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
-hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
-hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
-hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
-hl.bind("SUPER + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
-hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
-
-hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
-hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
-hl.bind("SUPER + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
-hl.bind("SUPER + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
-hl.bind("SUPER + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
-hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
-hl.bind("SUPER + SHIFT + up",    hl.dsp.window.move({ direction = "up" }))
-hl.bind("SUPER + SHIFT + down",  hl.dsp.window.move({ direction = "down" }))
-
--- Example special workspace (scratchpad)
+-- ** special workspaces (tbd)
+-- example: scratchpad
 -- hl.bind("SUPER + S",         hl.dsp.workspace.toggle_special("magic"))
 -- hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- * layout keybinds
+-- ** general layout stuff
 hl.bind("SUPER + SPACE", function ()
     -- local layouts     = { "dwindle", "master", "scrolling", "monocle" }
-    local layouts     = { "dwindle", "scrolling", "monocle" }
+    local layouts     = { "scrolling", "monocle" }
     local workspace   = hl.get_active_workspace()
     if hl.get_active_special_workspace() then
         workspace = hl.get_active_special_workspace()
@@ -74,11 +63,54 @@ hl.bind("SUPER + SPACE", function ()
     end
 end)
 
-hl.bind("SUPER + F", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
+hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
+hl.bind("SUPER + left",  hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
+hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
+
+hl.bind("SUPER + CTRL + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind("SUPER + CTRL + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind("SUPER + CTRL + K", hl.dsp.window.move({ direction = "up" }))
+hl.bind("SUPER + CTRL + J", hl.dsp.window.move({ direction = "down" }))
+hl.bind("SUPER + CTRL + left",  hl.dsp.window.move({ direction = "left" }))
+hl.bind("SUPER + CTRL + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind("SUPER + CTRL + up",    hl.dsp.window.move({ direction = "up" }))
+hl.bind("SUPER + CTRL + down",  hl.dsp.window.move({ direction = "down" }))
+
+-- ** scrolling layout
+hl.bind("SUPER + SHIFT + H", hl.dsp.layout("swapcol l"))
+hl.bind("SUPER + SHIFT + L", hl.dsp.layout("swapcol r"))
+hl.bind("SUPER + SHIFT + left", hl.dsp.layout("swapcol l"))
+hl.bind("SUPER + SHIFT + right", hl.dsp.layout("swapcol r"))
+hl.bind("SUPER + p", hl.dsp.layout("promote"))
+
+-- ** dwindle layout
+-- hl.bind("SUPER + TODO", hl.dsp.layout("togglesplit"))
+
+-- ** monocle layout
+-- enable ALT + TAB & ALT + SHIFT + TAB only in monocle layout
+-- use SUPER + H/J/K/L in all other layouts (much less confusing this way)
+hl.bind("ALT + TAB", function()
+            local workspace = hl.get_active_workspace()
+            if not workspace then return end
+            if workspace.tiled_layout == "monocle" then hl.dispatch(hl.dsp.layout("cyclenext")) end
+end)
+
+hl.bind("ALT + SHIFT + TAB", function()
+            local workspace = hl.get_active_workspace()
+            if not workspace then return end
+            if workspace.tiled_layout == "monocle" then hl.dispatch(hl.dsp.layout("cycleprev")) end
+end)
 
 -- * window keybinds
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
