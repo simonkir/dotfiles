@@ -1,22 +1,21 @@
 -- * windows
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 10,
+        gaps_in  = 0,
+        gaps_out = 0,
 
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(89ddffff)", "rgba(82aaffff)"}, angle = 45 },
+            active_border   = { colors = {"rgba(82aaffff)", "rgba(c792eaff)"}, angle = 45 },
             inactive_border = "rgba(292d3eff)",
         },
     },
 
     decoration = {
-        rounding       = 5,
-        rounding_power = 2,
+        rounding       = 0,
+        rounding_power = 0,
 
-        -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
 

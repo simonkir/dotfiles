@@ -39,7 +39,7 @@ button {
 
 #workspaces button.active {
     background-color: #393d4e;
-    box-shadow: inset 0 -2px #82aaff;
+    box-shadow: inset 0 -2px #c792ea;
 }
 
 #workspaces button.urgent {

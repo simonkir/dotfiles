@@ -1,0 +1,14 @@
+* Palenight
+#+begin_src css
+black:      #292d3e
+red:        #ff5370
+green:      #c3e88d
+yellow:     #ffcb6b
+blue:       #82aaff
+magenta:    #c792ea
+cyan:       #89ddff
+white:      #eeffff
+foreground: #eeffff
+background: #292d3e
+#+end_src
+
