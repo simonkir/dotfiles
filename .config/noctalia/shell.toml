@@ -1,0 +1,15 @@
+[shell]
+font_family = "Fira Code"
+corner_radius_scale = 1
+
+[shell.panel]
+transparency_mode = "soft"
+shadow = true
+
+clipboard_placement = "attached"
+wallpaper_placement = "floating"
+wallpaper_position = "center"
+
+open_near_click_control_center = true
+open_near_click_clipboard = true
+

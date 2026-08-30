@@ -1,0 +1,6 @@
+[control_center]
+sidebar = "compact"
+
+[control_center.calendar]
+show_week_numbers = true
+show_events_card = false

@@ -1,9 +1,8 @@
 hl.on("hyprland.start", function ()
-  -- hl.exec_cmd("dunst")
-  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+  hl.exec_cmd("systemctl --user start ssh-agent.service")
 
-  hl.exec_cmd("waybar")
-  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("noctalia")
   -- hl.exec_cmd("~/.config/conky/launch-conky.sh")
 
   hl.exec_cmd("emacs --daemon")

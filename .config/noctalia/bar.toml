@@ -1,0 +1,105 @@
+# * general settings
+[bar.default]
+position = "bottom"
+thickness = 24
+
+start = ["workspaces", "active_window"]
+center = []
+end = ["group:system-monitor", "group:info", "group:system-tools", "tray"]
+
+widget_spacing = 20
+margin_ends = 0
+shadow = false
+
+radius = 0
+concave_edge_corners = false
+
+font_scale = 0.9
+background_opacity = 0.9
+
+# * widget settings
+# ** workspaces
+[widget.workspaces]
+style = "regular"
+active_pill_size = 1.6
+
+focused_output_only = true
+hide_when_empty = true
+
+focused_color = "primary"
+occupied_color = "secondary"
+urgent_color = "error"
+
+# ** active window
+[widget.active_window]
+max_length = 750
+
+# ** battery
+[widget.battery]
+display_mode = "none"
+
+[widget.icon_battery]
+type = "custom_button"
+custom_image = "~/.config/simonkir/icons/battery.svg"
+
+# ** bluetooth
+[widget.bluetooth]
+hide_when_no_connected_device = true
+
+# ** clock
+[widget.clock]
+tooltip_format = "%H:%M:%S"
+
+[widget.icon_clock]
+type = "custom_button"
+custom_image = "~/.config/simonkir/icons/clock.svg"
+
+# ** cpu
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+custom_image = "~/.config/simonkir/icons/cpu.svg"
+
+[widget.cpu_temp]
+type = "sysmon"
+stat = "cpu_temp"
+custom_image = "~/.config/simonkir/icons/temperature.svg"
+
+# ** notifications
+[widget.notifications]
+hide_when_no_unread = true
+
+# ** ram
+[widget.ram]
+type = "sysmon"
+stat = "ram_used"
+custom_image = "~/.config/simonkir/icons/memory.svg"
+
+# ** spacer
+[widget.icon_gap]
+type = "spacer"
+length = 16
+
+# ** volume
+[widget.volume]
+custom_image = "~/.config/simonkir/icons/volume.svg"
+mute_color = "on_surface_variant"
+
+# * widget groups
+# ** system monitor
+[[bar.default.capsule_group]]
+id = "system-monitor"
+members = ["cpu_temp", "icon_gap", "cpu", "icon_gap", "ram", "icon_gap", "icon_battery", "battery"]
+widget_spacing = 0
+
+# ** info
+[[bar.default.capsule_group]]
+id = "info"
+members = ["volume", "bluetooth", "icon_gap", "icon_clock", "clock"]
+widget_spacing = 4
+
+# ** system tools
+[[bar.default.capsule_group]]
+id = "system-tools"
+members = ["clipboard", "notifications", "control-center"]
+widget_spacing = 16

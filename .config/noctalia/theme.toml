@@ -1,0 +1,9 @@
+[theme]
+mode = "dark"
+source = "custom"
+custom_palette = "palenight"
+
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = ["gtk3", "gtk4", "kcolorscheme", "qt"]
+
