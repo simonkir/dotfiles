@@ -1,7 +1,7 @@
 -- * alphanumeric keys
 hl.bind("SUPER + 9", hl.dsp.exec_cmd("hyprlock & sleep 1; systemctl suspend"))
-hl.bind("SUPER + SHIFT + 9", hl.dsp.exec_cmd("hyprlock -g 5"))
-hl.bind("SUPER + CTRL + 9", hl.dsp.exec_cmd("hyprlock& sleep 1; systemctl hybrid-sleep"))
+hl.bind("SUPER + SHIFT + 9", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + CTRL + 9", hl.dsp.exec_cmd("hyprlock & sleep 1; systemctl hybrid-sleep"))
 
 hl.bind("SUPER + ALT + A", hl.dsp.exec_cmd("emacsclient -cq --eval \"(sk:org-agenda-dashboard)\""))
 hl.bind("SUPER + ALT + B", hl.dsp.exec_cmd("~/.config/simonkir/bluetooth-connect.sh"))
