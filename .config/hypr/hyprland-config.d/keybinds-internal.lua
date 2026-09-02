@@ -1,3 +1,19 @@
+-- * helper functions
+local function layout_bind(bind_table)
+    return function ()
+        local workspace = hl.get_active_special_workspace() or hl.get_active_workspace()
+        if not workspace then
+            return
+        end
+
+        local layout = workspace.tiled_layout
+
+        if bind_table[layout] then
+            hl.dispatch(bind_table[layout])
+        end
+    end
+end
+
 -- * general keybinds
 hl.bind("SUPER + SHIFT + Q", hl.dsp.window.close())
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("xkill"))
@@ -94,17 +110,8 @@ hl.bind("SUPER + p", hl.dsp.layout("promote"))
 -- ** monocle layout
 -- enable ALT + TAB & ALT + SHIFT + TAB only in monocle layout
 -- use SUPER + H/J/K/L in all other layouts (much less confusing this way)
-hl.bind("ALT + TAB", function()
-            local workspace = hl.get_active_workspace()
-            if not workspace then return end
-            if workspace.tiled_layout == "monocle" then hl.dispatch(hl.dsp.layout("cyclenext")) end
-end)
-
-hl.bind("ALT + SHIFT + TAB", function()
-            local workspace = hl.get_active_workspace()
-            if not workspace then return end
-            if workspace.tiled_layout == "monocle" then hl.dispatch(hl.dsp.layout("cycleprev")) end
-end)
+hl.bind("ALT + TAB", layout_bind({monocle = hl.dsp.layout("cyclenext")}))
+hl.bind("ALT + SHIFT + TAB", layout_bind({monocle = hl.dsp.layout("cycleprev")}))
 
 -- * window keybinds
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
