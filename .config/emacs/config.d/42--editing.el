@@ -73,7 +73,7 @@ when region is active, replace in region, else replace in buffer"
 ; * checkers
 ; ** skcorrect
 (use-package skcorrect
-  :hook ((org-mode LaTeX-mode) . skcorrect-mode))
+  :hook ((org-mode markdown-mode LaTeX-mode) . skcorrect-mode))
 
 ; ** spell checking
 (use-package jinx

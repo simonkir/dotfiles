@@ -137,5 +137,45 @@
   :config (setq lua-indent-level 4))
 
 ; ** markdown
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
+
+  (defun sk:markdown-metadown ()
+    (interactive)
+    (cond
+     ((markdown-table-at-point-p) (markdown-table-move-row-down))
+     ((markdown-heading-at-point) (markdown-move-subtree-down))
+     ((markdown-list-item-at-point-p) (markdown-move-list-item-down))))
+
+  (defun sk:markdown-metaup ()
+    (interactive)
+    (cond
+     ((markdown-table-at-point-p) (markdown-table-move-row-up))
+     ((markdown-heading-at-point) (markdown-move-subtree-up))
+     ((markdown-list-item-at-point-p) (markdown-move-list-item-up))))
+
+  (defun sk:markdown-return ()
+    (interactive)
+    (cond
+     ((markdown-table-at-point-p) (markdown-table-insert-row 'below))
+     ((markdown-list-item-at-point-p) (markdown-insert-list-item 1))
+     (t (newline))))
+
+  (general-def markdown-mode-map
+    "RET" 'sk:markdown-return
+
+    "M-h" 'markdown-promote
+    "M-H" 'markdown-promote-subtree
+    "M-j" 'sk:markdown-metadown
+    "M-k" 'sk:markdown-metaup
+    "M-l" 'markdown-demote
+    "M-L" 'markdown-demote-subtree
+
+    "M-<left>" 'markdown-promote
+    "M-S-<left>" 'markdown-promote-subtree
+    "M-<down>" 'sk:markdown-metadown
+    "M-<up>" 'sk:markdown-metaup
+    "M-<right>" 'markdown-demote
+    "M-S-<right>" 'markdown-demote-subtree))
 

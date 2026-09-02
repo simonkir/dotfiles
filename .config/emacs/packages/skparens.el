@@ -32,7 +32,6 @@
         ("V" . ("\\left\\langle" . "\\right\\rangle"))
 
         ;; lang-specific pairs
-        ("`" . ("`" . "'"))       ;; elisp symbol quote
         ("\\" . ("/* " . " */"))  ;; c-like comment
         ("f" . ("f\"" . "\""))    ;; python f-string
         ("F" . ("f\"{" . "}\""))  ;; python f-string (for surrounding vars)

@@ -72,6 +72,10 @@ else: do nothing"
          (member (nth 0 (org-element-at-point)) #'(table-row table)))
     (org-table-previous-field))
 
+   ((and (derived-mode-p 'markdown-mode)
+         (markdown-table-at-point-p))
+    (markdown-table-backward-cell))
+
    ;; decrease indentation
    (t nil)))
 
@@ -95,6 +99,10 @@ else: indent"
          (member (nth 0 (org-element-at-point)) #'(table-row table)))
     (org-table-next-field))
 
+   ((and (derived-mode-p 'markdown-mode)
+         (markdown-table-at-point-p))
+    (markdown-table-forward-cell))
+   
    ;; snippet exapnsion
    ((when yas-minor-mode
       (let ((yas-fallback-behavior 'return-nil))
