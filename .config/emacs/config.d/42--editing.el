@@ -107,15 +107,9 @@ when region is active, replace in region, else replace in buffer"
   (setq languagetool-console-command "org.languagetool.commandline.Main")
   (setq languagetool-server-command "org.languagetool.server.HTTPServer")
 
-  (setq languagetool-server-arguments '("--level PICKY"))
-  (setq languagetool-console-arguments '("--level PICKY"))
-
   :config
   (setq languagetool-mother-tongue "de-DE")
-  (setq languagetool-hint-idle-delay 0)
-
-  ;; TODO enable picky mode
-  )
+  (setq languagetool-hint-idle-delay 0))
 
 ; * indentation
 ; ** tab settings

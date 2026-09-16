@@ -285,9 +285,9 @@ with prefix arg, call `org-return'"
                         (org-deadline-warning-days 0)
                         (org-agenda-skip-scheduled-if-done t)
                         (org-agenda-skip-deadline-if-done t)
-                        (org-agenda-use-time-grid nil)))
-            (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
-                      (org-agenda-todo-ignore-with-date t)))))))
+                        (org-agenda-use-time-grid nil)))))))
+            ;; (todo "" ((org-agenda-overriding-header "Unplanned Tasks")
+            ;;           (org-agenda-todo-ignore-with-date t)))))))
 
   (setq org-agenda-block-separator "")
   (setq org-agenda-scheduled-leaders '("Scheduled:  " "Sch. %2dd.: "))
@@ -300,10 +300,10 @@ with prefix arg, call `org-return'"
           (search alpha-up)))
 
   (setq org-agenda-prefix-format
-   '((agenda . "   %s  %-7:c ")
-     (todo . "  %-7:c ")
-     (tags . "  %-7:c ")
-     (search . "  %-7:c ")))
+   '((agenda . "   %s  %-10:c ")
+     (todo . "  %-10:c ")
+     (tags . "  %-10:c ")
+     (search . "  %-10:c ")))
 
   (defun sk:org-agenda-dashboard ()
     (interactive)
