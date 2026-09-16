@@ -32,7 +32,7 @@ urgent_color = "error"
 
 # ** active window
 [widget.active_window]
-max_length = 750
+max_length = 1000
 
 # ** battery
 [widget.battery]
