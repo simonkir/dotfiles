@@ -1,0 +1,68 @@
+{ config, pkgs, ... }:
+
+{
+# * nix settings
+  nixpkgs.config.allowUnfree = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than +10";
+  };
+
+# * packages
+  environment.systemPackages = with pkgs; [
+    wget
+    rclone
+    p7zip
+
+    bluez
+    pavucontrol
+    gparted
+
+    alacritty
+    hyfetch
+
+    hyprpaper
+    hyprpolkitagent
+    xkill
+    satty
+    grim
+
+    texliveFull
+    jupyter
+
+    emacs-gtk
+    pdftk
+    pandoc
+
+    digikam
+    krita
+    inkscape
+    libreoffice
+    spotify
+
+  ];
+
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    nerd-fonts.fira-code
+    corefonts
+  ];
+
+# * programs
+  programs.git.enable = true;
+  programs.fish.enable = true;
+  programs.htop.enable = true;
+
+  programs.hyprland.enable = true;
+  programs.hyprlock.enable = true;
+  programs.noctalia.enable = true;
+
+  programs.vim.enable = true;
+
+  programs.firefox.enable = true;
+  programs.thunderbird.enable = true;
+
+}

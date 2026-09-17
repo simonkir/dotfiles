@@ -1,5 +1,5 @@
 # * general settings
-terminal.shell.program = "/usr/bin/fish"
+terminal.shell.program = "fish"
 mouse.hide_when_typing = true
 scrolling.history = 50000
 
