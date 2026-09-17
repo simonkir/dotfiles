@@ -1,0 +1,61 @@
+# * general settings
+[desktop_widgets]
+enabled = true
+
+# * clock widget
+[desktop_widgets.widget.clock-0]
+box_height = 220
+box_width = 1000
+cx = 960
+cy = 220
+output = "eDP-1"
+type = "clock"
+
+[desktop_widgets.widget.clock-1]
+box_height = 220
+box_width = 1000
+cx = 960
+cy = 220
+output = "HDMI-A-1"
+type = "clock"
+
+[desktop_widgets.widget.clock-0.settings]
+format = "%H:%M"
+font_family = "Carlito"
+background = false
+shadow = false
+
+[desktop_widgets.widget.clock-1.settings]
+format = "%H:%M"
+font_family = "Carlito"
+background = false
+shadow = false
+
+[desktop_widgets.widget.date-0]
+box_height = 40
+box_width = 1000
+cx = 960
+cy = 320
+output = "eDP-1"
+type = "clock"
+
+[desktop_widgets.widget.date-1]
+box_height = 40
+box_width = 1000
+cx = 960
+cy = 320
+output = "HDMI-A-1"
+type = "clock"
+
+[desktop_widgets.widget.date-0.settings]
+format = "%A, %d. %B %Y"
+font_family = "Carlito"
+background = false
+shadow = false
+
+[desktop_widgets.widget.date-1.settings]
+format = "%A, %d. %B %Y"
+font_family = "Carlito"
+background = false
+shadow = false
+
