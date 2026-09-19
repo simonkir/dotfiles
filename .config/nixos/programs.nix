@@ -10,6 +10,7 @@
     wget
     rclone
     p7zip
+    eza
     just
 
     bluez

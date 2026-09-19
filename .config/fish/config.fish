@@ -5,9 +5,12 @@ set -gx VISUAL "emacsclient -cq"
 set -gx BROWSER "firefox"
 
 # * aliases
-abbr -a "la" "ls -a"
-abbr -a "ll" "ls -lh"
-abbr -a "lla" "ls -lha"
+abbr -a "ls" "eza --icons"
+abbr -a "la" "eza --icons -a"
+abbr -a "ll" "eza --icons -l"
+abbr -a "lla" "eza --icons -la"
+abbr -a "llt" "eza --icons -lT"
+
 abbr -a "mv" "mv -i"
 abbr -a "rm" "rm -I"
 abbr -a "gspdf" "gs -q -dNOPAUSE -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook"
