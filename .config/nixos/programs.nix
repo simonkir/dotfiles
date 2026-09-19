@@ -34,6 +34,7 @@
     pandoc
 
     digikam
+    gimp
     krita
     inkscape
     libreoffice
