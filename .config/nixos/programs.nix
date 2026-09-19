@@ -3,18 +3,14 @@
 {
 # * nix settings
   nixpkgs.config.allowUnfree = true;
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than +10";
-  };
+  nix.settings.auto-optimise-store = true;
 
 # * packages
   environment.systemPackages = with pkgs; [
     wget
     rclone
     p7zip
+    just
 
     bluez
     pavucontrol

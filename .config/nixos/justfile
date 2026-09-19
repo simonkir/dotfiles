@@ -1,0 +1,18 @@
+rebuild:
+    sudo nixos-rebuild switch
+
+rebuild-upgrade:
+    sudo nixos-rebuild switch --upgrade-all
+
+gc:
+    sudo nix-collect-garbage
+
+optimise:
+    sudo nix-store --optimise
+
+list-generations:
+    sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+
+delete-older-generations:
+    sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +10
+
