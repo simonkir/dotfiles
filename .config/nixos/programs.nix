@@ -13,7 +13,9 @@
     eza
     just
 
+    libnotify
     bluez
+    openvpn
     pavucontrol
     gparted
 
