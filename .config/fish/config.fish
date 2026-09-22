@@ -33,3 +33,6 @@ fish_config theme choose Dracula
 function fish_greeting
     hyfetch
 end
+
+# * post-stuff
+zoxide init fish | source

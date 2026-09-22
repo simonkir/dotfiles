@@ -82,6 +82,12 @@
 
   (recentf-mode t))
 
+; * zoxide
+(use-package zoxide
+  :general (general-def-leader
+    "f z" 'zoxide-find-file
+    "f Z" 'zoxide-travel))
+
 ; * bookmark
 (use-package bookmark
   :demand t

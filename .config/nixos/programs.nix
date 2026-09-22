@@ -11,6 +11,7 @@
     rclone
     p7zip
     eza
+    zoxide
     just
 
     libnotify
