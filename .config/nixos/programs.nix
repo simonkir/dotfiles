@@ -16,20 +16,24 @@
     p7zip
     eza
     zoxide
+    file
+    tree
     just
 
     libnotify
     bluez
+    networkmanagerapplet
     openvpn
+    gnupg
     pavucontrol
     gparted
 
     alacritty
     hyfetch
 
+    xkill
     hyprpaper
     hyprpolkitagent
-    xkill
     satty
     grim
 
