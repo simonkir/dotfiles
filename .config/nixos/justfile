@@ -1,8 +1,12 @@
 rebuild:
-    sudo nixos-rebuild switch
+    sudo nixos-rebuild switch --flake .
 
-rebuild-upgrade:
-    sudo nixos-rebuild switch --upgrade-all
+update:
+    sudo nix flake update
+
+upgrade: update rebuild
+
+
 
 gc:
     sudo nix-collect-garbage
@@ -11,8 +15,10 @@ optimise:
     sudo nix-store --optimise
 
 list-generations:
-    sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+    sudo nix profile history --profile /nix/var/nix/profiles/system
 
 delete-older-generations:
-    sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +10
+    sudo nix profile wipe-history --older-than 30d --profile /nix/var/nix/profiles/system
+
+clean: delete-older-generations gc rebuild
 

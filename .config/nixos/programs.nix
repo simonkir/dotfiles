@@ -3,7 +3,11 @@
 {
 # * nix settings
   nixpkgs.config.allowUnfree = true;
-  nix.settings.auto-optimise-store = true;
+
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
 # * packages
   environment.systemPackages = with pkgs; [
