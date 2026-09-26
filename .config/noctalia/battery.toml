@@ -1,2 +1,6 @@
 [battery]
 warning_threshold = 15
+
+[lockscreen]
+lock_before_suspend = false
+
