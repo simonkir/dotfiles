@@ -18,8 +18,20 @@
 # * tty
   console.keyMap = "de";
 
-# * cups
-  services.printing.enable = true;
+# * printing
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
 # * audio
   services.pulseaudio.enable = false;
