@@ -7,7 +7,7 @@ enabled = true
 box_height = 220
 box_width = 1000
 cx = 960
-cy = 220
+cy = 250
 output = "eDP-1"
 type = "clock"
 
@@ -15,7 +15,7 @@ type = "clock"
 box_height = 220
 box_width = 1000
 cx = 960
-cy = 220
+cy = 250
 output = "HDMI-A-1"
 type = "clock"
 
@@ -35,7 +35,7 @@ shadow = false
 box_height = 40
 box_width = 1000
 cx = 960
-cy = 320
+cy = 350
 output = "eDP-1"
 type = "clock"
 
@@ -43,7 +43,7 @@ type = "clock"
 box_height = 40
 box_width = 1000
 cx = 960
-cy = 320
+cy = 350
 output = "HDMI-A-1"
 type = "clock"
 
