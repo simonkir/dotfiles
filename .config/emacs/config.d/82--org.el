@@ -342,20 +342,20 @@ with prefix arg, call `org-return'"
 
 ; *** clocking
   (setq org-clock-persist t)
-  (setq org-clock-display-default-range 'untilnow)
-  (setq org-clock-mode-line-total 'current)
 
-  (setq org-clock-idle-time 10)
+  (setq org-clock-idle-time 60)
   (setq org-clock-x11idle-program-name "xprintidle")
 
+  (setq org-clock-mode-line-total 'current)
+  (setq org-clock-display-default-range '(16))
+
   (general-def org-mode-map
-    "C-c C-x C-r" 'org-resolve-clocks
     "C-c C-x D" 'org-clock-remove-overlays)
 
   (general-def-leader
     "r c o" 'org-clock-out
     "r c l" 'org-clock-in-last
-    "r c r" 'org-clock-resolve
+    "r c j" 'org-clock-jump
     "r c q" 'org-clock-cancel
     "r c x" 'org-clock-cancel)
 
