@@ -5,7 +5,7 @@
 ; ** keybinds
   :general
   (general-def-leader
-    ;; temporarily switched back to `switch-to-buffer' ;; "b b" 'consult-buffer
+    "b b" 'consult-buffer
     "f b" 'consult-bookmark
     "f r" 'consult-recent-file
     "v e" 'consult-flymake
@@ -45,7 +45,7 @@
            (add-to-list 'result (buffer-name buffer)))))
       result))
 
-  (defvar sk:consult--source-file-visiting-buffer
+  (defvar sk:consult-source-file-visiting-buffer
     `( :name "File Visiting Buffer"
        :narrow ?f
        :hidden t
@@ -55,7 +55,7 @@
        :history buffer-name-history
        :items ,#'sk:file-visiting-buffer-list ))
 
-  (defvar sk:consult--source-vc-buffer
+  (defvar sk:consult-source-vc-buffer
     `( :name "VC Buffer"
        :narrow ?g
        :hidden t
@@ -65,7 +65,7 @@
        :history buffer-name-history
        :items ,#'sk:vc-buffer-list ))
 
-  (defvar sk:consult--source-dired-buffer
+  (defvar sk:consult-source-dired-buffer
     `( :name "Dired Buffer"
        :narrow ?d
        :hidden t
@@ -75,13 +75,13 @@
        :history buffer-name-history
        :items ,#'sk:dired-buffer-list ))
 
-  (setq consult-buffer-sources '(consult--source-buffer
-                                 sk:consult--source-file-visiting-buffer
-                                 sk:consult--source-vc-buffer
-                                 sk:consult--source-dired-buffer
-                                 consult--source-project-buffer-hidden
-                                 consult--source-modified-buffer
-                                 consult--source-hidden-buffer))
+  (setq consult-buffer-sources '(consult-source-buffer
+                                 sk:consult-source-file-visiting-buffer
+                                 sk:consult-source-vc-buffer
+                                 sk:consult-source-dired-buffer
+                                 consult-source-project-buffer-hidden
+                                 consult-source-modified-buffer
+                                 consult-source-hidden-buffer))
 
   (add-to-list 'consult-buffer-filter "\\*Async-native-compile-log\\*"))
 
@@ -91,3 +91,4 @@
   (general-def-leader
     "v ." 'xref-find-definitions-other-frame
     "v :" 'xref-find-references))
+
