@@ -27,7 +27,6 @@
     gnupg
     libnotify
     bluez
-    networkmanagerapplet
     openvpn
     pavucontrol
 
@@ -76,6 +75,8 @@
   programs.git.enable = true;
   programs.fish.enable = true;
   programs.htop.enable = true;
+
+  programs.nm-applet.enable = true;
 
 # ** window manager & compositor
   programs.xwayland.enable = true;

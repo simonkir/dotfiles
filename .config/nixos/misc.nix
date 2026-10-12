@@ -4,7 +4,11 @@
 # * networking
   networking = {
     networkmanager.enable = true;
-    wireless.enable = true;
+
+    wireless = {
+      enable = true;
+      userControlled = true;
+    };
 
     firewall.enable = true;
 
