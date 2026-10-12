@@ -11,6 +11,7 @@
 
 # * packages
   environment.systemPackages = with pkgs; [
+# ** file management
     wget
     rclone
     p7zip
@@ -18,32 +19,41 @@
     zoxide
     file
     tree
-    just
+    gparted
+    cifs-utils
 
+# ** system tools
+    psmisc
+    gnupg
     libnotify
     bluez
     networkmanagerapplet
     openvpn
-    gnupg
     pavucontrol
-    gparted
 
+# ** terminal
     alacritty
     hyfetch
 
+# ** window manager & compositor stuff
+    xhost
     xkill
     hyprpaper
     hyprpolkitagent
     satty
     grim
 
+# ** programming languages
     texliveFull
+# ** programming tools
+    just
     jupyter
 
     emacs-gtk
     pdftk
     pandoc
 
+# ** applications
     digikam
     gimp
     krita
@@ -53,6 +63,7 @@
 
   ];
 
+# ** fonts
   fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
@@ -61,16 +72,21 @@
   ];
 
 # * programs
+# ** system
   programs.git.enable = true;
   programs.fish.enable = true;
   programs.htop.enable = true;
 
+# ** window manager & compositor
+  programs.xwayland.enable = true;
   programs.hyprland.enable = true;
   programs.hyprlock.enable = true;
   programs.noctalia.enable = true;
 
+# ** programming
   programs.vim.enable = true;
 
+# ** applications
   programs.firefox.enable = true;
   programs.thunderbird.enable = true;
 
