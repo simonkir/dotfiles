@@ -44,9 +44,12 @@
 
 # ** programming languages
     texliveFull
+    python3
+
 # ** programming tools
     just
     jupyter
+    paraview
 
     emacs-gtk
     pdftk
